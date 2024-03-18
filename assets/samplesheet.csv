@@ -1,3 +1,3 @@
-sample_id,flowcell_id,lane_id,project_id,fastq_1,fastq_2,rundir
-SAMPLE_PAIRED_END,F01,L01,P001,/path/to/fastq/files/AEG588A1_S1_L002_R1_001.fastq.gz,/path/to/fastq/files/AEG588A1_S1_L002_R2_001.fastq.gz,/path/to/rundir
-SAMPLE_SINGLE_END,F02,L02,P002,/path/to/fastq/files/AEG588A4_S4_L003_R1_001.fastq.gz,,/path/to/rundir
+sample_id,lane_id,project_id,fastq_1,fastq_2,rundir
+SAMPLE_PAIRED_END,L01,P001,/path/to/fastq/files/AEG588A1_S1_L002_R1_001.fastq.gz,/path/to/fastq/files/AEG588A1_S1_L002_R2_001.fastq.gz,/path/to/rundir
+SAMPLE_SINGLE_END,L02,P002,/path/to/fastq/files/AEG588A4_S4_L003_R1_001.fastq.gz,,/path/to/rundir
