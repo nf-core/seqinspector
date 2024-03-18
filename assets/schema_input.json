@@ -11,7 +11,19 @@
                 "type": "string",
                 "pattern": "^\\S+$",
                 "errorMessage": "Sample name must be provided and cannot contain spaces",
-                "meta": ["id"]
+                "meta": ["sample"]
+            },
+            "lane": {
+                "type": "integer",
+                "pattern": "^\\d+$",
+                "errorMessage": "Lane ID must be a number",
+                "meta": ["lane"]
+            },
+            "project": {
+                "type": "string",
+                "pattern": "^\\S+$",
+                "errorMessage": "Project ID cannot contain spaces",
+                "meta": ["project"]
             },
             "fastq_1": {
                 "type": "string",
@@ -26,8 +38,15 @@
                 "exists": true,
                 "pattern": "^\\S+\\.f(ast)?q\\.gz$",
                 "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+            },
+            "rundir": {
+                "type": "string",
+                "format": "file-path",
+                "exists": true,
+                "errorMessage": "Run directory must be a path",
+                "meta": ["rundir"]
             }
         },
-        "required": ["sample", "fastq_1"]
+        "required": ["sample", "lane", "fastq_1"]
     }
 }
