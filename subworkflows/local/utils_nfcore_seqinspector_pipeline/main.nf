@@ -75,29 +75,32 @@ workflow PIPELINE_INITIALISATION {
     //
     // Custom validation for pipeline parameters
     //
-    validateInputParameters()
+    validateInputParameters() // Validates workflow parameters against $projectDir/nextflow_schema.json
 
     //
     // Create channel from input file provided through params.input
     //
     Channel
-        .fromSamplesheet("input")
+        .fromSamplesheet("input") // Validates samplesheet against $projectDir/assets/schema_input.json. Path to validation schema is defined by $projectDir/nextflow_schema.json
         .map {
             meta, fastq_1, fastq_2 ->
+                def id_string = "${meta.lane}_${meta.group ?: "ungrouped"}_${meta.sample}"
+                def updated_meta = meta + [ id: id_string ]
                 if (!fastq_2) {
-                    return [ meta.id, meta + [ single_end:true ], [ fastq_1 ] ]
+                    return [ updated_meta.id, updated_meta + [ single_end:true ], [ fastq_1 ] ]
                 } else {
-                    return [ meta.id, meta + [ single_end:false ], [ fastq_1, fastq_2 ] ]
+                    return [ updated_meta.id, updated_meta + [ single_end:false ], [ fastq_1, fastq_2 ] ]
                 }
         }
         .groupTuple()
         .map {
-            validateInputSamplesheet(it)
+            validateInputSamplesheet(it) // Applies additional group validation checks that schema_input.json cannot do.
         }
-        .map {
-            meta, fastqs ->
-                return [ meta, fastqs.flatten() ]
-        }
+        .transpose() // Replace the map below
+        // .map {
+        //     meta, fastqs ->
+        //         return [ meta, fastqs.flatten() ]
+        // }
         .set { ch_samplesheet }
 
     emit:
@@ -152,6 +155,8 @@ workflow PIPELINE_COMPLETION {
 //
 def validateInputParameters() {
     // genomeExistsError()
+
+    // TODO: Add code to further validate pipeline parameters here
 }
 
 //
