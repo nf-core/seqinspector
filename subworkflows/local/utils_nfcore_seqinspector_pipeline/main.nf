@@ -75,7 +75,7 @@ workflow PIPELINE_INITIALISATION {
     //
     // Custom validation for pipeline parameters
     //
-    validateInputParameters() // Validates workflow parameters against $projectDir/nextflow_schema.json
+    validateInputParameters() // Runs additional validation that is not done by $projectDir/nextflow_schema.json
 
     //
     // Create channel from input file provided through params.input
