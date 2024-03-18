@@ -57,7 +57,7 @@ workflow PIPELINE_INITIALISATION {
     pre_help_text = nfCoreLogo(monochrome_logs)
     post_help_text = '\n' + workflowCitation() + '\n' + dashedLine(monochrome_logs)
     def String workflow_command = "nextflow run ${workflow.manifest.name} -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>"
-    UTILS_NFVALIDATION_PLUGIN (
+    UTILS_NFVALIDATION_PLUGIN ( // Validates parameters against $projectDir/nextflow_schema.json
         help,
         workflow_command,
         pre_help_text,
