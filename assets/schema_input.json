@@ -41,7 +41,7 @@
             },
             "rundir": {
                 "type": "string",
-                "format": "file-path",
+                "format": "directory-path",
                 "exists": true,
                 "errorMessage": "Run directory must be a path",
                 "meta": ["rundir"]
