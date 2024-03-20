@@ -45,7 +45,6 @@
                         "type": "string",
                         "format": "file-path",
                         "exists": true,
-                        "errorMessage": "Run directory must be a path",
                         "pattern": "^\\S+\\.tar\\.gz$",
                         "meta": ["rundir"]
                     },
@@ -53,10 +52,10 @@
                         "type": "string",
                         "format": "directory-path",
                         "exists": true,
-                        "errorMessage": "Run directory must be a path",
                         "meta": ["rundir"]
                     }
-                ]
+                ],
+                "errorMessage": "Run directory must be a path or tar directory"
             }
         },
         "required": ["sample", "lane", "fastq_1"],
