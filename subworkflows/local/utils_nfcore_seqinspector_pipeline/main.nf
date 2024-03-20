@@ -84,7 +84,7 @@ workflow PIPELINE_INITIALISATION {
         .fromSamplesheet("input") // Validates samplesheet against $projectDir/assets/schema_input.json. Path to validation schema is defined by $projectDir/nextflow_schema.json
         .map {
             meta, fastq_1, fastq_2 ->
-                def id_string = "${meta.sample}_${meta.group ?: "ungrouped"}_${meta.lane}"
+                def id_string = "${meta.sample}_${meta.project ?: "ungrouped"}_${meta.lane}"
                 def updated_meta = meta + [ id: id_string ]
                 if (!fastq_2) {
                     return [ updated_meta.id, updated_meta + [ single_end:true ], [ fastq_1 ] ]
