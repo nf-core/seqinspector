@@ -45,17 +45,16 @@
                         "type": "string",
                         "format": "file-path",
                         "exists": true,
-                        "pattern": "^\\S+\\.tar\\.gz$",
-                        "meta": ["rundir"]
+                        "pattern": "^\\S+\\.tar\\.gz$"
                     },
                     {
                         "type": "string",
                         "format": "directory-path",
-                        "exists": true,
-                        "meta": ["rundir"]
+                        "exists": true
                     }
                 ],
-                "errorMessage": "Run directory must be a path or tar directory"
+                "errorMessage": "Run directory must be a path or tar directory",
+                "meta": ["rundir"]
             }
         },
         "required": ["sample", "lane", "fastq_1"],
