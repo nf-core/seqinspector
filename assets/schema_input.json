@@ -40,11 +40,23 @@
                 "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
             },
             "rundir": {
-                "type": "string",
-                "format": "path",
-                "exists": true,
-                "errorMessage": "Run directory must be a path",
-                "meta": ["rundir"]
+                "oneOf": [
+                    {
+                        "type": "string",
+                        "format": "file-path",
+                        "exists": true,
+                        "errorMessage": "Run directory must be a path",
+                        "pattern": "*.tar.gz$",
+                        "meta": ["rundir"]
+                    },
+                    {
+                        "type": "string",
+                        "format": "directory-path",
+                        "exists": true,
+                        "errorMessage": "Run directory must be a path",
+                        "meta": ["rundir"]
+                    }
+                ]
             }
         },
         "required": ["sample", "lane", "fastq_1"],
