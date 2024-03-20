@@ -46,7 +46,7 @@
                         "format": "file-path",
                         "exists": true,
                         "errorMessage": "Run directory must be a path",
-                        "pattern": "*.tar.gz$",
+                        "pattern": "^\\S+\\.tar\\.gz$",
                         "meta": ["rundir"]
                     },
                     {
