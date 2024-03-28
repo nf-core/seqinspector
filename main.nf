@@ -58,9 +58,9 @@ workflow NFCORE_SEQINSPECTOR {
     )
 
     emit:
-    global_report = SEQINSPECTOR.out.global_report // channel: /path/to/multiqc_report.html
-    lane_reports = SEQINSPECTOR.out.lane_reports // channel: /path/to/multiqc_report.html
-    group_report = SEQINSPECTOR.out.group_reports // channel: /path/to/multiqc_report.html
+    global_report = SEQINSPECTOR.out.global_report  // channel: /path/to/multiqc_report.html
+    lane_reports = SEQINSPECTOR.out.lane_reports    // channel: /path/to/multiqc_report.html
+    group_report = SEQINSPECTOR.out.group_reports   // channel: /path/to/multiqc_report.html
     rundir_report = SEQINSPECTOR.out.rundir_reports // channel: /path/to/multiqc_report.html
 
 }
