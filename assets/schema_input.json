@@ -19,11 +19,11 @@
                 "errorMessage": "Lane ID must be a number",
                 "meta": ["lane"]
             },
-            "project": {
+            "group": {
                 "type": "string",
                 "pattern": "^\\S+$",
                 "errorMessage": "Project ID cannot contain spaces",
-                "meta": ["project"]
+                "meta": ["group"]
             },
             "fastq_1": {
                 "type": "string",
