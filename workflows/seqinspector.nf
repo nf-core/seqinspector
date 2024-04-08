@@ -108,7 +108,7 @@ workflow SEQINSPECTOR {
             ]
         }
         .map { file -> def fileparts = file.name.split("_")
-             [ fileparts[0], file ] 
+            [ fileparts[0], file ]
         }
         .join(mqc_by_lane)
         .multiMap { lane, config, meta , samples_per_lane ->
@@ -137,7 +137,7 @@ workflow SEQINSPECTOR {
             ]
         }
         .map { file -> def fileparts = file.name.split("_")
-             [ fileparts[0], file ] 
+            [ fileparts[0], file ]
         }
         .join(mqc_by_group)
         .multiMap { group, config, meta , samples_per_group ->
@@ -166,7 +166,7 @@ workflow SEQINSPECTOR {
             ]
         }
         .map { file -> def fileparts = file.name.split("_")
-             [ fileparts[0], file ] 
+            [ fileparts[0], file ]
         }
         .join(mqc_by_rundir)
         .multiMap { rundir, config, meta , samples_per_rundir ->
