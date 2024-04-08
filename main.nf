@@ -104,7 +104,7 @@ workflow {
         params.outdir,
         params.monochrome_logs,
         params.hook_url,
-        NFCORE_SEQINSPECTOR.out.multiqc_report
+        NFCORE_SEQINSPECTOR.out.global_report,
     )
 }
 
