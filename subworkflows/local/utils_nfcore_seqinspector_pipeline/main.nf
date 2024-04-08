@@ -101,7 +101,6 @@ workflow PIPELINE_INITIALISATION {
         //     meta, fastqs ->
         //         return [ meta, fastqs.flatten() ]
         // }
-        .view()
         .set { ch_samplesheet }
 
     emit:
