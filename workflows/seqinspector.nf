@@ -98,13 +98,17 @@ workflow SEQINSPECTOR {
 
     // Generate reports by lane
     lane_mqc_files = ch_multiqc_files
-        .map { meta, sample -> [ "L${meta.lane}", meta, sample ] }
+        .map { meta, sample -> [ "[LANE:${meta.lane}]", meta, sample ] }
         .groupTuple()
         .tap { mqc_by_lane }
         .collectFile{
             lane, meta, samples -> [
                 "${lane}_multiqc_extra_config.yml",
-                "output_fn_name: \"${lane}_multiqc_report.html\"\ndata_dir_name: \"${lane}_multiqc_data\"\nplots_dir_name: \"${lane}_multiqc_plots\""
+                """
+                    |output_fn_name: \"${lane}_multiqc_report.html\"
+                    |data_dir_name:  \"${lane}_multiqc_data\"
+                    |plots_dir_name: \"${lane}_multiqc_plots\"
+                """.stripMargin()
             ]
         }
         .map { file -> def fileparts = file.name.split("_")
@@ -127,13 +131,17 @@ workflow SEQINSPECTOR {
     // Generate reports by group
     group_mqc_files = ch_multiqc_files
         .filter { meta, sample -> meta.group }
-        .map { meta, sample -> [ "G-${meta.group}", meta, sample ] }
+        .map { meta, sample -> [ "[GROUP:${meta.group}]", meta, sample ] }
         .groupTuple()
         .tap { mqc_by_group }
         .collectFile{
             group, meta, samples -> [
                 "${group}_multiqc_extra_config.yml",
-                "output_fn_name: \"${group}_multiqc_report.html\"\ndata_dir_name: \"${group}_multiqc_data\"\nplots_dir_name: \"${group}_multiqc_plots\""
+                """
+                    |output_fn_name: \"${group}_multiqc_report.html\"
+                    |data_dir_name:  \"${group}_multiqc_data\"
+                    |plots_dir_name: \"${group}_multiqc_plots\"
+                """.stripMargin()
             ]
         }
         .map { file -> def fileparts = file.name.split("_")
@@ -156,13 +164,17 @@ workflow SEQINSPECTOR {
     // Generate reports by rundir
     rundir_mqc_files = ch_multiqc_files
         .filter { meta, sample -> meta.rundir }
-        .map { meta, sample -> [ "D-${meta.rundir.name}", meta, sample ] }
+        .map { meta, sample -> [ "[RUNDIR:${meta.rundir.name}]", meta, sample ] }
         .groupTuple()
         .tap { mqc_by_rundir }
         .collectFile{
             rundir, meta, samples -> [
                 "${rundir}_multiqc_extra_config.yml",
-                "output_fn_name: \"${rundir}_multiqc_report.html\"\ndata_dir_name: \"${rundir}_multiqc_data\"\nplots_dir_name: \"${rundir}_multiqc_plots\""
+                """
+                    |output_fn_name: \"${rundir}_multiqc_report.html\"
+                    |data_dir_name:  \"${rundir}_multiqc_data\"
+                    |plots_dir_name: \"${rundir}_multiqc_plots\"
+                """.stripMargin()
             ]
         }
         .map { file -> def fileparts = file.name.split("_")
