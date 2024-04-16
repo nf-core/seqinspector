@@ -29,15 +29,15 @@
                 "type": "string",
                 "format": "file-path",
                 "exists": true,
-                "pattern": "^\\S+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                "pattern": "\\.f(ast)?q\\.gz$",
+                "errorMessage": "FastQ file for reads 1 must be provided and must have extension '.fq.gz' or '.fastq.gz'"
             },
             "fastq_2": {
                 "type": "string",
                 "format": "file-path",
                 "exists": true,
-                "pattern": "^\\S+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                "pattern": "\\.f(ast)?q\\.gz$",
+                "errorMessage": "FastQ file for reads 2 is optional and must have extension '.fq.gz' or '.fastq.gz' if provided"
             },
             "rundir": {
                 "oneOf": [
@@ -45,7 +45,7 @@
                         "type": "string",
                         "format": "file-path",
                         "exists": true,
-                        "pattern": "^\\S+\\.tar\\.gz$"
+                        "pattern": "\\.tar\\.gz$"
                     },
                     {
                         "type": "string",
