@@ -22,7 +22,7 @@
             "group": {
                 "type": "string",
                 "pattern": "^\\S+$",
-                "errorMessage": "Project ID cannot contain spaces",
+                "errorMessage": "Group ID cannot contain spaces",
                 "meta": ["group"]
             },
             "fastq_1": {
