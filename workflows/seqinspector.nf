@@ -98,6 +98,7 @@ workflow SEQINSPECTOR {
 
     // Generate reports by lane
     lane_mqc_files = ch_multiqc_files
+        .filter { meta, sample -> meta.lane }
         .map { meta, sample -> [ "[LANE:${meta.lane}]", meta, sample ] }
         .groupTuple()
         .tap { mqc_by_lane }

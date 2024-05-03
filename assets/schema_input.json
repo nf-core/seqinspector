@@ -47,7 +47,7 @@
                 "meta": ["rundir"]
             }
         },
-        "required": ["sample", "lane", "fastq_1"],
+        "required": ["sample", "fastq_1"],
         "dependentRequired": {
             "fastq_2": ["fastq_1"]
         }
