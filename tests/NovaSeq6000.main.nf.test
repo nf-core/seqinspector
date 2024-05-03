@@ -1,0 +1,23 @@
+nextflow_pipeline {
+
+    name "Test Workflow main.nf on NovaSeq6000 data"
+    script "../main.nf"
+    tag "seqinspector"
+    tag "PIPELINE"
+
+    test("NovaSeq6000 data test") {
+
+        when {
+            params {
+                outdir = "tests/results/NovaSeq6000"
+                input  = "https://raw.githubusercontent.com/nf-core/test-datasets/seqinspector/testdata/NovaSeq6000/samplesheet.csv"
+            }
+        }
+
+        then {
+            assert workflow.success
+        }
+
+    }
+
+}
