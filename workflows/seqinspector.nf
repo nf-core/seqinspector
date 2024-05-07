@@ -94,11 +94,17 @@ workflow SEQINSPECTOR {
         ch_multiqc_logo.toList()
     )
 
-    multiqc_extra_files = ch_multiqc_extra_files.toList()
-
     // Generate reports by lane
+    multiqc_extra_files_per_lane = ch_multiqc_files
+        .filter { meta, sample -> meta.lane }
+        .map { meta, sample -> meta.lane }
+        .unique()
+        .map { lane -> [lane:lane] }
+        .cross(ch_multiqc_extra_files)
+
     lane_mqc_files = ch_multiqc_files
         .filter { meta, sample -> meta.lane }
+        .mix(multiqc_extra_files_per_lane)
         .map { meta, sample -> [ "[LANE:${meta.lane}]", meta, sample ] }
         .groupTuple()
         .tap { mqc_by_lane }
@@ -122,16 +128,23 @@ workflow SEQINSPECTOR {
         }
 
     MULTIQC_PER_LANE(
-        lane_mqc_files.samples_per_lane
-            .map { samples -> samples + multiqc_extra_files.value },
+        lane_mqc_files.samples_per_lane,
         ch_multiqc_config.toList(),
         lane_mqc_files.config,
         ch_multiqc_logo.toList()
     )
 
     // Generate reports by group
+    multiqc_extra_files_per_group = ch_multiqc_files
+        .filter { meta, sample -> meta.group }
+        .map { meta, sample -> meta.group }
+        .unique()
+        .map { group -> [group:group] }
+        .cross(ch_multiqc_extra_files)
+
     group_mqc_files = ch_multiqc_files
         .filter { meta, sample -> meta.group }
+        .mix(multiqc_extra_files_per_group)
         .map { meta, sample -> [ "[GROUP:${meta.group}]", meta, sample ] }
         .groupTuple()
         .tap { mqc_by_group }
@@ -155,16 +168,23 @@ workflow SEQINSPECTOR {
         }
 
     MULTIQC_PER_GROUP(
-        group_mqc_files.samples_per_group
-            .map { samples -> samples + multiqc_extra_files.value },
+        group_mqc_files.samples_per_group,
         ch_multiqc_config.toList(),
         group_mqc_files.config,
         ch_multiqc_logo.toList()
     )
 
     // Generate reports by rundir
+    multiqc_extra_files_per_rundir = ch_multiqc_files
+        .filter { meta, sample -> meta.rundir }
+        .map { meta, sample -> meta.rundir }
+        .unique()
+        .map { rundir -> [rundir:rundir] }
+        .cross(ch_multiqc_extra_files)
+
     rundir_mqc_files = ch_multiqc_files
         .filter { meta, sample -> meta.rundir }
+        .mix(multiqc_extra_files_per_rundir)
         .map { meta, sample -> [ "[RUNDIR:${meta.rundir.name}]", meta, sample ] }
         .groupTuple()
         .tap { mqc_by_rundir }
@@ -188,8 +208,7 @@ workflow SEQINSPECTOR {
         }
 
     MULTIQC_PER_RUNDIR(
-        rundir_mqc_files.samples_per_rundir
-            .map { samples -> samples + multiqc_extra_files.value },
+        rundir_mqc_files.samples_per_rundir,
         ch_multiqc_config.toList(),
         rundir_mqc_files.config,
         ch_multiqc_logo.toList()
