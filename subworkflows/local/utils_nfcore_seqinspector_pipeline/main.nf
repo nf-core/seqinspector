@@ -57,7 +57,7 @@ workflow PIPELINE_INITIALISATION {
     pre_help_text = nfCoreLogo(monochrome_logs)
     post_help_text = '\n' + workflowCitation() + '\n' + dashedLine(monochrome_logs)
     def String workflow_command = "nextflow run ${workflow.manifest.name} -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>"
-    UTILS_NFVALIDATION_PLUGIN (
+    UTILS_NFVALIDATION_PLUGIN ( // Validates parameters against $projectDir/nextflow_schema.json
         help,
         workflow_command,
         pre_help_text,
@@ -75,29 +75,33 @@ workflow PIPELINE_INITIALISATION {
     //
     // Custom validation for pipeline parameters
     //
-    validateInputParameters()
+    validateInputParameters() // Runs additional validation that is not done by $projectDir/nextflow_schema.json
 
     //
     // Create channel from input file provided through params.input
     //
     Channel
-        .fromSamplesheet("input")
+        .fromSamplesheet("input") // Validates samplesheet against $projectDir/assets/schema_input.json. Path to validation schema is defined by $projectDir/nextflow_schema.json
         .map {
             meta, fastq_1, fastq_2 ->
+                def id_string = "${meta.sample}_${meta.project ?: "ungrouped"}_${meta.lane}"
+                def updated_meta = meta + [ id: id_string ]
                 if (!fastq_2) {
-                    return [ meta.id, meta + [ single_end:true ], [ fastq_1 ] ]
+                    return [ updated_meta.id, updated_meta + [ single_end:true ], [ fastq_1 ] ]
                 } else {
-                    return [ meta.id, meta + [ single_end:false ], [ fastq_1, fastq_2 ] ]
+                    return [ updated_meta.id, updated_meta + [ single_end:false ], [ fastq_1, fastq_2 ] ]
                 }
         }
         .groupTuple()
         .map {
-            validateInputSamplesheet(it)
+            validateInputSamplesheet(it) // Applies additional group validation checks that schema_input.json cannot do.
         }
-        .map {
-            meta, fastqs ->
-                return [ meta, fastqs.flatten() ]
-        }
+        .transpose() // Replace the map below
+        // .map {
+        //     meta, fastqs ->
+        //         return [ meta, fastqs.flatten() ]
+        // }
+        .view()
         .set { ch_samplesheet }
 
     emit:
@@ -155,7 +159,9 @@ workflow PIPELINE_COMPLETION {
 // Check and validate pipeline parameters
 //
 def validateInputParameters() {
-    genomeExistsError()
+    // genomeExistsError()
+
+    // TODO: Add code to further validate pipeline parameters here
 }
 
 //
