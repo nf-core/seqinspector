@@ -9,15 +9,32 @@ nextflow_pipeline {
 
         when {
             params {
-                outdir = "tests/results/MiSeq"
+                outdir = "$outputDir"
                 input  = "https://raw.githubusercontent.com/nf-core/test-datasets/seqinspector/testdata/MiSeq/samplesheet.csv"
             }
         }
 
         then {
-            assert workflow.success
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    path("$outputDir/multiqc/lanes/L1/multiqc_data/multiqc_citations.txt"),
+                    path("$outputDir/multiqc/lanes/L1/multiqc_data/multiqc_fastqc.txt"),
+                    path("$outputDir/multiqc/lanes/L1/multiqc_data/multiqc_general_stats.txt"),
+                    path("$outputDir/multiqc/lanes/L1/multiqc_data/multiqc_software_versions.txt"),
+
+                    path("$outputDir/multiqc/groups/P001/multiqc_data/multiqc_citations.txt"),
+                    path("$outputDir/multiqc/groups/P001/multiqc_data/multiqc_fastqc.txt"),
+                    path("$outputDir/multiqc/groups/P001/multiqc_data/multiqc_general_stats.txt"),
+                    path("$outputDir/multiqc/groups/P001/multiqc_data/multiqc_software_versions.txt"),
+
+                    path("$outputDir/multiqc/multiqc_data/multiqc_citations.txt"),
+                    path("$outputDir/multiqc/multiqc_data/multiqc_fastqc.txt"),
+                    path("$outputDir/multiqc/multiqc_data/multiqc_general_stats.txt"),
+                    path("$outputDir/multiqc/multiqc_data/multiqc_software_versions.txt"),
+                    ).match()
+                }
+            )
         }
-
     }
-
 }

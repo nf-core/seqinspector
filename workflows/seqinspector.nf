@@ -100,7 +100,7 @@ workflow SEQINSPECTOR {
         .map { meta, sample -> meta.lane }
         .unique()
         .map { lane -> [lane:lane] }
-        .cross(ch_multiqc_extra_files)
+        .combine(ch_multiqc_extra_files)
 
     lane_mqc_files = ch_multiqc_files
         .filter { meta, sample -> meta.lane }
@@ -118,9 +118,7 @@ workflow SEQINSPECTOR {
                 """.stripMargin()
             ]
         }
-        .map { file -> def fileparts = file.name.split("_")
-            [ fileparts[0], file ]
-        }
+        .map { file -> [ (file =~ /(\[LANE:.+\])/)[0][1], file ] }
         .join(mqc_by_lane)
         .multiMap { lane, config, meta , samples_per_lane ->
             samples_per_lane: samples_per_lane
@@ -140,7 +138,7 @@ workflow SEQINSPECTOR {
         .map { meta, sample -> meta.group }
         .unique()
         .map { group -> [group:group] }
-        .cross(ch_multiqc_extra_files)
+        .combine(ch_multiqc_extra_files)
 
     group_mqc_files = ch_multiqc_files
         .filter { meta, sample -> meta.group }
@@ -158,9 +156,7 @@ workflow SEQINSPECTOR {
                 """.stripMargin()
             ]
         }
-        .map { file -> def fileparts = file.name.split("_")
-            [ fileparts[0], file ]
-        }
+        .map { file -> [ (file =~ /(\[GROUP:.+\])/)[0][1], file ] }
         .join(mqc_by_group)
         .multiMap { group, config, meta , samples_per_group ->
             samples_per_group: samples_per_group
@@ -180,7 +176,7 @@ workflow SEQINSPECTOR {
         .map { meta, sample -> meta.rundir }
         .unique()
         .map { rundir -> [rundir:rundir] }
-        .cross(ch_multiqc_extra_files)
+        .combine(ch_multiqc_extra_files)
 
     rundir_mqc_files = ch_multiqc_files
         .filter { meta, sample -> meta.rundir }
@@ -198,9 +194,7 @@ workflow SEQINSPECTOR {
                 """.stripMargin()
             ]
         }
-        .map { file -> def fileparts = file.name.split("_")
-            [ fileparts[0], file ]
-        }
+        .map { file -> [ (file =~ /(\[RUNDIR:.+\])/)[0][1], file ] }
         .join(mqc_by_rundir)
         .multiMap { rundir, config, meta , samples_per_rundir ->
             samples_per_rundir: samples_per_rundir

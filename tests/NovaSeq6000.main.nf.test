@@ -9,15 +9,47 @@ nextflow_pipeline {
 
         when {
             params {
-                outdir = "tests/results/NovaSeq6000"
+                outdir = "$outputDir"
                 input  = "https://raw.githubusercontent.com/nf-core/test-datasets/seqinspector/testdata/NovaSeq6000/samplesheet.csv"
             }
         }
 
         then {
-            assert workflow.success
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    path("$outputDir/multiqc/lanes/L1/multiqc_data/multiqc_citations.txt"),
+                    path("$outputDir/multiqc/lanes/L1/multiqc_data/multiqc_fastqc.txt"),
+                    path("$outputDir/multiqc/lanes/L1/multiqc_data/multiqc_general_stats.txt"),
+                    path("$outputDir/multiqc/lanes/L1/multiqc_data/multiqc_software_versions.txt"),
+
+                    path("$outputDir/multiqc/groups/S1/multiqc_data/multiqc_citations.txt"),
+                    path("$outputDir/multiqc/groups/S1/multiqc_data/multiqc_fastqc.txt"),
+                    path("$outputDir/multiqc/groups/S1/multiqc_data/multiqc_general_stats.txt"),
+                    path("$outputDir/multiqc/groups/S1/multiqc_data/multiqc_software_versions.txt"),
+
+                    path("$outputDir/multiqc/groups/S2/multiqc_data/multiqc_citations.txt"),
+                    path("$outputDir/multiqc/groups/S2/multiqc_data/multiqc_fastqc.txt"),
+                    path("$outputDir/multiqc/groups/S2/multiqc_data/multiqc_general_stats.txt"),
+                    path("$outputDir/multiqc/groups/S2/multiqc_data/multiqc_software_versions.txt"),
+
+                    path("$outputDir/multiqc/groups/S3/multiqc_data/multiqc_citations.txt"),
+                    path("$outputDir/multiqc/groups/S3/multiqc_data/multiqc_fastqc.txt"),
+                    path("$outputDir/multiqc/groups/S3/multiqc_data/multiqc_general_stats.txt"),
+                    path("$outputDir/multiqc/groups/S3/multiqc_data/multiqc_software_versions.txt"),
+
+                    path("$outputDir/multiqc/groups/S4/multiqc_data/multiqc_citations.txt"),
+                    path("$outputDir/multiqc/groups/S4/multiqc_data/multiqc_fastqc.txt"),
+                    path("$outputDir/multiqc/groups/S4/multiqc_data/multiqc_general_stats.txt"),
+                    path("$outputDir/multiqc/groups/S4/multiqc_data/multiqc_software_versions.txt"),
+
+                    path("$outputDir/multiqc/multiqc_data/multiqc_citations.txt"),
+                    path("$outputDir/multiqc/multiqc_data/multiqc_fastqc.txt"),
+                    path("$outputDir/multiqc/multiqc_data/multiqc_general_stats.txt"),
+                    path("$outputDir/multiqc/multiqc_data/multiqc_software_versions.txt"),
+                    ).match()
+                },
+            )
         }
-
     }
-
 }
