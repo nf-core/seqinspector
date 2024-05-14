@@ -68,9 +68,7 @@ The FastQC plots displayed in the MultiQC report shows _untrimmed_ reads. They m
     - `RUNDIR2/`
       - ...
 
-
 [1] These files will only be generated if `lane`, `group` or `rundir` were specified for some samples.
-
 
 </details>
 
