@@ -80,7 +80,7 @@ workflow SEQINSPECTOR {
     ch_multiqc_extra_files = ch_multiqc_extra_files.mix(
         ch_methods_description.collectFile(
             name: 'methods_description_mqc.yaml',
-            sort: false
+            sort: true
         )
     )
 
