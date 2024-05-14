@@ -6,8 +6,6 @@ This document describes the output produced by the pipeline. Most of the plots a
 
 The directories listed below will be created in the results directory after the pipeline has finished. All paths are relative to the top-level results directory.
 
-<!-- TODO nf-core: Write this documentation describing your workflow's output -->
-
 ## Pipeline overview
 
 The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes data using the following steps:
@@ -48,6 +46,31 @@ The FastQC plots displayed in the MultiQC report shows _untrimmed_ reads. They m
   - `multiqc_report.html`: a standalone HTML file that can be viewed in your web browser.
   - `multiqc_data/`: directory containing parsed statistics from the different tools used in the pipeline.
   - `multiqc_plots/`: directory containing static images from the report in various formats.
+  - `lanes/` [1]
+    - `L1/`
+      - `multiqc_report.html`: a standalone HTML file that can be viewed in your web browser.
+      - `multiqc_data/`: directory containing parsed statistics from the different tools used in the pipeline.
+      - `multiqc_plots/`: directory containing static images from the report in various formats.
+    - `L2/`
+      - ...
+  - `groups/` [1]
+    - `GROUPNAME1/`
+      - `multiqc_report.html`: a standalone HTML file that can be viewed in your web browser.
+      - `multiqc_data/`: directory containing parsed statistics from the different tools used in the pipeline.
+      - `multiqc_plots/`: directory containing static images from the report in various formats.
+    - `GROUPNAME2/`
+      - ...
+  - `rundir/` [1]
+    - `RUNDIR1/`
+      - `multiqc_report.html`: a standalone HTML file that can be viewed in your web browser.
+      - `multiqc_data/`: directory containing parsed statistics from the different tools used in the pipeline.
+      - `multiqc_plots/`: directory containing static images from the report in various formats.
+    - `RUNDIR2/`
+      - ...
+
+
+[1] These files will only be generated if `lane`, `group` or `rundir` were specified for some samples.
+
 
 </details>
 
