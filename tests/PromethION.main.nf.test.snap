@@ -1,0 +1,15 @@
+{
+    "PromethION data test": {
+        "content": [
+            "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+            "multiqc_fastqc.txt:md5,333360ff12007d64f2bf7673b0658bed",
+            "multiqc_general_stats.txt:md5,b1999255f9a502618d59be2f2e93bad2",
+            "multiqc_software_versions.txt:md5,7452f1f7aae2a8a4066c2ef6cd5ceb95",
+            "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+            "multiqc_fastqc.txt:md5,333360ff12007d64f2bf7673b0658bed",
+            "multiqc_general_stats.txt:md5,b1999255f9a502618d59be2f2e93bad2",
+            "multiqc_software_versions.txt:md5,7452f1f7aae2a8a4066c2ef6cd5ceb95"
+        ],
+        "timestamp": "2024-05-08T17:17:23.151259"
+    }
+}
