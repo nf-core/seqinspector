@@ -8,9 +8,9 @@ nextflow_pipeline {
     test("PromethION data test") {
 
         when {
+            config "./PromethION.main.nf.test.config"
             params {
                 outdir = "$outputDir"
-                input  = params.pipelines_testdata_base_path + "seqinspector/testdata/PromethION/samplesheet.csv"
             }
         }
 
