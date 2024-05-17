@@ -4,16 +4,20 @@
             "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
             "multiqc_fastqc.txt:md5,692b8aed0614ed1655f2c1cbea1ba312",
             "multiqc_general_stats.txt:md5,630167d67d3f92408cd1a04422c7196f",
-            "multiqc_software_versions.txt:md5,7452f1f7aae2a8a4066c2ef6cd5ceb95",
+            "multiqc_software_versions.txt:md5,b1e01403f9bdaa81ebabd388d5f9a921",
             "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
             "multiqc_fastqc.txt:md5,692b8aed0614ed1655f2c1cbea1ba312",
             "multiqc_general_stats.txt:md5,630167d67d3f92408cd1a04422c7196f",
-            "multiqc_software_versions.txt:md5,7452f1f7aae2a8a4066c2ef6cd5ceb95",
+            "multiqc_software_versions.txt:md5,b1e01403f9bdaa81ebabd388d5f9a921",
             "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
             "multiqc_fastqc.txt:md5,692b8aed0614ed1655f2c1cbea1ba312",
             "multiqc_general_stats.txt:md5,630167d67d3f92408cd1a04422c7196f",
-            "multiqc_software_versions.txt:md5,7452f1f7aae2a8a4066c2ef6cd5ceb95"
+            "multiqc_software_versions.txt:md5,b1e01403f9bdaa81ebabd388d5f9a921"
         ],
-        "timestamp": "2024-05-08T16:29:33.284003"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-05-17T12:59:21.531493"
     }
 }
