@@ -8,9 +8,9 @@ nextflow_pipeline {
     test("NovaSeq6000 data test") {
 
         when {
+            config "./NovaSeq6000.main.nf.test.config"
             params {
                 outdir = "$outputDir"
-                input  = params.pipelines_testdata_base_path + "seqinspector/testdata/NovaSeq6000/samplesheet.csv"
             }
         }
 
