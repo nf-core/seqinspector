@@ -6,7 +6,7 @@
 
 include { FASTQC                        } from '../modules/nf-core/fastqc/main'
 
-include { MULTIQC                       } from '../modules/nf-core/multiqc/main'
+include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc/main'
 include { MULTIQC as MULTIQC_PER_LANE   } from '../modules/nf-core/multiqc/main'
 include { MULTIQC as MULTIQC_PER_GROUP  } from '../modules/nf-core/multiqc/main'
 include { MULTIQC as MULTIQC_PER_RUNDIR } from '../modules/nf-core/multiqc/main'
@@ -84,7 +84,7 @@ workflow SEQINSPECTOR {
         )
     )
 
-    MULTIQC (
+    MULTIQC_GLOBAL (
         ch_multiqc_files
             .map { meta, file -> file }
             .mix(ch_multiqc_extra_files)
@@ -97,9 +97,8 @@ workflow SEQINSPECTOR {
     // Generate reports by lane
     multiqc_extra_files_per_lane = ch_multiqc_files
         .filter { meta, sample -> meta.lane }
-        .map { meta, sample -> meta.lane }
+        .map { meta, sample -> [lane: meta.lane] }
         .unique()
-        .map { lane -> [lane:lane] }
         .combine(ch_multiqc_extra_files)
 
     lane_mqc_files = ch_multiqc_files
@@ -209,7 +208,7 @@ workflow SEQINSPECTOR {
     )
 
     emit:
-    global_report = MULTIQC.out.report.toList()             // channel: /path/to/multiqc_report.html
+    global_report = MULTIQC_GLOBAL.out.report.toList()      // channel: /path/to/multiqc_report.html
     lane_reports = MULTIQC_PER_LANE.out.report.toList()     // channel: [ /path/to/multiqc_report.html ]
     group_reports = MULTIQC_PER_GROUP.out.report.toList()   // channel: [ /path/to/multiqc_report.html ]
     rundir_reports = MULTIQC_PER_RUNDIR.out.report.toList() // channel: [ /path/to/multiqc_report.html ]
