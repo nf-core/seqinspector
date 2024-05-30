@@ -1,0 +1,40 @@
+nextflow_pipeline {
+
+    name "Test Workflow main.nf on MiSeq data"
+    script "../main.nf"
+    tag "seqinspector"
+    tag "PIPELINE"
+
+    test("MiSeq data test") {
+
+        when {
+            config "./MiSeq.main.nf.test.config"
+            params {
+                outdir = "$outputDir"
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    path("$outputDir/multiqc/lanes/L1/multiqc_data/multiqc_citations.txt"),
+                    path("$outputDir/multiqc/lanes/L1/multiqc_data/multiqc_fastqc.txt"),
+                    path("$outputDir/multiqc/lanes/L1/multiqc_data/multiqc_general_stats.txt"),
+                    path("$outputDir/multiqc/lanes/L1/multiqc_data/multiqc_software_versions.txt"),
+
+                    path("$outputDir/multiqc/groups/P001/multiqc_data/multiqc_citations.txt"),
+                    path("$outputDir/multiqc/groups/P001/multiqc_data/multiqc_fastqc.txt"),
+                    path("$outputDir/multiqc/groups/P001/multiqc_data/multiqc_general_stats.txt"),
+                    path("$outputDir/multiqc/groups/P001/multiqc_data/multiqc_software_versions.txt"),
+
+                    path("$outputDir/multiqc/multiqc_data/multiqc_citations.txt"),
+                    path("$outputDir/multiqc/multiqc_data/multiqc_fastqc.txt"),
+                    path("$outputDir/multiqc/multiqc_data/multiqc_general_stats.txt"),
+                    path("$outputDir/multiqc/multiqc_data/multiqc_software_versions.txt"),
+                    ).match()
+                }
+            )
+        }
+    }
+}

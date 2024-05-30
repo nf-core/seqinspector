@@ -1,0 +1,35 @@
+nextflow_pipeline {
+
+    name "Test Workflow main.nf on PromethION data"
+    script "../main.nf"
+    tag "seqinspector"
+    tag "PIPELINE"
+
+    test("PromethION data test") {
+
+        when {
+            config "./PromethION.main.nf.test.config"
+            params {
+                outdir = "$outputDir"
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    path("$outputDir/multiqc/groups/r10p41_e8p2_human_runs_jkw/multiqc_data/multiqc_citations.txt"),
+                    path("$outputDir/multiqc/groups/r10p41_e8p2_human_runs_jkw/multiqc_data/multiqc_fastqc.txt"),
+                    path("$outputDir/multiqc/groups/r10p41_e8p2_human_runs_jkw/multiqc_data/multiqc_general_stats.txt"),
+                    path("$outputDir/multiqc/groups/r10p41_e8p2_human_runs_jkw/multiqc_data/multiqc_software_versions.txt"),
+
+                    path("$outputDir/multiqc/multiqc_data/multiqc_citations.txt"),
+                    path("$outputDir/multiqc/multiqc_data/multiqc_fastqc.txt"),
+                    path("$outputDir/multiqc/multiqc_data/multiqc_general_stats.txt"),
+                    path("$outputDir/multiqc/multiqc_data/multiqc_software_versions.txt"),
+                    ).match()
+                },
+            )
+        }
+    }
+}
