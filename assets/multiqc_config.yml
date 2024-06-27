@@ -13,3 +13,16 @@ report_section_order:
 export_plots: true
 
 disable_version_detection: true
+
+module_order:
+  - fastqc:
+      name: "FastQC (raw)"
+      info: "This section of the report shows FastQC results before adapter trimming."
+      path_filters:
+        - "*.raw_fastqc.zip"
+  - fastp
+  - fastqc:
+      name: "FastQC (trimmed)"
+      info: "This section of the report shows FastQC results after adapter trimming."
+      path_filters:
+        - "*.trim_fastqc.zip"

@@ -74,6 +74,37 @@
                 }
             }
         },
+        "trimming_options": {
+            "title": "Trimming options",
+            "type": "object",
+            "description": "",
+            "default": "",
+            "fa_icon": "fas fa-cut",
+            "properties": {
+                "skip_trimming": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-fast-forward",
+                    "description": "Skip adapter trimming step"
+                },
+                "save_trimmed_fail": {
+                    "type": "boolean",
+                    "default": true,
+                    "fa_icon": "fas fa-save",
+                    "description": "Save the trimmed FastQ files in the results directory"
+                },
+                "min_trimmed_reads": {
+                    "type": "integer",
+                    "default": 10000,
+                    "fa_icon": "fas fa-hand-paper",
+                    "description": "Minimum number of trimmed reads below which samples are removed from further processing. Some downstream steps in the pipeline will fail if this threshold is too low"
+                },
+                "extra_fastp_args": {
+                    "type": "string",
+                    "fa_icon": "fas fa-plus",
+                    "description": "Extra arguments to pass to fastp command in addition to defaults defined by the pipeline"
+                }
+            }
+        },
         "institutional_config_options": {
             "title": "Institutional config options",
             "type": "object",
@@ -282,6 +313,9 @@
         },
         {
             "$ref": "#/definitions/reference_genome_options"
+        },
+        {
+            "$ref": "#/definitions/trimming_options"
         },
         {
             "$ref": "#/definitions/institutional_config_options"

@@ -4,14 +4,13 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { FASTQC                        } from '../modules/nf-core/fastqc/main'
-
 include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc/main'
 include { MULTIQC as MULTIQC_PER_LANE   } from '../modules/nf-core/multiqc/main'
 include { MULTIQC as MULTIQC_PER_GROUP  } from '../modules/nf-core/multiqc/main'
 include { MULTIQC as MULTIQC_PER_RUNDIR } from '../modules/nf-core/multiqc/main'
 
 include { paramsSummaryMap              } from 'plugin/nf-validation'
+include { FASTQ_FASTQC_UMITOOLS_FASTP   } from '../subworkflows/nf-core/fastq_fastqc_umitools_fastp/main'
 include { paramsSummaryMultiqc          } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML        } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText        } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
@@ -35,13 +34,27 @@ workflow SEQINSPECTOR {
     ch_multiqc_reports     = Channel.empty()
 
     //
-    // MODULE: Run FastQC
+    // SUBSORKFLOW: FASTQ_FASTQC_UMITOOLS_FASTP
     //
-    FASTQC (
-        ch_samplesheet
+    FASTQ_FASTQC_UMITOOLS_FASTP (
+        ch_samplesheet,
+        false,                      // skip_fastqc
+        false,                      // with_umi
+        true,                       // skip_umi_extract
+        0,                          // umi_discard_read
+        params.skip_trimming,
+        [],                         // adapter_fasta,
+        params.save_trimmed_fail,
+        false,                      // save_merged
+        params.min_trimmed_reads
     )
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
-    ch_versions = ch_versions.mix(FASTQC.out.versions.first())
+
+    ch_multiqc_files                = ch_multiqc_files
+                                    | mix(FASTQ_FASTQC_UMITOOLS_FASTP.out.fastqc_raw_zip)
+                                    | mix(FASTQ_FASTQC_UMITOOLS_FASTP.out.trim_json)
+                                    | mix(FASTQ_FASTQC_UMITOOLS_FASTP.out.fastqc_trim_zip)
+
+    ch_versions                     = ch_versions.mix(FASTQ_FASTQC_UMITOOLS_FASTP.out.versions)
 
     //
     // Collate and save software versions
