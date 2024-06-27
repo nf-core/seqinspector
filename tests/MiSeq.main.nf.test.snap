@@ -1,19 +1,23 @@
 {
     "MiSeq data test": {
         "content": [
-            "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-            "multiqc_fastqc.txt:md5,692b8aed0614ed1655f2c1cbea1ba312",
-            "multiqc_general_stats.txt:md5,630167d67d3f92408cd1a04422c7196f",
-            "multiqc_software_versions.txt:md5,7452f1f7aae2a8a4066c2ef6cd5ceb95",
-            "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-            "multiqc_fastqc.txt:md5,692b8aed0614ed1655f2c1cbea1ba312",
-            "multiqc_general_stats.txt:md5,630167d67d3f92408cd1a04422c7196f",
-            "multiqc_software_versions.txt:md5,7452f1f7aae2a8a4066c2ef6cd5ceb95",
-            "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-            "multiqc_fastqc.txt:md5,692b8aed0614ed1655f2c1cbea1ba312",
-            "multiqc_general_stats.txt:md5,630167d67d3f92408cd1a04422c7196f",
-            "multiqc_software_versions.txt:md5,7452f1f7aae2a8a4066c2ef6cd5ceb95"
+            "multiqc_citations.txt:md5,d35df50e9903a96a2b3bce3c1fbc8ad2",
+            "multiqc_fastqc.txt:md5,4da95cbe22bce954b82b02ca79979279",
+            "multiqc_general_stats.txt:md5,08af93f12fe75b8b95792ea7eef3d81b",
+            "multiqc_software_versions.txt:md5,58ba4a50500001b1ba72556e1d797c89",
+            "multiqc_citations.txt:md5,d35df50e9903a96a2b3bce3c1fbc8ad2",
+            "multiqc_fastqc.txt:md5,4da95cbe22bce954b82b02ca79979279",
+            "multiqc_general_stats.txt:md5,08af93f12fe75b8b95792ea7eef3d81b",
+            "multiqc_software_versions.txt:md5,58ba4a50500001b1ba72556e1d797c89",
+            "multiqc_citations.txt:md5,d35df50e9903a96a2b3bce3c1fbc8ad2",
+            "multiqc_fastqc.txt:md5,4da95cbe22bce954b82b02ca79979279",
+            "multiqc_general_stats.txt:md5,08af93f12fe75b8b95792ea7eef3d81b",
+            "multiqc_software_versions.txt:md5,58ba4a50500001b1ba72556e1d797c89"
         ],
-        "timestamp": "2024-05-30T13:14:20.263485"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-06-27T15:15:28.557909"
     }
 }

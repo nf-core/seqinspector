@@ -1,31 +1,35 @@
 {
     "NovaSeq6000 data test": {
         "content": [
-            "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-            "multiqc_fastqc.txt:md5,5ba3f4f4ec6026a5f5d55418384dcd3e",
-            "multiqc_general_stats.txt:md5,123cd6b64c9c15607405bcdd45a843d4",
-            "multiqc_software_versions.txt:md5,7452f1f7aae2a8a4066c2ef6cd5ceb95",
-            "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-            "multiqc_fastqc.txt:md5,9b4fd8a6d6e8a9acabecd592f633472e",
-            "multiqc_general_stats.txt:md5,8237b88ceb018d3cb1edcea62d10f4a2",
-            "multiqc_software_versions.txt:md5,7452f1f7aae2a8a4066c2ef6cd5ceb95",
-            "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-            "multiqc_fastqc.txt:md5,9246a5b6b7b0410c79049fc3dbd08e92",
-            "multiqc_general_stats.txt:md5,44328403f423c6f5ac9ee0a8a01e6725",
-            "multiqc_software_versions.txt:md5,7452f1f7aae2a8a4066c2ef6cd5ceb95",
-            "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-            "multiqc_fastqc.txt:md5,84820276fae52d4d492831280ae6207c",
-            "multiqc_general_stats.txt:md5,dd07799e5e4b9d389f9de49a852c3363",
-            "multiqc_software_versions.txt:md5,7452f1f7aae2a8a4066c2ef6cd5ceb95",
-            "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-            "multiqc_fastqc.txt:md5,59ae05d89453da6f57010ffb6466f902",
-            "multiqc_general_stats.txt:md5,e4629691992bfe639c01a84b90563334",
-            "multiqc_software_versions.txt:md5,7452f1f7aae2a8a4066c2ef6cd5ceb95",
-            "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-            "multiqc_fastqc.txt:md5,5ba3f4f4ec6026a5f5d55418384dcd3e",
-            "multiqc_general_stats.txt:md5,123cd6b64c9c15607405bcdd45a843d4",
-            "multiqc_software_versions.txt:md5,7452f1f7aae2a8a4066c2ef6cd5ceb95"
+            "multiqc_citations.txt:md5,d35df50e9903a96a2b3bce3c1fbc8ad2",
+            "multiqc_fastqc.txt:md5,da9f2ca03b3bfefe7899df7ece476545",
+            "multiqc_general_stats.txt:md5,614af3f17d9b4379fd788dcddc64a8a5",
+            "multiqc_software_versions.txt:md5,58ba4a50500001b1ba72556e1d797c89",
+            "multiqc_citations.txt:md5,d35df50e9903a96a2b3bce3c1fbc8ad2",
+            "multiqc_fastqc.txt:md5,b201101e7d53841a4d1ebbe09e032f50",
+            "multiqc_general_stats.txt:md5,8c5f74b12d2f2a11bec5cabf6f218065",
+            "multiqc_software_versions.txt:md5,58ba4a50500001b1ba72556e1d797c89",
+            "multiqc_citations.txt:md5,d35df50e9903a96a2b3bce3c1fbc8ad2",
+            "multiqc_fastqc.txt:md5,c80c0201e230e7444337a1ca0d2f921d",
+            "multiqc_general_stats.txt:md5,b316ebc76dd9b0e0aeb18b242778a7ab",
+            "multiqc_software_versions.txt:md5,58ba4a50500001b1ba72556e1d797c89",
+            "multiqc_citations.txt:md5,d35df50e9903a96a2b3bce3c1fbc8ad2",
+            "multiqc_fastqc.txt:md5,df7c2ec650c485da546711be8c864138",
+            "multiqc_general_stats.txt:md5,173f3cdd74e3f9a9329325da294380e3",
+            "multiqc_software_versions.txt:md5,58ba4a50500001b1ba72556e1d797c89",
+            "multiqc_citations.txt:md5,d35df50e9903a96a2b3bce3c1fbc8ad2",
+            "multiqc_fastqc.txt:md5,c1adafa923c33f0620d2fae630a40afc",
+            "multiqc_general_stats.txt:md5,bdf69c5a4da6b55a05e94568f6780e61",
+            "multiqc_software_versions.txt:md5,58ba4a50500001b1ba72556e1d797c89",
+            "multiqc_citations.txt:md5,d35df50e9903a96a2b3bce3c1fbc8ad2",
+            "multiqc_fastqc.txt:md5,da9f2ca03b3bfefe7899df7ece476545",
+            "multiqc_general_stats.txt:md5,614af3f17d9b4379fd788dcddc64a8a5",
+            "multiqc_software_versions.txt:md5,58ba4a50500001b1ba72556e1d797c89"
         ],
-        "timestamp": "2024-05-30T13:13:49.062282"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-06-27T15:16:03.100096"
     }
 }
