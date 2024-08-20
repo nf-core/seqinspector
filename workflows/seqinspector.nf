@@ -5,6 +5,7 @@
 */
 
 include { FASTQC                        } from '../modules/nf-core/fastqc/main'
+include { FASTQSCREEN_FASTQSCREEN       } from '../modules/nf-core/fastqscreen/fastqscreen/main'
 
 include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc/main'
 include { MULTIQC as MULTIQC_PER_LANE   } from '../modules/nf-core/multiqc/main'
@@ -42,6 +43,15 @@ workflow SEQINSPECTOR {
     )
     ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
     ch_versions = ch_versions.mix(FASTQC.out.versions.first())
+
+    //
+    // MODULE: Run FastQ Screen
+    //
+
+    FASTQSCREEN_FASTQSCREEN (
+        ch_samplesheet
+        Channel.fromPath('/Users/franziska.franziska/Desktop/sequinspector_other_files/fastq_screen_config_file.conf')
+    )
 
     //
     // Collate and save software versions
