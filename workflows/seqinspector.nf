@@ -49,9 +49,11 @@ workflow SEQINSPECTOR {
     //
 
     FASTQSCREEN_FASTQSCREEN (
-        ch_samplesheet
-        Channel.fromPath('/Users/franziska.franziska/Desktop/sequinspector_other_files/fastq_screen_config_file.conf')
+        ch_samplesheet,
+        Channel.fromPath(params.config_fastq_screen)
     )
+    ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
+    ch_versions = ch_versions.mix(FASTQSCREEN_FASTQSCREEN.out.versions.first())
 
     //
     // Collate and save software versions
