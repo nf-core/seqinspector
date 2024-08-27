@@ -31,22 +31,21 @@ run_dir
 ...would be represented in the following samplesheet (shown as .tsv for readability)
 
 ```csv title="samplesheet.csv"
-sample  lane  group   fastq_1                                       fastq_2 rundir
-sample1 1     group1  path/to/run_dir/sample1_lane1_group1_r1.fq.gz         path/to/run_dir
-sample2 1     group1  path/to/run_dir/sample2_lane1_group1_r1.fq.gz         path/to/run_dir
-sample3 2     group2  path/to/run_dir/sample3_lane2_group2_r1.fq.gz         path/to/run_dir
-sample4 2     group3  path/to/run_dir/sample4_lane2_group3_r1.fq.gz         path/to/run_dir
+sample  fastq_1                                       fastq_2 rundir          tags
+sample1 path/to/run_dir/sample1_lane1_group1_r1.fq.gz         path/to/run_dir "cohort1,patient1"
+sample2 path/to/run_dir/sample2_lane1_group1_r1.fq.gz         path/to/run_dir "cohort1,patient2"
+sample3 path/to/run_dir/sample3_lane2_group2_r1.fq.gz         path/to/run_dir "cohort1,patient3"
+sample4 path/to/run_dir/sample4_lane2_group3_r1.fq.gz         path/to/run_dir "control"
 
 ```
 
 | Column    | Description                                                                                                                                                                            |
 | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `sample`  | Custom sample name. This entry will be identical for multiple sequencing libraries/runs from the same sample. Spaces in sample names are automatically converted to underscores (`_`). |
-| `lane`    | Lane where the sample was processed on an Illumina instrument (optional).                                                                                                              |
-| `group`   | Group the sample belongs too, useful when several groups are pooled together (optional).                                                                                               |
 | `fastq_1` | Full path to FastQ file for Illumina short reads 1. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                             |
 | `fastq_2` | Full path to FastQ file for Illumina short reads 2. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz" (optional).                                                  |
 | `rundir`  | Path to the runfolder containing extra information about the sequencing run (optional) .                                                                                               |
+| `tags`    | Comma-separated list of tags to group samples in special reports.                                                                                                                      |
 
 Another [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
 
