@@ -87,9 +87,17 @@ workflow PIPELINE_INITIALISATION {
                 def tags = meta.tags ? meta.tags.tokenize(":") : []
                 def updated_meta = meta + [ id:meta.sample, tags:tags ]
                 if (!fastq_2) {
-                    return [ updated_meta.id, updated_meta + [ single_end:true ], [ fastq_1 ] ]
+                    return [
+                        updated_meta.id + fastq_1.toString().replaceAll('/', '_'),
+                        updated_meta + [ single_end:true ],
+                        [ fastq_1 ]
+                    ]
                 } else {
-                    return [ updated_meta.id, updated_meta + [ single_end:false ], [ fastq_1, fastq_2 ] ]
+                    return [
+                        updated_meta.id + fastq_1.toString().replaceAll('/', '_') + '_' + fastq_2.toString().replaceAll('/', '_'),
+                        updated_meta + [ single_end:false ],
+                        [ fastq_1, fastq_2 ]
+                    ]
                 }
         }
         .groupTuple()
@@ -102,6 +110,20 @@ workflow PIPELINE_INITIALISATION {
         //         return [ meta, fastqs.flatten() ]
         // }
         .set { ch_samplesheet }
+
+    ch_samplesheet
+        .map {
+            meta, fastqs -> meta.tags
+        }
+        .flatten()
+        .unique()
+        .map { tag_name -> [tag_name.toLowerCase(), tag_name] }
+        .groupTuple()
+        .map {
+            tag_lowercase, tags ->
+                assert tags.size() == 1 :
+                "Tag name collision: " + tags.join(", ")
+        }
 
     emit:
     samplesheet = ch_samplesheet
