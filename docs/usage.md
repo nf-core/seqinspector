@@ -32,9 +32,9 @@ run_dir
 
 ```csv title="samplesheet.csv"
 sample  fastq_1                                       fastq_2 rundir          tags
-sample1 path/to/run_dir/sample1_lane1_group1_r1.fq.gz         path/to/run_dir "cohort1,patient1"
-sample2 path/to/run_dir/sample2_lane1_group1_r1.fq.gz         path/to/run_dir "cohort1,patient2"
-sample3 path/to/run_dir/sample3_lane2_group2_r1.fq.gz         path/to/run_dir "cohort1,patient3"
+sample1 path/to/run_dir/sample1_lane1_group1_r1.fq.gz         path/to/run_dir "project1,group1"
+sample2 path/to/run_dir/sample2_lane1_group1_r1.fq.gz         path/to/run_dir "project1,group1"
+sample3 path/to/run_dir/sample3_lane2_group2_r1.fq.gz         path/to/run_dir "project1,group2"
 sample4 path/to/run_dir/sample4_lane2_group3_r1.fq.gz         path/to/run_dir "control"
 
 ```
