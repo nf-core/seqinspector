@@ -36,8 +36,8 @@
             },
             "tags": {
                 "type": "string",
-                "pattern": "^\\\"([A-Za-z0-9_-]+,\\ ?)*([A-Za-z0-9_-]+)\\\"$",
-                "errorMessage": "Tags must consist of numbers, letters, underscores or dashes and must be provided as a comma-separated list flanked by a pair of double-quotes, e.g. \"patient_01, lane1, pos-CTRL_2\".",
+                "pattern": "^([a-z0-9_-]+:)*([a-z0-9_-]+)$",
+                "errorMessage": "Tags must be separated by colons and only consist of lowercase letters, numbers, underscores and hyphens.",
                 "meta": ["tags"]
             }
         },
