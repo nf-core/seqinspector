@@ -89,7 +89,9 @@ workflow SEQINSPECTOR {
             .collect(),
         ch_multiqc_config.toList(),
         Channel.empty().toList(),
-        ch_multiqc_logo.toList()
+        ch_multiqc_logo.toList(),
+        Channel.empty().toList(),
+        Channel.empty().toList()
     )
 
     ch_tags = ch_multiqc_files
@@ -131,7 +133,9 @@ workflow SEQINSPECTOR {
         tagged_mqc_files.samples_per_tag,
         ch_multiqc_config.toList(),
         tagged_mqc_files.config,
-        ch_multiqc_logo.toList()
+        ch_multiqc_logo.toList(),
+        Channel.empty().toList(),
+        Channel.empty().toList()
     )
 
     emit:
