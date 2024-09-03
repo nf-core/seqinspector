@@ -103,6 +103,20 @@ workflow PIPELINE_INITIALISATION {
         // }
         .set { ch_samplesheet }
 
+    ch_samplesheet
+        .map {
+            meta, fastqs -> meta.tags
+        }
+        .flatten()
+        .unique()
+        .map { tag_name -> [tag_name.toLowerCase(), tag_name] }
+        .groupTuple()
+        .map {
+            tag_lowercase, tags ->
+                assert tags.size() == 1 :
+                "Tag name collision: " + tags.join(", ")
+        }
+
     emit:
     samplesheet = ch_samplesheet
     versions    = ch_versions
