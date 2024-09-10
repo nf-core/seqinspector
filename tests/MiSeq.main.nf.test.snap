@@ -2,10 +2,14 @@
     "MiSeq data test": {
         "content": [
             "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-            "multiqc_fastqc.txt:md5,e46e7baa8f57d4cf54d973925b5eadf9",
-            "multiqc_general_stats.txt:md5,a5e626a2e1a3c986092e4f89091cc41c",
-            "multiqc_software_versions.txt:md5,7452f1f7aae2a8a4066c2ef6cd5ceb95"
+            "multiqc_fastqc.txt:md5,7b1b7fd457b60404768045b148d4c0a8",
+            "multiqc_general_stats.txt:md5,962713a1473a318f2cb29bb5290c4c8e",
+            "multiqc_software_versions.txt:md5,49e3596d49ee49d967d3b6c363b486d5"
         ],
-        "timestamp": "2024-08-26T17:55:16.152573"
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-09-10T08:57:05.870194"
     }
 }
