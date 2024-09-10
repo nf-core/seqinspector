@@ -2,10 +2,14 @@
     "PromethION data test": {
         "content": [
             "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-            "multiqc_fastqc.txt:md5,cecee3cb343c75c80180d3169c6f3ea1",
-            "multiqc_general_stats.txt:md5,e63c25089c4fc10618414ba2254d18c7",
-            "multiqc_software_versions.txt:md5,7452f1f7aae2a8a4066c2ef6cd5ceb95"
+            "multiqc_fastqc.txt:md5,35984961f25a0d4e7352cab4d5650178",
+            "multiqc_general_stats.txt:md5,1465b0b1959e3864b28ecc2340df351b",
+            "multiqc_software_versions.txt:md5,49e3596d49ee49d967d3b6c363b486d5"
         ],
-        "timestamp": "2024-08-26T17:55:38.755385"
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-09-10T08:58:57.180636"
     }
 }
