@@ -2,14 +2,14 @@
     "PromethION data test": {
         "content": [
             "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-            "multiqc_fastqc.txt:md5,333360ff12007d64f2bf7673b0658bed",
-            "multiqc_general_stats.txt:md5,b1999255f9a502618d59be2f2e93bad2",
-            "multiqc_software_versions.txt:md5,7452f1f7aae2a8a4066c2ef6cd5ceb95",
-            "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-            "multiqc_fastqc.txt:md5,333360ff12007d64f2bf7673b0658bed",
-            "multiqc_general_stats.txt:md5,b1999255f9a502618d59be2f2e93bad2",
-            "multiqc_software_versions.txt:md5,7452f1f7aae2a8a4066c2ef6cd5ceb95"
+            "multiqc_fastqc.txt:md5,35984961f25a0d4e7352cab4d5650178",
+            "multiqc_general_stats.txt:md5,1465b0b1959e3864b28ecc2340df351b",
+            "multiqc_software_versions.txt:md5,49e3596d49ee49d967d3b6c363b486d5"
         ],
-        "timestamp": "2024-05-30T13:14:40.99246"
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-09-10T08:58:57.180636"
     }
 }

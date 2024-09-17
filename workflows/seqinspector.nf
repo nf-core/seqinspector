@@ -7,9 +7,7 @@
 include { FASTQC                        } from '../modules/nf-core/fastqc/main'
 
 include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc/main'
-include { MULTIQC as MULTIQC_PER_LANE   } from '../modules/nf-core/multiqc/main'
-include { MULTIQC as MULTIQC_PER_GROUP  } from '../modules/nf-core/multiqc/main'
-include { MULTIQC as MULTIQC_PER_RUNDIR } from '../modules/nf-core/multiqc/main'
+include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc/main'
 
 include { paramsSummaryMap              } from 'plugin/nf-validation'
 include { paramsSummaryMultiqc          } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -91,127 +89,58 @@ workflow SEQINSPECTOR {
             .collect(),
         ch_multiqc_config.toList(),
         Channel.empty().toList(),
-        ch_multiqc_logo.toList()
+        ch_multiqc_logo.toList(),
+        Channel.empty().toList(),
+        Channel.empty().toList()
     )
 
-    // Generate reports by lane
-    multiqc_extra_files_per_lane = ch_multiqc_files
-        .filter { meta, sample -> meta.lane }
-        .map { meta, sample -> [lane: meta.lane] }
+    ch_tags = ch_multiqc_files
+        .map { meta, sample -> meta.tags }
+        .flatten()
         .unique()
+
+    multiqc_extra_files_per_tag = ch_tags
         .combine(ch_multiqc_extra_files)
 
-    lane_mqc_files = ch_multiqc_files
-        .filter { meta, sample -> meta.lane }
-        .mix(multiqc_extra_files_per_lane)
-        .map { meta, sample -> [ "[LANE:${meta.lane}]", meta, sample ] }
+    // Group samples by tag
+    tagged_mqc_files = ch_tags
+        .combine(ch_multiqc_files)
+        .filter { sample_tag, meta, sample -> sample_tag in meta.tags }
+        .map { sample_tag, meta, sample -> [sample_tag, sample] }
+        .mix(multiqc_extra_files_per_tag)
         .groupTuple()
-        .tap { mqc_by_lane }
-        .collectFile{
-            lane, meta, samples -> [
-                "${lane}_multiqc_extra_config.yml",
+        .tap { mqc_by_tag }
+        .collectFile {
+            sample_tag, samples ->
+            def prefix_tag = "[TAG:${sample_tag}]"
+            [
+                "${prefix_tag}_multiqc_extra_config.yml",
                 """
-                    |output_fn_name: \"${lane}_multiqc_report.html\"
-                    |data_dir_name:  \"${lane}_multiqc_data\"
-                    |plots_dir_name: \"${lane}_multiqc_plots\"
+                    |output_fn_name: \"${prefix_tag}_multiqc_report.html\"
+                    |data_dir_name:  \"${prefix_tag}_multiqc_data\"
+                    |plots_dir_name: \"${prefix_tag}_multiqc_plots\"
                 """.stripMargin()
             ]
         }
-        .map { file -> [ (file =~ /(\[LANE:.+\])/)[0][1], file ] }
-        .join(mqc_by_lane)
-        .multiMap { lane, config, meta , samples_per_lane ->
-            samples_per_lane: samples_per_lane
+        .map { file -> [ (file =~ /\[TAG:(.+)\]/)[0][1], file ] }
+        .join(mqc_by_tag)
+        .multiMap { sample_tag, config, samples ->
+            samples_per_tag: samples
             config: config
         }
 
-    MULTIQC_PER_LANE(
-        lane_mqc_files.samples_per_lane,
+    MULTIQC_PER_TAG(
+        tagged_mqc_files.samples_per_tag,
         ch_multiqc_config.toList(),
-        lane_mqc_files.config,
-        ch_multiqc_logo.toList()
-    )
-
-    // Generate reports by group
-    multiqc_extra_files_per_group = ch_multiqc_files
-        .filter { meta, sample -> meta.group }
-        .map { meta, sample -> meta.group }
-        .unique()
-        .map { group -> [group:group] }
-        .combine(ch_multiqc_extra_files)
-
-    group_mqc_files = ch_multiqc_files
-        .filter { meta, sample -> meta.group }
-        .mix(multiqc_extra_files_per_group)
-        .map { meta, sample -> [ "[GROUP:${meta.group}]", meta, sample ] }
-        .groupTuple()
-        .tap { mqc_by_group }
-        .collectFile{
-            group, meta, samples -> [
-                "${group}_multiqc_extra_config.yml",
-                """
-                    |output_fn_name: \"${group}_multiqc_report.html\"
-                    |data_dir_name:  \"${group}_multiqc_data\"
-                    |plots_dir_name: \"${group}_multiqc_plots\"
-                """.stripMargin()
-            ]
-        }
-        .map { file -> [ (file =~ /(\[GROUP:.+\])/)[0][1], file ] }
-        .join(mqc_by_group)
-        .multiMap { group, config, meta , samples_per_group ->
-            samples_per_group: samples_per_group
-            config: config
-        }
-
-    MULTIQC_PER_GROUP(
-        group_mqc_files.samples_per_group,
-        ch_multiqc_config.toList(),
-        group_mqc_files.config,
-        ch_multiqc_logo.toList()
-    )
-
-    // Generate reports by rundir
-    multiqc_extra_files_per_rundir = ch_multiqc_files
-        .filter { meta, sample -> meta.rundir }
-        .map { meta, sample -> meta.rundir }
-        .unique()
-        .map { rundir -> [rundir:rundir] }
-        .combine(ch_multiqc_extra_files)
-
-    rundir_mqc_files = ch_multiqc_files
-        .filter { meta, sample -> meta.rundir }
-        .mix(multiqc_extra_files_per_rundir)
-        .map { meta, sample -> [ "[RUNDIR:${meta.rundir.name}]", meta, sample ] }
-        .groupTuple()
-        .tap { mqc_by_rundir }
-        .collectFile{
-            rundir, meta, samples -> [
-                "${rundir}_multiqc_extra_config.yml",
-                """
-                    |output_fn_name: \"${rundir}_multiqc_report.html\"
-                    |data_dir_name:  \"${rundir}_multiqc_data\"
-                    |plots_dir_name: \"${rundir}_multiqc_plots\"
-                """.stripMargin()
-            ]
-        }
-        .map { file -> [ (file =~ /(\[RUNDIR:.+\])/)[0][1], file ] }
-        .join(mqc_by_rundir)
-        .multiMap { rundir, config, meta , samples_per_rundir ->
-            samples_per_rundir: samples_per_rundir
-            config: config
-        }
-
-    MULTIQC_PER_RUNDIR(
-        rundir_mqc_files.samples_per_rundir,
-        ch_multiqc_config.toList(),
-        rundir_mqc_files.config,
-        ch_multiqc_logo.toList()
+        tagged_mqc_files.config,
+        ch_multiqc_logo.toList(),
+        Channel.empty().toList(),
+        Channel.empty().toList()
     )
 
     emit:
     global_report = MULTIQC_GLOBAL.out.report.toList()      // channel: /path/to/multiqc_report.html
-    lane_reports = MULTIQC_PER_LANE.out.report.toList()     // channel: [ /path/to/multiqc_report.html ]
-    group_reports = MULTIQC_PER_GROUP.out.report.toList()   // channel: [ /path/to/multiqc_report.html ]
-    rundir_reports = MULTIQC_PER_RUNDIR.out.report.toList() // channel: [ /path/to/multiqc_report.html ]
+    grouped_reports = MULTIQC_PER_TAG.out.report.toList()   // channel: [ /path/to/multiqc_report.html ]
     versions       = ch_versions                            // channel: [ path(versions.yml) ]
 }
 
