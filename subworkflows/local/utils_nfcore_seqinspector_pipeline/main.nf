@@ -82,14 +82,24 @@ workflow PIPELINE_INITIALISATION {
     //
     Channel
         .fromSamplesheet("input") // Validates samplesheet against $projectDir/assets/schema_input.json. Path to validation schema is defined by $projectDir/nextflow_schema.json
+        .toList()
+        .flatMap { it.withIndex().collect {  entry, idx -> entry + "${idx+1}" } }
         .map {
-            meta, fastq_1, fastq_2 ->
-                def id_string = "${meta.sample}_${meta.group ?: "ungrouped"}_${meta.lane}"
-                def updated_meta = meta + [ id: id_string ]
+            meta, fastq_1, fastq_2, idx ->
+                def tags = meta.tags ? meta.tags.tokenize(":") : []
+                def updated_meta = meta + [ id:"${meta.sample}_${idx}", tags:tags ]
                 if (!fastq_2) {
-                    return [ updated_meta.id, updated_meta + [ single_end:true ], [ fastq_1 ] ]
+                    return [
+                        updated_meta.id,
+                        updated_meta + [ single_end:true ],
+                        [ fastq_1 ]
+                    ]
                 } else {
-                    return [ updated_meta.id, updated_meta + [ single_end:false ], [ fastq_1, fastq_2 ] ]
+                    return [
+                        updated_meta.id,
+                        updated_meta + [ single_end:false ],
+                        [ fastq_1, fastq_2 ]
+                    ]
                 }
         }
         .groupTuple()
@@ -102,6 +112,20 @@ workflow PIPELINE_INITIALISATION {
         //         return [ meta, fastqs.flatten() ]
         // }
         .set { ch_samplesheet }
+
+    ch_samplesheet
+        .map {
+            meta, fastqs -> meta.tags
+        }
+        .flatten()
+        .unique()
+        .map { tag_name -> [tag_name.toLowerCase(), tag_name] }
+        .groupTuple()
+        .map {
+            tag_lowercase, tags ->
+                assert tags.size() == 1 :
+                "Tag name collision: " + tags.join(", ")
+        }
 
     emit:
     samplesheet = ch_samplesheet

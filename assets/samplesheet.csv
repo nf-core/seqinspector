@@ -1,3 +1,7 @@
-sample,lane,group,fastq_1,fastq_2,rundir
-SAMPLE_PAIRED_END,1,P001,/path/to/fastq/files/AEG588A1_S1_L002_R1_001.fastq.gz,/path/to/fastq/files/AEG588A1_S1_L002_R2_001.fastq.gz,/path/to/rundir
-SAMPLE_SINGLE_END,2,P002,/path/to/fastq/files/AEG588A4_S4_L003_R1_001.fastq.gz,,/path/to/rundir
+sample,fastq_1,fastq_2,rundir,tags
+SAMPLE_PAIRED_END,/path/to/fastq/files/AEG588A1_S1_L002_R1_001.fastq.gz,/path/to/fastq/files/AEG588A1_S1_L002_R2_001.fastq.gz,/path/to/rundir,paired_sample:lane1
+SAMPLE_PAIRED_END,/path/to/fastq/files/AEG588A2_S2_L002_R1_001.fastq.gz,/path/to/fastq/files/AEG588A2_S2_L002_R2_001.fastq.gz,/path/to/rundir,paired_sample:lane1
+SAMPLE_PAIRED_END,/path/to/fastq/files/AEG588A3_S3_L002_R1_001.fastq.gz,/path/to/fastq/files/AEG588A3_S3_L002_R2_001.fastq.gz,/path/to/rundir,paired_sample:lane2
+SAMPLE_SINGLE_END,/path/to/fastq/files/AEG588A4_S4_L003_R1_001.fastq.gz,,/path/to/rundir,group1
+SAMPLE_SINGLE_END,/path/to/fastq/files/AEG588A4_S4_L003_R1_001.fastq.gz,,/path/to/rundir,group2
+SAMPLE_SINGLE_END,/path/to/fastq/files/AEG588A4_S4_L003_R1_001.fastq.gz,,/path/to/rundir,group3

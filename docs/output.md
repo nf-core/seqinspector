@@ -39,36 +39,29 @@ The FastQC plots displayed in the MultiQC report shows _untrimmed_ reads. They m
 
 ### MultiQC
 
+nf-core/seqinspector will generate the following MultiQC reports:
+
+- one global reports including all the samples listed in the samplesheet
+- one group report per unique tag. These reports compile samples that share the same tag.
+
 <details markdown="1">
 <summary>Output files</summary>
 
 - `multiqc/`
-  - `multiqc_report.html`: a standalone HTML file that can be viewed in your web browser.
-  - `multiqc_data/`: directory containing parsed statistics from the different tools used in the pipeline.
-  - `multiqc_plots/`: directory containing static images from the report in various formats.
-  - `lanes/` [1]
-    - `L1/`
-      - `multiqc_report.html`: a standalone HTML file that can be viewed in your web browser.
-      - `multiqc_data/`: directory containing parsed statistics from the different tools used in the pipeline.
-      - `multiqc_plots/`: directory containing static images from the report in various formats.
-    - `L2/`
-      - ...
-  - `groups/` [1]
-    - `GROUPNAME1/`
-      - `multiqc_report.html`: a standalone HTML file that can be viewed in your web browser.
-      - `multiqc_data/`: directory containing parsed statistics from the different tools used in the pipeline.
-      - `multiqc_plots/`: directory containing static images from the report in various formats.
-    - `GROUPNAME2/`
-      - ...
-  - `rundir/` [1]
-    - `RUNDIR1/`
-      - `multiqc_report.html`: a standalone HTML file that can be viewed in your web browser.
-      - `multiqc_data/`: directory containing parsed statistics from the different tools used in the pipeline.
-      - `multiqc_plots/`: directory containing static images from the report in various formats.
-    - `RUNDIR2/`
-      - ...
-
-[1] These files will only be generated if `lane`, `group` or `rundir` were specified for some samples.
+  - `global_report`
+    - `multiqc_report.html`: a standalone HTML file that can be viewed in your web browser.
+    - `multiqc_data/`: directory containing parsed statistics from the different tools used in the pipeline.
+    - `multiqc_plots/`: directory containing static images from the report in various formats.
+  - `group_reports`
+    - `tag1/`
+      - `multiqc_report.html`
+      - `multiqc_data/`
+      - `multiqc_plots/`
+    - `tag2/`
+      - `multiqc_report.html`
+      - `multiqc_data/`
+      - `multiqc_plots/`
+    - ...
 
 </details>
 

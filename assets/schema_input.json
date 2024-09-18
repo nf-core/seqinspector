@@ -13,18 +13,6 @@
                 "errorMessage": "Sample name must be provided and cannot contain spaces",
                 "meta": ["sample"]
             },
-            "lane": {
-                "type": "integer",
-                "pattern": "^\\d+$",
-                "errorMessage": "Lane ID must be a number",
-                "meta": ["lane"]
-            },
-            "group": {
-                "type": "string",
-                "pattern": "^\\S+$",
-                "errorMessage": "Group ID cannot contain spaces",
-                "meta": ["group"]
-            },
             "fastq_1": {
                 "type": "string",
                 "format": "file-path",
@@ -45,6 +33,12 @@
                 "exists": true,
                 "errorMessage": "Run directory must be a path",
                 "meta": ["rundir"]
+            },
+            "tags": {
+                "type": "string",
+                "pattern": "^([A-Za-z0-9_-]+:)*([A-Za-z0-9_-]+)$",
+                "errorMessage": "Tags must be separated by colons and only consist of lowercase letters, numbers, underscores and hyphens.",
+                "meta": ["tags"]
             }
         },
         "required": ["sample", "fastq_1"],
