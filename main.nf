@@ -88,6 +88,9 @@ workflow {
     //
     // WORKFLOW: Run main workflow
     //
+    the_samplesheet = PIPELINE_INITIALISATION.out.samplesheet
+    the_samplesheet.view()
+    
     NFCORE_SEQINSPECTOR (
         PIPELINE_INITIALISATION.out.samplesheet
     )

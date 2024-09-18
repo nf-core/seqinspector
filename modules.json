@@ -10,6 +10,11 @@
                         "git_sha": "285a50500f9e02578d90b3ce6382ea3c30216acd",
                         "installed_by": ["modules"]
                     },
+                    "fastqscreen/fastqscreen": {
+                        "branch": "master",
+                        "git_sha": "e1316cdcbef318b9cdfd35586423f8337c3d45f0",
+                        "installed_by": ["modules"]
+                    },
                     "multiqc": {
                         "branch": "master",
                         "git_sha": "19ca321db5d8bd48923262c2eca6422359633491",
