@@ -12,12 +12,12 @@ class Constants {
     static enum Tool {
         FASTQSCREEN,
         FASTQC,
-        MULTIQC,
+        // MULTIQC, // Turning MultiQC off kind of defeats the purpose of the pipeline
     }
 
     // Define some default profiles for the tool selection
 
-    static Map ToolProfiles = [
+    static Map<String, ToolTracker> ToolProfiles = [
 
             // Tool trackers do not need to explicitly define all tools
 

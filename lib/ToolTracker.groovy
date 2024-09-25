@@ -54,7 +54,7 @@ class ToolTracker {
         return result
     }
 
-    // Method to perform UnionOR operation: Retain entries that exists in either of the ToolTracker instances, but not both
+    // Method to perform UnionOR operation: Retain entries that exists in either of the ToolTracker instances, OR for common entries
     public ToolTracker unionOrOperation(ToolTracker other) {
         ToolTracker result = new ToolTracker()
         Set<String> allTools = this.tool_selection.keySet() + other.tool_selection.keySet()
@@ -68,11 +68,10 @@ class ToolTracker {
                 result[tool] = other[tool]
             }
         }
-
         return result
     }
 
-        // Method to perform exclusiveOR operation: Retain entries that exists in either of the ToolTracker instances, but not both
+        // Method to perform exclusiveOR (XOR) operation: Retain entries that exists in either of the ToolTracker instances, but not both
     public ToolTracker exclusiveOrOperation(ToolTracker other) {
         ToolTracker result = new ToolTracker()
         Set<String> allTools = this.tool_selection.keySet() + other.tool_selection.keySet()
@@ -84,7 +83,6 @@ class ToolTracker {
                 result[tool] = other[tool]
             }
         }
-
         return result
     }
 
