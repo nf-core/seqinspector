@@ -112,10 +112,10 @@ class Ultilities {
                 result = result.andOperation(nextProfile)
             } else if (operation == "OR") {
                 result = result.orOperation(nextProfile)
-            } else if (operation == "UOR") {
-                result = result.unionOrOperation(nextProfile)
+            } else if (operation == "XORAND") {
+                result = result.xorAndOperationOperation(nextProfile)
             } else if (operation == "XOR") {
-                result = result.exclusiveOrOperation(nextProfile)
+                result = result.xorOperation(nextProfile)
             } else {
                 log.error("Unsupported operation: $operation")
                 nextflow.Nextflow.exit(1)

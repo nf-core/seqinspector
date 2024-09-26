@@ -32,30 +32,28 @@ class ToolTracker {
         tool_selection[tool] = setting
     }
 
-    // Method to perform AND operation
+    // There is actually no use for non-union methods, since that would eliminate entries from the maps.
+
+
+        // Method to perform AND operation: Perform AND common entries and set the rest to false (interpret absence as false)
     public ToolTracker andOperation(ToolTracker other) {
         ToolTracker result = new ToolTracker()
-        this.tool_selection.each { tool, setting ->
-            if (other.tool_selection.containsKey(tool)) {
-                result[tool] = setting && other[tool]
-            }
-        }
-        return result
-    }
+        Set<String> allTools = this.tool_selection.keySet() + other.tool_selection.keySet()
 
-    // Method to perform OR operation
-    public ToolTracker orOperation(ToolTracker other) {
-        ToolTracker result = new ToolTracker()
-        this.tool_selection.each { tool, setting ->
-            if (other.tool_selection.containsKey(tool)) {
-                result[tool] = setting || other[tool]
+        allTools.each { tool ->
+            if (this.tool_selection.containsKey(tool) && other.tool_selection.containsKey(tool)) {
+                result[tool] = this[tool] && other[tool]
+            } else if (this.tool_selection.containsKey(tool) && !other.tool_selection.containsKey(tool)) {
+                result[tool] = false
+            } else if (!this.tool_selection.containsKey(tool) && other.tool_selection.containsKey(tool)) {
+                result[tool] = false
             }
         }
         return result
     }
 
     // Method to perform UnionOR operation: Retain entries that exists in either of the ToolTracker instances, OR for common entries
-    public ToolTracker unionOrOperation(ToolTracker other) {
+    public ToolTracker orOperation(ToolTracker other) {
         ToolTracker result = new ToolTracker()
         Set<String> allTools = this.tool_selection.keySet() + other.tool_selection.keySet()
 
@@ -72,12 +70,31 @@ class ToolTracker {
     }
 
         // Method to perform exclusiveOR (XOR) operation: Retain entries that exists in either of the ToolTracker instances, but not both
-    public ToolTracker exclusiveOrOperation(ToolTracker other) {
+    public ToolTracker xorOperation(ToolTracker other) {
         ToolTracker result = new ToolTracker()
         Set<String> allTools = this.tool_selection.keySet() + other.tool_selection.keySet()
 
         allTools.each { tool ->
             if (this.tool_selection.containsKey(tool) && !other.tool_selection.containsKey(tool)) {
+                result[tool] = this[tool]
+            } else if (!this.tool_selection.containsKey(tool) && other.tool_selection.containsKey(tool)) {
+                result[tool] = other[tool]
+            } else {
+                result[tool] = false
+            }
+        }
+        return result
+    }
+
+    // Method to perform xorAND operation: Retain entries that exists in either of the ToolTracker instances, AND conjunction for common entries
+    public ToolTracker xorAndOperation(ToolTracker other) {
+        ToolTracker result = new ToolTracker()
+        Set<String> allTools = this.tool_selection.keySet() + other.tool_selection.keySet()
+
+        allTools.each { tool ->
+            if (this.tool_selection.containsKey(tool) && other.tool_selection.containsKey(tool)) {
+                result[tool] = this[tool] && other[tool]
+            } else if (this.tool_selection.containsKey(tool) && !other.tool_selection.containsKey(tool)) {
                 result[tool] = this[tool]
             } else if (!this.tool_selection.containsKey(tool) && other.tool_selection.containsKey(tool)) {
                 result[tool] = other[tool]
