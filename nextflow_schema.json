@@ -1,5 +1,5 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema",
+    "$schema": "https://json-schema.org/draft-07/schema",
     "$id": "https://raw.githubusercontent.com/nf-core/seqinspector/master/nextflow_schema.json",
     "title": "nf-core/seqinspector pipeline parameters",
     "description": "Pipeline to QC your sequences",
@@ -42,6 +42,34 @@
                     "fa_icon": "fas fa-file-signature"
                 }
             }
+        },
+        "tool_selection_options": {
+            "title": "Tool selection options",
+            "type": "object",
+            "description": "Select the quality checks and tools you wish to run.",
+            "default": "",
+            "properties": {
+                "tool_selection": {
+                    "type": "string",
+                    "default": "default",
+                    "description": "Pick and apply profiles to select tools. Choose from the profiles `none`, `minimal`,`default`, `all` and the operations `AND`, `OR`, `XOR` as well as `XORAND`.",
+                    "fa_icon": "fab fa-blackberry",
+                    "pattern": "^\\w+(\\s(AND|OR|XOR|XORAND)\\s\\w+)*$"
+                },
+                "tools_include": {
+                    "type": "string",
+                    "fa_icon": "fas fa-search-plus",
+                    "description": "Comma-seperated list of tools that you wish to run. The selection will be applied after the profiles and added to the final list.",
+                    "pattern": "^(\\w+(,\\s\\w+)*)?$"
+                },
+                "tools_exclude": {
+                    "type": "string",
+                    "fa_icon": "fas fa-search-minus",
+                    "description": "Comma-seperated list of tools that must not run. The selection will be subtracted from the evaluated profiles.",
+                    "pattern": "^(\\w+(,\\s\\w+)*)?$"
+                }
+            },
+            "required": ["tool_selection"]
         },
         "reference_genome_options": {
             "title": "Reference genome options",
@@ -279,6 +307,9 @@
     "allOf": [
         {
             "$ref": "#/definitions/input_output_options"
+        },
+        {
+            "$ref": "#/definitions/tool_selection_options"
         },
         {
             "$ref": "#/definitions/reference_genome_options"

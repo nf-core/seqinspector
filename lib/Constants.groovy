@@ -21,11 +21,13 @@ class Constants {
 
             // Tool trackers do not need to explicitly define all tools
 
+            ALL: Ultilities.buildToolTracker(Constants.Tool.values().toList(), []),
+
             DEFAULT: new ToolTracker(tool_selection: [FASTQSCREEN: false, FASTQC: true]),
 
-            FULL: new ToolTracker(tool_selection: [FASTQSCREEN: true, FASTQC: true]),
-
             MINIMAL: new ToolTracker(tool_selection: [FASTQC: true]),
+
+            NONE: Ultilities.buildToolTracker([], Constants.Tool.values().toList()),
 
     ]
 
