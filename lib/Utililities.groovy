@@ -112,8 +112,8 @@ class Ultilities {
                 result = result.andOperation(nextProfile)
             } else if (operation == "OR") {
                 result = result.orOperation(nextProfile)
-            } else if (operation == "XORAND") {
-                result = result.xorAndOperationOperation(nextProfile)
+            } else if (operation == "IAND") {
+                result = result.iAndOperationOperation(nextProfile)
             } else if (operation == "XOR") {
                 result = result.xorOperation(nextProfile)
             } else {

@@ -32,6 +32,8 @@ workflow SEQINSPECTOR {
     ch_multiqc_extra_files = Channel.empty()
     ch_multiqc_reports     = Channel.empty()
 
+
+    if (seqinspector_tools['FASTQC']){
     //
     // MODULE: Run FastQC
     //
@@ -40,6 +42,7 @@ workflow SEQINSPECTOR {
     )
     ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
     ch_versions = ch_versions.mix(FASTQC.out.versions.first())
+    }
 
     //
     // Collate and save software versions

@@ -52,9 +52,9 @@
                 "tool_selection": {
                     "type": "string",
                     "default": "default",
-                    "description": "Pick and apply profiles to select tools. Choose from the profiles `none`, `minimal`,`default`, `all` and the operations `AND`, `OR`, `XOR` as well as `XORAND`.",
+                    "description": "Pick and apply profiles to select tools. Choose from the profiles `none`, `minimal`,`default`, `all` and the operations `AND`, `OR`, `XOR` as well as `IAND`.",
                     "fa_icon": "fab fa-blackberry",
-                    "pattern": "^\\w+(\\s(AND|OR|XOR|XORAND)\\s\\w+)*$"
+                    "pattern": "^\\w+(\\s(AND|OR|XOR|IAND)\\s\\w+)*$"
                 },
                 "tools_include": {
                     "type": "string",

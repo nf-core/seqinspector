@@ -86,8 +86,8 @@ class ToolTracker {
         return result
     }
 
-    // Method to perform xorAND operation: Retain entries that exists in either of the ToolTracker instances, AND conjunction for common entries
-    public ToolTracker xorAndOperation(ToolTracker other) {
+    // Method to perform inclusiveAND operation: Retain entries that exists in either of the ToolTracker instances, AND conjunction for common entries
+    public ToolTracker iAndOperation(ToolTracker other) {
         ToolTracker result = new ToolTracker()
         Set<String> allTools = this.tool_selection.keySet() + other.tool_selection.keySet()
 

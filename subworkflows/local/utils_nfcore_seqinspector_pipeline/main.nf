@@ -78,6 +78,34 @@ workflow PIPELINE_INITIALISATION {
     validateInputParameters() // Runs additional validation that is not done by $projectDir/nextflow_schema.json
 
     //
+    // Process the tool selection parameters to generate the final list of tools (processes) to run
+    //
+    def seqinspector_tools = Constants.ToolProfiles["NONE"]  // Start with no tools (except MultiQC)
+
+    // Activate the tools that are selected through the applied profiles (typically `default`)
+    if (params.tool_selection) {
+        def evaluated_profiles = Utilities.parseAndApplyBooleanOperation(params.tool_selection, Constants.ToolProfiles, log)
+        seqinspector_tools = seqinspector_tools.orOperation(evaluated_profiles)
+    }
+
+    if (params.tools_include || params.tools_exclude) {
+        def tool_include_list = Utilities.getToolList(params.tools_include, log)
+        def tool_exclude_list = Utilities.getToolList(params.tools_exclude, log)
+
+        // Check for overlapping include and exclude list entries
+        Utilities.checkIncludeExcludeList(tool_include_list, tool_exclude_list, log)
+
+        // Convert the specified custom tools into a profile
+        def custom_tools = Utilities.buildToolTracker(tool_include_list, tool_exclude_list)
+
+        // Apply the custom tools to the existing tool profile: orOperation to activate the include_tools
+        seqinspector_tools =  seqinspector_tools.orOperation(custom_tools)
+
+        // Apply the custom tools to the existing tool profile: iAndOperation to deactivate the exclude_tools
+        seqinspector_tools =  seqinspector_tools.iAndOperation(custom_tools)
+    }
+
+    //
     // Create channel from input file provided through params.input
     //
     Channel
