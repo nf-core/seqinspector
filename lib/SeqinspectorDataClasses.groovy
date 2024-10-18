@@ -5,15 +5,15 @@ static enum RunMode {
         RUNFOLDER,
     }
 
-// enum for the available Tools
+// enum for the available tools
 
 static enum Tool {
         FASTQSCREEN,
         FASTQC,
-        // MULTIQC, // Turning MultiQC off kind of defeats the purpose of the pipeline
+        MULTIQC,
     }
 
-// ToolProfile class to define and intersect selections of tools
+// ToolProfile class to define and intersect selections of tools and handle extra arguments and settings
 
 class ToolProfile {
     Set<Tool> enable
