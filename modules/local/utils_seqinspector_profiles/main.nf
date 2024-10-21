@@ -1,82 +1,77 @@
-
-/*
-========================================================================================
-    CLASSES
-========================================================================================
-*/
-
-
 /*
 ========================================================================================
     FUNCTIONS
 ========================================================================================
 */
 
+// Function to get a valid profile from a ToolProfiles map
+    /*
+    String profileStr,
+    Map<String, ToolProfile> toolProfilesMap
+    <logger> log
+    */
 
-    // Method to perform AND operation: Perform AND common entries and set the rest to false (interpret absence as false)
-    public ToolProfile andOperation(ToolProfile other) {
-        ToolProfile result = new ToolProfile()
-        Set<String> allTools = this.tool_selection.keySet() + other.tool_selection.keySet()
+def getProfileFromToolProfiles(profileStr, toolProfilesMap, log) {
 
-        allTools.each { tool ->
-            if (this.tool_selection.containsKey(tool) && other.tool_selection.containsKey(tool)) {
-                result[tool] = this[tool] && other[tool]
-            } else if (this.tool_selection.containsKey(tool) && !other.tool_selection.containsKey(tool)) {
-                result[tool] = false
-            } else if (!this.tool_selection.containsKey(tool) && other.tool_selection.containsKey(tool)) {
-                result[tool] = false
-            }
+        if (!toolProfilesMap) {
+            toolProfilesMap = SeqinspectorDataClasses.ToolProfiles
         }
-        return result
+
+        if (!toolProfilesMap.containsKey(profileStr.toUpperCase())) {
+            def keys = toolProfilesMap.keySet().toLowerCase().join('\n  - ')
+            log.error "Invalid profile specified: '${profileStr}'. Valid options are:\n  - ${keys}"
+            nextflow.Nextflow.exit(1)
+        }
+        return toolProfilesMap[profileStr]
     }
 
-    // Method to perform UnionOR operation: Retain entries that exists in either of the ToolProfile instances, OR for common entries
-    public ToolProfile orOperation(ToolProfile other) {
-        ToolProfile result = new ToolProfile()
-        Set<String> allTools = this.tool_selection.keySet() + other.tool_selection.keySet()
 
-        allTools.each { tool ->
-            if (this.tool_selection.containsKey(tool) && other.tool_selection.containsKey(tool)) {
-                result[tool] = this[tool] || other[tool]
-            } else if (this.tool_selection.containsKey(tool) && !other.tool_selection.containsKey(tool)) {
-                result[tool] = this[tool]
-            } else if (!this.tool_selection.containsKey(tool) && other.tool_selection.containsKey(tool)) {
-                result[tool] = other[tool]
+// Function to combine two profiles
+    /*
+    String profileStr,
+    Map<String, ToolProfile> toolProfilesMap
+    <logger> log
+    */
+
+def combine_profiles(firstProfile, otherProfile, log) {
+
+     // Create a new ToolProfile instance to store the combined results
+    def combinedProfile = new SeqinspectorDataClasses.ToolProfile(
+        enable: (firstProfile.enable + otherProfile.enable),
+        disable: (firstProfile.disable + otherProfile.disable),
+        tool_arguments: [:]
+    )
+
+    // remove possibly disabled tools
+    combinedProfile.enable.removeAll(combinedProfile.disable)
+
+
+    // Combine tool_arguments maps
+    def allArgs = firstProfile.tool_arguments.keySet() + otherProfile.tool_arguments.keySet()
+    allArgs.each { tool ->
+        def firstArgs = firstProfile.tool_arguments[tool] ?: [:]
+        def otherArgs = otherProfile.tool_arguments[tool] ?: [:]
+
+        // Check for common arguments specified in both profiles for a tool
+        def commonArgs = firstArgs.keySet().intersect(otherArgs.keySet())
+        // if a common setting for a tool is detected, compare the values
+        if (commonArgs) {
+            def incompatibleArgs = false
+            commonArgs.each { arg ->
+                if(firstArgs[arg] != otherArgs[arg]) {
+                log.error "Conflicting settings of argument '${arg}' for tool '${tool}'"
+                incompatibleArgs = true
+                }
+            }
+            if(incompatibleArgs) {
+                nextflow.Nextflow.exit(1)
             }
         }
-        return result
+        combinedProfile.tool_arguments[tool] = firstArgs + otherArgs
     }
 
-        // Method to perform exclusiveOR (XOR) operation: Retain entries that exists in either of the ToolProfile instances, but not both
-    public ToolProfile xorOperation(ToolProfile other) {
-        ToolProfile result = new ToolProfile()
-        Set<String> allTools = this.tool_selection.keySet() + other.tool_selection.keySet()
+    return combinedProfile
 
-        allTools.each { tool ->
-            if (this.tool_selection.containsKey(tool) && !other.tool_selection.containsKey(tool)) {
-                result[tool] = this[tool]
-            } else if (!this.tool_selection.containsKey(tool) && other.tool_selection.containsKey(tool)) {
-                result[tool] = other[tool]
-            } else {
-                result[tool] = false
-            }
-        }
-        return result
-    }
 
-    // Method to perform inclusiveAND operation: Retain entries that exists in either of the ToolProfile instances, AND conjunction for common entries
-    public ToolProfile iAndOperation(ToolProfile other) {
-        ToolProfile result = new ToolProfile()
-        Set<String> allTools = this.tool_selection.keySet() + other.tool_selection.keySet()
+}
 
-        allTools.each { tool ->
-            if (this.tool_selection.containsKey(tool) && other.tool_selection.containsKey(tool)) {
-                result[tool] = this[tool] && other[tool]
-            } else if (this.tool_selection.containsKey(tool) && !other.tool_selection.containsKey(tool)) {
-                result[tool] = this[tool]
-            } else if (!this.tool_selection.containsKey(tool) && other.tool_selection.containsKey(tool)) {
-                result[tool] = other[tool]
-            }
-        }
-        return result
-    }
