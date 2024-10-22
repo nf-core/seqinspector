@@ -80,13 +80,17 @@ workflow PIPELINE_INITIALISATION {
     //
     // Process the tool selection parameters to generate the final list of tools (processes) to run
     //
-    def seqinspector_tools = Constants.ToolProfiles["NONE"]  // Start with no tools (except MultiQC)
+    def seqinspector_tools = new SeqinspectorDataClasses.ToolProfile()  // Start with no tools (except MultiQC)
 
+
+    if(path.tool_profile_custom_path){
+
+    } else {
     // Activate the tools that are selected through the applied profiles (typically `default`)
     if (params.tool_selection) {
         def evaluated_profiles = Utilities.parseAndApplyBooleanOperation(params.tool_selection, Constants.ToolProfiles, log)
         seqinspector_tools = seqinspector_tools.orOperation(evaluated_profiles)
-    }
+    }}
 
     if (params.tools_include || params.tools_exclude) {
         def tool_include_list = Utilities.getToolList(params.tools_include, log)

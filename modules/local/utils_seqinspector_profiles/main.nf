@@ -1,3 +1,5 @@
+new GroovyShell().evaluate(new File("$projectDir/lib/SeqinspectorDataClasses.groovy"))
+
 /*
 ========================================================================================
     FUNCTIONS

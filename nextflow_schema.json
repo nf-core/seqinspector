@@ -49,12 +49,19 @@
             "description": "Select the quality checks and tools you wish to run.",
             "default": "",
             "properties": {
-                "tool_selection": {
+                "tool_profile": {
                     "type": "string",
                     "default": "default",
-                    "description": "Pick and apply profiles to select tools. Choose from the profiles `none`, `minimal`,`default`, `all` and the operations `AND`, `OR`, `XOR` as well as `IAND`.",
+                    "description": "Pick and apply preconfigured profiles to select tools.",
                     "fa_icon": "fab fa-blackberry",
                     "pattern": "^\\w+(\\s(AND|OR|XOR|IAND)\\s\\w+)*$"
+                },
+                "tool_profile_custom_path": {
+                    "type": "string",
+                    "description": "Path to a custom profile used instead of the preconfigured ones.",
+                    "format": "file-path",
+                    "mimetype": "text/vnd.yaml",
+                    "fa_icon": "fas fa-clipboard-list"
                 },
                 "tools_include": {
                     "type": "string",
@@ -68,8 +75,7 @@
                     "description": "Comma-seperated list of tools that must not run. The selection will be subtracted from the evaluated profiles.",
                     "pattern": "^(\\w+(,\\s\\w+)*)?$"
                 }
-            },
-            "required": ["tool_selection"]
+            }
         },
         "reference_genome_options": {
             "title": "Reference genome options",
