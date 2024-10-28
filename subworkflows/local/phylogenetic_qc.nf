@@ -3,7 +3,7 @@
 //
 
 include { UNTAR as UNTAR_KRAKEN2_DB } from '../../modules/nf-core/untar/main.nf'
-include { KRAKEN2 } from '../../modules/nf-core/kraken2/kraken2/main.nf'
+include { KRAKEN2_KRAKEN2 } from '../../modules/nf-core/kraken2/kraken2/main.nf'
 include { KRONA_KTUPDATETAXONOMY } from '../../modules/nf-core/krona/ktupdatetaxonomy/main.nf'
 include { KRONA_KTIMPORTTAXONOMY } from '../../modules/nf-core/krona/ktimporttaxonomy/main.nf'
 
@@ -22,20 +22,20 @@ workflow PHYLOGENETIC_QC{
     //
     // MODULE: Perform kraken2
     //
-    KRAKEN2 (
+    KRAKEN2_KRAKEN2 (
         ch_reads, ch_kraken2_db
     )
-    KRAKEN2.out.report.map { meta, report -> [ report ] }.collect()
+    KRAKEN2_KRAKEN2.out.report.map { meta, report -> [ report ] }.collect()
 
     //
     // MODULE: krona plot the kraken2 reports
     //
     KRONA_KTUPDATETAXONOMY()
     KRONA_KTIMPORTTAXONOMY (
-        KRAKEN2.out.report.map { meta, report -> [ report ] }.collect(),
+        KRAKEN2_KRAKEN2.out.report.map { meta, report -> [ report ] }.collect(),
         KRONA_KTUPDATETAXONOMY.out.db
     )
 
     emit:
-    kraken2_report = KRAKEN2.out.report.map { meta, report -> [ report ] }.collect()
+    kraken2_report = KRAKEN2_KRAKEN2.out.report.map { meta, report -> [ report ] }.collect()
 }
