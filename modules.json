@@ -12,7 +12,7 @@
                     },
                     "fastqscreen/fastqscreen": {
                         "branch": "master",
-                        "git_sha": "e1316cdcbef318b9cdfd35586423f8337c3d45f0",
+                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
                         "installed_by": ["modules"]
                     },
                     "multiqc": {
