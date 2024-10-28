@@ -25,9 +25,9 @@
                 },
                 "sample_size": {
                     "type": "integer",
-                    "default": null,
+                    "default": 0,
                     "description": "Subset this number of reads.",
-                    "help_text": "Samples will be subsetted to this number of reads. If null, no subsampling will be performed."
+                    "help_text": "Samples will be subsetted to this number of reads. If 0 (default), no subsampling will be performed."
                 },
                 "outdir": {
                     "type": "string",
