@@ -3,13 +3,12 @@
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-
 include { FASTQC                        } from '../modules/nf-core/fastqc/main'
 
 include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc/main'
 include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc/main'
 
-include { paramsSummaryMap              } from 'plugin/nf-validation'
+include { paramsSummaryMap              } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc          } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML        } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText        } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
@@ -24,7 +23,6 @@ workflow SEQINSPECTOR {
 
     take:
     ch_samplesheet // channel: samplesheet read in from --input
-
     main:
 
     ch_versions            = Channel.empty()
@@ -47,10 +45,11 @@ workflow SEQINSPECTOR {
     softwareVersionsToYAML(ch_versions)
         .collectFile(
             storeDir: "${params.outdir}/pipeline_info",
-            name: 'nf_core_pipeline_software_mqc_versions.yml',
+            name: 'nf_core_'  + 'pipeline_software_' +  'mqc_'  + 'versions.yml',
             sort: true,
             newLine: true
         ).set { ch_collated_versions }
+
 
     //
     // MODULE: MultiQC
@@ -134,8 +133,8 @@ workflow SEQINSPECTOR {
         ch_multiqc_config.toList(),
         tagged_mqc_files.config,
         ch_multiqc_logo.toList(),
-        Channel.empty().toList(),
-        Channel.empty().toList()
+        [],
+        []
     )
 
     emit:
