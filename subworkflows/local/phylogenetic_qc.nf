@@ -13,6 +13,8 @@ workflow PHYLOGENETIC_QC{
 
     main:
     ch_reads = reads
+    ch_multiqc_files = Channel.empty()
+    ch_versions             = Channel.empty()
     //
     // MODULE: Untar kraken2_db
     //
@@ -28,6 +30,8 @@ workflow PHYLOGENETIC_QC{
         params.kraken2_save_reads,
         params.kraken2_save_readclassifications
     )
+    ch_multiqc_files       = ch_multiqc_files.mix( KRAKEN2_KRAKEN2.out.report )
+    ch_versions            = ch_versions.mix( KRAKEN2_KRAKEN2.out.versions.first() )
     //KRAKEN2_KRAKEN2.out.report.map { meta, report -> [ report ] }.collect()
 
     //
@@ -40,5 +44,6 @@ workflow PHYLOGENETIC_QC{
     )
 
     emit:
-    kraken2_report = KRAKEN2_KRAKEN2.out.report.map { meta, report -> [ report ] }.collect()
+    versions        = ch_versions
+    mqc             = ch_multiqc_files
 }
