@@ -9,7 +9,7 @@ include { FASTQC                        } from '../modules/nf-core/fastqc/main'
 include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc/main'
 include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc/main'
 
-include { PHYLOGENETIC_QC               } from '../modules/local/phylogenetic_qc'
+include { PHYLOGENETIC_QC               } from '../subworkflows/local/phylogenetic_qc'
 
 include { paramsSummaryMap              } from 'plugin/nf-validation'
 include { paramsSummaryMultiqc          } from '../subworkflows/nf-core/utils_nfcore_pipeline'

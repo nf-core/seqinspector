@@ -1,5 +1,5 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema",
+    "$schema": "https://json-schema.org/draft-07/schema",
     "$id": "https://raw.githubusercontent.com/nf-core/seqinspector/master/nextflow_schema.json",
     "title": "nf-core/seqinspector pipeline parameters",
     "description": "Pipeline to QC your sequences",
@@ -71,6 +71,13 @@
                     "fa_icon": "fas fa-ban",
                     "hidden": true,
                     "help_text": "Do not load `igenomes.config` when running the pipeline. You may choose this option if you observe clashes between custom parameters and those supplied in `igenomes.config`."
+                },
+                "kraken2_db": {
+                    "type": "string",
+                    "exists": true,
+                    "mimetype": "text/plain",
+                    "help_text": "Path to Kraken2 database file, built with kraken2 build",
+                    "fa_icon": "fas fa-database"
                 }
             }
         },
