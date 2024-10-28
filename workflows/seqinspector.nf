@@ -47,8 +47,8 @@ workflow SEQINSPECTOR {
         ch_samplesheet
     )
 
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip).join(PHYLOGENETIC_QC.out.kraken2_report)
-    ch_multiqc_files.view()
+    //ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip).join(PHYLOGENETIC_QC.out.kraken2_report)
+    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
     ch_versions = ch_versions.mix(FASTQC.out.versions.first())
 
     //
