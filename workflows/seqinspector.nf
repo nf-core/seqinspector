@@ -9,6 +9,8 @@ include { FASTQC                        } from '../modules/nf-core/fastqc/main'
 include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc/main'
 include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc/main'
 
+include { SEQKIT_STATS                  } from '../modules/nf-core/seqkit/stats/main'
+
 include { paramsSummaryMap              } from 'plugin/nf-validation'
 include { paramsSummaryMultiqc          } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML        } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -137,6 +139,14 @@ workflow SEQINSPECTOR {
         Channel.empty().toList(),
         Channel.empty().toList()
     )
+
+    //
+    // MODULE: Run SEQKIT_STATS
+    //
+    SEQKIT_STATS (
+        ch_samplesheet
+    )
+    ch_versions = ch_versions.mix(SEQKIT_STATS.out.versions.first())
 
     emit:
     global_report = MULTIQC_GLOBAL.out.report.toList()      // channel: /path/to/multiqc_report.html
