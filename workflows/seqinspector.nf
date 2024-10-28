@@ -35,7 +35,7 @@ workflow SEQINSPECTOR {
     //
     // MODULE: Run Seqkit sample to perform subsampling
     //
-    if (params.sample_size) {
+    if (params.sample_size > 0 ) {
         ch_sample_sized = SEQTK_SAMPLE(ch_samplesheet.map {
             meta, reads -> [meta, reads, params.sample_size]
         }).reads
