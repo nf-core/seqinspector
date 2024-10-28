@@ -9,8 +9,6 @@
 ----------------------------------------------------------------------------------------
 */
 
-nextflow.enable.dsl = 2
-
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT FUNCTIONS / MODULES / SUBWORKFLOWS / WORKFLOWS
@@ -20,7 +18,6 @@ nextflow.enable.dsl = 2
 include { SEQINSPECTOR            } from './workflows/seqinspector'
 include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
 include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
-
 include { getGenomeAttribute      } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
 
 /*
@@ -56,7 +53,6 @@ workflow NFCORE_SEQINSPECTOR {
     SEQINSPECTOR (
         samplesheet
     )
-
     emit:
     global_report   = SEQINSPECTOR.out.global_report    // channel: /path/to/multiqc_report.html
     grouped_reports = SEQINSPECTOR.out.grouped_reports  // channel: /path/to/multiqc_report.html
@@ -71,13 +67,11 @@ workflow NFCORE_SEQINSPECTOR {
 workflow {
 
     main:
-
     //
     // SUBWORKFLOW: Run initialisation tasks
     //
     PIPELINE_INITIALISATION (
         params.version,
-        params.help,
         params.validate_params,
         params.monochrome_logs,
         args,
@@ -91,7 +85,6 @@ workflow {
     NFCORE_SEQINSPECTOR (
         PIPELINE_INITIALISATION.out.samplesheet
     )
-
     //
     // SUBWORKFLOW: Run completion tasks
     //
