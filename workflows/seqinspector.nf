@@ -39,8 +39,6 @@ workflow SEQINSPECTOR {
     FASTQC (
         ch_samplesheet
     )
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
-    ch_versions = ch_versions.mix(FASTQC.out.versions.first())
 
     //
     // SUBWORKFLOW: Run kraken2 and produce krona plots
@@ -48,6 +46,10 @@ workflow SEQINSPECTOR {
     PHYLOGENETIC_QC (
         ch_samplesheet
     )
+
+    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip).mix(PHYLOGENETIC_QC.out.kraken2_report)
+    ch_multiqc_files.view()
+    ch_versions = ch_versions.mix(FASTQC.out.versions.first())
 
     //
     // Collate and save software versions

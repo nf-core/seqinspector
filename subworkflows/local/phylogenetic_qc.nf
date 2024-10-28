@@ -28,14 +28,14 @@ workflow PHYLOGENETIC_QC{
         params.kraken2_save_reads,
         params.kraken2_save_readclassifications
     )
-    KRAKEN2_KRAKEN2.out.report.map { meta, report -> [ report ] }.collect()
+    //KRAKEN2_KRAKEN2.out.report.map { meta, report -> [ report ] }.collect()
 
     //
     // MODULE: krona plot the kraken2 reports
     //
     KRONA_KTUPDATETAXONOMY()
     KRONA_KTIMPORTTAXONOMY (
-        KRAKEN2_KRAKEN2.out.report.map { meta, report -> [ report ] }.collect(),
+        KRAKEN2_KRAKEN2.out.report,
         KRONA_KTUPDATETAXONOMY.out.db
     )
 
