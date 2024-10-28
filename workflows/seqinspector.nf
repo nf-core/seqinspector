@@ -96,7 +96,7 @@ workflow SEQINSPECTOR {
 
     MULTIQC_GLOBAL (
         ch_multiqc_files
-            .map { meta, file -> file }
+            //.map { meta, file -> file }
             .mix(ch_multiqc_extra_files)
             .collect(),
         ch_multiqc_config.toList(),
