@@ -1,5 +1,5 @@
 {
-    "$schema": "https://json-schema.org/draft-07/schema",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://raw.githubusercontent.com/nf-core/seqinspector/master/nextflow_schema.json",
     "title": "nf-core/seqinspector pipeline parameters",
     "description": "Pipeline to QC your sequences",
