@@ -94,6 +94,7 @@ genome: 'GRCh37'
 You can also generate such `YAML`/`JSON` files via [nf-core/launch](https://nf-co.re/launch).
 
 Optionally, the `sample_size` parameter allows you to subset a random number of reads to be analysed.
+
 ```bash
 nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 90 -profile docker
 ```
