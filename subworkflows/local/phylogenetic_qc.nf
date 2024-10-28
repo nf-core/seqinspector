@@ -16,10 +16,15 @@ workflow PHYLOGENETIC_QC{
     ch_multiqc_files = Channel.empty()
     ch_versions             = Channel.empty()
     //
-    // MODULE: Untar kraken2_db
+    // MODULE: Untar kraken2_db or read it as it is if not compressed
     //
-    UNTAR_KRAKEN2_DB ( [ [:], params.kraken2_db ])
-    ch_kraken2_db = UNTAR_KRAKEN2_DB.out.untar.map { it[1] }
+    if (params.kraken2_db.endsWith('.gz')) {
+        UNTAR_KRAKEN2_DB ( [ [:], params.kraken2_db ])
+        ch_kraken2_db = UNTAR_KRAKEN2_DB.out.untar.map { it[1] }
+        ch_versions      = ch_versions.mix(UNTAR.out.versions)
+    } else {
+        ch_kraken2_db = Channel.value([[:], file(params.kraken2_db, checkIfExists: true)])
+    }
 
     //
     // MODULE: Perform kraken2
@@ -46,4 +51,5 @@ workflow PHYLOGENETIC_QC{
     emit:
     versions        = ch_versions
     mqc             = ch_multiqc_files
+    krona_plots     = KRONA_KTIMPORTTAXONOMY.out.html.collect()
 }
