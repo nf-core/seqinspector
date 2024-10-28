@@ -23,7 +23,10 @@ workflow PHYLOGENETIC_QC{
     // MODULE: Perform kraken2
     //
     KRAKEN2_KRAKEN2 (
-        ch_reads, ch_kraken2_db
+        ch_reads,
+        ch_kraken2_db,
+        params.kraken2_save_reads,
+        params.kraken2_save_readclassifications
     )
     KRAKEN2_KRAKEN2.out.report.map { meta, report -> [ report ] }.collect()
 
