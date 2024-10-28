@@ -74,6 +74,7 @@ workflow PIPELINE_INITIALISATION {
 
     Channel
         .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
+        .toList()
         .flatMap { it.withIndex().collect {  entry, idx -> entry + "${idx+1}" } }
         .map {
             meta, fastq_1, fastq_2, idx ->
@@ -94,8 +95,8 @@ workflow PIPELINE_INITIALISATION {
                 }
         }
         .groupTuple()
-        .map { samplesheet ->
-            validateInputSamplesheet(samplesheet)
+        .map {
+            validateInputSamplesheet(it) // Applies additional group validation checks that schema_input.json cannot do.
         }
         .transpose() // Replace the map below
         // .map {
