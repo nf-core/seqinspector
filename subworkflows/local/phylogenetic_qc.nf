@@ -40,5 +40,5 @@ workflow PHYLOGENETIC_QC{
     )
 
     emit:
-    kraken2_report = KRAKEN2_KRAKEN2.out.report.map { meta, report -> [ report ] }.collect()
+    kraken2_report = KRAKEN2_KRAKEN2.out.report.collect()
 }
