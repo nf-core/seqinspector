@@ -25,7 +25,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 
 </details>
 
-[SeqKit](https://bioinf.shenwei.me/seqkit/) samples sequences by number. For further reading and documentation see the [Sekit sample](https://bioinf.shenwei.me/seqkit/usage/#sample).
+[SeqKit](https://bioinf.shenwei.me/seqkit/) samples sequences by number. For further reading and documentation see the [Seqkit sample](https://bioinf.shenwei.me/seqkit/usage/#sample).
 
 ### FastQC
 
