@@ -10,9 +10,22 @@ The directories listed below will be created in the results directory after the 
 
 The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes data using the following steps:
 
+- [seqkit](#seqkit) - Subsample a specific number of reads per sample
 - [FastQC](#fastqc) - Raw read QC
 - [MultiQC](#multiqc) - Aggregate report describing results and QC from the whole pipeline
 - [Pipeline information](#pipeline-information) - Report metrics generated during the workflow execution
+
+### Seqkit
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `seqtk/`
+  - `*_fastq`: FastQ file after being subsampled to the sample_size value.
+
+</details>
+
+[SeqKit](https://bioinf.shenwei.me/seqkit/) samples sequences by number. For further reading and documentation see the [FastQC help pages](https://bioinf.shenwei.me/seqkit/usage/#sample).
 
 ### FastQC
 
