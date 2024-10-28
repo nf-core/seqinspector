@@ -4,6 +4,8 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 include { FASTQC                        } from '../modules/nf-core/fastqc/main'
+include { BBMAP_CLUMPIFY         } from '../modules/nf-core/bbmap/clumpify/main'
+
 
 include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc/main'
 include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc/main'
@@ -38,6 +40,16 @@ workflow SEQINSPECTOR {
     )
     ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
     ch_versions = ch_versions.mix(FASTQC.out.versions.first())
+
+    //
+    // MODULE: Run BBMAP_CLUMPIFY
+    //
+    BBMAP_CLUMPIFY (
+        ch_samplesheet
+    )
+//    ch_multiqc_files = ch_multiqc_files.mix(BBMAP_CLUMPIFY.out.zip.collect{it[1]})
+    ch_versions = ch_versions.mix(BBMAP_CLUMPIFY.out.versions)
+
 
     //
     // Collate and save software versions
