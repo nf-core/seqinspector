@@ -9,10 +9,13 @@ include { FASTQC                        } from '../modules/nf-core/fastqc/main'
 include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc/main'
 include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc/main'
 
+include { PHYLOGENETIC_QC               } from '../modules/local/phylogenetic_qc'
+
 include { paramsSummaryMap              } from 'plugin/nf-validation'
 include { paramsSummaryMultiqc          } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML        } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText        } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { PHYLOGENETIC_QC } from '../subworkflows/local/phylogenetic_qc.nf'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -40,6 +43,13 @@ workflow SEQINSPECTOR {
     )
     ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
     ch_versions = ch_versions.mix(FASTQC.out.versions.first())
+
+    //
+    // SUBWORKFLOW: Run kraken2 and produce krona plots
+    //
+    PHYLOGENETIC_QC (
+        ch_samplesheet
+    )
 
     //
     // Collate and save software versions
