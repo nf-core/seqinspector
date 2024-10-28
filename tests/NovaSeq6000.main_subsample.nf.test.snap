@@ -1,31 +1,31 @@
 {
-    "NovaSeq6000 data test": {
+    "NovaSeq6000 data test sample size": {
         "content": [
             "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
             "multiqc_fastqc.txt:md5,aba942d1e6996b579f19798e5673f514",
-            "multiqc_general_stats.txt:md5,c4f40f2313aadc38619e7487226e8d93",
+            "multiqc_general_stats.txt:md5,ad1ec9c64cbdb1131a26aeb6de51e31c",
             "multiqc_software_versions.txt:md5,b7d1ca14785a9361f0a39ce1b6a02686",
             "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
             "multiqc_fastqc.txt:md5,aa1b8d6adae86005ea7a8b2e901099b8",
-            "multiqc_general_stats.txt:md5,d5d73d2888cd9895e5f116e5b869e73c",
+            "multiqc_general_stats.txt:md5,c73c8d10568a56f6534d280fff701e60",
             "multiqc_software_versions.txt:md5,b7d1ca14785a9361f0a39ce1b6a02686",
             "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
             "multiqc_fastqc.txt:md5,ff996e1d3dc4a46e0c9535e54d51ccab",
-            "multiqc_general_stats.txt:md5,d01ec30a262b69bc5749b0ed108a950a",
+            "multiqc_general_stats.txt:md5,834e1868b887171cfda72029bbbe2d3f",
             "multiqc_software_versions.txt:md5,b7d1ca14785a9361f0a39ce1b6a02686",
             "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
             "multiqc_fastqc.txt:md5,3df36ecfe76b25b0c22dcda84bce2b3b",
-            "multiqc_general_stats.txt:md5,4dffc0d1169c49adde819d4467ffb775",
+            "multiqc_general_stats.txt:md5,274a001b007521970f14d68bd176e5be",
             "multiqc_software_versions.txt:md5,b7d1ca14785a9361f0a39ce1b6a02686",
             "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
             "multiqc_fastqc.txt:md5,ce61b4ce4b1d76ec3f20de3bf0c9ec7f",
-            "multiqc_general_stats.txt:md5,05f8dfeea9fca7f4c16ba9d553af4c69",
+            "multiqc_general_stats.txt:md5,d476ad59458a035a329605d5284b6012",
             "multiqc_software_versions.txt:md5,b7d1ca14785a9361f0a39ce1b6a02686"
         ],
         "meta": {
             "nf-test": "0.9.1",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-28T14:05:44.868455454"
+        "timestamp": "2024-10-28T15:09:41.503580136"
     }
 }

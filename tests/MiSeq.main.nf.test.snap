@@ -4,12 +4,12 @@
             "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
             "multiqc_fastqc.txt:md5,7b1b7fd457b60404768045b148d4c0a8",
             "multiqc_general_stats.txt:md5,5b28a83b14cb2fe88d084d08900ebdbf",
-            "multiqc_software_versions.txt:md5,a3698a2d32e8695c38d50e3d17de5fe3"
+            "multiqc_software_versions.txt:md5,49e3596d49ee49d967d3b6c363b486d5"
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.10.0"
+            "nf-test": "0.9.1",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-28T13:18:10.3675973"
+        "timestamp": "2024-10-28T15:06:30.86052858"
     }
 }
