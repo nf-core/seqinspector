@@ -49,7 +49,6 @@ workflow SEQINSPECTOR {
     //
     ch_databases = Channel
         .fromList(samplesheetToList(ch_databasesheet, "${projectDir}/assets/schema_database.json"))
-        .view()
 
     FASTQSCREEN_FASTQSCREEN (
         ch_samplesheet,
