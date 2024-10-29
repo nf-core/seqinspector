@@ -31,6 +31,7 @@ workflow SEQINSPECTOR {
     ch_samplesheet               // channel: samplesheet read in from --input
 
     main:
+    skip_tools = params.skip_tools ? params.skip_tools.split(',') : []
 
     ch_versions            = Channel.empty()
     ch_multiqc_files       = Channel.empty()
@@ -55,23 +56,27 @@ workflow SEQINSPECTOR {
     //
     // MODULE: Run FastQC
     //
-    FASTQC (
-        ch_sample_sized.map {
-            meta, subsampled -> [meta, subsampled]
-        }
-    )
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
-    ch_versions = ch_versions.mix(FASTQC.out.versions.first())
+    if (!("fastqc" in skip_tools)) {
+        FASTQC (
+            ch_sample_sized.map {
+                meta, subsampled -> [meta, subsampled]
+            }
+        )
+        ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
+        ch_versions = ch_versions.mix(FASTQC.out.versions.first())
+    }
 
 
     //
     // Module: Run SeqFu stats
     //
-    SEQFU_STATS (
-        ch_samplesheet
-    )
-    ch_multiqc_files = ch_multiqc_files.mix(SEQFU_STATS.out.multiqc)
-    ch_versions = ch_versions.mix(SEQFU_STATS.out.versions.first())
+    if (!("seqfu_stats" in skip_tools)) {
+        SEQFU_STATS (
+            ch_samplesheet
+        )
+        ch_multiqc_files = ch_multiqc_files.mix(SEQFU_STATS.out.multiqc)
+        ch_versions = ch_versions.mix(SEQFU_STATS.out.versions.first())
+    }
 
     //
     // MODULE: Run FastQ Screen
