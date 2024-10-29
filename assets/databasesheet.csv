@@ -1,9 +1,2 @@
 name,index,aligner
-Ecoli,./database/EB1,BOWTIE2
-Ecoli,s3://ngi-igenomes/database/EB1,BOWTIE2
-## M. tuberculosis (igenomes/Mycobacterium_tuberculosis_H37RV/Ensembl/H37Rv.EB1)
-Tuberculosis,./references/genome_tuberculosis/genome,BOWTIE2
-## PhiX (/igenomes/PhiX/Illumina/RTA)
-PhiX,../../../modules/nf-core/fastqscreen/references/genome_phix/genome,BOWTIE2
-##S. cerevisiae (igenomes/Saccharomyces_cerevisiae/Ensembl/EF4)
-Scerevisiae,../../../modules/nf-core/fastqscreen/references/genome_cerevisiae/genome,BOWTIE2
+PhiX,s3://ngi-igenomes/igenomes/PhiX/Illumina/RTA/Sequence/Bowtie2Index/,BOWTIE2

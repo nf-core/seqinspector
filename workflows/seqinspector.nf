@@ -1,3 +1,5 @@
+include { samplesheetToList } from 'plugin/nf-schema'
+
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -24,6 +26,8 @@ workflow SEQINSPECTOR {
 
     take:
     ch_samplesheet // channel: samplesheet read in from --input
+    ch_databasesheet // channel: database sheet read in from --database_sheet
+
     main:
 
     ch_versions            = Channel.empty()
@@ -43,26 +47,13 @@ workflow SEQINSPECTOR {
     //
     // MODULE: Run FastQ Screen
     //
-
-    Channel.fromPath(params.config_fastq_screen)
-        .splitText()
-        .filter(!it.contains('database')) // TODO anything that doesn't have "database"
-        .collect()
+    ch_databases = Channel
+        .fromList(samplesheetToList(ch_databasesheet, "${projectDir}/assets/schema_database.json"))
         .view()
-
-    if(params.database_tar.endsWith('.tar.gz')) {
-        UNTAR (
-            params.database_tar,
-        )
-        ch_database = UNTAR.out.untar
-    } else {
-        ch_database = params.database_tar
-    }
 
     FASTQSCREEN_FASTQSCREEN (
         ch_samplesheet,
-        Channel.fromPath(params.config_fastq_screen),
-        ch_database,
+        ch_databases,
     )
     ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
     ch_versions = ch_versions.mix(FASTQSCREEN_FASTQSCREEN.out.versions.first())

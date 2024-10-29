@@ -9,7 +9,7 @@ process FASTQSCREEN_FASTQSCREEN {
 
     input:
     tuple val(meta), path(reads)  // .fastq files
-    path database
+    tuple val(meta), path(database) // [[database_name,  database_notes], database_path]
 
     output:
     tuple val(meta), path("*.txt")     , emit: txt
@@ -24,11 +24,14 @@ process FASTQSCREEN_FASTQSCREEN {
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
     def args = task.ext.args ?: ""
-
+    // 'Database name','Genome path and basename','Notes'
     """
-    fastq_screen --threads ${task.cpus} \\
-        --aligner bowtie2 \\
-        --conf ${database}/fastq_screen.conf \\
+    fastq_screen --add_genome \\
+        '$meta.database_name','$database_path','$meta.database_notes'
+
+    fastq_screen
+        --conf fastq_screen.conf \\
+        --threads ${task.cpus} \\
         $reads \\
         $args \\
 

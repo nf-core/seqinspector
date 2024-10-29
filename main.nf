@@ -44,6 +44,7 @@ workflow NFCORE_SEQINSPECTOR {
 
     take:
     samplesheet // channel: samplesheet read in from --input
+    database_sheet
 
     main:
 
@@ -51,7 +52,8 @@ workflow NFCORE_SEQINSPECTOR {
     // WORKFLOW: Run pipeline
     //
     SEQINSPECTOR (
-        samplesheet
+        samplesheet,
+        database_sheet,
     )
     emit:
     global_report   = SEQINSPECTOR.out.global_report    // channel: /path/to/multiqc_report.html
@@ -83,7 +85,8 @@ workflow {
     // WORKFLOW: Run main workflow
     //
     NFCORE_SEQINSPECTOR (
-        PIPELINE_INITIALISATION.out.samplesheet
+        PIPELINE_INITIALISATION.out.samplesheet,
+        params.database_sheet,
     )
     //
     // SUBWORKFLOW: Run completion tasks
