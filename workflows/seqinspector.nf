@@ -33,7 +33,7 @@ workflow SEQINSPECTOR {
     ch_multiqc_reports     = Channel.empty()
 
     //
-    // MODULE: Run Seqkit sample to perform subsampling
+    // MODULE: Run Seqtk sample to perform subsampling
     //
     if (params.sample_size > 0 ) {
         ch_sample_sized = SEQTK_SAMPLE(
@@ -44,9 +44,7 @@ workflow SEQINSPECTOR {
         ch_versions = ch_versions.mix(SEQTK_SAMPLE.out.versions.first())
     } else {
         // No do subsample
-        ch_sample_sized = ch_samplesheet.map {
-            meta, reads -> [meta, reads]
-        }
+        ch_sample_sized = ch_samplesheet
     }
 
     //
