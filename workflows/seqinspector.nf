@@ -36,20 +36,28 @@ workflow SEQINSPECTOR {
     // MODULE: Run Seqkit sample to perform subsampling
     //
     if (params.sample_size > 0 ) {
-        ch_sample_sized = SEQTK_SAMPLE(ch_samplesheet.map {
-            meta, reads -> [meta, reads, params.sample_size]
-        }).reads
+        ch_sample_sized = ch_samplesheet.join(
+            SEQTK_SAMPLE(
+                ch_samplesheet.map {
+                    meta, reads -> [meta, reads, params.sample_size]
+                }
+            ).reads, by: [0]
+        )
         ch_versions = ch_versions.mix(SEQTK_SAMPLE.out.versions.first())
     } else {
         // No do subsample
-        ch_sample_sized = ch_samplesheet
+        ch_sample_sized = ch_samplesheet.map {
+            meta, reads -> [meta, reads, []]
+        }
     }
 
     //
     // MODULE: Run FastQC
     //
     FASTQC (
-        ch_sample_sized
+        ch_sample_sized.map {
+            meta, reads, subsampled -> [meta, reads]
+        }
     )
     ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
     ch_versions = ch_versions.mix(FASTQC.out.versions.first())
