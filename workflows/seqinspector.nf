@@ -4,6 +4,7 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 include { FASTQC                        } from '../modules/nf-core/fastqc/main'
+include { FQ_LINT                       } from '../modules/nf-core/fq/lint/main'
 
 include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc/main'
 include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc/main'
@@ -38,6 +39,14 @@ workflow SEQINSPECTOR {
     )
     ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
     ch_versions = ch_versions.mix(FASTQC.out.versions.first())
+
+    //
+    // MODULE: Run FastQC
+    //
+    FQ_LINT (
+        ch_samplesheet
+    )
+    ch_versions = ch_versions.mix(FQ_LINT.out.versions)
 
     //
     // Collate and save software versions
