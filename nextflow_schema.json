@@ -26,8 +26,8 @@
                 "sample_size": {
                     "type": "integer",
                     "default": 0,
-                    "description": "Subset this number of reads.",
-                    "help_text": "Samples will be subsetted to this number of reads. If 0 (default), no subsampling will be performed."
+                    "description": "Take this number of reads as a subset.",
+                    "help_text": "Choose the size of the subset or 0, if no subsampling shall be performed. Note that it refers to an absolute number."
                 },
                 "outdir": {
                     "type": "string",
