@@ -46,15 +46,23 @@ workflow SEQINSPECTOR {
 
     Channel.fromPath(params.config_fastq_screen)
         .splitText()
-    .filter // TODO anything that doesn't have "database"
+        .filter(!it.contains('database')) // TODO anything that doesn't have "database"
         .collect()
+        .view()
 
-    file(list_of_configs)
-    // TODO write configs to text file?
+    if(params.database_tar.endsWith('.tar.gz')) {
+        UNTAR (
+            params.database_tar,
+        )
+        ch_database = UNTAR.out.untar
+    } else {
+        ch_database = params.database_tar
+    }
 
     FASTQSCREEN_FASTQSCREEN (
         ch_samplesheet,
-        Channel.fromPath(params.config_fastq_screen)
+        Channel.fromPath(params.config_fastq_screen),
+        ch_database,
     )
     ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
     ch_versions = ch_versions.mix(FASTQSCREEN_FASTQSCREEN.out.versions.first())
