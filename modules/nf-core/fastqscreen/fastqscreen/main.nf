@@ -1,5 +1,5 @@
 process FASTQSCREEN_FASTQSCREEN {
-    tag "$meta.id"
+    tag "$meta.id | $meta2.database_name"
     label 'process_medium'
 
     conda "${moduleDir}/environment.yml"
@@ -9,7 +9,7 @@ process FASTQSCREEN_FASTQSCREEN {
 
     input:
     tuple val(meta), path(reads)  // .fastq files
-    tuple val(meta), path(database) // [[database_name,  database_notes], database_path]
+    tuple val(meta2), path(database) // [[database_name,  database_notes], database_path]
 
     output:
     tuple val(meta), path("*.txt")     , emit: txt
@@ -26,14 +26,16 @@ process FASTQSCREEN_FASTQSCREEN {
     def args = task.ext.args ?: ""
     // 'Database name','Genome path and basename','Notes'
     """
-    fastq_screen --add_genome \\
-        '$meta.database_name','$database_path','$meta.database_notes'
+    echo "Writing config"
+    echo "DATABASE    ${meta2.database_name}    ./${database}/genome    ${meta2.database_notes}" > fastq_screen.conf
+    echo "Wrote config"
 
-    fastq_screen
+    fastq_screen \\
         --conf fastq_screen.conf \\
         --threads ${task.cpus} \\
+        --aligner ${meta2.database_notes.toLowerCase()} \\
         $reads \\
-        $args \\
+        $args
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
