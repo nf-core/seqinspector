@@ -87,10 +87,10 @@ workflow SEQINSPECTOR {
             .mix(ch_multiqc_extra_files)
             .collect(),
         ch_multiqc_config.toList(),
-        Channel.empty().toList(),
+        [],
         ch_multiqc_logo.toList(),
-        Channel.empty().toList(),
-        Channel.empty().toList()
+        [],
+        []
     )
 
     ch_tags = ch_multiqc_files
@@ -138,9 +138,9 @@ workflow SEQINSPECTOR {
     )
 
     emit:
-    global_report = MULTIQC_GLOBAL.out.report.toList()      // channel: /path/to/multiqc_report.html
+    global_report   = MULTIQC_GLOBAL.out.report.toList()    // channel: [ /path/to/multiqc_report.html ]
     grouped_reports = MULTIQC_PER_TAG.out.report.toList()   // channel: [ /path/to/multiqc_report.html ]
-    versions       = ch_versions                            // channel: [ path(versions.yml) ]
+    versions        = ch_versions                           // channel: [ path(versions.yml) ]
 }
 
 /*
