@@ -12,18 +12,18 @@ workflow PHYLOGENETIC_QC{
     reads
 
     main:
-    ch_reads = reads
-    ch_multiqc_files = Channel.empty()
-    ch_versions             = Channel.empty()
+    ch_reads    = reads
+    ch_versions = Channel.empty()
     //
     // MODULE: Untar kraken2_db or read it as it is if not compressed
     //
     if (params.kraken2_db.endsWith('.gz')) {
         UNTAR_KRAKEN2_DB ( [ [:], params.kraken2_db ])
         ch_kraken2_db = UNTAR_KRAKEN2_DB.out.untar.map { it[1] }
-        ch_versions      = ch_versions.mix(UNTAR_KRAKEN2_DB.out.versions)
+        ch_versions      = ch_versions.mix(UNTAR_KRAKEN2_DB.out.versions.first())
     } else {
-        ch_kraken2_db = Channel.value([[:], file(params.kraken2_db, checkIfExists: true)])
+        ch_kraken2_db = Channel.fromPath(params.kraken2_db, checkIfExists: true)
+        ch_kraken2_db = ch_kraken2_db.collect()
     }
 
     //
@@ -35,9 +35,7 @@ workflow PHYLOGENETIC_QC{
         params.kraken2_save_reads,
         params.kraken2_save_readclassifications
     )
-    ch_multiqc_files       = ch_multiqc_files.mix( KRAKEN2_KRAKEN2.out.report )
-    ch_versions            = ch_versions.mix( KRAKEN2_KRAKEN2.out.versions.first() )
-    //KRAKEN2_KRAKEN2.out.report.map { meta, report -> [ report ] }.collect()
+    ch_versions            = ch_versions.mix( KRAKEN2_KRAKEN2.out.versions.first())
 
     //
     // MODULE: krona plot the kraken2 reports
@@ -50,6 +48,6 @@ workflow PHYLOGENETIC_QC{
 
     emit:
     versions        = ch_versions
-    mqc             = ch_multiqc_files
+    mqc             = KRAKEN2_KRAKEN2.out.report
     krona_plots     = KRONA_KTIMPORTTAXONOMY.out.html.collect()
 }

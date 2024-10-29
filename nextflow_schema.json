@@ -255,5 +255,10 @@
         {
             "$ref": "#/$defs/generic_options"
         }
-    ]
+    ],
+    "properties": {
+        "save_uncompressed_k2db": {
+            "type": "boolean"
+        }
+    }
 }

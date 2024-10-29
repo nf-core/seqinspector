@@ -46,15 +46,16 @@ workflow SEQINSPECTOR {
     PHYLOGENETIC_QC (
         ch_samplesheet
     )
-    //ch_multiqc_files = ch_multiqc_files.mix(PHYLOGENETIC_QC.out.mqc.collect{it[1]}.ifEmpty([]))
-    ch_versions = ch_versions.mix(PHYLOGENETIC_QC.out.versions)
+    // TODO: Uncomment this line for add the kraken2 report to the MultiQC (channel creation might need some further tweaking)
+    //ch_multiqc_files = ch_multiqc_files.mix(PHYLOGENETIC_QC.out)
+    ch_versions = ch_versions.mix(PHYLOGENETIC_QC.out.versions.flatten())
 
 
     //
     // Collate and save software versions
     //
     softwareVersionsToYAML(ch_versions)
-        .collectFile(
+            .collectFile(
             storeDir: "${params.outdir}/pipeline_info",
             name: 'nf_core_'  + 'pipeline_software_' +  'mqc_'  + 'versions.yml',
             sort: true,
@@ -92,6 +93,7 @@ workflow SEQINSPECTOR {
         )
     )
 
+    //            .map { meta, file -> file }
     MULTIQC_GLOBAL (
         ch_multiqc_files
             .map { meta, file -> file }
