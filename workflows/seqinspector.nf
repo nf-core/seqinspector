@@ -44,6 +44,14 @@ workflow SEQINSPECTOR {
     // MODULE: Run FastQ Screen
     //
 
+    Channel.fromPath(params.config_fastq_screen)
+        .splitText()
+    .filter // TODO anything that doesn't have "database"
+        .collect()
+
+    file(list_of_configs)
+    // TODO write configs to text file?
+
     FASTQSCREEN_FASTQSCREEN (
         ch_samplesheet,
         Channel.fromPath(params.config_fastq_screen)
