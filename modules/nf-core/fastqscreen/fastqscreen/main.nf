@@ -8,8 +8,8 @@ process FASTQSCREEN_FASTQSCREEN {
         'community.wave.seqera.io/library/fastq-screen_perl-gdgraph:5c1786a5d5bc1309'}"
 
     input:
-    tuple val(meta), path(reads)  // .fastq files
-    tuple val(meta2), path(database) // [[database_name,  database_notes], database_path]
+    // NOTE for meta 2 and database [[database_name,  database_notes], database_path]
+    tuple val(meta), path(reads), val(meta2), path(database)
 
     output:
     tuple val(meta), path("*.txt")     , emit: txt

@@ -51,8 +51,7 @@ workflow SEQINSPECTOR {
         .fromList(samplesheetToList(ch_databasesheet, "${projectDir}/assets/schema_database.json"))
 
     FASTQSCREEN_FASTQSCREEN (
-        ch_samplesheet,
-        ch_databases,
+        ch_samplesheet.combine(ch_databases)
     )
     ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
     ch_versions = ch_versions.mix(FASTQSCREEN_FASTQSCREEN.out.versions.first())
