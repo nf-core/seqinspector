@@ -35,7 +35,7 @@ process FASTQSCREEN_FASTQSCREEN {
         --threads ${task.cpus} \\
         --aligner ${meta2.database_notes.toLowerCase()} \\
         $reads \\
-        $args \\
+        $args
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
