@@ -111,7 +111,6 @@ workflow SEQINSPECTOR {
         )
     )
 
-    //            .map { meta, file -> file }
     MULTIQC_GLOBAL (
         ch_multiqc_files
             .map { meta, file -> file }
