@@ -7,6 +7,9 @@
 include { SEQTK_SAMPLE                  } from '../modules/nf-core/seqtk/sample/main'
 include { FASTQC                        } from '../modules/nf-core/fastqc/main'
 
+include {SYLPH_SKETCH                   } from '../modules/local/sylph/sketch/main'
+include {SYLPH_PROFILE                  } from '../modules/local/sylph/profile/main'
+
 include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc/main'
 include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc/main'
 
@@ -38,7 +41,7 @@ workflow SEQINSPECTOR {
     if (params.sample_size > 0 ) {
         ch_sample_sized = SEQTK_SAMPLE(
             ch_samplesheet.map {
-                meta, reads -> [meta, reads, params.sample_size]
+                meta, reads, reference -> [meta, reads, params.sample_size]
             }
         ).reads
         ch_versions = ch_versions.mix(SEQTK_SAMPLE.out.versions.first())
@@ -52,7 +55,7 @@ workflow SEQINSPECTOR {
     //
     FASTQC (
         ch_sample_sized.map {
-            meta, subsampled -> [meta, subsampled]
+            meta, subsampled, reference -> [meta, subsampled]
         }
     )
     ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
@@ -69,6 +72,18 @@ workflow SEQINSPECTOR {
             newLine: true
         ).set { ch_collated_versions }
 
+    //
+    // MODULE: Run SYLPH
+    //
+    SYLPH_SKETCH (
+        ch_samplesheet
+    )
+
+    sketch_files = SYLPH_SKETCH.out.sketch_fastq_genome
+    
+    SYLPH_PROFILE (
+        sketch_files
+    )
 
     //
     // MODULE: MultiQC

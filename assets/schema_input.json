@@ -27,6 +27,12 @@
                 "pattern": "^\\S+\\.f(ast)?q\\.gz$",
                 "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
             },
+            "reference": {
+                "type": "string",
+                "format": "file-path",
+                "pattern": "^\\S+\\.(fasta|fa|fna|tar)(\\.gz)?$",
+                "errorMessage": "FASTA file must be gzipped with extensions '.fasta.gz', '.fa.gz', 'tar.gz' or '.fna.gz'"            
+            },            
             "rundir": {
                 "type": "string",
                 "format": "path",

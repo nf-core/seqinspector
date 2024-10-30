@@ -77,20 +77,22 @@ workflow PIPELINE_INITIALISATION {
         .toList()
         .flatMap { it.withIndex().collect {  entry, idx -> entry + "${idx+1}" } }
         .map {
-            meta, fastq_1, fastq_2, idx ->
+            meta, fastq_1, fastq_2, reference, idx ->
                 def tags = meta.tags ? meta.tags.tokenize(":") : []
                 def updated_meta = meta + [ id:"${meta.sample}_${idx}", tags:tags ]
                 if (!fastq_2) {
                     return [
                         updated_meta.id,
                         updated_meta + [ single_end:true ],
-                        [ fastq_1 ]
+                        [ fastq_1 ],
+                        reference
                     ]
                 } else {
                     return [
                         updated_meta.id,
                         updated_meta + [ single_end:false ],
-                        [ fastq_1, fastq_2 ]
+                        [ fastq_1, fastq_2 ],
+                        reference
                     ]
                 }
         }
@@ -103,11 +105,12 @@ workflow PIPELINE_INITIALISATION {
         //     meta, fastqs ->
         //         return [ meta, fastqs.flatten() ]
         // }
+        .view{"dadadad$it"}
         .set { ch_samplesheet }
 
     ch_samplesheet
         .map {
-            meta, fastqs -> meta.tags
+            meta, fastqs, reference -> meta.tags
         }
         .flatten()
         .unique()
@@ -189,7 +192,7 @@ def validateInputParameters() {
 // Validate channels from input samplesheet
 //
 def validateInputSamplesheet(input) {
-    def (metas, fastqs) = input[1..2]
+    def (metas, fastqs, reference) = input[1..3]
 
     // Check that multiple runs of the same sample are of the same datatype i.e. single-end / paired-end
     def endedness_ok = metas.collect{ meta -> meta.single_end }.unique().size == 1
@@ -197,7 +200,7 @@ def validateInputSamplesheet(input) {
         error("Please check input samplesheet -> Multiple runs of a sample must be of the same datatype i.e. single-end or paired-end: ${metas[0].id}")
     }
 
-    return [ metas[0], fastqs ]
+    return [ metas[0], fastqs, reference ]
 }
 //
 // Get attribute from genome config file e.g. fasta
