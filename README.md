@@ -32,7 +32,8 @@
 <!-- TODO nf-core: Fill in short bullet-pointed list of the default steps in the pipeline -->
 
 1. Read QC ([`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/))
-2. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
+2. Validate fastq pairs ([`FQ `](https://github.com/stjude-rust-labs/fq))
+3. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
 
 ## Usage
 
