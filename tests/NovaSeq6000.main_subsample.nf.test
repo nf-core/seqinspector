@@ -1,0 +1,45 @@
+nextflow_pipeline {
+
+    name "Test Workflow main.nf on NovaSeq6000 data sample size 90"
+    script "../main.nf"
+    tag "seqinspector"
+    tag "PIPELINE"
+
+    test("NovaSeq6000 data test sample size") {
+
+        when {
+            config "./NovaSeq6000.main_subsample.nf.test.config"
+            params {
+                outdir = "$outputDir"
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    path("$outputDir/multiqc/global_report/multiqc_data/multiqc_citations.txt"),
+                    path("$outputDir/multiqc/global_report/multiqc_data/multiqc_fastqc.txt"),
+                    path("$outputDir/multiqc/global_report/multiqc_data/multiqc_general_stats.txt"),
+
+                    path("$outputDir/multiqc/group_reports/lane1/multiqc_data/multiqc_citations.txt"),
+                    path("$outputDir/multiqc/group_reports/lane1/multiqc_data/multiqc_fastqc.txt"),
+                    path("$outputDir/multiqc/group_reports/lane1/multiqc_data/multiqc_general_stats.txt"),
+
+                    path("$outputDir/multiqc/group_reports/group1/multiqc_data/multiqc_citations.txt"),
+                    path("$outputDir/multiqc/group_reports/group1/multiqc_data/multiqc_fastqc.txt"),
+                    path("$outputDir/multiqc/group_reports/group1/multiqc_data/multiqc_general_stats.txt"),
+
+                    path("$outputDir/multiqc/group_reports/group2/multiqc_data/multiqc_citations.txt"),
+                    path("$outputDir/multiqc/group_reports/group2/multiqc_data/multiqc_fastqc.txt"),
+                    path("$outputDir/multiqc/group_reports/group2/multiqc_data/multiqc_general_stats.txt"),
+
+                    path("$outputDir/multiqc/group_reports/test/multiqc_data/multiqc_citations.txt"),
+                    path("$outputDir/multiqc/group_reports/test/multiqc_data/multiqc_fastqc.txt"),
+                    path("$outputDir/multiqc/group_reports/test/multiqc_data/multiqc_general_stats.txt"),
+                    ).match()
+                },
+            )
+        }
+    }
+}
