@@ -20,7 +20,7 @@ workflow PHYLOGENETIC_QC{
     if (params.kraken2_db.endsWith('.gz')) {
         UNTAR_KRAKEN2_DB ( [ [:], params.kraken2_db ])
         ch_kraken2_db = UNTAR_KRAKEN2_DB.out.untar.map { it[1] }
-        ch_versions      = ch_versions.mix(UNTAR_KRAKEN2_DB.out.versions.first())
+        ch_versions      = ch_versions.mix(UNTAR_KRAKEN2_DB.out.versions)
     } else {
         ch_kraken2_db = Channel.fromPath(params.kraken2_db, checkIfExists: true)
         ch_kraken2_db = ch_kraken2_db.collect()
@@ -35,7 +35,7 @@ workflow PHYLOGENETIC_QC{
         params.kraken2_save_reads,
         params.kraken2_save_readclassifications
     )
-    ch_versions            = ch_versions.mix( KRAKEN2_KRAKEN2.out.versions.first())
+    ch_versions            = ch_versions.mix( KRAKEN2_KRAKEN2.out.versions)
 
     //
     // MODULE: krona plot the kraken2 reports

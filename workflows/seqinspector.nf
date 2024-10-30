@@ -46,9 +46,8 @@ workflow SEQINSPECTOR {
     PHYLOGENETIC_QC (
         ch_samplesheet
     )
-    // TODO: Uncomment this line for add the kraken2 report to the MultiQC (channel creation might need some further tweaking)
-    //ch_multiqc_files = ch_multiqc_files.mix(PHYLOGENETIC_QC.out)
-    ch_versions = ch_versions.mix(PHYLOGENETIC_QC.out.versions.flatten())
+    ch_multiqc_files = ch_multiqc_files.mix(PHYLOGENETIC_QC.out.mqc)
+    ch_versions = ch_versions.mix(PHYLOGENETIC_QC.out.versions.first())
 
 
     //
