@@ -23,8 +23,15 @@
                     "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row. See [usage docs](https://nf-co.re/seqinspector/usage#samplesheet-input).",
                     "fa_icon": "fas fa-file-csv"
                 },
+                "sample_size": {
+                    "type": "integer",
+                    "default": 0,
+                    "description": "Take this number of reads as a subset.",
+                    "help_text": "Choose the size of the subset or 0, if no subsampling shall be performed. Note that it refers to an absolute number."
+                },
                 "outdir": {
                     "type": "string",
+                    "default": null,
                     "format": "directory-path",
                     "description": "The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.",
                     "fa_icon": "fas fa-folder-open"

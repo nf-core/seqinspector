@@ -13,6 +13,9 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#13](https://github.com/nf-core/seqinspector/pull/13) Generate reports per run, per project and per lane.
 - [#49](https://github.com/nf-core/seqinspector/pull/49) Merge with template 3.0.2.
 - [#56](https://github.com/nf-core/seqinspector/pull/56) Added SeqFu stats module.
+- [#50](https://github.com/nf-core/seqinspector/pull/50) Add an optional subsampling step.
+- [#51](https://github.com/nf-core/seqinspector/pull/51) Add nf-test to CI.
+- [#63](https://github.com/nf-core/seqinspector/pull/63) Contribution guidelines added about displaying results for new tools
 
 ### `Fixed`
 
