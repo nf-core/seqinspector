@@ -95,9 +95,8 @@
                     "type": "string",
                     "exists": true,
                     "mimetype": "text/plain",
-                    "help_text": "Path to Kraken2 database file, built with kraken2 build",
-                    "fa_icon": "fas fa-database",
-                    "default": "https://github.com/nf-core/test-datasets/raw/taxprofiler/data/database/kraken2/testdb-kraken2.tar.gz"
+                    "description": "Path to Kraken2 database file, either a gzipped file or the path to the uncompressed database.",
+                    "fa_icon": "fas fa-database"
                 },
                 "igenomes_base": {
                     "type": "string",
