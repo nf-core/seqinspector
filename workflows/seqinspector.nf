@@ -3,6 +3,8 @@
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
+
+include { SEQTK_SAMPLE                  } from '../modules/nf-core/seqtk/sample/main'
 include { FASTQC                        } from '../modules/nf-core/fastqc/main'
 
 include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc/main'
@@ -32,10 +34,27 @@ workflow SEQINSPECTOR {
     ch_multiqc_reports     = Channel.empty()
 
     //
+    // MODULE: Run Seqtk sample to perform subsampling
+    //
+    if (params.sample_size > 0 ) {
+        ch_sample_sized = SEQTK_SAMPLE(
+            ch_samplesheet.map {
+                meta, reads -> [meta, reads, params.sample_size]
+            }
+        ).reads
+        ch_versions = ch_versions.mix(SEQTK_SAMPLE.out.versions.first())
+    } else {
+        // No do subsample
+        ch_sample_sized = ch_samplesheet
+    }
+
+    //
     // MODULE: Run FastQC
     //
     FASTQC (
-        ch_samplesheet
+        ch_sample_sized.map {
+            meta, subsampled -> [meta, subsampled]
+        }
     )
     ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
     ch_versions = ch_versions.mix(FASTQC.out.versions.first())
