@@ -34,6 +34,7 @@
 1. Subsample reads ([`Seqtk`](https://github.com/lh3/seqtk))
 2. Read QC ([`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/))
 3. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
+4. Provide Seqkit summary stats ([`SeqkitStats`](https://bioinf.shenwei.me/seqkit/usage/#stats))
 
 ## Usage
 
