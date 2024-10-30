@@ -11,6 +11,7 @@ The directories listed below will be created in the results directory after the 
 The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes data using the following steps:
 
 - [FastQC](#fastqc) - Raw read QC
+- [Fastqscreen](#fastqscreen) - mapping against a set of references for basic contamination QC
 - [MultiQC](#multiqc) - Aggregate report describing results and QC from the whole pipeline
 - [Pipeline information](#pipeline-information) - Report metrics generated during the workflow execution
 
@@ -26,6 +27,22 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 </details>
 
 [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) gives general quality metrics about your sequenced reads. It provides information about the quality score distribution across your reads, per base sequence content (%A/T/G/C), adapter contamination and overrepresented sequences. For further reading and documentation see the [FastQC help pages](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/).
+
+### FASTQSCREEN
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `fastqc/`
+  - `*_screen.html`: Interactive graphical fastqscreen report which summaries the mapping of your sequences against each of your libraries.
+  - `*_screen.pdf`: Static graphical fastqscreen report which summaries the mapping of your sequences against each of your libraries.
+  - `*_screen.txt` : text based fastqscreen report which summaries the mapping of your sequences against each of your libraries.
+
+</details>
+
+[Fastqscreen](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/) allows you to set up a standard set of libraries against which all of your sequences can be searched. Your search libraries might contain the genomes of all of the organisms you work on, along with PhiX, Vectors or other contaminants commonly seen in sequencing experiments.
+
+It requires the supply of referenced (databases) in a config file. In order to parallelize the mapping of the different samples, in seqinspector, this a fastqscreen config file is generated for every sample/reference combination.
 
 ### MultiQC
 

@@ -68,7 +68,8 @@
                 "config_fastq_screen": {
                     "type": "string",
                     "description": "path to directory with fastq_screen config (fastq_screen.conf)",
-                    "fa_icon": "fas fa-braille"
+                    "fa_icon": "fas fa-braille",
+                    "default": "/Users/franziska.franziska/workspace/seqinspector/conf"
                 },
                 "igenomes_ignore": {
                     "type": "boolean",
@@ -84,6 +85,12 @@
                     "fa_icon": "fas fa-ban",
                     "hidden": true,
                     "default": "s3://ngi-igenomes/igenomes/"
+                },
+                "fastqscreen_database_sheet": {
+                    "type": "string",
+                    "default": "./assets/databasesheet.csv",
+                    "fa_icon": "fas fa-search",
+                    "description": "list of reference genomes (databases) to be mapped against in fastqscreen"
                 }
             }
         },
