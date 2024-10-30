@@ -4,7 +4,6 @@
             "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
             "multiqc_fastqc.txt:md5,aba942d1e6996b579f19798e5673f514",
             "multiqc_general_stats.txt:md5,ad1ec9c64cbdb1131a26aeb6de51e31c",
-            "multiqc_software_versions.txt:md5,b7d1ca14785a9361f0a39ce1b6a02686",
             "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
             "multiqc_fastqc.txt:md5,aa1b8d6adae86005ea7a8b2e901099b8",
             "multiqc_general_stats.txt:md5,c73c8d10568a56f6534d280fff701e60",
@@ -26,6 +25,6 @@
             "nf-test": "0.9.1",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-30T09:11:23.734754433"
+        "timestamp": "2024-10-30T09:25:16.689719475"
     }
 }
