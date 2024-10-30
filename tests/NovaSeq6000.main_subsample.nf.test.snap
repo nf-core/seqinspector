@@ -1,0 +1,26 @@
+{
+    "NovaSeq6000 data test sample size": {
+        "content": [
+            "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+            "multiqc_fastqc.txt:md5,aba942d1e6996b579f19798e5673f514",
+            "multiqc_general_stats.txt:md5,ad1ec9c64cbdb1131a26aeb6de51e31c",
+            "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+            "multiqc_fastqc.txt:md5,aa1b8d6adae86005ea7a8b2e901099b8",
+            "multiqc_general_stats.txt:md5,c73c8d10568a56f6534d280fff701e60",
+            "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+            "multiqc_fastqc.txt:md5,ff996e1d3dc4a46e0c9535e54d51ccab",
+            "multiqc_general_stats.txt:md5,834e1868b887171cfda72029bbbe2d3f",
+            "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+            "multiqc_fastqc.txt:md5,3df36ecfe76b25b0c22dcda84bce2b3b",
+            "multiqc_general_stats.txt:md5,274a001b007521970f14d68bd176e5be",
+            "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+            "multiqc_fastqc.txt:md5,ce61b4ce4b1d76ec3f20de3bf0c9ec7f",
+            "multiqc_general_stats.txt:md5,d476ad59458a035a329605d5284b6012"
+        ],
+        "meta": {
+            "nf-test": "0.9.1",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-10-30T09:37:46.182191597"
+    }
+}

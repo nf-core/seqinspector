@@ -1,14 +1,14 @@
 nextflow_pipeline {
 
-    name "Test Workflow main.nf on NovaSeq6000 data"
+    name "Test Workflow main.nf on NovaSeq6000 data sample size 90"
     script "../main.nf"
     tag "seqinspector"
     tag "PIPELINE"
 
-    test("NovaSeq6000 data test") {
+    test("NovaSeq6000 data test sample size") {
 
         when {
-            config "./NovaSeq6000.main.nf.test.config"
+            config "./NovaSeq6000.main_subsample.nf.test.config"
             params {
                 outdir = "$outputDir"
             }
