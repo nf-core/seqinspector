@@ -12,11 +12,10 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#20](https://github.com/nf-core/seqinspector/pull/20) Use tags to generate group reports
 - [#13](https://github.com/nf-core/seqinspector/pull/13) Generate reports per run, per project and per lane.
 - [#49](https://github.com/nf-core/seqinspector/pull/49) Merge with template 3.0.2.
-  <<<<<<< HEAD
-- # [#40](https://github.com/nf-core/seqinspector/pull/59) Seqkit Stats TSV output.
+- [#59](https://github.com/nf-core/seqinspector/pull/59) Seqkit Stats TSV output.
+- [#50](https://github.com/nf-core/seqinspector/pull/50) Add an optional subsampling step.
 - [#51](https://github.com/nf-core/seqinspector/pull/51) Add nf-test to CI.
 - [#63](https://github.com/nf-core/seqinspector/pull/63) Contribution guidelines added about displaying results for new tools
-  > > > > > > > 1ca5e188c2fc4f501b3bb123e97ebfc743ae5b06
 
 ### `Fixed`
 
