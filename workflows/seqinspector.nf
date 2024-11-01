@@ -6,6 +6,7 @@
 
 include { SEQTK_SAMPLE                  } from '../modules/nf-core/seqtk/sample/main'
 include { FASTQC                        } from '../modules/nf-core/fastqc/main'
+include { FASTQE                        } from '../modules/nf-core/fastqe/main'  
 
 include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc/main'
 include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc/main'
@@ -57,6 +58,15 @@ workflow SEQINSPECTOR {
     )
     ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
     ch_versions = ch_versions.mix(FASTQC.out.versions.first())
+
+    // FASTQE
+    FASTQE(
+        ch_sample_sized.map {
+            meta, subsampled -> [meta, subsampled]
+        }
+    )
+    ch_multiqc_files = ch_multiqc_files.mix(FASTQE.out.tsv)
+    ch_versions = ch_versions.mix(FASTQE.out.versions.first())
 
     //
     // Collate and save software versions
