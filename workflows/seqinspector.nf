@@ -6,7 +6,7 @@
 
 include { SEQTK_SAMPLE                  } from '../modules/nf-core/seqtk/sample/main'
 include { FASTQC                        } from '../modules/nf-core/fastqc/main'
-include { FASTQE                        } from '../modules/nf-core/fastqe/main'  
+include { FASTQE                        } from '../modules/nf-core/fastqe/main'
 
 include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc/main'
 include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc/main'
@@ -29,8 +29,8 @@ workflow SEQINSPECTOR {
     main:
 
     ch_versions            = Channel.empty()
-    ch_multiqc_files       = Channel.empty()
-    ch_multiqc_extra_files = Channel.empty()
+    ch_multiqc_files        = Channel.empty()
+    ch_multiqc_extra_files  = Channel.empty()
     ch_multiqc_reports     = Channel.empty()
 
     //
