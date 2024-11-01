@@ -10,6 +10,11 @@
                         "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
                         "installed_by": ["modules"]
                     },
+                    "fastqe": {
+                        "branch": "master",
+                        "git_sha": "cab0b8fdc4f785810f49423d8141a0773c21eb3b",
+                        "installed_by": ["modules"]
+                    },
                     "multiqc": {
                         "branch": "master",
                         "git_sha": "cf17ca47590cc578dfb47db1c2a44ef86f89976d",
