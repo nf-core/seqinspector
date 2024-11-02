@@ -31,9 +31,10 @@
      workflows use the "tube map" design for that. See https://nf-co.re/docs/contributing/design_guidelines#examples for examples.   -->
 <!-- TODO nf-core: Fill in short bullet-pointed list of the default steps in the pipeline -->
 
+1. Lint FASTQs with ([`fq`](https://github.com/stjude-rust-labs/fq))
 1. Subsample reads ([`Seqtk`](https://github.com/lh3/seqtk))
-2. Read QC ([`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/))
-3. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
+1. Read QC ([`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/))
+1. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
 
 ## Usage
 

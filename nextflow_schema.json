@@ -31,7 +31,6 @@
                 },
                 "outdir": {
                     "type": "string",
-                    "default": null,
                     "format": "directory-path",
                     "description": "The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.",
                     "fa_icon": "fas fa-folder-open"
@@ -47,6 +46,30 @@
                     "type": "string",
                     "description": "MultiQC report title. Printed as page header, used for filename if not otherwise specified.",
                     "fa_icon": "fas fa-file-signature"
+                }
+            }
+        },
+        "validation_options": {
+            "title": "Validation options",
+            "type": "object",
+            "description": "Options for validating and screening FASTQ files.",
+            "default": "",
+            "properties": {
+                "skip_linting": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Whether to lint the FASTQs before performing QC on the sequences",
+                    "help_text": "FASTQ files will be linted with FQ early in the pipeline. If they fail validation, the pipeline will terminate preventing expensive quality control steps being performed on the other samples. If ignoring FQ is enabled, quality control will be performed on the remaining samples."
+                },
+                "fq_lint_args": {
+                    "type": "string",
+                    "description": "Arguments to pass to FQ lint",
+                    "help_text": "Arguments to pass to FQ lint. This can be used to disable overly strict linting. See https://github.com/stjude-rust-labs/fq?tab=readme-ov-file#lint for more information."
+                },
+                "continue_with_lint_fail": {
+                    "type": "boolean",
+                    "description": "Whether to continue with the pipeline if linting fails for a single sample.",
+                    "help_text": "If set to true, the pipeline will continue with the remaining samples if linting fails for a single sample. If set to false, the pipeline will terminate if linting fails for a single sample."
                 }
             }
         },
@@ -244,6 +267,9 @@
     "allOf": [
         {
             "$ref": "#/$defs/input_output_options"
+        },
+        {
+            "$ref": "#/$defs/validation_options"
         },
         {
             "$ref": "#/$defs/reference_genome_options"

@@ -17,6 +17,7 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#51](https://github.com/nf-core/seqinspector/pull/51) Add nf-test to CI.
 - [#63](https://github.com/nf-core/seqinspector/pull/63) Contribution guidelines added about displaying results for new tools
 - [#53](https://github.com/nf-core/seqinspector/pull/53) Add FastQ-Screen database multiplexing and limit scope of nf-test in CI.
+- [#67](https://github.com/nf-core/seqinspector/pull/67) Add FASTQ linting for early validation
 
 ### `Fixed`
 
