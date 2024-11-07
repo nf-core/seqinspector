@@ -21,23 +21,28 @@ nextflow_pipeline {
                     path("$outputDir/multiqc/global_report/multiqc_data/multiqc_citations.txt"),
                     path("$outputDir/multiqc/global_report/multiqc_data/multiqc_fastqc.txt"),
                     path("$outputDir/multiqc/global_report/multiqc_data/multiqc_general_stats.txt"),
+                    path("$outputDir/multiqc/global_report/multiqc_data/multiqc_fastq_screen.txt"),
 
                     path("$outputDir/multiqc/group_reports/lane1/multiqc_data/multiqc_citations.txt"),
                     path("$outputDir/multiqc/group_reports/lane1/multiqc_data/multiqc_fastqc.txt"),
                     path("$outputDir/multiqc/group_reports/lane1/multiqc_data/multiqc_general_stats.txt"),
+                    path("$outputDir/multiqc/group_reports/lane1/multiqc_data/multiqc_fastq_screen.txt"),
 
                     path("$outputDir/multiqc/group_reports/group1/multiqc_data/multiqc_citations.txt"),
                     path("$outputDir/multiqc/group_reports/group1/multiqc_data/multiqc_fastqc.txt"),
                     path("$outputDir/multiqc/group_reports/group1/multiqc_data/multiqc_general_stats.txt"),
+                    path("$outputDir/multiqc/group_reports/group1/multiqc_data/multiqc_fastq_screen.txt"),
 
                     path("$outputDir/multiqc/group_reports/group2/multiqc_data/multiqc_citations.txt"),
                     path("$outputDir/multiqc/group_reports/group2/multiqc_data/multiqc_fastqc.txt"),
                     path("$outputDir/multiqc/group_reports/group2/multiqc_data/multiqc_general_stats.txt"),
+                    path("$outputDir/multiqc/group_reports/group2/multiqc_data/multiqc_fastq_screen.txt"),
 
                     path("$outputDir/multiqc/group_reports/test/multiqc_data/multiqc_citations.txt"),
                     path("$outputDir/multiqc/group_reports/test/multiqc_data/multiqc_fastqc.txt"),
                     path("$outputDir/multiqc/group_reports/test/multiqc_data/multiqc_general_stats.txt"),
-                    ).match()
+                                        path("$outputDir/multiqc/group_reports/test/multiqc_data/multiqc_fastq_screen.txt"),
+                                        ).match()
                 },
             )
         }
