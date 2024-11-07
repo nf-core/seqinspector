@@ -27,7 +27,7 @@ include { methodsDescriptionText        } from '../subworkflows/local/utils_nfco
 workflow SEQINSPECTOR {
 
     take:
-    ch_samplesheet // channel: samplesheet read in from --input
+    ch_samplesheet               // channel: samplesheet read in from --input
     ch_fastqscreen_databasesheet // channel: database sheet read in from --fastqscreen_database_sheet
 
     main:
