@@ -10,10 +10,23 @@ The directories listed below will be created in the results directory after the 
 
 The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes data using the following steps:
 
+- [Seqtk](#seqtk) - Subsample a specific number of reads per sample
 - [FastQC](#fastqc) - Raw read QC
 - [Fastqscreen](#fastqscreen) - mapping against a set of references for basic contamination QC
 - [MultiQC](#multiqc) - Aggregate report describing results and QC from the whole pipeline
 - [Pipeline information](#pipeline-information) - Report metrics generated during the workflow execution
+
+### Seqtk
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `seqtk/`
+  - `*_fastq`: FastQ file after being subsampled to the sample_size value.
+
+</details>
+
+[Seqtk](https://github.com/lh3/seqtk) samples sequences by number.
 
 ### FastQC
 
