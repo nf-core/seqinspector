@@ -86,7 +86,7 @@ workflow {
     //
     NFCORE_SEQINSPECTOR (
         PIPELINE_INITIALISATION.out.samplesheet,
-        params.database_sheet,
+        params.fastqscreen_database_sheet,
     )
     //
     // SUBWORKFLOW: Run completion tasks

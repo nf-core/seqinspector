@@ -26,7 +26,7 @@ workflow SEQINSPECTOR {
 
     take:
     ch_samplesheet // channel: samplesheet read in from --input
-    ch_databasesheet // channel: database sheet read in from --database_sheet
+    ch_fastqscreen_databasesheet // channel: database sheet read in from --fastqscreen_database_sheet
 
     main:
 
@@ -48,7 +48,7 @@ workflow SEQINSPECTOR {
     // MODULE: Run FastQ Screen
     //
     ch_databases = Channel
-        .fromList(samplesheetToList(ch_databasesheet, "${projectDir}/assets/schema_database.json"))
+        .fromList(samplesheetToList(ch_fastqscreen_databasesheet, "${projectDir}/assets/schema_database.json"))
 
     FASTQSCREEN_FASTQSCREEN (
         ch_samplesheet.combine(ch_databases)
