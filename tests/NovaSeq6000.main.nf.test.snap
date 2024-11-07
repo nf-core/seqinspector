@@ -1,26 +1,26 @@
 {
     "NovaSeq6000 data test": {
         "content": [
-            "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+            "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
             "multiqc_fastqc.txt:md5,3730f9046b20ac5c17a86db0a33f8d5d",
             "multiqc_general_stats.txt:md5,25abe0f6a35eb4a3b056fc3cf5c13732",
-            "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+            "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
             "multiqc_fastqc.txt:md5,8284e25ccc21041cf3b5a32eb6a51e78",
             "multiqc_general_stats.txt:md5,90ee35137492b80aab36ef67f72d8921",
-            "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+            "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
             "multiqc_fastqc.txt:md5,f38ffdc112c73af3a41ed15848a3761f",
             "multiqc_general_stats.txt:md5,d62a2fc39e674d98783d408791803148",
-            "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+            "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
             "multiqc_fastqc.txt:md5,7ff71ceb8ecdf086331047f8860c3347",
             "multiqc_general_stats.txt:md5,2f09b8f199ac40cf67ba50843cebd29c",
-            "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+            "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
             "multiqc_fastqc.txt:md5,519ff344a896ac369bba4d5c5b8be7b5",
             "multiqc_general_stats.txt:md5,6a1c16f068d7ba3a9225a17eb570ed9a"
         ],
         "meta": {
-            "nf-test": "0.9.1",
-            "nextflow": "24.04.4"
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.0"
         },
-        "timestamp": "2024-10-30T09:09:57.158871165"
+        "timestamp": "2024-11-07T12:33:47.150820885"
     }
 }

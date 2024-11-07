@@ -1,14 +1,14 @@
 {
     "PromethION data test": {
         "content": [
-            "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+            "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
             "multiqc_fastqc.txt:md5,1a4b472e13cadc770832b0e20d1de7b0",
             "multiqc_general_stats.txt:md5,409cefc7f17f95d176ced6032bf8fb32"
         ],
         "meta": {
-            "nf-test": "0.9.1",
-            "nextflow": "24.04.4"
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.0"
         },
-        "timestamp": "2024-10-30T09:12:03.048502046"
+        "timestamp": "2024-11-07T12:35:46.010641114"
     }
 }
