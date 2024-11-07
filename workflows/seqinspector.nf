@@ -5,6 +5,8 @@ include { samplesheetToList } from 'plugin/nf-schema'
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
+
+include { SEQTK_SAMPLE                  } from '../modules/nf-core/seqtk/sample/main'
 include { FASTQC                        } from '../modules/nf-core/fastqc/main'
 include { FASTQSCREEN_FASTQSCREEN       } from '../modules/nf-core/fastqscreen/fastqscreen/main'
 
@@ -36,10 +38,27 @@ workflow SEQINSPECTOR {
     ch_multiqc_reports     = Channel.empty()
 
     //
+    // MODULE: Run Seqtk sample to perform subsampling
+    //
+    if (params.sample_size > 0 ) {
+        ch_sample_sized = SEQTK_SAMPLE(
+            ch_samplesheet.map {
+                meta, reads -> [meta, reads, params.sample_size]
+            }
+        ).reads
+        ch_versions = ch_versions.mix(SEQTK_SAMPLE.out.versions.first())
+    } else {
+        // No do subsample
+        ch_sample_sized = ch_samplesheet
+    }
+
+    //
     // MODULE: Run FastQC
     //
     FASTQC (
-        ch_samplesheet
+        ch_sample_sized.map {
+            meta, subsampled -> [meta, subsampled]
+        }
     )
     ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
     ch_versions = ch_versions.mix(FASTQC.out.versions.first())
@@ -104,10 +123,10 @@ workflow SEQINSPECTOR {
             .mix(ch_multiqc_extra_files)
             .collect(),
         ch_multiqc_config.toList(),
-        Channel.empty().toList(),
+        [],
         ch_multiqc_logo.toList(),
-        Channel.empty().toList(),
-        Channel.empty().toList()
+        [],
+        []
     )
 
     ch_tags = ch_multiqc_files
@@ -155,9 +174,9 @@ workflow SEQINSPECTOR {
     )
 
     emit:
-    global_report = MULTIQC_GLOBAL.out.report.toList()      // channel: /path/to/multiqc_report.html
+    global_report   = MULTIQC_GLOBAL.out.report.toList()    // channel: [ /path/to/multiqc_report.html ]
     grouped_reports = MULTIQC_PER_TAG.out.report.toList()   // channel: [ /path/to/multiqc_report.html ]
-    versions       = ch_versions                            // channel: [ path(versions.yml) ]
+    versions        = ch_versions                           // channel: [ path(versions.yml) ]
 }
 
 /*
