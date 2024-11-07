@@ -41,8 +41,8 @@ nextflow_pipeline {
                     path("$outputDir/multiqc/group_reports/test/multiqc_data/multiqc_citations.txt"),
                     path("$outputDir/multiqc/group_reports/test/multiqc_data/multiqc_fastqc.txt"),
                     path("$outputDir/multiqc/group_reports/test/multiqc_data/multiqc_general_stats.txt"),
-                                        path("$outputDir/multiqc/group_reports/test/multiqc_data/multiqc_fastq_screen.txt"),
-                                        ).match()
+                    path("$outputDir/multiqc/group_reports/test/multiqc_data/multiqc_fastq_screen.txt"),
+                    ).match()
                 },
             )
         }
