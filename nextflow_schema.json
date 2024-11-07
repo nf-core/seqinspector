@@ -69,7 +69,7 @@
                     "type": "string",
                     "description": "path to directory with fastq_screen config (fastq_screen.conf)",
                     "fa_icon": "fas fa-braille",
-                    "default": "/Users/franziska.franziska/workspace/seqinspector/conf"
+                    "default": "./conf"
                 },
                 "igenomes_ignore": {
                     "type": "boolean",
