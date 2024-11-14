@@ -37,6 +37,10 @@ process FASTQSCREEN_FASTQSCREEN {
         $reads \\
         $args
 
+    mv *_screen.txt ${prefix}_${meta2.database_name}_${meta2.database_notes}_screen.txt
+    mv *_screen.html ${prefix}_${meta2.database_name}_${meta2.database_notes}_screen.html
+    mv *_screen.png ${prefix}_${meta2.database_name}_${meta2.database_notes}_screen.png
+
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         fastqscreen: \$(echo \$(fastq_screen --version 2>&1) | sed 's/^.*FastQ Screen v//; s/ .*\$//')

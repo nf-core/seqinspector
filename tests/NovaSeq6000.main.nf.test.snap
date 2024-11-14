@@ -4,28 +4,28 @@
             "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
             "multiqc_fastqc.txt:md5,3730f9046b20ac5c17a86db0a33f8d5d",
             "multiqc_general_stats.txt:md5,25abe0f6a35eb4a3b056fc3cf5c13732",
-            "multiqc_fastq_screen.txt:md5,836b01175da79f0de458df899b9751e1",
+            "multiqc_fastq_screen.txt:md5,c7b24e20fd157128924384e52eb3405d",
             "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
             "multiqc_fastqc.txt:md5,8284e25ccc21041cf3b5a32eb6a51e78",
             "multiqc_general_stats.txt:md5,90ee35137492b80aab36ef67f72d8921",
-            "multiqc_fastq_screen.txt:md5,fd72aaf00fd4fac3da4ef222608e0c32",
+            "multiqc_fastq_screen.txt:md5,a1e15006994d06a47634ccf07a08df0f",
             "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
             "multiqc_fastqc.txt:md5,f38ffdc112c73af3a41ed15848a3761f",
             "multiqc_general_stats.txt:md5,d62a2fc39e674d98783d408791803148",
-            "multiqc_fastq_screen.txt:md5,301fe12a6c6ccd09904c4f759008d416",
+            "multiqc_fastq_screen.txt:md5,d4f1cc5396c4f719b1fcaab2470e7d7c",
             "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
             "multiqc_fastqc.txt:md5,7ff71ceb8ecdf086331047f8860c3347",
             "multiqc_general_stats.txt:md5,2f09b8f199ac40cf67ba50843cebd29c",
-            "multiqc_fastq_screen.txt:md5,045f5b7623f6abb99b7075734fdb0cf4",
+            "multiqc_fastq_screen.txt:md5,02246ddb4bf5373b157b45eab698cdc8",
             "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
             "multiqc_fastqc.txt:md5,519ff344a896ac369bba4d5c5b8be7b5",
             "multiqc_general_stats.txt:md5,6a1c16f068d7ba3a9225a17eb570ed9a",
-            "multiqc_fastq_screen.txt:md5,ee786f054e356ee005ca33c7558866dc"
+            "multiqc_fastq_screen.txt:md5,483995ed26ba25b3217650840b2d82fa"
         ],
         "meta": {
-            "nf-test": "0.9.0",
+            "nf-test": "0.9.2",
             "nextflow": "24.10.0"
         },
-        "timestamp": "2024-11-07T13:35:28.998292704"
+        "timestamp": "2024-11-14T11:22:20.902938"
     }
 }
