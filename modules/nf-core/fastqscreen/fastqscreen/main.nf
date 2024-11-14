@@ -9,7 +9,7 @@ process FASTQSCREEN_FASTQSCREEN {
 
     input:
     // NOTE for meta 2 and database [[database_name,  database_notes], database_path]
-    tuple val(meta), path(reads), val(meta2), path(database)
+    tuple val(meta), path(reads, arity: '1..2'), val(meta2), path(database, arity: '1')
 
     output:
     tuple val(meta), path("*.txt")     , emit: txt
