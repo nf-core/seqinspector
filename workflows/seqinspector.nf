@@ -79,33 +79,24 @@ workflow SEQINSPECTOR {
     //
     ch_databases = Channel
         .fromList(samplesheetToList(ch_fastqscreen_databasesheet, "${projectDir}/assets/schema_database.json"))
-
-    FASTQSCREEN_FASTQSCREEN (
-        ch_samplesheet.combine(ch_databases)
-    )
-    // Group by sample
-    FASTQSCREEN_FASTQSCREEN.out.txt
-        .groupTuple(by: [0])
+    ch_fastqscreen_config = ch_databases
         .collectFile(
-            keepHeader: true,
-            skip: 1,
-            newLine: false,
+            newLine: true,
+            name: 'fastq_screen.conf',
             storeDir: "${params.outdir}/fastqscreen/",
         )
-        { meta, file ->
-            filename = "${meta.id}_screen.txt"
-            [filename, file.text]
-        }
-        // TODO Add % Not hit
-        .map { path ->
-            meta = [
-                id:path.getSimpleName(),
-            ]
-            [meta, file(path)]
-        }
-        .set { ch_fastqscreen_clean }
+    {
+        meta, db ->
+        "DATABASE    ${meta.database_name}    ./${db}/genome    ${meta.database_notes}"
+    }
+    ch_database_files = ch_databases.collect { meta, db -> db}
 
-    ch_multiqc_files = ch_multiqc_files.mix(ch_fastqscreen_clean)
+    FASTQSCREEN_FASTQSCREEN (
+        ch_samplesheet,
+        ch_fastqscreen_config,
+        ch_database_files,
+    )
+    ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
     ch_versions = ch_versions.mix(FASTQSCREEN_FASTQSCREEN.out.versions.first())
 
     //
