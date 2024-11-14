@@ -41,7 +41,7 @@ Changes in 'fastqscreen/fastqscreen/main.nf':
  
      output:
      tuple val(meta), path("*.txt")     , emit: txt
-@@ -24,13 +24,18 @@
+@@ -24,13 +24,22 @@
      script:
      def prefix = task.ext.prefix ?: "${meta.id}"
      def args = task.ext.args ?: ""
@@ -62,6 +62,10 @@ Changes in 'fastqscreen/fastqscreen/main.nf':
          $reads \\
 -        $args \\
 +        $args
++
++    mv *_screen.txt ${prefix}_${meta2.database_name}_${meta2.database_notes}_screen.txt
++    mv *_screen.html ${prefix}_${meta2.database_name}_${meta2.database_notes}_screen.html
++    mv *_screen.png ${prefix}_${meta2.database_name}_${meta2.database_notes}_screen.png
  
      cat <<-END_VERSIONS > versions.yml
      "${task.process}":
