@@ -1,5 +1,5 @@
 process FASTQSCREEN_FASTQSCREEN {
-    tag "$meta.id | $meta2.database_name"
+    tag "$meta.id"
     label 'process_medium'
 
     conda "${moduleDir}/environment.yml"
@@ -8,8 +8,10 @@ process FASTQSCREEN_FASTQSCREEN {
         'community.wave.seqera.io/library/fastq-screen_perl-gdgraph:5c1786a5d5bc1309'}"
 
     input:
-    // NOTE for meta 2 and database [[database_name,  database_notes], database_path]
-    tuple val(meta), path(reads, arity: '1..2'), val(meta2), path(database, arity: '1')
+    tuple val(meta), path(reads, arity: '1..2')
+    path('fastq_screen.conf', arity: '1')
+    path(database, arity:'1..*', name: '*/*')
+
 
     output:
     tuple val(meta), path("*.txt")     , emit: txt
@@ -25,21 +27,17 @@ process FASTQSCREEN_FASTQSCREEN {
     def prefix = task.ext.prefix ?: "${meta.id}"
     def args = task.ext.args ?: ""
     // 'Database name','Genome path and basename','Notes'
+    // FIXME? --aligner ${meta2.database_notes.toLowerCase()} \\
     """
-    echo "Writing config"
-    echo "DATABASE    ${meta2.database_name}    ./${database}/genome    ${meta2.database_notes}" > fastq_screen.conf
-    echo "Wrote config"
-
     fastq_screen \\
         --conf fastq_screen.conf \\
         --threads ${task.cpus} \\
-        --aligner ${meta2.database_notes.toLowerCase()} \\
         $reads \\
         $args
 
-    mv *_screen.txt ${prefix}_${meta2.database_name}_${meta2.database_notes}_screen.txt
-    mv *_screen.html ${prefix}_${meta2.database_name}_${meta2.database_notes}_screen.html
-    mv *_screen.png ${prefix}_${meta2.database_name}_${meta2.database_notes}_screen.png
+    mv *_screen.txt ${prefix}_screen.txt
+    mv *_screen.html ${prefix}_screen.html
+    mv *_screen.png ${prefix}_screen.png
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
