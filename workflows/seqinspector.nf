@@ -8,6 +8,7 @@ include { samplesheetToList } from 'plugin/nf-schema'
 
 include { SEQTK_SAMPLE                  } from '../modules/nf-core/seqtk/sample/main'
 include { FASTQC                        } from '../modules/nf-core/fastqc/main'
+include { SEQFU_STATS                   } from '../modules/nf-core/seqfu/stats'
 include { FASTQSCREEN_FASTQSCREEN       } from '../modules/nf-core/fastqscreen/fastqscreen/main'
 
 include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc/main'
@@ -62,6 +63,16 @@ workflow SEQINSPECTOR {
     )
     ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
     ch_versions = ch_versions.mix(FASTQC.out.versions.first())
+
+
+    //
+    // Module: Run SeqFu stats
+    //
+    SEQFU_STATS (
+        ch_samplesheet
+    )
+    ch_multiqc_files = ch_multiqc_files.mix(SEQFU_STATS.out.multiqc)
+    ch_versions = ch_versions.mix(SEQFU_STATS.out.versions.first())
 
     //
     // MODULE: Run FastQ Screen

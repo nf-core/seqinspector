@@ -14,7 +14,11 @@
 
 > Andrews, S. (2010). FastQC: A Quality Control Tool for High Throughput Sequence Data [Online].
 
-- [Fastqscreen](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/)
+- [SeqFu](https://telatin.github.io/seqfu2/)
+
+> Telatin A, Fariselli P, Birolo G. SeqFu: A Suite of Utilities for the Robust and Reproducible Manipulation of Sequence Files. Bioengineering 2021, 8, 59. doi.org/10.3390/bioengineering8050059
+
+- [FastQ Screen](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/)
 
 > Wingett SW and Andrews S. FastQ Screen: A tool for multi-genome mapping and quality control [version 2; referees: 4 approved]. F1000Research 2018, 7:1338 (https://doi.org/10.12688/f1000research.15931.2)
 
