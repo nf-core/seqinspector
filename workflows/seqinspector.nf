@@ -83,7 +83,29 @@ workflow SEQINSPECTOR {
     FASTQSCREEN_FASTQSCREEN (
         ch_samplesheet.combine(ch_databases)
     )
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
+    // Group by sample
+    FASTQSCREEN_FASTQSCREEN.out.txt
+        .groupTuple(by: [0])
+        .collectFile(
+            keepHeader: true,
+            skip: 1,
+            newLine: false,
+            storeDir: "${params.outdir}/fastqscreen/",
+        )
+        { meta, file ->
+            filename = "${meta.id}_screen.txt"
+            [filename, file.text]
+        }
+        // TODO Add % Not hit
+        .map { path ->
+            meta = [
+                id:path.getSimpleName(),
+            ]
+            [meta, file(path)]
+        }
+        .set { ch_fastqscreen_clean }
+
+    ch_multiqc_files = ch_multiqc_files.mix(ch_fastqscreen_clean)
     ch_versions = ch_versions.mix(FASTQSCREEN_FASTQSCREEN.out.versions.first())
 
     //
