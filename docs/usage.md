@@ -98,6 +98,12 @@ Optionally, the `sample_size` parameter allows you to subset a random number of 
 nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 -profile docker
 ```
 
+### Skipping tools
+
+Some tools might not be compatible with your data. In this case it might be desired to skip some of them. This can be done easily by providing a comma-separated list of tools to be skipped with the `--skip_tools` parameter.
+
+In case you want to make this more permanent, it is recommended to specify this in a params file, or even in your own nextflow configuration file. The nextflow configuration file can also be use to customise tool arguments. See official [nexflow](https://www.nextflow.io/docs/latest/config.html) and [nf-core](https://nf-co.re/docs/usage/configuration) documentation for further details.
+
 ### Updating the pipeline
 
 When you run the above command, Nextflow automatically pulls the pipeline code from GitHub and stores it as a cached version. When running the pipeline after this, it will always use the cached version if available - even if the pipeline has been updated since. To make sure that you're running the latest version of the pipeline, make sure that you regularly update the cached version of the pipeline:
