@@ -45,7 +45,7 @@ nextflow_pipeline {
                     ).match()
                 },
                 {
-                  assert !path("$outputDir/multiqc/global_report/multiqc_data/multiqc_fastqc.txt").exists()
+                    assert !path("$outputDir/multiqc/global_report/multiqc_data/multiqc_fastqc.txt").exists()
                 }
             )
         }
