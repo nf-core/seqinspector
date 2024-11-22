@@ -27,4 +27,27 @@ nextflow_pipeline {
             )
         }
     }
+
+    test("Miseq data test (skip fastqc)") {
+        when {
+            config "./MiSeq.main.nf.test.config"
+            params {
+                outdir = "$outputDir"
+                skip_tools = "fastqc"
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    path("$outputDir/multiqc/global_report/multiqc_data/multiqc_citations.txt"),
+                    ).match()
+                },
+                {
+                  assert !path("$outputDir/multiqc/global_report/multiqc_data/multiqc_fastqc.txt").exists()
+                }
+            )
+        }
+    }
 }
