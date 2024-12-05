@@ -29,7 +29,6 @@ workflow SEQINSPECTOR {
 
     take:
     ch_samplesheet               // channel: samplesheet read in from --input
-    ch_fastqscreen_databasesheet // channel: database sheet read in from --fastqscreen_database_sheet
 
     main:
 
@@ -80,10 +79,11 @@ workflow SEQINSPECTOR {
 
     // Parse the reference info needed to create a FastQ Screen config file
     // and transpose it into a tuple containing lists for each property
+
     ch_fastqscreen_refs = Channel
         .fromList(samplesheetToList(
-            "${projectDir}/assets/databasesheet.csv",
-            "${projectDir}/assets/schema_database.json"
+            "${projectDir}/assets/example_fastq_screen_references.csv",
+            "${projectDir}/assets/schema_fastq_screen_references.json"
         ))
         .toList()
         .transpose()
