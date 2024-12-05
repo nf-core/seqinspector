@@ -16,15 +16,10 @@ Changes in 'fastqscreen/fastqscreen/environment.yml':
 +  # - bwa
 +  # - bismark
 
-'modules/nf-core/fastqscreen/fastqscreen/meta.yml' is unchanged
 Changes in 'fastqscreen/fastqscreen/main.nf':
 --- modules/nf-core/fastqscreen/fastqscreen/main.nf
 +++ modules/nf-core/fastqscreen/fastqscreen/main.nf
-@@ -1,15 +1,15 @@
- process FASTQSCREEN_FASTQSCREEN {
--    tag "$meta.id"
-+    tag "$meta.id | $meta2.database_name"
-     label 'process_medium'
+@@ -4,12 +4,12 @@
  
      conda "${moduleDir}/environment.yml"
      container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
@@ -36,20 +31,18 @@ Changes in 'fastqscreen/fastqscreen/main.nf':
      input:
 -    tuple val(meta), path(reads)  // .fastq files
 -    path database
-+    // NOTE for meta 2 and database [[database_name,  database_notes], database_path]
-+    tuple val(meta), path(reads, arity: '1..2'), val(meta2), path(database, arity: '1')
++    tuple val(meta), path(reads, arity: '1..2')
++    tuple val(ref_names), path(ref_dirs, name:"ref*"), val(ref_basenames), val(ref_aligners)
  
      output:
      tuple val(meta), path("*.txt")     , emit: txt
-@@ -24,13 +24,22 @@
+@@ -24,31 +24,35 @@
      script:
      def prefix = task.ext.prefix ?: "${meta.id}"
      def args = task.ext.args ?: ""
-+    // 'Database name','Genome path and basename','Notes'
++    def config_content = ref_names.withIndex().collect { name, i -> "DATABASE ${name} ./${ref_dirs[i]}/${ref_basenames[i]} ${ref_aligners[i]}" }.join('\n')
 +    """
-+    echo "Writing config"
-+    echo "DATABASE    ${meta2.database_name}    ./${database}/genome    ${meta2.database_notes}" > fastq_screen.conf
-+    echo "Wrote config"
++    echo '${config_content}' > fastq_screen.conf
  
 -    """
 -    fastq_screen --threads ${task.cpus} \\
@@ -58,20 +51,47 @@ Changes in 'fastqscreen/fastqscreen/main.nf':
 +    fastq_screen \\
 +        --conf fastq_screen.conf \\
 +        --threads ${task.cpus} \\
-+        --aligner ${meta2.database_notes.toLowerCase()} \\
          $reads \\
 -        $args \\
 +        $args
-+
-+    mv *_screen.txt ${prefix}_${meta2.database_name}_${meta2.database_notes}_screen.txt
-+    mv *_screen.html ${prefix}_${meta2.database_name}_${meta2.database_notes}_screen.html
-+    mv *_screen.png ${prefix}_${meta2.database_name}_${meta2.database_notes}_screen.png
  
-     cat <<-END_VERSIONS > versions.yml
-     "${task.process}":
+-    cat <<-END_VERSIONS > versions.yml
+-    "${task.process}":
+-        fastqscreen: \$(echo \$(fastq_screen --version 2>&1) | sed 's/^.*FastQ Screen v//; s/ .*\$//')
+-    END_VERSIONS
++    mv *_screen.txt ${prefix}_screen.txt
++    mv *_screen.html ${prefix}_screen.html
++    mv *_screen.png ${prefix}_screen.png
++
++    fastq_screen_version=\$(fastq_screen --version 2>&1 | sed 's/^.*FastQ Screen v//; s/ .*\$//')
++    echo "\\\"${task.process}\\\":" > versions.yml
++    echo "    fastqscreen: \$fastq_screen_version" >> versions.yml
+     """
+ 
+     stub:
+     def prefix = task.ext.prefix ?: "${meta.id}"
+     """
+-    touch test_1_screen.html
+-    touch test_1_screen.png
+-    touch test_1_screen.txt
++    touch ${prefix}_screen.html
++    touch ${prefix}_screen.png
++    touch ${prefix}_screen.txt
+ 
+-    cat <<-END_VERSIONS > versions.yml
+-    "${task.process}":
+-        fastqscreen: \$(echo \$(fastq_screen --version 2>&1) | sed 's/^.*FastQ Screen v//; s/ .*\$//')
+-    END_VERSIONS
++    fastq_screen_version=\$(fastq_screen --version 2>&1 | sed 's/^.*FastQ Screen v//; s/ .*\$//')
++    echo "\\\"${task.process}\\\":" > versions.yml
++    echo "    fastqscreen: \$fastq_screen_version" >> versions.yml
+     """
+ 
+ }
 
-'modules/nf-core/fastqscreen/fastqscreen/tests/main.nf.test.snap' is unchanged
-'modules/nf-core/fastqscreen/fastqscreen/tests/tags.yml' is unchanged
-'modules/nf-core/fastqscreen/fastqscreen/tests/nextflow.config' is unchanged
+'modules/nf-core/fastqscreen/fastqscreen/meta.yml' is unchanged
 'modules/nf-core/fastqscreen/fastqscreen/tests/main.nf.test' is unchanged
+'modules/nf-core/fastqscreen/fastqscreen/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/fastqscreen/fastqscreen/tests/nextflow.config' is unchanged
+'modules/nf-core/fastqscreen/fastqscreen/tests/tags.yml' is unchanged
 ************************************************************
