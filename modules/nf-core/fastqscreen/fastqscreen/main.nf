@@ -9,9 +9,7 @@ process FASTQSCREEN_FASTQSCREEN {
 
     input:
     tuple val(meta), path(reads, arity: '1..2')
-    path('fastq_screen.conf', arity: '1')
-    path(database, arity:'1..*', name: '*/*')
-
+    tuple val(ref_names), path(ref_paths, name:"ref*"), val(ref_aligners)
 
     output:
     tuple val(meta), path("*.txt")     , emit: txt
@@ -26,9 +24,10 @@ process FASTQSCREEN_FASTQSCREEN {
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
     def args = task.ext.args ?: ""
-    // 'Database name','Genome path and basename','Notes'
-    // FIXME? --aligner ${meta2.database_notes.toLowerCase()} \\
+    def config_content = ref_names.withIndex().collect { name, i -> "DATABASE ${name} ./${ref_paths[i]}/genome ${ref_aligners[i]}" }.join('\n')
     """
+    echo '${config_content}' > fastq_screen.conf
+
     fastq_screen \\
         --conf fastq_screen.conf \\
         --threads ${task.cpus} \\
@@ -39,23 +38,21 @@ process FASTQSCREEN_FASTQSCREEN {
     mv *_screen.html ${prefix}_screen.html
     mv *_screen.png ${prefix}_screen.png
 
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        fastqscreen: \$(echo \$(fastq_screen --version 2>&1) | sed 's/^.*FastQ Screen v//; s/ .*\$//')
-    END_VERSIONS
+    fastq_screen_version=\$(fastq_screen --version 2>&1 | sed 's/^.*FastQ Screen v//; s/ .*\$//')
+    echo "\\\"${task.process}\\\":" > versions.yml
+    echo "    fastqscreen: \$fastq_screen_version" >> versions.yml
     """
 
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    touch test_1_screen.html
-    touch test_1_screen.png
-    touch test_1_screen.txt
+    touch ${prefix}_screen.html
+    touch ${prefix}_screen.png
+    touch ${prefix}_screen.txt
 
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        fastqscreen: \$(echo \$(fastq_screen --version 2>&1) | sed 's/^.*FastQ Screen v//; s/ .*\$//')
-    END_VERSIONS
+    fastq_screen_version=\$(fastq_screen --version 2>&1 | sed 's/^.*FastQ Screen v//; s/ .*\$//')
+    echo "\\\"${task.process}\\\":" > versions.yml
+    echo "    fastqscreen: \$fastq_screen_version" >> versions.yml
     """
 
 }

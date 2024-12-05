@@ -77,24 +77,20 @@ workflow SEQINSPECTOR {
     //
     // MODULE: Run FastQ Screen
     //
-    ch_databases = Channel
-        .fromList(samplesheetToList(ch_fastqscreen_databasesheet, "${projectDir}/assets/schema_database.json"))
-    ch_fastqscreen_config = ch_databases
-        .collectFile(
-            newLine: true,
-            name: 'fastq_screen.conf',
-            storeDir: "${params.outdir}/fastqscreen/",
-        )
-    {
-        meta, db ->
-        "DATABASE    ${meta.database_name}    ./${db}/genome    ${meta.database_notes}"
-    }
-    ch_database_files = ch_databases.collect { meta, db -> db}
+
+    // Parse the reference info needed to create a FastQ Screen config file
+    // and transpose it into a tuple containing lists of names, index paths and aligners
+    ch_fastqscreen_refs = Channel
+        .fromPath("${projectDir}/assets/databasesheet.csv")
+        .splitCsv(header: true)
+        .map { row -> tuple(row.name, row.index, row.aligner) }
+        .toList()
+        .transpose()
+        .toList()
 
     FASTQSCREEN_FASTQSCREEN (
         ch_samplesheet,
-        ch_fastqscreen_config,
-        ch_database_files,
+        ch_fastqscreen_refs
     )
     ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
     ch_versions = ch_versions.mix(FASTQSCREEN_FASTQSCREEN.out.versions.first())
