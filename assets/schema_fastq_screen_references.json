@@ -1,8 +1,8 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://raw.githubusercontent.com/nf-core/seqinspector/master/assets/schema_database.json",
-    "title": "nf-core/seqinspector pipeline - params.fastqscreen_databasesheet schema",
-    "description": "Schema for the file provided with params.fastq_screen_databasesheet",
+    "$id": "https://raw.githubusercontent.com/nf-core/seqinspector/master/assets/schema_fastq_screen_references.json",
+    "title": "nf-core/seqinspector pipeline - params.fastq_screen_references schema",
+    "description": "Schema for the file provided with params.fastq_screen_references",
     "type": "array",
     "items": {
         "type": "object",

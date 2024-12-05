@@ -87,11 +87,11 @@
                     "hidden": true,
                     "default": "s3://ngi-igenomes/igenomes/"
                 },
-                "fastqscreen_database_sheet": {
+                "fastq_screen_references": {
                     "type": "string",
-                    "default": "./assets/databasesheet.csv",
+                    "default": "./assets/example_fastq_screen_references.csv",
                     "fa_icon": "fas fa-search",
-                    "description": "list of reference genomes (databases) to be mapped against in fastqscreen"
+                    "description": "A .csv of reference genomes to be mapped against by FastQ Screen"
                 }
             }
         },
