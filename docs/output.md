@@ -56,7 +56,16 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 
 [Fastqscreen](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/) allows you to set up a standard set of libraries against which all of your sequences can be searched. Your search libraries might contain the genomes of all of the organisms you work on, along with PhiX, Vectors or other contaminants commonly seen in sequencing experiments.
 
-It requires the supply of referenced (databases) in a config file. In order to parallelize the mapping of the different samples, in seqinspector, this a fastqscreen config file is generated for every sample/reference combination.
+It requires a `.csv` detailing:
+
+- the working name of the reference
+- the name of the aligner used to generate its index (which is also the aligner and index used by the tool)
+- the file basename of the reference and its index (e.g. the reference `genoma.fa` and its index `genome.bt2` have the basename `genome`)
+- the path to a dir where the reference and index files both reside.
+
+See `assets/example_fastq_screen_references.csv` for example.
+
+The `.csv` is provided as a pipeline parameter `fastq_screen_references`. The `.csv` is used to construct a `FastQ Screen` configuration file within the context of the process work directory in order to properly mount the references.
 
 ### SeqFu Stats
 
