@@ -9,7 +9,7 @@ process FASTQSCREEN_FASTQSCREEN {
 
     input:
     tuple val(meta), path(reads, arity: '1..2')
-    tuple val(ref_names), path(ref_paths, name:"ref*"), val(ref_aligners)
+    tuple val(ref_names), path(ref_dirs, name:"ref*"), val(ref_basenames), val(ref_aligners)
 
     output:
     tuple val(meta), path("*.txt")     , emit: txt
@@ -24,7 +24,7 @@ process FASTQSCREEN_FASTQSCREEN {
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
     def args = task.ext.args ?: ""
-    def config_content = ref_names.withIndex().collect { name, i -> "DATABASE ${name} ./${ref_paths[i]}/genome ${ref_aligners[i]}" }.join('\n')
+    def config_content = ref_names.withIndex().collect { name, i -> "DATABASE ${name} ./${ref_dirs[i]}/${ref_basenames[i]} ${ref_aligners[i]}" }.join('\n')
     """
     echo '${config_content}' > fastq_screen.conf
 
