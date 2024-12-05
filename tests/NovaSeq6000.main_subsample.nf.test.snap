@@ -4,28 +4,28 @@
             "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
             "multiqc_fastqc.txt:md5,aba942d1e6996b579f19798e5673f514",
             "multiqc_general_stats.txt:md5,ad1ec9c64cbdb1131a26aeb6de51e31c",
-            "multiqc_fastq_screen.txt:md5,c7b24e20fd157128924384e52eb3405d",
+            "multiqc_fastq_screen.txt:md5,2ff2485b1f197cb6228dd4350d1bd638",
             "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
             "multiqc_fastqc.txt:md5,aa1b8d6adae86005ea7a8b2e901099b8",
             "multiqc_general_stats.txt:md5,c73c8d10568a56f6534d280fff701e60",
-            "multiqc_fastq_screen.txt:md5,a1e15006994d06a47634ccf07a08df0f",
+            "multiqc_fastq_screen.txt:md5,c54d863ed3e68ee8bcb51c9ad85de9bc",
             "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
             "multiqc_fastqc.txt:md5,ff996e1d3dc4a46e0c9535e54d51ccab",
             "multiqc_general_stats.txt:md5,834e1868b887171cfda72029bbbe2d3f",
-            "multiqc_fastq_screen.txt:md5,d4f1cc5396c4f719b1fcaab2470e7d7c",
+            "multiqc_fastq_screen.txt:md5,737dc47e74e5b2f2c590652788831eff",
             "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
             "multiqc_fastqc.txt:md5,3df36ecfe76b25b0c22dcda84bce2b3b",
             "multiqc_general_stats.txt:md5,274a001b007521970f14d68bd176e5be",
-            "multiqc_fastq_screen.txt:md5,02246ddb4bf5373b157b45eab698cdc8",
+            "multiqc_fastq_screen.txt:md5,568f6b6d14562d01b5aaeb1a39e1cf3d",
             "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
             "multiqc_fastqc.txt:md5,ce61b4ce4b1d76ec3f20de3bf0c9ec7f",
             "multiqc_general_stats.txt:md5,d476ad59458a035a329605d5284b6012",
-            "multiqc_fastq_screen.txt:md5,483995ed26ba25b3217650840b2d82fa"
+            "multiqc_fastq_screen.txt:md5,a4dca31413036d35899a35ba14b17ea5"
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.0"
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.2"
         },
-        "timestamp": "2024-11-14T11:23:19.55095"
+        "timestamp": "2024-12-05T15:17:50.525033752"
     }
 }

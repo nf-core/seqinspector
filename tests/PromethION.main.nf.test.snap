@@ -4,12 +4,12 @@
             "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
             "multiqc_fastqc.txt:md5,1a4b472e13cadc770832b0e20d1de7b0",
             "multiqc_general_stats.txt:md5,409cefc7f17f95d176ced6032bf8fb32",
-            "multiqc_fastq_screen.txt:md5,2931dcec302d74c378b69a0831363224"
+            "multiqc_fastq_screen.txt:md5,7c5d711e27c53d13c81644a1f2468dba"
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.0"
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.2"
         },
-        "timestamp": "2024-11-14T11:23:42.382002"
+        "timestamp": "2024-12-05T15:18:25.176791779"
     }
 }
