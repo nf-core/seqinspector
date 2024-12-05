@@ -83,7 +83,7 @@ workflow SEQINSPECTOR {
     ch_fastqscreen_refs = Channel
         .fromPath("${projectDir}/assets/databasesheet.csv")
         .splitCsv(header: true)
-        .map { row -> tuple(row.name, row.index, row.aligner) }
+        .map { row -> tuple(row.name, row.dir, row.basename, row.aligner) }
         .toList()
         .transpose()
         .toList()
