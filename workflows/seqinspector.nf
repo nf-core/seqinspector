@@ -85,7 +85,6 @@ workflow SEQINSPECTOR {
             "${projectDir}/assets/databasesheet.csv",
             "${projectDir}/assets/schema_database.json"
         ))
-        .map { row -> tuple(row[0], row[1], row[2], row[3]) }
         .toList()
         .transpose()
         .toList()
