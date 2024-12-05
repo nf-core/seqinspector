@@ -79,7 +79,7 @@ workflow SEQINSPECTOR {
     //
 
     // Parse the reference info needed to create a FastQ Screen config file
-    // and transpose it into a tuple containing lists of names, index paths and aligners
+    // and transpose it into a tuple containing lists for each property
     ch_fastqscreen_refs = Channel
         .fromList(samplesheetToList(
             "${projectDir}/assets/databasesheet.csv",
