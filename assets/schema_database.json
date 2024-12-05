@@ -10,23 +10,26 @@
             "name": {
                 "type": "string",
                 "pattern": "^\\S+$",
-                "errorMessage": "The database name for fastq screen",
-                "meta": ["database_name"]
+                "errorMessage": "The reference name as referred to by FastQ Screen."
             },
-            "index": {
+            "dir": {
                 "type": "string",
                 "format": "file-path",
                 "exists": true,
                 "pattern": "^\\S+$",
-                "errorMessage": "Path to the aligner index"
+                "errorMessage": "Path to the dir containing the aligner reference and index. Can be remote."
+            },
+            "basename": {
+                "type": "string",
+                "pattern": "^\\S+$",
+                "errorMessage": "The shared basename of the reference and index files contained in the dir."
             },
             "aligner": {
                 "type": "string",
-                "enum": ["BOWTIE", "BOWTIE2", "BWA", "MINIMAP2"],
-                "errorMessage": "Specify the aligner to use for the mapping. Valid arguments are 'bowtie', bowtie2' (default), 'bwa' or 'minimap2'.",
-                "meta": ["database_notes"]
+                "enum": ["bowtie", "bowtie2", "bwa", "minimap2"],
+                "errorMessage": "Specify the aligner to use for the mapping. Valid arguments are 'bowtie', bowtie2' (default), 'bwa' or 'minimap2'."
             }
         },
-        "required": ["name", "index", "aligner"]
+        "required": ["name", "dir", "basename", "aligner"]
     }
 }
