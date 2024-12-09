@@ -1,3 +1,5 @@
+include { samplesheetToList } from 'plugin/nf-schema'
+
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -7,6 +9,7 @@
 include { SEQTK_SAMPLE                  } from '../modules/nf-core/seqtk/sample/main'
 include { FASTQC                        } from '../modules/nf-core/fastqc/main'
 include { SEQFU_STATS                   } from '../modules/nf-core/seqfu/stats'
+include { FASTQSCREEN_FASTQSCREEN       } from '../modules/nf-core/fastqscreen/fastqscreen/main'
 
 include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc/main'
 include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc/main'
@@ -25,7 +28,8 @@ include { methodsDescriptionText        } from '../subworkflows/local/utils_nfco
 workflow SEQINSPECTOR {
 
     take:
-    ch_samplesheet // channel: samplesheet read in from --input
+    ch_samplesheet               // channel: samplesheet read in from --input
+
     main:
 
     ch_versions            = Channel.empty()
@@ -68,6 +72,29 @@ workflow SEQINSPECTOR {
     )
     ch_multiqc_files = ch_multiqc_files.mix(SEQFU_STATS.out.multiqc)
     ch_versions = ch_versions.mix(SEQFU_STATS.out.versions.first())
+
+    //
+    // MODULE: Run FastQ Screen
+    //
+
+    // Parse the reference info needed to create a FastQ Screen config file
+    // and transpose it into a tuple containing lists for each property
+
+    ch_fastqscreen_refs = Channel
+        .fromList(samplesheetToList(
+            "${projectDir}/assets/example_fastq_screen_references.csv",
+            "${projectDir}/assets/schema_fastq_screen_references.json"
+        ))
+        .toList()
+        .transpose()
+        .toList()
+
+    FASTQSCREEN_FASTQSCREEN (
+        ch_samplesheet,
+        ch_fastqscreen_refs
+    )
+    ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
+    ch_versions = ch_versions.mix(FASTQSCREEN_FASTQSCREEN.out.versions.first())
 
     //
     // Collate and save software versions
