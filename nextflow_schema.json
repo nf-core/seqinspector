@@ -86,6 +86,12 @@
                     "fa_icon": "fas fa-ban",
                     "hidden": true,
                     "default": "s3://ngi-igenomes/igenomes/"
+                },
+                "fastq_screen_references": {
+                    "type": "string",
+                    "default": "./assets/example_fastq_screen_references.csv",
+                    "fa_icon": "fas fa-search",
+                    "description": "A .csv of reference genomes to be mapped against by FastQ Screen"
                 }
             }
         },
