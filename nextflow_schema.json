@@ -25,9 +25,9 @@
                 },
                 "sample_size": {
                     "type": "integer",
-                    "default": 0,
                     "description": "Take this number of reads as a subset.",
-                    "help_text": "Choose the size of the subset or 0, if no subsampling shall be performed. Note that it refers to an absolute number."
+                    "help_text": "Choose the size of the subset or 0, if no subsampling shall be performed. Note that it refers to an absolute number.",
+                    "default": 0
                 },
                 "outdir": {
                     "type": "string",

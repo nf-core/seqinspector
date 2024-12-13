@@ -41,7 +41,7 @@ workflow SEQINSPECTOR {
     //
     // MODULE: Run Seqtk sample to perform subsampling
     //
-    if (params.sample_size > 0 ) {
+    if (!("seqtk_sample" in skip_tools) && params.sample_size > 0) {
         ch_sample_sized = SEQTK_SAMPLE(
             ch_samplesheet.map {
                 meta, reads -> [meta, reads, params.sample_size]
@@ -49,7 +49,7 @@ workflow SEQINSPECTOR {
         ).reads
         ch_versions = ch_versions.mix(SEQTK_SAMPLE.out.versions.first())
     } else {
-        // No do subsample
+        // No subsampling
         ch_sample_sized = ch_samplesheet
     }
 
@@ -85,21 +85,23 @@ workflow SEQINSPECTOR {
     // Parse the reference info needed to create a FastQ Screen config file
     // and transpose it into a tuple containing lists for each property
 
-    ch_fastqscreen_refs = Channel
-        .fromList(samplesheetToList(
-            "${projectDir}/assets/example_fastq_screen_references.csv",
-            "${projectDir}/assets/schema_fastq_screen_references.json"
-        ))
-        .toList()
-        .transpose()
-        .toList()
+    if (!("fastqscreen" in skip_tools)) {
+        ch_fastqscreen_refs = Channel
+            .fromList(samplesheetToList(
+                "${projectDir}/assets/example_fastq_screen_references.csv",
+                "${projectDir}/assets/schema_fastq_screen_references.json"
+            ))
+            .toList()
+            .transpose()
+            .toList()
 
-    FASTQSCREEN_FASTQSCREEN (
-        ch_samplesheet,
-        ch_fastqscreen_refs
-    )
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
-    ch_versions = ch_versions.mix(FASTQSCREEN_FASTQSCREEN.out.versions.first())
+        FASTQSCREEN_FASTQSCREEN (
+            ch_samplesheet,
+            ch_fastqscreen_refs
+        )
+        ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
+        ch_versions = ch_versions.mix(FASTQSCREEN_FASTQSCREEN.out.versions.first())
+    }
 
     //
     // Collate and save software versions
