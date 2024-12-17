@@ -25,6 +25,16 @@ process FASTQSCREEN_FASTQSCREEN {
     def prefix = task.ext.prefix ?: "${meta.id}"
     def args = task.ext.args ?: ""
     def config_content = ref_names.withIndex().collect { name, i -> "DATABASE ${name} ./${ref_dirs[i]}/${ref_basenames[i]} ${ref_aligners[i]}" }.join('\n')
+    def num_reads     = reads instanceof List  ? reads.size() : 1
+    def mv_txt_cmd    = (num_reads == 1) ? 
+            "mv ${reads[0].simpleName}_screen.txt ${prefix}_screen.txt" : 
+            reads.collect { "mv ${it.simpleName}_screen.txt ${prefix}_${it.simpleName}_screen.txt" }.join(' && ')
+    def mv_html_cmd   = (num_reads == 1) ? 
+            "mv ${reads[0].simpleName}_screen.html ${prefix}_1_screen.html" : 
+            reads.collect { "mv ${it.simpleName}_screen.txt ${prefix}_${it.simpleName}_screen.txt" }.join(' && ')
+    def mv_png_cmd    = (num_reads == 1) ? 
+            "mv ${reads[0].simpleName}_screen.png ${prefix}_1_screen.png" : 
+            reads.collect { "mv ${it.simpleName}_screen.txt ${prefix}_${it.simpleName}_screen.txt" }.join(' && ')
     """
     echo '${config_content}' > fastq_screen.conf
 
@@ -34,9 +44,9 @@ process FASTQSCREEN_FASTQSCREEN {
         $reads \\
         $args
 
-    mv *_screen.txt ${prefix}_screen.txt
-    mv *_screen.html ${prefix}_screen.html
-    mv *_screen.png ${prefix}_screen.png
+    $mv_txt_cmd
+    $mv_html_cmd
+    $mv_png_cmd
 
     fastq_screen_version=\$(fastq_screen --version 2>&1 | sed 's/^.*FastQ Screen v//; s/ .*\$//')
     echo "\\\"${task.process}\\\":" > versions.yml

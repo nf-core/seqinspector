@@ -16,6 +16,7 @@ Changes in 'fastqscreen/fastqscreen/environment.yml':
 +  # - bwa
 +  # - bismark
 
+'modules/nf-core/fastqscreen/fastqscreen/meta.yml' is unchanged
 Changes in 'fastqscreen/fastqscreen/main.nf':
 --- modules/nf-core/fastqscreen/fastqscreen/main.nf
 +++ modules/nf-core/fastqscreen/fastqscreen/main.nf
@@ -36,11 +37,21 @@ Changes in 'fastqscreen/fastqscreen/main.nf':
  
      output:
      tuple val(meta), path("*.txt")     , emit: txt
-@@ -24,31 +24,35 @@
+@@ -24,31 +24,45 @@
      script:
      def prefix = task.ext.prefix ?: "${meta.id}"
      def args = task.ext.args ?: ""
 +    def config_content = ref_names.withIndex().collect { name, i -> "DATABASE ${name} ./${ref_dirs[i]}/${ref_basenames[i]} ${ref_aligners[i]}" }.join('\n')
++    def num_reads     = reads instanceof List  ? reads.size() : 1
++    def mv_txt_cmd    = (num_reads == 1) ? 
++            "mv ${reads[0].simpleName}_screen.txt ${prefix}_screen.txt" : 
++            reads.collect { "mv ${it.simpleName}_screen.txt ${prefix}_${it.simpleName}_screen.txt" }.join(' && ')
++    def mv_html_cmd   = (num_reads == 1) ? 
++            "mv ${reads[0].simpleName}_screen.html ${prefix}_1_screen.html" : 
++            reads.collect { "mv ${it.simpleName}_screen.txt ${prefix}_${it.simpleName}_screen.txt" }.join(' && ')
++    def mv_png_cmd    = (num_reads == 1) ? 
++            "mv ${reads[0].simpleName}_screen.png ${prefix}_1_screen.png" : 
++            reads.collect { "mv ${it.simpleName}_screen.txt ${prefix}_${it.simpleName}_screen.txt" }.join(' && ')
 +    """
 +    echo '${config_content}' > fastq_screen.conf
  
@@ -59,9 +70,9 @@ Changes in 'fastqscreen/fastqscreen/main.nf':
 -    "${task.process}":
 -        fastqscreen: \$(echo \$(fastq_screen --version 2>&1) | sed 's/^.*FastQ Screen v//; s/ .*\$//')
 -    END_VERSIONS
-+    mv *_screen.txt ${prefix}_screen.txt
-+    mv *_screen.html ${prefix}_screen.html
-+    mv *_screen.png ${prefix}_screen.png
++    $mv_txt_cmd
++    $mv_html_cmd
++    $mv_png_cmd
 +
 +    fastq_screen_version=\$(fastq_screen --version 2>&1 | sed 's/^.*FastQ Screen v//; s/ .*\$//')
 +    echo "\\\"${task.process}\\\":" > versions.yml
@@ -89,9 +100,8 @@ Changes in 'fastqscreen/fastqscreen/main.nf':
  
  }
 
-'modules/nf-core/fastqscreen/fastqscreen/meta.yml' is unchanged
-'modules/nf-core/fastqscreen/fastqscreen/tests/main.nf.test' is unchanged
 'modules/nf-core/fastqscreen/fastqscreen/tests/main.nf.test.snap' is unchanged
-'modules/nf-core/fastqscreen/fastqscreen/tests/nextflow.config' is unchanged
 'modules/nf-core/fastqscreen/fastqscreen/tests/tags.yml' is unchanged
+'modules/nf-core/fastqscreen/fastqscreen/tests/nextflow.config' is unchanged
+'modules/nf-core/fastqscreen/fastqscreen/tests/main.nf.test' is unchanged
 ************************************************************
