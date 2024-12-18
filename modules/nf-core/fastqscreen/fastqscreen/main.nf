@@ -25,16 +25,15 @@ process FASTQSCREEN_FASTQSCREEN {
     def prefix = task.ext.prefix ?: "${meta.id}"
     def args = task.ext.args ?: ""
     def config_content = ref_names.withIndex().collect { name, i -> "DATABASE ${name} ./${ref_dirs[i]}/${ref_basenames[i]} ${ref_aligners[i]}" }.join('\n')
-    def num_reads     = reads instanceof List  ? reads.size() : 1
-    def mv_txt_cmd    = (num_reads == 1) ? 
-            "mv ${reads[0].simpleName}_screen.txt ${prefix}_screen.txt" : 
-            reads.collect { "mv ${it.simpleName}_screen.txt ${prefix}_${it.simpleName}_screen.txt" }.join(' && ')
-    def mv_html_cmd   = (num_reads == 1) ? 
-            "mv ${reads[0].simpleName}_screen.html ${prefix}_screen.html" : 
-            reads.collect { "mv ${it.simpleName}_screen.html ${prefix}_${it.simpleName}_screen.html" }.join(' && ')
-    def mv_png_cmd    = (num_reads == 1) ? 
-            "mv ${reads[0].simpleName}_screen.png ${prefix}_screen.png" : 
-            reads.collect { "mv ${it.simpleName}_screen.png ${prefix}_${it.simpleName}_screen.png" }.join(' && ')
+
+    // Build mv commands to rename the output files. Dual reads will be appended with '_1' and '_2'
+    def num_reads = reads instanceof List  ? reads.size() : 1
+    def file_extensions = ['txt', 'html', 'png']
+    def mv_cmd = file_extensions.collect { ext ->
+        reads.withIndex().collect { read, i ->
+            "mv ${read.simpleName}_screen.${ext} ${prefix}${num_reads > 1 ? "_${i+1}" : ''}_screen.${ext}"
+        }.join(' && ')
+    }.join(' && ')
     """
     echo '${config_content}' > fastq_screen.conf
 
@@ -44,9 +43,7 @@ process FASTQSCREEN_FASTQSCREEN {
         $reads \\
         $args
 
-    $mv_txt_cmd
-    $mv_html_cmd
-    $mv_png_cmd
+    $mv_cmd
 
     fastq_screen_version=\$(fastq_screen --version 2>&1 | sed 's/^.*FastQ Screen v//; s/ .*\$//')
     echo "\\\"${task.process}\\\":" > versions.yml
