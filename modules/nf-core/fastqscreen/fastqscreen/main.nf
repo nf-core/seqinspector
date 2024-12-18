@@ -30,11 +30,11 @@ process FASTQSCREEN_FASTQSCREEN {
             "mv ${reads[0].simpleName}_screen.txt ${prefix}_screen.txt" : 
             reads.collect { "mv ${it.simpleName}_screen.txt ${prefix}_${it.simpleName}_screen.txt" }.join(' && ')
     def mv_html_cmd   = (num_reads == 1) ? 
-            "mv ${reads[0].simpleName}_screen.html ${prefix}_1_screen.html" : 
-            reads.collect { "mv ${it.simpleName}_screen.txt ${prefix}_${it.simpleName}_screen.txt" }.join(' && ')
+            "mv ${reads[0].simpleName}_screen.html ${prefix}_screen.html" : 
+            reads.collect { "mv ${it.simpleName}_screen.html ${prefix}_${it.simpleName}_screen.html" }.join(' && ')
     def mv_png_cmd    = (num_reads == 1) ? 
-            "mv ${reads[0].simpleName}_screen.png ${prefix}_1_screen.png" : 
-            reads.collect { "mv ${it.simpleName}_screen.txt ${prefix}_${it.simpleName}_screen.txt" }.join(' && ')
+            "mv ${reads[0].simpleName}_screen.png ${prefix}_screen.png" : 
+            reads.collect { "mv ${it.simpleName}_screen.png ${prefix}_${it.simpleName}_screen.png" }.join(' && ')
     """
     echo '${config_content}' > fastq_screen.conf
 
