@@ -20,6 +20,8 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 
 ### `Fixed`
 
+- [#71](https://github.com/nf-core/seqinspector/pull/71) FASTQSCREEN does not fail when multiple reads are provided.
+
 ### `Dependencies`
 
 ### `Deprecated`
