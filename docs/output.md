@@ -13,7 +13,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 - [Seqtk](#seqtk) - Subsample a specific number of reads per sample
 - [FastQC](#fastqc) - Raw read QC
 - [SeqFu Stats](#seqfu_stats) - Statistics for FASTA or FASTQ files
-- [Fastqscreen](#fastqscreen) - mapping against a set of references for basic contamination QC
+- [FastQ Screen](#fastqscreen) - Mapping against a set of references for basic contamination QC
 - [MultiQC](#multiqc) - Aggregate report describing results and QC from the whole pipeline
 - [Pipeline information](#pipeline-information) - Report metrics generated during the workflow execution
 
@@ -42,21 +42,21 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 
 [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) gives general quality metrics about your sequenced reads. It provides information about the quality score distribution across your reads, per base sequence content (%A/T/G/C), adapter contamination and overrepresented sequences. For further reading and documentation see the [FastQC help pages](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/).
 
-### FASTQSCREEN
+### FastQ Screen
 
 <details markdown="1">
 <summary>Output files</summary>
 
 - `fastqscreen/`
-  - `*_screen.html`: Interactive graphical fastqscreen report which summaries the mapping of your sequences against each of your libraries.
-  - `*_screen.pdf`: Static graphical fastqscreen report which summaries the mapping of your sequences against each of your libraries.
-  - `*_screen.txt` : text based fastqscreen report which summaries the mapping of your sequences against each of your libraries.
+  - `*_screen.html`: Interactive graphical report.
+  - `*_screen.pdf`: Static graphical report.
+  - `*_screen.txt` : Text-based report.
 
 </details>
 
-[Fastqscreen](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/) allows you to set up a standard set of libraries against which all of your sequences can be searched. Your search libraries might contain the genomes of all of the organisms you work on, along with PhiX, Vectors or other contaminants commonly seen in sequencing experiments.
+[FastQ Screen](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/) allows you to set up a standard set of references against which all of your samples can be mapped. Your references might contain the genomes of all of the organisms you work on, along with PhiX, vectors or other contaminants commonly seen in sequencing experiments.
 
-It requires a `.csv` detailing:
+To use FastQ Screen, this pipeline requires a `.csv` detailing:
 
 - the working name of the reference
 - the name of the aligner used to generate its index (which is also the aligner and index used by the tool)
@@ -65,7 +65,7 @@ It requires a `.csv` detailing:
 
 See `assets/example_fastq_screen_references.csv` for example.
 
-The `.csv` is provided as a pipeline parameter `fastq_screen_references`. The `.csv` is used to construct a `FastQ Screen` configuration file within the context of the process work directory in order to properly mount the references.
+The `.csv` is provided as a pipeline parameter `fastq_screen_references` and is used to construct a `FastQ Screen` configuration file within the context of the process work directory in order to properly mount the references.
 
 ### SeqFu Stats
 
