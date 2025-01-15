@@ -66,7 +66,7 @@ workflow PIPELINE_INITIALISATION {
     //
     // Custom validation for pipeline parameters
     //
-    validateInputParameters()
+    validateInputParameters() // Runs additional validation that is not done by $projectDir/nextflow_schema.json
 
     //
     // Create channel from input file provided through params.input
@@ -74,23 +74,50 @@ workflow PIPELINE_INITIALISATION {
 
     Channel
         .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
+        .toList()
+        .flatMap { it.withIndex().collect {  entry, idx -> entry + "${idx+1}" } }
         .map {
-            meta, fastq_1, fastq_2 ->
+            meta, fastq_1, fastq_2, idx ->
+                def tags = meta.tags ? meta.tags.tokenize(":") : []
+                def updated_meta = meta + [ id:"${meta.sample}_${idx}", tags:tags ]
                 if (!fastq_2) {
-                    return [ meta.id, meta + [ single_end:true ], [ fastq_1 ] ]
+                    return [
+                        updated_meta.id,
+                        updated_meta + [ single_end:true ],
+                        [ fastq_1 ]
+                    ]
                 } else {
-                    return [ meta.id, meta + [ single_end:false ], [ fastq_1, fastq_2 ] ]
+                    return [
+                        updated_meta.id,
+                        updated_meta + [ single_end:false ],
+                        [ fastq_1, fastq_2 ]
+                    ]
                 }
         }
         .groupTuple()
-        .map { samplesheet ->
-            validateInputSamplesheet(samplesheet)
-        }
         .map {
-            meta, fastqs ->
-                return [ meta, fastqs.flatten() ]
+            validateInputSamplesheet(it) // Applies additional group validation checks that schema_input.json cannot do.
         }
+        .transpose() // Replace the map below
+        // .map {
+        //     meta, fastqs ->
+        //         return [ meta, fastqs.flatten() ]
+        // }
         .set { ch_samplesheet }
+
+    ch_samplesheet
+        .map {
+            meta, fastqs -> meta.tags
+        }
+        .flatten()
+        .unique()
+        .map { tag_name -> [tag_name.toLowerCase(), tag_name] }
+        .groupTuple()
+        .map {
+            tag_lowercase, tags ->
+                assert tags.size() == 1 :
+                "Tag name collision: " + tags.join(", ")
+        }
 
     emit:
     samplesheet = ch_samplesheet
@@ -154,7 +181,9 @@ workflow PIPELINE_COMPLETION {
 // Check and validate pipeline parameters
 //
 def validateInputParameters() {
-    genomeExistsError()
+    // genomeExistsError()
+
+    // TODO: Add code to further validate pipeline parameters here
 }
 
 //

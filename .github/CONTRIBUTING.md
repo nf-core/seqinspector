@@ -82,6 +82,12 @@ If you wish to contribute a new step, please use the following coding standards:
 9. Update MultiQC config `assets/multiqc_config.yml` so relevant suffixes, file name clean up and module plots are in the appropriate order. If applicable, add a [MultiQC](https://https://multiqc.info/) module.
 10. Add a description of the output files and if relevant any appropriate images from the MultiQC report to `docs/output.md`.
 
+### Things to consider regarding displaying results for a new tool
+
+- If a MultiQC module exist for the tool, use the standard settings for it to start with.
+- If no Multiqc module exists, the results of the tool should be made available in the results directory.
+- If a tool doesn’t produce output files, the stdout should be channeled into a output file that can be accessible from the outdir of the pipeline.
+
 ### Default values
 
 Parameters should be initialised / defined with default values within the `params` scope in `nextflow.config`.
