@@ -1,0 +1,25 @@
+{
+    "MiSeq data test": {
+        "content": [
+            "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
+            "multiqc_fastqc.txt:md5,7b1b7fd457b60404768045b148d4c0a8",
+            "multiqc_general_stats.txt:md5,5b28a83b14cb2fe88d084d08900ebdbf",
+            "multiqc_fastq_screen.txt:md5,bd50a8641c6481cc497fc6e3e9af2607"
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.2"
+        },
+        "timestamp": "2024-12-13T16:10:21.816261"
+    },
+    "Miseq data test (skip fastqc)": {
+        "content": [
+            "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a"
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.2"
+        },
+        "timestamp": "2024-12-13T16:10:53.718831"
+    }
+}
