@@ -477,11 +477,6 @@
                 "seqfu_stats/sampletest_4_mqc.txt"
             ],
             [
-                "Sample1_1_fastqc.html:md5,358c1d6e7ea23b531312d88b51f525fa",
-                "Sample23_3_fastqc.html:md5,5b2b55815c667515184d1591fc57249b",
-                "SampleA_2_fastqc.html:md5,ecc7ab9529216dac84acc864bde7c839",
-                "Undetermined_5_fastqc.html:md5,ec71c3ad29df3c70411777b0bcbddd61",
-                "sampletest_4_fastqc.html:md5,62fc1e99df0da04e3dd5e17fa608a763",
                 "Sample1_1_screen.png:md5,562256290643b51e4374c2225a15f463",
                 "Sample1_1_screen.txt:md5,3b184ef10eeb99043a85826534a4ee28",
                 "Sample23_3_screen.png:md5,6bb2caf67b9b2ed25d3d5f32c343e9ab",
@@ -592,6 +587,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2025-02-03T16:42:55.549005"
+        "timestamp": "2025-02-04T10:10:13.268943"
     }
 }
