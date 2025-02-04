@@ -9,4 +9,4 @@ multiqc/{global_report,group_reports/*}/multiqc_plots/{svg,pdf,png}/*.{svg,pdf,p
 multiqc/{global_report,group_reports/*}/multiqc_report.html
 pipeline_info/*.{html,json,txt,yml}
 fastqscreen/*_screen.html
-fastqc/*_fastqc.zip
+fastqc/*_fastqc.{html,zip}

@@ -104,7 +104,6 @@
                 "seqfu_stats/SAMPLE_SINGLE_END_1_mqc.txt"
             ],
             [
-                "SAMPLE_SINGLE_END_1_fastqc.html:md5,a299e4a9a0b5aa289d6a325b71f915ce",
                 "SAMPLE_SINGLE_END_1_screen.png:md5,ad98ae0f39335aede67e0a233cf16616",
                 "SAMPLE_SINGLE_END_1_screen.txt:md5,588b1b1f2d307fae7272ab0819e4bac5",
                 "fastq_screen_plot.txt:md5,8393eabda6ebac90ff00533f9562271f",
@@ -129,7 +128,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2025-02-03T16:39:35.285693"
+        "timestamp": "2025-02-04T10:07:47.514983"
     },
     "Miseq data test (skip all tools)": {
         "content": [

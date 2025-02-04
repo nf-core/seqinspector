@@ -112,7 +112,6 @@
                 "seqfu_stats/hg001_1_mqc.txt"
             ],
             [
-                "hg001_1_fastqc.html:md5,e1c944e38d02d26a2220fdb0ead48114",
                 "hg001_1_screen.png:md5,b9c58e388f18ad11f4c2e29e9b573a5e",
                 "hg001_1_screen.txt:md5,8e53ea043d658a130f4b8ca455e2ba9b",
                 "fastq_screen_plot.txt:md5,3023b86477fecf6d46d8fc60d82cc53a",
@@ -139,6 +138,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2025-02-03T16:45:47.047432"
+        "timestamp": "2025-02-04T10:12:21.446251"
     }
 }
