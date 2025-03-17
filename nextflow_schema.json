@@ -25,9 +25,9 @@
                 },
                 "sample_size": {
                     "type": "integer",
-                    "default": 0,
                     "description": "Take this number of reads as a subset.",
-                    "help_text": "Choose the size of the subset or 0, if no subsampling shall be performed. Note that it refers to an absolute number."
+                    "help_text": "Choose the size of the subset or 0, if no subsampling shall be performed. Note that it refers to an absolute number.",
+                    "default": 0
                 },
                 "outdir": {
                     "type": "string",
@@ -47,6 +47,11 @@
                     "type": "string",
                     "description": "MultiQC report title. Printed as page header, used for filename if not otherwise specified.",
                     "fa_icon": "fas fa-file-signature"
+                },
+                "skip_tools": {
+                    "type": "string",
+                    "description": "Comma-separated string of tools to skip",
+                    "pattern": "^((fastqc|fastqscreen|seqfu_stats|seqtk_sample)?,?)*(?<!,)$"
                 }
             }
         },
@@ -230,6 +235,12 @@
                     "fa_icon": "far fa-check-circle",
                     "description": "Base URL or local path to location of pipeline test dataset files",
                     "default": "https://raw.githubusercontent.com/nf-core/test-datasets/",
+                    "hidden": true
+                },
+                "trace_report_suffix": {
+                    "type": "string",
+                    "fa_icon": "far calendar",
+                    "description": "Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss.",
                     "hidden": true
                 }
             }
