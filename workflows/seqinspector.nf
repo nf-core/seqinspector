@@ -86,10 +86,6 @@ workflow SEQINSPECTOR {
     // and transpose it into a tuple containing lists for each property
 
     if (!("fastqscreen" in skip_tools)) {
-
-        assert params.fastq_screen_references; "params.fastq_screen_references is not defined, either supply it or skip running FastQ Screen"
-        assert file(params.fastq_screen_references).exists(); "params.fastq_screen_references does not exist, either supply it or skip running FastQ Screen"
-
         ch_fastqscreen_refs = Channel
             .fromList(samplesheetToList(
                 params.fastq_screen_references,
