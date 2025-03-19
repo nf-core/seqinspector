@@ -1,3 +1,5 @@
+include { samplesheetToList } from 'plugin/nf-schema'
+
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -6,6 +8,8 @@
 
 include { SEQTK_SAMPLE                  } from '../modules/nf-core/seqtk/sample/main'
 include { FASTQC                        } from '../modules/nf-core/fastqc/main'
+include { SEQFU_STATS                   } from '../modules/nf-core/seqfu/stats'
+include { FASTQSCREEN_FASTQSCREEN       } from '../modules/nf-core/fastqscreen/fastqscreen/main'
 
 include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc/main'
 include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc/main'
@@ -25,8 +29,10 @@ include { methodsDescriptionText        } from '../subworkflows/local/utils_nfco
 workflow SEQINSPECTOR {
 
     take:
-    ch_samplesheet // channel: samplesheet read in from --input
+    ch_samplesheet               // channel: samplesheet read in from --input
+
     main:
+    skip_tools = params.skip_tools ? params.skip_tools.split(',') : []
 
     ch_versions            = Channel.empty()
     ch_multiqc_files       = Channel.empty()
@@ -36,7 +42,7 @@ workflow SEQINSPECTOR {
     //
     // MODULE: Run Seqtk sample to perform subsampling
     //
-    if (params.sample_size > 0 ) {
+    if (!("seqtk_sample" in skip_tools) && params.sample_size > 0) {
         ch_sample_sized = SEQTK_SAMPLE(
             ch_samplesheet.map {
                 meta, reads -> [meta, reads, params.sample_size]
@@ -44,20 +50,59 @@ workflow SEQINSPECTOR {
         ).reads
         ch_versions = ch_versions.mix(SEQTK_SAMPLE.out.versions.first())
     } else {
-        // No do subsample
+        // No subsampling
         ch_sample_sized = ch_samplesheet
     }
 
     //
     // MODULE: Run FastQC
     //
-    FASTQC (
-        ch_sample_sized.map {
-            meta, subsampled -> [meta, subsampled]
-        }
-    )
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
-    ch_versions = ch_versions.mix(FASTQC.out.versions.first())
+    if (!("fastqc" in skip_tools)) {
+        FASTQC (
+            ch_sample_sized.map {
+                meta, subsampled -> [meta, subsampled]
+            }
+        )
+        ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
+        ch_versions = ch_versions.mix(FASTQC.out.versions.first())
+    }
+
+
+    //
+    // Module: Run SeqFu stats
+    //
+    if (!("seqfu_stats" in skip_tools)) {
+        SEQFU_STATS (
+            ch_samplesheet
+        )
+        ch_multiqc_files = ch_multiqc_files.mix(SEQFU_STATS.out.multiqc)
+        ch_versions = ch_versions.mix(SEQFU_STATS.out.versions.first())
+    }
+
+    //
+    // MODULE: Run FastQ Screen
+    //
+
+    // Parse the reference info needed to create a FastQ Screen config file
+    // and transpose it into a tuple containing lists for each property
+
+    if (!("fastqscreen" in skip_tools)) {
+        ch_fastqscreen_refs = Channel
+            .fromList(samplesheetToList(
+                "${projectDir}/assets/example_fastq_screen_references.csv",
+                "${projectDir}/assets/schema_fastq_screen_references.json"
+            ))
+            .toList()
+            .transpose()
+            .toList()
+
+        FASTQSCREEN_FASTQSCREEN (
+            ch_samplesheet,
+            ch_fastqscreen_refs
+        )
+        ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
+        ch_versions = ch_versions.mix(FASTQSCREEN_FASTQSCREEN.out.versions.first())
+    }
 
     //
     // SUBWORKFLOW: Run kraken2 and produce krona plots
@@ -75,7 +120,7 @@ workflow SEQINSPECTOR {
     softwareVersionsToYAML(ch_versions)
             .collectFile(
             storeDir: "${params.outdir}/pipeline_info",
-            name: 'nf_core_'  + 'pipeline_software_' +  'mqc_'  + 'versions.yml',
+            name: 'nf_core_'  +  'seqinspector_software_'  + 'mqc_'  + 'versions.yml',
             sort: true,
             newLine: true
         ).set { ch_collated_versions }
