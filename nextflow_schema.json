@@ -59,6 +59,7 @@
                     "fa_icon": "fas fa-save",
                     "description": "Turn on saving of Kraken2 per-read taxonomic assignment file",
                     "help_text": "Save a text file that contains a list of each read that had a taxonomic assignment, with information on specific taxonomic taxonomic assignment that that read recieved.\n\n> Modifies tool parameter(s):\n> - kraken2: `--output`"
+                },
                 "skip_tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to skip",
