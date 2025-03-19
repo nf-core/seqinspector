@@ -47,6 +47,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 ### Kraken2
 
 [Kraken](https://ccb.jhu.edu/software/kraken2/) is a taxonomic sequence classifier that assigns taxonomic labels to DNA sequences. Kraken examines the k-mers within a query sequence and uses the information within those k-mers to query a database. That database maps -mers to the lowest common ancestor (LCA) of all genomes known to contain a given k-mer.
+
 - `kraken2/`
   - `<sample>.kraken2.report.txt`: A report containing information on the phylogenetic assignment of reads in a given sample.
   - `<db_name>/`
@@ -101,7 +102,6 @@ The `.csv` is provided as a pipeline parameter `fastq_screen_references` and is 
 
 <details markdown="1">
 <summary>Output files</summary>
-
 
 - `seqfu/`
   - `*.tsv`: Tab-separated file containing quality metrics.
