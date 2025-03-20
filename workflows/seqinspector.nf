@@ -88,7 +88,7 @@ workflow SEQINSPECTOR {
     if (!("fastqscreen" in skip_tools)) {
         ch_fastqscreen_refs = Channel
             .fromList(samplesheetToList(
-                "${projectDir}/assets/example_fastq_screen_references.csv",
+                params.fastq_screen_references,
                 "${projectDir}/assets/schema_fastq_screen_references.json"
             ))
             .toList()
