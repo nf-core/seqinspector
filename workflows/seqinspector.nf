@@ -10,6 +10,7 @@ include { SEQTK_SAMPLE                  } from '../modules/nf-core/seqtk/sample/
 include { FASTQC                        } from '../modules/nf-core/fastqc/main'
 include { SEQFU_STATS                   } from '../modules/nf-core/seqfu/stats'
 include { FASTQSCREEN_FASTQSCREEN       } from '../modules/nf-core/fastqscreen/fastqscreen/main'
+include { RUNDIRPARSER                  } from '../modules/local/rundirparser/main'
 
 include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc/main'
 include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc/main'
@@ -37,6 +38,19 @@ workflow SEQINSPECTOR {
     ch_multiqc_files       = Channel.empty()
     ch_multiqc_extra_files = Channel.empty()
     ch_multiqc_reports     = Channel.empty()
+
+    //
+    // MODULE: Parse rundir info
+    //
+    if (!("rundirparser" in skip_tools)) {
+
+        ch_rundir = ch_samplesheet
+            .map { meta, _reads -> meta.rundir }
+            .distinct()
+            .view()
+
+        RUNDIRPARSER(ch_rundir, "${projectDir}/modules/local/rundirparser/rundirparser.py")
+    }
 
     //
     // MODULE: Run Seqtk sample to perform subsampling
