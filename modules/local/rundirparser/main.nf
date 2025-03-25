@@ -47,7 +47,8 @@ process RUNDIRPARSER {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        rundirparser: \$(python --version |& sed '1!d ; s/Python //')
+        Python: \$(python --version |& sed '1!d ; s/Python //')
+        PyYAML: \$(python -c "import yaml; print(yaml.__version__)")
     END_VERSIONS
     """
 
@@ -59,11 +60,12 @@ process RUNDIRPARSER {
     //               Simple example: https://github.com/nf-core/modules/blob/818474a292b4860ae8ff88e149fbcda68814114d/modules/nf-core/bcftools/annotate/main.nf#L47-L63
     //               Complex example: https://github.com/nf-core/modules/blob/818474a292b4860ae8ff88e149fbcda68814114d/modules/nf-core/bedtools/split/main.nf#L38-L54
     """
-    touch rundir_metadata.yml
+    touch rundir_mqc.yml
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        rundirparser: "stub_version"
+        Python: stub_version
+        PyYAML: stub_version
     END_VERSIONS
     """
 }
