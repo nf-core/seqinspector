@@ -9,7 +9,6 @@ process RUNDIRPARSER {
 
     input:
     tuple val(joint_meta), path(rundir)
-    path(parser_script)
 
     output:
     tuple val(joint_meta), path("*_mqc.*"), emit: multiqc
@@ -22,7 +21,7 @@ process RUNDIRPARSER {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${rundir.baseName}"
     """
-    python ${parser_script} ${rundir}
+    rundirparser.py ${rundir}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
