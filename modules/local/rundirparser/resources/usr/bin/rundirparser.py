@@ -50,7 +50,7 @@ def parse_rundir(rundir):
 
     contents = yml_contents + tsv_contents
 
-    with open(f"{rundir}_mqc.txt", "w") as f:
+    with open(f"{rundir}_rundir_mqc.txt", "w") as f:
         f.write(contents)
 
 
