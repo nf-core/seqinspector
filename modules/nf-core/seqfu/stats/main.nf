@@ -14,7 +14,7 @@ process SEQFU_STATS {
 
     output:
     tuple val(meta), path("*.tsv")    ,  emit: stats
-    tuple val(meta), path("*_mqc.txt"), emit: multiqc
+    tuple val(meta), path("*_mqc.txt"),  emit: multiqc
     path "versions.yml"               ,  emit: versions
 
     when:
