@@ -19,7 +19,19 @@
 
 ## Introduction
 
-**nf-core/seqinspector** is a bioinformatics pipeline that ...
+**nf-core/seqinspector** -
+<p align="justify"><br>a basic QC pipeline for sequencing core facilities providing high quality data from a range of different sequencing instruments to their users is in the interest of every sequencing facility. In order to monitor their sequencing quality, performing standardized, yet flexible quality controls for every sequencing project and sample that passes through their facilities is crucial to ensure consistent quality and dependable results.</br>
+<br>The Nextflow pipeline nf-core/seqinspector is envisioned as a unified quality control pipeline for sequencing data originating from instruments of various providers like Illumina, Oxford Nanopore Technologies or Pacific Biosciences.</br>
+<br>It will assess sequencing quality, duplication levels and complexity on a per-sample basis, in addition to highlighting adapter contents and technical artifacts. Furthermore, it will facilitate the detection of common biological contaminants that may have been introduced to the samples before or during library preparation.</br>
+<br>Since facilities share their flowcells and even sequencing lanes between different projects, the report generation will be particularly versatile and customizable. Quality reports can be obtained with a variable granularity ranging from individual samples or projects to whole flow cells. Therefore, receiving one single MultiQC report that summarizes all input samples, or having individual MultiQC reports for sample groups determined by the sample sheet will be possible.</br>
+<br>While nf-core/seqinspector is developed by and for core facilities, it will also be a useful QC solution for research groups that own or have access to a sequencer outside of facilities. This project is still under development, and we are happy to welcome collaborators.</br></p>
+
+<h1>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/seqinspector_poster_2024_v4.png">
+    <img src="docs/images/seqinspector_poster_2024_v4.png">
+  </picture>
+</h1>
 
 <!-- TODO nf-core:
    Complete this sentence with a 2-3 sentence summary of what types of data the pipeline ingests, a brief overview of the
