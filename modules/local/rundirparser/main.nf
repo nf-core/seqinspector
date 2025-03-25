@@ -29,12 +29,12 @@ process RUNDIRPARSER {
         'community.wave.seqera.io/library/pip_pyyaml:c2ecf27a7f63796e' }"
 
     input:
-    path(rundir)
+    tuple val(joint_meta), path(rundir)
     path(parser_script)
 
     output:
-    path("*_mqc.yml"), emit: yaml
-    path "versions.yml", emit: versions
+    tuple val(joint_meta), path("*_mqc.yml"), emit: multiqc
+    path "versions.yml",                      emit: versions
 
     when:
     task.ext.when == null || task.ext.when
