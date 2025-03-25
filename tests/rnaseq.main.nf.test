@@ -28,7 +28,7 @@ nextflow_pipeline {
             config "./rnaseq.main.nf.test.config"
             params {
                 outdir = "$outputDir"
-                skip_linting = true
+                skip_tools = "fq"
             }
         }
 

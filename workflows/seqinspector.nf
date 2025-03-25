@@ -42,7 +42,7 @@ workflow SEQINSPECTOR {
     //
     // MODULE: Run FQ_LINT to catch early errors
     //
-    if ( !params.skip_linting ) {
+    if ( !("fq" in skip_tools) ) {
         FQ_LINT (
             ch_samplesheet
         )
