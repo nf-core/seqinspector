@@ -45,11 +45,22 @@ workflow SEQINSPECTOR {
     if (!("rundirparser" in skip_tools)) {
 
         ch_rundir = ch_samplesheet
-            .map { meta, _reads -> meta.rundir }
-            .distinct()
-            .view()
+            // Group by rundir to merge tags from samples with the same rundir
+            .map { meta, _reads -> [meta.rundir, meta] }
+            .groupTuple()
+            // Create a new meta object with merged tags for each unique rundir
+            .map { rundir, metas ->
+                // Collect all tags across all samples with this rundir
+                def all_tags = metas.collect { it.tags }.flatten().unique()
+                // Create a new meta object with the merged tags
+                def new_meta = [tags: all_tags]
+                // Return the new structure
+                [new_meta, rundir]
+            }
 
         RUNDIRPARSER(ch_rundir, "${projectDir}/modules/local/rundirparser/rundirparser.py")
+        ch_multiqc_files = ch_multiqc_files.mix(RUNDIRPARSER.out.multiqc.first())
+        ch_versions = ch_versions.mix(RUNDIRPARSER.out.versions.first())
     }
 
     //
