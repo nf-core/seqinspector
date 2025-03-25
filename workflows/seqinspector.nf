@@ -58,7 +58,7 @@ workflow SEQINSPECTOR {
                 [new_meta, rundir]
             }
 
-        RUNDIRPARSER(ch_rundir, "${projectDir}/modules/local/rundirparser/rundirparser.py")
+        RUNDIRPARSER( ch_rundir )
         ch_multiqc_files = ch_multiqc_files.mix(RUNDIRPARSER.out.multiqc.first())
         ch_versions = ch_versions.mix(RUNDIRPARSER.out.versions.first())
     }
