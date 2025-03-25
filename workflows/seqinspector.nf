@@ -105,6 +105,20 @@ workflow SEQINSPECTOR {
     }
 
     //
+    // MODULE: Run ToulligQC
+    //
+
+    // This provides useful stats of long reads
+
+    if (!("tolligqc" in skip_tools)) {
+        TOULLIGQC (
+            ch_samplesheet
+        )
+        ch_multiqc_files.mix(TOULLIGQC.out)
+        ch_versions = ch_versions.mix(TOULLIGQC.out.versions.first())
+    }
+
+    //
     // Collate and save software versions
     //
     softwareVersionsToYAML(ch_versions)
