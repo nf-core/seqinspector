@@ -9,6 +9,8 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 
 ### `Added`
 
+- [#75](https://github.com/nf-core/seqinspector/pull/75) Set up nft-utils
+- [#68](https://github.com/nf-core/seqinspector/pull/68) Add tool selector
 - [#20](https://github.com/nf-core/seqinspector/pull/20) Use tags to generate group reports
 - [#13](https://github.com/nf-core/seqinspector/pull/13) Generate reports per run, per project and per lane.
 - [#49](https://github.com/nf-core/seqinspector/pull/49) Merge with template 3.0.2.
@@ -18,6 +20,7 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#63](https://github.com/nf-core/seqinspector/pull/63) Contribution guidelines added about displaying results for new tools
 - [#53](https://github.com/nf-core/seqinspector/pull/53) Add FastQ-Screen database multiplexing and limit scope of nf-test in CI.
 - [#67](https://github.com/nf-core/seqinspector/pull/67) Add FASTQ linting for early validation
+- [#96](https://github.com/nf-core/seqinspector/pull/96) Added missing citations to citation tool
 
 ### `Fixed`
 
