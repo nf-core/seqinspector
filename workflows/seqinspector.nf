@@ -35,6 +35,8 @@ workflow SEQINSPECTOR {
         TOULLIGQC (
             ch_samplesheet
         )
+        ch_multiqc_files.mix(TOULLIGQC)
+        ch_versions = ch_versions.mix(TOULLIGQC.out.versions.first())
     } else {
 
         take:
