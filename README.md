@@ -33,6 +33,7 @@
 
 1. Read QC ([`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/))
 2. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
+3. Read QC on long reads ([`ToulligQC`](https://github.com/GenomiqueENS/toulligQC))
 
 ## Usage
 
@@ -64,6 +65,16 @@ nextflow run nf-core/seqinspector \
    -profile <docker/singularity/.../institute> \
    --input samplesheet.csv \
    --outdir <OUTDIR>
+```
+
+To run on long reads use:
+
+```bash
+nextflow run nf-core/seqinspector \
+   -profile <docker/singularity/.../institute> \
+   --input samplesheet.csv \
+   --outdir <OUTDIR> \
+   --long
 ```
 
 > [!WARNING]
