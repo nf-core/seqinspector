@@ -23,17 +23,17 @@ process RUNDIRPARSER {
     //               Software MUST be pinned to channel (i.e. "bioconda"), version (i.e. "1.10").
     //               For Conda, the build (i.e. "h9402c20_2") must be EXCLUDED to support installation on different operating systems.
     // TODO nf-core: See section in main README for further information regarding finding and adding container addresses to the section below.
-    conda "python=3.12"
+    conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/python:3.12' :
-        'python:3.12' }"
+        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/ad/ad2bcce70756f81c07c7e2ffd9b66213bf48ace786466395ac3a402840df2ffb/data' :
+        'community.wave.seqera.io/library/pip_pyyaml:c2ecf27a7f63796e' }"
 
     input:
     path(rundir)
     path(parser_script)
 
     output:
-    path("*_mqc.yaml"), emit: yaml
+    path("*_mqc.yml"), emit: yaml
     path "versions.yml", emit: versions
 
     when:
