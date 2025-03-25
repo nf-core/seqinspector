@@ -50,7 +50,7 @@
                 "skip_tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to skip",
-                    "pattern": "^((fastqc|fastqscreen|seqfu_stats|seqtk_sample)?,?)*(?<!,)$"
+                    "pattern": "^((fq|fastqc|fastqscreen|seqfu_stats|seqtk_sample)?,?)*(?<!,)$"
                 }
             }
         },
@@ -60,12 +60,6 @@
             "description": "Options for validating and screening FASTQ files.",
             "default": "",
             "properties": {
-                "skip_linting": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Whether to lint the FASTQs before performing QC on the sequences",
-                    "help_text": "FASTQ files will be linted with FQ early in the pipeline. If they fail validation, the pipeline will terminate preventing expensive quality control steps being performed on the other samples. If ignoring FQ is enabled, quality control will be performed on the remaining samples."
-                },
                 "fq_lint_args": {
                     "type": "string",
                     "description": "Arguments to pass to FQ lint",
