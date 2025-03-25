@@ -11,7 +11,7 @@ process RUNDIRPARSER {
     tuple val(joint_meta), path(rundir)
 
     output:
-    tuple val(joint_meta), path("*_mqc.*"), emit: multiqc
+    tuple val(joint_meta), path("*_rundir_mqc.*"), emit: multiqc
     path "versions.yml",                    emit: versions
 
     when:
