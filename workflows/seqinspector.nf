@@ -150,14 +150,14 @@ workflow SEQINSPECTOR {
         Channel.fromPath(params.multiqc_logo, checkIfExists: true) :
         Channel.empty()
 
-    summary_params                        = paramsSummaryMap(
+    summary_params = paramsSummaryMap(
         workflow, parameters_schema: "nextflow_schema.json")
-    ch_workflow_summary                   = Channel.value(
+    ch_workflow_summary = Channel.value(
         paramsSummaryMultiqc(summary_params))
     ch_multiqc_custom_methods_description = params.multiqc_methods_description ?
         file(params.multiqc_methods_description, checkIfExists: true) :
         file("$projectDir/assets/methods_description_template.yml", checkIfExists: true)
-    ch_methods_description                = Channel.value(
+    ch_methods_description = Channel.value(
         methodsDescriptionText(ch_multiqc_custom_methods_description))
 
     ch_multiqc_extra_files = ch_multiqc_extra_files.mix(
@@ -172,7 +172,7 @@ workflow SEQINSPECTOR {
 
     MULTIQC_GLOBAL (
         ch_multiqc_files
-            .map { meta, file -> file }
+            .map { _meta, file -> file }
             .mix(ch_multiqc_extra_files)
             .collect(),
         ch_multiqc_config.toList(),
@@ -183,7 +183,7 @@ workflow SEQINSPECTOR {
     )
 
     ch_tags = ch_multiqc_files
-        .map { meta, sample -> meta.tags }
+        .map { meta, _sample -> meta.tags }
         .flatten()
         .unique()
 
@@ -193,13 +193,13 @@ workflow SEQINSPECTOR {
     // Group samples by tag
     tagged_mqc_files = ch_tags
         .combine(ch_multiqc_files)
-        .filter { sample_tag, meta, sample -> sample_tag in meta.tags }
-        .map { sample_tag, meta, sample -> [sample_tag, sample] }
+        .filter { sample_tag, meta, _sample -> sample_tag in meta.tags }
+        .map { sample_tag, _meta, sample -> [sample_tag, sample] }
         .mix(multiqc_extra_files_per_tag)
         .groupTuple()
         .tap { mqc_by_tag }
         .collectFile {
-            sample_tag, samples ->
+            sample_tag, _samples ->
             def prefix_tag = "[TAG:${sample_tag}]"
             [
                 "${prefix_tag}_multiqc_extra_config.yml",
@@ -212,7 +212,7 @@ workflow SEQINSPECTOR {
         }
         .map { file -> [ (file =~ /\[TAG:(.+)\]/)[0][1], file ] }
         .join(mqc_by_tag)
-        .multiMap { sample_tag, config, samples ->
+        .multiMap { _sample_tag, config, samples ->
             samples_per_tag: samples
             config: config
         }
