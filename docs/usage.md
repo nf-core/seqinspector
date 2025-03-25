@@ -96,6 +96,14 @@ genome: 'GRCh37'
 
 You can also generate such `YAML`/`JSON` files via [nf-core/launch](https://nf-co.re/launch).
 
+### Running with long reads
+
+For long read technologies (eg. PacBio and Nanopore) we have implemented toulligqc. To use toulligqc pass the --long argument. An example command would be
+
+```bash
+nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --long -profile docker
+```
+
 ### Updating the pipeline
 
 When you run the above command, Nextflow automatically pulls the pipeline code from GitHub and stores it as a cached version. When running the pipeline after this, it will always use the cached version if available - even if the pipeline has been updated since. To make sure that you're running the latest version of the pipeline, make sure that you regularly update the cached version of the pipeline:
