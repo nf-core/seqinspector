@@ -59,7 +59,7 @@ workflow SEQINSPECTOR {
             }
 
         RUNDIRPARSER( ch_rundir )
-        ch_multiqc_files = ch_multiqc_files.mix(RUNDIRPARSER.out.multiqc.first())
+        ch_multiqc_files = ch_multiqc_files.mix(RUNDIRPARSER.out.multiqc)
         ch_versions = ch_versions.mix(RUNDIRPARSER.out.versions.first())
     }
 
