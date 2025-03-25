@@ -10,7 +10,7 @@
 
 include { UTILS_NFVALIDATION_PLUGIN } from '../../nf-core/utils_nfvalidation_plugin'
 include { paramsSummaryMap          } from 'plugin/nf-schema'
-include { fromSamplesheet           } from 'plugin/nf-schema'
+include { samplesheetToList } from 'plugin/nf-schema'
 include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipeline'
 include { completionEmail           } from '../../nf-core/utils_nfcore_pipeline'
 include { completionSummary         } from '../../nf-core/utils_nfcore_pipeline'
@@ -80,8 +80,7 @@ workflow PIPELINE_INITIALISATION {
     //
     // Create channel from input file provided through params.input
     //
-    Channel
-        .fromSamplesheet("input") // Validates samplesheet against $projectDir/assets/schema_input.json. Path to validation schema is defined by $projectDir/nextflow_schema.json
+    Channel.fromList(samplesheetToList(params.input, "path/to/samplesheet/schema")) // Validates samplesheet against $projectDir/assets/schema_input.json. Path to validation schema is defined by $projectDir/nextflow_schema.json
         .map {
             meta, fastq_1, fastq_2 ->
                 def id_string = "${meta.sample}_${meta.project ?: "ungrouped"}_${meta.lane}"
