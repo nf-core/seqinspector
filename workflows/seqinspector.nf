@@ -114,7 +114,7 @@ workflow SEQINSPECTOR {
         TOULLIGQC (
             ch_samplesheet
         )
-        ch_multiqc_files.mix(TOULLIGQC.out)
+        ch_multiqc_files.mix(TOULLIGQC.out.report_data)
         ch_versions = ch_versions.mix(TOULLIGQC.out.versions.first())
     }
 
