@@ -1,11 +1,11 @@
 nextflow_pipeline {
 
-    name "Test Workflow main.nf on MiSeq data"
+    name "Test Workflow main.nf on MiSeq data with paired end reads"
     script "../main.nf"
     tag "seqinspector"
     tag "PIPELINE"
 
-    test("MiSeq data test") {
+    test("MiSeq data test (paired end reads)") {
 
         when {
             config "./MiSeq_PairedEnd.main.nf.test.config"
