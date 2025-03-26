@@ -48,7 +48,7 @@ process TOULLIGQC {
     """
     mkdir ${prefix}
     mkdir ${prefix}/images
-    touch ${prefix}/report.data
+    touch ${prefix}/report_mqc.data
     touch ${prefix}/images/Correlation_between_read_length_and_PHRED_score.html
     touch ${prefix}/images/Distribution_of_read_lengths.html
     touch ${prefix}/images/PHRED_score_density_distribution.html
