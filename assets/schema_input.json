@@ -17,21 +17,31 @@
                 "type": "string",
                 "format": "file-path",
                 "exists": true,
-                "pattern": "^\\S+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                "pattern": "\\.f(ast)?q\\.gz$",
+                "errorMessage": "FastQ files for read 1 must be provided and must have extension '.fq.gz' or '.fastq.gz'"
             },
             "fastq_2": {
                 "type": "string",
                 "format": "file-path",
                 "exists": true,
-                "pattern": "^\\S+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                "pattern": "\\.f(ast)?q\\.gz$",
+                "errorMessage": "FastQ files for read 2 are optional and must have extension '.fq.gz' or '.fastq.gz' if provided"
             },
             "rundir": {
-                "type": "string",
-                "format": "path",
-                "exists": true,
-                "errorMessage": "Run directory must be a path",
+                "oneOf": [
+                    {
+                        "type": "string",
+                        "format": "file-path",
+                        "exists": true,
+                        "pattern": "\\.tar\\.gz$"
+                    },
+                    {
+                        "type": "string",
+                        "format": "directory-path",
+                        "exists": true
+                    }
+                ],
+                "errorMessage": "Run directory must be a path or tar directory",
                 "meta": ["rundir"]
             },
             "tags": {
