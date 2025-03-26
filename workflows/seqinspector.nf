@@ -73,6 +73,9 @@ workflow SEQINSPECTOR {
     if (!("seqfu_stats" in skip_tools)) {
         SEQFU_STATS (
             ch_samplesheet
+            .map { meta, reads ->
+                [[id: "seqfu", sample_id: meta.id, tags: meta.tags], reads]
+            }
         )
         ch_multiqc_files = ch_multiqc_files.mix(SEQFU_STATS.out.multiqc)
         ch_versions = ch_versions.mix(SEQFU_STATS.out.versions.first())
