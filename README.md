@@ -29,11 +29,12 @@
 
 <!-- TODO nf-core: Include a figure that guides the user through the major workflow steps. Many nf-core
      workflows use the "tube map" design for that. See https://nf-co.re/docs/contributing/design_guidelines#examples for examples.   -->
-<!-- TODO nf-core: Fill in short bullet-pointed list of the default steps in the pipeline -->
 
 1. Subsample reads ([`Seqtk`](https://github.com/lh3/seqtk))
 2. Read QC ([`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/))
-3. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
+3. Sequence statistics ([`SeqFu Stats`](https://github.com/telatin/seqfu2))
+4. Contamination QC ([`FastQ Screen`](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/))
+5. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
 
 ## Usage
 
