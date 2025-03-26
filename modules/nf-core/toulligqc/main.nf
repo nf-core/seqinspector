@@ -13,7 +13,7 @@ process TOULLIGQC {
 
 
     output:
-    tuple val(meta), path("*/*_mqc.data")                   , emit: report_data
+    tuple val(meta), path("*/*.data")                   , emit: report_data
     tuple val(meta), path("*/*.html")                   , emit: report_html, optional: true
     tuple val(meta), path("*/images/*.html")            , emit: plots_html
     tuple val(meta), path("*/images/plotly.min.js")     , emit: plotly_js
@@ -48,7 +48,7 @@ process TOULLIGQC {
     """
     mkdir ${prefix}
     mkdir ${prefix}/images
-    touch ${prefix}/report_mqc.data
+    touch ${prefix}/report.data
     touch ${prefix}/images/Correlation_between_read_length_and_PHRED_score.html
     touch ${prefix}/images/Distribution_of_read_lengths.html
     touch ${prefix}/images/PHRED_score_density_distribution.html
