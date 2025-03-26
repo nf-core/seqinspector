@@ -53,9 +53,9 @@ workflow SEQINSPECTOR {
                 // Collect all tags across all samples with this rundir
                 def all_tags = metas.collect { it.tags }.flatten().unique()
                 // Create a new meta object with the merged tags
-                def new_meta = [tags: all_tags]
+                def dir_meta = [tags: all_tags, dirname: rundir.simpleName]
                 // Return the new structure
-                [new_meta, rundir]
+                [dir_meta, rundir]
             }
 
         RUNDIRPARSER( ch_rundir )

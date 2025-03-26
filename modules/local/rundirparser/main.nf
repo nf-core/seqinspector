@@ -1,5 +1,5 @@
 process RUNDIRPARSER {
-    tag "$rundir.baseName"
+    tag "$rundir.simpleName"
     label 'process_single'
 
     conda "${moduleDir}/environment.yml"
@@ -8,18 +8,16 @@ process RUNDIRPARSER {
         'community.wave.seqera.io/library/pip_pyyaml:c2ecf27a7f63796e' }"
 
     input:
-    tuple val(joint_meta), path(rundir)
+    tuple val(dir_meta), path(rundir)
 
     output:
-    tuple val(joint_meta), path("*_mqc.*"), emit: multiqc
+    tuple val(dir_meta), path("*_mqc.*"), emit: multiqc
     path "versions.yml",                    emit: versions
 
     when:
     task.ext.when == null || task.ext.when
 
     script:
-    // def args = task.ext.args ?: ''
-    // def prefix = task.ext.prefix ?: "${rundir.baseName}"
     """
     rundirparser.py ${rundir}
 
@@ -31,8 +29,6 @@ process RUNDIRPARSER {
     """
 
     stub:
-    // def args = task.ext.args ?: ''
-    // def prefix = task.ext.prefix ?: "${rundir.baseName}"
     """
     touch rundir_mqc.txt
 
