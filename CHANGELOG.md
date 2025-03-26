@@ -20,6 +20,7 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#63](https://github.com/nf-core/seqinspector/pull/63) Contribution guidelines added about displaying results for new tools
 - [#53](https://github.com/nf-core/seqinspector/pull/53) Add FastQ-Screen database multiplexing and limit scope of nf-test in CI.
 - [#96](https://github.com/nf-core/seqinspector/pull/96) Added missing citations to citation tool
+- [#109](https://github.com/nf-core/seqinspector/pull/109) Adds ToulligQC module for long read QC
 
 ### `Fixed`
 
