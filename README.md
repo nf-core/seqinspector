@@ -19,7 +19,7 @@
 
 ## Introduction
 
-**nf-core/seqinspector** is a bioinformatics pipeline that ...
+**nf-core/seqinspector** is a bioinformatics pipeline that that processes raw sequencing data to provide comprehensive quality control and exploratory analysis. It performs subsampling, quality assessment, duplication level analysis, and complexity evaluation on a per-sample basis, while also detecting adapter content, technical artifacts, and common biological contaminants. The pipeline generates detailed reports with flexible output options, ranging from individual sample analyses to project-wide summaries, making it particularly useful for sequencing core facilities and research groups with access to sequencing instruments.
 
 <!-- TODO nf-core:
    Complete this sentence with a 2-3 sentence summary of what types of data the pipeline ingests, a brief overview of the

@@ -23,6 +23,7 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#103](https://github.com/nf-core/seqinspector/pull/103) Configure full-tests
 - [#94](https://github.com/nf-core/seqinspector/issues/94) Test data validation
 - [#86](https://github.com/nf-core/seqinspector/issues/86) Update lists of default steps in the pipeline
+- [#84](https://github.com/nf-core/seqinspector/issues/84) Short summary of seqinspector in README.md
 
 ### `Fixed`
 
