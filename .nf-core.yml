@@ -1,6 +1,9 @@
 lint:
   files_unchanged:
     - .github/CONTRIBUTING.md
+  nextflow_config:
+    - config_defaults:
+        - params.fastq_screen_references
 nf_core_version: 3.2.0
 repository_type: pipeline
 template:
