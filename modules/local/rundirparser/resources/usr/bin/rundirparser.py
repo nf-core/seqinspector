@@ -3,7 +3,7 @@ import sys
 import yaml
 
 
-def parse_rundir(rundir):
+def parse_rundir(rundir, outname):
     # Dummy implementation, replace with actual logic
 
     yml_contents = """# plot_type: 'table'
@@ -50,13 +50,14 @@ def parse_rundir(rundir):
 
     contents = yml_contents + tsv_contents
 
-    with open(f"{rundir}_rundir_mqc.txt", "w") as f:
+    with open(outname, "w") as f:
         f.write(contents)
 
 
 def main():
     rundir = sys.argv[1]
-    parse_rundir(rundir)
+    outname = sys.argv[2]
+    parse_rundir(rundir, outname)
 
 
 if __name__ == "__main__":
