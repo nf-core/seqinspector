@@ -13,7 +13,7 @@ process TOULLIGQC {
 
 
     output:
-    tuple val(meta), path("*/*.data")                   , emit: report_data
+    tuple val(meta), path("*/*_mqc.data")                   , emit: report_data
     tuple val(meta), path("*/*.html")                   , emit: report_html, optional: true
     tuple val(meta), path("*/images/*.html")            , emit: plots_html
     tuple val(meta), path("*/images/plotly.min.js")     , emit: plotly_js
