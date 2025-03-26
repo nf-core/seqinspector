@@ -4,8 +4,8 @@ process RUNDIRPARSER {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/ad/ad2bcce70756f81c07c7e2ffd9b66213bf48ace786466395ac3a402840df2ffb/data' :
-        'community.wave.seqera.io/library/pip_pyyaml:c2ecf27a7f63796e' }"
+        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/41/412df2cdcf04e0a12971ba61b12cacaa5a49705442afe99ad96668bebbb8f880/data' :
+        'community.wave.seqera.io/library/pip_pyyaml_xmltodict:a4e48bd1ab4b6a53' }"
 
     input:
     tuple val(dir_meta), path(rundir)
@@ -19,7 +19,9 @@ process RUNDIRPARSER {
 
     script:
     """
+    # TODO: check what kind of seq platfrom to decide which script to use
     rundirparser.py ${rundir}
+    parse_illumina.py ${rundir}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
