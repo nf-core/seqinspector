@@ -44,21 +44,28 @@ workflow SEQINSPECTOR {
     //
     if (!("rundirparser" in skip_tools)) {
 
+        // From samplesheet channel serving (sampleMetaObj, sampleReadsPath) tuples:
+        // --> Create new rundir channel serving (rundirMetaObj, rundirPath) tuples
         ch_rundir = ch_samplesheet
-            // Group by rundir to merge tags from samples with the same rundir
+            // Group by rundir
             .map { meta, _reads -> [meta.rundir, meta] }
             .groupTuple()
-            // Create a new meta object with merged tags for each unique rundir
+            // From all meta objects associated with a given rundir...
             .map { rundir, metas ->
-                // Collect all tags across all samples with this rundir
+                // Collect all unique tags into a list
                 def all_tags = metas.collect { it.tags }.flatten().unique()
-                // Create a new meta object with the merged tags
+                // Create a new meta object whose attributes are...
+                //  1. tags: The list of merged tags, used for grouping MultiQC reports
+                //  2. dirname: The simple name of the rundir, used for setting unique output names in publishDir
                 def dir_meta = [tags: all_tags, dirname: rundir.simpleName]
-                // Return the new structure
+                // Return the new structure, to...
+                //  1. Feed into rundir specific processes
+                //  2. Mix with the ch_multiqc_files channel downstream
                 [dir_meta, rundir]
             }
 
         RUNDIRPARSER( ch_rundir )
+
         ch_multiqc_files = ch_multiqc_files.mix(RUNDIRPARSER.out.multiqc)
         ch_versions = ch_versions.mix(RUNDIRPARSER.out.versions.first())
     }
