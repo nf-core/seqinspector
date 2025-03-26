@@ -22,6 +22,7 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#96](https://github.com/nf-core/seqinspector/pull/96) Added missing citations to citation tool
 - [#103](https://github.com/nf-core/seqinspector/pull/103) Configure full-tests
 - [#94](https://github.com/nf-core/seqinspector/issues/94) Test data validation
+- [#86](https://github.com/nf-core/seqinspector/issues/86) Update lists of default steps in the pipeline
 
 ### `Fixed`
 
