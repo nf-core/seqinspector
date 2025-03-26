@@ -21,6 +21,7 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#53](https://github.com/nf-core/seqinspector/pull/53) Add FastQ-Screen database multiplexing and limit scope of nf-test in CI.
 - [#96](https://github.com/nf-core/seqinspector/pull/96) Added missing citations to citation tool
 - [#103](https://github.com/nf-core/seqinspector/pull/103) Configure full-tests
+- [#94](https://github.com/nf-core/seqinspector/issues/94) Test data validation
 
 ### `Fixed`
 
