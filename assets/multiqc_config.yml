@@ -13,3 +13,12 @@ report_section_order:
 export_plots: true
 
 disable_version_detection: true
+
+custom_data:
+  toulligqc:
+    section_name: "ToulligQC"
+    description: "Data extracted from ToulligQC, a html report is available in the results folder"
+    plot_type: "table"
+sp:
+  toulligqc:
+    fn: "report.data"
