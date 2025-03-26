@@ -12,7 +12,7 @@ process RUNDIRPARSER {
 
     output:
     tuple val(dir_meta), path("*_mqc.*"), emit: multiqc
-    path "versions.yml",                    emit: versions
+    path "versions.yml",                  emit: versions
 
     when:
     task.ext.when == null || task.ext.when
