@@ -191,7 +191,7 @@ workflow SEQINSPECTOR {
         .map { file -> [ (file =~ /\[TAG:(.+)\]/)[0][1], file ] }
         .join(mqc_by_tag)
         .multiMap { sample_tag, config, samples ->
-            samples_per_tag: samples
+            samples_per_tag: samples.flatten()
             config: config
         }
 
