@@ -21,7 +21,7 @@ process RUNDIRPARSER {
     // def args = task.ext.args ?: ''
     // def prefix = task.ext.prefix ?: "${rundir.baseName}"
     """
-    rundirparser.py ${rundir} ${moduleDir.baseName}_mqc.txt
+    rundirparser.py ${rundir}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

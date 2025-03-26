@@ -3,8 +3,10 @@ import sys
 import yaml
 
 
-def parse_rundir(rundir, outname):
+def parse_rundir(rundir):
     # Dummy implementation, replace with actual logic
+
+    sequencing_platform = None
 
     yml_contents = """# plot_type: 'table'
 # section_name: 'rundir stats'
@@ -50,14 +52,20 @@ def parse_rundir(rundir, outname):
 
     contents = yml_contents + tsv_contents
 
+    """
+    File names should be unique between sequencing platforms, but otherwise identical
+    so multiple rundirs of the same platform will be written to the same table
+    in the MultiQC report.
+    """
+    outname = f"{sequencing_platform or 'rundirparser'}_mqc.txt"
+
     with open(outname, "w") as f:
         f.write(contents)
 
 
 def main():
     rundir = sys.argv[1]
-    outname = sys.argv[2]
-    parse_rundir(rundir, outname)
+    parse_rundir(rundir)
 
 
 if __name__ == "__main__":
