@@ -110,7 +110,7 @@ workflow SEQINSPECTOR {
 
     // This provides useful stats of long reads
 
-    if (!("tolligqc" in skip_tools)) {
+    if (!("toulligqc" in skip_tools)) {
         TOULLIGQC (
             ch_samplesheet
         )
