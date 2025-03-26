@@ -26,7 +26,7 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 
 - [#71](https://github.com/nf-core/seqinspector/pull/71) FASTQSCREEN does not fail when multiple reads are provided.
 - [#99](https://github.com/nf-core/seqinspector/pull/99) Fix group reports for paired reads
-- [#107](https://github.com/nf-core/seqinspector/pull/107)  Put SeqFU-stats section reports together
+- [#107](https://github.com/nf-core/seqinspector/pull/107) Put SeqFU-stats section reports together
 
 ### `Dependencies`
 
