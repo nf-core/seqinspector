@@ -21,12 +21,17 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#53](https://github.com/nf-core/seqinspector/pull/53) Add FastQ-Screen database multiplexing and limit scope of nf-test in CI.
 - [#96](https://github.com/nf-core/seqinspector/pull/96) Added missing citations to citation tool
 - [#103](https://github.com/nf-core/seqinspector/pull/103) Configure full-tests
+- [#110](https://github.com/nf-core/seqinspector/pull/110) Update input schema to accept either tar file or directory as rundir, and fastq messages and patterns.
 
 ### `Fixed`
 
 - [#71](https://github.com/nf-core/seqinspector/pull/71) FASTQSCREEN does not fail when multiple reads are provided.
 - [#99](https://github.com/nf-core/seqinspector/pull/99) Fix group reports for paired reads
+- [#107](https://github.com/nf-core/seqinspector/pull/107) Put SeqFU-stats section reports together
+- [#112](https://github.com/nf-core/seqinspector/pull/112) Making fastq_screen_references value to use parentDir
 
 ### `Dependencies`
+
+- [#116](https://github.com/nf-core/seqinspector/pull/116) Update MultiQC to 1.28
 
 ### `Deprecated`
