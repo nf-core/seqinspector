@@ -32,4 +32,6 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 
 ### `Dependencies`
 
+- [#116](https://github.com/nf-core/seqinspector/pull/116) Update MultiQC to 1.28
+
 ### `Deprecated`
