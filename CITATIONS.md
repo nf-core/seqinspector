@@ -28,6 +28,8 @@
 
 - [Seqtk](https://github.com/lh3/seqtk)
 
+- [ToulligQC](https://github.com/GenomiqueENS/toulligQ)
+
 ## Software packaging/containerisation tools
 
 - [Anaconda](https://anaconda.com)
