@@ -1,0 +1,87 @@
+nextflow_pipeline {
+
+    name "Test Workflow main.nf on NovaSeq6000 data"
+    script "../main.nf"
+    tag "seqinspector"
+    tag "PIPELINE"
+
+    test("rnaseq data test fail linting") {
+
+        when {
+            config "./rnaseq.main.nf.test.config"
+            params {
+                outdir = "$outputDir"
+            }
+        }
+
+        then {
+            assertAll(
+                // Linting should fail!
+                { assert workflow.failed }
+            )
+        }
+    }
+
+    test("rnaseq data test skip linting") {
+
+        when {
+            config "./rnaseq.main.nf.test.config"
+            params {
+                outdir = "$outputDir"
+                skip_tools = "fq"
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success }
+            )
+        }
+    }
+
+    test("rnaseq data test ignore linting") {
+
+        when {
+            config "./rnaseq.main.nf.test.config"
+            params {
+                outdir = "$outputDir"
+                continue_with_lint_fail = true
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                        path("$outputDir/multiqc/global_report/multiqc_data/multiqc_citations.txt"),
+                        path("$outputDir/multiqc/global_report/multiqc_data/multiqc_fastqc.txt"),
+                        path("$outputDir/multiqc/global_report/multiqc_data/multiqc_general_stats.txt")
+                    )
+                },
+            )
+        }
+    }
+
+    test("rnaseq data test add args to fq/lint") {
+
+        when {
+            config "./rnaseq.main.nf.test.config"
+            params {
+                outdir = "$outputDir"
+                fq_lint_args = "--disable-validator P001"
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                        path("$outputDir/multiqc/global_report/multiqc_data/multiqc_citations.txt"),
+                        path("$outputDir/multiqc/global_report/multiqc_data/multiqc_fastqc.txt"),
+                        path("$outputDir/multiqc/global_report/multiqc_data/multiqc_general_stats.txt")
+                    )
+                },
+            )
+        }
+    }
+}
