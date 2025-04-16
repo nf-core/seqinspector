@@ -48,6 +48,18 @@
                     "description": "MultiQC report title. Printed as page header, used for filename if not otherwise specified.",
                     "fa_icon": "fas fa-file-signature"
                 },
+                "kraken2_save_reads": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-save",
+                    "description": "Turn on saving of Kraken2-aligned reads",
+                    "help_text": "Save reads that do and do not have a taxonomic classification in your output results directory in FASTQ format.\n\n> Modifies tool parameter(s):\n> - kraken2: `--classified-out` and `--unclassified-out`"
+                },
+                "kraken2_save_readclassifications": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-save",
+                    "description": "Turn on saving of Kraken2 per-read taxonomic assignment file",
+                    "help_text": "Save a text file that contains a list of each read that had a taxonomic assignment, with information on specific taxonomic taxonomic assignment that that read recieved.\n\n> Modifies tool parameter(s):\n> - kraken2: `--output`"
+                },
                 "skip_tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to skip",
@@ -83,6 +95,13 @@
                     "fa_icon": "fas fa-ban",
                     "hidden": true,
                     "help_text": "Do not load `igenomes.config` when running the pipeline. You may choose this option if you observe clashes between custom parameters and those supplied in `igenomes.config`."
+                },
+                "kraken2_db": {
+                    "type": "string",
+                    "exists": true,
+                    "mimetype": "text/plain",
+                    "description": "Path to Kraken2 database file, either a gzipped file or the path to the uncompressed database.",
+                    "fa_icon": "fas fa-database"
                 },
                 "igenomes_base": {
                     "type": "string",
@@ -259,5 +278,10 @@
         {
             "$ref": "#/$defs/generic_options"
         }
-    ]
+    ],
+    "properties": {
+        "save_uncompressed_k2db": {
+            "type": "boolean"
+        }
+    }
 }
