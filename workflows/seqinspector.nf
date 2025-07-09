@@ -72,7 +72,7 @@ workflow SEQINSPECTOR {
     //
     if (!("seqfu_stats" in skip_tools)) {
         SEQFU_STATS (
-            ch_samplesheet
+            ch_samplesheet // Not `ch_sample_sized` to get actual read count
             .map { meta, reads ->
                 [[id: "seqfu", sample_id: meta.id, tags: meta.tags], reads]
             }
@@ -99,7 +99,7 @@ workflow SEQINSPECTOR {
             .toList()
 
         FASTQSCREEN_FASTQSCREEN (
-            ch_samplesheet,
+            ch_sample_sized,
             ch_fastqscreen_refs
         )
         ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
