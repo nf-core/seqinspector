@@ -13,3 +13,11 @@ report_section_order:
 export_plots: true
 
 disable_version_detection: true
+
+table_sample_merge:
+  "Read1":
+    - type: regex
+      pattern: "_1$"
+  "Read2":
+    - type: regex
+      pattern: "_2$"
