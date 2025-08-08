@@ -17,6 +17,14 @@ disable_version_detection: true
 fn_clean_trim:
  - "_screen" # Added by FastqScreen
 
+# Make sample name with indexes a bit prettier
+# for SE: "SampleName_01" -> "SampleName #01"
+# for PE: "SampleName_01_1" -> "SampleName #01_1"
+#    and: "SampleName_01_2" -> "SampleName #01_2"
+sample_names_replace_regex: True
+sample_names_replace:
+  "(.+)_(\\d{2,}|\\d{2,}_[12])$": "\\1 #\\2"
+
 table_sample_merge:
   "Read1":
     - type: regex
