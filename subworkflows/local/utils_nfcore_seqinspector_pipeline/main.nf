@@ -204,12 +204,39 @@ def validateInputSamplesheet(input) {
 // Get attribute from genome config file e.g. fasta
 //
 def getGenomeAttribute(attribute) {
-    if (params.genomes && params.genome && params.genomes.containsKey(params.genome)) {
-        if (params.genomes[ params.genome ].containsKey(attribute)) {
-            return params.genomes[ params.genome ][ attribute ]
-        }
+    // Input validation
+    if (!attribute) {
+        log.warn "No attribute specified"
+        return null
     }
-    return null
+    
+    if (!params.genomes) {
+        log.warn "No genomes configuration found"
+        return null
+    }
+    
+    if (!params.genome) {
+        log.warn "No genome specified in params.genome"
+        return null
+    }
+    
+    if (!params.genomes.containsKey(params.genome)) {
+        log.warn "Genome '${params.genome}' not found in configuration"
+        log.warn "Available genomes: ${params.genomes.keySet().join(', ')}"
+        return null
+    }
+    
+    def genomeConfig = params.genomes[params.genome]
+    log.info "Genome config for '${params.genome}': ${genomeConfig}"
+    
+    if (!genomeConfig.containsKey(attribute)) {
+        log.warn "Attribute '${attribute}' not found for genome '${params.genome}'"
+        log.warn "Available attributes: ${genomeConfig.keySet().join(', ')}"
+        return null
+    }
+    
+    log.info "Found ${attribute}: ${genomeConfig[attribute]}"
+    return genomeConfig[attribute]
 }
 
 //
