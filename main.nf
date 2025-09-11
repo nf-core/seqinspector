@@ -17,8 +17,8 @@
 
 include { SEQINSPECTOR            } from './workflows/seqinspector'
 include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
-include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
 include { getGenomeAttribute      } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -29,9 +29,9 @@ include { getGenomeAttribute      } from './subworkflows/local/utils_nfcore_seqi
 // TODO nf-core: Remove this line if you don't need a FASTA file
 //   This is an example of how to use getGenomeAttribute() to fetch parameters
 //   from igenomes.config using `--genome`
-// params.fasta = getGenomeAttribute('fasta')
+params.fasta = getGenomeAttribute('fasta') 
 
-/*
+/* 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     NAMED WORKFLOWS FOR PIPELINE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -67,9 +67,12 @@ workflow NFCORE_SEQINSPECTOR {
 workflow {
 
     main:
+
+
     //
     // SUBWORKFLOW: Run initialisation tasks
     //
+
     PIPELINE_INITIALISATION (
         params.version,
         params.validate_params,
@@ -78,12 +81,12 @@ workflow {
         params.outdir,
         params.input
     )
-
+    
     //
     // WORKFLOW: Run main workflow
     //
     NFCORE_SEQINSPECTOR (
-        PIPELINE_INITIALISATION.out.samplesheet
+        PIPELINE_INITIALISATION.out.samplesheet,
     )
     //
     // SUBWORKFLOW: Run completion tasks

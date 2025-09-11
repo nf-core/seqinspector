@@ -10,6 +10,7 @@ include { SEQTK_SAMPLE                  } from '../modules/nf-core/seqtk/sample/
 include { FASTQC                        } from '../modules/nf-core/fastqc/main'
 include { SEQFU_STATS                   } from '../modules/nf-core/seqfu/stats'
 include { FASTQSCREEN_FASTQSCREEN       } from '../modules/nf-core/fastqscreen/fastqscreen/main'
+include { BWAMEM2_INDEX                 } from '../modules/nf-core/bwamem2/index/main'
 
 include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc/main'
 include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc/main'
@@ -18,7 +19,6 @@ include { paramsSummaryMap              } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc          } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML        } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText        } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
-
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     RUN MAIN WORKFLOW
@@ -28,7 +28,7 @@ include { methodsDescriptionText        } from '../subworkflows/local/utils_nfco
 workflow SEQINSPECTOR {
 
     take:
-    ch_samplesheet               // channel: samplesheet read in from --input
+    ch_samplesheet           // channel: samplesheet read in from --input
 
     main:
     skip_tools = params.skip_tools ? params.skip_tools.split(',') : []
@@ -105,7 +105,18 @@ workflow SEQINSPECTOR {
         ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
         ch_versions = ch_versions.mix(FASTQSCREEN_FASTQSCREEN.out.versions.first())
     }
+    // MODULE: Create BWA-MEM2 index of the reference genome
+    
+    log.info "params.genome: ${params.genome}"
+    if (!("bwamem2_index" in skip_tools) && params.genome) {
+    ch_reference_fasta = Channel.fromPath(params.genome, checkIfExists: true)
+    BWAMEM2_INDEX (
+        ch_reference_fasta
+    )
+    ch_bwamem2_index = BWAMEM2_INDEX.out.index
+    ch_versions = ch_versions.mix(BWAMEM2_INDEX.out.versions.first())
 
+}
     //
     // Collate and save software versions
     //
