@@ -19,6 +19,8 @@ include { paramsSummaryMap              } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc          } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML        } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText        } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { getGenomeAttribute            } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
+
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     RUN MAIN WORKFLOW
@@ -106,17 +108,20 @@ workflow SEQINSPECTOR {
         ch_versions = ch_versions.mix(FASTQSCREEN_FASTQSCREEN.out.versions.first())
     }
     // MODULE: Create BWA-MEM2 index of the reference genome
-    
-    log.info "params.genome: ${params.genome}"
-    if (!("bwamem2_index" in skip_tools) && params.genome) {
-    ch_reference_fasta = Channel.fromPath(params.genome, checkIfExists: true)
-    BWAMEM2_INDEX (
-        ch_reference_fasta
-    )
-    ch_bwamem2_index = BWAMEM2_INDEX.out.index
-    ch_versions = ch_versions.mix(BWAMEM2_INDEX.out.versions.first())
 
-}
+    if (!("bwamem2_index" in skip_tools)) {
+        def fasta_file = getGenomeAttribute('fasta')
+        log.warn" fasta_file: ${fasta_file}"
+        ch_reference_fasta = Channel.fromPath(fasta_file, checkIfExists: true).map { that -> [[id:that.Name], that] }
+        log.info "ch_reference_fasta: ${ch_reference_fasta}"
+        BWAMEM2_INDEX (
+            ch_reference_fasta
+        )
+        ch_bwamem2_index = BWAMEM2_INDEX.out.index
+        ch_versions = ch_versions.mix(BWAMEM2_INDEX.out.versions.first())
+
+    }
+
     //
     // Collate and save software versions
     //

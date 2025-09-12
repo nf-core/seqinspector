@@ -29,7 +29,8 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_seqi
 // TODO nf-core: Remove this line if you don't need a FASTA file
 //   This is an example of how to use getGenomeAttribute() to fetch parameters
 //   from igenomes.config using `--genome`
-params.fasta = getGenomeAttribute('fasta') 
+// params.fasta = getGenomeAttribute('fasta')
+
 
 /* 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -50,6 +51,7 @@ workflow NFCORE_SEQINSPECTOR {
     //
     // WORKFLOW: Run pipeline
     //
+
     SEQINSPECTOR (
         samplesheet
     )
