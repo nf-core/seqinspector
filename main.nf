@@ -31,7 +31,6 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_seqi
 //   from igenomes.config using `--genome`
 // params.fasta = getGenomeAttribute('fasta')
 
-
 /* 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     NAMED WORKFLOWS FOR PIPELINE

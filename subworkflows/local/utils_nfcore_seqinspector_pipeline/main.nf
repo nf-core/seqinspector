@@ -209,6 +209,7 @@ def getGenomeAttribute(attribute) {
             return params.genomes[ params.genome ][ attribute ]
         }
     }
+    return null
 }
 
 
