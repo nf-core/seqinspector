@@ -11,6 +11,7 @@ include { FASTQC                        } from '../modules/nf-core/fastqc/main'
 include { SEQFU_STATS                   } from '../modules/nf-core/seqfu/stats'
 include { FASTQSCREEN_FASTQSCREEN       } from '../modules/nf-core/fastqscreen/fastqscreen/main'
 include { BWAMEM2_INDEX                 } from '../modules/nf-core/bwamem2/index/main'
+include { BWAMEM2_MEM                   } from '../modules/nf-core/bwamem2/mem/main'                                                                                                                                                                       
 
 include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc/main'
 include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc/main'
@@ -112,16 +113,43 @@ workflow SEQINSPECTOR {
     if (!("bwamem2_index" in skip_tools)) {
         def fasta_file = getGenomeAttribute('fasta')
         log.warn" fasta_file: ${fasta_file}"
-        ch_reference_fasta = Channel.fromPath(fasta_file, checkIfExists: true).map { that -> [[id:that.Name], that] }
+        ch_reference_fasta = Channel.fromPath(fasta_file, checkIfExists: true)
+                               .map { [[id: it.name], it] }
+                               .first()  // ✅ Value channel
         log.info "ch_reference_fasta: ${ch_reference_fasta}"
         BWAMEM2_INDEX (
             ch_reference_fasta
         )
-        ch_bwamem2_index = BWAMEM2_INDEX.out.index
+        ch_bwamem2_index = BWAMEM2_INDEX.out.index.first()
         ch_versions = ch_versions.mix(BWAMEM2_INDEX.out.versions.first())
 
     }
+    // MODULE: Align reads with BWA-MEM2
+    if (!("bwamem2_mem" in skip_tools)) {
+           
+        // // Debug all input channels
+        // ch_sample_sized.count().view { "DEBUG - Samples: $it" }
+        // ch_bwamem2_index.count().view { "DEBUG - Index count: $it" }
+        // ch_bwamem2_index.view { "DEBUG - Index content: $it" }
+        // ch_reference_fasta.count().view { "DEBUG - Fasta count: $it" }
+        // ch_reference_fasta.view { "DEBUG - Fasta content: $it" }
+        
+    //     BWAMEM2_MEM (
+    //     ch_sample_sized.map {meta, subsampled -> [meta, subsampled]},
+    //     ch_bwamem2_index,
+    //     ch_reference_fasta,
+    //     params.sort_bam ?: true  // Example default value, adjust as needed
+    // )
+        BWAMEM2_MEM (
+            ch_sample_sized,        // ✅ Samples: [[meta], [reads]]
+            ch_bwamem2_index,       // ✅ Index: [[meta], [index]]
+            ch_reference_fasta,     // ✅ Fasta: [[meta], [fasta]]
+            params.sort_bam ?: true // ✅ Boolean
+        )
+        ch_bwamem2_mem = BWAMEM2_MEM.out
+        ch_versions = ch_versions.mix(BWAMEM2_MEM.out.versions.first())
 
+}
     //
     // Collate and save software versions
     //
