@@ -166,7 +166,7 @@
                     "default": true,
                     "description": "Sort BAM files after alignment",
                     "help_text": "If true, BAM files produced by alignment will be sorted by genomic coordinates."
-               },
+                },
                 "publish_dir_mode": {
                     "type": "string",
                     "default": "copy",
