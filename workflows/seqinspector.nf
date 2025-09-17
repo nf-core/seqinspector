@@ -115,11 +115,12 @@ workflow SEQINSPECTOR {
         ch_reference_fasta = Channel.fromPath(fasta_file, checkIfExists: true)
                                     .map { [[id: it.name], it] }
                                     .first()
+
         BWAMEM2_INDEX (
             ch_reference_fasta
         )
-        ch_bwamem2_index = BWAMEM2_INDEX.out.index.first()
-        ch_versions = ch_versions.mix(BWAMEM2_INDEX.out.versions.first())
+        ch_bwamem2_index = BWAMEM2_INDEX.out.index
+        ch_versions = ch_versions.mix(BWAMEM2_INDEX.out.versions)
 
     }
     // MODULE: Align reads with BWA-MEM2
@@ -131,7 +132,7 @@ workflow SEQINSPECTOR {
             params.sort_bam ?: true
         )
         ch_bwamem2_mem = BWAMEM2_MEM.out
-        ch_versions = ch_versions.mix(BWAMEM2_MEM.out.versions.first())
+        ch_versions = ch_versions.mix(BWAMEM2_MEM.out.versions)
 
 }
     //
