@@ -113,8 +113,7 @@ workflow SEQINSPECTOR {
     if (!("bwamem2_index" in skip_tools)) {
         def fasta_file = getGenomeAttribute('fasta')
         ch_reference_fasta = Channel.fromPath(fasta_file, checkIfExists: true)
-                                    .map { [[id: it.name], it] }
-                                    .first()
+                                    .map { [[id: it.name], it] }.collect()
 
         BWAMEM2_INDEX (
             ch_reference_fasta
@@ -190,7 +189,7 @@ workflow SEQINSPECTOR {
     )
 
     ch_tags = ch_multiqc_files
-        .map { meta, sample -> meta.tags }
+        .map { meta, _sample -> meta.tags }
         .flatten()
         .unique()
 
@@ -200,13 +199,13 @@ workflow SEQINSPECTOR {
     // Group samples by tag
     tagged_mqc_files = ch_tags
         .combine(ch_multiqc_files)
-        .filter { sample_tag, meta, sample -> sample_tag in meta.tags }
-        .map { sample_tag, meta, sample -> [sample_tag, sample] }
+        .filter { sample_tag, meta, _sample -> sample_tag in meta.tags }
+        .map { sample_tag, _meta, sample -> [sample_tag, sample] }
         .mix(multiqc_extra_files_per_tag)
         .groupTuple()
         .tap { mqc_by_tag }
         .collectFile {
-            sample_tag, samples ->
+            sample_tag, _samples ->
             def prefix_tag = "[TAG:${sample_tag}]"
             [
                 "${prefix_tag}_multiqc_extra_config.yml",
@@ -219,7 +218,7 @@ workflow SEQINSPECTOR {
         }
         .map { file -> [ (file =~ /\[TAG:(.+)\]/)[0][1], file ] }
         .join(mqc_by_tag)
-        .multiMap { sample_tag, config, samples ->
+        .multiMap { _sample_tag, config, samples ->
             samples_per_tag: samples.flatten()
             config: config
         }
