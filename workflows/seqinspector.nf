@@ -113,8 +113,8 @@ workflow SEQINSPECTOR {
     if (!("bwamem2_index" in skip_tools)) {
         def fasta_file = getGenomeAttribute('fasta')
         ch_reference_fasta = Channel.fromPath(fasta_file, checkIfExists: true)
-                               .map { [[id: it.name], it] }
-                               .first()
+                                    .map { [[id: it.name], it] }
+                                    .first()
         BWAMEM2_INDEX (
             ch_reference_fasta
         )
