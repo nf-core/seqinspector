@@ -11,7 +11,7 @@ include { FASTQC                        } from '../modules/nf-core/fastqc/main'
 include { SEQFU_STATS                   } from '../modules/nf-core/seqfu/stats'
 include { FASTQSCREEN_FASTQSCREEN       } from '../modules/nf-core/fastqscreen/fastqscreen/main'
 include { BWAMEM2_INDEX                 } from '../modules/nf-core/bwamem2/index/main'
-include { BWAMEM2_MEM                   } from '../modules/nf-core/bwamem2/mem/main'                                                                                                                                                                       
+include { BWAMEM2_MEM                   } from '../modules/nf-core/bwamem2/mem/main'
 
 include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc/main'
 include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc/main'
@@ -124,7 +124,6 @@ workflow SEQINSPECTOR {
     }
     // MODULE: Align reads with BWA-MEM2
     if (!("bwamem2_mem" in skip_tools)) {
-           
         BWAMEM2_MEM (
             ch_sample_sized,
             ch_bwamem2_index,
