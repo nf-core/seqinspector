@@ -94,7 +94,7 @@
                 },
                 "fastq_screen_references": {
                     "type": "string",
-                    "default": "/Users/agrimabhatt/abh_seqinspector/seqinspector/assets/example_fastq_screen_references.csv",
+                    "default": "${projectDir}/assets/example_fastq_screen_references.csv",
                     "fa_icon": "fas fa-search",
                     "description": "A .csv of reference genomes to be mapped against by FastQ Screen"
                 }

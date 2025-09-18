@@ -1,53 +1,243 @@
 {
     "Miseq data test (skip all tools)": {
         "content": [
-            0,
-            null,
+            3,
+            {
+                "BWAMEM2_INDEX": {
+                    "bwamem2": "2.2.1"
+                },
+                "BWAMEM2_MEM": {
+                    "bwamem2": "2.2.1",
+                    "samtools": 1.21
+                },
+                "Workflow": {
+                    "nf-core/seqinspector": "v1.0dev"
+                }
+            },
             [
-                "pipeline_info"
+                "bwamem2_index",
+                "bwamem2_index/bwamem2",
+                "bwamem2_index/bwamem2/genome.fa.0123",
+                "bwamem2_index/bwamem2/genome.fa.amb",
+                "bwamem2_index/bwamem2/genome.fa.ann",
+                "bwamem2_index/bwamem2/genome.fa.bwt.2bit.64",
+                "bwamem2_index/bwamem2/genome.fa.pac",
+                "bwamem2_mem",
+                "bwamem2_mem/SAMPLE_SINGLE_END_1.bam",
+                "multiqc",
+                "multiqc/global_report",
+                "multiqc/global_report/multiqc_data",
+                "multiqc/global_report/multiqc_data/multiqc.log",
+                "multiqc/global_report/multiqc_data/multiqc_citations.txt",
+                "multiqc/global_report/multiqc_data/multiqc_data.json",
+                "multiqc/global_report/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/global_report/multiqc_data/multiqc_sources.txt",
+                "multiqc/global_report/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"
             ],
             [
-                
+                "genome.fa.0123:md5,8af61f4bc59cc2fe7b396db46a2173f3",
+                "genome.fa.amb:md5,657cfdf0628d140d645d8d01a24f0c5f",
+                "genome.fa.ann:md5,4439f90bdaaf2cdf9089c9f7f07b9d6b",
+                "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
+                "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
+                "SAMPLE_SINGLE_END_1.bam:md5,ed3f6acd94560448218a288623c810e6",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-17T09:46:18.576771"
+        "timestamp": "2025-09-18T11:05:17.619991"
     },
     "MiSeq data test (single end reads)": {
         "content": [
-            0,
-            null,
+            6,
+            {
+                "BWAMEM2_INDEX": {
+                    "bwamem2": "2.2.1"
+                },
+                "BWAMEM2_MEM": {
+                    "bwamem2": "2.2.1",
+                    "samtools": 1.21
+                },
+                "FASTQC": {
+                    "fastqc": "0.12.1"
+                },
+                "FASTQSCREEN_FASTQSCREEN": {
+                    "fastqscreen": "0.16.0"
+                },
+                "SEQFU_STATS": {
+                    "seqfu": "1.20.3"
+                },
+                "Workflow": {
+                    "nf-core/seqinspector": "v1.0dev"
+                }
+            },
             [
-                "pipeline_info"
+                "bwamem2_index",
+                "bwamem2_index/bwamem2",
+                "bwamem2_index/bwamem2/genome.fa.0123",
+                "bwamem2_index/bwamem2/genome.fa.amb",
+                "bwamem2_index/bwamem2/genome.fa.ann",
+                "bwamem2_index/bwamem2/genome.fa.bwt.2bit.64",
+                "bwamem2_index/bwamem2/genome.fa.pac",
+                "bwamem2_mem",
+                "bwamem2_mem/SAMPLE_SINGLE_END_1.bam",
+                "fastqc",
+                "fastqc/SAMPLE_SINGLE_END_1_fastqc.html",
+                "fastqc/SAMPLE_SINGLE_END_1_fastqc.zip",
+                "fastqscreen",
+                "fastqscreen/SAMPLE_SINGLE_END_1_screen.html",
+                "fastqscreen/SAMPLE_SINGLE_END_1_screen.png",
+                "fastqscreen/SAMPLE_SINGLE_END_1_screen.txt",
+                "multiqc",
+                "multiqc/global_report",
+                "multiqc/global_report/multiqc_data",
+                "multiqc/global_report/multiqc_data/fastq_screen_plot.txt",
+                "multiqc/global_report/multiqc_data/fastqc-status-check-heatmap.txt",
+                "multiqc/global_report/multiqc_data/fastqc_overrepresented_sequences_plot.txt",
+                "multiqc/global_report/multiqc_data/fastqc_per_base_n_content_plot.txt",
+                "multiqc/global_report/multiqc_data/fastqc_per_base_sequence_quality_plot.txt",
+                "multiqc/global_report/multiqc_data/fastqc_per_sequence_gc_content_plot_Counts.txt",
+                "multiqc/global_report/multiqc_data/fastqc_per_sequence_gc_content_plot_Percentages.txt",
+                "multiqc/global_report/multiqc_data/fastqc_per_sequence_quality_scores_plot.txt",
+                "multiqc/global_report/multiqc_data/fastqc_sequence_counts_plot.txt",
+                "multiqc/global_report/multiqc_data/fastqc_sequence_duplication_levels_plot.txt",
+                "multiqc/global_report/multiqc_data/fastqc_top_overrepresented_sequences_table.txt",
+                "multiqc/global_report/multiqc_data/multiqc.log",
+                "multiqc/global_report/multiqc_data/multiqc_citations.txt",
+                "multiqc/global_report/multiqc_data/multiqc_data.json",
+                "multiqc/global_report/multiqc_data/multiqc_fastq_screen.txt",
+                "multiqc/global_report/multiqc_data/multiqc_fastqc.txt",
+                "multiqc/global_report/multiqc_data/multiqc_general_stats.txt",
+                "multiqc/global_report/multiqc_data/multiqc_seqfu.txt",
+                "multiqc/global_report/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/global_report/multiqc_data/multiqc_sources.txt",
+                "multiqc/global_report/multiqc_plots",
+                "multiqc/global_report/multiqc_plots/pdf",
+                "multiqc/global_report/multiqc_plots/png",
+                "multiqc/global_report/multiqc_plots/svg",
+                "multiqc/global_report/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
+                "seqfu_stats",
+                "seqfu_stats/SAMPLE_SINGLE_END_1_seqfu.tsv",
+                "seqfu_stats/SAMPLE_SINGLE_END_1_seqfu_mqc.txt"
             ],
             [
-                
+                "genome.fa.0123:md5,8af61f4bc59cc2fe7b396db46a2173f3",
+                "genome.fa.amb:md5,657cfdf0628d140d645d8d01a24f0c5f",
+                "genome.fa.ann:md5,4439f90bdaaf2cdf9089c9f7f07b9d6b",
+                "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
+                "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
+                "SAMPLE_SINGLE_END_1.bam:md5,ed3f6acd94560448218a288623c810e6",
+                "SAMPLE_SINGLE_END_1_screen.png:md5,ad98ae0f39335aede67e0a233cf16616",
+                "SAMPLE_SINGLE_END_1_screen.txt:md5,588b1b1f2d307fae7272ab0819e4bac5",
+                "fastq_screen_plot.txt:md5,8393eabda6ebac90ff00533f9562271f",
+                "fastqc-status-check-heatmap.txt:md5,8f98652c377741c974e485652a19f37f",
+                "fastqc_overrepresented_sequences_plot.txt:md5,cdc7479933cae03e0043ae794f81c304",
+                "fastqc_per_base_n_content_plot.txt:md5,dd8d6976dc5ea8cf67d9fa2c3be9e24b",
+                "fastqc_per_base_sequence_quality_plot.txt:md5,5f9a98d3068aab17f26731ae0615f41a",
+                "fastqc_per_sequence_gc_content_plot_Counts.txt:md5,1de1333bb959189dcf8230706f60dbfc",
+                "fastqc_per_sequence_gc_content_plot_Percentages.txt:md5,62f140bfa52d462c9c499dfdabc35476",
+                "fastqc_per_sequence_quality_scores_plot.txt:md5,5fda43eb9b7c60cf6b4348f734a94b26",
+                "fastqc_sequence_counts_plot.txt:md5,00cd6842465f7aa9ae75434e175946a6",
+                "fastqc_sequence_duplication_levels_plot.txt:md5,c3befe0812d2f1c23d5e75e6fccf0622",
+                "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
+                "multiqc_fastq_screen.txt:md5,bd50a8641c6481cc497fc6e3e9af2607",
+                "multiqc_fastqc.txt:md5,7b1b7fd457b60404768045b148d4c0a8",
+                "multiqc_seqfu.txt:md5,8e6989a2392f599a09a5c3edf8119702",
+                "SAMPLE_SINGLE_END_1_seqfu.tsv:md5,f65c868e562291647d539090698ba5eb",
+                "SAMPLE_SINGLE_END_1_seqfu_mqc.txt:md5,1de529f1e2cbd4df0945cb08a24d6d39"
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-17T09:45:44.557713"
+        "timestamp": "2025-09-18T11:02:54.782814"
     },
     "Miseq data test (skip fastqc)": {
         "content": [
-            0,
-            null,
+            5,
+            {
+                "BWAMEM2_INDEX": {
+                    "bwamem2": "2.2.1"
+                },
+                "BWAMEM2_MEM": {
+                    "bwamem2": "2.2.1",
+                    "samtools": 1.21
+                },
+                "FASTQSCREEN_FASTQSCREEN": {
+                    "fastqscreen": "0.16.0"
+                },
+                "SEQFU_STATS": {
+                    "seqfu": "1.20.3"
+                },
+                "Workflow": {
+                    "nf-core/seqinspector": "v1.0dev"
+                }
+            },
             [
-                "pipeline_info"
+                "bwamem2_index",
+                "bwamem2_index/bwamem2",
+                "bwamem2_index/bwamem2/genome.fa.0123",
+                "bwamem2_index/bwamem2/genome.fa.amb",
+                "bwamem2_index/bwamem2/genome.fa.ann",
+                "bwamem2_index/bwamem2/genome.fa.bwt.2bit.64",
+                "bwamem2_index/bwamem2/genome.fa.pac",
+                "bwamem2_mem",
+                "bwamem2_mem/SAMPLE_SINGLE_END_1.bam",
+                "fastqscreen",
+                "fastqscreen/SAMPLE_SINGLE_END_1_screen.html",
+                "fastqscreen/SAMPLE_SINGLE_END_1_screen.png",
+                "fastqscreen/SAMPLE_SINGLE_END_1_screen.txt",
+                "multiqc",
+                "multiqc/global_report",
+                "multiqc/global_report/multiqc_data",
+                "multiqc/global_report/multiqc_data/fastq_screen_plot.txt",
+                "multiqc/global_report/multiqc_data/multiqc.log",
+                "multiqc/global_report/multiqc_data/multiqc_citations.txt",
+                "multiqc/global_report/multiqc_data/multiqc_data.json",
+                "multiqc/global_report/multiqc_data/multiqc_fastq_screen.txt",
+                "multiqc/global_report/multiqc_data/multiqc_seqfu.txt",
+                "multiqc/global_report/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/global_report/multiqc_data/multiqc_sources.txt",
+                "multiqc/global_report/multiqc_plots",
+                "multiqc/global_report/multiqc_plots/pdf",
+                "multiqc/global_report/multiqc_plots/png",
+                "multiqc/global_report/multiqc_plots/svg",
+                "multiqc/global_report/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
+                "seqfu_stats",
+                "seqfu_stats/SAMPLE_SINGLE_END_1_seqfu.tsv",
+                "seqfu_stats/SAMPLE_SINGLE_END_1_seqfu_mqc.txt"
             ],
             [
-                
+                "genome.fa.0123:md5,8af61f4bc59cc2fe7b396db46a2173f3",
+                "genome.fa.amb:md5,657cfdf0628d140d645d8d01a24f0c5f",
+                "genome.fa.ann:md5,4439f90bdaaf2cdf9089c9f7f07b9d6b",
+                "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
+                "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
+                "SAMPLE_SINGLE_END_1.bam:md5,ed3f6acd94560448218a288623c810e6",
+                "SAMPLE_SINGLE_END_1_screen.png:md5,ad98ae0f39335aede67e0a233cf16616",
+                "SAMPLE_SINGLE_END_1_screen.txt:md5,588b1b1f2d307fae7272ab0819e4bac5",
+                "fastq_screen_plot.txt:md5,8393eabda6ebac90ff00533f9562271f",
+                "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
+                "multiqc_fastq_screen.txt:md5,bd50a8641c6481cc497fc6e3e9af2607",
+                "multiqc_seqfu.txt:md5,8e6989a2392f599a09a5c3edf8119702",
+                "SAMPLE_SINGLE_END_1_seqfu.tsv:md5,f65c868e562291647d539090698ba5eb",
+                "SAMPLE_SINGLE_END_1_seqfu_mqc.txt:md5,1de529f1e2cbd4df0945cb08a24d6d39"
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-17T09:46:02.359222"
+        "timestamp": "2025-09-18T11:04:10.524764"
     }
 }

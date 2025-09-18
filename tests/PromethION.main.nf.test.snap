@@ -1,19 +1,61 @@
 {
     "PromethION data test": {
         "content": [
-            0,
-            null,
+            4,
+            {
+                "BWAMEM2_INDEX": {
+                    "bwamem2": "2.2.1"
+                },
+                "FASTQC": {
+                    "fastqc": "0.12.1"
+                },
+                "FASTQSCREEN_FASTQSCREEN": {
+                    "fastqscreen": "0.16.0"
+                },
+                "SEQFU_STATS": {
+                    "seqfu": "1.20.3"
+                },
+                "Workflow": {
+                    "nf-core/seqinspector": "v1.0dev"
+                }
+            },
             [
-                "pipeline_info"
+                "bwamem2_index",
+                "bwamem2_index/bwamem2",
+                "bwamem2_index/bwamem2/genome.fa.0123",
+                "bwamem2_index/bwamem2/genome.fa.amb",
+                "bwamem2_index/bwamem2/genome.fa.ann",
+                "bwamem2_index/bwamem2/genome.fa.bwt.2bit.64",
+                "bwamem2_index/bwamem2/genome.fa.pac",
+                "fastqc",
+                "fastqc/hg001_1_fastqc.html",
+                "fastqc/hg001_1_fastqc.zip",
+                "fastqscreen",
+                "fastqscreen/hg001_1_screen.html",
+                "fastqscreen/hg001_1_screen.png",
+                "fastqscreen/hg001_1_screen.txt",
+                "pipeline_info",
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
+                "seqfu_stats",
+                "seqfu_stats/hg001_1_seqfu.tsv",
+                "seqfu_stats/hg001_1_seqfu_mqc.txt"
             ],
             [
-                
+                "genome.fa.0123:md5,8af61f4bc59cc2fe7b396db46a2173f3",
+                "genome.fa.amb:md5,657cfdf0628d140d645d8d01a24f0c5f",
+                "genome.fa.ann:md5,4439f90bdaaf2cdf9089c9f7f07b9d6b",
+                "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
+                "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
+                "hg001_1_screen.png:md5,b9c58e388f18ad11f4c2e29e9b573a5e",
+                "hg001_1_screen.txt:md5,8e53ea043d658a130f4b8ca455e2ba9b",
+                "hg001_1_seqfu.tsv:md5,b133752c897afbb4d8721b911fa117d4",
+                "hg001_1_seqfu_mqc.txt:md5,6285f582c03faa70e8dcb3503e5db728"
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-17T09:47:47.762241"
+        "timestamp": "2025-09-18T11:49:53.715982"
     }
 }
