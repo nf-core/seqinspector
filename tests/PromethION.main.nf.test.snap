@@ -9,9 +9,6 @@
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
-                "FASTQSCREEN_FASTQSCREEN": {
-                    "fastqscreen": "0.16.0"
-                },
                 "SEQFU_STATS": {
                     "seqfu": "1.20.3"
                 },
@@ -56,6 +53,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-18T11:49:53.715982"
+        "timestamp": "2025-09-19T10:26:18.425518"
     }
 }
