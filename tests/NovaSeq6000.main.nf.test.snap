@@ -226,11 +226,11 @@
                 "genome.fa.ann:md5,4439f90bdaaf2cdf9089c9f7f07b9d6b",
                 "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
                 "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
-                "Sample1_1.bam:md5,39c3c91eedd90307315acec7aa0b9a35",
-                "Sample23_3.bam:md5,3d536a6680470138eb361eed198a8efd",
-                "SampleA_2.bam:md5,ad691a2590eed5bbc56a56dd24493e4e",
-                "Undetermined_5.bam:md5,06077f7de3641b4b86e08f6a9cdb5a97",
-                "sampletest_4.bam:md5,7dcb21eb9fec77b862af33e692678dbd",
+                "Sample1_1.bam:md5,4faa63a4f5727030602c3a0a44adc49e",
+                "Sample23_3.bam:md5,cdb70dd996290e8d78c95fac6d8593ed",
+                "SampleA_2.bam:md5,f43f5370d028c3bca91554a330c46f1d",
+                "Undetermined_5.bam:md5,a96a70aee79f991514a516c3f6f65230",
+                "sampletest_4.bam:md5,159d33f5a6bea2f97c9444e6149fc280",
                 "Sample1_1_screen.png:md5,562256290643b51e4374c2225a15f463",
                 "Sample1_1_screen.txt:md5,3b184ef10eeb99043a85826534a4ee28",
                 "Sample23_3_screen.png:md5,6bb2caf67b9b2ed25d3d5f32c343e9ab",
@@ -332,6 +332,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-18T11:15:39.145326"
+        "timestamp": "2025-09-22T15:32:30.048406"
     }
 }
