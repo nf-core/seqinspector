@@ -12,6 +12,9 @@ include { SEQFU_STATS                   } from '../modules/nf-core/seqfu/stats'
 include { FASTQSCREEN_FASTQSCREEN       } from '../modules/nf-core/fastqscreen/fastqscreen/main'
 include { BWAMEM2_INDEX                 } from '../modules/nf-core/bwamem2/index/main'
 include { BWAMEM2_MEM                   } from '../modules/nf-core/bwamem2/mem/main'
+include { SAMTOOLS_INDEX                } from '../modules/nf-core/samtools/index/main'
+include { SAMTOOLS_FAIDX                } from '../modules/nf-core/samtools/faidx/main'
+include { PICARD_COLLECTMULTIPLEMETRICS } from '../modules/nf-core/picard/collectmultiplemetrics/main'
 
 include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc/main'
 include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc/main'
@@ -113,7 +116,8 @@ workflow SEQINSPECTOR {
     if (!("bwamem2_index" in skip_tools)) {
         def fasta_file = getGenomeAttribute('fasta')
         ch_reference_fasta = Channel.fromPath(fasta_file, checkIfExists: true)
-                                    .map { [[id: it.name], it] }.collect()
+                            .map { file -> tuple([id: file.name], file) }.collect()
+
 
         BWAMEM2_INDEX (
             ch_reference_fasta
@@ -130,11 +134,68 @@ workflow SEQINSPECTOR {
             ch_reference_fasta,
             params.sort_bam ?: true
         )
-        ch_bwamem2_mem = BWAMEM2_MEM.out
+        ch_bwamem2_mem = BWAMEM2_MEM.out.bam
         ch_versions = ch_versions.mix(BWAMEM2_MEM.out.versions)
+        ch_bwamem2_mem.view { "BAM: $it" }
+
 
 }
-    //
+    // MODULE: Index BAM files with Samtools
+    if (!("samtools_index" in skip_tools)) {
+
+        SAMTOOLS_INDEX (
+            ch_bwamem2_mem
+        )
+        ch_samtools_index = SAMTOOLS_INDEX.out.bai
+        ch_versions = ch_versions.mix(SAMTOOLS_INDEX.out.versions)
+        ch_samtools_index.view { "BAI: $it" }
+    }
+
+    // MODULE: Index reference FASTA with Samtools faidx
+    if (!("samtools_faidx" in skip_tools)) {
+
+        // Assume ch_fasta emits tuple(meta, fasta)
+        ch_dummy_fai = Channel.value(['dummy_meta', file('empty.fai')])
+
+
+        SAMTOOLS_FAIDX (
+            ch_reference_fasta,
+            ch_dummy_fai,
+            true           // get_sizes
+        )
+        ch_reference_fasta_fai = SAMTOOLS_FAIDX.out.fai
+        ch_versions = ch_versions.mix(SAMTOOLS_FAIDX.out.versions)
+    }
+
+    // MODULE: Prepare BAM/BAI tuples for Picard
+    // Combine BAM and BAI outputs for Picard
+    ch_bam_bai = ch_bwamem2_mem
+        .join(ch_samtools_index)
+        .map { meta, bam, bai ->
+             [meta, bam, bai]
+    }
+
+    ch_bam_bai.view { "Combined BAM/BAI for Picard: $it" }
+    ch_fasta   = ch_reference_fasta
+    ch_fai     = ch_reference_fasta_fai
+
+    ch_fasta.view { "FASTA for Picard: $it" }
+    ch_fai.view { "FAI for Picard: $it" }
+
+    // Prepare reference FASTA and FAI tuples for Picard
+    // Run Picard CollectMultipleMetrics
+    if (!("picard_collectmultiplemetrics" in skip_tools)) {
+        PICARD_COLLECTMULTIPLEMETRICS(
+            ch_bam_bai,
+            ch_fasta,
+            ch_fai
+)
+
+     ch_multiqc_files = ch_multiqc_files.mix(PICARD_COLLECTMULTIPLEMETRICS.out.metrics)
+     ch_versions = ch_versions.mix(PICARD_COLLECTMULTIPLEMETRICS.out.versions.first())
+    }
+
+
     // Collate and save software versions
     //
     softwareVersionsToYAML(ch_versions)
