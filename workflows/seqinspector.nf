@@ -44,6 +44,13 @@ workflow SEQINSPECTOR {
     ch_multiqc_extra_files = Channel.empty()
     ch_multiqc_reports     = Channel.empty()
 
+// Initialize all channels that might be used later
+    ch_bwamem2_index = Channel.empty()
+    ch_bwamem2_mem = Channel.empty()
+    ch_samtools_index = Channel.empty()
+    ch_reference_fasta_fai = Channel.empty()
+    ch_reference_fasta = Channel.empty()
+
     //
     // MODULE: Run Seqtk sample to perform subsampling
     //
@@ -141,8 +148,7 @@ workflow SEQINSPECTOR {
 
 }
     // MODULE: Index BAM files with Samtools
-    if (!("samtools_index" in skip_tools)) {
-
+    if (!("samtools_index" in skip_tools) && !("bwamem2_mem" in skip_tools)) {
         SAMTOOLS_INDEX (
             ch_bwamem2_mem
         )
@@ -169,30 +175,33 @@ workflow SEQINSPECTOR {
 
     // MODULE: Prepare BAM/BAI tuples for Picard
     // Combine BAM and BAI outputs for Picard
-    ch_bam_bai = ch_bwamem2_mem
-        .join(ch_samtools_index)
-        .map { meta, bam, bai ->
-            [meta, bam, bai]
-    }
+    if (!("picard_collectmultiplemetrics" in skip_tools) &&
+        !("bwamem2_mem" in skip_tools) &&
+        !("samtools_index" in skip_tools) &&
+        !("samtools_faidx" in skip_tools)) {
 
-    ch_bam_bai.view { "Combined BAM/BAI for Picard: $it" }
-    ch_fasta   = ch_reference_fasta
-    ch_fai     = ch_reference_fasta_fai
+        // Prepare BAM/BAI tuples for Picard
+        ch_bam_bai = ch_bwamem2_mem
+            .join(ch_samtools_index)
+            .map { meta, bam, bai ->
+                [meta, bam, bai]
+            }
 
-    ch_fasta.view { "FASTA for Picard: $it" }
-    ch_fai.view { "FAI for Picard: $it" }
+        ch_bam_bai.view { "Combined BAM/BAI for Picard: $it" }
+        ch_fasta   = ch_reference_fasta
+        ch_fai     = ch_reference_fasta_fai
 
-    // Prepare reference FASTA and FAI tuples for Picard
-    // Run Picard CollectMultipleMetrics
-    if (!("picard_collectmultiplemetrics" in skip_tools)) {
+        ch_fasta.view { "FASTA for Picard: $it" }
+        ch_fai.view { "FAI for Picard: $it" }
+
         PICARD_COLLECTMULTIPLEMETRICS(
             ch_bam_bai,
             ch_fasta,
             ch_fai
-            )
+        )
 
-    ch_multiqc_files = ch_multiqc_files.mix(PICARD_COLLECTMULTIPLEMETRICS.out.metrics)
-    ch_versions = ch_versions.mix(PICARD_COLLECTMULTIPLEMETRICS.out.versions.first())
+        ch_multiqc_files = ch_multiqc_files.mix(PICARD_COLLECTMULTIPLEMETRICS.out.metrics)
+        ch_versions = ch_versions.mix(PICARD_COLLECTMULTIPLEMETRICS.out.versions.first())
     }
 
 
