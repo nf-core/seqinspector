@@ -4,6 +4,7 @@ lint:
     - .github/CONTRIBUTING.md
   files_exist:
     - .github/workflows/ci.yml
+    - tests/default.nf.test
   nextflow_config:
     - config_defaults:
         - params.fastq_screen_references
