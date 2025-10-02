@@ -172,7 +172,7 @@ workflow SEQINSPECTOR {
     ch_bam_bai = ch_bwamem2_mem
         .join(ch_samtools_index)
         .map { meta, bam, bai ->
-             [meta, bam, bai]
+            [meta, bam, bai]
     }
 
     ch_bam_bai.view { "Combined BAM/BAI for Picard: $it" }
