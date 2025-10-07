@@ -2,30 +2,30 @@
     "NovaSeq6000 data test sample size": {
         "content": [
             "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
-            "multiqc_fastqc.txt:md5,464552ede2e3398b15009d2fe497cdfd",
-            "multiqc_general_stats.txt:md5,ee481e5e78e8eb5dfae605d0358c222a",
-            "multiqc_fastq_screen.txt:md5,b9d41d5113f10387a8549cc1b9078300",
+            "multiqc_fastqc.txt:md5,a9a9fc06badaade2d09486d2adaac1ce",
+            "multiqc_general_stats.txt:md5,13296eed367755f92d12fe70c4b8b2f4",
+            "multiqc_fastq_screen.txt:md5,62240561100f78af37e7e2438cb58f90",
             "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
-            "multiqc_fastqc.txt:md5,2bd9e3d267cee5a21755f56460e05574",
-            "multiqc_general_stats.txt:md5,780d5ade40457b44d19ce0368b72493f",
-            "multiqc_fastq_screen.txt:md5,bf4dfaccf959bc1305b9b1a190402a69",
+            "multiqc_fastqc.txt:md5,b8f6f4ed32e60ff57c64bb0ba029adba",
+            "multiqc_general_stats.txt:md5,6fedb1a47d2a5b306c28ba9b2d302f18",
+            "multiqc_fastq_screen.txt:md5,536c28d7fadc9a76944f93ac9d643272",
             "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
-            "multiqc_fastqc.txt:md5,0c6c5817dd59422b5c257fae72fc2ffc",
-            "multiqc_general_stats.txt:md5,7f2d01ba5feb51496f2bdfcaec1a7672",
-            "multiqc_fastq_screen.txt:md5,d323ad84f998f21d6924495d5767db04",
+            "multiqc_fastqc.txt:md5,e87c99cac0c4956521d9c660183722bb",
+            "multiqc_general_stats.txt:md5,aad648cdaf1cac2c2962ea94d3516f7c",
+            "multiqc_fastq_screen.txt:md5,024e1e7f9db3b0906c7aa0904229e176",
             "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
-            "multiqc_fastqc.txt:md5,50611144cc4384363db6be9a327c7f02",
-            "multiqc_general_stats.txt:md5,427406a14f0583da93f8120e4cc20c9f",
-            "multiqc_fastq_screen.txt:md5,456a39b074280f88aa8ac0c00dd7e38f",
+            "multiqc_fastqc.txt:md5,8b808265a3cfe52846f7d6a0c9624beb",
+            "multiqc_general_stats.txt:md5,e44b85891b450effc0cae8b958175569",
+            "multiqc_fastq_screen.txt:md5,fd3074930c72b666f201ae71fa27744b",
             "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
-            "multiqc_fastqc.txt:md5,911bc13b7adfd499efef327d56f4b34e",
-            "multiqc_general_stats.txt:md5,c07dc697a170838db9d95271a9cb47a5",
-            "multiqc_fastq_screen.txt:md5,fee55523161dea1bd328e653ed35bcb3"
+            "multiqc_fastqc.txt:md5,284597d876abc5a1242d8efb2d69f0d5",
+            "multiqc_general_stats.txt:md5,36cecde1b0127abd0f955771724dc71d",
+            "multiqc_fastq_screen.txt:md5,4fc422d9cb06a1d0248cc578c1eebaa2"
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-08-08T14:34:00.031836"
+        "timestamp": "2025-10-07T13:59:59.319738"
     }
 }
