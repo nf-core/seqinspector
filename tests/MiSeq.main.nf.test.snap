@@ -258,10 +258,6 @@
                 "picard_base_distribution_by_cycle__Undetermined.txt:md5,5451af67007a16e7645d0393011414af",
                 "picard_quality_by_cycle.txt:md5,46fbe44a9788f2e9184e2c1d689c2876",
                 "picard_quality_score_distribution.txt:md5,154ee2704c7adad6b26877da26fe6b77",
-                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.alignment_summary_metrics:md5,1908cd9278b61eb99088415e7e3ddd4b",
-                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.base_distribution_by_cycle_metrics:md5,2f17706448e1809713b45318c5bb296f",
-                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.quality_by_cycle_metrics:md5,36a24ef4e50ee914cc616c8dbf669060",
-                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.quality_distribution_metrics:md5,892945b3fba6cf9f4404ad7e2a705f12",
                 "genome.fa.fai:md5,6f4c0ce5258e6948135ad006e1f9ee1b",
                 "genome.fa.sizes:md5,e122f8021a5ef14104c32785cb9b7adc",
                 "SAMPLE_SINGLE_END_1.bam.bai:md5,786cb1fbbadef4acea403f83d4628d5c",
@@ -273,7 +269,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-10-07T08:36:46.667146476"
+        "timestamp": "2025-10-07T09:08:15.546626793"
     },
     "Miseq data test (skip fastqc)": {
         "content": [
@@ -439,10 +435,6 @@
                 "picard_base_distribution_by_cycle__Undetermined.txt:md5,5451af67007a16e7645d0393011414af",
                 "picard_quality_by_cycle.txt:md5,46fbe44a9788f2e9184e2c1d689c2876",
                 "picard_quality_score_distribution.txt:md5,154ee2704c7adad6b26877da26fe6b77",
-                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.alignment_summary_metrics:md5,aa301637ed9c1b1fbfa7a1de4cf2383d",
-                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.base_distribution_by_cycle_metrics:md5,79083e5d6e2477101abcf973884cb942",
-                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.quality_by_cycle_metrics:md5,d8d0d5f2cf02b11c6bcec05e9a4008a4",
-                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.quality_distribution_metrics:md5,bbd960f2bd28054fb9bd588393d4255b",
                 "genome.fa.fai:md5,6f4c0ce5258e6948135ad006e1f9ee1b",
                 "genome.fa.sizes:md5,e122f8021a5ef14104c32785cb9b7adc",
                 "SAMPLE_SINGLE_END_1.bam.bai:md5,786cb1fbbadef4acea403f83d4628d5c",
@@ -454,6 +446,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-10-07T08:37:34.627849865"
+        "timestamp": "2025-10-07T09:09:05.277171766"
     }
 }
