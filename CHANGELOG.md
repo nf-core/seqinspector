@@ -30,6 +30,7 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#99](https://github.com/nf-core/seqinspector/pull/99) Fix group reports for paired reads
 - [#107](https://github.com/nf-core/seqinspector/pull/107) Put SeqFU-stats section reports together
 - [#112](https://github.com/nf-core/seqinspector/pull/112) Making fastq_screen_references value to use parentDir
+- [#121](https://github.com/nf-core/seqinspector/pull/121) Cleanup sample naming for MultiQC report (#105)
 
 ### `Dependencies`
 
