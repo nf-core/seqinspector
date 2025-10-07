@@ -418,22 +418,6 @@
                 "picard_base_distribution_by_cycle__Undetermined.txt:md5,98f4e5ed094b41eb131d493b4f06bcd6",
                 "picard_quality_by_cycle.txt:md5,2634f306a33f648bac74bc7cd3253f9e",
                 "picard_quality_score_distribution.txt:md5,ecde9f0e859a6eecc5cea75a156c632d",
-                "SAMPLE_PAIRED_END_1_1.CollectMultipleMetrics.alignment_summary_metrics:md5,57867f2256ba20432c1d3f4e05b859cb",
-                "SAMPLE_PAIRED_END_1_1.CollectMultipleMetrics.base_distribution_by_cycle.pdf:md5,424a7301c75d420be14b82e306c8e7ac",
-                "SAMPLE_PAIRED_END_1_1.CollectMultipleMetrics.base_distribution_by_cycle_metrics:md5,6d038e0e3199130d39495ef1578e5fc0",
-                "SAMPLE_PAIRED_END_1_1.CollectMultipleMetrics.quality_by_cycle.pdf:md5,2a5bf91d08150498624850bc9e3c31d3",
-                "SAMPLE_PAIRED_END_1_1.CollectMultipleMetrics.quality_by_cycle_metrics:md5,8c2f8718a58383329a9e7705734ff061",
-                "SAMPLE_PAIRED_END_1_1.CollectMultipleMetrics.quality_distribution.pdf:md5,60dc5954e74690b1fa48f56341894c33",
-                "SAMPLE_PAIRED_END_1_1.CollectMultipleMetrics.quality_distribution_metrics:md5,a3b1f0d7602953780a28d0b20ae40423",
-                "SAMPLE_PAIRED_END_1_1.CollectMultipleMetrics.read_length_histogram.pdf:md5,4596354348f4c07cd51797e71049d6d5",
-                "SAMPLE_PAIRED_END_2_2.CollectMultipleMetrics.alignment_summary_metrics:md5,b4839168ccf4ce0e264f47186e63e24a",
-                "SAMPLE_PAIRED_END_2_2.CollectMultipleMetrics.base_distribution_by_cycle.pdf:md5,66956caa820952d0aac7b1a9632e8001",
-                "SAMPLE_PAIRED_END_2_2.CollectMultipleMetrics.base_distribution_by_cycle_metrics:md5,1bbf264e071decd795993f8c20bf4e46",
-                "SAMPLE_PAIRED_END_2_2.CollectMultipleMetrics.quality_by_cycle.pdf:md5,f96185989f1be989426de3482177684c",
-                "SAMPLE_PAIRED_END_2_2.CollectMultipleMetrics.quality_by_cycle_metrics:md5,23594926727c09a33e1c167c34882ca7",
-                "SAMPLE_PAIRED_END_2_2.CollectMultipleMetrics.quality_distribution.pdf:md5,c0668ba3e6326417b1f8fa2a7670c530",
-                "SAMPLE_PAIRED_END_2_2.CollectMultipleMetrics.quality_distribution_metrics:md5,3e8465e540fc2b1101675618cd067a54",
-                "SAMPLE_PAIRED_END_2_2.CollectMultipleMetrics.read_length_histogram.pdf:md5,7e54241d39ac011af0818a72a695d926",
                 "genome.fa.fai:md5,6f4c0ce5258e6948135ad006e1f9ee1b",
                 "genome.fa.sizes:md5,e122f8021a5ef14104c32785cb9b7adc",
                 "SAMPLE_PAIRED_END_1_1.bam.bai:md5,82724835c47f8e1d1a86e13ef469b464",
@@ -448,6 +432,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-10-07T08:13:51.663791761"
+        "timestamp": "2025-10-07T08:39:14.939736631"
     }
 }
