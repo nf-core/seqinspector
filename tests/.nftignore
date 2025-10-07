@@ -12,5 +12,10 @@ fastqc/*_fastqc.html
 fastqc/*_fastqc.zip
 picard_collectmultiplemetrics/*.{pdf}
 picard_collectmultiplemetrics/*_metrics
+picard_collectmultiplemetrics/alignment_summary_metrics
+picard_collectmultiplemetrics/base_distribution_by_cycle_metrics
+picard_collectmultiplemetrics/quality_by_cycle_metrics
+picard_collectmultiplemetrics/quality_distribution_metrics
 picard_collectmultiplemetrics/*_summary_metrics
+
 
