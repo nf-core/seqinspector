@@ -258,14 +258,14 @@
                 "picard_base_distribution_by_cycle__Undetermined.txt:md5,5451af67007a16e7645d0393011414af",
                 "picard_quality_by_cycle.txt:md5,46fbe44a9788f2e9184e2c1d689c2876",
                 "picard_quality_score_distribution.txt:md5,154ee2704c7adad6b26877da26fe6b77",
-                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.alignment_summary_metrics:md5,0915dbd5c8222f1a4b3447e3ca8c54bc",
-                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.base_distribution_by_cycle.pdf:md5,22a4abecac217c739a4c4f6bc82b0c12",
-                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.base_distribution_by_cycle_metrics:md5,0b3bb74a8ad8a0100637bdbba1e9240f",
-                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.quality_by_cycle.pdf:md5,b361c12b170688d4a70118514623f152",
-                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.quality_by_cycle_metrics:md5,e58b899f05b6f69fd0a7b3c2e544bd1d",
-                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.quality_distribution.pdf:md5,352870a1403a46efeb0a6c230be8cf8c",
-                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.quality_distribution_metrics:md5,be44d54ada8c71c45b131e99cca6cef3",
-                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.read_length_histogram.pdf:md5,2409eecbac134092f2d37b0db95a31cb",
+                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.alignment_summary_metrics:md5,c9b706b6dfc96101aac59307ecc759ad",
+                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.base_distribution_by_cycle.pdf:md5,2e4613849abf1f0542a3d9ddbe359a56",
+                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.base_distribution_by_cycle_metrics:md5,12bd2ffe9ee28218455f62c69cbdeeec",
+                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.quality_by_cycle.pdf:md5,d01a625914a989e0d4b43b9abcd04d59",
+                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.quality_by_cycle_metrics:md5,03d12f8f1bb6c493f93c122533073724",
+                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.quality_distribution.pdf:md5,7582da6777bd48398b9139f3a1c83d3a",
+                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.quality_distribution_metrics:md5,9c67dac65001f69e1c7fa3335b5a13cf",
+                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.read_length_histogram.pdf:md5,720d9526ecc44b4ce749f34f52be4296",
                 "genome.fa.fai:md5,6f4c0ce5258e6948135ad006e1f9ee1b",
                 "genome.fa.sizes:md5,e122f8021a5ef14104c32785cb9b7adc",
                 "SAMPLE_SINGLE_END_1.bam.bai:md5,786cb1fbbadef4acea403f83d4628d5c",
@@ -277,7 +277,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-10-07T07:41:25.334642847"
+        "timestamp": "2025-10-07T08:11:25.9098161"
     },
     "Miseq data test (skip fastqc)": {
         "content": [
@@ -443,14 +443,14 @@
                 "picard_base_distribution_by_cycle__Undetermined.txt:md5,5451af67007a16e7645d0393011414af",
                 "picard_quality_by_cycle.txt:md5,46fbe44a9788f2e9184e2c1d689c2876",
                 "picard_quality_score_distribution.txt:md5,154ee2704c7adad6b26877da26fe6b77",
-                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.alignment_summary_metrics:md5,b206513b1471261da900edddeb49d137",
-                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.base_distribution_by_cycle.pdf:md5,249ab4225979bc722195f99dbff93149",
-                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.base_distribution_by_cycle_metrics:md5,83ce1f2330f4207823c8fafecd5fd155",
-                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.quality_by_cycle.pdf:md5,0f2e5ef4d04365233680cb09fb512eb7",
-                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.quality_by_cycle_metrics:md5,ae688aa2981ee86109b1a1671bf7a780",
-                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.quality_distribution.pdf:md5,d8095576b6e5fe2a7f421d59fd220b79",
-                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.quality_distribution_metrics:md5,5340c302b027a90b139585624ce835bf",
-                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.read_length_histogram.pdf:md5,5426727948d459147f33bc0790fbd5c7",
+                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.alignment_summary_metrics:md5,936e7467e71d1d3db75d44ffb7538a3f",
+                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.base_distribution_by_cycle.pdf:md5,4bb1adaee56eff4c1a094893d07eaeb9",
+                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.base_distribution_by_cycle_metrics:md5,0b71b2c9064d81206fb20c3e03b365dc",
+                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.quality_by_cycle.pdf:md5,6cf5c3f833c9a01c3be8788344cd6548",
+                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.quality_by_cycle_metrics:md5,500dd6e858e670b968d4398b627e81cc",
+                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.quality_distribution.pdf:md5,39aed52abbbca6b7dc23112399ee9327",
+                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.quality_distribution_metrics:md5,78d199953999c2d31ca8e4ad91cb0716",
+                "SAMPLE_SINGLE_END_1.CollectMultipleMetrics.read_length_histogram.pdf:md5,532adafe681c023e4bac68c3f2cee5b1",
                 "genome.fa.fai:md5,6f4c0ce5258e6948135ad006e1f9ee1b",
                 "genome.fa.sizes:md5,e122f8021a5ef14104c32785cb9b7adc",
                 "SAMPLE_SINGLE_END_1.bam.bai:md5,786cb1fbbadef4acea403f83d4628d5c",
@@ -462,6 +462,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-10-07T07:42:21.005994558"
+        "timestamp": "2025-10-07T08:12:14.250499004"
     }
 }
