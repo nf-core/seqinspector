@@ -73,7 +73,7 @@ workflow PIPELINE_INITIALISATION {
     //
     nr_samples = Channel.fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
         .toList().size()
-        
+
     Channel
         .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
         .toList()
