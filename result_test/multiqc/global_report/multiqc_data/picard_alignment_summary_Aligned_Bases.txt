@@ -1,0 +1,3 @@
+Sample	Aligned Bases
+SAMPLE_PAIRED_END_1_1	95.0
+SAMPLE_PAIRED_END_2_2	80.0

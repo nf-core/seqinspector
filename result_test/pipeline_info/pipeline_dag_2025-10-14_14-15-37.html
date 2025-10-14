@@ -1,0 +1,209 @@
+<!--
+  ~ Copyright 2013-2024, Seqera Labs
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<html>
+<head>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+</head>
+<body>
+<pre class="mermaid" style="text-align: center;">
+%%{
+  init: {
+    'theme': 'base',
+    'themeVariables': {
+      'primaryColor': '#B6ECE2',
+      'primaryTextColor': '#160F26',
+      'primaryBorderColor': '#065647',
+      'lineColor': '#545555',
+      'clusterBkg': '#BABCBD22',
+      'clusterBorder': '#DDDEDE',
+      'fontFamily': 'arial'
+    }
+  }
+}%%
+flowchart TB
+    subgraph " "
+    v2["Channel.fromList"]
+    v43["Channel.fromList"]
+    v54["Channel.fromPath"]
+    v57["Channel.fromFilePairs"]
+    v59["sort_bam"]
+    v74["ch_dummy_fai"]
+    v75["get_sizes"]
+    v97["Channel.of"]
+    v100["Channel.fromPath"]
+    v102["ch_workflow_summary"]
+    v106["ch_methods_description"]
+    v114["extra_multiqc_config"]
+    v115["replace_names"]
+    v116["sample_names"]
+    v137["replace_names"]
+    v138["sample_names"]
+    end
+    subgraph " "
+    v15[" "]
+    v33[" "]
+    v39[" "]
+    v48[" "]
+    v49[" "]
+    v50[" "]
+    v61[" "]
+    v62[" "]
+    v63[" "]
+    v64[" "]
+    v67[" "]
+    v69[" "]
+    v70[" "]
+    v73[" "]
+    v77[" "]
+    v78[" "]
+    v79[" "]
+    v84[" "]
+    v86[" "]
+    v88[" "]
+    v90[" "]
+    v118[" "]
+    v119[" "]
+    v120[" "]
+    v140[" "]
+    v141[" "]
+    v142[" "]
+    v145["grouped_reports"]
+    v147[" "]
+    end
+    subgraph "NFCORE_SEQINSPECTOR [NFCORE_SEQINSPECTOR]"
+    subgraph "NFCORE_SEQINSPECTOR:SEQINSPECTOR [SEQINSPECTOR]"
+    v32(["FASTQC"])
+    v38(["SEQFU_STATS"])
+    v47(["FASTQSCREEN_FASTQSCREEN"])
+    v60(["BWAMEM2_MEM"])
+    v68(["SAMTOOLS_INDEX"])
+    v76(["SAMTOOLS_FAIDX"])
+    v89(["PICARD_COLLECTMULTIPLEMETRICS"])
+    v117(["MULTIQC_GLOBAL"])
+    v139(["MULTIQC_PER_TAG"])
+    v31(( ))
+    v34(( ))
+    v37(( ))
+    v44(( ))
+    v55(( ))
+    v58(( ))
+    v66(( ))
+    v72(( ))
+    v81(( ))
+    v87(( ))
+    v112(( ))
+    v113(( ))
+    v135(( ))
+    v136(( ))
+    v143(( ))
+    v144(( ))
+    end
+    end
+    subgraph "PIPELINE_INITIALISATION [PIPELINE_INITIALISATION]"
+    v3(( ))
+    end
+    subgraph "PIPELINE_COMPLETION [PIPELINE_COMPLETION]"
+    v146(( ))
+    end
+    v2 --> v3
+    v3 --> v15
+    v31 --> v32
+    v32 --> v33
+    v32 --> v34
+    v37 --> v38
+    v38 --> v39
+    v38 --> v34
+    v43 --> v44
+    v3 --> v47
+    v44 --> v47
+    v47 --> v50
+    v47 --> v49
+    v47 --> v48
+    v47 --> v34
+    v54 --> v55
+    v57 --> v58
+    v59 --> v60
+    v3 --> v60
+    v55 --> v60
+    v58 --> v60
+    v60 --> v64
+    v60 --> v63
+    v60 --> v62
+    v60 --> v61
+    v60 --> v68
+    v60 --> v34
+    v60 --> v66
+    v60 --> v81
+    v66 --> v67
+    v68 --> v70
+    v68 --> v69
+    v68 --> v34
+    v68 --> v72
+    v68 --> v81
+    v72 --> v73
+    v74 --> v76
+    v75 --> v76
+    v55 --> v76
+    v76 --> v79
+    v76 --> v78
+    v76 --> v77
+    v76 --> v89
+    v76 --> v34
+    v76 --> v87
+    v81 --> v84
+    v55 --> v86
+    v87 --> v88
+    v55 --> v89
+    v81 --> v89
+    v89 --> v90
+    v89 --> v34
+    v97 --> v34
+    v100 --> v112
+    v100 --> v135
+    v102 --> v34
+    v106 --> v34
+    v114 --> v117
+    v115 --> v117
+    v116 --> v117
+    v34 --> v117
+    v112 --> v117
+    v113 --> v117
+    v117 --> v120
+    v117 --> v119
+    v117 --> v118
+    v117 --> v143
+    v137 --> v139
+    v138 --> v139
+    v34 --> v139
+    v135 --> v139
+    v136 --> v139
+    v139 --> v142
+    v139 --> v141
+    v139 --> v140
+    v139 --> v144
+    v144 --> v145
+    v146 --> v147
+    v3 --> v31
+    v3 --> v37
+    v143 --> v146
+
+</pre>
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, maxTextSize: Number.MAX_SAFE_INTEGER, maxEdges: Number.MAX_SAFE_INTEGER });
+</script>
+</body>
+</html>

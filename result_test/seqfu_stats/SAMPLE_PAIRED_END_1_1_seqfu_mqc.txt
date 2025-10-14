@@ -1,0 +1,40 @@
+# plot_type: 'table'
+# section_name: 'SeqFu stats'
+# description: 'Statistics on sequence lengths of a set of FASTA/FASTQ files, generated with <a href="https://telatin.github.io/seqfu2">SeqFu 1.20.3</a>'
+# pconfig:
+#     namespace: 'Cust Data'
+# headers:
+#     col1:
+#         title: '#Seqs'
+#         description: 'Number of sequences'
+#         format: '{:,.0f}'
+#     col2:
+#         title: 'Total bp'
+#         description: 'Total size of the dataset'
+#     col3:
+#         title: 'Avg'
+#         description: 'Average sequence length'
+#     col4:
+#         title: 'N50'
+#         description: '50% of the sequences are longer than this size'
+#     col5:
+#         title: 'N75'
+#         description: '75% of the sequences are longer than this size'
+#     col6:
+#         title: 'N90'
+#         description: '90% of the sequences are longer than this size'
+#     col7:
+#         title: 'Min'
+#         description: 'Length of the shortest sequence'
+#     col8:
+#         title: 'Max'
+#         description: 'Length of the longest sequence'
+#     col9:
+#         title: 'auN'
+#         description: 'Area under the Nx curve'
+#     col10:
+#         title: 'GC'
+#         description: 'Relative GC content (excluding Ns)'
+Sample	col1	col2	col3	col4	col5	col6	col7	col8	col9	col10
+Bpacificus-ATCC10987-rep1-sWGS-MiSeqi100-241111_S1_L001_R1_001.fastq.gz	10000	1510000	151.0000000	151	151	151	0.0151000	151	151	NaN
+Bpacificus-ATCC10987-rep1-sWGS-MiSeqi100-241111_S1_L001_R2_001.fastq.gz	10000	1510000	151.0000000	151	151	151	0.0151000	151	151	NaN

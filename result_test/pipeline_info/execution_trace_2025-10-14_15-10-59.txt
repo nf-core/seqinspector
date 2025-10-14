@@ -1,0 +1,2 @@
+task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
+3	83/9789a5	36365	NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQC (SAMPLE_PAIRED_END_1_1)	ABORTED	-	2025-10-14 15:11:10.985	-	-	-	-	-	-	-

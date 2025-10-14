@@ -1,0 +1,3 @@
+Sample	Aligned Reads	Unaligned Reads
+SAMPLE_PAIRED_END_1_1	1.5	9998.5
+SAMPLE_PAIRED_END_2_2	1.0	9999.0

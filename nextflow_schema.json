@@ -94,7 +94,7 @@
                 },
                 "fastq_screen_references": {
                     "type": "string",
-                    "default": "${projectDir}/assets/example_fastq_screen_references.csv",
+                    "default": "/Users/agrimabhatt/seqinspector/assets/example_fastq_screen_references.csv",
                     "fa_icon": "fas fa-search",
                     "description": "A .csv of reference genomes to be mapped against by FastQ Screen"
                 }
@@ -214,7 +214,8 @@
                 "modules_testdata_base_path": {
                     "type": "string",
                     "description": "Base path / URL for data used in the modules",
-                    "hidden": true
+                    "hidden": true,
+                    "default": "s3://ngi-igenomes/testdata/nf-core/modules/"
                 },
                 "multiqc_config": {
                     "type": "string",
@@ -270,5 +271,10 @@
         {
             "$ref": "#/$defs/generic_options"
         }
-    ]
+    ],
+    "properties": {
+        "bwa_index": {
+            "type": "string"
+        }
+    }
 }
