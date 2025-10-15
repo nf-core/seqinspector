@@ -16,5 +16,5 @@ SAMTOOLS_INDEX:
 SEQFU_STATS:
   seqfu: 1.20.3
 Workflow:
-    nf-core/seqinspector: v1.0dev
-    Nextflow: 25.04.7
+  nf-core/seqinspector: v1.0dev
+  Nextflow: 25.04.7

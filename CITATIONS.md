@@ -38,7 +38,6 @@
 
 - [Picard Tools](https://broadinstitute.github.io/picard/)
 
-
 ## Software packaging/containerisation tools
 
 - [Anaconda](https://anaconda.com)
