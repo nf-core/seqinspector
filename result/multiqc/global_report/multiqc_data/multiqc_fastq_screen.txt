@@ -1,5 +1,0 @@
-Sample	total_reads	Ecoli counts	Ecoli percentage	PhiX counts	PhiX percentage	Scerevisiae counts	Scerevisiae percentage	No hits counts	No hits percentage
-SAMPLE_PAIRED_END_1_1_1_screen	10000	19.0	0.19	0.0	0.0	0.0	0.0	9981	99.81
-SAMPLE_PAIRED_END_1_1_2_screen	10000	26.0	0.26	0.0	0.0	3.0	0.03	9971	99.71
-SAMPLE_PAIRED_END_2_2_1_screen	10000	22.0	0.22	0.0	0.0	0.0	0.0	9978	99.78
-SAMPLE_PAIRED_END_2_2_2_screen	10000	25.0	0.25	0.0	0.0	2.0	0.02	9973	99.73

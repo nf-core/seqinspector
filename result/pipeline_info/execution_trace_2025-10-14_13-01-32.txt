@@ -1,2 +1,0 @@
-task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
-1	fc/f00808	-	NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQC (SAMPLE_PAIRED_END_1_1)	FAILED	-	-	-	-	-	-	-	-	-
