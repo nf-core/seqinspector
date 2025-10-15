@@ -37,7 +37,7 @@
 4. Index aligned BAM files ([`SAMtools`](http://github.com/samtools))
 5. Create FASTA index ([`SAMtools`](http://github.com/samtools))
 6. Collect multiple QC metrics ([`Picard CollectMultipleMetrics`](https://broadinstitute.github.io/picard/picard-metric-definitions.html))
-5. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
+7. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
 
 ## Usage
 
