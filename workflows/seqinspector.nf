@@ -168,7 +168,7 @@ workflow SEQINSPECTOR {
     ch_bam_bai = ch_bwamem2_mem
         .join(ch_samtools_index)
         .map { meta, bam, bai ->
-             [meta, bam, bai]
+            [meta, bam, bai]
     }
 
     ch_bam_bai.view { "Combined BAM/BAI for Picard: $it" }
@@ -187,8 +187,8 @@ workflow SEQINSPECTOR {
             ch_fai
 )
 
-     ch_multiqc_files = ch_multiqc_files.mix(PICARD_COLLECTMULTIPLEMETRICS.out.metrics)
-     ch_versions = ch_versions.mix(PICARD_COLLECTMULTIPLEMETRICS.out.versions.first())
+    ch_multiqc_files = ch_multiqc_files.mix(PICARD_COLLECTMULTIPLEMETRICS.out.metrics)
+    ch_versions = ch_versions.mix(PICARD_COLLECTMULTIPLEMETRICS.out.versions.first())
     }
 
 
