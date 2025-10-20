@@ -23,7 +23,6 @@ include { paramsSummaryMap              } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc          } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML        } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText        } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
-include { getGenomeAttribute            } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -114,10 +113,7 @@ workflow SEQINSPECTOR {
     // MODULE: Create BWA-MEM2 index of the reference genome
 
     if (!("bwamem2_index" in skip_tools)) {
-        def fasta_file = getGenomeAttribute('fasta')
-        ch_reference_fasta = Channel.fromPath(fasta_file, checkIfExists: true)
-                            .map { file -> tuple([id: file.name], file) }.collect()
-
+        ch_reference_fasta  = Channel.fromPath(params.fasta).map { it -> [[id:it.simpleName], it] }.collect()
 
         BWAMEM2_INDEX (
             ch_reference_fasta
