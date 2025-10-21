@@ -18,6 +18,7 @@ include { paramsSummaryMap              } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc          } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML        } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText        } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { reportIndexMultiqc            } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -121,6 +122,11 @@ workflow SEQINSPECTOR {
     //
     // MODULE: MultiQC
     //
+    ch_tags = ch_multiqc_files
+        .map { meta, sample -> meta.tags }
+        .flatten()
+        .unique()
+
     ch_multiqc_config = params.multiqc_config ?
         Channel.fromPath(params.multiqc_config, checkIfExists: true) :
         Channel.fromPath("$projectDir/assets/multiqc_config.yml", checkIfExists: true)
@@ -147,6 +153,16 @@ workflow SEQINSPECTOR {
             sort: true
         )
     )
+    ch_multiqc_extra_files = ch_multiqc_extra_files.mix(
+        ch_tags.toList()
+            .map { tag_list ->
+                reportIndexMultiqc(tag_list)
+            }
+            .collectFile(
+                name: 'multiqc_index_mqc.yaml',
+                sort: true
+            ).view()
+    )
 
     MULTIQC_GLOBAL (
         ch_multiqc_files
@@ -159,11 +175,6 @@ workflow SEQINSPECTOR {
         [],
         []
     )
-
-    ch_tags = ch_multiqc_files
-        .map { meta, sample -> meta.tags }
-        .flatten()
-        .unique()
 
     multiqc_extra_files_per_tag = ch_tags
         .combine(ch_multiqc_extra_files)
