@@ -32,7 +32,7 @@
 <!-- TODO nf-core: Fill in short bullet-pointed list of the default steps in the pipeline -->
 
 1. Subsample reads ([`Seqtk`](https://github.com/lh3/seqtk))
-2. Read QC ([`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/))
+2. Read QC ([`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), [`Sequali`](https://sequali.readthedocs.io/en/latest/))
 3. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
 
 ## Usage
