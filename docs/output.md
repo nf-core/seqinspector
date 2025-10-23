@@ -12,6 +12,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 
 - [Seqtk](#seqtk) - Subsample a specific number of reads per sample
 - [FastQC](#fastqc) - Raw read QC
+- [Sequali](#sequali) - Sequence quality metrics for short and long reads
 - [SeqFu Stats](#seqfu_stats) - Statistics for FASTA or FASTQ files
 - [FastQ Screen](#fastqscreen) - Mapping against a set of references for basic contamination QC
 - [MultiQC](#multiqc) - Aggregate report describing results and QC from the whole pipeline
@@ -41,6 +42,19 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 </details>
 
 [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) gives general quality metrics about your sequenced reads. It provides information about the quality score distribution across your reads, per base sequence content (%A/T/G/C), adapter contamination and overrepresented sequences. For further reading and documentation see the [FastQC help pages](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/).
+
+### Sequali
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `sequali/`
+  - `*.html`: Sequali report containing quality metrics.
+  - `*.jsom`: JSON containing the Sequali data, used for generating MultiQC report.
+
+</details>
+
+[Sequali](https://sequali.readthedocs.io/en/latest/) gives general quality metrics for short and long sequenced reads. It provides information about the quality score distribution across your reads, GC content, duplication levels, length distribution, adapter contamination (Illumina and Oxford Nanopore) and overrepresented sequences.
 
 ### FastQ Screen
 

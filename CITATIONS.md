@@ -14,6 +14,10 @@
 
 > Andrews, S. (2010). FastQC: A Quality Control Tool for High Throughput Sequence Data [Online].
 
+- [Sequali](https://sequali.readthedocs.io/en/latest/)
+
+> Vorderman R. Sequali: efficient and comprehensive quality control of short- and long-read sequencing data. Bioinformatics Advances, 2025. doi: 10.1093/bioadv/vbaf010
+
 - [SeqFu](https://telatin.github.io/seqfu2/)
 
 > Telatin A, Fariselli P, Birolo G. SeqFu: A Suite of Utilities for the Robust and Reproducible Manipulation of Sequence Files. Bioengineering 2021, 8, 59. doi.org/10.3390/bioengineering8050059

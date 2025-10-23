@@ -236,6 +236,7 @@ def toolCitationText() {
         "FastQ Screen (Wingett & Andrews 2018)",
         params.sample_size > 0 ? "Seqtk (Li 2021)," : "",
         "SeqFu (Telatin et al. 2021),",
+        "Sequali (Vorderman 2025),",
         "."
     ].join(' ').trim()
 
@@ -248,7 +249,8 @@ def toolBibliographyText() {
         "<li>Ewels, P., Magnusson, M., Lundin, S., & Käller, M. (2016). MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics, 32(19), 3047–3048. doi: /10.1093/bioinformatics/btw354</li>",
         "<li>Wingett SW, Andrews S. FastQ Screen: A tool for multi-genome mapping and quality control. F1000Res. 2018 Aug 24 [revised 2018 Jan 1];7:1338. doi: 10.12688/f1000research.15931.2. eCollection</li>",
         params.sample_size > 0 ? "<li>Li, H. SeqTk. Available online: https://github.com/lh3/seqtk (accessed on 6 May 2021)</li>" : "",
-        "<li>Telatin, A.; Fariselli, P.; Birolo, G. SeqFu: A Suite of Utilities for the Robust and Reproducible Manipulation of Sequence Files. Bioengineering 2021, 8, 59. https://doi.org/10.3390/bioengineering8050059</li>"
+        "<li>Telatin, A.; Fariselli, P.; Birolo, G. SeqFu: A Suite of Utilities for the Robust and Reproducible Manipulation of Sequence Files. Bioengineering 2021, 8, 59. https://doi.org/10.3390/bioengineering8050059</li>",
+        "<li>Vorderman, R. Sequali: efficient and comprehensive quality control of short- and long-read sequencing data. Bioinformatics Advances, 2025. doi: 10.1093/bioadv/vbaf010</li>"
     ].join(' ').trim()
 
     return reference_text
