@@ -55,7 +55,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 
 </details>
 
-[Sequali](https://sequali.readthedocs.io/en/latest/) gives general quality metrics for short and long sequenced reads. It provides information about the quality score distribution across your reads, GC content, duplication levels, length distribution, adapter contamination (Illumina and Oxford Nanopore) and overrepresented sequences. For further reading and documentation see the [FastQC help pages](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/).
+[Sequali](https://sequali.readthedocs.io/en/latest/) gives general quality metrics for short and long sequenced reads. It provides information about the quality score distribution across your reads, GC content, duplication levels, length distribution, adapter contamination (Illumina and Oxford Nanopore) and overrepresented sequences. 
 
 
 ### FastQ Screen
