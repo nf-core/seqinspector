@@ -82,7 +82,7 @@ nextflow_pipeline {
             config "./MiSeq.main.nf.test.config"
             params {
                 outdir = "$outputDir"
-                skip_tools = "fastqc,fastqscreen,seqfu_stats,seqtk_sample"
+                skip_tools = "fastqc,fastqscreen,seqfu_stats,seqtk_sample,bwamem2_index,bwamem2_mem"
             }
         }
 

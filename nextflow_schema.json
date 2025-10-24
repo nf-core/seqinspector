@@ -51,7 +51,7 @@
                 "skip_tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to skip",
-                    "pattern": "^((fastqc|fastqscreen|seqfu_stats|seqtk_sample)?,?)*(?<!,)$"
+                    "pattern": "^((fastqc|fastqscreen|seqfu_stats|seqtk_sample|bwamem2_index|bwamem2_mem)?,?)*(?<!,)$"
                 }
             }
         },
@@ -161,6 +161,12 @@
                     "fa_icon": "fas fa-question-circle",
                     "hidden": true
                 },
+                "sort_bam": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Sort BAM files after alignment",
+                    "help_text": "If true, BAM files produced by alignment will be sorted by genomic coordinates."
+                },
                 "publish_dir_mode": {
                     "type": "string",
                     "default": "copy",
@@ -203,6 +209,11 @@
                     "description": "Incoming hook URL for messaging service",
                     "fa_icon": "fas fa-people-group",
                     "help_text": "Incoming hook URL for messaging service. Currently, MS Teams and Slack are supported.",
+                    "hidden": true
+                },
+                "modules_testdata_base_path": {
+                    "type": "string",
+                    "description": "Base path / URL for data used in the modules",
                     "hidden": true
                 },
                 "multiqc_config": {
