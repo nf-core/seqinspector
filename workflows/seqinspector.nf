@@ -10,6 +10,8 @@ include { SEQTK_SAMPLE                  } from '../modules/nf-core/seqtk/sample/
 include { FASTQC                        } from '../modules/nf-core/fastqc/main'
 include { SEQFU_STATS                   } from '../modules/nf-core/seqfu/stats'
 include { FASTQSCREEN_FASTQSCREEN       } from '../modules/nf-core/fastqscreen/fastqscreen/main'
+include { BWAMEM2_INDEX                 } from '../modules/nf-core/bwamem2/index/main'
+include { BWAMEM2_MEM                   } from '../modules/nf-core/bwamem2/mem/main'
 
 include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc/main'
 include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc/main'
@@ -28,7 +30,7 @@ include { methodsDescriptionText        } from '../subworkflows/local/utils_nfco
 workflow SEQINSPECTOR {
 
     take:
-    ch_samplesheet               // channel: samplesheet read in from --input
+    ch_samplesheet           // channel: samplesheet read in from --input
 
     main:
     skip_tools = params.skip_tools ? params.skip_tools.split(',') : []
@@ -105,8 +107,33 @@ workflow SEQINSPECTOR {
         ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
         ch_versions = ch_versions.mix(FASTQSCREEN_FASTQSCREEN.out.versions.first())
     }
+    // MODULE: Create BWA-MEM2 index of the reference genome
 
-    //
+    if (!("bwamem2_index" in skip_tools)) {
+        ch_reference_fasta  = Channel.fromPath(params.fasta).map { it -> [[id:it.simpleName], it] }.collect()
+
+        BWAMEM2_INDEX (
+            ch_reference_fasta
+        )
+        ch_bwamem2_index = BWAMEM2_INDEX.out.index
+        ch_versions = ch_versions.mix(BWAMEM2_INDEX.out.versions)
+
+    }
+    // MODULE: Align reads with BWA-MEM2
+    if (!("bwamem2_mem" in skip_tools)) {
+        BWAMEM2_MEM (
+            ch_sample_sized,
+            ch_bwamem2_index,
+            ch_reference_fasta,
+            params.sort_bam ?: true
+        )
+        ch_bwamem2_mem = BWAMEM2_MEM.out.bam
+        ch_versions = ch_versions.mix(BWAMEM2_MEM.out.versions)
+        ch_bwamem2_mem.view { "BAM: $it" }
+
+
+}
+
     // Collate and save software versions
     //
     softwareVersionsToYAML(ch_versions)
@@ -161,7 +188,7 @@ workflow SEQINSPECTOR {
     )
 
     ch_tags = ch_multiqc_files
-        .map { meta, sample -> meta.tags }
+        .map { meta, _sample -> meta.tags }
         .flatten()
         .unique()
 
@@ -171,13 +198,13 @@ workflow SEQINSPECTOR {
     // Group samples by tag
     tagged_mqc_files = ch_tags
         .combine(ch_multiqc_files)
-        .filter { sample_tag, meta, sample -> sample_tag in meta.tags }
-        .map { sample_tag, meta, sample -> [sample_tag, sample] }
+        .filter { sample_tag, meta, _sample -> sample_tag in meta.tags }
+        .map { sample_tag, _meta, sample -> [sample_tag, sample] }
         .mix(multiqc_extra_files_per_tag)
         .groupTuple()
         .tap { mqc_by_tag }
         .collectFile {
-            sample_tag, samples ->
+            sample_tag, _samples ->
             def prefix_tag = "[TAG:${sample_tag}]"
             [
                 "${prefix_tag}_multiqc_extra_config.yml",
@@ -190,7 +217,7 @@ workflow SEQINSPECTOR {
         }
         .map { file -> [ (file =~ /\[TAG:(.+)\]/)[0][1], file ] }
         .join(mqc_by_tag)
-        .multiMap { sample_tag, config, samples ->
+        .multiMap { _sample_tag, config, samples ->
             samples_per_tag: samples.flatten()
             config: config
         }
