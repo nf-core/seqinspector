@@ -12,9 +12,6 @@ include { SEQFU_STATS                   } from '../modules/nf-core/seqfu/stats'
 include { FASTQSCREEN_FASTQSCREEN       } from '../modules/nf-core/fastqscreen/fastqscreen/main'
 include { BWAMEM2_INDEX                 } from '../modules/nf-core/bwamem2/index/main'
 include { BWAMEM2_MEM                   } from '../modules/nf-core/bwamem2/mem/main'
-include { SAMTOOLS_INDEX                } from '../modules/nf-core/samtools/index/main'
-include { SAMTOOLS_FAIDX                } from '../modules/nf-core/samtools/faidx/main'
-include { PICARD_COLLECTMULTIPLEMETRICS } from '../modules/nf-core/picard/collectmultiplemetrics/main'
 
 include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc/main'
 include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc/main'
@@ -23,7 +20,6 @@ include { paramsSummaryMap              } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc          } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML        } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText        } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
-include { getGenomeAttribute            } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -121,10 +117,7 @@ workflow SEQINSPECTOR {
     // MODULE: Create BWA-MEM2 index of the reference genome
 
     if (!("bwamem2_index" in skip_tools)) {
-        def fasta_file = getGenomeAttribute('fasta')
-        ch_reference_fasta = Channel.fromPath(fasta_file, checkIfExists: true)
-                            .map { file -> tuple([id: file.name], file) }.collect()
-
+        ch_reference_fasta  = Channel.fromPath(params.fasta).map { it -> [[id:it.simpleName], it] }.collect()
 
         BWAMEM2_INDEX (
             ch_reference_fasta
