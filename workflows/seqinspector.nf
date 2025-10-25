@@ -12,7 +12,9 @@ include { SEQFU_STATS                   } from '../modules/nf-core/seqfu/stats'
 include { FASTQSCREEN_FASTQSCREEN       } from '../modules/nf-core/fastqscreen/fastqscreen/main'
 include { BWAMEM2_INDEX                 } from '../modules/nf-core/bwamem2/index/main'
 include { BWAMEM2_MEM                   } from '../modules/nf-core/bwamem2/mem/main'
-
+include { SAMTOOLS_INDEX                } from '../modules/nf-core/samtools/index/main'
+include { SAMTOOLS_FAIDX                } from '../modules/nf-core/samtools/faidx/main'
+include { PICARD_COLLECTMULTIPLEMETRICS } from '../modules/nf-core/picard/collectmultiplemetrics/main'
 include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc/main'
 include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc/main'
 
