@@ -29,6 +29,7 @@
             "nextflow": "25.04.6"
         },
         "timestamp": "2025-10-02T12:58:23.877378234"
+        "timestamp": "2025-10-20T11:56:38.220604962"
     },
     "MiSeq data test (single end reads)": {
         "content": [
@@ -270,6 +271,7 @@
             "nextflow": "25.04.6"
         },
         "timestamp": "2025-10-07T09:08:15.546626793"
+        "timestamp": "2025-10-20T11:55:41.808238633"
     },
     "Miseq data test (skip fastqc)": {
         "content": [
@@ -447,5 +449,6 @@
             "nextflow": "25.04.6"
         },
         "timestamp": "2025-10-07T09:09:05.277171766"
+        "timestamp": "2025-10-20T11:56:20.313008405"
     }
 }
