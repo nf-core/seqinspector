@@ -1,16 +1,13 @@
 {
     "NovaSeq6000 data test": {
         "content": [
-            17,
+            10,
             {
                 "BWAMEM2_INDEX": {
                     "bwamem2": "2.2.1"
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
-                },
-                "FASTQSCREEN_FASTQSCREEN": {
-                    "fastqscreen": "0.16.0"
                 },
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.22.1"
@@ -35,28 +32,8 @@
                 "fastqc/Sample1_1_fastqc.zip",
                 "fastqc/Sample23_3_fastqc.html",
                 "fastqc/Sample23_3_fastqc.zip",
-                "fastqc/SampleA_2_fastqc.html",
-                "fastqc/SampleA_2_fastqc.zip",
-                "fastqc/Undetermined_5_fastqc.html",
-                "fastqc/Undetermined_5_fastqc.zip",
                 "fastqc/sampletest_4_fastqc.html",
                 "fastqc/sampletest_4_fastqc.zip",
-                "fastqscreen",
-                "fastqscreen/Sample1_1_screen.html",
-                "fastqscreen/Sample1_1_screen.png",
-                "fastqscreen/Sample1_1_screen.txt",
-                "fastqscreen/Sample23_3_screen.html",
-                "fastqscreen/Sample23_3_screen.png",
-                "fastqscreen/Sample23_3_screen.txt",
-                "fastqscreen/SampleA_2_screen.html",
-                "fastqscreen/SampleA_2_screen.png",
-                "fastqscreen/SampleA_2_screen.txt",
-                "fastqscreen/Undetermined_5_screen.html",
-                "fastqscreen/Undetermined_5_screen.png",
-                "fastqscreen/Undetermined_5_screen.txt",
-                "fastqscreen/sampletest_4_screen.html",
-                "fastqscreen/sampletest_4_screen.png",
-                "fastqscreen/sampletest_4_screen.txt",
                 "pipeline_info",
                 "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
                 "samtools_faidx",
@@ -80,16 +57,6 @@
                 "genome.fa.ann:md5,4439f90bdaaf2cdf9089c9f7f07b9d6b",
                 "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
                 "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
-                "Sample1_1_screen.png:md5,562256290643b51e4374c2225a15f463",
-                "Sample1_1_screen.txt:md5,3b184ef10eeb99043a85826534a4ee28",
-                "Sample23_3_screen.png:md5,6bb2caf67b9b2ed25d3d5f32c343e9ab",
-                "Sample23_3_screen.txt:md5,3b184ef10eeb99043a85826534a4ee28",
-                "SampleA_2_screen.png:md5,b2c3e95e034f5c038754bf108537de0e",
-                "SampleA_2_screen.txt:md5,3b184ef10eeb99043a85826534a4ee28",
-                "Undetermined_5_screen.png:md5,fc5d53f8876dfae3d1a781fa512ea1db",
-                "Undetermined_5_screen.txt:md5,3b184ef10eeb99043a85826534a4ee28",
-                "sampletest_4_screen.png:md5,1fb60070e8f4b70de0c1b3786b54f27e",
-                "sampletest_4_screen.txt:md5,3b184ef10eeb99043a85826534a4ee28",
                 "genome.fa.fai:md5,6f4c0ce5258e6948135ad006e1f9ee1b",
                 "genome.fa.sizes:md5,e122f8021a5ef14104c32785cb9b7adc",
                 "Sample1_1_seqfu.tsv:md5,269fabf8435defcd327aa69a050b7869",
@@ -108,6 +75,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-10-25T17:02:26.23151"
+        "timestamp": "2025-10-27T13:32:28.607154"
     }
 }
