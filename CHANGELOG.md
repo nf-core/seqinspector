@@ -23,6 +23,7 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#96](https://github.com/nf-core/seqinspector/pull/96) Added missing citations to citation tool
 - [#103](https://github.com/nf-core/seqinspector/pull/103) Configure full-tests
 - [#110](https://github.com/nf-core/seqinspector/pull/110) Update input schema to accept either tar file or directory as rundir, and fastq messages and patterns.
+- [#135](https://github.com/nf-core/seqinspector/pull/135) Added index section to MultiQC reports to facilitate report navigation (#125)
 
 ### `Fixed`
 
