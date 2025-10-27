@@ -293,21 +293,24 @@ def reportIndexMultiqc(tags, global=true) {
     def relative_path = global ? ".." : "../.."
 
     // Global report path
-    def index_section = "    <li><a href=\"${relative_path}/global_report/multiqc_report.html\">Global</a></li>\n"
+    def index_section = "    <li><a href=\"${relative_path}/global_report/multiqc_report.html\">Global report</a></li>\n"
 
     // Group report paths
     tags
         .each { tag ->
-            index_section += "    <li><a href=\"${relative_path}/group_reports/${tag}/multiqc_report.html\">${tag}</a></li>\n"
+            index_section += "    <li>Group: <a href=\"${relative_path}/group_reports/${tag}/multiqc_report.html\">${tag}</a></li>\n"
         }
     
     def yaml_file_text = "id: '${workflow.manifest.name.replace('/', '-')}-index'\n" as String
-    yaml_file_text     += "description: ' - this information is collected when the pipeline is started.'\n"
+    yaml_file_text     += "description: 'MultiQC reports collected from running the pipeline.'\n"
     yaml_file_text     += "section_name: '${workflow.manifest.name} MultiQC Reports Index'\n"
     yaml_file_text     += "section_href: 'https://github.com/${workflow.manifest.name}'\n"
     yaml_file_text     += "plot_type: 'html'\n"
     yaml_file_text     += "data: |\n"
+    yaml_file_text     += "  <h4>Reports</h4>\n"
+    yaml_file_text     += "  <ul>\n"
     yaml_file_text     += "${index_section}"
+    yaml_file_text     += "  </ul>\n"
 
     return yaml_file_text
 }
