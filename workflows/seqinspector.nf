@@ -178,7 +178,6 @@ workflow SEQINSPECTOR {
                 [meta, bam, bai]
             }
 
-        ch_bam_bai.view { "Combined BAM/BAI for Picard: $it" }
         ch_fasta   = ch_reference_fasta
         ch_fai     = ch_reference_fasta_fai
 
