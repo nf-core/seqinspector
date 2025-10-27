@@ -149,7 +149,6 @@ workflow SEQINSPECTOR {
         )
         ch_samtools_index = SAMTOOLS_INDEX.out.bai
         ch_versions = ch_versions.mix(SAMTOOLS_INDEX.out.versions)
-        ch_samtools_index.view { "BAI: $it" }
     }
 
     // MODULE: Index reference FASTA with Samtools faidx
