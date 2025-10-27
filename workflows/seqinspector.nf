@@ -173,10 +173,7 @@ workflow SEQINSPECTOR {
 
         // Prepare BAM/BAI tuples for Picard
         ch_bam_bai = ch_bwamem2_mem
-            .join(ch_samtools_index)
-            .map { meta, bam, bai ->
-                [meta, bam, bai]
-            }
+            .join(ch_samtools_index, failOnDuplicate: true, failOnMismatch: true)
 
         ch_fasta   = ch_reference_fasta
         ch_fai     = ch_reference_fasta_fai
