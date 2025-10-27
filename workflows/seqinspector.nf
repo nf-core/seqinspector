@@ -181,8 +181,6 @@ workflow SEQINSPECTOR {
         ch_fasta   = ch_reference_fasta
         ch_fai     = ch_reference_fasta_fai
 
-        ch_fasta.view { "FASTA for Picard: $it" }
-        ch_fai.view { "FAI for Picard: $it" }
 
         PICARD_COLLECTMULTIPLEMETRICS(
             ch_bam_bai,
