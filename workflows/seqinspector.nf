@@ -155,12 +155,9 @@ workflow SEQINSPECTOR {
     if (!("samtools_faidx" in skip_tools)) {
 
         // Assume ch_fasta emits tuple(meta, fasta)
-        ch_dummy_fai = Channel.value(['dummy_meta', file('empty.fai')])
-
-
         SAMTOOLS_FAIDX (
             ch_reference_fasta,
-            ch_dummy_fai,
+            [[:],[]],
             true           // get_sizes
         )
         ch_reference_fasta_fai = SAMTOOLS_FAIDX.out.fai
