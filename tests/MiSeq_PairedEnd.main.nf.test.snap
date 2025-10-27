@@ -1,8 +1,15 @@
 {
     "MiSeq data test (paired end reads)": {
         "content": [
-            8,
+            11,
             {
+                "BWAMEM2_INDEX": {
+                    "bwamem2": "2.2.1"
+                },
+                "BWAMEM2_MEM": {
+                    "bwamem2": "2.2.1",
+                    "samtools": 1.21
+                },
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
@@ -17,6 +24,16 @@
                 }
             },
             [
+                "bwamem2_index",
+                "bwamem2_index/bwamem2",
+                "bwamem2_index/bwamem2/genome.fa.0123",
+                "bwamem2_index/bwamem2/genome.fa.amb",
+                "bwamem2_index/bwamem2/genome.fa.ann",
+                "bwamem2_index/bwamem2/genome.fa.bwt.2bit.64",
+                "bwamem2_index/bwamem2/genome.fa.pac",
+                "bwamem2_mem",
+                "bwamem2_mem/SAMPLE_PAIRED_END_1_1.bam",
+                "bwamem2_mem/SAMPLE_PAIRED_END_2_2.bam",
                 "fastqc",
                 "fastqc/SAMPLE_PAIRED_END_1_1_1_fastqc.html",
                 "fastqc/SAMPLE_PAIRED_END_1_1_1_fastqc.zip",
@@ -186,6 +203,13 @@
                 "seqfu_stats/SAMPLE_PAIRED_END_2_2_seqfu_mqc.txt"
             ],
             [
+                "genome.fa.0123:md5,8af61f4bc59cc2fe7b396db46a2173f3",
+                "genome.fa.amb:md5,657cfdf0628d140d645d8d01a24f0c5f",
+                "genome.fa.ann:md5,4439f90bdaaf2cdf9089c9f7f07b9d6b",
+                "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
+                "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
+                "SAMPLE_PAIRED_END_1_1.bam:md5,ced6a17fb3dee760c2606860e1177071",
+                "SAMPLE_PAIRED_END_2_2.bam:md5,15ada2a4f4a6cf2978aeaeb64a525197",
                 "SAMPLE_PAIRED_END_1_1_1_screen.png:md5,f52ddd0e65f23f68dd8d58d5453417db",
                 "SAMPLE_PAIRED_END_1_1_1_screen.txt:md5,921b08eeb461a2aa1bd42bba53900f70",
                 "SAMPLE_PAIRED_END_1_1_2_screen.png:md5,908f4fceea8aa546106efdaa7ca78f7d",
@@ -229,9 +253,9 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.10.4"
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-03-27T09:01:13.732951"
+        "timestamp": "2025-10-20T11:57:37.980484968"
     }
 }
