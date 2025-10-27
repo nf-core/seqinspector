@@ -153,21 +153,22 @@ workflow SEQINSPECTOR {
             sort: true
         )
     )
-    ch_multiqc_extra_files = ch_multiqc_extra_files.mix(
+    // Add index to other MultiQC reports
+    //ch_multiqc_extra_files_global = Channel.empty()
+    ch_multiqc_extra_files_global = ch_multiqc_extra_files.mix(
         ch_tags.toList()
             .map { tag_list ->
                 reportIndexMultiqc(tag_list)
             }
             .collectFile(
                 name: 'multiqc_index_mqc.yaml',
-                sort: true
-            ).view()
+            )
     )
 
     MULTIQC_GLOBAL (
         ch_multiqc_files
             .map { meta, file -> file }
-            .mix(ch_multiqc_extra_files)
+            .mix(ch_multiqc_extra_files_global)
             .collect(),
         ch_multiqc_config.toList(),
         [],
@@ -176,8 +177,18 @@ workflow SEQINSPECTOR {
         []
     )
 
+    ch_multiqc_extra_files_tag = ch_multiqc_extra_files.mix(
+        ch_tags.toList()
+            .map { tag_list ->
+                reportIndexMultiqc(tag_list, false)
+            }
+            .collectFile(
+                name: 'multiqc_index_mqc.yaml',
+            )
+    )
+
     multiqc_extra_files_per_tag = ch_tags
-        .combine(ch_multiqc_extra_files)
+        .combine(ch_multiqc_extra_files_tag)
 
     // Group samples by tag
     tagged_mqc_files = ch_tags
@@ -205,6 +216,7 @@ workflow SEQINSPECTOR {
             samples_per_tag: samples.flatten()
             config: config
         }
+    
 
     MULTIQC_PER_TAG(
         tagged_mqc_files.samples_per_tag,
