@@ -25,15 +25,22 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.10.3"
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-01-07T13:49:22.707398"
+        "timestamp": "2025-10-20T11:56:38.220604962"
     },
     "MiSeq data test (single end reads)": {
         "content": [
-            4,
+            6,
             {
+                "BWAMEM2_INDEX": {
+                    "bwamem2": "2.2.1"
+                },
+                "BWAMEM2_MEM": {
+                    "bwamem2": "2.2.1",
+                    "samtools": 1.21
+                },
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
@@ -48,6 +55,15 @@
                 }
             },
             [
+                "bwamem2_index",
+                "bwamem2_index/bwamem2",
+                "bwamem2_index/bwamem2/genome.fa.0123",
+                "bwamem2_index/bwamem2/genome.fa.amb",
+                "bwamem2_index/bwamem2/genome.fa.ann",
+                "bwamem2_index/bwamem2/genome.fa.bwt.2bit.64",
+                "bwamem2_index/bwamem2/genome.fa.pac",
+                "bwamem2_mem",
+                "bwamem2_mem/SAMPLE_SINGLE_END_1.bam",
                 "fastqc",
                 "fastqc/SAMPLE_SINGLE_END_1_fastqc.html",
                 "fastqc/SAMPLE_SINGLE_END_1_fastqc.zip",
@@ -135,6 +151,12 @@
                 "seqfu_stats/SAMPLE_SINGLE_END_1_seqfu_mqc.txt"
             ],
             [
+                "genome.fa.0123:md5,8af61f4bc59cc2fe7b396db46a2173f3",
+                "genome.fa.amb:md5,657cfdf0628d140d645d8d01a24f0c5f",
+                "genome.fa.ann:md5,4439f90bdaaf2cdf9089c9f7f07b9d6b",
+                "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
+                "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
+                "SAMPLE_SINGLE_END_1.bam:md5,79744f146752fd486b09604be721cc85",
                 "SAMPLE_SINGLE_END_1_screen.png:md5,ad98ae0f39335aede67e0a233cf16616",
                 "SAMPLE_SINGLE_END_1_screen.txt:md5,588b1b1f2d307fae7272ab0819e4bac5",
                 "fastq_screen_plot.txt:md5,8393eabda6ebac90ff00533f9562271f",
@@ -156,15 +178,22 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.10.4"
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-03-26T13:00:21.042755"
+        "timestamp": "2025-10-20T11:55:41.808238633"
     },
     "Miseq data test (skip fastqc)": {
         "content": [
-            3,
+            5,
             {
+                "BWAMEM2_INDEX": {
+                    "bwamem2": "2.2.1"
+                },
+                "BWAMEM2_MEM": {
+                    "bwamem2": "2.2.1",
+                    "samtools": 1.21
+                },
                 "FASTQSCREEN_FASTQSCREEN": {
                     "fastqscreen": "0.16.0"
                 },
@@ -176,6 +205,15 @@
                 }
             },
             [
+                "bwamem2_index",
+                "bwamem2_index/bwamem2",
+                "bwamem2_index/bwamem2/genome.fa.0123",
+                "bwamem2_index/bwamem2/genome.fa.amb",
+                "bwamem2_index/bwamem2/genome.fa.ann",
+                "bwamem2_index/bwamem2/genome.fa.bwt.2bit.64",
+                "bwamem2_index/bwamem2/genome.fa.pac",
+                "bwamem2_mem",
+                "bwamem2_mem/SAMPLE_SINGLE_END_1.bam",
                 "fastqscreen",
                 "fastqscreen/SAMPLE_SINGLE_END_1_screen.html",
                 "fastqscreen/SAMPLE_SINGLE_END_1_screen.png",
@@ -212,6 +250,12 @@
                 "seqfu_stats/SAMPLE_SINGLE_END_1_seqfu_mqc.txt"
             ],
             [
+                "genome.fa.0123:md5,8af61f4bc59cc2fe7b396db46a2173f3",
+                "genome.fa.amb:md5,657cfdf0628d140d645d8d01a24f0c5f",
+                "genome.fa.ann:md5,4439f90bdaaf2cdf9089c9f7f07b9d6b",
+                "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
+                "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
+                "SAMPLE_SINGLE_END_1.bam:md5,79744f146752fd486b09604be721cc85",
                 "SAMPLE_SINGLE_END_1_screen.png:md5,ad98ae0f39335aede67e0a233cf16616",
                 "SAMPLE_SINGLE_END_1_screen.txt:md5,588b1b1f2d307fae7272ab0819e4bac5",
                 "fastq_screen_plot.txt:md5,8393eabda6ebac90ff00533f9562271f",
@@ -223,9 +267,9 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.10.4"
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-03-26T13:00:53.07934"
+        "timestamp": "2025-10-20T11:56:20.313008405"
     }
 }
