@@ -28,7 +28,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-10-27T12:21:09.386002"
+        "timestamp": "2025-10-28T13:25:50.322714"
     },
     "MiSeq data test (single end reads)": {
         "content": [
@@ -150,7 +150,7 @@
                 "genome.fa.ann:md5,4439f90bdaaf2cdf9089c9f7f07b9d6b",
                 "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
                 "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
-                "SAMPLE_SINGLE_END_1.bam:md5,79744f146752fd486b09604be721cc85",
+                "SAMPLE_SINGLE_END_1.bam:md5,ed3f6acd94560448218a288623c810e6",
                 "SAMPLE_SINGLE_END_1_screen.png:md5,ad98ae0f39335aede67e0a233cf16616",
                 "SAMPLE_SINGLE_END_1_screen.txt:md5,588b1b1f2d307fae7272ab0819e4bac5",
                 "fastq_screen_plot.txt:md5,8393eabda6ebac90ff00533f9562271f",
@@ -194,7 +194,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-10-27T23:04:45.509991853"
+        "timestamp": "2025-10-28T13:22:43.561562"
     },
     "Miseq data test (skip fastqc)": {
         "content": [
@@ -298,7 +298,7 @@
                 "genome.fa.ann:md5,4439f90bdaaf2cdf9089c9f7f07b9d6b",
                 "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
                 "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
-                "SAMPLE_SINGLE_END_1.bam:md5,79744f146752fd486b09604be721cc85",
+                "SAMPLE_SINGLE_END_1.bam:md5,ed3f6acd94560448218a288623c810e6",
                 "SAMPLE_SINGLE_END_1_screen.png:md5,ad98ae0f39335aede67e0a233cf16616",
                 "SAMPLE_SINGLE_END_1_screen.txt:md5,588b1b1f2d307fae7272ab0819e4bac5",
                 "fastq_screen_plot.txt:md5,8393eabda6ebac90ff00533f9562271f",
@@ -332,5 +332,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-10-27T23:09:02.98022178"
+        "timestamp": "2025-10-28T13:25:03.786062"
     }
+}
