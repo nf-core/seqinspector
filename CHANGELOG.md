@@ -9,6 +9,7 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 
 ### `Added`
 
+- [#114](https://github.com/nf-core/seqinspector/pull/114/) Update CI
 - [#75](https://github.com/nf-core/seqinspector/pull/75) Set up nft-utils
 - [#68](https://github.com/nf-core/seqinspector/pull/68) Add tool selector
 - [#20](https://github.com/nf-core/seqinspector/pull/20) Use tags to generate group reports
@@ -24,12 +25,17 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#94](https://github.com/nf-core/seqinspector/issues/94) Test data validation
 - [#86](https://github.com/nf-core/seqinspector/issues/86) Update lists of default steps in the pipeline
 - [#84](https://github.com/nf-core/seqinspector/issues/84) Short summary of seqinspector in README.md
+- [#110](https://github.com/nf-core/seqinspector/pull/110) Update input schema to accept either tar file or directory as rundir, and fastq messages and patterns.
 
 ### `Fixed`
 
 - [#71](https://github.com/nf-core/seqinspector/pull/71) FASTQSCREEN does not fail when multiple reads are provided.
 - [#99](https://github.com/nf-core/seqinspector/pull/99) Fix group reports for paired reads
+- [#107](https://github.com/nf-core/seqinspector/pull/107) Put SeqFU-stats section reports together
+- [#112](https://github.com/nf-core/seqinspector/pull/112) Making fastq_screen_references value to use parentDir
 
 ### `Dependencies`
+
+- [#116](https://github.com/nf-core/seqinspector/pull/116) Update MultiQC to 1.28
 
 ### `Deprecated`
