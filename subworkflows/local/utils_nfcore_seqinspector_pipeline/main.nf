@@ -95,7 +95,7 @@ workflow PIPELINE_INITIALISATION {
     //
     // Custom validation for pipeline parameters
     //
-    validateInputParameters()
+    validateInputParameters() // Runs additional validation that is not done by $projectDir/nextflow_schema.json
 
     //
     // Create channel from input file provided through params.input
@@ -103,23 +103,50 @@ workflow PIPELINE_INITIALISATION {
 
     Channel
         .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
+        .toList()
+        .flatMap { it.withIndex().collect {  entry, idx -> entry + "${idx+1}" } }
         .map {
-            meta, fastq_1, fastq_2 ->
+            meta, fastq_1, fastq_2, idx ->
+                def tags = meta.tags ? meta.tags.tokenize(":") : []
+                def updated_meta = meta + [ id:"${meta.sample}_${idx}", tags:tags ]
                 if (!fastq_2) {
-                    return [ meta.id, meta + [ single_end:true ], [ fastq_1 ] ]
+                    return [
+                        updated_meta.id,
+                        updated_meta + [ single_end:true ],
+                        [ fastq_1 ]
+                    ]
                 } else {
-                    return [ meta.id, meta + [ single_end:false ], [ fastq_1, fastq_2 ] ]
+                    return [
+                        updated_meta.id,
+                        updated_meta + [ single_end:false ],
+                        [ fastq_1, fastq_2 ]
+                    ]
                 }
         }
         .groupTuple()
-        .map { samplesheet ->
-            validateInputSamplesheet(samplesheet)
-        }
         .map {
-            meta, fastqs ->
-                return [ meta, fastqs.flatten() ]
+            validateInputSamplesheet(it) // Applies additional group validation checks that schema_input.json cannot do.
         }
+        .transpose() // Replace the map below
+        // .map {
+        //     meta, fastqs ->
+        //         return [ meta, fastqs.flatten() ]
+        // }
         .set { ch_samplesheet }
+
+    ch_samplesheet
+        .map {
+            meta, fastqs -> meta.tags
+        }
+        .flatten()
+        .unique()
+        .map { tag_name -> [tag_name.toLowerCase(), tag_name] }
+        .groupTuple()
+        .map {
+            tag_lowercase, tags ->
+                assert tags.size() == 1 :
+                "Tag name collision: " + tags.join(", ")
+        }
 
     emit:
     samplesheet = ch_samplesheet
@@ -183,7 +210,9 @@ workflow PIPELINE_COMPLETION {
 // Check and validate pipeline parameters
 //
 def validateInputParameters() {
-    genomeExistsError()
+    // genomeExistsError()
+
+    // TODO: Add code to further validate pipeline parameters here
 }
 
 //
@@ -199,17 +228,6 @@ def validateInputSamplesheet(input) {
     }
 
     return [ metas[0], fastqs ]
-}
-//
-// Get attribute from genome config file e.g. fasta
-//
-def getGenomeAttribute(attribute) {
-    if (params.genomes && params.genome && params.genomes.containsKey(params.genome)) {
-        if (params.genomes[ params.genome ].containsKey(attribute)) {
-            return params.genomes[ params.genome ][ attribute ]
-        }
-    }
-    return null
 }
 
 //
@@ -229,27 +247,27 @@ def genomeExistsError() {
 // Generate methods description for MultiQC
 //
 def toolCitationText() {
-    // TODO nf-core: Optionally add in-text citation tools to this list.
-    // Can use ternary operators to dynamically construct based conditions, e.g. params["run_xyz"] ? "Tool (Foo et al. 2023)" : "",
-    // Uncomment function in methodsDescriptionText to render in MultiQC report
     def citation_text = [
-            "Tools used in the workflow included:",
-            "FastQC (Andrews 2010),",
-            "MultiQC (Ewels et al. 2016)",
-            "."
-        ].join(' ').trim()
+        "Tools used in the workflow included:",
+        "FastQC (Andrews 2010),",
+        "MultiQC (Ewels et al. 2016),",
+        "FastQ Screen (Wingett & Andrews 2018)",
+        params.sample_size > 0 ? "Seqtk (Li 2021)," : "",
+        "SeqFu (Telatin et al. 2021),",
+        "."
+    ].join(' ').trim()
 
     return citation_text
 }
 
 def toolBibliographyText() {
-    // TODO nf-core: Optionally add bibliographic entries to this list.
-    // Can use ternary operators to dynamically construct based conditions, e.g. params["run_xyz"] ? "<li>Author (2023) Pub name, Journal, DOI</li>" : "",
-    // Uncomment function in methodsDescriptionText to render in MultiQC report
     def reference_text = [
-            "<li>Andrews S, (2010) FastQC, URL: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).</li>",
-            "<li>Ewels, P., Magnusson, M., Lundin, S., & Käller, M. (2016). MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics , 32(19), 3047–3048. doi: /10.1093/bioinformatics/btw354</li>"
-        ].join(' ').trim()
+        "<li>Andrews S, (2010) FastQC, URL: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/.</li>",
+        "<li>Ewels, P., Magnusson, M., Lundin, S., & Käller, M. (2016). MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics, 32(19), 3047–3048. doi: /10.1093/bioinformatics/btw354</li>",
+        "<li>Wingett SW, Andrews S. FastQ Screen: A tool for multi-genome mapping and quality control. F1000Res. 2018 Aug 24 [revised 2018 Jan 1];7:1338. doi: 10.12688/f1000research.15931.2. eCollection</li>",
+        params.sample_size > 0 ? "<li>Li, H. SeqTk. Available online: https://github.com/lh3/seqtk (accessed on 6 May 2021)</li>" : "",
+        "<li>Telatin, A.; Fariselli, P.; Birolo, G. SeqFu: A Suite of Utilities for the Robust and Reproducible Manipulation of Sequence Files. Bioengineering 2021, 8, 59. https://doi.org/10.3390/bioengineering8050059</li>"
+    ].join(' ').trim()
 
     return reference_text
 }
@@ -275,13 +293,8 @@ def methodsDescriptionText(mqc_methods_yaml) {
     meta["nodoi_text"] = meta.manifest_map.doi ? "" : "<li>If available, make sure to update the text to include the Zenodo DOI of version of the pipeline used. </li>"
 
     // Tool references
-    meta["tool_citations"] = ""
-    meta["tool_bibliography"] = ""
-
-    // TODO nf-core: Only uncomment below if logic in toolCitationText/toolBibliographyText has been filled!
-    // meta["tool_citations"] = toolCitationText().replaceAll(", \\.", ".").replaceAll("\\. \\.", ".").replaceAll(", \\.", ".")
-    // meta["tool_bibliography"] = toolBibliographyText()
-
+    meta["tool_citations"] = toolCitationText().replaceAll(", \\.", ".").replaceAll("\\. \\.", ".").replaceAll(", \\.", ".")
+    meta["tool_bibliography"] = toolBibliographyText()
 
     def methods_text = mqc_methods_yaml.text
 

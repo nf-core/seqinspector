@@ -1,8 +1,4 @@
 lint:
-  files_exist:
-    - .github/workflows/ci.yml
-  files_unchanged:
-    - .github/CONTRIBUTING.md
   nextflow_config:
     - config_defaults:
         - params.fastq_screen_references
