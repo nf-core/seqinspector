@@ -25,10 +25,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2025-10-02T12:58:23.877378234"
+        "timestamp": "2025-11-06T15:31:57.418384172"
     },
     "MiSeq data test (single end reads)": {
         "content": [
@@ -266,10 +266,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2025-10-07T09:08:15.546626793"
+        "timestamp": "2025-11-06T15:37:04.651311769"
     },
     "Miseq data test (skip fastqc)": {
         "content": [
@@ -443,9 +443,9 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2025-10-07T09:09:05.277171766"
+        "timestamp": "2025-11-06T15:38:00.403207972"
     }
 }

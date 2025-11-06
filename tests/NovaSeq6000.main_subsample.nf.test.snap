@@ -23,9 +23,9 @@
             "multiqc_fastq_screen.txt:md5,a4dca31413036d35899a35ba14b17ea5"
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.10.2"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2024-12-05T15:17:50.525033752"
+        "timestamp": "2025-11-06T15:43:28.060685418"
     }
 }
