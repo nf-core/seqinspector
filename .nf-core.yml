@@ -1,5 +1,6 @@
 lint:
   actions_ci: false
+  multiqc_config: false
   files_unchanged:
     - .github/CONTRIBUTING.md
   files_exist:
