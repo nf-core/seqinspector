@@ -34,7 +34,6 @@
     },
     "MiSeq data test (single end reads)": {
         "content": [
-            6,
             {
                 "BWAMEM2_INDEX": {
                     "bwamem2": "2.2.1"
@@ -179,7 +178,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2025-11-06T17:09:30.687814423"
+        "timestamp": "2025-11-07T10:23:17.145777453"
     },
     "Miseq data test (skip fastqc)": {
         "content": [
