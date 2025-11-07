@@ -291,7 +291,7 @@ def reportIndexMultiqc(tags, global=true) {
         .each { tag ->
             index_section += "    <a href=\"${relative_path}/group_reports/${tag}/multiqc_report.html\" ${a_attrs}>Group report: ${tag}</a>\n"
         }
-    
+
     def yaml_file_text = "id: '${workflow.manifest.name.replace('/', '-')}-index'\n" as String
     yaml_file_text     += "description: 'MultiQC reports collected from running the pipeline.'\n"
     yaml_file_text     += "section_name: '${workflow.manifest.name} MultiQC Reports Index'\n"
