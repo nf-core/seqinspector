@@ -1,4 +1,8 @@
 lint:
+  files_exist:
+    - tests/default.nf.test
+  files_unchanged:
+    - .github/CONTRIBUTING.md
   nextflow_config:
     - config_defaults:
         - params.fastq_screen_references
