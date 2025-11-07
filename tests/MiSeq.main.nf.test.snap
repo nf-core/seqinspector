@@ -1,7 +1,6 @@
 {
     "Miseq data test (skip all tools)": {
         "content": [
-            1,
             {
                 "Workflow": {
                     "nf-core/seqinspector": "v1.0dev"
@@ -11,7 +10,9 @@
                 "multiqc",
                 "multiqc/global_report",
                 "multiqc/global_report/multiqc_data",
+                "multiqc/global_report/multiqc_data/llms-full.txt",
                 "multiqc/global_report/multiqc_data/multiqc.log",
+                "multiqc/global_report/multiqc_data/multiqc.parquet",
                 "multiqc/global_report/multiqc_data/multiqc_citations.txt",
                 "multiqc/global_report/multiqc_data/multiqc_data.json",
                 "multiqc/global_report/multiqc_data/multiqc_software_versions.txt",
@@ -28,11 +29,10 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2025-11-06T15:31:57.418384172"
+        "timestamp": "2025-11-07T10:48:01.699825922"
     },
     "MiSeq data test (single end reads)": {
         "content": [
-            9,
             {
                 "BWAMEM2_INDEX": {
                     "bwamem2": "2.2.1"
@@ -94,7 +94,9 @@
                 "multiqc/global_report/multiqc_data/fastqc_sequence_counts_plot.txt",
                 "multiqc/global_report/multiqc_data/fastqc_sequence_duplication_levels_plot.txt",
                 "multiqc/global_report/multiqc_data/fastqc_top_overrepresented_sequences_table.txt",
+                "multiqc/global_report/multiqc_data/llms-full.txt",
                 "multiqc/global_report/multiqc_data/multiqc.log",
+                "multiqc/global_report/multiqc_data/multiqc.parquet",
                 "multiqc/global_report/multiqc_data/multiqc_citations.txt",
                 "multiqc/global_report/multiqc_data/multiqc_data.json",
                 "multiqc/global_report/multiqc_data/multiqc_fastq_screen.txt",
@@ -123,7 +125,6 @@
                 "multiqc/global_report/multiqc_plots/pdf",
                 "multiqc/global_report/multiqc_plots/pdf/fastq_screen_plot-cnt.pdf",
                 "multiqc/global_report/multiqc_plots/pdf/fastq_screen_plot-pct.pdf",
-                "multiqc/global_report/multiqc_plots/pdf/fastqc-status-check-heatmap.pdf",
                 "multiqc/global_report/multiqc_plots/pdf/fastqc_overrepresented_sequences_plot.pdf",
                 "multiqc/global_report/multiqc_plots/pdf/fastqc_per_base_n_content_plot.pdf",
                 "multiqc/global_report/multiqc_plots/pdf/fastqc_per_base_sequence_quality_plot.pdf",
@@ -134,22 +135,10 @@
                 "multiqc/global_report/multiqc_plots/pdf/fastqc_sequence_counts_plot-pct.pdf",
                 "multiqc/global_report/multiqc_plots/pdf/fastqc_sequence_duplication_levels_plot.pdf",
                 "multiqc/global_report/multiqc_plots/pdf/fastqc_top_overrepresented_sequences_table.pdf",
-                "multiqc/global_report/multiqc_plots/pdf/general_stats_table.pdf",
-                "multiqc/global_report/multiqc_plots/pdf/picard_alignment_readlength_plot.pdf",
-                "multiqc/global_report/multiqc_plots/pdf/picard_alignment_summary-cnt.pdf",
-                "multiqc/global_report/multiqc_plots/pdf/picard_alignment_summary-pct.pdf",
-                "multiqc/global_report/multiqc_plots/pdf/picard_base_distribution_by_cycle__Adenine.pdf",
-                "multiqc/global_report/multiqc_plots/pdf/picard_base_distribution_by_cycle__Cytosine.pdf",
-                "multiqc/global_report/multiqc_plots/pdf/picard_base_distribution_by_cycle__Guanine.pdf",
-                "multiqc/global_report/multiqc_plots/pdf/picard_base_distribution_by_cycle__Thymine.pdf",
-                "multiqc/global_report/multiqc_plots/pdf/picard_base_distribution_by_cycle__Undetermined.pdf",
-                "multiqc/global_report/multiqc_plots/pdf/picard_quality_by_cycle.pdf",
-                "multiqc/global_report/multiqc_plots/pdf/picard_quality_score_distribution.pdf",
                 "multiqc/global_report/multiqc_plots/pdf/seqfu.pdf",
                 "multiqc/global_report/multiqc_plots/png",
                 "multiqc/global_report/multiqc_plots/png/fastq_screen_plot-cnt.png",
                 "multiqc/global_report/multiqc_plots/png/fastq_screen_plot-pct.png",
-                "multiqc/global_report/multiqc_plots/png/fastqc-status-check-heatmap.png",
                 "multiqc/global_report/multiqc_plots/png/fastqc_overrepresented_sequences_plot.png",
                 "multiqc/global_report/multiqc_plots/png/fastqc_per_base_n_content_plot.png",
                 "multiqc/global_report/multiqc_plots/png/fastqc_per_base_sequence_quality_plot.png",
@@ -160,22 +149,10 @@
                 "multiqc/global_report/multiqc_plots/png/fastqc_sequence_counts_plot-pct.png",
                 "multiqc/global_report/multiqc_plots/png/fastqc_sequence_duplication_levels_plot.png",
                 "multiqc/global_report/multiqc_plots/png/fastqc_top_overrepresented_sequences_table.png",
-                "multiqc/global_report/multiqc_plots/png/general_stats_table.png",
-                "multiqc/global_report/multiqc_plots/png/picard_alignment_readlength_plot.png",
-                "multiqc/global_report/multiqc_plots/png/picard_alignment_summary-cnt.png",
-                "multiqc/global_report/multiqc_plots/png/picard_alignment_summary-pct.png",
-                "multiqc/global_report/multiqc_plots/png/picard_base_distribution_by_cycle__Adenine.png",
-                "multiqc/global_report/multiqc_plots/png/picard_base_distribution_by_cycle__Cytosine.png",
-                "multiqc/global_report/multiqc_plots/png/picard_base_distribution_by_cycle__Guanine.png",
-                "multiqc/global_report/multiqc_plots/png/picard_base_distribution_by_cycle__Thymine.png",
-                "multiqc/global_report/multiqc_plots/png/picard_base_distribution_by_cycle__Undetermined.png",
-                "multiqc/global_report/multiqc_plots/png/picard_quality_by_cycle.png",
-                "multiqc/global_report/multiqc_plots/png/picard_quality_score_distribution.png",
                 "multiqc/global_report/multiqc_plots/png/seqfu.png",
                 "multiqc/global_report/multiqc_plots/svg",
                 "multiqc/global_report/multiqc_plots/svg/fastq_screen_plot-cnt.svg",
                 "multiqc/global_report/multiqc_plots/svg/fastq_screen_plot-pct.svg",
-                "multiqc/global_report/multiqc_plots/svg/fastqc-status-check-heatmap.svg",
                 "multiqc/global_report/multiqc_plots/svg/fastqc_overrepresented_sequences_plot.svg",
                 "multiqc/global_report/multiqc_plots/svg/fastqc_per_base_n_content_plot.svg",
                 "multiqc/global_report/multiqc_plots/svg/fastqc_per_base_sequence_quality_plot.svg",
@@ -186,17 +163,6 @@
                 "multiqc/global_report/multiqc_plots/svg/fastqc_sequence_counts_plot-pct.svg",
                 "multiqc/global_report/multiqc_plots/svg/fastqc_sequence_duplication_levels_plot.svg",
                 "multiqc/global_report/multiqc_plots/svg/fastqc_top_overrepresented_sequences_table.svg",
-                "multiqc/global_report/multiqc_plots/svg/general_stats_table.svg",
-                "multiqc/global_report/multiqc_plots/svg/picard_alignment_readlength_plot.svg",
-                "multiqc/global_report/multiqc_plots/svg/picard_alignment_summary-cnt.svg",
-                "multiqc/global_report/multiqc_plots/svg/picard_alignment_summary-pct.svg",
-                "multiqc/global_report/multiqc_plots/svg/picard_base_distribution_by_cycle__Adenine.svg",
-                "multiqc/global_report/multiqc_plots/svg/picard_base_distribution_by_cycle__Cytosine.svg",
-                "multiqc/global_report/multiqc_plots/svg/picard_base_distribution_by_cycle__Guanine.svg",
-                "multiqc/global_report/multiqc_plots/svg/picard_base_distribution_by_cycle__Thymine.svg",
-                "multiqc/global_report/multiqc_plots/svg/picard_base_distribution_by_cycle__Undetermined.svg",
-                "multiqc/global_report/multiqc_plots/svg/picard_quality_by_cycle.svg",
-                "multiqc/global_report/multiqc_plots/svg/picard_quality_score_distribution.svg",
                 "multiqc/global_report/multiqc_plots/svg/seqfu.svg",
                 "multiqc/global_report/multiqc_report.html",
                 "picard_collectmultiplemetrics",
@@ -269,11 +235,10 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2025-11-06T15:37:04.651311769"
+        "timestamp": "2025-11-07T10:23:17.145777453"
     },
     "Miseq data test (skip fastqc)": {
         "content": [
-            8,
             {
                 "BWAMEM2_INDEX": {
                     "bwamem2": "2.2.1"
@@ -319,7 +284,9 @@
                 "multiqc/global_report",
                 "multiqc/global_report/multiqc_data",
                 "multiqc/global_report/multiqc_data/fastq_screen_plot.txt",
+                "multiqc/global_report/multiqc_data/llms-full.txt",
                 "multiqc/global_report/multiqc_data/multiqc.log",
+                "multiqc/global_report/multiqc_data/multiqc.parquet",
                 "multiqc/global_report/multiqc_data/multiqc_citations.txt",
                 "multiqc/global_report/multiqc_data/multiqc_data.json",
                 "multiqc/global_report/multiqc_data/multiqc_fastq_screen.txt",
@@ -446,6 +413,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2025-11-06T15:38:00.403207972"
+        "timestamp": "2025-11-07T10:47:45.83823672"
     }
 }
