@@ -28,8 +28,8 @@ input:
         - edam: http://edamontology.org/format_3750 # YAML
   - extra_multiqc_config:
       type: file
-      description: Second optional config yml for MultiQC. Will override common
-        sections in multiqc_config.
+      description: Second optional config yml for MultiQC. Will override common sections
+        in multiqc_config.
       pattern: "*.{yml,yaml}"
       ontologies:
         - edam: http://edamontology.org/format_3750 # YAML
