@@ -243,7 +243,7 @@ workflow SEQINSPECTOR {
             samples_per_tag: samples.flatten()
             config: config
         }
-    
+
 
     MULTIQC_PER_TAG(
         tagged_mqc_files.samples_per_tag,
