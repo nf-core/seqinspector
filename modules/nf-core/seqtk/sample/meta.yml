@@ -6,8 +6,8 @@ keywords:
   - reads
 tools:
   - seqtk:
-      description: Seqtk is a fast and lightweight tool for processing sequences
-        in the FASTA or FASTQ format. Seqtk sample command subsamples sequences.
+      description: Seqtk is a fast and lightweight tool for processing sequences in
+        the FASTA or FASTQ format. Seqtk sample command subsamples sequences.
       homepage: https://github.com/lh3/seqtk
       documentation: https://docs.csc.fi/apps/seqtk/
       tool_dev_url: https://github.com/lh3/seqtk
@@ -25,8 +25,8 @@ input:
         pattern: "*.{fastq.gz}"
         ontologies: []
     - sample_size:
-        type: integer
-        description: Number of reads to sample.
+        type: float
+        description: Fraction (<1.0) or number (>=1) of reads to sample.
 output:
   reads:
     - - meta:
