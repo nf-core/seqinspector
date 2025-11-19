@@ -8,6 +8,7 @@ include { samplesheetToList } from 'plugin/nf-schema'
 
 include { SEQTK_SAMPLE                  } from '../modules/nf-core/seqtk/sample/main'
 include { FASTQC                        } from '../modules/nf-core/fastqc/main'
+include { FASTQE                        } from '../modules/nf-core/fastqe/main'
 include { SEQFU_STATS                   } from '../modules/nf-core/seqfu/stats'
 include { FASTQSCREEN_FASTQSCREEN       } from '../modules/nf-core/fastqscreen/fastqscreen/main'
 include { BWAMEM2_INDEX                 } from '../modules/nf-core/bwamem2/index/main'
@@ -77,6 +78,14 @@ workflow SEQINSPECTOR {
         ch_versions = ch_versions.mix(FASTQC.out.versions.first())
     }
 
+    // FASTQE
+    FASTQE(
+        ch_sample_sized.map {
+            meta, subsampled -> [meta, subsampled]
+        }
+    )
+    ch_multiqc_files = ch_multiqc_files.mix(FASTQE.out.tsv)
+    ch_versions = ch_versions.mix(FASTQE.out.versions.first())
 
     //
     // Module: Run SeqFu stats

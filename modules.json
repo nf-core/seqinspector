@@ -31,6 +31,11 @@
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
                         "installed_by": ["modules"]
                     },
+                    "fastqe": {
+                        "branch": "master",
+                        "git_sha": "cab0b8fdc4f785810f49423d8141a0773c21eb3b",
+                        "installed_by": ["modules"]
+                    },
                     "fastqscreen/fastqscreen": {
                         "branch": "master",
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
