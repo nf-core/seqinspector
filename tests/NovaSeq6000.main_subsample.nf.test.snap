@@ -785,11 +785,7 @@
                 "multiqc_picard_baseContent.txt:md5,8b2efc3fa06d2013348b35f9607292aa",
                 "multiqc_picard_quality_by_cycle.txt:md5,c2774038d1a0142746426e46f9f954dd",
                 "multiqc_picard_quality_score_distribution.txt:md5,792755ee794d375b85a57f58d879f0c6",
-<<<<<<< HEAD
-                "multiqc_seqfu.txt:md5,5b54a49079169985795537d83d58bdd9",
-=======
                 "multiqc_seqfu.txt:md5,18dd2407d4a1791646785123028f69b5",
->>>>>>> dev
                 "picard_MarkIlluminaAdapters_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_MeanQualityByCycle_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_MeanQualityByCycle_histogram_1.txt:md5,c2774038d1a0142746426e46f9f954dd",
@@ -821,11 +817,7 @@
                 "multiqc_picard_baseContent.txt:md5,1426865fe8ee1a36f67636c28500a91c",
                 "multiqc_picard_quality_by_cycle.txt:md5,79bf9f861077de70ec28c9af01783876",
                 "multiqc_picard_quality_score_distribution.txt:md5,a3f8d1937e1f118800aa3d86c1b498c4",
-<<<<<<< HEAD
-                "multiqc_seqfu.txt:md5,5579172a6f8ac09a5ffcb3ce6a99590e",
-=======
                 "multiqc_seqfu.txt:md5,6cdb863a3686fbb772aae5a66925ff23",
->>>>>>> dev
                 "picard_MarkIlluminaAdapters_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_MeanQualityByCycle_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_MeanQualityByCycle_histogram_1.txt:md5,79bf9f861077de70ec28c9af01783876",
@@ -857,7 +849,7 @@
                 "multiqc_picard_baseContent.txt:md5,0a5f9d32dd3061ce4349518c47d69838",
                 "multiqc_picard_quality_by_cycle.txt:md5,ec59b472afc1242ff299011ba456e792",
                 "multiqc_picard_quality_score_distribution.txt:md5,1b8be76b60ee71aa36a98d34e433b9bf",
-                "multiqc_seqfu.txt:md5,b5434520fa5be5c98be5ed164a464d23",
+                "multiqc_seqfu.txt:md5,f821357507fda2d4cfd9299f52fa7dc1",
                 "picard_MarkIlluminaAdapters_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_MeanQualityByCycle_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_MeanQualityByCycle_histogram_1.txt:md5,ec59b472afc1242ff299011ba456e792",
@@ -889,7 +881,7 @@
                 "multiqc_picard_baseContent.txt:md5,b9d72d8173cdc7649b44b80aa485477c",
                 "multiqc_picard_quality_by_cycle.txt:md5,062547fb888ed508dd1d5733d7bed22e",
                 "multiqc_picard_quality_score_distribution.txt:md5,dd5abab3a7141654fffa3946c50a039b",
-                "multiqc_seqfu.txt:md5,e2e092852c011abe5ad75cdcd68b9383",
+                "multiqc_seqfu.txt:md5,8cced36d66ca9d25d60c006e734aa7e9",
                 "picard_MarkIlluminaAdapters_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_MeanQualityByCycle_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_MeanQualityByCycle_histogram_1.txt:md5,062547fb888ed508dd1d5733d7bed22e",
@@ -921,7 +913,7 @@
                 "multiqc_picard_baseContent.txt:md5,974d83faa49711ab4ea1248c59e69393",
                 "multiqc_picard_quality_by_cycle.txt:md5,248ecaf269d8fef1e84ea06f98b6f6ba",
                 "multiqc_picard_quality_score_distribution.txt:md5,5e7e80654e12c500b15f8564ffb12b27",
-                "multiqc_seqfu.txt:md5,a1a0b9a0dde0c1c4fe184d44c675dcde",
+                "multiqc_seqfu.txt:md5,ff4ce1c88f39ed24a88bae0a861f75c8",
                 "picard_MarkIlluminaAdapters_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_MeanQualityByCycle_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_MeanQualityByCycle_histogram_1.txt:md5,248ecaf269d8fef1e84ea06f98b6f6ba",
@@ -958,6 +950,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2025-11-07T11:18:58.975063972"
+        "timestamp": "2025-11-19T14:24:39.696680631"
     }
 }
