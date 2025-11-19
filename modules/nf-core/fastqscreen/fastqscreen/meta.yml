@@ -30,10 +30,10 @@ input:
           List of input FastQ files of size 1 and 2 for single-end and paired-end data,
           respectively.
         ontologies: []
-  - - ref_names: {}
-    - ref_dirs: {}
-    - ref_basenames: {}
-    - ref_aligners: {}
+  - database:
+      type: directory
+      description: fastq screen database folder containing config file and index folders
+      pattern: "FastQ_Screen_Genomes"
 output:
   txt:
     - - meta:
@@ -59,8 +59,8 @@ output:
           description: Groovy Map containing sample information
       - "*.html":
           type: file
-          description: HTML file containing mapping results as a table and
-            graphical representation
+          description: HTML file containing mapping results as a table and graphical
+            representation
           pattern: "*.html"
           ontologies: []
   fastq:
@@ -69,8 +69,8 @@ output:
           description: Groovy Map containing sample information
       - "*.fastq.gz":
           type: file
-          description: FastQ file containing reads that did not align to any
-            database (optional)
+          description: FastQ file containing reads that did not align to any database
+            (optional)
           pattern: "*.fastq.gz"
           ontologies:
             - edam: http://edamontology.org/format_3989 # GZIP format
