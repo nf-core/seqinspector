@@ -41,7 +41,9 @@
                 "bwamem2_index/bwamem2/genome.fa.pac",
                 "bwamem2_mem",
                 "bwamem2_mem/SAMPLE_PAIRED_END_1_1.bam",
+                "bwamem2_mem/SAMPLE_PAIRED_END_1_1.bam.bai",
                 "bwamem2_mem/SAMPLE_PAIRED_END_2_2.bam",
+                "bwamem2_mem/SAMPLE_PAIRED_END_2_2.bam.bai",
                 "fastqc",
                 "fastqc/SAMPLE_PAIRED_END_1_1_1_fastqc.html",
                 "fastqc/SAMPLE_PAIRED_END_1_1_1_fastqc.zip",
@@ -324,9 +326,6 @@
                 "samtools_faidx",
                 "samtools_faidx/genome.fa.fai",
                 "samtools_faidx/genome.fa.sizes",
-                "samtools_index",
-                "samtools_index/SAMPLE_PAIRED_END_1_1.bam.bai",
-                "samtools_index/SAMPLE_PAIRED_END_2_2.bam.bai",
                 "seqfu_stats",
                 "seqfu_stats/SAMPLE_PAIRED_END_1_1_seqfu.tsv",
                 "seqfu_stats/SAMPLE_PAIRED_END_1_1_seqfu_mqc.txt",
@@ -340,7 +339,9 @@
                 "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
                 "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
                 "SAMPLE_PAIRED_END_1_1.bam:md5,fc37892fea524a3c1799f51605c3cc5f",
+                "SAMPLE_PAIRED_END_1_1.bam.bai:md5,82724835c47f8e1d1a86e13ef469b464",
                 "SAMPLE_PAIRED_END_2_2.bam:md5,d68128596af24e2349004a082d507cea",
+                "SAMPLE_PAIRED_END_2_2.bam.bai:md5,3c4bdff0f906f2234fdeee8eea719210",
                 "SAMPLE_PAIRED_END_1_1_1_screen.png:md5,f52ddd0e65f23f68dd8d58d5453417db",
                 "SAMPLE_PAIRED_END_1_1_1_screen.txt:md5,921b08eeb461a2aa1bd42bba53900f70",
                 "SAMPLE_PAIRED_END_1_1_2_screen.png:md5,908f4fceea8aa546106efdaa7ca78f7d",
@@ -415,8 +416,6 @@
                 "picard_quality_score_distribution.txt:md5,ecde9f0e859a6eecc5cea75a156c632d",
                 "genome.fa.fai:md5,6f4c0ce5258e6948135ad006e1f9ee1b",
                 "genome.fa.sizes:md5,e122f8021a5ef14104c32785cb9b7adc",
-                "SAMPLE_PAIRED_END_1_1.bam.bai:md5,82724835c47f8e1d1a86e13ef469b464",
-                "SAMPLE_PAIRED_END_2_2.bam.bai:md5,3c4bdff0f906f2234fdeee8eea719210",
                 "SAMPLE_PAIRED_END_1_1_seqfu.tsv:md5,bbd911ff3fa43212dfd4c5a5872dbdb6",
                 "SAMPLE_PAIRED_END_1_1_seqfu_mqc.txt:md5,cd60f746b6749cc66213d031af1b931c",
                 "SAMPLE_PAIRED_END_2_2_seqfu.tsv:md5,152566a128dd657da33465b4966b5799",
@@ -427,6 +426,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2025-11-07T11:25:02.819346496"
+        "timestamp": "2025-11-19T11:50:04.344118749"
     }
 }
