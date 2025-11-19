@@ -1,6 +1,6 @@
 name: multiqc
-description: Aggregate results from bioinformatics analyses across many samples
-  into a single report
+description: Aggregate results from bioinformatics analyses across many samples into
+  a single report
 keywords:
   - QC
   - bioinformatics tools
