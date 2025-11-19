@@ -12,7 +12,9 @@ include { SEQFU_STATS                   } from '../modules/nf-core/seqfu/stats'
 include { FASTQSCREEN_FASTQSCREEN       } from '../modules/nf-core/fastqscreen/fastqscreen/main'
 include { BWAMEM2_INDEX                 } from '../modules/nf-core/bwamem2/index/main'
 include { BWAMEM2_MEM                   } from '../modules/nf-core/bwamem2/mem/main'
-
+include { SAMTOOLS_INDEX                } from '../modules/nf-core/samtools/index/main'
+include { SAMTOOLS_FAIDX                } from '../modules/nf-core/samtools/faidx/main'
+include { PICARD_COLLECTMULTIPLEMETRICS } from '../modules/nf-core/picard/collectmultiplemetrics/main'
 include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc/main'
 include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc/main'
 
@@ -39,6 +41,13 @@ workflow SEQINSPECTOR {
     ch_multiqc_files       = Channel.empty()
     ch_multiqc_extra_files = Channel.empty()
     ch_multiqc_reports     = Channel.empty()
+
+// Initialize all channels that might be used later
+    ch_bwamem2_index = Channel.empty()
+    ch_bwamem2_mem = Channel.empty()
+    ch_samtools_index = Channel.empty()
+    ch_reference_fasta_fai = Channel.empty()
+    ch_reference_fasta = Channel.empty()
 
     //
     // MODULE: Run Seqtk sample to perform subsampling
@@ -133,6 +142,53 @@ workflow SEQINSPECTOR {
 
 
 }
+    // MODULE: Index BAM files with Samtools
+    if (!("samtools_index" in skip_tools) && !("bwamem2_mem" in skip_tools)) {
+        SAMTOOLS_INDEX (
+            ch_bwamem2_mem
+        )
+        ch_samtools_index = SAMTOOLS_INDEX.out.bai
+        ch_versions = ch_versions.mix(SAMTOOLS_INDEX.out.versions)
+    }
+
+    // MODULE: Index reference FASTA with Samtools faidx
+    if (!("samtools_faidx" in skip_tools)) {
+
+        // Assume ch_fasta emits tuple(meta, fasta)
+        SAMTOOLS_FAIDX (
+            ch_reference_fasta,
+            [[:],[]],
+            true           // get_sizes
+        )
+        ch_reference_fasta_fai = SAMTOOLS_FAIDX.out.fai
+        ch_versions = ch_versions.mix(SAMTOOLS_FAIDX.out.versions)
+    }
+
+    // MODULE: Prepare BAM/BAI tuples for Picard
+    // Combine BAM and BAI outputs for Picard
+    if (!("picard_collectmultiplemetrics" in skip_tools) &&
+        !("bwamem2_mem" in skip_tools) &&
+        !("samtools_index" in skip_tools) &&
+        !("samtools_faidx" in skip_tools)) {
+
+        // Prepare BAM/BAI tuples for Picard
+        ch_bam_bai = ch_bwamem2_mem
+            .join(ch_samtools_index, failOnDuplicate: true, failOnMismatch: true)
+
+        ch_fasta   = ch_reference_fasta
+        ch_fai     = ch_reference_fasta_fai
+
+
+        PICARD_COLLECTMULTIPLEMETRICS(
+            ch_bam_bai,
+            ch_fasta,
+            ch_fai
+        )
+
+        ch_multiqc_files = ch_multiqc_files.mix(PICARD_COLLECTMULTIPLEMETRICS.out.metrics)
+        ch_versions = ch_versions.mix(PICARD_COLLECTMULTIPLEMETRICS.out.versions.first())
+    }
+
 
     // Collate and save software versions
     //
