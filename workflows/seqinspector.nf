@@ -41,7 +41,6 @@ workflow SEQINSPECTOR {
     ch_versions = channel.empty()
     ch_multiqc_files = channel.empty()
     ch_multiqc_extra_files = channel.empty()
-    ch_multiqc_reports = channel.empty()
 
     // Initialize all channels that might be used later
     ch_bwamem2_index = channel.empty()
@@ -164,19 +163,15 @@ workflow SEQINSPECTOR {
         )
         ch_samtools_index = SAMTOOLS_INDEX.out.bai
         ch_versions = ch_versions.mix(SAMTOOLS_INDEX.out.versions)
-        ch_samtools_index.view { "BAI: ${it}" }
     }
 
     // MODULE: Index reference FASTA with Samtools faidx
     if (!("samtools_faidx" in skip_tools)) {
 
         // Assume ch_fasta emits tuple(meta, fasta)
-        ch_dummy_fai = channel.value(['dummy_meta', file('empty.fai')])
-
-
         SAMTOOLS_FAIDX(
             ch_reference_fasta,
-            ch_dummy_fai,
+            [[:], []],
             true,
         )
         ch_reference_fasta_fai = SAMTOOLS_FAIDX.out.fai
@@ -188,11 +183,7 @@ workflow SEQINSPECTOR {
     if (!("picard_collectmultiplemetrics" in skip_tools) && !("bwamem2_mem" in skip_tools) && !("samtools_index" in skip_tools) && !("samtools_faidx" in skip_tools)) {
 
         // Prepare BAM/BAI tuples for Picard
-        ch_bam_bai = ch_bwamem2_mem
-            .join(ch_samtools_index)
-            .map { meta, bam, bai ->
-                [meta, bam, bai]
-            }
+        ch_bam_bai = ch_bwamem2_mem.join(ch_samtools_index, failOnDuplicate: true, failOnMismatch: true)
 
         ch_bam_bai.view { "Combined BAM/BAI for Picard: ${it}" }
         ch_fasta = ch_reference_fasta
@@ -259,7 +250,7 @@ workflow SEQINSPECTOR {
     )
 
     MULTIQC_GLOBAL(
-        ch_multiqc_files.map { meta, file -> file }.mix(ch_multiqc_extra_files).collect(),
+        ch_multiqc_files.map { _meta, file -> file }.mix(ch_multiqc_extra_files).collect(),
         ch_multiqc_config.toList(),
         [],
         ch_multiqc_logo.toList(),

@@ -7,7 +7,7 @@
                 },
                 "BWAMEM2_MEM": {
                     "bwamem2": "2.2.1",
-                    "samtools": 1.21
+                    "samtools": "1.22.1"
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -25,7 +25,7 @@
                     "samtools": "1.22.1"
                 },
                 "SEQFU_STATS": {
-                    "seqfu": "1.20.3"
+                    "seqfu": "1.22.3"
                 },
                 "SEQTK_SAMPLE": {
                     "seqtk": "1.4-r122"
@@ -44,10 +44,15 @@
                 "bwamem2_index/bwamem2/genome.fa.pac",
                 "bwamem2_mem",
                 "bwamem2_mem/Sample1_1.bam",
+                "bwamem2_mem/Sample1_1.bam.bai",
                 "bwamem2_mem/Sample23_3.bam",
+                "bwamem2_mem/Sample23_3.bam.bai",
                 "bwamem2_mem/SampleA_2.bam",
+                "bwamem2_mem/SampleA_2.bam.bai",
                 "bwamem2_mem/Undetermined_5.bam",
+                "bwamem2_mem/Undetermined_5.bam.bai",
                 "bwamem2_mem/sampletest_4.bam",
+                "bwamem2_mem/sampletest_4.bam.bai",
                 "fastqc",
                 "fastqc/Sample1_1_fastqc.html",
                 "fastqc/Sample1_1_fastqc.zip",
@@ -718,12 +723,6 @@
                 "samtools_faidx",
                 "samtools_faidx/genome.fa.fai",
                 "samtools_faidx/genome.fa.sizes",
-                "samtools_index",
-                "samtools_index/Sample1_1.bam.bai",
-                "samtools_index/Sample23_3.bam.bai",
-                "samtools_index/SampleA_2.bam.bai",
-                "samtools_index/Undetermined_5.bam.bai",
-                "samtools_index/sampletest_4.bam.bai",
                 "seqfu_stats",
                 "seqfu_stats/Sample1_1_seqfu.tsv",
                 "seqfu_stats/Sample1_1_seqfu_mqc.txt",
@@ -748,11 +747,16 @@
                 "genome.fa.ann:md5,4439f90bdaaf2cdf9089c9f7f07b9d6b",
                 "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
                 "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
-                "Sample1_1.bam:md5,a948b66ba258785fe12aea5d64136b05",
-                "Sample23_3.bam:md5,61e745916240193c0ecced45e6a0b054",
-                "SampleA_2.bam:md5,82a083dcf79d10110a39c736dde463de",
-                "Undetermined_5.bam:md5,6eb240ce5a28b26c48b72e7d84e976f8",
-                "sampletest_4.bam:md5,08e4ce7950bb8b0ae9e83b497991b9c9",
+                "Sample1_1.bam:md5,0bd502d4e221008867c85393cce2b89b",
+                "Sample1_1.bam.bai:md5,20c7b66e8e1ace324a3cbbee6745b714",
+                "Sample23_3.bam:md5,26a49672caec3ab985d3f3dd6bdff530",
+                "Sample23_3.bam.bai:md5,20c7b66e8e1ace324a3cbbee6745b714",
+                "SampleA_2.bam:md5,240d536aab1aac8fa3bca402703121df",
+                "SampleA_2.bam.bai:md5,20c7b66e8e1ace324a3cbbee6745b714",
+                "Undetermined_5.bam:md5,f30b23c562a1725f3f23236acab1fd9a",
+                "Undetermined_5.bam.bai:md5,20c7b66e8e1ace324a3cbbee6745b714",
+                "sampletest_4.bam:md5,2c37f72ed4f25c971199fbde3af370b9",
+                "sampletest_4.bam.bai:md5,20c7b66e8e1ace324a3cbbee6745b714",
                 "Sample1_1_screen.png:md5,562256290643b51e4374c2225a15f463",
                 "Sample1_1_screen.txt:md5,3b184ef10eeb99043a85826534a4ee28",
                 "Sample23_3_screen.png:md5,6bb2caf67b9b2ed25d3d5f32c343e9ab",
@@ -781,7 +785,11 @@
                 "multiqc_picard_baseContent.txt:md5,8b2efc3fa06d2013348b35f9607292aa",
                 "multiqc_picard_quality_by_cycle.txt:md5,c2774038d1a0142746426e46f9f954dd",
                 "multiqc_picard_quality_score_distribution.txt:md5,792755ee794d375b85a57f58d879f0c6",
+<<<<<<< HEAD
                 "multiqc_seqfu.txt:md5,5b54a49079169985795537d83d58bdd9",
+=======
+                "multiqc_seqfu.txt:md5,18dd2407d4a1791646785123028f69b5",
+>>>>>>> dev
                 "picard_MarkIlluminaAdapters_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_MeanQualityByCycle_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_MeanQualityByCycle_histogram_1.txt:md5,c2774038d1a0142746426e46f9f954dd",
@@ -813,7 +821,11 @@
                 "multiqc_picard_baseContent.txt:md5,1426865fe8ee1a36f67636c28500a91c",
                 "multiqc_picard_quality_by_cycle.txt:md5,79bf9f861077de70ec28c9af01783876",
                 "multiqc_picard_quality_score_distribution.txt:md5,a3f8d1937e1f118800aa3d86c1b498c4",
+<<<<<<< HEAD
                 "multiqc_seqfu.txt:md5,5579172a6f8ac09a5ffcb3ce6a99590e",
+=======
+                "multiqc_seqfu.txt:md5,6cdb863a3686fbb772aae5a66925ff23",
+>>>>>>> dev
                 "picard_MarkIlluminaAdapters_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_MeanQualityByCycle_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_MeanQualityByCycle_histogram_1.txt:md5,79bf9f861077de70ec28c9af01783876",
@@ -925,21 +937,16 @@
                 "picard_quality_score_distribution.txt:md5,9d9f1bb12316175cdb88d3ff70305428",
                 "genome.fa.fai:md5,6f4c0ce5258e6948135ad006e1f9ee1b",
                 "genome.fa.sizes:md5,e122f8021a5ef14104c32785cb9b7adc",
-                "Sample1_1.bam.bai:md5,20c7b66e8e1ace324a3cbbee6745b714",
-                "Sample23_3.bam.bai:md5,20c7b66e8e1ace324a3cbbee6745b714",
-                "SampleA_2.bam.bai:md5,20c7b66e8e1ace324a3cbbee6745b714",
-                "Undetermined_5.bam.bai:md5,20c7b66e8e1ace324a3cbbee6745b714",
-                "sampletest_4.bam.bai:md5,20c7b66e8e1ace324a3cbbee6745b714",
-                "Sample1_1_seqfu.tsv:md5,269fabf8435defcd327aa69a050b7869",
-                "Sample1_1_seqfu_mqc.txt:md5,a354b0ed16b9cf84aa88f501d7740fd6",
-                "Sample23_3_seqfu.tsv:md5,6fdadbeeefccbf957f880d6852bf9676",
-                "Sample23_3_seqfu_mqc.txt:md5,e94269e3efc8b8192d7ac9c15ea2aa99",
-                "SampleA_2_seqfu.tsv:md5,b980ed694a05825fcf7c8b5b73888eb3",
-                "SampleA_2_seqfu_mqc.txt:md5,1d4b0e918644cf553108b7ccf77b4a01",
-                "Undetermined_5_seqfu.tsv:md5,b4458d41df4dee9321da03f4d4672aae",
-                "Undetermined_5_seqfu_mqc.txt:md5,0c869488cb61d2f87758c621bded212b",
-                "sampletest_4_seqfu.tsv:md5,db3179b0c41a09e6317a5a5c0852f476",
-                "sampletest_4_seqfu_mqc.txt:md5,590b97cc48268629204f59007bae7ad7",
+                "Sample1_1_seqfu.tsv:md5,ac174f48d928c6ddfd43c88af0caa8b6",
+                "Sample1_1_seqfu_mqc.txt:md5,24d99524ccd0e6c6255a69d68a871c7a",
+                "Sample23_3_seqfu.tsv:md5,6fac5d3dbce3f3bee72341fe99a399dc",
+                "Sample23_3_seqfu_mqc.txt:md5,4d4f280911a08bb6b753142980178027",
+                "SampleA_2_seqfu.tsv:md5,aec811f267bb2a0ef066a7abb59d2775",
+                "SampleA_2_seqfu_mqc.txt:md5,a819409a5cb64e20c3e54ec5ada4aa27",
+                "Undetermined_5_seqfu.tsv:md5,3a42c5c66a0a118f1a6f6f6e560b0e7e",
+                "Undetermined_5_seqfu_mqc.txt:md5,bd8be908362c5cb08a72f8ae7ab41b0d",
+                "sampletest_4_seqfu.tsv:md5,a5bea0b9c6015dd1a201ffd433e9b377",
+                "sampletest_4_seqfu_mqc.txt:md5,2180961655bbc8a12f0152d6a4b803a2",
                 "Sample1_1_Sample1_S1_L001_R1_001.fastq.gz:md5,3ccd132ff32399706842b0f1d00f477e",
                 "Sample23_3_Sample23_S3_L001_R1_001.fastq.gz:md5,3802f03450693b42531fdf5b0b542c2f",
                 "SampleA_2_SampleA_S2_L001_R1_001.fastq.gz:md5,f99d5407aac64cb36451c6f0a1db5ade",
