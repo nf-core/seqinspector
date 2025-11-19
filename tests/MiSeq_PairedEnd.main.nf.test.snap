@@ -7,7 +7,7 @@
                 },
                 "BWAMEM2_MEM": {
                     "bwamem2": "2.2.1",
-                    "samtools": 1.21
+                    "samtools": "1.22.1"
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -25,7 +25,7 @@
                     "samtools": "1.22.1"
                 },
                 "SEQFU_STATS": {
-                    "seqfu": "1.20.3"
+                    "seqfu": "1.22.3"
                 },
                 "Workflow": {
                     "nf-core/seqinspector": "v1.0dev"
@@ -41,7 +41,9 @@
                 "bwamem2_index/bwamem2/genome.fa.pac",
                 "bwamem2_mem",
                 "bwamem2_mem/SAMPLE_PAIRED_END_1_1.bam",
+                "bwamem2_mem/SAMPLE_PAIRED_END_1_1.bam.bai",
                 "bwamem2_mem/SAMPLE_PAIRED_END_2_2.bam",
+                "bwamem2_mem/SAMPLE_PAIRED_END_2_2.bam.bai",
                 "fastqc",
                 "fastqc/SAMPLE_PAIRED_END_1_1_1_fastqc.html",
                 "fastqc/SAMPLE_PAIRED_END_1_1_1_fastqc.zip",
@@ -324,9 +326,6 @@
                 "samtools_faidx",
                 "samtools_faidx/genome.fa.fai",
                 "samtools_faidx/genome.fa.sizes",
-                "samtools_index",
-                "samtools_index/SAMPLE_PAIRED_END_1_1.bam.bai",
-                "samtools_index/SAMPLE_PAIRED_END_2_2.bam.bai",
                 "seqfu_stats",
                 "seqfu_stats/SAMPLE_PAIRED_END_1_1_seqfu.tsv",
                 "seqfu_stats/SAMPLE_PAIRED_END_1_1_seqfu_mqc.txt",
@@ -339,8 +338,10 @@
                 "genome.fa.ann:md5,4439f90bdaaf2cdf9089c9f7f07b9d6b",
                 "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
                 "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
-                "SAMPLE_PAIRED_END_1_1.bam:md5,ced6a17fb3dee760c2606860e1177071",
-                "SAMPLE_PAIRED_END_2_2.bam:md5,15ada2a4f4a6cf2978aeaeb64a525197",
+                "SAMPLE_PAIRED_END_1_1.bam:md5,44c0ef738b73e26f67ded45ca4cb9e5b",
+                "SAMPLE_PAIRED_END_1_1.bam.bai:md5,82724835c47f8e1d1a86e13ef469b464",
+                "SAMPLE_PAIRED_END_2_2.bam:md5,9e20db3f3088fc478c223839e3a4ed62",
+                "SAMPLE_PAIRED_END_2_2.bam.bai:md5,3c4bdff0f906f2234fdeee8eea719210",
                 "SAMPLE_PAIRED_END_1_1_1_screen.png:md5,f52ddd0e65f23f68dd8d58d5453417db",
                 "SAMPLE_PAIRED_END_1_1_1_screen.txt:md5,921b08eeb461a2aa1bd42bba53900f70",
                 "SAMPLE_PAIRED_END_1_1_2_screen.png:md5,908f4fceea8aa546106efdaa7ca78f7d",
@@ -366,7 +367,7 @@
                 "multiqc_picard_baseContent.txt:md5,72b0ae83ed58052bfd768021d377c78f",
                 "multiqc_picard_quality_by_cycle.txt:md5,f6514f14befb874ded5aed79caba3e7b",
                 "multiqc_picard_quality_score_distribution.txt:md5,99be409e325619171b820d762dd023c0",
-                "multiqc_seqfu.txt:md5,1f1e063e4a509a26cee167c3b20389c0",
+                "multiqc_seqfu.txt:md5,139354afd154804b4b77f997277f3ee9",
                 "picard_MarkIlluminaAdapters_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_MeanQualityByCycle_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_MeanQualityByCycle_histogram_1.txt:md5,f6514f14befb874ded5aed79caba3e7b",
@@ -398,7 +399,7 @@
                 "multiqc_picard_baseContent.txt:md5,72b0ae83ed58052bfd768021d377c78f",
                 "multiqc_picard_quality_by_cycle.txt:md5,f6514f14befb874ded5aed79caba3e7b",
                 "multiqc_picard_quality_score_distribution.txt:md5,99be409e325619171b820d762dd023c0",
-                "multiqc_seqfu.txt:md5,1f1e063e4a509a26cee167c3b20389c0",
+                "multiqc_seqfu.txt:md5,139354afd154804b4b77f997277f3ee9",
                 "picard_MarkIlluminaAdapters_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_MeanQualityByCycle_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_MeanQualityByCycle_histogram_1.txt:md5,f6514f14befb874ded5aed79caba3e7b",
@@ -415,12 +416,10 @@
                 "picard_quality_score_distribution.txt:md5,ecde9f0e859a6eecc5cea75a156c632d",
                 "genome.fa.fai:md5,6f4c0ce5258e6948135ad006e1f9ee1b",
                 "genome.fa.sizes:md5,e122f8021a5ef14104c32785cb9b7adc",
-                "SAMPLE_PAIRED_END_1_1.bam.bai:md5,82724835c47f8e1d1a86e13ef469b464",
-                "SAMPLE_PAIRED_END_2_2.bam.bai:md5,3c4bdff0f906f2234fdeee8eea719210",
-                "SAMPLE_PAIRED_END_1_1_seqfu.tsv:md5,bbd911ff3fa43212dfd4c5a5872dbdb6",
-                "SAMPLE_PAIRED_END_1_1_seqfu_mqc.txt:md5,cd60f746b6749cc66213d031af1b931c",
-                "SAMPLE_PAIRED_END_2_2_seqfu.tsv:md5,152566a128dd657da33465b4966b5799",
-                "SAMPLE_PAIRED_END_2_2_seqfu_mqc.txt:md5,8a3296956e094e3a95e28431e6009c40"
+                "SAMPLE_PAIRED_END_1_1_seqfu.tsv:md5,be29dfe848eab9a10ee0d46691223eae",
+                "SAMPLE_PAIRED_END_1_1_seqfu_mqc.txt:md5,0aca00c7f64454af520c7e08ec595d2b",
+                "SAMPLE_PAIRED_END_2_2_seqfu.tsv:md5,44a5cb826e001d58208a5855938fa82b",
+                "SAMPLE_PAIRED_END_2_2_seqfu_mqc.txt:md5,ac1740de9ef142c99c993fa9824ead63"
             ]
         ],
         "meta": {

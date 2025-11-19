@@ -39,7 +39,7 @@
                 },
                 "BWAMEM2_MEM": {
                     "bwamem2": "2.2.1",
-                    "samtools": 1.21
+                    "samtools": "1.22.1"
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -57,7 +57,7 @@
                     "samtools": "1.22.1"
                 },
                 "SEQFU_STATS": {
-                    "seqfu": "1.20.3"
+                    "seqfu": "1.22.3"
                 },
                 "Workflow": {
                     "nf-core/seqinspector": "v1.0dev"
@@ -73,6 +73,7 @@
                 "bwamem2_index/bwamem2/genome.fa.pac",
                 "bwamem2_mem",
                 "bwamem2_mem/SAMPLE_SINGLE_END_1.bam",
+                "bwamem2_mem/SAMPLE_SINGLE_END_1.bam.bai",
                 "fastqc",
                 "fastqc/SAMPLE_SINGLE_END_1_fastqc.html",
                 "fastqc/SAMPLE_SINGLE_END_1_fastqc.zip",
@@ -210,8 +211,6 @@
                 "samtools_faidx",
                 "samtools_faidx/genome.fa.fai",
                 "samtools_faidx/genome.fa.sizes",
-                "samtools_index",
-                "samtools_index/SAMPLE_SINGLE_END_1.bam.bai",
                 "seqfu_stats",
                 "seqfu_stats/SAMPLE_SINGLE_END_1_seqfu.tsv",
                 "seqfu_stats/SAMPLE_SINGLE_END_1_seqfu_mqc.txt"
@@ -222,7 +221,8 @@
                 "genome.fa.ann:md5,4439f90bdaaf2cdf9089c9f7f07b9d6b",
                 "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
                 "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
-                "SAMPLE_SINGLE_END_1.bam:md5,79744f146752fd486b09604be721cc85",
+                "SAMPLE_SINGLE_END_1.bam:md5,ff8893272a6560cac7067fd8a9406f9b",
+                "SAMPLE_SINGLE_END_1.bam.bai:md5,786cb1fbbadef4acea403f83d4628d5c",
                 "SAMPLE_SINGLE_END_1_screen.png:md5,ad98ae0f39335aede67e0a233cf16616",
                 "SAMPLE_SINGLE_END_1_screen.txt:md5,588b1b1f2d307fae7272ab0819e4bac5",
                 "fastq_screen_plot.txt:md5,8393eabda6ebac90ff00533f9562271f",
@@ -242,7 +242,7 @@
                 "multiqc_picard_baseContent.txt:md5,796e8e0803ad3ed4fd1c76f073784942",
                 "multiqc_picard_quality_by_cycle.txt:md5,d1e7814f9a612561dcbeafb9d8c887f1",
                 "multiqc_picard_quality_score_distribution.txt:md5,bad70b98811c4cbe4728f53334993703",
-                "multiqc_seqfu.txt:md5,8e6989a2392f599a09a5c3edf8119702",
+                "multiqc_seqfu.txt:md5,7ec63bc3465b3fc8e316e2443ec4c848",
                 "picard_MarkIlluminaAdapters_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_MeanQualityByCycle_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_MeanQualityByCycle_histogram_1.txt:md5,d1e7814f9a612561dcbeafb9d8c887f1",
@@ -258,16 +258,19 @@
                 "picard_quality_score_distribution.txt:md5,154ee2704c7adad6b26877da26fe6b77",
                 "genome.fa.fai:md5,6f4c0ce5258e6948135ad006e1f9ee1b",
                 "genome.fa.sizes:md5,e122f8021a5ef14104c32785cb9b7adc",
-                "SAMPLE_SINGLE_END_1.bam.bai:md5,786cb1fbbadef4acea403f83d4628d5c",
-                "SAMPLE_SINGLE_END_1_seqfu.tsv:md5,f65c868e562291647d539090698ba5eb",
-                "SAMPLE_SINGLE_END_1_seqfu_mqc.txt:md5,1de529f1e2cbd4df0945cb08a24d6d39"
+                "SAMPLE_SINGLE_END_1_seqfu.tsv:md5,33a9e44386f308d43881a58394b6b17c",
+                "SAMPLE_SINGLE_END_1_seqfu_mqc.txt:md5,e67e819605ab49182aacf1d676dc885d"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
+<<<<<<< HEAD
         "timestamp": "2025-11-07T11:14:40.189991111"
+=======
+        "timestamp": "2025-11-19T12:16:11.695977259"
+>>>>>>> dev
     },
     "Miseq data test (skip fastqc)": {
         "content": [
@@ -277,7 +280,7 @@
                 },
                 "BWAMEM2_MEM": {
                     "bwamem2": "2.2.1",
-                    "samtools": 1.21
+                    "samtools": "1.22.1"
                 },
                 "FASTQSCREEN_FASTQSCREEN": {
                     "fastqscreen": "0.16.0"
@@ -292,7 +295,7 @@
                     "samtools": "1.22.1"
                 },
                 "SEQFU_STATS": {
-                    "seqfu": "1.20.3"
+                    "seqfu": "1.22.3"
                 },
                 "Workflow": {
                     "nf-core/seqinspector": "v1.0dev"
@@ -308,6 +311,7 @@
                 "bwamem2_index/bwamem2/genome.fa.pac",
                 "bwamem2_mem",
                 "bwamem2_mem/SAMPLE_SINGLE_END_1.bam",
+                "bwamem2_mem/SAMPLE_SINGLE_END_1.bam.bai",
                 "fastqscreen",
                 "fastqscreen/SAMPLE_SINGLE_END_1_screen.html",
                 "fastqscreen/SAMPLE_SINGLE_END_1_screen.png",
@@ -400,8 +404,6 @@
                 "samtools_faidx",
                 "samtools_faidx/genome.fa.fai",
                 "samtools_faidx/genome.fa.sizes",
-                "samtools_index",
-                "samtools_index/SAMPLE_SINGLE_END_1.bam.bai",
                 "seqfu_stats",
                 "seqfu_stats/SAMPLE_SINGLE_END_1_seqfu.tsv",
                 "seqfu_stats/SAMPLE_SINGLE_END_1_seqfu_mqc.txt"
@@ -412,7 +414,8 @@
                 "genome.fa.ann:md5,4439f90bdaaf2cdf9089c9f7f07b9d6b",
                 "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
                 "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
-                "SAMPLE_SINGLE_END_1.bam:md5,79744f146752fd486b09604be721cc85",
+                "SAMPLE_SINGLE_END_1.bam:md5,ff8893272a6560cac7067fd8a9406f9b",
+                "SAMPLE_SINGLE_END_1.bam.bai:md5,786cb1fbbadef4acea403f83d4628d5c",
                 "SAMPLE_SINGLE_END_1_screen.png:md5,ad98ae0f39335aede67e0a233cf16616",
                 "SAMPLE_SINGLE_END_1_screen.txt:md5,588b1b1f2d307fae7272ab0819e4bac5",
                 "fastq_screen_plot.txt:md5,8393eabda6ebac90ff00533f9562271f",
@@ -422,7 +425,7 @@
                 "multiqc_picard_baseContent.txt:md5,796e8e0803ad3ed4fd1c76f073784942",
                 "multiqc_picard_quality_by_cycle.txt:md5,d1e7814f9a612561dcbeafb9d8c887f1",
                 "multiqc_picard_quality_score_distribution.txt:md5,bad70b98811c4cbe4728f53334993703",
-                "multiqc_seqfu.txt:md5,8e6989a2392f599a09a5c3edf8119702",
+                "multiqc_seqfu.txt:md5,7ec63bc3465b3fc8e316e2443ec4c848",
                 "picard_MarkIlluminaAdapters_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_MeanQualityByCycle_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_MeanQualityByCycle_histogram_1.txt:md5,d1e7814f9a612561dcbeafb9d8c887f1",
@@ -438,15 +441,18 @@
                 "picard_quality_score_distribution.txt:md5,154ee2704c7adad6b26877da26fe6b77",
                 "genome.fa.fai:md5,6f4c0ce5258e6948135ad006e1f9ee1b",
                 "genome.fa.sizes:md5,e122f8021a5ef14104c32785cb9b7adc",
-                "SAMPLE_SINGLE_END_1.bam.bai:md5,786cb1fbbadef4acea403f83d4628d5c",
-                "SAMPLE_SINGLE_END_1_seqfu.tsv:md5,f65c868e562291647d539090698ba5eb",
-                "SAMPLE_SINGLE_END_1_seqfu_mqc.txt:md5,1de529f1e2cbd4df0945cb08a24d6d39"
+                "SAMPLE_SINGLE_END_1_seqfu.tsv:md5,33a9e44386f308d43881a58394b6b17c",
+                "SAMPLE_SINGLE_END_1_seqfu_mqc.txt:md5,e67e819605ab49182aacf1d676dc885d"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
+<<<<<<< HEAD
         "timestamp": "2025-11-07T11:15:17.347135189"
+=======
+        "timestamp": "2025-11-19T12:16:53.917262693"
+>>>>>>> dev
     }
 }
