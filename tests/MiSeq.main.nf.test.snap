@@ -73,6 +73,7 @@
                 "bwamem2_index/bwamem2/genome.fa.pac",
                 "bwamem2_mem",
                 "bwamem2_mem/SAMPLE_SINGLE_END_1.bam",
+                "bwamem2_mem/SAMPLE_SINGLE_END_1.bam.bai",
                 "fastqc",
                 "fastqc/SAMPLE_SINGLE_END_1_fastqc.html",
                 "fastqc/SAMPLE_SINGLE_END_1_fastqc.zip",
@@ -210,8 +211,6 @@
                 "samtools_faidx",
                 "samtools_faidx/genome.fa.fai",
                 "samtools_faidx/genome.fa.sizes",
-                "samtools_index",
-                "samtools_index/SAMPLE_SINGLE_END_1.bam.bai",
                 "seqfu_stats",
                 "seqfu_stats/SAMPLE_SINGLE_END_1_seqfu.tsv",
                 "seqfu_stats/SAMPLE_SINGLE_END_1_seqfu_mqc.txt"
@@ -223,6 +222,7 @@
                 "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
                 "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
                 "SAMPLE_SINGLE_END_1.bam:md5,ed3f6acd94560448218a288623c810e6",
+                "SAMPLE_SINGLE_END_1.bam.bai:md5,786cb1fbbadef4acea403f83d4628d5c",
                 "SAMPLE_SINGLE_END_1_screen.png:md5,ad98ae0f39335aede67e0a233cf16616",
                 "SAMPLE_SINGLE_END_1_screen.txt:md5,588b1b1f2d307fae7272ab0819e4bac5",
                 "fastq_screen_plot.txt:md5,8393eabda6ebac90ff00533f9562271f",
@@ -258,7 +258,6 @@
                 "picard_quality_score_distribution.txt:md5,154ee2704c7adad6b26877da26fe6b77",
                 "genome.fa.fai:md5,6f4c0ce5258e6948135ad006e1f9ee1b",
                 "genome.fa.sizes:md5,e122f8021a5ef14104c32785cb9b7adc",
-                "SAMPLE_SINGLE_END_1.bam.bai:md5,786cb1fbbadef4acea403f83d4628d5c",
                 "SAMPLE_SINGLE_END_1_seqfu.tsv:md5,f65c868e562291647d539090698ba5eb",
                 "SAMPLE_SINGLE_END_1_seqfu_mqc.txt:md5,1de529f1e2cbd4df0945cb08a24d6d39"
             ]
@@ -267,7 +266,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2025-11-07T11:23:15.112360835"
+        "timestamp": "2025-11-19T11:58:59.644568276"
     },
     "Miseq data test (skip fastqc)": {
         "content": [
@@ -308,6 +307,7 @@
                 "bwamem2_index/bwamem2/genome.fa.pac",
                 "bwamem2_mem",
                 "bwamem2_mem/SAMPLE_SINGLE_END_1.bam",
+                "bwamem2_mem/SAMPLE_SINGLE_END_1.bam.bai",
                 "fastqscreen",
                 "fastqscreen/SAMPLE_SINGLE_END_1_screen.html",
                 "fastqscreen/SAMPLE_SINGLE_END_1_screen.png",
@@ -400,8 +400,6 @@
                 "samtools_faidx",
                 "samtools_faidx/genome.fa.fai",
                 "samtools_faidx/genome.fa.sizes",
-                "samtools_index",
-                "samtools_index/SAMPLE_SINGLE_END_1.bam.bai",
                 "seqfu_stats",
                 "seqfu_stats/SAMPLE_SINGLE_END_1_seqfu.tsv",
                 "seqfu_stats/SAMPLE_SINGLE_END_1_seqfu_mqc.txt"
@@ -413,6 +411,7 @@
                 "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
                 "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
                 "SAMPLE_SINGLE_END_1.bam:md5,ed3f6acd94560448218a288623c810e6",
+                "SAMPLE_SINGLE_END_1.bam.bai:md5,786cb1fbbadef4acea403f83d4628d5c",
                 "SAMPLE_SINGLE_END_1_screen.png:md5,ad98ae0f39335aede67e0a233cf16616",
                 "SAMPLE_SINGLE_END_1_screen.txt:md5,588b1b1f2d307fae7272ab0819e4bac5",
                 "fastq_screen_plot.txt:md5,8393eabda6ebac90ff00533f9562271f",
@@ -438,7 +437,6 @@
                 "picard_quality_score_distribution.txt:md5,154ee2704c7adad6b26877da26fe6b77",
                 "genome.fa.fai:md5,6f4c0ce5258e6948135ad006e1f9ee1b",
                 "genome.fa.sizes:md5,e122f8021a5ef14104c32785cb9b7adc",
-                "SAMPLE_SINGLE_END_1.bam.bai:md5,786cb1fbbadef4acea403f83d4628d5c",
                 "SAMPLE_SINGLE_END_1_seqfu.tsv:md5,f65c868e562291647d539090698ba5eb",
                 "SAMPLE_SINGLE_END_1_seqfu_mqc.txt:md5,1de529f1e2cbd4df0945cb08a24d6d39"
             ]
@@ -447,6 +445,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2025-11-07T11:23:52.513224822"
+        "timestamp": "2025-11-19T11:48:51.553934925"
     }
 }
