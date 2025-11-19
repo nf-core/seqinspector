@@ -9,7 +9,7 @@
                     "fastqscreen": "0.16.0"
                 },
                 "SEQFU_STATS": {
-                    "seqfu": "1.20.3"
+                    "seqfu": "1.22.3"
                 },
                 "Workflow": {
                     "nf-core/seqinspector": "v1.0dev"
@@ -126,13 +126,13 @@
                 "multiqc_fastqc.txt:md5,1a4b472e13cadc770832b0e20d1de7b0",
                 "multiqc_seqfu.txt:md5,9595d608ff5709f2bdec8cb1016416c0",
                 "hg001_1_seqfu.tsv:md5,b133752c897afbb4d8721b911fa117d4",
-                "hg001_1_seqfu_mqc.txt:md5,6285f582c03faa70e8dcb3503e5db728"
+                "hg001_1_seqfu_mqc.txt:md5,42e3506b02ceb72a6f05cb174505e722"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2025-11-07T10:27:14.736749139"
+        "timestamp": "2025-11-19T12:21:24.011932536"
     }
 }
