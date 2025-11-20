@@ -99,7 +99,12 @@
                     "description": "A .csv of reference genomes to be mapped against by FastQ Screen"
                 },
                 "bwa_index": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "directory-path",
+                    "exists": true,
+                    "fa_icon": "fas fa-copy",
+                    "description": "Path to BWA mem indices.",
+                    "help_text": "If you wish to recompute indices available on igenomes, set `--bwa false`.\n\n> **NB** If none provided, will be generated automatically from the FASTA reference. Combine with `--save_reference` to save for future runs.\n\nIf you use AWS iGenomes, this has already been set for you appropriately."
                 }
             }
         },
