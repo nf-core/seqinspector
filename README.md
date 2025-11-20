@@ -35,7 +35,11 @@
 
 1. Subsample reads ([`Seqtk`](https://github.com/lh3/seqtk))
 2. Read QC ([`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/))
-3. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
+3. Align reads to reference with ([`Bwamem2`](https://github.com/bwa-mem2/bwa-mem2))
+4. Index aligned BAM files ([`SAMtools`](http://github.com/samtools))
+5. Create FASTA index ([`SAMtools`](http://github.com/samtools))
+6. Collect multiple QC metrics ([`Picard CollectMultipleMetrics`](https://broadinstitute.github.io/picard/picard-metric-definitions.html))
+7. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
 
 ## Usage
 

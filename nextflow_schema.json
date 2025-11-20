@@ -97,6 +97,14 @@
                     "default": "${projectDir}/assets/example_fastq_screen_references.csv",
                     "fa_icon": "fas fa-search",
                     "description": "A .csv of reference genomes to be mapped against by FastQ Screen"
+                },
+                "bwa_index": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "exists": true,
+                    "fa_icon": "fas fa-copy",
+                    "description": "Path to BWA mem indices.",
+                    "help_text": "If you wish to recompute indices available on igenomes, set `--bwa false`.\n\n> **NB** If none provided, will be generated automatically from the FASTA reference. Combine with `--save_reference` to save for future runs.\n\nIf you use AWS iGenomes, this has already been set for you appropriately."
                 }
             }
         },
@@ -214,7 +222,8 @@
                 "modules_testdata_base_path": {
                     "type": "string",
                     "description": "Base path / URL for data used in the modules",
-                    "hidden": true
+                    "hidden": true,
+                    "default": "s3://ngi-igenomes/testdata/nf-core/modules/"
                 },
                 "multiqc_config": {
                     "type": "string",
