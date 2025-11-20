@@ -97,6 +97,9 @@
                     "default": "${projectDir}/assets/example_fastq_screen_references.csv",
                     "fa_icon": "fas fa-search",
                     "description": "A .csv of reference genomes to be mapped against by FastQ Screen"
+                },
+                "bwa_index": {
+                    "type": "string"
                 }
             }
         },
@@ -283,10 +286,5 @@
         {
             "$ref": "#/$defs/generic_options"
         }
-    ],
-    "properties": {
-        "bwa_index": {
-            "type": "string"
-        }
-    }
+    ]
 }
