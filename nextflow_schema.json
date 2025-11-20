@@ -23,8 +23,15 @@
                     "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row. See [usage docs](https://nf-co.re/seqinspector/usage#samplesheet-input).",
                     "fa_icon": "fas fa-file-csv"
                 },
+                "sample_size": {
+                    "type": "integer",
+                    "description": "Take this number of reads as a subset.",
+                    "help_text": "Choose the size of the subset or 0, if no subsampling shall be performed. Note that it refers to an absolute number.",
+                    "default": 0
+                },
                 "outdir": {
                     "type": "string",
+                    "default": null,
                     "format": "directory-path",
                     "description": "The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.",
                     "fa_icon": "fas fa-folder-open"
@@ -40,6 +47,11 @@
                     "type": "string",
                     "description": "MultiQC report title. Printed as page header, used for filename if not otherwise specified.",
                     "fa_icon": "fas fa-file-signature"
+                },
+                "skip_tools": {
+                    "type": "string",
+                    "description": "Comma-separated string of tools to skip",
+                    "pattern": "^((fastqc|fastqscreen|seqfu_stats|seqtk_sample|bwamem2_index|bwamem2_mem|picard_collectmultiplemetrics|samtools_faidx|samtools_index)?,?)*(?<!,)$"
                 }
             }
         },
@@ -79,6 +91,20 @@
                     "fa_icon": "fas fa-ban",
                     "hidden": true,
                     "default": "s3://ngi-igenomes/igenomes/"
+                },
+                "fastq_screen_references": {
+                    "type": "string",
+                    "default": "${projectDir}/assets/example_fastq_screen_references.csv",
+                    "fa_icon": "fas fa-search",
+                    "description": "A .csv of reference genomes to be mapped against by FastQ Screen"
+                },
+                "bwa_index": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "exists": true,
+                    "fa_icon": "fas fa-copy",
+                    "description": "Path to BWA mem indices.",
+                    "help_text": "If you wish to recompute indices available on igenomes, set `--bwa false`.\n\n> **NB** If none provided, will be generated automatically from the FASTA reference. Combine with `--save_reference` to save for future runs.\n\nIf you use AWS iGenomes, this has already been set for you appropriately."
                 }
             }
         },
@@ -143,6 +169,12 @@
                     "fa_icon": "fas fa-question-circle",
                     "hidden": true
                 },
+                "sort_bam": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Sort BAM files after alignment",
+                    "help_text": "If true, BAM files produced by alignment will be sorted by genomic coordinates."
+                },
                 "publish_dir_mode": {
                     "type": "string",
                     "default": "copy",
@@ -186,6 +218,12 @@
                     "fa_icon": "fas fa-people-group",
                     "help_text": "Incoming hook URL for messaging service. Currently, MS Teams and Slack are supported.",
                     "hidden": true
+                },
+                "modules_testdata_base_path": {
+                    "type": "string",
+                    "description": "Base path / URL for data used in the modules",
+                    "hidden": true,
+                    "default": "s3://ngi-igenomes/testdata/nf-core/modules/"
                 },
                 "multiqc_config": {
                     "type": "string",
