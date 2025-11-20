@@ -9,8 +9,33 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 
 ### `Added`
 
+- [#114](https://github.com/nf-core/seqinspector/pull/114/) Update CI
+- [#75](https://github.com/nf-core/seqinspector/pull/75) Set up nft-utils
+- [#68](https://github.com/nf-core/seqinspector/pull/68) Add tool selector
+- [#20](https://github.com/nf-core/seqinspector/pull/20) Use tags to generate group reports
+- [#13](https://github.com/nf-core/seqinspector/pull/13) Generate reports per run, per project and per lane.
+- [#49](https://github.com/nf-core/seqinspector/pull/49) Merge with template 3.0.2.
+- [#56](https://github.com/nf-core/seqinspector/pull/56) Added SeqFu stats module.
+- [#50](https://github.com/nf-core/seqinspector/pull/50) Add an optional subsampling step.
+- [#51](https://github.com/nf-core/seqinspector/pull/51) Add nf-test to CI.
+- [#63](https://github.com/nf-core/seqinspector/pull/63) Contribution guidelines added about displaying results for new tools
+- [#53](https://github.com/nf-core/seqinspector/pull/53) Add FastQ-Screen database multiplexing and limit scope of nf-test in CI.
+- [#96](https://github.com/nf-core/seqinspector/pull/96) Added missing citations to citation tool
+- [#103](https://github.com/nf-core/seqinspector/pull/103) Configure full-tests
+- [#110](https://github.com/nf-core/seqinspector/pull/110) Update input schema to accept either tar file or directory as rundir, and fastq messages and patterns.
+- [#127](https://github.com/nf-core/seqinspector/pull/127) Added alignment tools - bwamem2 - index and mem
+- [#128](https://github.com/nf-core/seqinspector/pull/128) Added Picard tools - Collect Multiple Mterics to collect QC metrics
+- [#132](https://github.com/nf-core/seqinspector/pull/132) Added a bwamem2 index params for faster output
+
 ### `Fixed`
 
+- [#71](https://github.com/nf-core/seqinspector/pull/71) FASTQSCREEN does not fail when multiple reads are provided.
+- [#99](https://github.com/nf-core/seqinspector/pull/99) Fix group reports for paired reads
+- [#107](https://github.com/nf-core/seqinspector/pull/107) Put SeqFU-stats section reports together
+- [#112](https://github.com/nf-core/seqinspector/pull/112) Making fastq_screen_references value to use parentDir
+
 ### `Dependencies`
+
+- [#116](https://github.com/nf-core/seqinspector/pull/116) Update MultiQC to 1.28
 
 ### `Deprecated`
