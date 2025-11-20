@@ -39,7 +39,7 @@
                     },
                     "multiqc": {
                         "branch": "master",
-                        "git_sha": "af27af1be706e6a2bb8fe454175b0cdf77f47b49",
+                        "git_sha": "82a79183037a403ad1b6714e5dbcff25500efaf6",
                         "installed_by": ["modules"]
                     },
                     "picard/collectmultiplemetrics": {
