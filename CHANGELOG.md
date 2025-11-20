@@ -23,6 +23,9 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#96](https://github.com/nf-core/seqinspector/pull/96) Added missing citations to citation tool
 - [#103](https://github.com/nf-core/seqinspector/pull/103) Configure full-tests
 - [#110](https://github.com/nf-core/seqinspector/pull/110) Update input schema to accept either tar file or directory as rundir, and fastq messages and patterns.
+- [#127](https://github.com/nf-core/seqinspector/pull/127) Added alignment tools - bwamem2 - index and mem
+- [#128](https://github.com/nf-core/seqinspector/pull/128) Added Picard tools - Collect Multiple Mterics to collect QC metrics
+- [#132](https://github.com/nf-core/seqinspector/pull/132) Added a bwamem2 index params for faster output
 
 ### `Fixed`
 
