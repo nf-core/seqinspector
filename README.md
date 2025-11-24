@@ -38,11 +38,12 @@
 1. Subsample reads ([`Seqtk`](https://github.com/lh3/seqtk))
 2. Read QC ([`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/))
 3. Basic contamination detection ([`FastqScreen`](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/))
-4. Align reads to reference with ([`Bwamem2`](https://github.com/bwa-mem2/bwa-mem2))
-5. Index aligned BAM files ([`SAMtools`](http://github.com/samtools))
-6. Create FASTA index ([`SAMtools`](http://github.com/samtools))
-7. Collect multiple QC metrics ([`Picard CollectMultipleMetrics`](https://broadinstitute.github.io/picard/picard-metric-definitions.html))
-8. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
+4. Sequence statistics ([`SeqFu Stats`](https://github.com/telatin/seqfu2))
+5. Align reads to reference with ([`Bwamem2`](https://github.com/bwa-mem2/bwa-mem2))
+6. Index aligned BAM files ([`SAMtools`](http://github.com/samtools))
+7. Create FASTA index ([`SAMtools`](http://github.com/samtools))
+8. Collect multiple QC metrics ([`Picard CollectMultipleMetrics`](https://broadinstitute.github.io/picard/picard-metric-definitions.html))
+9. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
 
 ![nf-core/seqinspector metro map](docs/images/seqinspector_tubemap_V1.0.png)
 
