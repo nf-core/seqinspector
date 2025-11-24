@@ -180,7 +180,7 @@ workflow SEQINSPECTOR {
 
     // MODULE: Prepare BAM/BAI tuples for Picard
     // Combine BAM and BAI outputs for Picard
-    if (!("picard_collectmultiplemetrics" in skip_tools) && !("bwamem2_mem" in skip_tools) && !("samtools_index" in skip_tools) && !("samtools_faidx" in skip_tools)) {
+    if (!("picard_collectmultiplemetrics" in skip_tools) && !("bwamem2_mem" in skip_tools) && !("samtools_faidx" in skip_tools)) {
 
         // Prepare BAM/BAI tuples for Picard
         ch_bam_bai = ch_bwamem2_mem.join(ch_samtools_index, failOnDuplicate: true, failOnMismatch: true)
