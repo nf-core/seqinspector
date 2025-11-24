@@ -18,10 +18,33 @@ process RUNDIRPARSER {
     task.ext.when == null || task.ext.when
 
     script:
+    def input_tar = rundir.toString().endsWith(".tar.gz") ? true : false
+    def input_dir = input_tar ? rundir.toString() - '.tar.gz' : rundir
     """
+
+    if [ ! -d ${input_dir} ]; then
+        mkdir -p ${input_dir}
+    fi
+
+    if ${input_tar}; then
+        ## Ensures --strip-components only applied when top level of tar contents is a directory
+        ## If just files or multiple directories, place all in $input_dir
+
+        if [[ \$(tar -taf ${rundir} | grep -o -P "^.*?\\/" | uniq | wc -l) -eq 1 ]]; then
+            tar \\
+                -C $input_dir --strip-components 1 \\
+                -xavf \\
+                $rundir
+        else
+            tar \\
+                -C $input_dir \\
+                -xavf \\
+                $rundir
+        fi
+    fi
+
     # TODO: check what kind of seq platfrom to decide which script to use
-    rundirparser.py ${rundir}
-    parse_illumina.py ${rundir}
+    parse_illumina.py ${input_dir}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
