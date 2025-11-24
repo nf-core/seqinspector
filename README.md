@@ -21,7 +21,7 @@
 
 ## Introduction
 
-**nf-core/seqinspector** is a bioinformatics pipeline that ...
+**nf-core/seqinspector** is a bioinformatics pipeline that that processes raw sequencedata (FASTQ) to provide comprehensive quality control. It can perform subsampling, quality assessment, duplication level analysis, and complexity evaluation on a per-sample basis, while also detecting adapter content, technical artifacts, and common biological contaminants. The pipeline generates detailed MultiQC reports with flexible output options, ranging from individual sample reports to project-wide summaries, making it particularly useful for sequencing core facilities and research groups with access to sequencing instruments.
 
 <!-- TODO nf-core:
    Complete this sentence with a 2-3 sentence summary of what types of data the pipeline ingests, a brief overview of the
@@ -31,7 +31,6 @@
 
 <!-- TODO nf-core: Include a figure that guides the user through the major workflow steps. Many nf-core
      workflows use the "tube map" design for that. See https://nf-co.re/docs/contributing/design_guidelines#examples for examples.   -->
-<!-- TODO nf-core: Fill in short bullet-pointed list of the default steps in the pipeline -->
 
 1. Subsample reads ([`Seqtk`](https://github.com/lh3/seqtk))
 2. Read QC ([`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/))
