@@ -51,7 +51,7 @@
                 "skip_tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to skip",
-                    "pattern": "^((fastqc|fastqscreen|seqfu_stats|seqtk_sample|bwamem2_index|bwamem2_mem)?,?)*(?<!,)$"
+                    "pattern": "^((fastqc|fastqscreen|seqfu_stats|seqtk_sample|bwamem2_index|bwamem2_mem|picard_collectmultiplemetrics|samtools_faidx|samtools_index)?,?)*(?<!,)$"
                 }
             }
         },
@@ -97,6 +97,14 @@
                     "default": "${projectDir}/assets/example_fastq_screen_references.csv",
                     "fa_icon": "fas fa-search",
                     "description": "A .csv of reference genomes to be mapped against by FastQ Screen"
+                },
+                "bwa_index": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "exists": true,
+                    "fa_icon": "fas fa-copy",
+                    "description": "Path to BWA mem indices.",
+                    "help_text": "If you wish to recompute indices available on igenomes, set `--bwa false`.\n\n> **NB** If none provided, will be generated automatically from the FASTA reference. Combine with `--save_reference` to save for future runs.\n\nIf you use AWS iGenomes, this has already been set for you appropriately."
                 }
             }
         },
@@ -214,7 +222,8 @@
                 "modules_testdata_base_path": {
                     "type": "string",
                     "description": "Base path / URL for data used in the modules",
-                    "hidden": true
+                    "hidden": true,
+                    "default": "s3://ngi-igenomes/testdata/nf-core/modules/"
                 },
                 "multiqc_config": {
                     "type": "string",
@@ -253,6 +262,18 @@
                     "fa_icon": "far calendar",
                     "description": "Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss.",
                     "hidden": true
+                },
+                "help": {
+                    "type": ["boolean", "string"],
+                    "description": "Display the help message."
+                },
+                "help_full": {
+                    "type": "boolean",
+                    "description": "Display the full detailed help message."
+                },
+                "show_hidden": {
+                    "type": "boolean",
+                    "description": "Display hidden parameters in the help message (only works when --help or --help_full are provided)."
                 }
             }
         }
