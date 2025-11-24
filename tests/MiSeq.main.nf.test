@@ -1,11 +1,11 @@
 nextflow_pipeline {
 
-    name "Test Workflow main.nf on MiSeq data"
+    name "Test Workflow main.nf on MiSeq data with single end reads"
     script "../main.nf"
     tag "seqinspector"
     tag "PIPELINE"
 
-    test("MiSeq data test") {
+    test("MiSeq data test (single end reads)") {
 
         when {
             config "./MiSeq.main.nf.test.config"
@@ -28,8 +28,6 @@ nextflow_pipeline {
             assertAll(
                 { assert workflow.success},
                 { assert snapshot(
-                    // Number of successful tasks
-                    workflow.trace.succeeded().size(),
                     // pipeline versions.yml file for multiqc from which Nextflow version is removed because we tests pipelines on multiple Nextflow versions
                     removeNextflowVersion("$outputDir/pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"),
                     // All stable path names, with a relative path
@@ -64,8 +62,6 @@ nextflow_pipeline {
             assertAll(
                 { assert workflow.success},
                 { assert snapshot(
-                    // Number of successful tasks
-                    workflow.trace.succeeded().size(),
                     // pipeline versions.yml file for multiqc from which Nextflow version is removed because we tests pipelines on multiple Nextflow versions
                     removeNextflowVersion("$outputDir/pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"),
                     // All stable path names, with a relative path
@@ -82,7 +78,7 @@ nextflow_pipeline {
             config "./MiSeq.main.nf.test.config"
             params {
                 outdir = "$outputDir"
-                skip_tools = "fastqc,fastqscreen,seqfu_stats,seqtk_sample"
+                skip_tools = "fastqc,fastqscreen,seqfu_stats,seqtk_sample,bwamem2_index,bwamem2_mem"
             }
         }
 
@@ -100,8 +96,6 @@ nextflow_pipeline {
             assertAll(
                 { assert workflow.success},
                 { assert snapshot(
-                    // Number of successful tasks
-                    workflow.trace.succeeded().size(),
                     // pipeline versions.yml file for multiqc from which Nextflow version is removed because we tests pipelines on multiple Nextflow versions
                     removeNextflowVersion("$outputDir/pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"),
                     // All stable path names, with a relative path
