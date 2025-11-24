@@ -50,8 +50,7 @@
                 "skip_tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to skip",
-                    "pattern": "^((fastqc|fastqscreen|seqfu_stats|seqtk_sample|bwamem2_index|bwamem2_mem|picard_collectmultiplemetrics|samtools_faidx|picard_collecthsmetrics)?,?)*(?<!,)$",
-                    "default": "picard_collecthsmetrics"
+                    "pattern": "^((fastqc|fastqscreen|seqfu_stats|seqtk_sample|bwamem2_index|bwamem2_mem|picard_collectmultiplemetrics|samtools_faidx|picard_collecthsmetrics)?,?)*(?<!,)$"
                 }
             }
         },
@@ -283,6 +282,11 @@
             "description": "",
             "default": "",
             "properties": {
+                "run_picard_collecthsmetrics": {
+                    "type": "boolean",
+                    "hidden": true,
+                    "description": "Run picard_colecthsmetrics for QC of bam files."
+                },
                 "bait_intervals": {
                     "type": "string",
                     "description": "Path to bait intervals file.",

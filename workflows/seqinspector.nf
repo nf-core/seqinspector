@@ -201,12 +201,12 @@ workflow SEQINSPECTOR {
         ch_versions = ch_versions.mix(PICARD_COLLECTMULTIPLEMETRICS.out.versions.first())
     }
 
-    if (!("picard_collecthsmetrics" in skip_tools) && !("picard_collectmultiplemetrics" in skip_tools)) {
+    if (params.run_picard_collecthsmetrics && !("picard_collectmultiplemetrics" in skip_tools)) {
         QC_BAM(
             ch_bam_bai,
             ch_reference_fasta,
             ch_reference_fasta_fai,
-            )
+        )
     }
     ch_multiqc_files = ch_multiqc_files.mix(QC_BAM.out.hs_metrics)
     ch_versions = ch_versions.mix(QC_BAM.out.versions)
