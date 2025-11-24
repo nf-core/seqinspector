@@ -22,8 +22,9 @@
 ## Introduction
 
 ![nf-core/seqinspector logo](docs/images/nf-core-seqinspector_logo_light.png)
+![nf-core/seqinspector hex logo](docs/images/nfcore-seqinspector-logo-hex-light.png)
 
-**nf-core/seqinspector** is a bioinformatics pipeline that that processes raw sequencedata (FASTQ) to provide comprehensive quality control. It can perform subsampling, quality assessment, duplication level analysis, and complexity evaluation on a per-sample basis, while also detecting adapter content, technical artifacts, and common biological contaminants. The pipeline generates detailed MultiQC reports with flexible output options, ranging from individual sample reports to project-wide summaries, making it particularly useful for sequencing core facilities and research groups with access to sequencing instruments.
+**nf-core/seqinspector** is a bioinformatics pipeline that that processes raw sequencedata (FASTQ) to provide comprehensive quality control. It can perform subsampling, quality assessment, duplication level analysis, and complexity evaluation on a per-sample basis, while also detecting adapter content, technical artifacts, and common biological contaminants. The pipeline generates detailed MultiQC reports with flexible output options, ranging from individual sample reports to project-wide summaries, making it particularly useful for sequencing core facilities and research groups with access to sequencing instruments. If provided, nf-core/seqinspector can also parse statistics from an Illumina run folder directory into the final MultiQC reports.
 
 <!-- TODO nf-core:
    Complete this sentence with a 2-3 sentence summary of what types of data the pipeline ingests, a brief overview of the
@@ -36,11 +37,12 @@
 
 1. Subsample reads ([`Seqtk`](https://github.com/lh3/seqtk))
 2. Read QC ([`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/))
-3. Align reads to reference with ([`Bwamem2`](https://github.com/bwa-mem2/bwa-mem2))
-4. Index aligned BAM files ([`SAMtools`](http://github.com/samtools))
-5. Create FASTA index ([`SAMtools`](http://github.com/samtools))
-6. Collect multiple QC metrics ([`Picard CollectMultipleMetrics`](https://broadinstitute.github.io/picard/picard-metric-definitions.html))
-7. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
+3. Basic contamination detection ([`FastqScreen`](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/))
+4. Align reads to reference with ([`Bwamem2`](https://github.com/bwa-mem2/bwa-mem2))
+5. Index aligned BAM files ([`SAMtools`](http://github.com/samtools))
+6. Create FASTA index ([`SAMtools`](http://github.com/samtools))
+7. Collect multiple QC metrics ([`Picard CollectMultipleMetrics`](https://broadinstitute.github.io/picard/picard-metric-definitions.html))
+8. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
 
 ![nf-core/seqinspector metro map](docs/images/seqinspector_tubemap_V1.0.png)
 
