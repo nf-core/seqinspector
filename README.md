@@ -32,9 +32,9 @@
 
 1. Subsample reads ([`Seqtk`](https://github.com/lh3/seqtk))
 2. Read QC ([`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/))
-3. Sequence statistics ([`SeqFu Stats`](https://github.com/telatin/seqfu2))
-4. Contamination QC ([`FastQ Screen`](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/))
-5. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
+3. Report read counts and lengths statistics ([`SeqFu Stats`](https://github.com/telatin/seqfu2))
+4. Screen reads against references ([`FastQ Screen`](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/))
+5. Compile QC results into report ([`MultiQC`](http://multiqc.info/))
 
 ## Usage
 
