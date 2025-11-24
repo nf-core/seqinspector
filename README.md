@@ -26,24 +26,18 @@
 
 **nf-core/seqinspector** is a bioinformatics pipeline that that processes raw sequencedata (FASTQ) to provide comprehensive quality control. It can perform subsampling, quality assessment, duplication level analysis, and complexity evaluation on a per-sample basis, while also detecting adapter content, technical artifacts, and common biological contaminants. The pipeline generates detailed MultiQC reports with flexible output options, ranging from individual sample reports to project-wide summaries, making it particularly useful for sequencing core facilities and research groups with access to sequencing instruments. If provided, nf-core/seqinspector can also parse statistics from an Illumina run folder directory into the final MultiQC reports.
 
-<!-- TODO nf-core:
-   Complete this sentence with a 2-3 sentence summary of what types of data the pipeline ingests, a brief overview of the
-   major pipeline sections and the types of output it produces. You're giving an overview to someone new
-   to nf-core here, in 15-20 seconds. For an example, see https://github.com/nf-core/rnaseq/blob/master/README.md#introduction
--->
+<!-- TODO: add a search tool that accepts a tree for `Compatibility with Data`. -->
 
-<!-- TODO nf-core: Include a figure that guides the user through the major workflow steps. Many nf-core
-     workflows use the "tube map" design for that. See https://nf-co.re/docs/contributing/design_guidelines#examples for examples.   -->
-
-1. Subsample reads ([`Seqtk`](https://github.com/lh3/seqtk))
-2. Read QC ([`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/))
-3. Basic contamination detection ([`FastqScreen`](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/))
-4. Sequence statistics ([`SeqFu Stats`](https://github.com/telatin/seqfu2))
-5. Align reads to reference with ([`Bwamem2`](https://github.com/bwa-mem2/bwa-mem2))
-6. Index aligned BAM files ([`SAMtools`](http://github.com/samtools))
-7. Create FASTA index ([`SAMtools`](http://github.com/samtools))
-8. Collect multiple QC metrics ([`Picard CollectMultipleMetrics`](https://broadinstitute.github.io/picard/picard-metric-definitions.html))
-9. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
+| Tool Type           | Tool Name                                                                          | Tool Description                            | Compatibility with Data | Dependencies        |
+| ------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------- | ----------------------- | ------------------- |
+| `Subsampling`       | [`Seqtk`](https://github.com/lh3/seqtk)                                            | Global subsampling of reads                 | [RNA, DNA, synthetic]   | [N/A]               |
+| `QC`                | [`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)             | Read QC                                     | [RNA, DNA]              | [N/A]               |
+| `QC`                | [`FastqScreen`](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/)  | Basic contamination detection               | [RNA, DNA]              | [N/A]               |
+| `QC`                | [`SeqFu Stats`](https://github.com/telatin/seqfu2)                                 | Sequence statistics                         | [RNA, DNA]              | [N/A]               |
+| `Indexing, Mapping` | [`Bwamem2`](https://github.com/bwa-mem2/bwa-mem2)                                  | Align reads to reference                    | [RNA, DNA]              | [N/A]               |
+| `Indexing`          | [`SAMtools`](http://github.com/samtools)                                           | Index aligned BAM files, create FASTA index | [DNA]                   | [N/A]               |
+| `QC`                | [`Picard`](https://broadinstitute.github.io/picard/picard-metric-definitions.html) | Collect multiple QC metrics                 | [RNA, DNA]              | [Bwamem2, SAMtools] |
+| `Reporting`         | [`MultiQC`](http://multiqc.info/)                                                  | Present QC for raw reads                    | [RNA, DNA, synthetic]   | [N/A]               |
 
 ![nf-core/seqinspector metro map](docs/images/seqinspector_tubemap_V1.0.png)
 
