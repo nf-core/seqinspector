@@ -15,8 +15,7 @@ include { SAMTOOLS_FAIDX } from '../modules/nf-core/samtools/faidx'
 include { SAMTOOLS_INDEX } from '../modules/nf-core/samtools/index'
 include { SEQFU_STATS } from '../modules/nf-core/seqfu/stats'
 include { SEQTK_SAMPLE } from '../modules/nf-core/seqtk/sample'
-include { PICARD_COLLECTHSMETRICS } from '../modules/nf-core/picard/collecthsmetrics/main'
-include { PICARD_CREATESEQUENCEDICTIONARY } from '../modules/nf-core/picard/createsequencedictionary/main'
+include { QC_BAM } from '../subworkflows/local/qc_bam'
 
 include { MULTIQC as MULTIQC_GLOBAL } from '../modules/nf-core/multiqc'
 include { MULTIQC as MULTIQC_PER_TAG } from '../modules/nf-core/multiqc'
@@ -202,46 +201,15 @@ workflow SEQINSPECTOR {
         ch_versions = ch_versions.mix(PICARD_COLLECTMULTIPLEMETRICS.out.versions.first())
     }
 
-    if (!("picard_collecthsmetrics" in skip_tools) && !("bwamem2_mem" in skip_tools)) {
-
-        if (("picard_collectmultiplemetrics" in skip_tools)){
-            ch_bam_bai = ch_bwamem2_mem.join(ch_samtools_index, failOnDuplicate: true, failOnMismatch: true)
-        }
-
-        ch_bait_intervals = channel
-            .fromPath(params.bait_intervals)
-            .collect()
-
-        ch_target_intervals = channel
-            .fromPath(params.target_intervals)
-            .collect()
-
-
-        ch_hsmetrics_in = ch_bam_bai
-            .combine(ch_bait_intervals)
-            .combine(ch_target_intervals)
-
-
-        if (!params.ref_dict) {
-            PICARD_CREATESEQUENCEDICTIONARY(
-                ch_reference_fasta
-            )
-            ch_ref_dict = PICARD_CREATESEQUENCEDICTIONARY.out.reference_dict
-        }
-        else {
-            ch_ref_dict = channel.fromPath(params.ref_dict).map { [[id: it.simpleName], it] }
-        }
-
-        PICARD_COLLECTHSMETRICS(
-            ch_hsmetrics_in,
+    if (!("picard_collecthsmetrics" in skip_tools) && !("picard_collectmultiplemetrics" in skip_tools)) {
+        QC_BAM(
+            ch_bam_bai,
             ch_reference_fasta,
-            [[], []],
-            ch_ref_dict,
-            [[], []],
-        )
-        ch_multiqc_files = ch_multiqc_files.mix(PICARD_COLLECTHSMETRICS.out.metrics)
-        ch_versions = ch_versions.mix(PICARD_COLLECTHSMETRICS.out.versions.first())
+            ch_reference_fasta_fai,
+            )
     }
+    ch_multiqc_files = ch_multiqc_files.mix(QC_BAM.out.hs_metrics)
+    ch_versions = ch_versions.mix(QC_BAM.out.versions)
 
 
     // Collate and save software versions
