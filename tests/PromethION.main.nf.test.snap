@@ -1,7 +1,6 @@
 {
     "PromethION data test": {
         "content": [
-            4,
             {
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -10,7 +9,7 @@
                     "fastqscreen": "0.16.0"
                 },
                 "SEQFU_STATS": {
-                    "seqfu": "1.20.3"
+                    "seqfu": "1.22.3"
                 },
                 "Workflow": {
                     "nf-core/seqinspector": "v1.0dev"
@@ -40,20 +39,21 @@
                 "multiqc/global_report/multiqc_data/fastqc_sequence_duplication_levels_plot.txt",
                 "multiqc/global_report/multiqc_data/fastqc_sequence_length_distribution_plot.txt",
                 "multiqc/global_report/multiqc_data/fastqc_top_overrepresented_sequences_table.txt",
+                "multiqc/global_report/multiqc_data/llms-full.txt",
                 "multiqc/global_report/multiqc_data/multiqc.log",
+                "multiqc/global_report/multiqc_data/multiqc.parquet",
                 "multiqc/global_report/multiqc_data/multiqc_citations.txt",
                 "multiqc/global_report/multiqc_data/multiqc_data.json",
                 "multiqc/global_report/multiqc_data/multiqc_fastq_screen.txt",
                 "multiqc/global_report/multiqc_data/multiqc_fastqc.txt",
                 "multiqc/global_report/multiqc_data/multiqc_general_stats.txt",
-                "multiqc/global_report/multiqc_data/multiqc_hg001_1.txt",
+                "multiqc/global_report/multiqc_data/multiqc_seqfu.txt",
                 "multiqc/global_report/multiqc_data/multiqc_software_versions.txt",
                 "multiqc/global_report/multiqc_data/multiqc_sources.txt",
                 "multiqc/global_report/multiqc_plots",
                 "multiqc/global_report/multiqc_plots/pdf",
                 "multiqc/global_report/multiqc_plots/pdf/fastq_screen_plot-cnt.pdf",
                 "multiqc/global_report/multiqc_plots/pdf/fastq_screen_plot-pct.pdf",
-                "multiqc/global_report/multiqc_plots/pdf/fastqc-status-check-heatmap.pdf",
                 "multiqc/global_report/multiqc_plots/pdf/fastqc_adapter_content_plot.pdf",
                 "multiqc/global_report/multiqc_plots/pdf/fastqc_overrepresented_sequences_plot.pdf",
                 "multiqc/global_report/multiqc_plots/pdf/fastqc_per_base_n_content_plot.pdf",
@@ -66,12 +66,10 @@
                 "multiqc/global_report/multiqc_plots/pdf/fastqc_sequence_duplication_levels_plot.pdf",
                 "multiqc/global_report/multiqc_plots/pdf/fastqc_sequence_length_distribution_plot.pdf",
                 "multiqc/global_report/multiqc_plots/pdf/fastqc_top_overrepresented_sequences_table.pdf",
-                "multiqc/global_report/multiqc_plots/pdf/general_stats_table.pdf",
-                "multiqc/global_report/multiqc_plots/pdf/hg001_1.pdf",
+                "multiqc/global_report/multiqc_plots/pdf/seqfu.pdf",
                 "multiqc/global_report/multiqc_plots/png",
                 "multiqc/global_report/multiqc_plots/png/fastq_screen_plot-cnt.png",
                 "multiqc/global_report/multiqc_plots/png/fastq_screen_plot-pct.png",
-                "multiqc/global_report/multiqc_plots/png/fastqc-status-check-heatmap.png",
                 "multiqc/global_report/multiqc_plots/png/fastqc_adapter_content_plot.png",
                 "multiqc/global_report/multiqc_plots/png/fastqc_overrepresented_sequences_plot.png",
                 "multiqc/global_report/multiqc_plots/png/fastqc_per_base_n_content_plot.png",
@@ -84,12 +82,10 @@
                 "multiqc/global_report/multiqc_plots/png/fastqc_sequence_duplication_levels_plot.png",
                 "multiqc/global_report/multiqc_plots/png/fastqc_sequence_length_distribution_plot.png",
                 "multiqc/global_report/multiqc_plots/png/fastqc_top_overrepresented_sequences_table.png",
-                "multiqc/global_report/multiqc_plots/png/general_stats_table.png",
-                "multiqc/global_report/multiqc_plots/png/hg001_1.png",
+                "multiqc/global_report/multiqc_plots/png/seqfu.png",
                 "multiqc/global_report/multiqc_plots/svg",
                 "multiqc/global_report/multiqc_plots/svg/fastq_screen_plot-cnt.svg",
                 "multiqc/global_report/multiqc_plots/svg/fastq_screen_plot-pct.svg",
-                "multiqc/global_report/multiqc_plots/svg/fastqc-status-check-heatmap.svg",
                 "multiqc/global_report/multiqc_plots/svg/fastqc_adapter_content_plot.svg",
                 "multiqc/global_report/multiqc_plots/svg/fastqc_overrepresented_sequences_plot.svg",
                 "multiqc/global_report/multiqc_plots/svg/fastqc_per_base_n_content_plot.svg",
@@ -102,14 +98,13 @@
                 "multiqc/global_report/multiqc_plots/svg/fastqc_sequence_duplication_levels_plot.svg",
                 "multiqc/global_report/multiqc_plots/svg/fastqc_sequence_length_distribution_plot.svg",
                 "multiqc/global_report/multiqc_plots/svg/fastqc_top_overrepresented_sequences_table.svg",
-                "multiqc/global_report/multiqc_plots/svg/general_stats_table.svg",
-                "multiqc/global_report/multiqc_plots/svg/hg001_1.svg",
+                "multiqc/global_report/multiqc_plots/svg/seqfu.svg",
                 "multiqc/global_report/multiqc_report.html",
                 "pipeline_info",
                 "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
                 "seqfu_stats",
-                "seqfu_stats/hg001_1.tsv",
-                "seqfu_stats/hg001_1_mqc.txt"
+                "seqfu_stats/hg001_1_seqfu.tsv",
+                "seqfu_stats/hg001_1_seqfu_mqc.txt"
             ],
             [
                 "hg001_1_screen.png:md5,b9c58e388f18ad11f4c2e29e9b573a5e",
@@ -129,15 +124,15 @@
                 "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
                 "multiqc_fastq_screen.txt:md5,7c5d711e27c53d13c81644a1f2468dba",
                 "multiqc_fastqc.txt:md5,1a4b472e13cadc770832b0e20d1de7b0",
-                "multiqc_hg001_1.txt:md5,9595d608ff5709f2bdec8cb1016416c0",
-                "hg001_1.tsv:md5,b133752c897afbb4d8721b911fa117d4",
-                "hg001_1_mqc.txt:md5,6285f582c03faa70e8dcb3503e5db728"
+                "multiqc_seqfu.txt:md5,9595d608ff5709f2bdec8cb1016416c0",
+                "hg001_1_seqfu.tsv:md5,b133752c897afbb4d8721b911fa117d4",
+                "hg001_1_seqfu_mqc.txt:md5,42e3506b02ceb72a6f05cb174505e722"
             ]
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.10.3"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2025-02-04T10:12:21.446251"
+        "timestamp": "2025-11-07T10:27:14.736749139"
     }
 }
