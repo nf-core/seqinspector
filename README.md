@@ -21,8 +21,17 @@
 
 ## Introduction
 
-![nf-core/seqinspector logo](docs/images/nf-core-seqinspector_logo_light.png)
-![nf-core/seqinspector hex logo](docs/images/nfcore-seqinspector-logo-hex-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/nf-core-seqinspector_logo_dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="docs/images/nf-core-seqinspector_logo_light.png">
+  <img alt="Fallback image description" src="docs/images/nf-core-seqinspector_logo_light.png">
+</picture>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/nfcore-seqinspector-logo-hex-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="docs/images/nfcore-seqinspector-logo-hex-light.png">
+  <img alt="Fallback image description" src="docs/images/nfcore-seqinspector-logo-hex-light.png">
+</picture>
 
 **nf-core/seqinspector** is a bioinformatics pipeline that that processes raw sequencedata (FASTQ) to provide comprehensive quality control. It can perform subsampling, quality assessment, duplication level analysis, and complexity evaluation on a per-sample basis, while also detecting adapter content, technical artifacts, and common biological contaminants. The pipeline generates detailed MultiQC reports with flexible output options, ranging from individual sample reports to project-wide summaries, making it particularly useful for sequencing core facilities and research groups with access to sequencing instruments. If provided, nf-core/seqinspector can also parse statistics from an Illumina run folder directory into the final MultiQC reports.
 
@@ -39,7 +48,11 @@
 | `QC`                | [`Picard`](https://broadinstitute.github.io/picard/picard-metric-definitions.html) | Collect multiple QC metrics                 | [RNA, DNA]              | [Bwamem2, SAMtools] |
 | `Reporting`         | [`MultiQC`](http://multiqc.info/)                                                  | Present QC for raw reads                    | [RNA, DNA, synthetic]   | [N/A]               |
 
-![nf-core/seqinspector metro map](docs/images/seqinspector_tubemap_V1.0.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/seqinspector_tubemap_V1.0_dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="docs/images/seqinspector_tubemap_V1.0.png">
+  <img alt="Fallback image description" src="docs/images/seqinspector_tubemap_V1.0.png">
+</picture>
 
 ## Usage
 
