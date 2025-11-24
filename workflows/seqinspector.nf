@@ -157,9 +157,7 @@ workflow SEQINSPECTOR {
         )
         ch_bwamem2_mem = BWAMEM2_MEM.out.bam
         ch_versions = ch_versions.mix(BWAMEM2_MEM.out.versions)
-    }
-    // MODULE: Index BAM files with Samtools
-    if (!("samtools_index" in skip_tools) && !("bwamem2_mem" in skip_tools)) {
+
         SAMTOOLS_INDEX(
             ch_bwamem2_mem
         )
