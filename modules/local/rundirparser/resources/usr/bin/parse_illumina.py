@@ -18,7 +18,8 @@ def read_run_parameters(directory):
         with open(alt_2) as f:
             return xmltodict.parse(f.read())
     else:
-        raise Exception("[Rr]unParameters.xml not found!")
+        raise Exception("Could not find Illumina [Rr]unParameters.xml. "
+                        "Please provide RunParameters.xml or skip module.")
 
 
 def find(d, tag):
@@ -53,7 +54,7 @@ def construct_data(run_parameters):
         for key, value in run_parameters_tags.items():
             info = list(find(run_parameters, key))
             if info:
-                data[value] = info[0]
+                data[value] = {"Value": info[0]}
         return data
 
 
@@ -64,22 +65,18 @@ def construct_multiqc_yaml(directory):
 
     data = construct_data(run_parameters)
 
-    #TODO: MultiQC currently ignores the data in this yaml RUDE
     metadata = {
-        "custom_data": {
-            "my_data_type": {
-                "id": "mqc_seq_metadata",
-                "section_name": "Sequencing instrument metadata",
-                "description": directory_name,
-                "plot_type": "table",
-                "pconfig": {
-                    "id": 'custom_table',
-                    "title": 'Custom Table',
-                    "no_headers": "true",
-                    },
-                "data": data,
-            }
-        }
+        "id": "mqc_seq_metadata",
+        "section_name": "Sequencing instrument metadata",
+        "description": "Sequencing metadata gathered from the run directory",
+        "plot_type": "table",
+        "pconfig": {
+            "id": 'mqc_seq_metadata',
+            "title": 'Run directory Metadata',
+            "col1_header": "Metadata",
+            },
+        "data": data,
+
     }
 
     return metadata

@@ -14,7 +14,6 @@ include { PICARD_COLLECTMULTIPLEMETRICS } from '../modules/nf-core/picard/collec
 include { SAMTOOLS_FAIDX                } from '../modules/nf-core/samtools/faidx'
 include { SAMTOOLS_INDEX                } from '../modules/nf-core/samtools/index'
 include { SEQFU_STATS                   } from '../modules/nf-core/seqfu/stats'
-include { FASTQSCREEN_FASTQSCREEN       } from '../modules/nf-core/fastqscreen/fastqscreen/main'
 include { RUNDIRPARSER                  } from '../modules/local/rundirparser/main'
 include { SEQTK_SAMPLE                  } from '../modules/nf-core/seqtk/sample'
 
