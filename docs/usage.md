@@ -92,7 +92,7 @@ genome: 'GRCh37'
 
 You can also generate such `YAML`/`JSON` files via [nf-core/launch](https://nf-co.re/launch).
 
-Optionally, the `sample_size` parameter allows you to subset a random number of reads to be analysed. Note that it refers to an absolute number.
+Optionally, the `sample_size` parameter allows you to subset a random number of reads to be analysed. Both absolute numbers (e.g 10000) and relative numbers (e.g 0.25) can be specified.
 
 ```bash
 nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 -profile docker

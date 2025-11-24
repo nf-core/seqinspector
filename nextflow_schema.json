@@ -24,9 +24,9 @@
                     "fa_icon": "fas fa-file-csv"
                 },
                 "sample_size": {
-                    "type": "integer",
+                    "type": "number",
                     "description": "Take this number of reads as a subset.",
-                    "help_text": "Choose the size of the subset or 0, if no subsampling shall be performed. Note that it refers to an absolute number.",
+                    "help_text": "Choose the size of the subset or 0, if no subsampling shall be performed. Both absolute numbers (e.g 10000) and relative numbers (e.g 0.25) can be specified.",
                     "default": 0
                 },
                 "outdir": {
