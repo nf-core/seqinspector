@@ -21,6 +21,8 @@
 
 ## Introduction
 
+![nf-core/seqinspector logo](docs/images/nf-core-seqinspector_logo_light.png)
+
 **nf-core/seqinspector** is a bioinformatics pipeline that ...
 
 <!-- TODO nf-core:
@@ -40,6 +42,8 @@
 5. Create FASTA index ([`SAMtools`](http://github.com/samtools))
 6. Collect multiple QC metrics ([`Picard CollectMultipleMetrics`](https://broadinstitute.github.io/picard/picard-metric-definitions.html))
 7. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
+
+![nf-core/seqinspector metro map](docs/images/seqinspector_tubemap_V1.0.png)
 
 ## Usage
 
