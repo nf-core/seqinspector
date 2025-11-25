@@ -50,7 +50,6 @@ workflow SEQINSPECTOR {
     ch_bwamem2_mem         = channel.empty()
     ch_samtools_index      = channel.empty()
     ch_reference_fasta     = fasta_file? channel.fromPath(fasta_file, checkIfExists: true).map { file -> tuple([id: file.name], file) }.collect() : channel.value([[:], []])
-    ch_ref_dict = channel.empty()
 
     PREPARE_GENOME (
         ch_reference_fasta,
@@ -179,7 +178,7 @@ workflow SEQINSPECTOR {
             ch_bait_intervals,
             ch_target_intervals,
             ch_reference_fasta,
-            ch_reference_fasta_fai,
+            ch_fai,
             params.ref_dict,
         )
 
