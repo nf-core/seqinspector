@@ -89,11 +89,12 @@ nextflow_pipeline {
         }
 
         then {
-            assert path(".nextflow.log").text.contains("Warning: Requested sample_size (120) is larger than available reads in Undetermined_5 (100). Pipeline will continue with 100 reads.")
-            assert path(".nextflow.log").text.contains("Warning: Requested sample_size (120) is larger than available reads in SampleA_2 (100). Pipeline will continue with 100 reads.")
-            assert path(".nextflow.log").text.contains("Warning: Requested sample_size (120) is larger than available reads in sampletest_4 (100). Pipeline will continue with 100 reads.")
-            assert path(".nextflow.log").text.contains("Warning: Requested sample_size (120) is larger than available reads in Sample23_3 (100). Pipeline will continue with 100 reads.")
-            assert path(".nextflow.log").text.contains("Warning: Requested sample_size (120) is larger than available reads in Sample1_1 (100). Pipeline will continue with 100 reads.")
+            def log_path = "./.nextflow.log"
+            assert path(log_path).text.contains("Warning: Requested sample_size (120) is larger than available reads in Undetermined_5 (100). Pipeline will continue with 100 reads.")
+            assert path(log_path).text.contains("Warning: Requested sample_size (120) is larger than available reads in SampleA_2 (100). Pipeline will continue with 100 reads.")
+            assert path(log_path).text.contains("Warning: Requested sample_size (120) is larger than available reads in sampletest_4 (100). Pipeline will continue with 100 reads.")
+            assert path(log_path).text.contains("Warning: Requested sample_size (120) is larger than available reads in Sample23_3 (100). Pipeline will continue with 100 reads.")
+            assert path(log_path).text.contains("Warning: Requested sample_size (120) is larger than available reads in Sample1_1 (100). Pipeline will continue with 100 reads.")
         }
     }
 }
