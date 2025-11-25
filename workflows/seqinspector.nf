@@ -202,10 +202,27 @@ workflow SEQINSPECTOR {
     }
 
     if (params.run_picard_collecthsmetrics && !("picard_collectmultiplemetrics" in skip_tools)) {
+
+        ch_bait_intervals = channel
+            .fromPath(params.bait_intervals)
+            .collect()
+
+        ch_target_intervals = channel
+            .fromPath(params.target_intervals)
+            .collect()
+
+
+        ch_hsmetrics_in = ch_bam_bai
+            .combine(ch_bait_intervals)
+            .combine(ch_target_intervals)
+
+        ch_ref_dict = channel.fromPath(params.ref_dict).map { [[id: it.simpleName], it]
+
         QC_BAM(
-            ch_bam_bai,
+            ch_hsmetrics_in,
             ch_reference_fasta,
             ch_reference_fasta_fai,
+            ch_ref_dict,
         )
     }
     ch_multiqc_files = ch_multiqc_files.mix(QC_BAM.out.hs_metrics)

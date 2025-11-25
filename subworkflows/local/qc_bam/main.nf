@@ -8,38 +8,21 @@ include { PICARD_CREATESEQUENCEDICTIONARY } from '../../../modules/nf-core/picar
 workflow QC_BAM {
     take:
 
-        ch_bam_bai
+        ch_hsmetrics_in
         ch_reference_fasta
         ch_reference_fasta_fai
+        ch_ref_dict
 
     main:
 
         ch_versions = channel.empty()
 
-
-        ch_bait_intervals = channel
-            .fromPath(params.bait_intervals)
-            .collect()
-
-        ch_target_intervals = channel
-            .fromPath(params.target_intervals)
-            .collect()
-
-
-        ch_hsmetrics_in = ch_bam_bai
-            .combine(ch_bait_intervals)
-            .combine(ch_target_intervals)
-
-
-        if (!params.ref_dict) {
+        if (!ch_ref_dict) {
             PICARD_CREATESEQUENCEDICTIONARY(
                 ch_reference_fasta
             )
             ch_ref_dict = PICARD_CREATESEQUENCEDICTIONARY.out.reference_dict
             ch_versions = ch_versions.mix(PICARD_CREATESEQUENCEDICTIONARY.out.versions)
-        }
-        else {
-            ch_ref_dict = channel.fromPath(params.ref_dict).map { [[id: it.simpleName], it] }
         }
 
         PICARD_COLLECTHSMETRICS(
