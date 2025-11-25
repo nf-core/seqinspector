@@ -86,8 +86,8 @@ The `.csv` is provided as a pipeline parameter `fastq_screen_references` and is 
 <details markdown="1">
 <summary>Output files</summary>
 
-- `seqfu/`
-  - `*<file>`: <File description.>
+- `picard_collecthsmetrics/`
+  - `*.coverage_metrics`: Tab-separated file containing quality metrics for hybrid-selection data.
  
 </details>
 
