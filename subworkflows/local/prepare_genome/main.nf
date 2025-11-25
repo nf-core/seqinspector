@@ -51,14 +51,9 @@ workflow PREPARE_GENOME {
         ch_versions = ch_versions.mix(SAMTOOLS_FAIDX.out.versions)
     }
 
- // Gather versions
-    ch_versions = ch_versions.mix(BWAMEM2_INDEX.out.versions)
-    ch_versions = ch_versions.mix(SAMTOOLS_FAIDX.out.versions)
-
-
     emit:
-    bwamem2_index = BWAMEM2_INDEX.out.index
-    reference_fasta_fai =     SAMTOOLS_FAIDX.out.fai
+    bwamem2_index = ch_bwamem2_index
+    reference_fasta_fai =     ch_reference_fasta_fai
     versions            = ch_versions
 
 }       

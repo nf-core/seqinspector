@@ -2,9 +2,6 @@
     "NovaSeq6000 data test sample size": {
         "content": [
             {
-                "BWAMEM2_INDEX": {
-                    "bwamem2": "2.2.1"
-                },
                 "BWAMEM2_MEM": {
                     "bwamem2": "2.2.1",
                     "samtools": "1.22.1"
@@ -17,9 +14,6 @@
                 },
                 "PICARD_COLLECTMULTIPLEMETRICS": {
                     "picard": "3.4.0"
-                },
-                "SAMTOOLS_FAIDX": {
-                    "samtools": "1.22.1"
                 },
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.22.1"
@@ -950,6 +944,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2025-11-19T14:24:39.696680631"
+        "timestamp": "2025-11-25T10:44:53.483227254"
     }
 }
