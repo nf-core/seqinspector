@@ -90,11 +90,26 @@ workflow SEQINSPECTOR {
     // Module: Run SeqFu stats
     //
     if (!("seqfu_stats" in skip_tools)) {
-        SEQFU_STATS(
+        ch_seqfu_stats = SEQFU_STATS(
             ch_samplesheet.map { meta, reads ->
                 [[id: "seqfu", sample_id: meta.id, tags: meta.tags], reads]
             }
         )
+        ch_seqfu_stats.stats.map { meta, stats -> {
+            // Parse the stats TSV file
+            [meta.sample_id, stats]
+        }}
+        .splitCsv(header: true, sep: '\t')
+        .view { sample_id, row ->
+            // Check if requested sample size exceeds available reads
+            def sample_reads = row['#Seq'].toInteger()
+            if (params.sample_size > sample_reads) {
+                log.info("Warning: Requested sample_size (${params.sample_size}) " +
+                        "is larger than available reads in ${sample_id} (${sample_reads}). " +
+                        "Pipeline will continue with ${sample_reads} reads." )
+            }
+
+        }
         ch_multiqc_files = ch_multiqc_files.mix(SEQFU_STATS.out.multiqc)
         ch_versions = ch_versions.mix(SEQFU_STATS.out.versions.first())
     }

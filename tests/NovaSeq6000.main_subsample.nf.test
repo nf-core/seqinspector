@@ -1,6 +1,6 @@
 nextflow_pipeline {
 
-    name "Test Workflow main.nf on NovaSeq6000 data sample size 90"
+    name "Test Workflow main.nf on NovaSeq6000 data with different sample sizes"
     script "../main.nf"
     tag "seqinspector"
     tag "PIPELINE"
@@ -36,6 +36,64 @@ nextflow_pipeline {
                     stable_path
                 ).match() }
             )
+        }
+    }
+    test("NovaSeq6000 data test relative sample size") {
+        config """
+        process {
+            sample_size = 0.9
+        }
+        """
+        when {
+            config "./NovaSeq6000.main_subsample.nf.test.config"
+            params {
+                outdir = "$outputDir"
+            }
+        }
+
+        then {
+            // stable_name: All files + folders in ${params.outdir}/ with a stable name
+            def stable_name = getAllFilesFromDir(
+                params.outdir,
+                relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}']
+            )
+            // stable_path: All files in ${params.outdir}/ with stable content
+            def stable_path = getAllFilesFromDir(
+                params.outdir,
+                ignoreFile: 'tests/.nftignore'
+            )
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(
+                    // pipeline versions.yml file for multiqc from which Nextflow version is removed because we tests pipelines on multiple Nextflow versions
+                    removeNextflowVersion("$outputDir/pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"),
+                    // All stable path names, with a relative path
+                    stable_name,
+                    // All files with stable contents
+                    stable_path
+                ).match() }
+            )
+        }
+    }
+    test("NovaSeq6000 data test sample size exceeds") {
+        config """
+        process {
+            sample_size = 120
+        }
+        """
+        when {
+            config "./NovaSeq6000.main_subsample.nf.test.config"
+            params {
+                outdir = "$outputDir"
+            }
+        }
+
+        then {
+            assert path(".nextflow.log").text.contains("Warning: Requested sample_size (120) is larger than available reads in Undetermined_5 (100). Pipeline will continue with 100 reads.")
+            assert path(".nextflow.log").text.contains("Warning: Requested sample_size (120) is larger than available reads in SampleA_2 (100). Pipeline will continue with 100 reads.")
+            assert path(".nextflow.log").text.contains("Warning: Requested sample_size (120) is larger than available reads in sampletest_4 (100). Pipeline will continue with 100 reads.")
+            assert path(".nextflow.log").text.contains("Warning: Requested sample_size (120) is larger than available reads in Sample23_3 (100). Pipeline will continue with 100 reads.")
+            assert path(".nextflow.log").text.contains("Warning: Requested sample_size (120) is larger than available reads in Sample1_1 (100). Pipeline will continue with 100 reads.")
         }
     }
 }
