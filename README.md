@@ -46,7 +46,7 @@
 | `Indexing, Mapping` | [`Bwamem2`](https://github.com/bwa-mem2/bwa-mem2)                                  | Align reads to reference                    | [RNA, DNA]              | [N/A]               |
 | `Indexing`          | [`SAMtools`](http://github.com/samtools)                                           | Index aligned BAM files, create FASTA index | [DNA]                   | [N/A]               |
 | `QC`                | [`Picard`](https://broadinstitute.github.io/picard/picard-metric-definitions.html) | Collect multiple QC metrics                 | [RNA, DNA]              | [Bwamem2, SAMtools] |
-| `Reporting`         | [`MultiQC`](http://multiqc.info/)                                                  | Aggregate and visualise results                    | [RNA, DNA, synthetic]   | [N/A]               |
+| `Reporting`         | [`MultiQC`](http://multiqc.info/)                                                  | Aggregate and visualise results             | [RNA, DNA, synthetic]   | [N/A]               |
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/images/seqinspector_tubemap_V1.0_dark.png">
