@@ -3,6 +3,9 @@ lint:
     - tests/default.nf.test
   files_unchanged:
     - .github/CONTRIBUTING.md
+    - docs/images/nf-core-seqinspector_logo_dark.png
+    - docs/images/nf-core-seqinspector_logo_light.png
+    - assets/nf-core-seqinspector_logo_light.png
   nextflow_config:
     - config_defaults:
         - params.fastq_screen_references
