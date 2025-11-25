@@ -11,19 +11,24 @@ workflow QC_BAM {
         ch_hsmetrics_in
         ch_reference_fasta
         ch_reference_fasta_fai
-        ch_ref_dict
+        ref_dict
 
     main:
 
         ch_versions = channel.empty()
 
-        if (!ch_ref_dict) {
+        if (!ref_dict) {
             PICARD_CREATESEQUENCEDICTIONARY(
                 ch_reference_fasta
             )
             ch_ref_dict = PICARD_CREATESEQUENCEDICTIONARY.out.reference_dict
             ch_versions = ch_versions.mix(PICARD_CREATESEQUENCEDICTIONARY.out.versions)
         }
+        else{
+            ch_ref_dict = channel.fromPath(ref_dict, checkIfExists: true).map{ [[id: it.simpleName], it]}
+        }
+
+        ch_ref_dict
 
         PICARD_COLLECTHSMETRICS(
             ch_hsmetrics_in,
