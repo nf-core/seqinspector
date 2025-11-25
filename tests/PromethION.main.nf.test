@@ -11,6 +11,7 @@ nextflow_pipeline {
             config "./PromethION.main.nf.test.config"
             params {
                 outdir = "$outputDir"
+                skip_tools = "rundirparser"
             }
         }
 

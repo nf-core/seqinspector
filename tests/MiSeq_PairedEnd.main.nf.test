@@ -11,6 +11,7 @@ nextflow_pipeline {
             config "./MiSeq_PairedEnd.main.nf.test.config"
             params {
                 outdir = "$outputDir"
+                skip_tools = "rundirparser"
             }
         }
 
