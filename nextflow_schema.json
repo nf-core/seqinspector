@@ -98,7 +98,7 @@
                     "fa_icon": "fas fa-search",
                     "description": "A .csv of reference genomes to be mapped against by FastQ Screen"
                 },
-                "bwa_index": {
+                "bwamem2": {
                     "type": "string",
                     "format": "directory-path",
                     "exists": true,

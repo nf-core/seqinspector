@@ -16,6 +16,7 @@
 
 params.fasta = getGenomeAttribute('fasta')
 
+
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT FUNCTIONS / MODULES / SUBWORKFLOWS / WORKFLOWS
@@ -44,10 +45,13 @@ workflow NFCORE_SEQINSPECTOR {
     //
     // WORKFLOW: Run pipeline
     //
+    skip_tools = params.skip_tools ? params.skip_tools.split(',') : []
 
     SEQINSPECTOR(
         samplesheet,
         params.fasta,
+        skip_tools,
+        params.bwamem2
     )
 
     emit:

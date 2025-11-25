@@ -6,7 +6,7 @@ include { samplesheetToList             } from 'plugin/nf-schema'
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { BWAMEM2_INDEX                 } from '../modules/nf-core/bwamem2/index'
+// nf-core
 include { BWAMEM2_MEM                   } from '../modules/nf-core/bwamem2/mem'
 include { FASTQC                        } from '../modules/nf-core/fastqc'
 include { FASTQSCREEN_FASTQSCREEN       } from '../modules/nf-core/fastqscreen/fastqscreen'
@@ -24,6 +24,9 @@ include { paramsSummaryMultiqc          } from '../subworkflows/nf-core/utils_nf
 include { softwareVersionsToYAML        } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText        } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
 
+// local
+include { PREPARE_GENOME                } from '../subworkflows/local/prepare_genome'
+
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     RUN MAIN WORKFLOW
@@ -34,20 +37,24 @@ workflow SEQINSPECTOR {
     take:
     ch_samplesheet // channel: samplesheet read in from --input
     fasta_file
+    skip_tools
+    bwamem2
 
     main:
-    skip_tools = params.skip_tools ? params.skip_tools.split(',') : []
 
-    ch_versions = channel.empty()
-    ch_multiqc_files = channel.empty()
+
+    ch_versions            = channel.empty()
+    ch_multiqc_files       = channel.empty()
     ch_multiqc_extra_files = channel.empty()
+    ch_bwamem2_mem         = channel.empty()
+    ch_samtools_index      = channel.empty()
+    ch_reference_fasta     = fasta_file? channel.fromPath(fasta_file, checkIfExists: true).map { file -> tuple([id: file.name], file) }.collect() : channel.value([[:], []])
 
-    // Initialize all channels that might be used later
-    ch_bwamem2_index = channel.empty()
-    ch_bwamem2_mem = channel.empty()
-    ch_samtools_index = channel.empty()
-    ch_reference_fasta_fai = channel.empty()
-    ch_reference_fasta = channel.empty()
+    PREPARE_GENOME (
+        ch_reference_fasta,
+        bwamem2,
+        skip_tools
+    )
 
     //
     // MODULE: Run Seqtk sample to perform subsampling
@@ -117,38 +124,12 @@ workflow SEQINSPECTOR {
         ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
         ch_versions = ch_versions.mix(FASTQSCREEN_FASTQSCREEN.out.versions.first())
     }
-    // MODULE: Create BWA-MEM2 index of the reference genome OR use pre-built index
-    if (!("bwamem2_index" in skip_tools)) {
-        // Always create the reference FASTA channel since it's needed by BWAMEM2_MEM
-        ch_reference_fasta = channel.fromPath(fasta_file, checkIfExists: true).map { file -> tuple([id: file.name], file) }.collect()
-
-        if (params.bwa_index) {
-            // Use pre-built index when --bwa_index parameter is provided
-            ch_bwamem2_index = channel.fromPath(params.bwa_index, checkIfExists: true)
-                .map { index_dir -> tuple([id: index_dir.name], index_dir) }
-                .collect()
-
-            // Add debug output to verify the pre-built index is being used
-            ch_bwamem2_index.view { "Using pre-built BWA-MEM2 index: ${it}" }
-        }
-        else {
-            // Build index from reference FASTA when no pre-built index is provided
-            BWAMEM2_INDEX(
-                ch_reference_fasta
-            )
-            ch_bwamem2_index = BWAMEM2_INDEX.out.index
-            ch_versions = ch_versions.mix(BWAMEM2_INDEX.out.versions)
-
-            // Add debug output to verify the index was built
-            ch_bwamem2_index.view { "Built BWA-MEM2 index: ${it}" }
-        }
-    }
 
     // MODULE: Align reads with BWA-MEM2
     if (!("bwamem2_mem" in skip_tools)) {
         BWAMEM2_MEM(
             ch_sample_sized,
-            ch_bwamem2_index,
+            PREPARE_GENOME.out.bwamem2_index,
             ch_reference_fasta,
             params.sort_bam ?: true,
         )
@@ -164,19 +145,6 @@ workflow SEQINSPECTOR {
         ch_versions = ch_versions.mix(SAMTOOLS_INDEX.out.versions)
     }
 
-    // MODULE: Index reference FASTA with Samtools faidx
-    if (!("samtools_faidx" in skip_tools)) {
-
-        // Assume ch_fasta emits tuple(meta, fasta)
-        SAMTOOLS_FAIDX(
-            ch_reference_fasta,
-            [[:], []],
-            true,
-        )
-        ch_reference_fasta_fai = SAMTOOLS_FAIDX.out.fai
-        ch_versions = ch_versions.mix(SAMTOOLS_FAIDX.out.versions)
-    }
-
     // MODULE: Prepare BAM/BAI tuples for Picard
     // Combine BAM and BAI outputs for Picard
     if (!("picard_collectmultiplemetrics" in skip_tools) && !("bwamem2_mem" in skip_tools) && !("samtools_index" in skip_tools) && !("samtools_faidx" in skip_tools)) {
@@ -184,12 +152,8 @@ workflow SEQINSPECTOR {
         // Prepare BAM/BAI tuples for Picard
         ch_bam_bai = ch_bwamem2_mem.join(ch_samtools_index, failOnDuplicate: true, failOnMismatch: true)
 
-        ch_bam_bai.view { "Combined BAM/BAI for Picard: ${it}" }
         ch_fasta = ch_reference_fasta
-        ch_fai = ch_reference_fasta_fai
-
-        ch_fasta.view { "FASTA for Picard: ${it}" }
-        ch_fai.view { "FAI for Picard: ${it}" }
+        ch_fai = PREPARE_GENOME.out.reference_fai
 
         PICARD_COLLECTMULTIPLEMETRICS(
             ch_bam_bai,
