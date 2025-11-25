@@ -203,12 +203,10 @@ workflow SEQINSPECTOR {
 
     if (params.run_picard_collecthsmetrics && !("picard_collectmultiplemetrics" in skip_tools)) {
 
-        ch_bait_intervals = channel
-            .fromPath(params.bait_intervals)
+        ch_bait_intervals = channel.fromPath(params.bait_intervals)
             .collect()
 
-        ch_target_intervals = channel
-            .fromPath(params.target_intervals)
+        ch_target_intervals = channel.fromPath(params.target_intervals)
             .collect()
 
 
@@ -216,7 +214,7 @@ workflow SEQINSPECTOR {
             .combine(ch_bait_intervals)
             .combine(ch_target_intervals)
 
-        ch_ref_dict = channel.fromPath(params.ref_dict).map { [[id: it.simpleName], it]
+        ch_ref_dict = channel.fromPath(params.ref_dict).map { [[id: it.simpleName], it] }
 
         QC_BAM(
             ch_hsmetrics_in,
