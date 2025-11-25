@@ -1,0 +1,10 @@
+{
+    "Should run without failures": {
+        "content": null,
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2025-11-25T13:44:30.894411279"
+    }
+}

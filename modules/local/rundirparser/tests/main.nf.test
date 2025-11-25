@@ -11,8 +11,11 @@ nextflow_process {
         when {
             process {
                 """
-                input[0] = file("$moduleDir/tests/data/test_rundir")
+                input[0] = [[], file("$moduleDir/tests/data/test_rundir")]
                 """
+            }
+            params {
+                outdir = "results"
             }
         }
 
@@ -30,9 +33,13 @@ nextflow_process {
         when {
             process {
                 """
-                input[0] = file("$moduleDir/tests/data/test_rundir")
+                input[0] = [[], file("$moduleDir/tests/data/test_rundir")]
                 """
             }
+            params {
+                outdir = "results"
+            }
+
         }
 
         then {
