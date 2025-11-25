@@ -8,7 +8,7 @@ workflow PREPARE_GENOME {
 
     take:
     fasta_file
-    bwa_index
+    bwamem2
     skip_tools
 
     main:
@@ -21,9 +21,9 @@ workflow PREPARE_GENOME {
     if (!("bwamem2_index" in skip_tools)) {
         ch_reference_fasta = channel.fromPath(fasta_file, checkIfExists: true).map { file -> tuple([id: file.name], file) }.collect()
 
-        if (bwa_index) {
+        if (bwamem2) {
             // Use pre-built index when --bwa_index parameter is provided
-            ch_bwamem2_index = channel.fromPath(bwa_index, checkIfExists: true)
+            ch_bwamem2_index = channel.fromPath(bwamem2, checkIfExists: true)
                 .map { index_dir -> tuple([id: index_dir.name], index_dir) }
                 .collect()
 
@@ -53,7 +53,7 @@ workflow PREPARE_GENOME {
 
     emit:
     bwamem2_index = ch_bwamem2_index
-    reference_fasta_fai =     ch_reference_fasta_fai
+    reference_fai =     ch_reference_fasta_fai
     versions            = ch_versions
 
 }
