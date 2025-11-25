@@ -1,14 +1,15 @@
 //
 // Prepare reference genome files
 
-include { BWAMEM2_INDEX                 } from '../modules/nf-core/bwamem2/index'
-include { SAMTOOLS_FAIDX                } from '../modules/nf-core/samtools/faidx'
+include { BWAMEM2_INDEX                 } from '../../../modules/nf-core/bwamem2/index'
+include { SAMTOOLS_FAIDX                } from '../../../modules/nf-core/samtools/faidx'
 
 workflow PREPARE_GENOME {
+
     take:
-    fasta_fai                
-    fasta_file               
+    fasta_file
     bwa_index
+    skip_tools
 
     main:
     // Initialize all channels that might be used later
@@ -56,8 +57,8 @@ workflow PREPARE_GENOME {
 
 
     emit:
-        BWAMEM2_INDEX.out.index       = ch_bwamem2_index
-        SAMTOOLS_FAIDX.out.fai        = ch_reference_fasta_fai
-        versions                      = ch_versions
+    bwamem2_index = BWAMEM2_INDEX.out.index
+    reference_fasta_fai =     SAMTOOLS_FAIDX.out.fai
+    versions            = ch_versions
 
 }       

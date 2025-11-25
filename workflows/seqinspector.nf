@@ -44,16 +44,15 @@ workflow SEQINSPECTOR {
     ch_versions = channel.empty()
     ch_multiqc_files = channel.empty()
     ch_multiqc_extra_files = channel.empty()
-
-    // Initialize all channels that might be used later
     ch_bwamem2_mem = channel.empty()
     ch_samtools_index = channel.empty()
 
-    PREPARE_GENOME (
-            ch_bwamem2_index,
-            ch_reference_fasta_fai,
-            ch_reference_fasta,
-        )
+
+PREPARE_GENOME (
+        fasta_file,
+        params.bwa_index,
+        skip_tools,
+)
 
 
     //
@@ -127,9 +126,10 @@ workflow SEQINSPECTOR {
     
     // MODULE: Align reads with BWA-MEM2
     if (!("bwamem2_mem" in skip_tools)) {
+                ch_reference_fasta = channel.fromPath(fasta_file, checkIfExists: true).map { file -> tuple([id: file.name], file) }.collect()
         BWAMEM2_MEM(
             ch_sample_sized,
-            ch_bwamem2_index,
+            PREPARE_GENOME.out.bwamem2_index,
             ch_reference_fasta,
             params.sort_bam ?: true,
         )
@@ -153,7 +153,7 @@ workflow SEQINSPECTOR {
         ch_bam_bai = ch_bwamem2_mem.join(ch_samtools_index, failOnDuplicate: true, failOnMismatch: true)
 
         ch_fasta = ch_reference_fasta
-        ch_fai = ch_reference_fasta_fai
+        ch_fai = PREPARE_GENOME.out.reference_fasta_fai
 
         PICARD_COLLECTMULTIPLEMETRICS(
             ch_bam_bai,
