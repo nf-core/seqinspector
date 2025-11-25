@@ -7,22 +7,20 @@ include { SAMTOOLS_FAIDX                } from '../../../modules/nf-core/samtool
 workflow PREPARE_GENOME {
 
     take:
-    fasta_file
+    ch_reference_fasta
     bwamem2
     skip_tools
 
     main:
     // Initialize all channels that might be used later
-    ch_bwamem2_index = channel.empty()
-    ch_reference_fasta_fai = channel.empty()
-    ch_reference_fasta = channel.empty()
-    ch_versions      = channel.empty()
+    ch_bwamem2_index      = channel.empty()
+    ch_reference_fai      = channel.empty()
+    ch_reference_fasta    = channel.empty()
+    ch_versions           = channel.empty()
 
     if (!("bwamem2_index" in skip_tools)) {
-        ch_reference_fasta = channel.fromPath(fasta_file, checkIfExists: true).map { file -> tuple([id: file.name], file) }.collect()
-
         if (bwamem2) {
-            // Use pre-built index when --bwa_index parameter is provided
+            // Use pre-built index when --bwamem2 parameter is provided
             ch_bwamem2_index = channel.fromPath(bwamem2, checkIfExists: true)
                 .map { index_dir -> tuple([id: index_dir.name], index_dir) }
                 .collect()
@@ -47,13 +45,13 @@ workflow PREPARE_GENOME {
             [[:], []],
             true,
         )
-        ch_reference_fasta_fai = SAMTOOLS_FAIDX.out.fai
+        ch_reference_fai = SAMTOOLS_FAIDX.out.fai
         ch_versions = ch_versions.mix(SAMTOOLS_FAIDX.out.versions)
     }
 
     emit:
     bwamem2_index = ch_bwamem2_index
-    reference_fai =     ch_reference_fasta_fai
-    versions            = ch_versions
+    reference_fai = ch_reference_fai
+    versions      = ch_versions
 
 }
