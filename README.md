@@ -37,17 +37,17 @@
 
 <!-- TODO: add a search tool that accepts a tree for `Compatibility with Data`. -->
 
-| Tool Type           | Tool Name                                                                          | Tool Description                            | Compatibility with Data | Dependencies        | Default |
-| ------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------- | ----------------------- | ------------------- | - |
-| `Subsampling`       | [`Seqtk`](https://github.com/lh3/seqtk)                                            | Global subsampling of reads                 | [RNA, DNA, synthetic]   | [N/A]               |
-| `QC`                | [`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)             | Read QC                                     | [RNA, DNA]              | [N/A]               |
-| `QC`                | [`FastqScreen`](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/)  | Basic contamination detection               | [RNA, DNA]              | [N/A]               |
-| `QC`                | [`SeqFu Stats`](https://github.com/telatin/seqfu2)                                 | Sequence statistics                         | [RNA, DNA]              | [N/A]               |
-| `Indexing, Mapping` | [`Bwamem2`](https://github.com/bwa-mem2/bwa-mem2)                                  | Align reads to reference                    | [RNA, DNA]              | [N/A]               |
-| `Indexing`          | [`SAMtools`](http://github.com/samtools)                                           | Index aligned BAM files, create FASTA index | [DNA]                   | [N/A]               |
-| `QC`                | [`Picard_collectmultiplemetrics`](https://broadinstitute.github.io/picard/picard-metric-definitions.html) | Collect multiple QC metrics                 | [RNA, DNA]              | [Bwamem2, SAMtools] |
- `QC`                | [`Picard_collecthsmetrics`](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard) | Collect alignment QC metrics of hybrid-selection data. | [RNA, DNA]              | [Bwamem2, SAMtools, `--fasta`, `--run_picard_collecths_metrics`, `--bait_intervals`, `--target_intervals` (`--ref_dict`)] | No
-| `Reporting`         | [`MultiQC`](http://multiqc.info/)                                                  | Aggregate and visualise results             | [RNA, DNA, synthetic]   | [N/A]               |
+| Tool Type           | Tool Name                                                                                                   | Tool Description                                                                              | Compatibility with Data | Dependencies                    | Default tool |
+| ------------------- | ----------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | ----------------------- | ------------------------------- | ------------ |
+| `Subsampling`       | [`Seqtk`](https://github.com/lh3/seqtk)                                                                     | Global subsampling of reads. Only performs subsampling if `--sample_size` parameter is given. | [RNA, DNA, synthetic]   | [N/A]                           | no           |
+| `Indexing, Mapping` | [`Bwamem2`](https://github.com/bwa-mem2/bwa-mem2)                                                           | Align reads to reference                                                                      | [RNA, DNA]              | [N/A]                           | yes          |
+| `Indexing`          | [`SAMtools`](http://github.com/samtools)                                                                    | Index aligned BAM files, create FASTA index                                                   | [DNA]                   | [N/A]                           | yes          |
+| `QC`                | [`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)                                      | Read QC                                                                                       | [RNA, DNA]              | [N/A]                           | yes          |
+| `QC`                | [`FastqScreen`](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/)                           | Basic contamination detection                                                                 | [RNA, DNA]              | [N/A]                           | yes          |
+| `QC`                | [`SeqFu Stats`](https://github.com/telatin/seqfu2)                                                          | Sequence statistics                                                                           | [RNA, DNA]              | [N/A]                           | yes          |
+| `QC`                | [`Picard collect multiple metrics`](https://broadinstitute.github.io/picard/picard-metric-definitions.html) | Collect multiple QC metrics                                                                   | [RNA, DNA]              | [Bwamem2, SAMtools, `--genome`] | yes          |
+| `QC`                | [`Picard_collecthsmetrics`](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard) | Collect alignment QC metrics of hybrid-selection data.                                | [RNA, DNA]              | [Bwamem2, SAMtools, `--fasta`, `--run_picard_collecths_metrics`, `--bait_intervals`, `--target_intervals` (`--ref_dict`)] | no |
+| `Reporting`         | [`MultiQC`](http://multiqc.info/)                                                                           | Present QC for raw reads                                                                      | [RNA, DNA, synthetic]   | [N/A]                           | yes          |
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/images/seqinspector_tubemap_V1.0_dark.png">
@@ -93,7 +93,7 @@ For more details about the output files and reports, please refer to the
 
 ## Credits
 
-nf-core/seqinspector was originally written by the Swedish [@NationalGenomicsInfrastructure](https://github.com/NationalGenomicsInfrastructure/).
+nf-core/seqinspector was originally written by the Swedish [@NationalGenomicsInfrastructure](https://github.com/NationalGenomicsInfrastructure/) and [Clinical Genomics Stockholm](https://clinical.scilifelab.se/).
 
 We thank the following people for their extensive assistance in the development of this pipeline:
 
@@ -106,9 +106,6 @@ If you would like to contribute to this pipeline, please see the [contributing g
 For further information or help, don't hesitate to get in touch on the [Slack `#seqinspector` channel](https://nfcore.slack.com/channels/seqinspector) (you can join with [this invite](https://nf-co.re/join/slack)).
 
 ## Citations
-
-<!-- TODO nf-core: Add citation for pipeline after first release. Uncomment lines below and update Zenodo doi and badge at the top of this file. -->
-<!-- If you use nf-core/seqinspector for your analysis, please cite it using the following doi: [10.5281/zenodo.XXXXXX](https://doi.org/10.5281/zenodo.XXXXXX) -->
 
 <!-- TODO nf-core: Add bibliography of tools and data used in your pipeline -->
 
