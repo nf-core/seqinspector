@@ -37,23 +37,24 @@ workflow SEQINSPECTOR {
     take:
     ch_samplesheet // channel: samplesheet read in from --input
     fasta_file
+    skip_tools
+    bwamem2
 
     main:
-    skip_tools = params.skip_tools ? params.skip_tools.split(',') : []
 
-    ch_versions = channel.empty()
-    ch_multiqc_files = channel.empty()
+
+    ch_versions            = channel.empty()
+    ch_multiqc_files       = channel.empty()
     ch_multiqc_extra_files = channel.empty()
-    ch_bwamem2_mem = channel.empty()
-    ch_samtools_index = channel.empty()
+    ch_bwamem2_mem         = channel.empty()
+    ch_samtools_index      = channel.empty()
+    ch_reference_fasta     = fasta_file? channel.fromPath(fasta_file, checkIfExists: true).map { file -> tuple([id: file.name], file) }.collect() : channel.value([[:], []])
 
-
-PREPARE_GENOME (
-        fasta_file,
-        params.bwa_index,
-        skip_tools,
-)
-
+    PREPARE_GENOME (
+        ch_reference_fasta,
+        bwamem2,
+        skip_tools
+    )
 
     //
     // MODULE: Run Seqtk sample to perform subsampling
@@ -126,8 +127,6 @@ PREPARE_GENOME (
 
     // MODULE: Align reads with BWA-MEM2
     if (!("bwamem2_mem" in skip_tools)) {
-                ch_reference_fasta = channel.fromPath(fasta_file, checkIfExists: true).map { file -> tuple([id: file.name], file) }.collect()
-
         BWAMEM2_MEM(
             ch_sample_sized,
             PREPARE_GENOME.out.bwamem2_index,
