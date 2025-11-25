@@ -81,7 +81,7 @@ The `.csv` is provided as a pipeline parameter `fastq_screen_references` and is 
 [SeqFu](https://telatin.github.io/seqfu2/) is general-purpose program to manipulate and parse information from FASTA/FASTQ files, supporting gzipped input files. Includes functions to interleave and de-interleave FASTQ files, to rename sequences and to count and print statistics on sequence lengths. In this pipeline, the `seqfu stats` module is used to produce general quality metrics statistics.
 
 
-### Picard_CollectHSmetrics
+### Picard CollectHSmetrics
 
 <details markdown="1">
 <summary>Output files</summary>
