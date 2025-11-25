@@ -30,6 +30,7 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#128](https://github.com/nf-core/seqinspector/pull/128) Added Picard tools - Collect Multiple Mterics to collect QC metrics
 - [#132](https://github.com/nf-core/seqinspector/pull/132) Added a bwamem2 index params for faster output
 - [#151](https://github.com/nf-core/seqinspector/pull/151) Added a prepare_genome subworkflow to handle bwamem2 indexing
+- [#156](https://github.com/nf-core/seqinspector/pull/156) Added relative sample_size and warning when a sample has less reads than desired sample_size.
 
 ### `Fixed`
 

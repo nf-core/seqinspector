@@ -24,14 +24,13 @@
                     "fa_icon": "fas fa-file-csv"
                 },
                 "sample_size": {
-                    "type": "integer",
-                    "description": "Take this number of reads as a subset.",
-                    "help_text": "Choose the size of the subset or 0, if no subsampling shall be performed. Note that it refers to an absolute number.",
+                    "type": "number",
+                    "description": "Take a subset of reads for analysis.",
+                    "help_text": "Subset can be used as a fraction of reads (ex/ 0.20) or an absolute number of reads per sample (integer). Pipeline will still run if a sample has less reads than selected subset value.",
                     "default": 0
                 },
                 "outdir": {
                     "type": "string",
-                    "default": null,
                     "format": "directory-path",
                     "description": "The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.",
                     "fa_icon": "fas fa-folder-open"
