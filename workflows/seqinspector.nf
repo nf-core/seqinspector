@@ -218,9 +218,10 @@ workflow SEQINSPECTOR {
             ch_reference_fasta_fai,
             params.ref_dict,
         )
-    }
+
     ch_multiqc_files = ch_multiqc_files.mix(QC_BAM.out.hs_metrics)
     ch_versions = ch_versions.mix(QC_BAM.out.versions)
+    }
 
 
     // Collate and save software versions
