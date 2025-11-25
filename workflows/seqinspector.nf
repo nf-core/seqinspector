@@ -177,31 +177,8 @@ workflow SEQINSPECTOR {
         ch_versions = ch_versions.mix(SAMTOOLS_FAIDX.out.versions)
     }
 
-    // MODULE: Prepare BAM/BAI tuples for Picard
-    // Combine BAM and BAI outputs for Picard
+
     if (!("picard_collectmultiplemetrics" in skip_tools) && !("bwamem2_mem" in skip_tools) && !("samtools_faidx" in skip_tools)) {
-
-        // Prepare BAM/BAI tuples for Picard
-        ch_bam_bai = ch_bwamem2_mem.join(ch_samtools_index, failOnDuplicate: true, failOnMismatch: true)
-
-        ch_bam_bai.view { "Combined BAM/BAI for Picard: ${it}" }
-        ch_fasta = ch_reference_fasta
-        ch_fai = ch_reference_fasta_fai
-
-        ch_fasta.view { "FASTA for Picard: ${it}" }
-        ch_fai.view { "FAI for Picard: ${it}" }
-
-        PICARD_COLLECTMULTIPLEMETRICS(
-            ch_bam_bai,
-            ch_fasta,
-            ch_fai,
-        )
-
-        ch_multiqc_files = ch_multiqc_files.mix(PICARD_COLLECTMULTIPLEMETRICS.out.metrics)
-        ch_versions = ch_versions.mix(PICARD_COLLECTMULTIPLEMETRICS.out.versions.first())
-    }
-
-    if (params.run_picard_collecthsmetrics && !("picard_collectmultiplemetrics" in skip_tools)) {
 
         ch_bait_intervals = channel.fromPath(params.bait_intervals)
             .collect()
@@ -211,18 +188,23 @@ workflow SEQINSPECTOR {
 
 
         QC_BAM(
-            ch_bam_bai,
-            ch_bait_intervals,
-            ch_target_intervals,
+            ch_bwamem2_mem,
+            ch_samtools_index,
             ch_reference_fasta,
             ch_reference_fasta_fai,
+            params.run_picard_collecthsmetrics,
+            ch_bait_intervals,
+            ch_target_intervals,
             params.ref_dict,
         )
 
-    ch_multiqc_files = ch_multiqc_files.mix(QC_BAM.out.hs_metrics)
-    ch_versions = ch_versions.mix(QC_BAM.out.versions)
-    }
 
+        // ch_multiqc_files = ch_multiqc_files.mix(PICARD_COLLECTMULTIPLEMETRICS.out.metrics)
+        // ch_versions = ch_versions.mix(PICARD_COLLECTMULTIPLEMETRICS.out.versions.first())
+
+        ch_multiqc_files = ch_multiqc_files.mix(QC_BAM.out.hs_metrics) // Add check for collecthsmetrics
+        ch_versions = ch_versions.mix(QC_BAM.out.versions)
+    }
 
     // Collate and save software versions
     //
