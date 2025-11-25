@@ -210,13 +210,10 @@ workflow SEQINSPECTOR {
             .collect()
 
 
-        ch_hsmetrics_in = ch_bam_bai
-            .combine(ch_bait_intervals)
-            .combine(ch_target_intervals)
-
-
         QC_BAM(
-            ch_hsmetrics_in,
+            ch_bam_bai,
+            ch_bait_intervals,
+            ch_target_intervals,
             ch_reference_fasta,
             ch_reference_fasta_fai,
             params.ref_dict,

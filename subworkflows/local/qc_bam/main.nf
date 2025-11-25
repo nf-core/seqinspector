@@ -7,7 +7,9 @@ include { PICARD_CREATESEQUENCEDICTIONARY } from '../../../modules/nf-core/picar
 
 workflow QC_BAM {
     take:
-        ch_hsmetrics_in
+        ch_bam_bai
+        ch_bait_intervals
+        ch_target_intervals
         ch_reference_fasta
         ch_reference_fasta_fai
         ref_dict
@@ -15,6 +17,10 @@ workflow QC_BAM {
     main:
 
     ch_versions = channel.empty()
+
+    ch_hsmetrics_in = ch_bam_bai
+            .combine(ch_bait_intervals)
+            .combine(ch_target_intervals)
 
     if (ref_dict) {
         ch_ref_dict = channel.fromPath(ref_dict, checkIfExists: true).map { [[id: it.simpleName], it] }
