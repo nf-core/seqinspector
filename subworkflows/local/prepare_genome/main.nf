@@ -56,4 +56,4 @@ workflow PREPARE_GENOME {
     reference_fasta_fai =     ch_reference_fasta_fai
     versions            = ch_versions
 
-}       
+}

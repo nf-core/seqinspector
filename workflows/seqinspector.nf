@@ -123,11 +123,11 @@ PREPARE_GENOME (
         ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
         ch_versions = ch_versions.mix(FASTQSCREEN_FASTQSCREEN.out.versions.first())
     }
-    
+
     // MODULE: Align reads with BWA-MEM2
     if (!("bwamem2_mem" in skip_tools)) {
                 ch_reference_fasta = channel.fromPath(fasta_file, checkIfExists: true).map { file -> tuple([id: file.name], file) }.collect()
-        
+
         BWAMEM2_MEM(
             ch_sample_sized,
             PREPARE_GENOME.out.bwamem2_index,
