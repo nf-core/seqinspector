@@ -198,11 +198,7 @@ workflow SEQINSPECTOR {
             params.ref_dict,
         )
 
-
-        // ch_multiqc_files = ch_multiqc_files.mix(PICARD_COLLECTMULTIPLEMETRICS.out.metrics)
-        // ch_versions = ch_versions.mix(PICARD_COLLECTMULTIPLEMETRICS.out.versions.first())
-
-        ch_multiqc_files = ch_multiqc_files.mix(QC_BAM.out.hs_metrics) // Add check for collecthsmetrics
+        ch_multiqc_files = ch_multiqc_files.mix(QC_BAM.out.metrics) // Add check for collecthsmetrics
         ch_versions = ch_versions.mix(QC_BAM.out.versions)
     }
 
