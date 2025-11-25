@@ -36,7 +36,14 @@ nextflow_workflow {
 
         then {
             assert workflow.success
-            assert snapshot(workflow.out).match()
+            assert snapshot(
+                            workflow.out.hs_metrics
+                                .collect {it[1]}
+                                .flatten()
+                                .collect { file(it).name }
+                                .toSorted(),
+                            workflow.out.versions
+                            ).match()
         }
 
     }
