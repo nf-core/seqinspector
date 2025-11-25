@@ -154,7 +154,7 @@ PREPARE_GENOME (
         ch_bam_bai = ch_bwamem2_mem.join(ch_samtools_index, failOnDuplicate: true, failOnMismatch: true)
 
         ch_fasta = ch_reference_fasta
-        ch_fai = PREPARE_GENOME.out.reference_fasta_fai
+        ch_fai = PREPARE_GENOME.out.reference_fai
 
         PICARD_COLLECTMULTIPLEMETRICS(
             ch_bam_bai,
