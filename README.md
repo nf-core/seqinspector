@@ -37,15 +37,16 @@
 
 <!-- TODO: add a search tool that accepts a tree for `Compatibility with Data`. -->
 
-| Tool Type           | Tool Name                                                                          | Tool Description                            | Compatibility with Data | Dependencies        |
-| ------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------- | ----------------------- | ------------------- |
+| Tool Type           | Tool Name                                                                          | Tool Description                            | Compatibility with Data | Dependencies        | Default |
+| ------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------- | ----------------------- | ------------------- | - |
 | `Subsampling`       | [`Seqtk`](https://github.com/lh3/seqtk)                                            | Global subsampling of reads                 | [RNA, DNA, synthetic]   | [N/A]               |
 | `QC`                | [`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)             | Read QC                                     | [RNA, DNA]              | [N/A]               |
 | `QC`                | [`FastqScreen`](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/)  | Basic contamination detection               | [RNA, DNA]              | [N/A]               |
 | `QC`                | [`SeqFu Stats`](https://github.com/telatin/seqfu2)                                 | Sequence statistics                         | [RNA, DNA]              | [N/A]               |
 | `Indexing, Mapping` | [`Bwamem2`](https://github.com/bwa-mem2/bwa-mem2)                                  | Align reads to reference                    | [RNA, DNA]              | [N/A]               |
 | `Indexing`          | [`SAMtools`](http://github.com/samtools)                                           | Index aligned BAM files, create FASTA index | [DNA]                   | [N/A]               |
-| `QC`                | [`Picard`](https://broadinstitute.github.io/picard/picard-metric-definitions.html) | Collect multiple QC metrics                 | [RNA, DNA]              | [Bwamem2, SAMtools] |
+| `QC`                | [`Picard_collectmultiplemetrics`](https://broadinstitute.github.io/picard/picard-metric-definitions.html) | Collect multiple QC metrics                 | [RNA, DNA]              | [Bwamem2, SAMtools] |
+ `QC`                | [`Picard_collecthsmetrics`](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard) | Collect alignment QC metrics of hybrid-selection data. | [RNA, DNA]              | [Bwamem2, SAMtools, `--fasta`, `--run_picard_collecths_metrics`, `--bait_intervals`, `--target_intervals` (`--ref_dict`)] | No
 | `Reporting`         | [`MultiQC`](http://multiqc.info/)                                                  | Aggregate and visualise results             | [RNA, DNA, synthetic]   | [N/A]               |
 
 <picture>
