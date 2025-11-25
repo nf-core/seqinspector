@@ -214,13 +214,12 @@ workflow SEQINSPECTOR {
             .combine(ch_bait_intervals)
             .combine(ch_target_intervals)
 
-        ch_ref_dict = channel.fromPath(params.ref_dict).map { [[id: it.simpleName], it] }
 
         QC_BAM(
             ch_hsmetrics_in,
             ch_reference_fasta,
             ch_reference_fasta_fai,
-            ch_ref_dict,
+            params.ref_dict,
         )
     }
     ch_multiqc_files = ch_multiqc_files.mix(QC_BAM.out.hs_metrics)
