@@ -80,7 +80,6 @@ The `.csv` is provided as a pipeline parameter `fastq_screen_references` and is 
 
 [SeqFu](https://telatin.github.io/seqfu2/) is general-purpose program to manipulate and parse information from FASTA/FASTQ files, supporting gzipped input files. Includes functions to interleave and de-interleave FASTQ files, to rename sequences and to count and print statistics on sequence lengths. In this pipeline, the `seqfu stats` module is used to produce general quality metrics statistics.
 
-
 ### Picard CollectHSmetrics
 
 <details markdown="1">
@@ -88,7 +87,7 @@ The `.csv` is provided as a pipeline parameter `fastq_screen_references` and is 
 
 - `picard_collecthsmetrics/`
   - `*.coverage_metrics`: Tab-separated file containing quality metrics for hybrid-selection data.
- 
+
 </details>
 
 [Picard_collecthsmetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard) is a tool to collect metrics on the aligment SAM/BAM files that are specific for sequence datasets generated through hybrid-selection (mostly used to capture exon-specific sequences for targeted sequencing).
