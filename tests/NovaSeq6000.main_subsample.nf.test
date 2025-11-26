@@ -74,7 +74,7 @@ nextflow_pipeline {
         }
     }
     test("NovaSeq6000 data test sample size exceeds available reads") {
-        
+
         when {
             config "./NovaSeq6000.main_subsample.nf.test.config"
             params {
