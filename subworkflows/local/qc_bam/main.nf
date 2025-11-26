@@ -2,22 +2,20 @@
 // A quality check subworkflow for processed bam files.
 //
 
-include { PICARD_COLLECTHSMETRICS } from '../../../modules/nf-core/picard/collecthsmetrics/main'
+include { PICARD_COLLECTHSMETRICS         } from '../../../modules/nf-core/picard/collecthsmetrics/main'
 include { PICARD_CREATESEQUENCEDICTIONARY } from '../../../modules/nf-core/picard/createsequencedictionary/main'
 
 workflow QC_BAM {
     take:
-        ch_bam_bai
-        ch_bait_intervals
-        ch_target_intervals
-        ch_reference_fasta
-        ch_reference_fasta_fai
-        ref_dict
+    ch_bam_bai
+    ch_bait_intervals
+    ch_target_intervals
+    ch_reference_fasta
+    ch_reference_fasta_fai
+    ref_dict
 
     main:
-
     ch_versions = channel.empty()
-
     ch_hsmetrics_in = ch_bam_bai
             .combine(ch_bait_intervals)
             .combine(ch_target_intervals)
@@ -43,6 +41,6 @@ workflow QC_BAM {
     ch_versions = ch_versions.mix(PICARD_COLLECTHSMETRICS.out.versions.first())
 
     emit:
-        hs_metrics = PICARD_COLLECTHSMETRICS.out.metrics
-        versions = ch_versions
+    hs_metrics = PICARD_COLLECTHSMETRICS.out.metrics
+    versions = ch_versions
 }
