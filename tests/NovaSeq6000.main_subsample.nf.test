@@ -38,16 +38,14 @@ nextflow_pipeline {
             )
         }
     }
+
     test("NovaSeq6000 data test relative sample size") {
-        config """
-        process {
-            sample_size = 0.9
-        }
-        """
+
         when {
             config "./NovaSeq6000.main_subsample.nf.test.config"
             params {
                 outdir = "$outputDir"
+                sample_size = 0.9
             }
         }
 
@@ -75,26 +73,29 @@ nextflow_pipeline {
             )
         }
     }
-    test("NovaSeq6000 data test sample size exceeds") {
-        config """
-        process {
-            sample_size = 120
-        }
-        """
+    test("NovaSeq6000 data test sample size exceeds available reads") {
+        
         when {
             config "./NovaSeq6000.main_subsample.nf.test.config"
             params {
                 outdir = "$outputDir"
+                sample_size = 120
             }
         }
 
         then {
-            def log_path = "./.nextflow.log"
-            assert path(log_path).text.contains("Warning: Requested sample_size (120) is larger than available reads in Undetermined_5 (100). Pipeline will continue with 100 reads.")
-            assert path(log_path).text.contains("Warning: Requested sample_size (120) is larger than available reads in SampleA_2 (100). Pipeline will continue with 100 reads.")
-            assert path(log_path).text.contains("Warning: Requested sample_size (120) is larger than available reads in sampletest_4 (100). Pipeline will continue with 100 reads.")
-            assert path(log_path).text.contains("Warning: Requested sample_size (120) is larger than available reads in Sample23_3 (100). Pipeline will continue with 100 reads.")
-            assert path(log_path).text.contains("Warning: Requested sample_size (120) is larger than available reads in Sample1_1 (100). Pipeline will continue with 100 reads.")
+            def warn_messages = [
+                "Warning: Requested sample_size (120) is larger than available reads in Undetermined_5 (100). Pipeline will continue with 100 reads.",
+                "Warning: Requested sample_size (120) is larger than available reads in SampleA_2 (100). Pipeline will continue with 100 reads.",
+                "Warning: Requested sample_size (120) is larger than available reads in sampletest_4 (100). Pipeline will continue with 100 reads.",
+                "Warning: Requested sample_size (120) is larger than available reads in Sample23_3 (100). Pipeline will continue with 100 reads.",
+                "Warning: Requested sample_size (120) is larger than available reads in Sample1_1 (100). Pipeline will continue with 100 reads."
+            ]
+            assert workflow.success
+            for ( msg in warn_messages ) {
+                // Read warning from stdout as nf-test does not capture log messages
+                assert workflow.stdout.contains(msg)
+            }
         }
     }
 }
