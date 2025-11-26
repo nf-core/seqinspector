@@ -535,7 +535,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2025-11-25T13:20:06.917144477"
+        "timestamp": "2025-11-26T13:46:44.353118705"
     },
     "NovaSeq6000 data test relative sample size": {
         "content": [
@@ -1073,6 +1073,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2025-11-26T14:26:30.962199041"
+        "timestamp": "2025-11-26T14:34:17.011633325"
     }
 }

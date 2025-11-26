@@ -104,9 +104,12 @@ workflow SEQINSPECTOR {
             // Check if requested sample size exceeds available reads
             def sample_reads = row['#Seq'].toInteger()
             if (params.sample_size > sample_reads) {
-                log.info("Warning: Requested sample_size (${params.sample_size}) " +
+                // prntln is used here instead of log.warn/log.info as nf-test captures stdout
+                // from 'println' but buffers log messages making them unavailable for assertion
+                // This message will appear in .nextflow.log file and temporarily on runtime stdout.
+                println ("Warning: Requested sample_size (${params.sample_size}) " +
                         "is larger than available reads in ${sample_id} (${sample_reads}). " +
-                        "Pipeline will continue with ${sample_reads} reads." )
+                        "Pipeline will continue with ${sample_reads} reads.")
             }
 
         }
