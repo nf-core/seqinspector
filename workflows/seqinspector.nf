@@ -1,4 +1,4 @@
-include { samplesheetToList } from 'plugin/nf-schema'
+include { samplesheetToList             } from 'plugin/nf-schema'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -17,13 +17,13 @@ include { SEQFU_STATS                   } from '../modules/nf-core/seqfu/stats'
 include { SEQTK_SAMPLE                  } from '../modules/nf-core/seqtk/sample'
 include { QC_BAM                        } from '../subworkflows/local/qc_bam'
 
-include { MULTIQC as MULTIQC_GLOBAL  } from '../modules/nf-core/multiqc'
-include { MULTIQC as MULTIQC_PER_TAG } from '../modules/nf-core/multiqc'
+include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc'
+include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc'
 
-include { paramsSummaryMap       } from 'plugin/nf-schema'
-include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { paramsSummaryMap              } from 'plugin/nf-schema'
+include { paramsSummaryMultiqc          } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { softwareVersionsToYAML        } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { methodsDescriptionText        } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
 
 // local
 include { PREPARE_GENOME                } from '../subworkflows/local/prepare_genome'
@@ -49,12 +49,12 @@ workflow SEQINSPECTOR {
     ch_multiqc_extra_files = channel.empty()
     ch_bwamem2_mem         = channel.empty()
     ch_samtools_index      = channel.empty()
-    ch_reference_fasta     = fasta_file? channel.fromPath(fasta_file, checkIfExists: true).map { file -> tuple([id: file.name], file) }.collect() : channel.value([[:], []])
+    ch_reference_fasta     = fasta_file ? channel.fromPath(fasta_file, checkIfExists: true).map { file -> tuple([id: file.name], file) }.collect() : channel.value([[:], []])
 
-    PREPARE_GENOME (
+    PREPARE_GENOME(
         ch_reference_fasta,
         bwamem2,
-        skip_tools
+        skip_tools,
     )
 
     //
@@ -166,10 +166,10 @@ workflow SEQINSPECTOR {
 
     if (params.run_picard_collecthsmetrics && !("picard_collectmultiplemetrics" in skip_tools)) {
 
-        ch_bait_intervals   = channel.fromPath(params.bait_intervals)
-                                     .collect()
+        ch_bait_intervals = channel.fromPath(params.bait_intervals)
+            .collect()
         ch_target_intervals = channel.fromPath(params.target_intervals)
-                                     .collect()
+            .collect()
 
 
         QC_BAM(
@@ -181,8 +181,8 @@ workflow SEQINSPECTOR {
             params.ref_dict,
         )
 
-    ch_multiqc_files = ch_multiqc_files.mix(QC_BAM.out.hs_metrics)
-    ch_versions      = ch_versions.mix(QC_BAM.out.versions)
+        ch_multiqc_files = ch_multiqc_files.mix(QC_BAM.out.hs_metrics)
+        ch_versions = ch_versions.mix(QC_BAM.out.versions)
     }
 
 
@@ -304,7 +304,7 @@ workflow SEQINSPECTOR {
     )
 
     emit:
-    global_report = MULTIQC_GLOBAL.out.report.toList() // channel: [ /path/to/multiqc_report.html ]
+    global_report   = MULTIQC_GLOBAL.out.report.toList() // channel: [ /path/to/multiqc_report.html ]
     grouped_reports = MULTIQC_PER_TAG.out.report.toList() // channel: [ /path/to/multiqc_report.html ]
-    versions = ch_versions // channel: [ path(versions.yml) ]
+    versions        = ch_versions // channel: [ path(versions.yml) ]
 }
