@@ -29,7 +29,7 @@ nextflow_workflow {
                 input[2]  = channel.fromPath(params.pipelines_testdata_base_path + '/reference/target.bed', checkIfExists: true).collect()
                 input[3]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/reference/reference.fasta', checkIfExists: true)).collect()
                 input[4]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/reference/reference.fasta.fai', checkIfExists: true)).collect()
-                input[5]  = null
+                input[5]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/reference/reference.dict', checkIfExists: true)).collect()
                 """
             }
         }
