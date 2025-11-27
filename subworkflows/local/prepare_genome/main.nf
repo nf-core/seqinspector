@@ -19,6 +19,7 @@ workflow PREPARE_GENOME {
     ch_bwamem2_index      = channel.empty()
     ch_reference_fai      = channel.empty()
     ch_reference_fasta    = channel.empty()
+    ch_ref_dict           = channel.empty()
     ch_versions           = channel.empty()
 
     if (!("bwamem2_index" in skip_tools)) {
