@@ -12,7 +12,7 @@ workflow QC_BAM {
     ch_target_intervals     // channel: [mandatory] [ val(meta), [ path(target_intervals) ] ]
     ch_reference_fasta      // channel: [mandatory] [ val(meta), [ path(reference_fasta) ] ]
     ch_reference_fasta_fai  // channel: [mandatory] [ val(meta), [ path(reference_fasta_fai) ] ]
-    ref_dict                // val: [mandatory] [ [ path(ref_dict) ] ]
+    ref_dict                // value:   [mandatory] [ path(ref_dict) ]
 
     main:
     ch_versions = channel.empty()
