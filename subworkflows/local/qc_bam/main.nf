@@ -7,12 +7,12 @@ include { PICARD_CREATESEQUENCEDICTIONARY } from '../../../modules/nf-core/picar
 
 workflow QC_BAM {
     take:
-    ch_bam_bai
-    ch_bait_intervals
-    ch_target_intervals
-    ch_reference_fasta
-    ch_reference_fasta_fai
-    ref_dict
+    ch_bam_bai              // channel: [mandatory] [ val(meta), [ path(bam) ], [ path(bai) ] ]
+    ch_bait_intervals       // channel: [mandatory] [ val(meta), [ path(bait_intervals) ] ]
+    ch_target_intervals     // channel: [mandatory] [ val(meta), [ path(target_intervals) ] ]
+    ch_reference_fasta      // channel: [mandatory] [ val(meta), [ path(reference_fasta) ] ]
+    ch_reference_fasta_fai  // channel: [mandatory] [ val(meta), [ path(reference_fasta_fai) ] ]
+    ref_dict                // val: [mandatory] [ [ path(ref_dict) ] ]
 
     main:
     ch_versions = channel.empty()
