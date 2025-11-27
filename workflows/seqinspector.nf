@@ -55,6 +55,8 @@ workflow SEQINSPECTOR {
         ch_reference_fasta,
         bwamem2,
         skip_tools,
+        params.run_picard_collecthsmetrics,
+        params.ref_dict,
     )
 
     //
@@ -171,6 +173,8 @@ workflow SEQINSPECTOR {
         ch_target_intervals = channel.fromPath(params.target_intervals)
             .collect()
 
+        ch_ref_dict = PREPARE_GENOME.out.ref_dict
+
 
         QC_BAM(
             ch_bam_bai,
@@ -178,7 +182,7 @@ workflow SEQINSPECTOR {
             ch_target_intervals,
             ch_reference_fasta,
             ch_fai,
-            params.ref_dict,
+            ch_ref_dict
         )
 
         ch_multiqc_files = ch_multiqc_files.mix(QC_BAM.out.hs_metrics)

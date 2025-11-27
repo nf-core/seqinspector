@@ -3,7 +3,6 @@
 //
 
 include { PICARD_COLLECTHSMETRICS         } from '../../../modules/nf-core/picard/collecthsmetrics/main'
-include { PICARD_CREATESEQUENCEDICTIONARY } from '../../../modules/nf-core/picard/createsequencedictionary/main'
 
 workflow QC_BAM {
     take:
@@ -12,7 +11,7 @@ workflow QC_BAM {
     ch_target_intervals  // channel: [mandatory] [ val(meta), path(target_intervals) ]
     ch_reference_fasta   // channel: [mandatory] [ val(meta), path(reference_fasta) ]
     ch_reference_fai     // channel: [mandatory] [ val(meta), path(reference_fai) ]
-    ref_dict             // value:   [mandatory] [ path(ref_dict) ]
+    ch_ref_dict          // channel: [mandatory] [ val(meta), path(ref_dict) ]
 
     main:
     ch_versions = channel.empty()
@@ -20,16 +19,6 @@ workflow QC_BAM {
             .combine(ch_bait_intervals)
             .combine(ch_target_intervals)
 
-    if (ref_dict) {
-        ch_ref_dict = channel.fromPath(ref_dict, checkIfExists: true).map { [[id: it.simpleName], it] }
-    }
-    else {
-        PICARD_CREATESEQUENCEDICTIONARY(
-            ch_reference_fasta
-        )
-        ch_ref_dict = PICARD_CREATESEQUENCEDICTIONARY.out.reference_dict
-        ch_versions = ch_versions.mix(PICARD_CREATESEQUENCEDICTIONARY.out.versions)
-    }
 
     PICARD_COLLECTHSMETRICS(
         ch_hsmetrics_in,
