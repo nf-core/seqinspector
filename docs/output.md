@@ -14,6 +14,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 - [FastQC](#fastqc) - Raw read QC
 - [SeqFu Stats](#seqfu_stats) - Statistics for FASTA or FASTQ files
 - [FastQ Screen](#fastqscreen) - Mapping against a set of references for basic contamination QC
+- [Picard collecthsmetrics](#picard-collecthsmetrics) - Collect alignment QC metrics of hybrid-selection data
 - [MultiQC](#multiqc) - Aggregate report describing results and QC from the whole pipeline
 - [Pipeline information](#pipeline-information) - Report metrics generated during the workflow execution
 
@@ -80,18 +81,17 @@ The `.csv` is provided as a pipeline parameter `fastq_screen_references` and is 
 
 [SeqFu](https://telatin.github.io/seqfu2/) is general-purpose program to manipulate and parse information from FASTA/FASTQ files, supporting gzipped input files. Includes functions to interleave and de-interleave FASTQ files, to rename sequences and to count and print statistics on sequence lengths. In this pipeline, the `seqfu stats` module is used to produce general quality metrics statistics.
 
-
 ### Picard CollectHSmetrics
 
 <details markdown="1">
 <summary>Output files</summary>
 
-- `picard_collecthsmetrics/``
-   - `*.coverage_metrics`: Tab-separated file containing quality metrics for hybrid-selection data.
+- `picard_collecthsmetrics/`
+  - `*.coverage_metrics`: Tab-separated file containing quality metrics for hybrid-selection data.
 
 </details>
 
-[CollectHsMetrics (Picard)](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard) is a tool that collects metrics from a SAM/BAM file of targeted sequencing data (hybrid-selection) like whole exome sequencing or panel sequencing.
+[Picard_collecthsmetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard) is a tool to collect metrics on the aligment SAM/BAM files that are specific for sequence datasets generated through hybrid-selection (mostly used to capture exon-specific sequences for targeted sequencing).
 
 ### MultiQC
 

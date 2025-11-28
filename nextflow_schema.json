@@ -50,7 +50,7 @@
                 "skip_tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to skip",
-                    "pattern": "^((fastqc|fastqscreen|seqfu_stats|seqtk_sample|bwamem2_index|bwamem2_mem|picard_collectmultiplemetrics|samtools_faidx|picard_collecthsmetrics)?,?)*(?<!,)$"
+                    "pattern": "^((fastqc|fastqscreen|seqfu_stats|seqtk_sample|bwamem2_index|bwamem2_mem|picard_collectmultiplemetrics|samtools_faidx)?,?)*(?<!,)$"
                 }
             }
         },
@@ -97,7 +97,7 @@
                     "fa_icon": "fas fa-search",
                     "description": "A .csv of reference genomes to be mapped against by FastQ Screen"
                 },
-                "bwa_index": {
+                "bwamem2": {
                     "type": "string",
                     "format": "directory-path",
                     "exists": true,

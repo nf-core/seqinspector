@@ -104,7 +104,7 @@ Optionally, the `sample_size` parameter allows you to subset a random number of 
 nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 -profile docker
 ```
 
-The pipeline support hybrid-selection data, use the flag `--run_picard_collecthsmetrics` if you want to run the QC tool [picard CollectHSmetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard). This tool is not run by default.
+The pipeline supports hybrid-selection data, use the flag `--run_picard_collecthsmetrics true` if you want to run the QC tool [picard CollectHSmetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard). This tool is not run by default.
 
 ### Skipping tools
 
