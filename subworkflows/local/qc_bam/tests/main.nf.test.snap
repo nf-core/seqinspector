@@ -5,7 +5,6 @@
                 "earlycasualcaiman.CollectHsMetrics.coverage_metrics"
             ],
             [
-                "versions.yml:md5,40396221974da20b7f066d5fab9ffb3a",
                 "versions.yml:md5,8508bd28eaf1fffcdc4d78e4d9f95393"
             ]
         ],
@@ -13,6 +12,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2025-11-25T15:58:16.830793"
+        "timestamp": "2025-11-28T09:03:50.918024"
     }
 }
