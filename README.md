@@ -5,13 +5,13 @@
   </picture>
 </h1>
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new/nf-core/seqinspector)
+[![Open in GitHub Codespaces](https://img.shields.io/badge/Open_In_GitHub_Codespaces-black?labelColor=grey&logo=github)](https://github.com/codespaces/new/nf-core/seqinspector)
 [![GitHub Actions CI Status](https://github.com/nf-core/seqinspector/actions/workflows/nf-test.yml/badge.svg)](https://github.com/nf-core/seqinspector/actions/workflows/nf-test.yml)
 [![GitHub Actions Linting Status](https://github.com/nf-core/seqinspector/actions/workflows/linting.yml/badge.svg)](https://github.com/nf-core/seqinspector/actions/workflows/linting.yml)[![AWS CI](https://img.shields.io/badge/CI%20tests-full%20size-FF9900?labelColor=000000&logo=Amazon%20AWS)](https://nf-co.re/seqinspector/results)[![Cite with Zenodo](http://img.shields.io/badge/DOI-10.5281/zenodo.XXXXXXX-1073c8?labelColor=000000)](https://doi.org/10.5281/zenodo.XXXXXXX)
 [![nf-test](https://img.shields.io/badge/unit_tests-nf--test-337ab7.svg)](https://www.nf-test.com)
 
 [![Nextflow](https://img.shields.io/badge/version-%E2%89%A525.04.0-green?style=flat&logo=nextflow&logoColor=white&color=%230DC09D&link=https%3A%2F%2Fnextflow.io)](https://www.nextflow.io/)
-[![nf-core template version](https://img.shields.io/badge/nf--core_template-3.4.1-green?style=flat&logo=nfcore&logoColor=white&color=%2324B064&link=https%3A%2F%2Fnf-co.re)](https://github.com/nf-core/tools/releases/tag/3.4.1)
+[![nf-core template version](https://img.shields.io/badge/nf--core_template-3.5.1-green?style=flat&logo=nfcore&logoColor=white&color=%2324B064&link=https%3A%2F%2Fnf-co.re)](https://github.com/nf-core/tools/releases/tag/3.5.1)
 [![run with conda](http://img.shields.io/badge/run%20with-conda-3EB049?labelColor=000000&logo=anaconda)](https://docs.conda.io/en/latest/)
 [![run with docker](https://img.shields.io/badge/run%20with-docker-0db7ed?labelColor=000000&logo=docker)](https://www.docker.com/)
 [![run with singularity](https://img.shields.io/badge/run%20with-singularity-1d355c.svg?labelColor=000000)](https://sylabs.io/docs/)
@@ -21,21 +21,38 @@
 
 ## Introduction
 
-**nf-core/seqinspector** is a bioinformatics pipeline that ...
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/nf-core-seqinspector_logo_dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="docs/images/nf-core-seqinspector_logo_light.png">
+  <img alt="Fallback image description" src="docs/images/nf-core-seqinspector_logo_light.png">
+</picture>
 
-<!-- TODO nf-core:
-   Complete this sentence with a 2-3 sentence summary of what types of data the pipeline ingests, a brief overview of the
-   major pipeline sections and the types of output it produces. You're giving an overview to someone new
-   to nf-core here, in 15-20 seconds. For an example, see https://github.com/nf-core/rnaseq/blob/master/README.md#introduction
--->
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/nfcore-seqinspector-logo-hex-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="docs/images/nfcore-seqinspector-logo-hex-light.png">
+  <img alt="Fallback image description" src="docs/images/nfcore-seqinspector-logo-hex-light.png">
+</picture>
 
-<!-- TODO nf-core: Include a figure that guides the user through the major workflow steps. Many nf-core
-     workflows use the "tube map" design for that. See https://nf-co.re/docs/contributing/design_guidelines#examples for examples.   -->
-<!-- TODO nf-core: Fill in short bullet-pointed list of the default steps in the pipeline -->
+**nf-core/seqinspector** is a bioinformatics pipeline that that processes raw sequence data (FASTQ) to provide comprehensive quality control. It can perform subsampling, quality assessment, duplication level analysis, and complexity evaluation on a per-sample basis, while also detecting adapter content, technical artifacts, and common biological contaminants. The pipeline generates detailed MultiQC reports with flexible output options, ranging from individual sample reports to project-wide summaries, making it particularly useful for sequencing core facilities and research groups with access to sequencing instruments. If provided, nf-core/seqinspector can also parse statistics from an Illumina run folder directory into the final MultiQC reports.
 
-1. Subsample reads ([`Seqtk`](https://github.com/lh3/seqtk))
-2. Read QC ([`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/))
-3. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
+<!-- TODO: add a search tool that accepts a tree for `Compatibility with Data`. -->
+
+| Tool Type           | Tool Name                                                                                                   | Tool Description                                                                              | Compatibility with Data | Dependencies                    | Default tool |
+| ------------------- | ----------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | ----------------------- | ------------------------------- | ------------ |
+| `Subsampling`       | [`Seqtk`](https://github.com/lh3/seqtk)                                                                     | Global subsampling of reads. Only performs subsampling if `--sample_size` parameter is given. | [RNA, DNA, synthetic]   | [N/A]                           | no           |
+| `Indexing, Mapping` | [`Bwamem2`](https://github.com/bwa-mem2/bwa-mem2)                                                           | Align reads to reference                                                                      | [RNA, DNA]              | [N/A]                           | yes          |
+| `Indexing`          | [`SAMtools`](http://github.com/samtools)                                                                    | Index aligned BAM files, create FASTA index                                                   | [DNA]                   | [N/A]                           | yes          |
+| `QC`                | [`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)                                      | Read QC                                                                                       | [RNA, DNA]              | [N/A]                           | yes          |
+| `QC`                | [`FastqScreen`](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/)                           | Basic contamination detection                                                                 | [RNA, DNA]              | [N/A]                           | yes          |
+| `QC`                | [`SeqFu Stats`](https://github.com/telatin/seqfu2)                                                          | Sequence statistics                                                                           | [RNA, DNA]              | [N/A]                           | yes          |
+| `QC`                | [`Picard collect multiple metrics`](https://broadinstitute.github.io/picard/picard-metric-definitions.html) | Collect multiple QC metrics                                                                   | [RNA, DNA]              | [Bwamem2, SAMtools, `--genome`] | yes          |
+| `Reporting`         | [`MultiQC`](http://multiqc.info/)                                                                           | Present QC for raw reads                                                                      | [RNA, DNA, synthetic]   | [N/A]                           | yes          |
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/seqinspector_tubemap_V1.0_dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="docs/images/seqinspector_tubemap_V1.0.png">
+  <img alt="Fallback image description" src="docs/images/seqinspector_tubemap_V1.0.png">
+</picture>
 
 ## Usage
 
@@ -75,7 +92,7 @@ For more details about the output files and reports, please refer to the
 
 ## Credits
 
-nf-core/seqinspector was originally written by the Swedish [@NationalGenomicsInfrastructure](https://github.com/NationalGenomicsInfrastructure/).
+nf-core/seqinspector was originally written by the Swedish [@NationalGenomicsInfrastructure](https://github.com/NationalGenomicsInfrastructure/) and [Clinical Genomics Stockholm](https://clinical.scilifelab.se/).
 
 We thank the following people for their extensive assistance in the development of this pipeline:
 
@@ -88,9 +105,6 @@ If you would like to contribute to this pipeline, please see the [contributing g
 For further information or help, don't hesitate to get in touch on the [Slack `#seqinspector` channel](https://nfcore.slack.com/channels/seqinspector) (you can join with [this invite](https://nf-co.re/join/slack)).
 
 ## Citations
-
-<!-- TODO nf-core: Add citation for pipeline after first release. Uncomment lines below and update Zenodo doi and badge at the top of this file. -->
-<!-- If you use nf-core/seqinspector for your analysis, please cite it using the following doi: [10.5281/zenodo.XXXXXX](https://doi.org/10.5281/zenodo.XXXXXX) -->
 
 <!-- TODO nf-core: Add bibliography of tools and data used in your pipeline -->
 

@@ -16,6 +16,7 @@
 
 params.fasta = getGenomeAttribute('fasta')
 
+
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT FUNCTIONS / MODULES / SUBWORKFLOWS / WORKFLOWS
@@ -36,7 +37,6 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_seqi
 // WORKFLOW: Run main analysis pipeline depending on type of input
 //
 workflow NFCORE_SEQINSPECTOR {
-
     take:
     samplesheet // channel: samplesheet read in from --input
 
@@ -45,14 +45,18 @@ workflow NFCORE_SEQINSPECTOR {
     //
     // WORKFLOW: Run pipeline
     //
+    skip_tools = params.skip_tools ? params.skip_tools.split(',') : []
 
-    SEQINSPECTOR (
-        samplesheet
+    SEQINSPECTOR(
+        samplesheet,
+        params.fasta,
+        skip_tools,
+        params.bwamem2
     )
-    emit:
-    global_report   = SEQINSPECTOR.out.global_report    // channel: /path/to/multiqc_report.html
-    grouped_reports = SEQINSPECTOR.out.grouped_reports  // channel: /path/to/multiqc_report.html
 
+    emit:
+    global_report   = SEQINSPECTOR.out.global_report // channel: /path/to/multiqc_report.html
+    grouped_reports = SEQINSPECTOR.out.grouped_reports // channel: /path/to/multiqc_report.html
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -62,14 +66,12 @@ workflow NFCORE_SEQINSPECTOR {
 
 workflow {
 
-    main:
-
 
     //
     // SUBWORKFLOW: Run initialisation tasks
     //
 
-    PIPELINE_INITIALISATION (
+    PIPELINE_INITIALISATION(
         params.version,
         params.validate_params,
         params.monochrome_logs,
@@ -84,13 +86,13 @@ workflow {
     //
     // WORKFLOW: Run main workflow
     //
-    NFCORE_SEQINSPECTOR (
-        PIPELINE_INITIALISATION.out.samplesheet,
+    NFCORE_SEQINSPECTOR(
+        PIPELINE_INITIALISATION.out.samplesheet
     )
     //
     // SUBWORKFLOW: Run completion tasks
     //
-    PIPELINE_COMPLETION (
+    PIPELINE_COMPLETION(
         params.email,
         params.email_on_fail,
         params.plaintext_email,
@@ -119,9 +121,3 @@ def getGenomeAttribute(attribute) {
     }
     return null
 }
-
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    THE END
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/

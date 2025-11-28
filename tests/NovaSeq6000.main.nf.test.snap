@@ -2,13 +2,6 @@
     "NovaSeq6000 data test": {
         "content": [
             {
-                "BWAMEM2_INDEX": {
-                    "bwamem2": "2.2.1"
-                },
-                "BWAMEM2_MEM": {
-                    "bwamem2": "2.2.1",
-                    "samtools": 1.21
-                },
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
@@ -16,26 +9,13 @@
                     "fastqscreen": "0.16.0"
                 },
                 "SEQFU_STATS": {
-                    "seqfu": "1.20.3"
+                    "seqfu": "1.22.3"
                 },
                 "Workflow": {
                     "nf-core/seqinspector": "v1.0dev"
                 }
             },
             [
-                "bwamem2_index",
-                "bwamem2_index/bwamem2",
-                "bwamem2_index/bwamem2/genome.fa.0123",
-                "bwamem2_index/bwamem2/genome.fa.amb",
-                "bwamem2_index/bwamem2/genome.fa.ann",
-                "bwamem2_index/bwamem2/genome.fa.bwt.2bit.64",
-                "bwamem2_index/bwamem2/genome.fa.pac",
-                "bwamem2_mem",
-                "bwamem2_mem/Sample1_1.bam",
-                "bwamem2_mem/Sample23_3.bam",
-                "bwamem2_mem/SampleA_2.bam",
-                "bwamem2_mem/Undetermined_5.bam",
-                "bwamem2_mem/sampletest_4.bam",
                 "fastqc",
                 "fastqc/Sample1_1_fastqc.html",
                 "fastqc/Sample1_1_fastqc.zip",
@@ -440,16 +420,6 @@
                 "seqfu_stats/sampletest_4_seqfu_mqc.txt"
             ],
             [
-                "genome.fa.0123:md5,8af61f4bc59cc2fe7b396db46a2173f3",
-                "genome.fa.amb:md5,657cfdf0628d140d645d8d01a24f0c5f",
-                "genome.fa.ann:md5,4439f90bdaaf2cdf9089c9f7f07b9d6b",
-                "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
-                "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
-                "Sample1_1.bam:md5,1efd4f55b836f732ccc3600697ebb4c3",
-                "Sample23_3.bam:md5,a13dd5db6ef2639f2227b6d3f9c92386",
-                "SampleA_2.bam:md5,c5082847134e5a1c0c869b2378637754",
-                "Undetermined_5.bam:md5,3453bb37bc50105e79f7bba23cbab9c5",
-                "sampletest_4.bam:md5,72532967a589a0a63e93ce86cf79f101",
                 "Sample1_1_screen.png:md5,562256290643b51e4374c2225a15f463",
                 "Sample1_1_screen.txt:md5,3b184ef10eeb99043a85826534a4ee28",
                 "Sample23_3_screen.png:md5,6bb2caf67b9b2ed25d3d5f32c343e9ab",
@@ -474,7 +444,7 @@
                 "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
                 "multiqc_fastq_screen.txt:md5,2ff2485b1f197cb6228dd4350d1bd638",
                 "multiqc_fastqc.txt:md5,3730f9046b20ac5c17a86db0a33f8d5d",
-                "multiqc_seqfu.txt:md5,5b54a49079169985795537d83d58bdd9",
+                "multiqc_seqfu.txt:md5,18dd2407d4a1791646785123028f69b5",
                 "fastq_screen_plot.txt:md5,c25d34568f10f131156294d31fbfa994",
                 "fastqc-status-check-heatmap.txt:md5,67afbf7ec626c4fc7a28b4922352bc84",
                 "fastqc_overrepresented_sequences_plot.txt:md5,0356d007eaf807f7b63714b438b11289",
@@ -489,7 +459,7 @@
                 "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
                 "multiqc_fastq_screen.txt:md5,737dc47e74e5b2f2c590652788831eff",
                 "multiqc_fastqc.txt:md5,f38ffdc112c73af3a41ed15848a3761f",
-                "multiqc_seqfu.txt:md5,5579172a6f8ac09a5ffcb3ce6a99590e",
+                "multiqc_seqfu.txt:md5,6cdb863a3686fbb772aae5a66925ff23",
                 "fastq_screen_plot.txt:md5,44fca6453b0a3d0590271bd7a31cc740",
                 "fastqc-status-check-heatmap.txt:md5,b6872d9dbaa3cce396d48dc137076e53",
                 "fastqc_overrepresented_sequences_plot.txt:md5,eac8d0fd31c614d8d0f56bd54ee8c78c",
@@ -504,7 +474,7 @@
                 "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
                 "multiqc_fastq_screen.txt:md5,568f6b6d14562d01b5aaeb1a39e1cf3d",
                 "multiqc_fastqc.txt:md5,7ff71ceb8ecdf086331047f8860c3347",
-                "multiqc_seqfu.txt:md5,b5434520fa5be5c98be5ed164a464d23",
+                "multiqc_seqfu.txt:md5,f821357507fda2d4cfd9299f52fa7dc1",
                 "fastq_screen_plot.txt:md5,5f748d33a7a396547fe8c260b728aa06",
                 "fastqc-status-check-heatmap.txt:md5,08228a8f3d6f11b174b98626bb22bda1",
                 "fastqc_overrepresented_sequences_plot.txt:md5,3434dfb79f150e2e584e85866983ba01",
@@ -519,7 +489,7 @@
                 "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
                 "multiqc_fastq_screen.txt:md5,c54d863ed3e68ee8bcb51c9ad85de9bc",
                 "multiqc_fastqc.txt:md5,8284e25ccc21041cf3b5a32eb6a51e78",
-                "multiqc_seqfu.txt:md5,e2e092852c011abe5ad75cdcd68b9383",
+                "multiqc_seqfu.txt:md5,8cced36d66ca9d25d60c006e734aa7e9",
                 "fastq_screen_plot.txt:md5,8622e1dbd0fe62520af6096207b9775d",
                 "fastqc-status-check-heatmap.txt:md5,2a66f5d61b9eb579555905cd5954b04c",
                 "fastqc_overrepresented_sequences_plot.txt:md5,e0b5bfc4b64d37611b51c939e61196fa",
@@ -534,23 +504,23 @@
                 "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
                 "multiqc_fastq_screen.txt:md5,a4dca31413036d35899a35ba14b17ea5",
                 "multiqc_fastqc.txt:md5,519ff344a896ac369bba4d5c5b8be7b5",
-                "multiqc_seqfu.txt:md5,a1a0b9a0dde0c1c4fe184d44c675dcde",
-                "Sample1_1_seqfu.tsv:md5,269fabf8435defcd327aa69a050b7869",
-                "Sample1_1_seqfu_mqc.txt:md5,a354b0ed16b9cf84aa88f501d7740fd6",
-                "Sample23_3_seqfu.tsv:md5,6fdadbeeefccbf957f880d6852bf9676",
-                "Sample23_3_seqfu_mqc.txt:md5,e94269e3efc8b8192d7ac9c15ea2aa99",
-                "SampleA_2_seqfu.tsv:md5,b980ed694a05825fcf7c8b5b73888eb3",
-                "SampleA_2_seqfu_mqc.txt:md5,1d4b0e918644cf553108b7ccf77b4a01",
-                "Undetermined_5_seqfu.tsv:md5,b4458d41df4dee9321da03f4d4672aae",
-                "Undetermined_5_seqfu_mqc.txt:md5,0c869488cb61d2f87758c621bded212b",
-                "sampletest_4_seqfu.tsv:md5,db3179b0c41a09e6317a5a5c0852f476",
-                "sampletest_4_seqfu_mqc.txt:md5,590b97cc48268629204f59007bae7ad7"
+                "multiqc_seqfu.txt:md5,ff4ce1c88f39ed24a88bae0a861f75c8",
+                "Sample1_1_seqfu.tsv:md5,ac174f48d928c6ddfd43c88af0caa8b6",
+                "Sample1_1_seqfu_mqc.txt:md5,24d99524ccd0e6c6255a69d68a871c7a",
+                "Sample23_3_seqfu.tsv:md5,6fac5d3dbce3f3bee72341fe99a399dc",
+                "Sample23_3_seqfu_mqc.txt:md5,4d4f280911a08bb6b753142980178027",
+                "SampleA_2_seqfu.tsv:md5,aec811f267bb2a0ef066a7abb59d2775",
+                "SampleA_2_seqfu_mqc.txt:md5,a819409a5cb64e20c3e54ec5ada4aa27",
+                "Undetermined_5_seqfu.tsv:md5,3a42c5c66a0a118f1a6f6f6e560b0e7e",
+                "Undetermined_5_seqfu_mqc.txt:md5,bd8be908362c5cb08a72f8ae7ab41b0d",
+                "sampletest_4_seqfu.tsv:md5,a5bea0b9c6015dd1a201ffd433e9b377",
+                "sampletest_4_seqfu_mqc.txt:md5,2180961655bbc8a12f0152d6a4b803a2"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2025-11-07T10:25:42.576692828"
+        "timestamp": "2025-11-25T13:18:53.764240677"
     }
 }

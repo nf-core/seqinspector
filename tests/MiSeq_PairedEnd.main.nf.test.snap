@@ -2,13 +2,6 @@
     "MiSeq data test (paired end reads)": {
         "content": [
             {
-                "BWAMEM2_INDEX": {
-                    "bwamem2": "2.2.1"
-                },
-                "BWAMEM2_MEM": {
-                    "bwamem2": "2.2.1",
-                    "samtools": 1.21
-                },
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
@@ -16,23 +9,13 @@
                     "fastqscreen": "0.16.0"
                 },
                 "SEQFU_STATS": {
-                    "seqfu": "1.20.3"
+                    "seqfu": "1.22.3"
                 },
                 "Workflow": {
                     "nf-core/seqinspector": "v1.0dev"
                 }
             },
             [
-                "bwamem2_index",
-                "bwamem2_index/bwamem2",
-                "bwamem2_index/bwamem2/genome.fa.0123",
-                "bwamem2_index/bwamem2/genome.fa.amb",
-                "bwamem2_index/bwamem2/genome.fa.ann",
-                "bwamem2_index/bwamem2/genome.fa.bwt.2bit.64",
-                "bwamem2_index/bwamem2/genome.fa.pac",
-                "bwamem2_mem",
-                "bwamem2_mem/SAMPLE_PAIRED_END_1_1.bam",
-                "bwamem2_mem/SAMPLE_PAIRED_END_2_2.bam",
                 "fastqc",
                 "fastqc/SAMPLE_PAIRED_END_1_1_1_fastqc.html",
                 "fastqc/SAMPLE_PAIRED_END_1_1_1_fastqc.zip",
@@ -194,13 +177,6 @@
                 "seqfu_stats/SAMPLE_PAIRED_END_2_2_seqfu_mqc.txt"
             ],
             [
-                "genome.fa.0123:md5,8af61f4bc59cc2fe7b396db46a2173f3",
-                "genome.fa.amb:md5,657cfdf0628d140d645d8d01a24f0c5f",
-                "genome.fa.ann:md5,4439f90bdaaf2cdf9089c9f7f07b9d6b",
-                "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
-                "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
-                "SAMPLE_PAIRED_END_1_1.bam:md5,ced6a17fb3dee760c2606860e1177071",
-                "SAMPLE_PAIRED_END_2_2.bam:md5,15ada2a4f4a6cf2978aeaeb64a525197",
                 "SAMPLE_PAIRED_END_1_1_1_screen.png:md5,f52ddd0e65f23f68dd8d58d5453417db",
                 "SAMPLE_PAIRED_END_1_1_1_screen.txt:md5,921b08eeb461a2aa1bd42bba53900f70",
                 "SAMPLE_PAIRED_END_1_1_2_screen.png:md5,908f4fceea8aa546106efdaa7ca78f7d",
@@ -222,7 +198,7 @@
                 "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
                 "multiqc_fastq_screen.txt:md5,5ef00028497d3271c9f0ea9a961db1e5",
                 "multiqc_fastqc.txt:md5,bc499ad273fd1c887056c31b82544984",
-                "multiqc_seqfu.txt:md5,1f1e063e4a509a26cee167c3b20389c0",
+                "multiqc_seqfu.txt:md5,139354afd154804b4b77f997277f3ee9",
                 "fastq_screen_plot.txt:md5,642264b93871c724aaa5d38b91c752dd",
                 "fastqc-status-check-heatmap.txt:md5,8e29ad6b23e03267c33bd9ed3385a44b",
                 "fastqc_adapter_content_plot.txt:md5,46fbd727a4996a3f0310d0423c628445",
@@ -236,17 +212,17 @@
                 "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
                 "multiqc_fastq_screen.txt:md5,5ef00028497d3271c9f0ea9a961db1e5",
                 "multiqc_fastqc.txt:md5,bc499ad273fd1c887056c31b82544984",
-                "multiqc_seqfu.txt:md5,1f1e063e4a509a26cee167c3b20389c0",
-                "SAMPLE_PAIRED_END_1_1_seqfu.tsv:md5,bbd911ff3fa43212dfd4c5a5872dbdb6",
-                "SAMPLE_PAIRED_END_1_1_seqfu_mqc.txt:md5,cd60f746b6749cc66213d031af1b931c",
-                "SAMPLE_PAIRED_END_2_2_seqfu.tsv:md5,152566a128dd657da33465b4966b5799",
-                "SAMPLE_PAIRED_END_2_2_seqfu_mqc.txt:md5,8a3296956e094e3a95e28431e6009c40"
+                "multiqc_seqfu.txt:md5,139354afd154804b4b77f997277f3ee9",
+                "SAMPLE_PAIRED_END_1_1_seqfu.tsv:md5,be29dfe848eab9a10ee0d46691223eae",
+                "SAMPLE_PAIRED_END_1_1_seqfu_mqc.txt:md5,0aca00c7f64454af520c7e08ec595d2b",
+                "SAMPLE_PAIRED_END_2_2_seqfu.tsv:md5,44a5cb826e001d58208a5855938fa82b",
+                "SAMPLE_PAIRED_END_2_2_seqfu_mqc.txt:md5,ac1740de9ef142c99c993fa9824ead63"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2025-11-07T10:24:43.782493978"
+        "timestamp": "2025-11-25T13:17:39.398776674"
     }
 }
