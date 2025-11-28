@@ -4,18 +4,17 @@
 
 include { PICARD_COLLECTMULTIPLEMETRICS } from '../../../modules/nf-core/picard/collectmultiplemetrics/main'
 include { PICARD_COLLECTHSMETRICS } from '../../../modules/nf-core/picard/collecthsmetrics/main'
-include { PICARD_CREATESEQUENCEDICTIONARY } from '../../../modules/nf-core/picard/createsequencedictionary/main'
 
 workflow QC_BAM {
     take:
-    ch_bam
-    ch_bai
-    ch_reference_fasta
-    ch_reference_fasta_fai
-    run_picard_collecthsmetrics
-    ch_bait_intervals
-    ch_target_intervals
-    ref_dict
+    ch_bam               // channel: [mandatory] [ val(meta), path(bam)]
+    ch_bai               // channel: [mandatory] [ val(meta), path(bai) ]
+    ch_reference_fasta   // channel: [mandatory] [ val(meta), path(reference_fasta) ]
+    ch_reference_fai             // channel: [mandatory] [ val(meta), path(reference_fai) ]
+    run_picard_collecthsmetrics  // value: [mandatory] bool
+    ch_bait_intervals    // channel: [mandatory] [ val(meta), path(bait_intervals) ]
+    ch_target_intervals  // channel: [mandatory] [ val(meta), path(target_intervals) ]
+    ch_ref_dict          // channel: [mandatory] [ val(meta), path(ref_dict) ]
 
     main:
 
@@ -29,7 +28,7 @@ workflow QC_BAM {
         ch_reference_fasta,
         ch_reference_fasta_fai,
     )
-    
+
     ch_metrics = ch_metrics.mix(PICARD_COLLECTMULTIPLEMETRICS.out.metrics)
     ch_versions = ch_versions.mix(PICARD_COLLECTMULTIPLEMETRICS.out.versions.first())
 
@@ -39,16 +38,6 @@ workflow QC_BAM {
             .combine(ch_bait_intervals)
             .combine(ch_target_intervals)
 
-        if (ref_dict) {
-            ch_ref_dict = channel.fromPath(ref_dict, checkIfExists: true).map { [[id: it.simpleName], it] }
-        }
-        else {
-            PICARD_CREATESEQUENCEDICTIONARY(
-                ch_reference_fasta
-            )
-            ch_ref_dict = PICARD_CREATESEQUENCEDICTIONARY.out.reference_dict
-            ch_versions = ch_versions.mix(PICARD_CREATESEQUENCEDICTIONARY.out.versions)
-        }
 
         PICARD_COLLECTHSMETRICS(
             ch_hsmetrics_in,
