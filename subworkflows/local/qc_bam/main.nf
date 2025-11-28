@@ -2,7 +2,7 @@
 // A quality check subworkflow for processed bam files.
 //
 
-include { PICARD_COLLECTHSMETRICS         } from '../../../modules/nf-core/picard/collecthsmetrics/main'
+include { PICARD_COLLECTHSMETRICS } from '../../../modules/nf-core/picard/collecthsmetrics/main'
 
 workflow QC_BAM {
     take:
