@@ -147,14 +147,12 @@ workflow SEQINSPECTOR {
     }
 
 
-    if (params.run_picard_collecthsmetrics && !("picard_collectmultiplemetrics" in skip_tools)) {
+    if (!("picard_collectmultiplemetrics" in skip_tools)) {
 
         ch_fai = PREPARE_GENOME.out.reference_fai
 
-        ch_bait_intervals = channel.fromPath(params.bait_intervals)
-            .collect()
-        ch_target_intervals = channel.fromPath(params.target_intervals)
-            .collect()
+        ch_bait_intervals = params.bait_intervals ? channel.fromPath(params.bait_intervals).collect() : channel.empty()
+        ch_target_intervals = params.target_intervals ? channel.fromPath(params.target_intervals).collect() : channel.empty()
 
         ch_ref_dict = PREPARE_GENOME.out.ref_dict
 
@@ -164,7 +162,10 @@ workflow SEQINSPECTOR {
             ch_samtools_index,
             ch_reference_fasta,
             ch_fai,
-            ch_ref_dict
+            params.run_picard_collecthsmetrics,
+            ch_bait_intervals,
+            ch_target_intervals,
+            ch_ref_dict,
         )
 
         ch_multiqc_files = ch_multiqc_files.mix(QC_BAM.out.hs_metrics)
