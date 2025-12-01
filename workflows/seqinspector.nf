@@ -168,10 +168,8 @@ workflow SEQINSPECTOR {
 
     if (params.run_picard_collecthsmetrics && !("picard_collectmultiplemetrics" in skip_tools)) {
 
-        ch_bait_intervals = channel.fromPath(params.bait_intervals)
-            .collect()
-        ch_target_intervals = channel.fromPath(params.target_intervals)
-            .collect()
+        ch_bait_intervals = params.bait_intervals ? channel.fromPath(params.bait_intervals).collect() : channel.empty()
+        ch_target_intervals = params.target_intervals ? channel.fromPath(params.target_intervals).collect() : channel.empty()
 
         ch_ref_dict = PREPARE_GENOME.out.ref_dict
 
