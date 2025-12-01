@@ -2,9 +2,17 @@
     "Should run without failures": {
         "content": [
             [
+                "earlycasualcaiman.CollectMultipleMetrics.alignment_summary_metrics",
+                "earlycasualcaiman.CollectMultipleMetrics.base_distribution_by_cycle_metrics",
+                "earlycasualcaiman.CollectMultipleMetrics.insert_size_metrics",
+                "earlycasualcaiman.CollectMultipleMetrics.quality_by_cycle_metrics",
+                "earlycasualcaiman.CollectMultipleMetrics.quality_distribution_metrics"
+            ],
+            [
                 "earlycasualcaiman.CollectHsMetrics.coverage_metrics"
             ],
             [
+                "versions.yml:md5,108c8ce4c159f43894c7800f3b69fbfd",
                 "versions.yml:md5,8508bd28eaf1fffcdc4d78e4d9f95393"
             ]
         ],
@@ -12,6 +20,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2025-11-28T09:03:50.918024"
+        "timestamp": "2025-12-01T14:06:04.611269"
     }
 }
