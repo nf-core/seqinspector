@@ -231,5 +231,3 @@ NXF_OPTS='-Xms1g -Xmx4g'
 ## Hybrid-selection QC metrics
 
 The pipeline supports hybrid-selection (HS) QC metrics collection . Use `--run_picard_collecthsmetrics true` to run the QC tool [picard CollectHSmetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard). This tool is otherwise not run by default.
-
-
