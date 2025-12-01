@@ -11,8 +11,8 @@ workflow PREPARE_GENOME {
     ch_reference_fasta
     bwamem2
     skip_tools
-    run_picard_collecthsmetrics  // value: [mandatory] [ bool ]
-    ref_dict                     // value: [mandatory] [ path(ref_dict) ]
+    run_picard_collecthsmetrics  // string: [mandatory for collecthsmetrics] bool
+    ref_dict                     // string: [mandatory for collecthsmetrics] path(ref_dict)
 
     main:
     // Initialize all channels that might be used later
