@@ -15,6 +15,7 @@ include { SAMTOOLS_FAIDX                } from '../modules/nf-core/samtools/faid
 include { SAMTOOLS_INDEX                } from '../modules/nf-core/samtools/index'
 include { SEQFU_STATS                   } from '../modules/nf-core/seqfu/stats'
 include { SEQTK_SAMPLE                  } from '../modules/nf-core/seqtk/sample'
+include { QC_BAM                        } from '../subworkflows/local/qc_bam'
 
 include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc'
 include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc'
@@ -48,12 +49,14 @@ workflow SEQINSPECTOR {
     ch_multiqc_extra_files = channel.empty()
     ch_bwamem2_mem         = channel.empty()
     ch_samtools_index      = channel.empty()
-    ch_reference_fasta     = fasta_file? channel.fromPath(fasta_file, checkIfExists: true).map { file -> tuple([id: file.name], file) }.collect() : channel.value([[:], []])
+    ch_reference_fasta     = fasta_file ? channel.fromPath(fasta_file, checkIfExists: true).map { file -> tuple([id: file.name], file) }.collect() : channel.value([[:], []])
 
-    PREPARE_GENOME (
+    PREPARE_GENOME(
         ch_reference_fasta,
         bwamem2,
-        skip_tools
+        skip_tools,
+        params.run_picard_collecthsmetrics,
+        params.ref_dict,
     )
 
     //
@@ -135,9 +138,7 @@ workflow SEQINSPECTOR {
         )
         ch_bwamem2_mem = BWAMEM2_MEM.out.bam
         ch_versions = ch_versions.mix(BWAMEM2_MEM.out.versions)
-    }
-    // MODULE: Index BAM files with Samtools
-    if (!("samtools_index" in skip_tools) && !("bwamem2_mem" in skip_tools)) {
+
         SAMTOOLS_INDEX(
             ch_bwamem2_mem
         )
@@ -147,7 +148,7 @@ workflow SEQINSPECTOR {
 
     // MODULE: Prepare BAM/BAI tuples for Picard
     // Combine BAM and BAI outputs for Picard
-    if (!("picard_collectmultiplemetrics" in skip_tools) && !("bwamem2_mem" in skip_tools) && !("samtools_index" in skip_tools) && !("samtools_faidx" in skip_tools)) {
+    if (!("picard_collectmultiplemetrics" in skip_tools) && !("bwamem2_mem" in skip_tools) && !("samtools_faidx" in skip_tools)) {
 
         // Prepare BAM/BAI tuples for Picard
         ch_bam_bai = ch_bwamem2_mem.join(ch_samtools_index, failOnDuplicate: true, failOnMismatch: true)
@@ -165,9 +166,32 @@ workflow SEQINSPECTOR {
         ch_versions = ch_versions.mix(PICARD_COLLECTMULTIPLEMETRICS.out.versions.first())
     }
 
+    if (params.run_picard_collecthsmetrics && !("picard_collectmultiplemetrics" in skip_tools)) {
+
+        ch_bait_intervals = params.bait_intervals ? channel.fromPath(params.bait_intervals).collect() : channel.empty()
+        ch_target_intervals = params.target_intervals ? channel.fromPath(params.target_intervals).collect() : channel.empty()
+
+        ch_ref_dict = PREPARE_GENOME.out.ref_dict
+
+
+        QC_BAM(
+            ch_bam_bai,
+            ch_bait_intervals,
+            ch_target_intervals,
+            ch_reference_fasta,
+            ch_fai,
+            ch_ref_dict
+        )
+
+        ch_multiqc_files = ch_multiqc_files.mix(QC_BAM.out.hs_metrics)
+        ch_versions = ch_versions.mix(QC_BAM.out.versions)
+    }
+
+
     // Collate and save software versions
     //
-    def topic_versions = Channel.topic("versions")
+    def topic_versions = Channel
+        .topic("versions")
         .distinct()
         .branch { entry ->
             versions_file: entry instanceof Path
@@ -176,9 +200,9 @@ workflow SEQINSPECTOR {
 
     def topic_versions_string = topic_versions.versions_tuple
         .map { process, tool, version ->
-            [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
+            [process[process.lastIndexOf(':') + 1..-1], "  ${tool}: ${version}"]
         }
-        .groupTuple(by:0)
+        .groupTuple(by: 0)
         .map { process, tool_versions ->
             tool_versions.unique().sort()
             "${process}:\n${tool_versions.join('\n')}"
