@@ -39,15 +39,15 @@ nextflow_workflow {
                 relative: true, includeDir: true
             )
 
-            assertAll(
-                { assert workflow.success },
-                { assert snapshot(
+            assert workflow.success
+
+            assert snapshot(
                     bwamem2_index_files,
                     samtools_faidx_files
-                ).match() },
-                // BWAMEM2_INDEX and SAMTOOLS_FAIDX should run
-                { assert workflow.out.versions.size() == 2 }
-            )
+                ).match()
+
+            // BWAMEM2_INDEX and SAMTOOLS_FAIDX should run
+            assert workflow.out.versions.size() == 2
         }
 
     }
@@ -85,15 +85,13 @@ nextflow_workflow {
                 relative: true, includeDir: true
             )
 
-            assertAll(
-                { assert workflow.success },
-                { assert snapshot(
+            assert workflow.success
+            assert snapshot(
                     bwamem2_index_files,
                     samtools_faidx_files
-                ).match() },
-                // BWAMEM2_INDEX and SAMTOOLS_FAIDX should run
-                { assert workflow.out.versions.size() == 2 }
-            )
+                ).match()
+            // BWAMEM2_INDEX and SAMTOOLS_FAIDX should run
+            assert workflow.out.versions.size() == 2
         }
 
     }
@@ -136,16 +134,14 @@ nextflow_workflow {
                 relative: true, includeDir: true
             )
 
-            assertAll(
-                { assert workflow.success },
-                { assert snapshot(
+            assert workflow.success
+            assert snapshot(
                     bwamem2_index_files,
                     samtools_faidx_files,
                     picard_createsequencedictionary_files
-                ).match() },
-                // BWAMEM2_INDEX, SAMTOOLS_FAIDX and PICARD_CREATESEQUENCEDICTIONARY should run
-                { assert workflow.out.versions.size() == 3 }
-            )
+                ).match()
+            // BWAMEM2_INDEX, SAMTOOLS_FAIDX and PICARD_CREATESEQUENCEDICTIONARY should run
+            assert workflow.out.versions.size() == 3
         }
 
     }
