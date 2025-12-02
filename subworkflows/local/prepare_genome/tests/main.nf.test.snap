@@ -2,20 +2,26 @@
     "Should run without failures": {
         "content": [
             [
-                "bwamem2"
+                "",
+                "bwamem2",
+                "bwamem2/reference.fasta.0123",
+                "bwamem2/reference.fasta.amb",
+                "bwamem2/reference.fasta.ann",
+                "bwamem2/reference.fasta.bwt.2bit.64",
+                "bwamem2/reference.fasta.pac"
             ],
             [
-                "reference.fasta.fai"
-            ],
-            [
-                "versions.yml:md5,2ed4fadc0038a6a8f46063219d23d3ef",
-                "versions.yml:md5,784a8f5ab1ba9964b1b8c4d6427e3cbb"
+                "reference.fasta.0123:md5,0f0ff4414949e6787a25a563f19e2a3b",
+                "reference.fasta.amb:md5,0a85644af00f9a856d874381d24e7803",
+                "reference.fasta.ann:md5,8fdb46970ca95a4ef54f5f1a02d233cd",
+                "reference.fasta.bwt.2bit.64:md5,3c0df9450afc5cb0ad5e85870829d9d0",
+                "reference.fasta.pac:md5,96b449e1316067fdfba91b1399687bc2"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-02T10:17:19.799498"
+        "timestamp": "2025-12-02T10:43:49.438931"
     }
 }
