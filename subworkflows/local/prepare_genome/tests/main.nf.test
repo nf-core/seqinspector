@@ -45,7 +45,7 @@ nextflow_workflow {
                     bwamem2_index_files,
                     samtools_faidx_files
                 ).match() },
-                // BWAMEM2_INDEX and SAMTOOLS_FAIDX should be run
+                // BWAMEM2_INDEX and SAMTOOLS_FAIDX should run
                 { assert workflow.out.versions.size() == 2 }
             )
         }
@@ -91,7 +91,7 @@ nextflow_workflow {
                     bwamem2_index_files,
                     samtools_faidx_files
                 ).match() },
-                // BWAMEM2_INDEX and SAMTOOLS_FAIDX should be run
+                // BWAMEM2_INDEX and SAMTOOLS_FAIDX should run
                 { assert workflow.out.versions.size() == 2 }
             )
         }
@@ -143,7 +143,7 @@ nextflow_workflow {
                     samtools_faidx_files,
                     picard_createsequencedictionary_files
                 ).match() },
-                // BWAMEM2_INDEX, SAMTOOLS_FAIDX and PICARD_CREATESEQUENCEDICTIONARY should be run
+                // BWAMEM2_INDEX, SAMTOOLS_FAIDX and PICARD_CREATESEQUENCEDICTIONARY should run
                 { assert workflow.out.versions.size() == 3 }
             )
         }
