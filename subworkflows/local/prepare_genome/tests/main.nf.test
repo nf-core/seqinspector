@@ -6,7 +6,7 @@ nextflow_workflow {
     tag 'subworkflows'
     tag 'prepare_genome'
 
-    test("Should run without failures") {
+    test("Test without bwamem2 index file path and with run_picard_collecthsmetrics=false") {
 
         when {
             params {
@@ -21,28 +21,130 @@ nextflow_workflow {
                 input[0]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/reference/reference.fasta', checkIfExists: true)).collect()
                 input[1]  = null
                 input[2]  = ''
+                input[3]  = false
+                input[4]  = null
                 """
             }
         }
 
         then {
-            // stable_name: All files + folders in ${params.outdir}/ with a stable name
-            def stable_name = getAllFilesFromDir(
+            // All files + folders produced by BWAMEM2_INDEX
+            def bwamem2_index_files = getAllFilesFromDir(
                 params.outdir + '/bwamem2_index',
                 relative: true, includeDir: true
             )
-            // stable_path: All files in ${params.outdir}/ with stable content
-            def stable_path = getAllFilesFromDir(
-                params.outdir + '/bwamem2_index'
+            // All files + folders produced by SAMTOOLS_FAIDX
+            def samtools_faidx_files = getAllFilesFromDir(
+                params.outdir + '/samtools_faidx',
+                relative: true, includeDir: true
             )
+
             assertAll(
-                { assert workflow.success},
+                { assert workflow.success },
                 { assert snapshot(
-                    // All stable path names, with a relative path
-                    stable_name,
-                    // All files with stable contents
-                    stable_path
-                ).match() }
+                    bwamem2_index_files,
+                    samtools_faidx_files
+                ).match() },
+                // BWAMEM2_INDEX and SAMTOOLS_FAIDX should be run
+                { assert workflow.out.versions.size() == 2 }
+            )
+        }
+
+    }
+
+    test("Test without bwamem2 index file path, with run_picard_collecthsmetrics=true and with ref_dict") {
+
+        when {
+            params {
+                pipelines_testdata_base_path    = 'https://raw.githubusercontent.com/nf-core/test-datasets/raredisease'
+                run_picard_collecthsmetrics     = true
+                config "./nextflow.config"
+                outdir = "$outputDir"
+
+            }
+            workflow {
+                """
+                input[0]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/reference/reference.fasta', checkIfExists: true)).collect()
+                input[1]  = null
+                input[2]  = ''
+                input[3]  = true
+                input[4]  = params.pipelines_testdata_base_path + '/reference/reference.dict'
+                """
+            }
+        }
+
+        then {
+            // All files + folders produced by BWAMEM2_INDEX
+            def bwamem2_index_files = getAllFilesFromDir(
+                params.outdir + '/bwamem2_index',
+                relative: true, includeDir: true
+            )
+            // All files + folders produced by SAMTOOLS_FAIDX
+            def samtools_faidx_files = getAllFilesFromDir(
+                params.outdir + '/samtools_faidx',
+                relative: true, includeDir: true
+            )
+
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    bwamem2_index_files,
+                    samtools_faidx_files
+                ).match() },
+                // BWAMEM2_INDEX and SAMTOOLS_FAIDX should be run
+                { assert workflow.out.versions.size() == 2 }
+            )
+        }
+
+    }
+
+    test("Test without bwamem2 index file path, with run_picard_collecthsmetrics=true and without ref_dict") {
+
+        when {
+            params {
+                pipelines_testdata_base_path    = 'https://raw.githubusercontent.com/nf-core/test-datasets/raredisease'
+                run_picard_collecthsmetrics     = true
+                config "./nextflow.config"
+                outdir = "$outputDir"
+
+            }
+            workflow {
+                """
+                input[0]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/reference/reference.fasta', checkIfExists: true)).collect()
+                input[1]  = null
+                input[2]  = ''
+                input[3]  = true
+                input[4]  = null
+                """
+            }
+        }
+
+        then {
+            // All files + folders produced by BWAMEM2_INDEX
+            def bwamem2_index_files = getAllFilesFromDir(
+                params.outdir + '/bwamem2_index',
+                relative: true, includeDir: true
+            )
+            // All files + folders produced by SAMTOOLS_FAIDX
+            def samtools_faidx_files = getAllFilesFromDir(
+                params.outdir + '/samtools_faidx',
+                relative: true, includeDir: true
+            )
+            // All files + folders produced by PICARD_CREATESEQUENCEDICTIONARY
+            def picard_createsequencedictionary_files = getAllFilesFromDir(
+                params.outdir + '/picard_createsequencedictionary',
+                relative: true, includeDir: true
+            )
+
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    bwamem2_index_files,
+                    samtools_faidx_files,
+                    picard_createsequencedictionary_files
+                ).match() },
+                // BWAMEM2_INDEX, SAMTOOLS_FAIDX and PICARD_CREATESEQUENCEDICTIONARY should be run
+                { assert workflow.out.versions.size() == 3 }
             )
         }
 
