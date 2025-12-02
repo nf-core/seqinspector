@@ -10,10 +10,9 @@ nextflow_workflow {
 
         when {
             params {
-                pipelines_testdata_base_path    = 'https://raw.githubusercontent.com/nf-core/test-datasets/raredisease'
-                run_picard_collecthsmetrics     = true
                 config "./nextflow.config"
                 outdir = "$outputDir"
+                run_picard_collecthsmetrics = true
 
             }
             workflow {
@@ -56,10 +55,9 @@ nextflow_workflow {
 
         when {
             params {
-                pipelines_testdata_base_path    = 'https://raw.githubusercontent.com/nf-core/test-datasets/raredisease'
-                run_picard_collecthsmetrics     = true
                 config "./nextflow.config"
                 outdir = "$outputDir"
+                run_picard_collecthsmetrics = true
 
             }
             workflow {
@@ -100,10 +98,9 @@ nextflow_workflow {
 
         when {
             params {
-                pipelines_testdata_base_path    = 'https://raw.githubusercontent.com/nf-core/test-datasets/raredisease'
-                run_picard_collecthsmetrics     = true
                 config "./nextflow.config"
                 outdir = "$outputDir"
+                run_picard_collecthsmetrics = true
 
             }
             workflow {
