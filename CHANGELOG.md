@@ -30,6 +30,7 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#128](https://github.com/nf-core/seqinspector/pull/128) Added Picard tools - Collect Multiple Mterics to collect QC metrics
 - [#132](https://github.com/nf-core/seqinspector/pull/132) Added a bwamem2 index params for faster output
 - [#151](https://github.com/nf-core/seqinspector/pull/151) Added a prepare_genome subworkflow to handle bwamem2 indexing
+- [#159](https://github.com/nf-core/seqinspector/pull/159) Added a subworkflow QC_BAM including picard_collecthsmetrics for alignment QC of hybrid-selection data
 
 ### `Fixed`
 
