@@ -1,0 +1,47 @@
+nextflow_workflow {
+
+    name "Test Workflow PREPARE_GENOME"
+    script "subworkflows/local/prepare_genome/main.nf"
+    workflow "PREPARE_GENOME"
+    tag 'subworkflows'
+    tag 'prepare_genome'
+
+    test("Should run without failures") {
+
+        when {
+            params {
+                pipelines_testdata_base_path    = 'https://raw.githubusercontent.com/nf-core/test-datasets/raredisease'
+                run_picard_collecthsmetrics     = true
+                config "./nextflow.config"
+                outdir = "$outputDir"
+
+            }
+            workflow {
+                """
+                input[0]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/reference/reference.fasta', checkIfExists: true)).collect()
+                input[1]  = null
+                input[2]  = ''
+                """
+            }
+        }
+
+        then {
+            assert workflow.success
+            assert snapshot(
+                            workflow.out.bwamem2_index
+                                    .collect {it[1]}
+                                    .flatten()
+                                    .collect { file(it).name }
+                                    .toSorted(),
+                            workflow.out.reference_fai
+                                    .collect {it[1]}
+                                    .flatten()
+                                    .collect { file(it).name }
+                                    .toSorted(),
+                            workflow.out.versions
+                            ).match()
+        }
+
+    }
+
+}
