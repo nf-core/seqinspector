@@ -26,20 +26,24 @@ nextflow_workflow {
         }
 
         then {
-            assert workflow.success
-            assert snapshot(
-                            workflow.out.bwamem2_index
-                                    .collect {it[1]}
-                                    .flatten()
-                                    .collect { file(it).name }
-                                    .toSorted(),
-                            workflow.out.reference_fai
-                                    .collect {it[1]}
-                                    .flatten()
-                                    .collect { file(it).name }
-                                    .toSorted(),
-                            workflow.out.versions
-                            ).match()
+            // stable_name: All files + folders in ${params.outdir}/ with a stable name
+            def stable_name = getAllFilesFromDir(
+                params.outdir + '/bwamem2_index',
+                relative: true, includeDir: true
+            )
+            // stable_path: All files in ${params.outdir}/ with stable content
+            def stable_path = getAllFilesFromDir(
+                params.outdir + '/bwamem2_index'
+            )
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(
+                    // All stable path names, with a relative path
+                    stable_name,
+                    // All files with stable contents
+                    stable_path
+                ).match() }
+            )
         }
 
     }
