@@ -1,0 +1,17 @@
+{
+    "Should run without failures": {
+        "content": [
+            [
+                "earlycasualcaiman.CollectHsMetrics.coverage_metrics"
+            ],
+            [
+                "versions.yml:md5,8508bd28eaf1fffcdc4d78e4d9f95393"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2025-11-28T09:03:50.918024"
+    }
+}
