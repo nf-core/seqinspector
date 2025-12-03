@@ -9,8 +9,8 @@ nextflow_workflow {
     test("Test without bwamem2 index file path and with run_picard_collecthsmetrics=false") {
 
         when {
+            config "./nextflow.config"
             params {
-                pipelines_testdata_base_path    = 'https://raw.githubusercontent.com/nf-core/test-datasets/raredisease'
                 outdir = "$outputDir"
                 run_picard_collecthsmetrics = true
 
@@ -54,8 +54,8 @@ nextflow_workflow {
     test("Test without bwamem2 index file path, with run_picard_collecthsmetrics=true and with ref_dict") {
 
         when {
+            config "./nextflow.config"
             params {
-                pipelines_testdata_base_path    = 'https://raw.githubusercontent.com/nf-core/test-datasets/raredisease'
                 outdir = "$outputDir"
                 run_picard_collecthsmetrics = true
 
@@ -97,8 +97,8 @@ nextflow_workflow {
     test("Test without bwamem2 index file path, with run_picard_collecthsmetrics=true and without ref_dict") {
 
         when {
+            config "./nextflow.config"
             params {
-                pipelines_testdata_base_path    = 'https://raw.githubusercontent.com/nf-core/test-datasets/raredisease'
                 outdir = "$outputDir"
                 run_picard_collecthsmetrics = true
 
