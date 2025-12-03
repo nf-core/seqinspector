@@ -11,7 +11,7 @@ workflow QC_BAM {
         ch_bai                      // channel: [mandatory] [ val(meta), path(bai) ]
         ch_reference_fasta          // channel: [mandatory] [ val(meta), path(reference_fasta) ]
         ch_reference_fai            // channel: [mandatory] [ val(meta), path(reference_fai) ]
-        run_picard_collecthsmetrics // value:   [mandatory for picard_collecthsmetrics] bool
+        run_picard_collecthsmetrics // string:  [mandatory for picard_collecthsmetrics] bool
         ch_bait_intervals           // channel: [mandatory for picard_collecthsmetrics] [ val(meta), path(bait_intervals) ]
         ch_target_intervals         // channel: [mandatory for picard_collecthsmetrics] [ val(meta), path(target_intervals) ]
         ch_ref_dict                 // channel: [mandatory for picard_collecthsmetrics] [ val(meta), path(ref_dict) ]
