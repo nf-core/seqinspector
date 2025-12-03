@@ -1,17 +1,50 @@
 {
-    "Should run without failures": {
+    "Test with run_picard_collecthsmetrics=false": {
         "content": [
             [
-                "earlycasualcaiman.CollectHsMetrics.coverage_metrics"
-            ],
-            [
-                "versions.yml:md5,8508bd28eaf1fffcdc4d78e4d9f95393"
+                "",
+                "earlycasualcaiman.CollectMultipleMetrics.alignment_summary_metrics",
+                "earlycasualcaiman.CollectMultipleMetrics.base_distribution_by_cycle.pdf",
+                "earlycasualcaiman.CollectMultipleMetrics.base_distribution_by_cycle_metrics",
+                "earlycasualcaiman.CollectMultipleMetrics.insert_size_histogram.pdf",
+                "earlycasualcaiman.CollectMultipleMetrics.insert_size_metrics",
+                "earlycasualcaiman.CollectMultipleMetrics.quality_by_cycle.pdf",
+                "earlycasualcaiman.CollectMultipleMetrics.quality_by_cycle_metrics",
+                "earlycasualcaiman.CollectMultipleMetrics.quality_distribution.pdf",
+                "earlycasualcaiman.CollectMultipleMetrics.quality_distribution_metrics",
+                "earlycasualcaiman.CollectMultipleMetrics.read_length_histogram.pdf"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-11-28T09:03:50.918024"
+        "timestamp": "2025-12-02T15:05:56.507859"
+    },
+    "Test with run_picard_collecthsmetrics=true": {
+        "content": [
+            [
+                "",
+                "earlycasualcaiman.CollectMultipleMetrics.alignment_summary_metrics",
+                "earlycasualcaiman.CollectMultipleMetrics.base_distribution_by_cycle.pdf",
+                "earlycasualcaiman.CollectMultipleMetrics.base_distribution_by_cycle_metrics",
+                "earlycasualcaiman.CollectMultipleMetrics.insert_size_histogram.pdf",
+                "earlycasualcaiman.CollectMultipleMetrics.insert_size_metrics",
+                "earlycasualcaiman.CollectMultipleMetrics.quality_by_cycle.pdf",
+                "earlycasualcaiman.CollectMultipleMetrics.quality_by_cycle_metrics",
+                "earlycasualcaiman.CollectMultipleMetrics.quality_distribution.pdf",
+                "earlycasualcaiman.CollectMultipleMetrics.quality_distribution_metrics",
+                "earlycasualcaiman.CollectMultipleMetrics.read_length_histogram.pdf"
+            ],
+            [
+                "",
+                "earlycasualcaiman.CollectHsMetrics.coverage_metrics"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2025-12-02T15:08:24.865168"
     }
 }
