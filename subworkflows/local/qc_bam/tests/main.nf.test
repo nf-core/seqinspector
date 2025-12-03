@@ -6,44 +6,110 @@ nextflow_workflow {
     tag 'subworkflows'
     tag 'qc_bam'
 
-    test("Should run without failures") {
+    test("Test with run_picard_collecthsmetrics=false") {
 
         when {
-            params {
-                pipelines_testdata_base_path    = 'https://raw.githubusercontent.com/nf-core/test-datasets/raredisease'
-                run_picard_collecthsmetrics     = true
-                config "./nextflow.config"
-                outdir = "$outputDir"
+            config "./nextflow.config"
 
+            params {
+                outdir = "$outputDir"
             }
+
             workflow {
                 """
                 input[0]  = channel.of(
                     [
                         [id:'earlycasualcaiman', sample:'earlycasualcaiman', single_end:false, num_lanes:1, read_group: "'@RG\\\\tID:earlycasualcaiman\\\\tPL:illumina\\\\tSM:earlycasualcaiman'", lane:1, sex:1, phenotype:1, paternal:0, maternal:0, case_id:'justhusky'],
-                        [file(params.pipelines_testdata_base_path + '/testdata/earlycasualcaiman_sorted_md.bam', checkIfExists: true)],
-                        [file(params.pipelines_testdata_base_path + '/testdata/earlycasualcaiman_sorted_md.bam.bai', checkIfExists: true)]
+                        [file(params.pipelines_testdata_base_path + 'testdata/earlycasualcaiman_sorted_md.bam', checkIfExists: true)]
                     ]
                 )
-                input[1]  = channel.fromPath(params.pipelines_testdata_base_path + '/reference/target.bed', checkIfExists: true).collect()
-                input[2]  = channel.fromPath(params.pipelines_testdata_base_path + '/reference/target.bed', checkIfExists: true).collect()
-                input[3]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/reference/reference.fasta', checkIfExists: true)).collect()
-                input[4]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/reference/reference.fasta.fai', checkIfExists: true)).collect()
-                input[5]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/reference/reference.dict', checkIfExists: true)).collect()
+                input[1]  = channel.of(
+                    [
+                        [id:'earlycasualcaiman', sample:'earlycasualcaiman', single_end:false, num_lanes:1, read_group: "'@RG\\\\tID:earlycasualcaiman\\\\tPL:illumina\\\\tSM:earlycasualcaiman'", lane:1, sex:1, phenotype:1, paternal:0, maternal:0, case_id:'justhusky'],
+                        [file(params.pipelines_testdata_base_path + 'testdata/earlycasualcaiman_sorted_md.bam.bai', checkIfExists: true)]
+                    ]
+                )
+                input[2]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + 'reference/reference.fasta', checkIfExists: true)).collect()
+                input[3]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + 'reference/reference.fasta.fai', checkIfExists: true)).collect()
+                input[4]  = false
+                input[5]  = null
+                input[6]  = null
+                input[7]  = null
                 """
             }
         }
 
         then {
+            // All files + folders produced by PICARD_COLLECTMULTIPLEMETRICS
+            def picard_collectmultiplemetrics_files = getAllFilesFromDir(
+                params.outdir + '/picard_collectmultiplemetrics',
+                relative: true, includeDir: true
+            )
+
             assert workflow.success
             assert snapshot(
-                            workflow.out.hs_metrics
-                                    .collect {it[1]}
-                                    .flatten()
-                                    .collect { file(it).name }
-                                    .toSorted(),
-                            workflow.out.versions
-                            ).match()
+                    picard_collectmultiplemetrics_files
+                ).match()
+
+            // Only PICARD_COLLECTMULTIPLEMETRICS should run
+            assert workflow.out.versions.size() == 1
+        }
+
+    }
+
+    test("Test with run_picard_collecthsmetrics=true") {
+
+        when {
+            config "./nextflow.config"
+
+            params {
+                outdir = "$outputDir"
+            }
+
+            workflow {
+                """
+                input[0]  = channel.of(
+                    [
+                        [id:'earlycasualcaiman', sample:'earlycasualcaiman', single_end:false, num_lanes:1, read_group: "'@RG\\\\tID:earlycasualcaiman\\\\tPL:illumina\\\\tSM:earlycasualcaiman'", lane:1, sex:1, phenotype:1, paternal:0, maternal:0, case_id:'justhusky'],
+                        [file(params.pipelines_testdata_base_path + 'testdata/earlycasualcaiman_sorted_md.bam', checkIfExists: true)]
+                    ]
+                )
+                input[1]  = channel.of(
+                    [
+                        [id:'earlycasualcaiman', sample:'earlycasualcaiman', single_end:false, num_lanes:1, read_group: "'@RG\\\\tID:earlycasualcaiman\\\\tPL:illumina\\\\tSM:earlycasualcaiman'", lane:1, sex:1, phenotype:1, paternal:0, maternal:0, case_id:'justhusky'],
+                        [file(params.pipelines_testdata_base_path + 'testdata/earlycasualcaiman_sorted_md.bam.bai', checkIfExists: true)]
+                    ]
+                )
+                input[2]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + 'reference/reference.fasta', checkIfExists: true)).collect()
+                input[3]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + 'reference/reference.fasta.fai', checkIfExists: true)).collect()
+                input[4]  = true
+                input[5]  = channel.fromPath(params.pipelines_testdata_base_path + 'reference/target.bed', checkIfExists: true).collect()
+                input[6]  = channel.fromPath(params.pipelines_testdata_base_path + 'reference/target.bed', checkIfExists: true).collect()
+                input[7]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + 'reference/reference.dict', checkIfExists: true)).collect()
+                """
+            }
+        }
+
+        then {
+            // All files + folders produced by PICARD_COLLECTMULTIPLEMETRICS
+            def picard_collectmultiplemetrics_files = getAllFilesFromDir(
+                params.outdir + '/picard_collectmultiplemetrics',
+                relative: true, includeDir: true
+            )
+            // All files + folders produced by PICARD_COLLECTHSMETRICS
+            def picard_collecthsmetrics_files = getAllFilesFromDir(
+                params.outdir + '/picard_collecthsmetrics',
+                relative: true, includeDir: true
+            )
+
+            assert workflow.success
+            assert snapshot(
+                    picard_collectmultiplemetrics_files,
+                    picard_collecthsmetrics_files
+                ).match()
+
+            // PICARD_COLLECTMULTIPLEMETRICS and PICARD_COLLECTHSMETRICS run
+            assert workflow.out.versions.size() == 2
         }
 
     }
