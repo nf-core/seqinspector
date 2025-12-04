@@ -40,7 +40,7 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#107](https://github.com/nf-core/seqinspector/pull/107) Put SeqFU-stats section reports together
 - [#112](https://github.com/nf-core/seqinspector/pull/112) Making fastq_screen_references value to use parentDir
 - [#94] (https://github.com/nf-core/seqinspector/issues/94) Go through and validate test data
-- [#162](https://github.com/nf-core/seqinspector/pull/162) Fix bug in prepare_genome subworkflow and add tests
+- [#162](https://github.com/nf-core/seqinspector/pull/162) Fix bugs in qc_bam and prepare_genome subworkflows and add tests
 
 ### `Dependencies`
 
