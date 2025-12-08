@@ -40,6 +40,7 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#107](https://github.com/nf-core/seqinspector/pull/107) Put SeqFU-stats section reports together
 - [#112](https://github.com/nf-core/seqinspector/pull/112) Making fastq_screen_references value to use parentDir
 - [#94] (https://github.com/nf-core/seqinspector/issues/94) Go through and validate test data
+- [#163](https://github.com/nf-core/seqinspector/pull/163) Run fastqscreen with subsampled data if available
 
 ### `Dependencies`
 
