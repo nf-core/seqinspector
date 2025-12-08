@@ -121,7 +121,7 @@ workflow SEQINSPECTOR {
             .toList()
 
         FASTQSCREEN_FASTQSCREEN(
-            ch_samplesheet,
+            ch_sample_sized,
             ch_fastqscreen_refs,
         )
         ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
