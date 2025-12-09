@@ -102,6 +102,9 @@
                 "multiqc/global_report/multiqc_report.html",
                 "pipeline_info",
                 "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
+                "samtools_faidx",
+                "samtools_faidx/genome.fa.fai",
+                "samtools_faidx/genome.fa.sizes",
                 "seqfu_stats",
                 "seqfu_stats/hg001_1_seqfu.tsv",
                 "seqfu_stats/hg001_1_seqfu_mqc.txt"
@@ -125,14 +128,16 @@
                 "multiqc_fastq_screen.txt:md5,7c5d711e27c53d13c81644a1f2468dba",
                 "multiqc_fastqc.txt:md5,1a4b472e13cadc770832b0e20d1de7b0",
                 "multiqc_seqfu.txt:md5,9595d608ff5709f2bdec8cb1016416c0",
+                "genome.fa.fai:md5,59557cd3a71ca5e0840285b6088ec1d6",
+                "genome.fa.sizes:md5,f154a58a25ba9c4d386003eaa1bb731b",
                 "hg001_1_seqfu.tsv:md5,b133752c897afbb4d8721b911fa117d4",
                 "hg001_1_seqfu_mqc.txt:md5,42e3506b02ceb72a6f05cb174505e722"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-11-25T13:20:37.20082732"
+        "timestamp": "2025-12-03T11:01:17.46398"
     }
 }
