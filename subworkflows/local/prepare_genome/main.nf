@@ -1,8 +1,8 @@
 //
 // Prepare reference genome files
 
-include { BWAMEM2_INDEX                 } from '../../../modules/nf-core/bwamem2/index'
-include { SAMTOOLS_FAIDX                } from '../../../modules/nf-core/samtools/faidx'
+include { BWAMEM2_INDEX                   } from '../../../modules/nf-core/bwamem2/index'
+include { SAMTOOLS_FAIDX                  } from '../../../modules/nf-core/samtools/faidx'
 include { PICARD_CREATESEQUENCEDICTIONARY } from '../../../modules/nf-core/picard/createsequencedictionary/main'
 
 workflow PREPARE_GENOME {
@@ -18,7 +18,6 @@ workflow PREPARE_GENOME {
     // Initialize all channels that might be used later
     ch_bwamem2_index      = channel.empty()
     ch_reference_fai      = channel.empty()
-    ch_reference_fasta    = channel.empty()
     ch_ref_dict           = channel.empty()
     ch_versions           = channel.empty()
 

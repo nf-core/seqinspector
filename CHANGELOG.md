@@ -32,6 +32,7 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#151](https://github.com/nf-core/seqinspector/pull/151) Added a prepare_genome subworkflow to handle bwamem2 indexing
 - [#159](https://github.com/nf-core/seqinspector/pull/159) Added a subworkflow QC_BAM including picard_collecthsmetrics for alignment QC of hybrid-selection data
 - [#158](https://github.com/nf-core/seqinspector/pull/158) Moved picard_collectmultiplemetrics to the subworkflow QC_BAM
+- [#162](https://github.com/nf-core/seqinspector/pull/162) Add tests for prepare_genome subworkflow
 
 ### `Fixed`
 
@@ -40,6 +41,7 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#107](https://github.com/nf-core/seqinspector/pull/107) Put SeqFU-stats section reports together
 - [#112](https://github.com/nf-core/seqinspector/pull/112) Making fastq_screen_references value to use parentDir
 - [#94] (https://github.com/nf-core/seqinspector/issues/94) Go through and validate test data
+- [#162](https://github.com/nf-core/seqinspector/pull/162) Fix bugs in qc_bam and prepare_genome subworkflows and add tests
 - [#163](https://github.com/nf-core/seqinspector/pull/163) Run fastqscreen with subsampled data if available
 
 ### `Dependencies`
