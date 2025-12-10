@@ -24,6 +24,7 @@ include { paramsSummaryMap              } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc          } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML        } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText        } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { reportIndexMultiqc            } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
 
 // local
 include { PREPARE_GENOME                } from '../subworkflows/local/prepare_genome'
@@ -206,6 +207,12 @@ workflow SEQINSPECTOR {
     //
     // MODULE: MultiQC
     //
+
+    ch_tags = ch_multiqc_files
+        .map { meta, _sample -> meta.tags }
+        .flatten()
+        .unique()
+
     ch_multiqc_config = params.multiqc_config
         ? channel.fromPath(params.multiqc_config, checkIfExists: true)
         : channel.fromPath("${projectDir}/assets/multiqc_config.yml", checkIfExists: true)
@@ -237,9 +244,20 @@ workflow SEQINSPECTOR {
             sort: true,
         )
     )
+    // Add index to other MultiQC reports
+    //ch_multiqc_extra_files_global = Channel.empty()
+    ch_multiqc_extra_files_global = ch_multiqc_extra_files.mix(
+        ch_tags.toList()
+            .map { tag_list ->
+                reportIndexMultiqc(tag_list)
+            }
+            .collectFile(
+                name: 'multiqc_index_mqc.yaml',
+            )
+    )
 
-    MULTIQC_GLOBAL(
-        ch_multiqc_files.map { _meta, file -> file }.mix(ch_multiqc_extra_files).collect(),
+    MULTIQC_GLOBAL (
+        ch_multiqc_files.map { _meta, file -> file }.mix(ch_multiqc_extra_files_global).collect(),
         ch_multiqc_config.toList(),
         [],
         ch_multiqc_logo.toList(),
@@ -247,12 +265,17 @@ workflow SEQINSPECTOR {
         [],
     )
 
-    ch_tags = ch_multiqc_files
-        .map { meta, _sample -> meta.tags }
-        .flatten()
-        .unique()
+    ch_multiqc_extra_files_tag = ch_multiqc_extra_files.mix(
+        ch_tags.toList()
+            .map { tag_list ->
+                reportIndexMultiqc(tag_list, false)
+            }
+            .collectFile(
+                name: 'multiqc_index_mqc.yaml',
+            )
+    )
 
-    multiqc_extra_files_per_tag = ch_tags.combine(ch_multiqc_extra_files)
+    multiqc_extra_files_per_tag = ch_tags.combine(ch_multiqc_extra_files_tag)
 
     // Group samples by tag
     tagged_mqc_files = ch_tags
@@ -279,6 +302,7 @@ workflow SEQINSPECTOR {
             samples_per_tag: samples.flatten()
             config: config
         }
+
 
     MULTIQC_PER_TAG(
         tagged_mqc_files.samples_per_tag,

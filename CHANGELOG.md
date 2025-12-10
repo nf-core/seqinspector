@@ -26,6 +26,7 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#86](https://github.com/nf-core/seqinspector/issues/86) Update lists of default steps in the pipeline
 - [#84](https://github.com/nf-core/seqinspector/issues/84) Short summary of seqinspector in README.md
 - [#110](https://github.com/nf-core/seqinspector/pull/110) Update input schema to accept either tar file or directory as rundir, and fastq messages and patterns.
+- [#135](https://github.com/nf-core/seqinspector/pull/135) Added index section to MultiQC reports to facilitate report navigation (#125)
 - [#127](https://github.com/nf-core/seqinspector/pull/127) Added alignment tools - bwamem2 - index and mem
 - [#128](https://github.com/nf-core/seqinspector/pull/128) Added Picard tools - Collect Multiple Mterics to collect QC metrics
 - [#132](https://github.com/nf-core/seqinspector/pull/132) Added a bwamem2 index params for faster output
