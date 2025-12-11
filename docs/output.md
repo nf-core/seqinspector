@@ -18,6 +18,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 - [BWA-MEM2_MEM](#bwamem2_mem) - Mapping reads against a chosen reference genome
 - [Samtools index](#samtools-index) - Index BAM files with Samtools
 - [Picard collect multiple metrics](#picard-collect-multiple-metrics) - Combine BAM and BAI outputs for Picard
+- [Picard collecthsmetrics](#picard-collecthsmetrics) - Collect alignment QC metrics of hybrid-selection data
 - [MultiQC](#multiqc) - Aggregate report describing results and QC from the whole pipeline
 - [Pipeline information](#pipeline-information) - Report metrics generated during the workflow execution
 
@@ -131,6 +132,18 @@ Generates the full set of bwamem2 indexes:
   - `*.CollectMultipleMetrics.quality_by_cycle.pdf`
   - `*.CollectMultipleMetrics.quality_distribution.pdf`
   - `*.CollectMultipleMetrics.read_length_histogram.pdf`
+
+### Picard CollectHSmetrics
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `picard_collecthsmetrics/`
+  - `*.coverage_metrics`: Tab-separated file containing quality metrics for hybrid-selection data.
+
+</details>
+
+[Picard_collecthsmetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard) is a tool to collect metrics on the aligment SAM/BAM files that are specific for sequence datasets generated through hybrid-selection (mostly used to capture exon-specific sequences for targeted sequencing).
 
 ### MultiQC
 

@@ -19,24 +19,26 @@
                 "multiqc/global_report/multiqc_data/multiqc_sources.txt",
                 "multiqc/global_report/multiqc_report.html",
                 "pipeline_info",
-                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
+                "samtools_faidx",
+                "samtools_faidx/genome.fa.fai",
+                "samtools_faidx/genome.fa.sizes"
             ],
             [
-                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+                "genome.fa.fai:md5,6f4c0ce5258e6948135ad006e1f9ee1b",
+                "genome.fa.sizes:md5,e122f8021a5ef14104c32785cb9b7adc"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-11-07T10:48:01.699825922"
+        "timestamp": "2025-12-02T12:24:49.888119"
     },
     "MiSeq data test (single end reads)": {
         "content": [
             {
-                "BWAMEM2_INDEX": {
-                    "bwamem2": "2.2.1"
-                },
                 "BWAMEM2_MEM": {
                     "bwamem2": "2.2.1",
                     "samtools": "1.22.1"
@@ -49,9 +51,6 @@
                 },
                 "PICARD_COLLECTMULTIPLEMETRICS": {
                     "picard": "3.4.0"
-                },
-                "SAMTOOLS_FAIDX": {
-                    "samtools": "1.22.1"
                 },
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.22.1"
@@ -264,16 +263,13 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-11-07T11:14:40.189991111"
+        "timestamp": "2025-12-03T10:55:19.837222"
     },
     "Miseq data test (skip fastqc)": {
         "content": [
             {
-                "BWAMEM2_INDEX": {
-                    "bwamem2": "2.2.1"
-                },
                 "BWAMEM2_MEM": {
                     "bwamem2": "2.2.1",
                     "samtools": "1.22.1"
@@ -283,9 +279,6 @@
                 },
                 "PICARD_COLLECTMULTIPLEMETRICS": {
                     "picard": "3.4.0"
-                },
-                "SAMTOOLS_FAIDX": {
-                    "samtools": "1.22.1"
                 },
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.22.1"
@@ -443,8 +436,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-11-07T11:15:17.347135189"
+        "timestamp": "2025-12-03T10:56:01.102965"
     }
 }

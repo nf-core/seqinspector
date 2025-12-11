@@ -31,7 +31,6 @@
                 },
                 "outdir": {
                     "type": "string",
-                    "default": null,
                     "format": "directory-path",
                     "description": "The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.",
                     "fa_icon": "fas fa-folder-open"
@@ -51,7 +50,7 @@
                 "skip_tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to skip",
-                    "pattern": "^((fastqc|fastqscreen|seqfu_stats|seqtk_sample|bwamem2_index|bwamem2_mem|picard_collectmultiplemetrics|samtools_faidx|samtools_index)?,?)*(?<!,)$"
+                    "pattern": "^((fastqc|fastqscreen|seqfu_stats|seqtk_sample|bwamem2_index|bwamem2_mem|picard_collectmultiplemetrics|samtools_faidx)?,?)*(?<!,)$"
                 }
             }
         },
@@ -98,7 +97,7 @@
                     "fa_icon": "fas fa-search",
                     "description": "A .csv of reference genomes to be mapped against by FastQ Screen"
                 },
-                "bwa_index": {
+                "bwamem2": {
                     "type": "string",
                     "format": "directory-path",
                     "exists": true,
@@ -276,6 +275,43 @@
                     "description": "Display hidden parameters in the help message (only works when --help or --help_full are provided)."
                 }
             }
+        },
+        "picard_collecthsmetrics_options": {
+            "title": "picard_collecthsmetrics options",
+            "type": "object",
+            "description": "",
+            "default": "",
+            "properties": {
+                "run_picard_collecthsmetrics": {
+                    "type": "boolean",
+                    "hidden": true,
+                    "description": "Run picard_colecthsmetrics for QC of bam files."
+                },
+                "bait_intervals": {
+                    "type": "string",
+                    "description": "Path to bait intervals file.",
+                    "hidden": true,
+                    "pattern": "^\\S+.(bed|bed.gz|interval_list)$",
+                    "format": "file-path",
+                    "exists": true
+                },
+                "target_intervals": {
+                    "type": "string",
+                    "description": "Path to target intervals file.",
+                    "hidden": true,
+                    "pattern": "^\\S+.(bed|bed.gz|interval_list)$",
+                    "format": "file-path",
+                    "exists": true
+                },
+                "ref_dict": {
+                    "type": "string",
+                    "hidden": true,
+                    "description": "Sequence dictionary for the reference fasta file provided.",
+                    "pattern": "^\\S+.dict$",
+                    "format": "file-path",
+                    "exists": true
+                }
+            }
         }
     },
     "allOf": [
@@ -290,6 +326,9 @@
         },
         {
             "$ref": "#/$defs/generic_options"
+        },
+        {
+            "$ref": "#/$defs/picard_collecthsmetrics_options"
         }
     ]
 }

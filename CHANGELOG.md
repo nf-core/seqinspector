@@ -26,9 +26,14 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#86](https://github.com/nf-core/seqinspector/issues/86) Update lists of default steps in the pipeline
 - [#84](https://github.com/nf-core/seqinspector/issues/84) Short summary of seqinspector in README.md
 - [#110](https://github.com/nf-core/seqinspector/pull/110) Update input schema to accept either tar file or directory as rundir, and fastq messages and patterns.
+- [#135](https://github.com/nf-core/seqinspector/pull/135) Added index section to MultiQC reports to facilitate report navigation (#125)
 - [#127](https://github.com/nf-core/seqinspector/pull/127) Added alignment tools - bwamem2 - index and mem
 - [#128](https://github.com/nf-core/seqinspector/pull/128) Added Picard tools - Collect Multiple Mterics to collect QC metrics
 - [#132](https://github.com/nf-core/seqinspector/pull/132) Added a bwamem2 index params for faster output
+- [#151](https://github.com/nf-core/seqinspector/pull/151) Added a prepare_genome subworkflow to handle bwamem2 indexing
+- [#159](https://github.com/nf-core/seqinspector/pull/159) Added a subworkflow QC_BAM including picard_collecthsmetrics for alignment QC of hybrid-selection data
+- [#158](https://github.com/nf-core/seqinspector/pull/158) Moved picard_collectmultiplemetrics to the subworkflow QC_BAM
+- [#162](https://github.com/nf-core/seqinspector/pull/162) Add tests for prepare_genome subworkflow
 
 ### `Fixed`
 
@@ -37,6 +42,8 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#107](https://github.com/nf-core/seqinspector/pull/107) Put SeqFU-stats section reports together
 - [#112](https://github.com/nf-core/seqinspector/pull/112) Making fastq_screen_references value to use parentDir
 - [#94] (https://github.com/nf-core/seqinspector/issues/94) Go through and validate test data
+- [#162](https://github.com/nf-core/seqinspector/pull/162) Fix bugs in qc_bam and prepare_genome subworkflows and add tests
+- [#163](https://github.com/nf-core/seqinspector/pull/163) Run fastqscreen with subsampled data if available
 
 ### `Dependencies`
 

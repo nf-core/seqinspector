@@ -6,7 +6,7 @@ include { samplesheetToList             } from 'plugin/nf-schema'
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { BWAMEM2_INDEX                 } from '../modules/nf-core/bwamem2/index'
+// nf-core
 include { BWAMEM2_MEM                   } from '../modules/nf-core/bwamem2/mem'
 include { FASTQC                        } from '../modules/nf-core/fastqc'
 include { FASTQSCREEN_FASTQSCREEN       } from '../modules/nf-core/fastqscreen/fastqscreen'
@@ -15,6 +15,7 @@ include { SAMTOOLS_FAIDX                } from '../modules/nf-core/samtools/faid
 include { SAMTOOLS_INDEX                } from '../modules/nf-core/samtools/index'
 include { SEQFU_STATS                   } from '../modules/nf-core/seqfu/stats'
 include { SEQTK_SAMPLE                  } from '../modules/nf-core/seqtk/sample'
+include { QC_BAM                        } from '../subworkflows/local/qc_bam'
 
 include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc'
 include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc'
@@ -23,6 +24,10 @@ include { paramsSummaryMap              } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc          } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML        } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText        } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { reportIndexMultiqc            } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
+
+// local
+include { PREPARE_GENOME                } from '../subworkflows/local/prepare_genome'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -34,20 +39,26 @@ workflow SEQINSPECTOR {
     take:
     ch_samplesheet // channel: samplesheet read in from --input
     fasta_file
+    skip_tools
+    bwamem2
 
     main:
-    skip_tools = params.skip_tools ? params.skip_tools.split(',') : []
 
-    ch_versions = channel.empty()
-    ch_multiqc_files = channel.empty()
+
+    ch_versions            = channel.empty()
+    ch_multiqc_files       = channel.empty()
     ch_multiqc_extra_files = channel.empty()
+    ch_bwamem2_mem         = channel.empty()
+    ch_samtools_index      = channel.empty()
+    ch_reference_fasta     = fasta_file ? channel.fromPath(fasta_file, checkIfExists: true).map { file -> tuple([id: file.name], file) }.collect() : channel.value([[:], []])
 
-    // Initialize all channels that might be used later
-    ch_bwamem2_index = channel.empty()
-    ch_bwamem2_mem = channel.empty()
-    ch_samtools_index = channel.empty()
-    ch_reference_fasta_fai = channel.empty()
-    ch_reference_fasta = channel.empty()
+    PREPARE_GENOME(
+        ch_reference_fasta,
+        bwamem2,
+        skip_tools,
+        params.run_picard_collecthsmetrics,
+        params.ref_dict,
+    )
 
     //
     // MODULE: Run Seqtk sample to perform subsampling
@@ -111,52 +122,24 @@ workflow SEQINSPECTOR {
             .toList()
 
         FASTQSCREEN_FASTQSCREEN(
-            ch_samplesheet,
+            ch_sample_sized,
             ch_fastqscreen_refs,
         )
         ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
         ch_versions = ch_versions.mix(FASTQSCREEN_FASTQSCREEN.out.versions.first())
-    }
-    // MODULE: Create BWA-MEM2 index of the reference genome OR use pre-built index
-    if (!("bwamem2_index" in skip_tools)) {
-        // Always create the reference FASTA channel since it's needed by BWAMEM2_MEM
-        ch_reference_fasta = channel.fromPath(fasta_file, checkIfExists: true).map { file -> tuple([id: file.name], file) }.collect()
-
-        if (params.bwa_index) {
-            // Use pre-built index when --bwa_index parameter is provided
-            ch_bwamem2_index = channel.fromPath(params.bwa_index, checkIfExists: true)
-                .map { index_dir -> tuple([id: index_dir.name], index_dir) }
-                .collect()
-
-            // Add debug output to verify the pre-built index is being used
-            ch_bwamem2_index.view { "Using pre-built BWA-MEM2 index: ${it}" }
-        }
-        else {
-            // Build index from reference FASTA when no pre-built index is provided
-            BWAMEM2_INDEX(
-                ch_reference_fasta
-            )
-            ch_bwamem2_index = BWAMEM2_INDEX.out.index
-            ch_versions = ch_versions.mix(BWAMEM2_INDEX.out.versions)
-
-            // Add debug output to verify the index was built
-            ch_bwamem2_index.view { "Built BWA-MEM2 index: ${it}" }
-        }
     }
 
     // MODULE: Align reads with BWA-MEM2
     if (!("bwamem2_mem" in skip_tools)) {
         BWAMEM2_MEM(
             ch_sample_sized,
-            ch_bwamem2_index,
+            PREPARE_GENOME.out.bwamem2_index,
             ch_reference_fasta,
             params.sort_bam ?: true,
         )
         ch_bwamem2_mem = BWAMEM2_MEM.out.bam
         ch_versions = ch_versions.mix(BWAMEM2_MEM.out.versions)
-    }
-    // MODULE: Index BAM files with Samtools
-    if (!("samtools_index" in skip_tools) && !("bwamem2_mem" in skip_tools)) {
+
         SAMTOOLS_INDEX(
             ch_bwamem2_mem
         )
@@ -164,46 +147,36 @@ workflow SEQINSPECTOR {
         ch_versions = ch_versions.mix(SAMTOOLS_INDEX.out.versions)
     }
 
-    // MODULE: Index reference FASTA with Samtools faidx
-    if (!("samtools_faidx" in skip_tools)) {
 
-        // Assume ch_fasta emits tuple(meta, fasta)
-        SAMTOOLS_FAIDX(
+    if (!("picard_collectmultiplemetrics" in skip_tools)) {
+
+        ch_reference_fai = PREPARE_GENOME.out.reference_fai
+
+        ch_bait_intervals = params.bait_intervals ? channel.fromPath(params.bait_intervals).collect() : channel.empty()
+        ch_target_intervals = params.target_intervals ? channel.fromPath(params.target_intervals).collect() : channel.empty()
+
+        ch_ref_dict = PREPARE_GENOME.out.ref_dict
+
+
+        QC_BAM(
+            ch_bwamem2_mem,
+            ch_samtools_index,
             ch_reference_fasta,
-            [[:], []],
-            true,
-        )
-        ch_reference_fasta_fai = SAMTOOLS_FAIDX.out.fai
-        ch_versions = ch_versions.mix(SAMTOOLS_FAIDX.out.versions)
-    }
-
-    // MODULE: Prepare BAM/BAI tuples for Picard
-    // Combine BAM and BAI outputs for Picard
-    if (!("picard_collectmultiplemetrics" in skip_tools) && !("bwamem2_mem" in skip_tools) && !("samtools_index" in skip_tools) && !("samtools_faidx" in skip_tools)) {
-
-        // Prepare BAM/BAI tuples for Picard
-        ch_bam_bai = ch_bwamem2_mem.join(ch_samtools_index, failOnDuplicate: true, failOnMismatch: true)
-
-        ch_bam_bai.view { "Combined BAM/BAI for Picard: ${it}" }
-        ch_fasta = ch_reference_fasta
-        ch_fai = ch_reference_fasta_fai
-
-        ch_fasta.view { "FASTA for Picard: ${it}" }
-        ch_fai.view { "FAI for Picard: ${it}" }
-
-        PICARD_COLLECTMULTIPLEMETRICS(
-            ch_bam_bai,
-            ch_fasta,
-            ch_fai,
+            ch_reference_fai,
+            params.run_picard_collecthsmetrics,
+            ch_bait_intervals,
+            ch_target_intervals,
+            ch_ref_dict,
         )
 
-        ch_multiqc_files = ch_multiqc_files.mix(PICARD_COLLECTMULTIPLEMETRICS.out.metrics)
-        ch_versions = ch_versions.mix(PICARD_COLLECTMULTIPLEMETRICS.out.versions.first())
+        ch_multiqc_files = ch_multiqc_files.mix(QC_BAM.out.multiple_metrics, QC_BAM.out.hs_metrics)
+        ch_versions = ch_versions.mix(QC_BAM.out.versions)
     }
 
     // Collate and save software versions
     //
-    def topic_versions = Channel.topic("versions")
+    def topic_versions = Channel
+        .topic("versions")
         .distinct()
         .branch { entry ->
             versions_file: entry instanceof Path
@@ -212,9 +185,9 @@ workflow SEQINSPECTOR {
 
     def topic_versions_string = topic_versions.versions_tuple
         .map { process, tool, version ->
-            [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
+            [process[process.lastIndexOf(':') + 1..-1], "  ${tool}: ${version}"]
         }
-        .groupTuple(by:0)
+        .groupTuple(by: 0)
         .map { process, tool_versions ->
             tool_versions.unique().sort()
             "${process}:\n${tool_versions.join('\n')}"
@@ -234,6 +207,12 @@ workflow SEQINSPECTOR {
     //
     // MODULE: MultiQC
     //
+
+    ch_tags = ch_multiqc_files
+        .map { meta, _sample -> meta.tags }
+        .flatten()
+        .unique()
+
     ch_multiqc_config = params.multiqc_config
         ? channel.fromPath(params.multiqc_config, checkIfExists: true)
         : channel.fromPath("${projectDir}/assets/multiqc_config.yml", checkIfExists: true)
@@ -265,9 +244,20 @@ workflow SEQINSPECTOR {
             sort: true,
         )
     )
+    // Add index to other MultiQC reports
+    //ch_multiqc_extra_files_global = Channel.empty()
+    ch_multiqc_extra_files_global = ch_multiqc_extra_files.mix(
+        ch_tags.toList()
+            .map { tag_list ->
+                reportIndexMultiqc(tag_list)
+            }
+            .collectFile(
+                name: 'multiqc_index_mqc.yaml',
+            )
+    )
 
-    MULTIQC_GLOBAL(
-        ch_multiqc_files.map { _meta, file -> file }.mix(ch_multiqc_extra_files).collect(),
+    MULTIQC_GLOBAL (
+        ch_multiqc_files.map { _meta, file -> file }.mix(ch_multiqc_extra_files_global).collect(),
         ch_multiqc_config.toList(),
         [],
         ch_multiqc_logo.toList(),
@@ -275,12 +265,17 @@ workflow SEQINSPECTOR {
         [],
     )
 
-    ch_tags = ch_multiqc_files
-        .map { meta, _sample -> meta.tags }
-        .flatten()
-        .unique()
+    ch_multiqc_extra_files_tag = ch_multiqc_extra_files.mix(
+        ch_tags.toList()
+            .map { tag_list ->
+                reportIndexMultiqc(tag_list, false)
+            }
+            .collectFile(
+                name: 'multiqc_index_mqc.yaml',
+            )
+    )
 
-    multiqc_extra_files_per_tag = ch_tags.combine(ch_multiqc_extra_files)
+    multiqc_extra_files_per_tag = ch_tags.combine(ch_multiqc_extra_files_tag)
 
     // Group samples by tag
     tagged_mqc_files = ch_tags
@@ -307,6 +302,7 @@ workflow SEQINSPECTOR {
             samples_per_tag: samples.flatten()
             config: config
         }
+
 
     MULTIQC_PER_TAG(
         tagged_mqc_files.samples_per_tag,

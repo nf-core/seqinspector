@@ -2,9 +2,6 @@
     "NovaSeq6000 data test sample size": {
         "content": [
             {
-                "BWAMEM2_INDEX": {
-                    "bwamem2": "2.2.1"
-                },
                 "BWAMEM2_MEM": {
                     "bwamem2": "2.2.1",
                     "samtools": "1.22.1"
@@ -17,9 +14,6 @@
                 },
                 "PICARD_COLLECTMULTIPLEMETRICS": {
                     "picard": "3.4.0"
-                },
-                "SAMTOOLS_FAIDX": {
-                    "samtools": "1.22.1"
                 },
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.22.1"
@@ -757,17 +751,17 @@
                 "Undetermined_5.bam.bai:md5,20c7b66e8e1ace324a3cbbee6745b714",
                 "sampletest_4.bam:md5,2c37f72ed4f25c971199fbde3af370b9",
                 "sampletest_4.bam.bai:md5,20c7b66e8e1ace324a3cbbee6745b714",
-                "Sample1_1_screen.png:md5,562256290643b51e4374c2225a15f463",
-                "Sample1_1_screen.txt:md5,3b184ef10eeb99043a85826534a4ee28",
-                "Sample23_3_screen.png:md5,6bb2caf67b9b2ed25d3d5f32c343e9ab",
-                "Sample23_3_screen.txt:md5,3b184ef10eeb99043a85826534a4ee28",
-                "SampleA_2_screen.png:md5,b2c3e95e034f5c038754bf108537de0e",
-                "SampleA_2_screen.txt:md5,3b184ef10eeb99043a85826534a4ee28",
-                "Undetermined_5_screen.png:md5,fc5d53f8876dfae3d1a781fa512ea1db",
-                "Undetermined_5_screen.txt:md5,3b184ef10eeb99043a85826534a4ee28",
-                "sampletest_4_screen.png:md5,1fb60070e8f4b70de0c1b3786b54f27e",
-                "sampletest_4_screen.txt:md5,3b184ef10eeb99043a85826534a4ee28",
-                "fastq_screen_plot.txt:md5,562b783630f698c3220c951b73b87027",
+                "Sample1_1_screen.png:md5,f77ab5b51b18150e9202544405f268a1",
+                "Sample1_1_screen.txt:md5,14d10b0c3b63e18f223a0dc589abee36",
+                "Sample23_3_screen.png:md5,09a60d51f8bf416e089715729a278a0d",
+                "Sample23_3_screen.txt:md5,14d10b0c3b63e18f223a0dc589abee36",
+                "SampleA_2_screen.png:md5,dfba178e76017bf9ea3e5517ee6915f4",
+                "SampleA_2_screen.txt:md5,14d10b0c3b63e18f223a0dc589abee36",
+                "Undetermined_5_screen.png:md5,e4f09e8c09c2cea7ddf1f0a01bab273d",
+                "Undetermined_5_screen.txt:md5,14d10b0c3b63e18f223a0dc589abee36",
+                "sampletest_4_screen.png:md5,18320e2dde03d1cc3b7897e75c3574c9",
+                "sampletest_4_screen.txt:md5,14d10b0c3b63e18f223a0dc589abee36",
+                "fastq_screen_plot.txt:md5,26b720108af59c53bdccad85540686b9",
                 "fastqc-status-check-heatmap.txt:md5,84794d045dc6d91b00e59985bae9d18a",
                 "fastqc_overrepresented_sequences_plot.txt:md5,8a49ca637e473578baa80c57486f6873",
                 "fastqc_per_base_n_content_plot.txt:md5,234d2d338b88166d1432f0fd3887ed90",
@@ -779,7 +773,7 @@
                 "fastqc_sequence_duplication_levels_plot.txt:md5,5c4b313cef9eae4900d6ca22b561c838",
                 "fastqc_sequence_length_distribution_plot.txt:md5,d423f73abb6f1c4e7ebfff407886f5a7",
                 "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
-                "multiqc_fastq_screen.txt:md5,2ff2485b1f197cb6228dd4350d1bd638",
+                "multiqc_fastq_screen.txt:md5,ede47a68cfe19144331104f4e51b6ee7",
                 "multiqc_fastqc.txt:md5,aba942d1e6996b579f19798e5673f514",
                 "multiqc_picard_AlignmentSummaryMetrics.txt:md5,ae3f9e644215ac39d2eae114bd52a517",
                 "multiqc_picard_baseContent.txt:md5,8b2efc3fa06d2013348b35f9607292aa",
@@ -799,7 +793,7 @@
                 "picard_base_distribution_by_cycle__Undetermined.txt:md5,a472bba4490d7189df23f6b38a554448",
                 "picard_quality_by_cycle.txt:md5,83d68b4049173f8c9a37f58f1276adc1",
                 "picard_quality_score_distribution.txt:md5,42c08c8a51230d9ecccdad416c06f59c",
-                "fastq_screen_plot.txt:md5,c25d34568f10f131156294d31fbfa994",
+                "fastq_screen_plot.txt:md5,fbd5dbdbc51ecb82f8c2da2b63f104d3",
                 "fastqc-status-check-heatmap.txt:md5,7ee494f345c09706513e65907788de02",
                 "fastqc_overrepresented_sequences_plot.txt:md5,ca9fa146e7b8a7f562fd79b521ba0f60",
                 "fastqc_per_base_n_content_plot.txt:md5,d0948f903d5cb77880ff7b1b4e0a4f23",
@@ -811,7 +805,7 @@
                 "fastqc_sequence_duplication_levels_plot.txt:md5,e37e8e4584f0157a5fa0d53b4834e836",
                 "fastqc_sequence_length_distribution_plot.txt:md5,e102bf11f348e8c24e1d15b336e2f595",
                 "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
-                "multiqc_fastq_screen.txt:md5,737dc47e74e5b2f2c590652788831eff",
+                "multiqc_fastq_screen.txt:md5,8028856af6d413fa3592900e16dbc99f",
                 "multiqc_fastqc.txt:md5,ff996e1d3dc4a46e0c9535e54d51ccab",
                 "multiqc_picard_AlignmentSummaryMetrics.txt:md5,7bc3f6ef8f47e6f1e060f957025c98aa",
                 "multiqc_picard_baseContent.txt:md5,1426865fe8ee1a36f67636c28500a91c",
@@ -831,7 +825,7 @@
                 "picard_base_distribution_by_cycle__Undetermined.txt:md5,2b4526a0b0977ebd7fbe326c6d51cf19",
                 "picard_quality_by_cycle.txt:md5,d53617c495e81e011996cd4e9f755e0a",
                 "picard_quality_score_distribution.txt:md5,05f9e89733e43b81acf593efc1a56180",
-                "fastq_screen_plot.txt:md5,44fca6453b0a3d0590271bd7a31cc740",
+                "fastq_screen_plot.txt:md5,c32019d1b4d5245d75264b9f453ce916",
                 "fastqc-status-check-heatmap.txt:md5,b6872d9dbaa3cce396d48dc137076e53",
                 "fastqc_overrepresented_sequences_plot.txt:md5,19babef6996c0bfdf28e5df89368cbb1",
                 "fastqc_per_base_n_content_plot.txt:md5,25367b78b3d6a063d33814c663fea91e",
@@ -843,7 +837,7 @@
                 "fastqc_sequence_duplication_levels_plot.txt:md5,1e595565e848ab3f13cfa8479214d3e0",
                 "fastqc_sequence_length_distribution_plot.txt:md5,24ef8f47147dabd210b03c497d340d77",
                 "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
-                "multiqc_fastq_screen.txt:md5,568f6b6d14562d01b5aaeb1a39e1cf3d",
+                "multiqc_fastq_screen.txt:md5,e3e01b13becd5e30c9c12e5313b795c7",
                 "multiqc_fastqc.txt:md5,3df36ecfe76b25b0c22dcda84bce2b3b",
                 "multiqc_picard_AlignmentSummaryMetrics.txt:md5,4dc89e1a04843d44695ecc8d1f047ee8",
                 "multiqc_picard_baseContent.txt:md5,0a5f9d32dd3061ce4349518c47d69838",
@@ -863,7 +857,7 @@
                 "picard_base_distribution_by_cycle__Undetermined.txt:md5,3536e6dcc7c7ed972b02d2945da75cb7",
                 "picard_quality_by_cycle.txt:md5,be127a96dd68c14077548d36c0507dc3",
                 "picard_quality_score_distribution.txt:md5,9e27b097f10cb9a9a95a3445b220d104",
-                "fastq_screen_plot.txt:md5,5f748d33a7a396547fe8c260b728aa06",
+                "fastq_screen_plot.txt:md5,f4a7d4d2c26ad1eb38525552d2275523",
                 "fastqc-status-check-heatmap.txt:md5,bab59a0bd1d676d90cdd986fbba36b26",
                 "fastqc_overrepresented_sequences_plot.txt:md5,79cb259874c52b44f8c69b2075ee498e",
                 "fastqc_per_base_n_content_plot.txt:md5,6ef3683b1b7db0b6db6948185f96959d",
@@ -875,7 +869,7 @@
                 "fastqc_sequence_duplication_levels_plot.txt:md5,77e0c9a542a3d59b173633764a11b404",
                 "fastqc_sequence_length_distribution_plot.txt:md5,c4f58d755233776c341da8dc357f8527",
                 "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
-                "multiqc_fastq_screen.txt:md5,c54d863ed3e68ee8bcb51c9ad85de9bc",
+                "multiqc_fastq_screen.txt:md5,025c2db89ab18864c2828f3f4e368d4f",
                 "multiqc_fastqc.txt:md5,aa1b8d6adae86005ea7a8b2e901099b8",
                 "multiqc_picard_AlignmentSummaryMetrics.txt:md5,fa26e8b96faa1926d8f41fc3fe959ff7",
                 "multiqc_picard_baseContent.txt:md5,b9d72d8173cdc7649b44b80aa485477c",
@@ -895,7 +889,7 @@
                 "picard_base_distribution_by_cycle__Undetermined.txt:md5,67ee93606c468a7eea7818b2f4b3389f",
                 "picard_quality_by_cycle.txt:md5,974b3baed160e9643f493df1d0ad5000",
                 "picard_quality_score_distribution.txt:md5,869d69ae4e243f0669f63b489563e4f1",
-                "fastq_screen_plot.txt:md5,8622e1dbd0fe62520af6096207b9775d",
+                "fastq_screen_plot.txt:md5,331bc452d453a3c31263b8c5018a07da",
                 "fastqc-status-check-heatmap.txt:md5,2a66f5d61b9eb579555905cd5954b04c",
                 "fastqc_overrepresented_sequences_plot.txt:md5,5cdefa954db6e46c286e2984a883eb18",
                 "fastqc_per_base_n_content_plot.txt:md5,92c23e189d98430517e4030e7c9ae038",
@@ -907,7 +901,7 @@
                 "fastqc_sequence_duplication_levels_plot.txt:md5,041857b1e41e0b47bfc62000cb9f323d",
                 "fastqc_sequence_length_distribution_plot.txt:md5,c2ee6b7c9fc91de049d183422e0a71fc",
                 "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
-                "multiqc_fastq_screen.txt:md5,a4dca31413036d35899a35ba14b17ea5",
+                "multiqc_fastq_screen.txt:md5,61392eb28e735f293516bb81f463450a",
                 "multiqc_fastqc.txt:md5,ce61b4ce4b1d76ec3f20de3bf0c9ec7f",
                 "multiqc_picard_AlignmentSummaryMetrics.txt:md5,55627d8016b72c37c104e03cc156862c",
                 "multiqc_picard_baseContent.txt:md5,974d83faa49711ab4ea1248c59e69393",
@@ -948,8 +942,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-11-19T14:24:39.696680631"
+        "timestamp": "2025-12-08T17:09:00.331820625"
     }
 }
