@@ -2,15 +2,21 @@
 
 ## :warning: Please read this documentation on the nf-core website: [https://nf-co.re/seqinspector/usage](https://nf-co.re/seqinspector/usage)
 
-> _Documentation of pipeline parameters is generated automatically from the pipeline schema and can no longer be found in markdown files._
-
 ## Introduction
 
-<!-- TODO nf-core: Add documentation about anything specific to running your pipeline. For general topics, please point to (and add to) the main nf-core website. -->
+### General points
+
+The nf-core/seqinspector pipeline is a general QC pipeline for sequencing data. The current version only supports data in fastq format.
+The pipeline is meant to include a large amount of possible QC tools to chose from, but not all of them may be relevant to your data. As such we highly recommend to familiarize yourself with the different QC tools available and to remove any QC tool you would like to exclude with the `--skip-tools` command line parameter. For repeated use we suggest to create a params file containing the `--skip-tools` parameters (for details see the "Running the pipeline" section).
+Be aware that some tools are skipped by default and will need to be included in the list of skipped tools when curating your own list. To identify defaults included or excluded please check out the overview table in the Introduction.
+
+### What nf-core/seqinspector is not for
+
+The results of the nf-core/seqinspector pipeline are not meant to be used for any downstream analysis, but are exclusively for QC purposes. Even tools that may be used in other pipelines as a starting point for analysis are run in a QC perspective, most likely with a downsampled input.
 
 ## Samplesheet input
 
-You will need to create a samplesheet with information about the samples you would like to analyse before running the pipeline. Use this parameter to specify its location.
+You will need to create a samplesheet with information about the samples/fastq files you would like to analyse before running the pipeline. Use this parameter to specify its location.
 
 ```bash
 --input '[path to samplesheet file]'
@@ -51,7 +57,7 @@ Another [example samplesheet](../assets/samplesheet.csv) has been provided with 
 
 ## Running the pipeline
 
-The typical command for running the pipeline is as follows:
+A typical command for running the pipeline is as follows:
 
 ```bash
 nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --genome GRCh37 -profile docker
@@ -100,7 +106,7 @@ nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results -
 
 ### Skipping tools
 
-Some tools might not be compatible with your data. In this case it might be desired to skip some of them. This can be done easily by providing a comma-separated list of tools to be skipped with the `--skip_tools` parameter.
+Some tools might not be compatible with your data. In this case you can skip them by providing a comma-separated list of tools to be skipped with the `--skip_tools` parameter.
 
 In case you want to make this more permanent, it is recommended to specify this in a params file, or even in your own nextflow configuration file. The nextflow configuration file can also be use to customise tool arguments. See official [nexflow](https://www.nextflow.io/docs/latest/config.html) and [nf-core](https://nf-co.re/docs/usage/configuration#customising-tool-arguments) documentation for further details.
 
@@ -123,7 +129,7 @@ This version number will be logged in reports when you run the pipeline, so that
 To further assist in reproducibility, you can use share and reuse [parameter files](#running-the-pipeline) to repeat pipeline runs with the same settings without having to write out a command with every single parameter.
 
 > [!TIP]
-> If you wish to share such profile (such as upload as supplementary material for academic publications), make sure to NOT include cluster specific paths to files, nor institutional specific profiles.
+> If you wish to share such profiles (such as upload as supplementary material for academic publications), make sure to NOT include cluster specific paths to files, nor institutional specific profiles.
 
 ## Core Nextflow arguments
 
@@ -221,3 +227,7 @@ We recommend adding the following line to your environment to limit this (typica
 ```bash
 NXF_OPTS='-Xms1g -Xmx4g'
 ```
+
+## Hybrid-selection QC metrics
+
+The pipeline supports hybrid-selection (HS) QC metrics collection . Use `--run_picard_collecthsmetrics true` to run the QC tool [picard CollectHSmetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard). This tool is otherwise not run by default.

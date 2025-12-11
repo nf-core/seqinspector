@@ -1,0 +1,75 @@
+{
+    "Test without bwamem2 index file path, with run_picard_collecthsmetrics=true and without ref_dict": {
+        "content": [
+            [
+                "",
+                "bwamem2",
+                "bwamem2/reference.fasta.0123",
+                "bwamem2/reference.fasta.amb",
+                "bwamem2/reference.fasta.ann",
+                "bwamem2/reference.fasta.bwt.2bit.64",
+                "bwamem2/reference.fasta.pac"
+            ],
+            [
+                "",
+                "reference.fasta.fai",
+                "reference.fasta.sizes"
+            ],
+            [
+                "",
+                "genome.dict"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2025-12-02T11:58:24.141721"
+    },
+    "Test without bwamem2 index file path, with run_picard_collecthsmetrics=true and with ref_dict": {
+        "content": [
+            [
+                "",
+                "bwamem2",
+                "bwamem2/reference.fasta.0123",
+                "bwamem2/reference.fasta.amb",
+                "bwamem2/reference.fasta.ann",
+                "bwamem2/reference.fasta.bwt.2bit.64",
+                "bwamem2/reference.fasta.pac"
+            ],
+            [
+                "",
+                "reference.fasta.fai",
+                "reference.fasta.sizes"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2025-12-02T11:57:18.592897"
+    },
+    "Test without bwamem2 index file path and with run_picard_collecthsmetrics=false": {
+        "content": [
+            [
+                "",
+                "bwamem2",
+                "bwamem2/reference.fasta.0123",
+                "bwamem2/reference.fasta.amb",
+                "bwamem2/reference.fasta.ann",
+                "bwamem2/reference.fasta.bwt.2bit.64",
+                "bwamem2/reference.fasta.pac"
+            ],
+            [
+                "",
+                "reference.fasta.fai",
+                "reference.fasta.sizes"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2025-12-02T11:56:19.206085"
+    }
+}
