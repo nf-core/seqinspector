@@ -38,6 +38,8 @@
 
 - [Picard Tools](https://broadinstitute.github.io/picard/)
 
+> Broad Institute, “Picard Toolkit.” 2019. GitHub Repository. https://broadinstitute.github.io/picard/
+
 ## Software packaging/containerisation tools
 
 - [Anaconda](https://anaconda.com)

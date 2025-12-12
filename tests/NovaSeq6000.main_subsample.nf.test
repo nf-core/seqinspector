@@ -1,6 +1,6 @@
 nextflow_pipeline {
 
-    name "Test Workflow main.nf on NovaSeq6000 data sample size 90"
+    name "Test Workflow main.nf on NovaSeq6000 data with different sample sizes"
     script "../main.nf"
     tag "seqinspector"
     tag "PIPELINE"
@@ -34,6 +34,79 @@ nextflow_pipeline {
                     stable_name,
                     // All files with stable contents
                     stable_path
+                ).match() }
+            )
+        }
+    }
+
+    test("NovaSeq6000 data test relative sample size") {
+
+        when {
+            config "./NovaSeq6000.main_subsample.nf.test.config"
+            params {
+                outdir = "$outputDir"
+                sample_size = 0.9
+            }
+        }
+
+        then {
+            // stable_name: All files + folders in ${params.outdir}/ with a stable name
+            def stable_name = getAllFilesFromDir(
+                params.outdir,
+                relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}']
+            )
+            // stable_path: All files in ${params.outdir}/ with stable content
+            def stable_path = getAllFilesFromDir(
+                params.outdir,
+                ignoreFile: 'tests/.nftignore'
+            )
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(
+                    // pipeline versions.yml file for multiqc from which Nextflow version is removed because we tests pipelines on multiple Nextflow versions
+                    removeNextflowVersion("$outputDir/pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"),
+                    // All stable path names, with a relative path
+                    stable_name,
+                    // All files with stable contents
+                    stable_path
+                ).match() }
+            )
+        }
+    }
+
+    test("NovaSeq6000 data test sample size exceeds available reads") {
+        tag "warning"
+
+        when {
+            config "./NovaSeq6000.main_subsample.nf.test.config"
+            params {
+                outdir = "$outputDir"
+                sample_size = 120
+            }
+        }
+
+        then {
+            // stable_name: All files + folders in ${params.outdir}/ with a stable name
+            def stable_name = getAllFilesFromDir(
+                params.outdir,
+                relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}']
+            )
+            // stable_path: All files in ${params.outdir}/ with stable content
+            def stable_path = getAllFilesFromDir(
+                params.outdir,
+                ignoreFile: 'tests/.nftignore'
+            )
+            assert workflow.success
+            assertAll(
+                { assert snapshot(
+                    // pipeline versions.yml file for multiqc from which Nextflow version is removed because we tests pipelines on multiple Nextflow versions
+                    removeNextflowVersion("$outputDir/pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"),
+                    // All stable path names, with a relative path
+                    stable_name,
+                    // All files with stable contents
+                    stable_path,
+                    // get all messages containing Requested sample_size (120)
+                    filterNextflowOutput(workflow.stdout + workflow.stderr, ignore: ['Downloading plugin'], include:['Requested sample_size (120)'])
                 ).match() }
             )
         }
