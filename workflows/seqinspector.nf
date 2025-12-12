@@ -6,29 +6,29 @@ include { samplesheetToList             } from 'plugin/nf-schema'
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-// nf-core
+// modules
 include { BWAMEM2_MEM                   } from '../modules/nf-core/bwamem2/mem'
 include { FASTQC                        } from '../modules/nf-core/fastqc'
 include { FASTQSCREEN_FASTQSCREEN       } from '../modules/nf-core/fastqscreen/fastqscreen'
+include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc'
+include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc'
 include { PICARD_COLLECTMULTIPLEMETRICS } from '../modules/nf-core/picard/collectmultiplemetrics'
-include { QC_BAM                        } from '../subworkflows/local/qc_bam'
 include { RUNDIRPARSER                  } from '../modules/local/rundirparser'
 include { SAMTOOLS_FAIDX                } from '../modules/nf-core/samtools/faidx'
 include { SAMTOOLS_INDEX                } from '../modules/nf-core/samtools/index'
 include { SEQFU_STATS                   } from '../modules/nf-core/seqfu/stats'
 include { SEQTK_SAMPLE                  } from '../modules/nf-core/seqtk/sample'
 
-include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc'
-include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc'
+// subworkflow
+include { PREPARE_GENOME                } from '../subworkflows/local/prepare_genome'
+include { QC_BAM                        } from '../subworkflows/local/qc_bam'
 
+// functions
+include { methodsDescriptionText        } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
 include { paramsSummaryMap              } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc          } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { softwareVersionsToYAML        } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { methodsDescriptionText        } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
 include { reportIndexMultiqc            } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
-
-// local
-include { PREPARE_GENOME                } from '../subworkflows/local/prepare_genome'
+include { softwareVersionsToYAML        } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
