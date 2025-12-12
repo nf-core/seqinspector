@@ -1,0 +1,146 @@
+nextflow_workflow {
+
+    name "Test Workflow PREPARE_GENOME"
+    script "subworkflows/local/prepare_genome/main.nf"
+    workflow "PREPARE_GENOME"
+    tag 'subworkflows'
+    tag 'prepare_genome'
+
+    test("Test without bwamem2 index file path and with run_picard_collecthsmetrics=false") {
+
+        when {
+            config "./nextflow.config"
+            params {
+                outdir = "$outputDir"
+                run_picard_collecthsmetrics = true
+
+            }
+            workflow {
+                """
+                input[0]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/reference/reference.fasta', checkIfExists: true)).collect()
+                input[1]  = null
+                input[2]  = ''
+                input[3]  = false
+                input[4]  = null
+                """
+            }
+        }
+
+        then {
+            // All files + folders produced by BWAMEM2_INDEX
+            def bwamem2_index_files = getAllFilesFromDir(
+                params.outdir + '/bwamem2_index',
+                relative: true, includeDir: true
+            )
+            // All files + folders produced by SAMTOOLS_FAIDX
+            def samtools_faidx_files = getAllFilesFromDir(
+                params.outdir + '/samtools_faidx',
+                relative: true, includeDir: true
+            )
+
+            assert workflow.success
+
+            assert snapshot(
+                    bwamem2_index_files,
+                    samtools_faidx_files
+                ).match()
+
+            // BWAMEM2_INDEX and SAMTOOLS_FAIDX should run
+            assert workflow.out.versions.size() == 2
+        }
+
+    }
+
+    test("Test without bwamem2 index file path, with run_picard_collecthsmetrics=true and with ref_dict") {
+
+        when {
+            config "./nextflow.config"
+            params {
+                outdir = "$outputDir"
+                run_picard_collecthsmetrics = true
+
+            }
+            workflow {
+                """
+                input[0]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/reference/reference.fasta', checkIfExists: true)).collect()
+                input[1]  = null
+                input[2]  = ''
+                input[3]  = true
+                input[4]  = params.pipelines_testdata_base_path + '/reference/reference.dict'
+                """
+            }
+        }
+
+        then {
+            // All files + folders produced by BWAMEM2_INDEX
+            def bwamem2_index_files = getAllFilesFromDir(
+                params.outdir + '/bwamem2_index',
+                relative: true, includeDir: true
+            )
+            // All files + folders produced by SAMTOOLS_FAIDX
+            def samtools_faidx_files = getAllFilesFromDir(
+                params.outdir + '/samtools_faidx',
+                relative: true, includeDir: true
+            )
+
+            assert workflow.success
+            assert snapshot(
+                    bwamem2_index_files,
+                    samtools_faidx_files
+                ).match()
+            // BWAMEM2_INDEX and SAMTOOLS_FAIDX should run
+            assert workflow.out.versions.size() == 2
+        }
+
+    }
+
+    test("Test without bwamem2 index file path, with run_picard_collecthsmetrics=true and without ref_dict") {
+
+        when {
+            config "./nextflow.config"
+            params {
+                outdir = "$outputDir"
+                run_picard_collecthsmetrics = true
+
+            }
+            workflow {
+                """
+                input[0]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/reference/reference.fasta', checkIfExists: true)).collect()
+                input[1]  = null
+                input[2]  = ''
+                input[3]  = true
+                input[4]  = null
+                """
+            }
+        }
+
+        then {
+            // All files + folders produced by BWAMEM2_INDEX
+            def bwamem2_index_files = getAllFilesFromDir(
+                params.outdir + '/bwamem2_index',
+                relative: true, includeDir: true
+            )
+            // All files + folders produced by SAMTOOLS_FAIDX
+            def samtools_faidx_files = getAllFilesFromDir(
+                params.outdir + '/samtools_faidx',
+                relative: true, includeDir: true
+            )
+            // All files + folders produced by PICARD_CREATESEQUENCEDICTIONARY
+            def picard_createsequencedictionary_files = getAllFilesFromDir(
+                params.outdir + '/picard_createsequencedictionary',
+                relative: true, includeDir: true
+            )
+
+            assert workflow.success
+            assert snapshot(
+                    bwamem2_index_files,
+                    samtools_faidx_files,
+                    picard_createsequencedictionary_files
+                ).match()
+            // BWAMEM2_INDEX, SAMTOOLS_FAIDX and PICARD_CREATESEQUENCEDICTIONARY should run
+            assert workflow.out.versions.size() == 3
+        }
+
+    }
+
+}
