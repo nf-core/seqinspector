@@ -81,12 +81,10 @@ workflow SEQINSPECTOR {
                 //  2. Mix with the ch_multiqc_files channel downstream
                 [dir_meta, rundir]
             }
-            .view()
 
         RUNDIRPARSER(ch_rundir)
 
         ch_multiqc_files = ch_multiqc_files.mix(RUNDIRPARSER.out.multiqc)
-        ch_versions = ch_versions.mix(RUNDIRPARSER.out.versions)
     }
 
     //
