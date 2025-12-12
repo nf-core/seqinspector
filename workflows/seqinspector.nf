@@ -6,28 +6,29 @@ include { samplesheetToList             } from 'plugin/nf-schema'
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-// nf-core
+// modules
 include { BWAMEM2_MEM                   } from '../modules/nf-core/bwamem2/mem'
 include { FASTQC                        } from '../modules/nf-core/fastqc'
 include { FASTQSCREEN_FASTQSCREEN       } from '../modules/nf-core/fastqscreen/fastqscreen'
+include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc'
+include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc'
 include { PICARD_COLLECTMULTIPLEMETRICS } from '../modules/nf-core/picard/collectmultiplemetrics'
+include { RUNDIRPARSER                  } from '../modules/local/rundirparser'
 include { SAMTOOLS_FAIDX                } from '../modules/nf-core/samtools/faidx'
 include { SAMTOOLS_INDEX                } from '../modules/nf-core/samtools/index'
 include { SEQFU_STATS                   } from '../modules/nf-core/seqfu/stats'
 include { SEQTK_SAMPLE                  } from '../modules/nf-core/seqtk/sample'
+
+// subworkflow
+include { PREPARE_GENOME                } from '../subworkflows/local/prepare_genome'
 include { QC_BAM                        } from '../subworkflows/local/qc_bam'
 
-include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc'
-include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc'
-
+// functions
+include { methodsDescriptionText        } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
 include { paramsSummaryMap              } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc          } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { softwareVersionsToYAML        } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { methodsDescriptionText        } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
 include { reportIndexMultiqc            } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
-
-// local
-include { PREPARE_GENOME                } from '../subworkflows/local/prepare_genome'
+include { softwareVersionsToYAML        } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -43,8 +44,6 @@ workflow SEQINSPECTOR {
     bwamem2
 
     main:
-
-
     ch_versions = channel.empty()
     ch_multiqc_files = channel.empty()
     ch_multiqc_extra_files = channel.empty()
@@ -61,6 +60,34 @@ workflow SEQINSPECTOR {
     )
 
     //
+    // MODULE: Parse rundir info
+    //
+    if (!("rundirparser" in skip_tools)) {
+
+        // From samplesheet channel serving (sampleMetaObj, sampleReadsPath) tuples:
+        // --> Create new rundir channel serving (rundirMetaObj, rundirPath) tuples
+        ch_rundir = ch_samplesheet
+            .map { meta, _reads -> [meta.rundir, meta] }
+            .groupTuple()
+            .map { rundir, metas ->
+                // Collect all unique tags into a list
+                def all_tags = metas.collect { meta -> meta.tags }.flatten().unique()
+                // Create a new meta object whose attributes are...
+                //  1. tags: The list of merged tags, used for grouping MultiQC reports
+                //  2. dirname: The simple name of the rundir, used for setting unique output names in publishDir
+                def dir_meta = [tags: all_tags, dirname: rundir.simpleName]
+                // Return the new structure, to...
+                //  1. Feed into rundir specific processes
+                //  2. Mix with the ch_multiqc_files channel downstream
+                [dir_meta, rundir]
+            }
+
+        RUNDIRPARSER(ch_rundir)
+
+        ch_multiqc_files = ch_multiqc_files.mix(RUNDIRPARSER.out.multiqc)
+    }
+
+    //
     // MODULE: Run Seqtk sample to perform subsampling
     //
     if (!("seqtk_sample" in skip_tools) && params.sample_size > 0) {
@@ -69,7 +96,7 @@ workflow SEQINSPECTOR {
                 [meta, reads, params.sample_size]
             }
         ).reads
-        ch_versions = ch_versions.mix(SEQTK_SAMPLE.out.versions.first())
+        ch_versions = ch_versions.mix(SEQTK_SAMPLE.out.versions)
     }
     else {
         // No subsampling
@@ -86,7 +113,7 @@ workflow SEQINSPECTOR {
             }
         )
         ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
-        ch_versions = ch_versions.mix(FASTQC.out.versions.first())
+        ch_versions = ch_versions.mix(FASTQC.out.versions)
     }
 
 
@@ -118,7 +145,7 @@ workflow SEQINSPECTOR {
                 }
             }
         ch_multiqc_files = ch_multiqc_files.mix(SEQFU_STATS.out.multiqc)
-        ch_versions = ch_versions.mix(SEQFU_STATS.out.versions.first())
+        ch_versions = ch_versions.mix(SEQFU_STATS.out.versions)
     }
 
     //
@@ -144,7 +171,7 @@ workflow SEQINSPECTOR {
             ch_fastqscreen_refs,
         )
         ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
-        ch_versions = ch_versions.mix(FASTQSCREEN_FASTQSCREEN.out.versions.first())
+        ch_versions = ch_versions.mix(FASTQSCREEN_FASTQSCREEN.out.versions)
     }
 
     // MODULE: Align reads with BWA-MEM2
@@ -193,8 +220,7 @@ workflow SEQINSPECTOR {
 
     // Collate and save software versions
     //
-    def topic_versions = Channel
-        .topic("versions")
+    def topic_versions = channel.topic("versions")
         .distinct()
         .branch { entry ->
             versions_file: entry instanceof Path
@@ -251,7 +277,6 @@ workflow SEQINSPECTOR {
     ch_methods_description = channel.value(
         methodsDescriptionText(ch_multiqc_custom_methods_description)
     )
-
     ch_multiqc_extra_files = ch_multiqc_extra_files.mix(
         ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml')
     )
@@ -263,7 +288,7 @@ workflow SEQINSPECTOR {
         )
     )
     // Add index to other MultiQC reports
-    //ch_multiqc_extra_files_global = Channel.empty()
+    //ch_multiqc_extra_files_global = channel.empty()
     ch_multiqc_extra_files_global = ch_multiqc_extra_files.mix(
         ch_tags.toList().map { tag_list ->
             reportIndexMultiqc(tag_list)
@@ -300,6 +325,7 @@ workflow SEQINSPECTOR {
         .groupTuple()
         .tap { mqc_by_tag }
         .collectFile { sample_tag, _samples ->
+
             def prefix_tag = "[TAG:${sample_tag}]"
             [
                 "${prefix_tag}_multiqc_extra_config.yml",
