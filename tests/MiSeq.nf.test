@@ -1,16 +1,17 @@
 nextflow_pipeline {
 
-    name "Test Workflow main.nf on NovaSeq6000 data with different sample sizes"
+    name "Test Workflow main.nf on MiSeq data with single end reads"
     script "../main.nf"
     tag "seqinspector"
     tag "PIPELINE"
 
-    test("NovaSeq6000 data test sample size") {
+    test("MiSeq data test (single end reads)") {
 
         when {
-            config "./NovaSeq6000.main_subsample.nf.test.config"
             params {
+                input  = params.pipelines_testdata_base_path + 'seqinspector/testdata/MiSeq/samplesheet.csv'
                 outdir = "$outputDir"
+                skip_tools = "rundirparser"
             }
         }
 
@@ -39,13 +40,12 @@ nextflow_pipeline {
         }
     }
 
-    test("NovaSeq6000 data test relative sample size") {
-
+    test("Miseq data test (skip fastqc)") {
         when {
-            config "./NovaSeq6000.main_subsample.nf.test.config"
             params {
+                input  = params.pipelines_testdata_base_path + 'seqinspector/testdata/MiSeq/samplesheet.csv'
                 outdir = "$outputDir"
-                sample_size = 0.9
+                skip_tools = "fastqc,rundirparser"
             }
         }
 
@@ -74,14 +74,12 @@ nextflow_pipeline {
         }
     }
 
-    test("NovaSeq6000 data test sample size exceeds available reads") {
-        tag "warning"
-
+    test("Miseq data test (skip all tools)") {
         when {
-            config "./NovaSeq6000.main_subsample.nf.test.config"
             params {
+                input  = params.pipelines_testdata_base_path + 'seqinspector/testdata/MiSeq/samplesheet.csv'
                 outdir = "$outputDir"
-                sample_size = 120
+                skip_tools = "fastqc,fastqscreen,seqfu_stats,seqtk_sample,bwamem2_index,bwamem2_mem,rundirparser"
             }
         }
 
@@ -96,17 +94,15 @@ nextflow_pipeline {
                 params.outdir,
                 ignoreFile: 'tests/.nftignore'
             )
-            assert workflow.success
             assertAll(
+                { assert workflow.success},
                 { assert snapshot(
                     // pipeline versions.yml file for multiqc from which Nextflow version is removed because we tests pipelines on multiple Nextflow versions
                     removeNextflowVersion("$outputDir/pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"),
                     // All stable path names, with a relative path
                     stable_name,
                     // All files with stable contents
-                    stable_path,
-                    // get all messages containing Requested sample_size (120)
-                    filterNextflowOutput(workflow.stdout + workflow.stderr, ignore: ['Downloading plugin'], include:['Requested sample_size (120)'])
+                    stable_path
                 ).match() }
             )
         }
