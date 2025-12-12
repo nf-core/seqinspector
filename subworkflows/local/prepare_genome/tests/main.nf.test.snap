@@ -1,75 +1,161 @@
 {
     "Test without bwamem2 index file path, with run_picard_collecthsmetrics=true and without ref_dict": {
         "content": [
-            [
-                "",
-                "bwamem2",
-                "bwamem2/reference.fasta.0123",
-                "bwamem2/reference.fasta.amb",
-                "bwamem2/reference.fasta.ann",
-                "bwamem2/reference.fasta.bwt.2bit.64",
-                "bwamem2/reference.fasta.pac"
-            ],
-            [
-                "",
-                "reference.fasta.fai",
-                "reference.fasta.sizes"
-            ],
-            [
-                "",
-                "genome.dict"
-            ]
+            {
+                "bwamem2_index": [
+                    [
+                        {
+                            "id": "genome"
+                        },
+                        [
+                            "genome.fasta.0123:md5,d73300d44f733bcdb7c988fc3ff3e3e9",
+                            "genome.fasta.amb:md5,1891c1de381b3a96d4e72f590fde20c1",
+                            "genome.fasta.ann:md5,2df4aa2d7580639fa0fcdbcad5e2e969",
+                            "genome.fasta.bwt.2bit.64:md5,cd4bdf496eab05228a50c45ee43c1ed0",
+                            "genome.fasta.pac:md5,8569fbdb2c98c6fb16dfa73d8eacb070"
+                        ]
+                    ]
+                ],
+                "ref_dict": [
+                    [
+                        {
+                            "id": "genome"
+                        },
+                        "genome.dict:md5,8acf53706487c0ff79ad8d063d66c51a"
+                    ]
+                ],
+                "reference_fai": [
+                    [
+                        {
+                            "id": "genome"
+                        },
+                        "genome.fasta.fai:md5,3520cd30e1b100e55f578db9c855f685"
+                    ]
+                ],
+                "versions": [
+                    {
+                        "PREPARE_GENOME:SAMTOOLS_FAIDX": {
+                            "samtools": "1.22.1"
+                        }
+                    },
+                    {
+                        "PREPARE_GENOME:PICARD_CREATESEQUENCEDICTIONARY": {
+                            "picard": "3.4.0"
+                        }
+                    },
+                    {
+                        "PREPARE_GENOME:BWAMEM2_INDEX": {
+                            "bwamem2": "2.2.1"
+                        }
+                    }
+                ]
+            }
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-02T11:58:24.141721"
+        "timestamp": "2025-12-12T16:10:21.23821705"
     },
     "Test without bwamem2 index file path, with run_picard_collecthsmetrics=true and with ref_dict": {
         "content": [
-            [
-                "",
-                "bwamem2",
-                "bwamem2/reference.fasta.0123",
-                "bwamem2/reference.fasta.amb",
-                "bwamem2/reference.fasta.ann",
-                "bwamem2/reference.fasta.bwt.2bit.64",
-                "bwamem2/reference.fasta.pac"
-            ],
-            [
-                "",
-                "reference.fasta.fai",
-                "reference.fasta.sizes"
-            ]
+            {
+                "bwamem2_index": [
+                    [
+                        {
+                            "id": "genome"
+                        },
+                        [
+                            "genome.fasta.0123:md5,d73300d44f733bcdb7c988fc3ff3e3e9",
+                            "genome.fasta.amb:md5,1891c1de381b3a96d4e72f590fde20c1",
+                            "genome.fasta.ann:md5,2df4aa2d7580639fa0fcdbcad5e2e969",
+                            "genome.fasta.bwt.2bit.64:md5,cd4bdf496eab05228a50c45ee43c1ed0",
+                            "genome.fasta.pac:md5,8569fbdb2c98c6fb16dfa73d8eacb070"
+                        ]
+                    ]
+                ],
+                "ref_dict": [
+                    [
+                        {
+                            "id": "genome"
+                        },
+                        "/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/genome.dict"
+                    ]
+                ],
+                "reference_fai": [
+                    [
+                        {
+                            "id": "genome"
+                        },
+                        "genome.fasta.fai:md5,3520cd30e1b100e55f578db9c855f685"
+                    ]
+                ],
+                "versions": [
+                    {
+                        "PREPARE_GENOME:SAMTOOLS_FAIDX": {
+                            "samtools": "1.22.1"
+                        }
+                    },
+                    {
+                        "PREPARE_GENOME:BWAMEM2_INDEX": {
+                            "bwamem2": "2.2.1"
+                        }
+                    }
+                ]
+            }
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-02T11:57:18.592897"
+        "timestamp": "2025-12-12T16:10:10.23226572"
     },
     "Test without bwamem2 index file path and with run_picard_collecthsmetrics=false": {
         "content": [
-            [
-                "",
-                "bwamem2",
-                "bwamem2/reference.fasta.0123",
-                "bwamem2/reference.fasta.amb",
-                "bwamem2/reference.fasta.ann",
-                "bwamem2/reference.fasta.bwt.2bit.64",
-                "bwamem2/reference.fasta.pac"
-            ],
-            [
-                "",
-                "reference.fasta.fai",
-                "reference.fasta.sizes"
-            ]
+            {
+                "bwamem2_index": [
+                    [
+                        {
+                            "id": "genome"
+                        },
+                        [
+                            "genome.fasta.0123:md5,d73300d44f733bcdb7c988fc3ff3e3e9",
+                            "genome.fasta.amb:md5,1891c1de381b3a96d4e72f590fde20c1",
+                            "genome.fasta.ann:md5,2df4aa2d7580639fa0fcdbcad5e2e969",
+                            "genome.fasta.bwt.2bit.64:md5,cd4bdf496eab05228a50c45ee43c1ed0",
+                            "genome.fasta.pac:md5,8569fbdb2c98c6fb16dfa73d8eacb070"
+                        ]
+                    ]
+                ],
+                "ref_dict": [
+                    
+                ],
+                "reference_fai": [
+                    [
+                        {
+                            "id": "genome"
+                        },
+                        "genome.fasta.fai:md5,3520cd30e1b100e55f578db9c855f685"
+                    ]
+                ],
+                "versions": [
+                    {
+                        "PREPARE_GENOME:SAMTOOLS_FAIDX": {
+                            "samtools": "1.22.1"
+                        }
+                    },
+                    {
+                        "PREPARE_GENOME:BWAMEM2_INDEX": {
+                            "bwamem2": "2.2.1"
+                        }
+                    }
+                ]
+            }
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-02T11:56:19.206085"
+        "timestamp": "2025-12-12T16:09:59.55850842"
     }
 }
