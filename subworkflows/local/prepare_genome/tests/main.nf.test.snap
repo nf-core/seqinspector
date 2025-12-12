@@ -4,33 +4,20 @@
             {
                 "bwamem2_index": [
                     [
-                        {
-                            "id": "genome"
-                        },
                         [
-                            "genome.fasta.0123:md5,d73300d44f733bcdb7c988fc3ff3e3e9",
-                            "genome.fasta.amb:md5,1891c1de381b3a96d4e72f590fde20c1",
-                            "genome.fasta.ann:md5,2df4aa2d7580639fa0fcdbcad5e2e969",
-                            "genome.fasta.bwt.2bit.64:md5,cd4bdf496eab05228a50c45ee43c1ed0",
-                            "genome.fasta.pac:md5,8569fbdb2c98c6fb16dfa73d8eacb070"
+                            "reference.fasta.0123:md5,0f0ff4414949e6787a25a563f19e2a3b",
+                            "reference.fasta.amb:md5,0a85644af00f9a856d874381d24e7803",
+                            "reference.fasta.ann:md5,8fdb46970ca95a4ef54f5f1a02d233cd",
+                            "reference.fasta.bwt.2bit.64:md5,3c0df9450afc5cb0ad5e85870829d9d0",
+                            "reference.fasta.pac:md5,96b449e1316067fdfba91b1399687bc2"
                         ]
                     ]
                 ],
                 "ref_dict": [
-                    [
-                        {
-                            "id": "genome"
-                        },
-                        "genome.dict:md5,8acf53706487c0ff79ad8d063d66c51a"
-                    ]
+                    "genome.dict:md5,f91ebda0d0bd72d5c22c1f1bcbbc563c"
                 ],
                 "reference_fai": [
-                    [
-                        {
-                            "id": "genome"
-                        },
-                        "genome.fasta.fai:md5,3520cd30e1b100e55f578db9c855f685"
-                    ]
+                    "reference.fasta.fai:md5,bf4047e05f95deb372eb8ffd601cbc29"
                 ],
                 "versions": [
                     {
@@ -55,40 +42,27 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-12T16:10:21.23821705"
+        "timestamp": "2025-12-12T18:17:59.250873828"
     },
     "Test without bwamem2 index file path, with run_picard_collecthsmetrics=true and with ref_dict": {
         "content": [
             {
                 "bwamem2_index": [
                     [
-                        {
-                            "id": "genome"
-                        },
                         [
-                            "genome.fasta.0123:md5,d73300d44f733bcdb7c988fc3ff3e3e9",
-                            "genome.fasta.amb:md5,1891c1de381b3a96d4e72f590fde20c1",
-                            "genome.fasta.ann:md5,2df4aa2d7580639fa0fcdbcad5e2e969",
-                            "genome.fasta.bwt.2bit.64:md5,cd4bdf496eab05228a50c45ee43c1ed0",
-                            "genome.fasta.pac:md5,8569fbdb2c98c6fb16dfa73d8eacb070"
+                            "reference.fasta.0123:md5,0f0ff4414949e6787a25a563f19e2a3b",
+                            "reference.fasta.amb:md5,0a85644af00f9a856d874381d24e7803",
+                            "reference.fasta.ann:md5,8fdb46970ca95a4ef54f5f1a02d233cd",
+                            "reference.fasta.bwt.2bit.64:md5,3c0df9450afc5cb0ad5e85870829d9d0",
+                            "reference.fasta.pac:md5,96b449e1316067fdfba91b1399687bc2"
                         ]
                     ]
                 ],
                 "ref_dict": [
-                    [
-                        {
-                            "id": "genome"
-                        },
-                        "/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/genome.dict"
-                    ]
+                    "/nf-core/test-datasets/raredisease/reference/reference.dict"
                 ],
                 "reference_fai": [
-                    [
-                        {
-                            "id": "genome"
-                        },
-                        "genome.fasta.fai:md5,3520cd30e1b100e55f578db9c855f685"
-                    ]
+                    "reference.fasta.fai:md5,bf4047e05f95deb372eb8ffd601cbc29"
                 ],
                 "versions": [
                     {
@@ -108,35 +82,25 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-12T16:10:10.23226572"
+        "timestamp": "2025-12-12T18:19:48.876692867"
     },
     "Test without bwamem2 index file path and with run_picard_collecthsmetrics=false": {
         "content": [
             {
                 "bwamem2_index": [
                     [
-                        {
-                            "id": "genome"
-                        },
                         [
-                            "genome.fasta.0123:md5,d73300d44f733bcdb7c988fc3ff3e3e9",
-                            "genome.fasta.amb:md5,1891c1de381b3a96d4e72f590fde20c1",
-                            "genome.fasta.ann:md5,2df4aa2d7580639fa0fcdbcad5e2e969",
-                            "genome.fasta.bwt.2bit.64:md5,cd4bdf496eab05228a50c45ee43c1ed0",
-                            "genome.fasta.pac:md5,8569fbdb2c98c6fb16dfa73d8eacb070"
+                            "reference.fasta.0123:md5,0f0ff4414949e6787a25a563f19e2a3b",
+                            "reference.fasta.amb:md5,0a85644af00f9a856d874381d24e7803",
+                            "reference.fasta.ann:md5,8fdb46970ca95a4ef54f5f1a02d233cd",
+                            "reference.fasta.bwt.2bit.64:md5,3c0df9450afc5cb0ad5e85870829d9d0",
+                            "reference.fasta.pac:md5,96b449e1316067fdfba91b1399687bc2"
                         ]
                     ]
                 ],
-                "ref_dict": [
-                    
-                ],
+                "ref_dict": null,
                 "reference_fai": [
-                    [
-                        {
-                            "id": "genome"
-                        },
-                        "genome.fasta.fai:md5,3520cd30e1b100e55f578db9c855f685"
-                    ]
+                    "reference.fasta.fai:md5,bf4047e05f95deb372eb8ffd601cbc29"
                 ],
                 "versions": [
                     {
@@ -156,6 +120,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-12T16:09:59.55850842"
+        "timestamp": "2025-12-12T17:27:20.079142637"
     }
 }
