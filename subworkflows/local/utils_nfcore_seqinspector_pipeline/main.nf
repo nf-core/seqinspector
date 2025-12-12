@@ -302,3 +302,35 @@ def methodsDescriptionText(mqc_methods_yaml) {
 
     return description_html.toString()
 }
+
+//
+// Generate report index for MultiQC
+//
+def reportIndexMultiqc(tags, global=true) {
+    def relative_path = global ? ".." : "../.."
+
+    def a_attrs = "target=\"_blank\" class=\"list-group-item list-group-item-action\""
+
+    // Global report path
+    def index_section = "    <a href=\"${relative_path}/global_report/multiqc_report.html\" ${a_attrs}>Global report</a>\n"
+
+    // Group report paths
+    tags
+        .each { tag ->
+            index_section += "    <a href=\"${relative_path}/group_reports/${tag}/multiqc_report.html\" ${a_attrs}>Group report: ${tag}</a>\n"
+        }
+
+    def yaml_file_text = "id: '${workflow.manifest.name.replace('/', '-')}-index'\n" as String
+    yaml_file_text     += "description: 'MultiQC reports collected from running the pipeline.'\n"
+    yaml_file_text     += "section_name: '${workflow.manifest.name} MultiQC Reports Index'\n"
+    yaml_file_text     += "section_href: 'https://github.com/${workflow.manifest.name}'\n"
+    yaml_file_text     += "plot_type: 'html'\n"
+    yaml_file_text     += "data: |\n"
+    yaml_file_text     += "  <h4>Reports</h4>\n"
+    yaml_file_text     += "  <p>Select a report to view (open in a new tab):</p>\n"
+    yaml_file_text     += "  <div class=\"list-group\">\n"
+    yaml_file_text     += "${index_section}"
+    yaml_file_text     += "  </div>\n"
+
+    return yaml_file_text
+}
