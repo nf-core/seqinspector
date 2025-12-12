@@ -100,6 +100,8 @@ workflow PIPELINE_INITIALISATION {
     //
     // Create channel from input file provided through params.input
     //
+    nr_samples = Channel.fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
+        .toList().size()
 
     channel
         .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
@@ -108,7 +110,9 @@ workflow PIPELINE_INITIALISATION {
         .map {
             meta, fastq_1, fastq_2, idx ->
                 def tags = meta.tags ? meta.tags.tokenize(":") : []
-                def updated_meta = meta + [ id:"${meta.sample}_${idx}", tags:tags ]
+                def pad_positions = [nr_samples.length(), 2].max()
+                def zero_padded_idx = idx.padLeft(pad_positions, "0")
+                def updated_meta = meta + [ id:"${meta.sample}_${zero_padded_idx}", tags:tags ]
                 if (!fastq_2) {
                     return [
                         updated_meta.id,
