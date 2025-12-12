@@ -45,12 +45,12 @@ workflow SEQINSPECTOR {
     main:
 
 
-    ch_versions            = channel.empty()
-    ch_multiqc_files       = channel.empty()
+    ch_versions = channel.empty()
+    ch_multiqc_files = channel.empty()
     ch_multiqc_extra_files = channel.empty()
-    ch_bwamem2_mem         = channel.empty()
-    ch_samtools_index      = channel.empty()
-    ch_reference_fasta     = fasta_file ? channel.fromPath(fasta_file, checkIfExists: true).map { file -> tuple([id: file.name], file) }.collect() : channel.value([[:], []])
+    ch_bwamem2_mem = channel.empty()
+    ch_samtools_index = channel.empty()
+    ch_reference_fasta = fasta_file ? channel.fromPath(fasta_file, checkIfExists: true).map { file -> tuple([id: file.name], file) }.collect() : channel.value([[:], []])
 
     PREPARE_GENOME(
         ch_reference_fasta,
@@ -99,24 +99,24 @@ workflow SEQINSPECTOR {
                 [[id: "seqfu", sample_id: meta.id, tags: meta.tags], reads]
             }
         )
-        ch_seqfu_stats.stats.map { meta, stats -> {
-            // Parse the stats TSV file
-            [meta.sample_id, stats]
-        }}
-        .splitCsv(header: true, sep: '\t')
-        .map { sample_id, row ->
-            // Check if requested sample size exceeds available reads
-            def sample_reads = row['#Seq'].toInteger()
-            if (params.sample_size > sample_reads) {
-                // prntln is used here instead of log.warn/log.info as nf-test captures stdout
-                // from 'println' but buffers log messages making them unavailable for assertion
-                // This message will appear in .nextflow.log file and temporarily on runtime stdout.
-                println ("Warning: Requested sample_size (${params.sample_size}) " +
-                        "is larger than available reads in ${sample_id} (${sample_reads}). " +
-                        "Pipeline will continue with ${sample_reads} reads.")
+        ch_seqfu_stats.stats
+            .map { meta, stats ->
+                {
+                    // Parse the stats TSV file
+                    [meta.sample_id, stats]
+                }
             }
-
-        }
+            .splitCsv(header: true, sep: '\t')
+            .map { sample_id, row ->
+                // Check if requested sample size exceeds available reads
+                def sample_reads = row['#Seq'].toInteger()
+                if (params.sample_size > sample_reads) {
+                    // prntln is used here instead of log.warn/log.info as nf-test captures stdout
+                    // from 'println' but buffers log messages making them unavailable for assertion
+                    // This message will appear in .nextflow.log file and temporarily on runtime stdout.
+                    log.warn("${sample_id}: Requested sample_size (${params.sample_size}) is larger than available reads (${sample_reads}). Pipeline will continue with ${sample_reads} reads.")
+                }
+            }
         ch_multiqc_files = ch_multiqc_files.mix(SEQFU_STATS.out.multiqc)
         ch_versions = ch_versions.mix(SEQFU_STATS.out.versions.first())
     }
@@ -265,16 +265,14 @@ workflow SEQINSPECTOR {
     // Add index to other MultiQC reports
     //ch_multiqc_extra_files_global = Channel.empty()
     ch_multiqc_extra_files_global = ch_multiqc_extra_files.mix(
-        ch_tags.toList()
-            .map { tag_list ->
-                reportIndexMultiqc(tag_list)
-            }
-            .collectFile(
-                name: 'multiqc_index_mqc.yaml',
-            )
+        ch_tags.toList().map { tag_list ->
+            reportIndexMultiqc(tag_list)
+        }.collectFile(
+            name: 'multiqc_index_mqc.yaml'
+        )
     )
 
-    MULTIQC_GLOBAL (
+    MULTIQC_GLOBAL(
         ch_multiqc_files.map { _meta, file -> file }.mix(ch_multiqc_extra_files_global).collect(),
         ch_multiqc_config.toList(),
         [],
@@ -284,13 +282,11 @@ workflow SEQINSPECTOR {
     )
 
     ch_multiqc_extra_files_tag = ch_multiqc_extra_files.mix(
-        ch_tags.toList()
-            .map { tag_list ->
-                reportIndexMultiqc(tag_list, false)
-            }
-            .collectFile(
-                name: 'multiqc_index_mqc.yaml',
-            )
+        ch_tags.toList().map { tag_list ->
+            reportIndexMultiqc(tag_list, false)
+        }.collectFile(
+            name: 'multiqc_index_mqc.yaml'
+        )
     )
 
     multiqc_extra_files_per_tag = ch_tags.combine(ch_multiqc_extra_files_tag)
