@@ -14,7 +14,7 @@ include { PICARD_COLLECTMULTIPLEMETRICS } from '../modules/nf-core/picard/collec
 include { SAMTOOLS_FAIDX                } from '../modules/nf-core/samtools/faidx'
 include { SAMTOOLS_INDEX                } from '../modules/nf-core/samtools/index'
 include { SEQFU_STATS                   } from '../modules/nf-core/seqfu/stats'
-include { RUNDIRPARSER                  } from '../modules/local/rundirparser/main'
+include { RUNDIRPARSER                  } from '../modules/local/rundirparser'
 include { SEQTK_SAMPLE                  } from '../modules/nf-core/seqtk/sample'
 include { QC_BAM                        } from '../subworkflows/local/qc_bam'
 
@@ -44,8 +44,6 @@ workflow SEQINSPECTOR {
     bwamem2
 
     main:
-
-
     ch_versions = channel.empty()
     ch_multiqc_files = channel.empty()
     ch_multiqc_extra_files = channel.empty()
@@ -73,7 +71,7 @@ workflow SEQINSPECTOR {
             .groupTuple()
             .map { rundir, metas ->
                 // Collect all unique tags into a list
-                def all_tags = metas.collect { it.tags }.flatten().unique()
+                def all_tags = metas.collect { meta -> meta.tags }.flatten().unique()
                 // Create a new meta object whose attributes are...
                 //  1. tags: The list of merged tags, used for grouping MultiQC reports
                 //  2. dirname: The simple name of the rundir, used for setting unique output names in publishDir
@@ -83,11 +81,12 @@ workflow SEQINSPECTOR {
                 //  2. Mix with the ch_multiqc_files channel downstream
                 [dir_meta, rundir]
             }
+            .view()
 
         RUNDIRPARSER(ch_rundir)
 
         ch_multiqc_files = ch_multiqc_files.mix(RUNDIRPARSER.out.multiqc)
-        ch_versions = ch_versions.mix(RUNDIRPARSER.out.versions.first())
+        ch_versions = ch_versions.mix(RUNDIRPARSER.out.versions)
     }
 
     //
@@ -99,7 +98,7 @@ workflow SEQINSPECTOR {
                 [meta, reads, params.sample_size]
             }
         ).reads
-        ch_versions = ch_versions.mix(SEQTK_SAMPLE.out.versions.first())
+        ch_versions = ch_versions.mix(SEQTK_SAMPLE.out.versions)
     }
     else {
         // No subsampling
@@ -116,7 +115,7 @@ workflow SEQINSPECTOR {
             }
         )
         ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
-        ch_versions = ch_versions.mix(FASTQC.out.versions.first())
+        ch_versions = ch_versions.mix(FASTQC.out.versions)
     }
 
 
@@ -148,7 +147,7 @@ workflow SEQINSPECTOR {
                 }
             }
         ch_multiqc_files = ch_multiqc_files.mix(SEQFU_STATS.out.multiqc)
-        ch_versions = ch_versions.mix(SEQFU_STATS.out.versions.first())
+        ch_versions = ch_versions.mix(SEQFU_STATS.out.versions)
     }
 
     //
@@ -174,7 +173,7 @@ workflow SEQINSPECTOR {
             ch_fastqscreen_refs,
         )
         ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
-        ch_versions = ch_versions.mix(FASTQSCREEN_FASTQSCREEN.out.versions.first())
+        ch_versions = ch_versions.mix(FASTQSCREEN_FASTQSCREEN.out.versions)
     }
 
     // MODULE: Align reads with BWA-MEM2
@@ -223,8 +222,7 @@ workflow SEQINSPECTOR {
 
     // Collate and save software versions
     //
-    def topic_versions = Channel
-        .topic("versions")
+    def topic_versions = channel.topic("versions")
         .distinct()
         .branch { entry ->
             versions_file: entry instanceof Path
@@ -292,7 +290,7 @@ workflow SEQINSPECTOR {
         )
     )
     // Add index to other MultiQC reports
-    //ch_multiqc_extra_files_global = Channel.empty()
+    //ch_multiqc_extra_files_global = channel.empty()
     ch_multiqc_extra_files_global = ch_multiqc_extra_files.mix(
         ch_tags.toList().map { tag_list ->
             reportIndexMultiqc(tag_list)
