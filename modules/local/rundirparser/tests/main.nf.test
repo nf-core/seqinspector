@@ -5,50 +5,45 @@ nextflow_process {
     process "RUNDIRPARSER"
     config "./nextflow.config"
 
-    test("Should run without failures") {
-
+    test("NovaSeq6000") {
 
         when {
             process {
                 """
-                input[0] = [[], file("$moduleDir/tests/data/test_rundir")]
+                input[0] = [[],
+                    file(params.pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/200624_A00834_0183_BHMTFYDRXX.tar.gz', checkIfExists: true)
+                ]
                 """
             }
-            params {
-                outdir = "results"
-            }
         }
-
         then {
             assert process.success
-            assert snapshot(process.out.yml).match()
-            assert process.out.versions.size() == 1
+            assert snapshot(
+                process.out.multiqc[0][1],
+                process.out.findAll { key, val -> key.startsWith("versions")}
+            ).match()
         }
-
-
     }
 
-    test("Should create correct yaml structure") {
+    test("NovaSeq6000 - stub") {
+
+        options "-stub"
 
         when {
             process {
                 """
-                input[0] = [[], file("$moduleDir/tests/data/test_rundir")]
+                input[0] = [[],
+                    file(params.pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/200624_A00834_0183_BHMTFYDRXX.tar.gz', checkIfExists: true)
+                ]
                 """
             }
-            params {
-                outdir = "results"
-            }
-
         }
-
         then {
-            def yamlcontent = path(process.out.yml[0]).yaml
-
-            assert yamlcontent.custom_data.my_data_type.data."Instrument type" == "NovaSeqXPlus"
-            assert snapshot(process.out.yml).match()
+            assert process.success
+            assert snapshot(
+                process.out.multiqc[0][1],
+                process.out.findAll { key, val -> key.startsWith("versions")}
+            ).match()
         }
-
     }
-
 }
