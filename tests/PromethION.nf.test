@@ -8,8 +8,9 @@ nextflow_pipeline {
     test("PromethION data test") {
 
         when {
-            config "./PromethION.main.nf.test.config"
             params {
+                input  = params.pipelines_testdata_base_path + 'seqinspector/testdata/PromethION/samplesheet.csv'
+                genome = 'EB1'
                 outdir = "$outputDir"
                 skip_tools = "bwamem2_index,bwamem2_mem,rundirparser"
             }

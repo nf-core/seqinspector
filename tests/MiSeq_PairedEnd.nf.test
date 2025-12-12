@@ -1,16 +1,17 @@
 nextflow_pipeline {
 
-    name "Test Workflow main.nf on NovaSeq6000 data"
+    name "Test Workflow main.nf on MiSeq data with paired end reads"
     script "../main.nf"
     tag "seqinspector"
     tag "PIPELINE"
 
-    test("NovaSeq6000 data test") {
+    test("MiSeq data test (paired end reads)") {
 
         when {
-            config "./NovaSeq6000.main.nf.test.config"
             params {
                 outdir = "$outputDir"
+                skip_tools = "rundirparser"
+                input = params.pipelines_testdata_base_path + 'seqinspector/testdata/Miseq_PairedEnd/samplesheet.csv'
             }
         }
 
