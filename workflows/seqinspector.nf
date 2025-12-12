@@ -104,7 +104,7 @@ workflow SEQINSPECTOR {
             [meta.sample_id, stats]
         }}
         .splitCsv(header: true, sep: '\t')
-        .view { sample_id, row ->
+        .map { sample_id, row ->
             // Check if requested sample size exceeds available reads
             def sample_reads = row['#Seq'].toInteger()
             if (params.sample_size > sample_reads) {
