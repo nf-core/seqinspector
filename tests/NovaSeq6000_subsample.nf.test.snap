@@ -767,16 +767,6 @@
                 "genome.fa.ann:md5,4439f90bdaaf2cdf9089c9f7f07b9d6b",
                 "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
                 "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
-                "Sample1_01.bam:md5,3aed5f0ecfaae2fea821fa829d942799",
-                "Sample1_01.bam.bai:md5,20c7b66e8e1ace324a3cbbee6745b714",
-                "Sample23_03.bam:md5,9d48a531653f29f0c6ecf1cad32f4e25",
-                "Sample23_03.bam.bai:md5,20c7b66e8e1ace324a3cbbee6745b714",
-                "SampleA_02.bam:md5,8048e27a75e5ce37c05a33857d3b5eda",
-                "SampleA_02.bam.bai:md5,20c7b66e8e1ace324a3cbbee6745b714",
-                "Undetermined_05.bam:md5,a6de4550335b8aaa06737c24cdd00682",
-                "Undetermined_05.bam.bai:md5,20c7b66e8e1ace324a3cbbee6745b714",
-                "sampletest_04.bam:md5,a34a795fe365d327199454dc9a88047a",
-                "sampletest_04.bam.bai:md5,20c7b66e8e1ace324a3cbbee6745b714",
                 "Sample1_01_screen.png:md5,57b1664bc6c8e82cc0ce14802ad0dc0f",
                 "Sample1_01_screen.txt:md5,14d10b0c3b63e18f223a0dc589abee36",
                 "Sample23_03_screen.png:md5,41b4f556865a2f55a93f63e520812fad",
@@ -970,13 +960,20 @@
                 "SampleA_02_SampleA_S2_L001_R1_001.fastq.gz:md5,f99d5407aac64cb36451c6f0a1db5ade",
                 "Undetermined_05_Undetermined_S0_L001_R1_001.fastq.gz:md5,104dbbef386db0eef3e02c586feb01a1",
                 "sampletest_04_sampletest_S4_L001_R1_001.fastq.gz:md5,30aa24a51e27e24390ac8b90158df8f2"
+            ],
+            [
+                "Sample1_01.bam:md5,fc83fc447ae236a94236f4993c405bed",
+                "Sample23_03.bam:md5,ee9f99e6c368e86af5516fd4ff2189d1",
+                "SampleA_02.bam:md5,3f378f47f7007916bc28921090c4e5e6",
+                "Undetermined_05.bam:md5,2841f21f7f70634f21505ac803ff8221",
+                "sampletest_04.bam:md5,3d1cd701ad22dacc6b194ea16582d647"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-12T11:45:23.711988389"
+        "timestamp": "2025-12-12T16:52:05.081506101"
     },
     "NovaSeq6000 data test relative sample size": {
         "content": [
@@ -1746,16 +1743,6 @@
                 "genome.fa.ann:md5,4439f90bdaaf2cdf9089c9f7f07b9d6b",
                 "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
                 "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
-                "Sample1_01.bam:md5,3545e16e264d357d190230e4dcee1cb2",
-                "Sample1_01.bam.bai:md5,e9c66d695e26fa2408d81ce006243ed4",
-                "Sample23_03.bam:md5,f3ccb87aa45fd8923796bb5bad36587c",
-                "Sample23_03.bam.bai:md5,e9c66d695e26fa2408d81ce006243ed4",
-                "SampleA_02.bam:md5,c07b657960b8073575bfebc40efb5ac0",
-                "SampleA_02.bam.bai:md5,e9c66d695e26fa2408d81ce006243ed4",
-                "Undetermined_05.bam:md5,e40757c83cdac87d6ade270bbb151057",
-                "Undetermined_05.bam.bai:md5,e9c66d695e26fa2408d81ce006243ed4",
-                "sampletest_04.bam:md5,adce222eaa16c05c123491465eaf96a5",
-                "sampletest_04.bam.bai:md5,e9c66d695e26fa2408d81ce006243ed4",
                 "Sample1_01_screen.png:md5,57b1664bc6c8e82cc0ce14802ad0dc0f",
                 "Sample1_01_screen.txt:md5,20926a4045b2ecf4bc76007047cc645a",
                 "Sample23_03_screen.png:md5,41b4f556865a2f55a93f63e520812fad",
@@ -1949,13 +1936,20 @@
                 "SampleA_02_SampleA_S2_L001_R1_001.fastq.gz:md5,f7897b87d06b13e9877f297169a678f1",
                 "Undetermined_05_Undetermined_S0_L001_R1_001.fastq.gz:md5,c9e790094f5c2b2bad247ae96f804d1e",
                 "sampletest_04_sampletest_S4_L001_R1_001.fastq.gz:md5,e35f5e6cd500f18ce05cc061fb471a76"
+            ],
+            [
+                "Sample1_01.bam:md5,9ccdbdc2adf0b9204a66060fefcec7f9",
+                "Sample23_03.bam:md5,dcd15b5562762f2e4d51c5ab1aef601d",
+                "SampleA_02.bam:md5,c9c0c519c072e1c808a9d58f17841008",
+                "Undetermined_05.bam:md5,691b83f3c015cf5f2b28ab6d0581d03c",
+                "sampletest_04.bam:md5,b13db1c95389474f089f870b906d3fc0"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-12T11:46:34.325054847"
+        "timestamp": "2025-12-12T16:53:21.397671601"
     },
     "NovaSeq6000 data test sample size exceeds available reads": {
         "content": [
@@ -2725,16 +2719,6 @@
                 "genome.fa.ann:md5,4439f90bdaaf2cdf9089c9f7f07b9d6b",
                 "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
                 "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
-                "Sample1_01.bam:md5,aa475f13ecd19f3a7792f2580093888a",
-                "Sample1_01.bam.bai:md5,786cb1fbbadef4acea403f83d4628d5c",
-                "Sample23_03.bam:md5,98795a0c8227b0278ba40394c5d241a7",
-                "Sample23_03.bam.bai:md5,786cb1fbbadef4acea403f83d4628d5c",
-                "SampleA_02.bam:md5,c24b053cb4a9008d9fcfc98c2ed2e8f8",
-                "SampleA_02.bam.bai:md5,786cb1fbbadef4acea403f83d4628d5c",
-                "Undetermined_05.bam:md5,210e17b1af6c72514a769bf3c168547c",
-                "Undetermined_05.bam.bai:md5,786cb1fbbadef4acea403f83d4628d5c",
-                "sampletest_04.bam:md5,35fbd12d959ed55e53b6310fe9d6ccb5",
-                "sampletest_04.bam.bai:md5,786cb1fbbadef4acea403f83d4628d5c",
                 "Sample1_01_screen.png:md5,57b1664bc6c8e82cc0ce14802ad0dc0f",
                 "Sample1_01_screen.txt:md5,3b184ef10eeb99043a85826534a4ee28",
                 "Sample23_03_screen.png:md5,41b4f556865a2f55a93f63e520812fad",
@@ -2941,6 +2925,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-12T11:47:44.482972598"
+        "timestamp": "2025-12-12T16:54:35.347526634"
     }
 }

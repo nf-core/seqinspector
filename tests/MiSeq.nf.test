@@ -27,6 +27,8 @@ nextflow_pipeline {
                 params.outdir,
                 ignoreFile: 'tests/.nftignore'
             )
+            // bam_files: All bam files
+            def bam_files  = getAllFilesFromDir(params.outdir, include: ['**/*.bam'])
             assert workflow.success
             assertAll(
                 { assert snapshot(
@@ -35,7 +37,9 @@ nextflow_pipeline {
                     // All stable path names, with a relative path
                     stable_name,
                     // All files with stable contents
-                    stable_path
+                    stable_path,
+                    // All bam files
+                    bam_files.isEmpty() ? 'No BAM files' : bam_files.collect { file -> file.getName() + ":md5," +  bam(file.toString()).readsMD5 },
                 ).match() }
             )
         }
@@ -62,6 +66,8 @@ nextflow_pipeline {
                 params.outdir,
                 ignoreFile: 'tests/.nftignore'
             )
+            // bam_files: All bam files
+            def bam_files  = getAllFilesFromDir(params.outdir, include: ['**/*.bam'])
             assert workflow.success
             assertAll(
                 { assert snapshot(
@@ -70,7 +76,9 @@ nextflow_pipeline {
                     // All stable path names, with a relative path
                     stable_name,
                     // All files with stable contents
-                    stable_path
+                    stable_path,
+                    // All bam files
+                    bam_files.isEmpty() ? 'No BAM files' : bam_files.collect { file -> file.getName() + ":md5," +  bam(file.toString()).readsMD5 },
                 ).match() }
             )
         }
@@ -97,6 +105,8 @@ nextflow_pipeline {
                 params.outdir,
                 ignoreFile: 'tests/.nftignore'
             )
+            // bam_files: All bam files
+            def bam_files  = getAllFilesFromDir(params.outdir, include: ['**/*.bam'])
             assert workflow.success
             assertAll(
                 { assert snapshot(
@@ -105,7 +115,9 @@ nextflow_pipeline {
                     // All stable path names, with a relative path
                     stable_name,
                     // All files with stable contents
-                    stable_path
+                    stable_path,
+                    // All bam files
+                    bam_files.isEmpty() ? 'No BAM files' : bam_files.collect { file -> file.getName() + ":md5," +  bam(file.toString()).readsMD5 },
                 ).match() }
             )
         }

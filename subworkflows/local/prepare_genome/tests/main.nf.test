@@ -10,13 +10,12 @@ nextflow_workflow {
 
         when {
             params {
-                outdir = "$outputDir"
-                run_picard_collecthsmetrics = true
-
+                run_picard_collecthsmetrics = false
             }
+
             workflow {
                 """
-                input[0]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/modules/data/genomics/homo_sapiens/genome/genome.fasta', checkIfExists: true)).collect()
+                input[0]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/raredisease/reference/reference.fasta', checkIfExists: true)).collect()
                 input[1]  = null
                 input[2]  = ''
                 input[3]  = false
@@ -40,17 +39,16 @@ nextflow_workflow {
 
         when {
             params {
-                outdir = "$outputDir"
                 run_picard_collecthsmetrics = true
-
             }
+
             workflow {
                 """
-                input[0]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/modules/data/genomics/homo_sapiens/genome/genome.fasta', checkIfExists: true)).collect()
+                input[0]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/raredisease/reference/reference.fasta', checkIfExists: true)).collect()
                 input[1]  = null
                 input[2]  = ''
                 input[3]  = true
-                input[4]  = params.pipelines_testdata_base_path + '/modules/data/genomics/homo_sapiens/genome/genome.dict'
+                input[4]  = params.pipelines_testdata_base_path + '/raredisease/reference/reference.dict'
                 """
             }
         }
@@ -70,13 +68,12 @@ nextflow_workflow {
 
         when {
             params {
-                outdir = "$outputDir"
                 run_picard_collecthsmetrics = true
-
             }
+
             workflow {
                 """
-                input[0]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/modules/data/genomics/homo_sapiens/genome/genome.fasta', checkIfExists: true)).collect()
+                input[0]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/raredisease/reference/reference.fasta', checkIfExists: true)).collect()
                 input[1]  = null
                 input[2]  = ''
                 input[3]  = true
