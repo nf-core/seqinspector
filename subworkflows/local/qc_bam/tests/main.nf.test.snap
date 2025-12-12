@@ -1,50 +1,112 @@
 {
     "Test with run_picard_collecthsmetrics=false": {
         "content": [
-            [
-                "",
-                "earlycasualcaiman.CollectMultipleMetrics.alignment_summary_metrics",
-                "earlycasualcaiman.CollectMultipleMetrics.base_distribution_by_cycle.pdf",
-                "earlycasualcaiman.CollectMultipleMetrics.base_distribution_by_cycle_metrics",
-                "earlycasualcaiman.CollectMultipleMetrics.insert_size_histogram.pdf",
-                "earlycasualcaiman.CollectMultipleMetrics.insert_size_metrics",
-                "earlycasualcaiman.CollectMultipleMetrics.quality_by_cycle.pdf",
-                "earlycasualcaiman.CollectMultipleMetrics.quality_by_cycle_metrics",
-                "earlycasualcaiman.CollectMultipleMetrics.quality_distribution.pdf",
-                "earlycasualcaiman.CollectMultipleMetrics.quality_distribution_metrics",
-                "earlycasualcaiman.CollectMultipleMetrics.read_length_histogram.pdf"
-            ]
+            {
+                "hs_metrics": [
+                    
+                ],
+                "multiple_metrics": [
+                    [
+                        {
+                            "id": "earlycasualcaiman",
+                            "sample": "earlycasualcaiman",
+                            "single_end": false,
+                            "num_lanes": 1,
+                            "read_group": "'@RG\\tID:earlycasualcaiman\\tPL:illumina\\tSM:earlycasualcaiman'",
+                            "lane": 1,
+                            "sex": 1,
+                            "phenotype": 1,
+                            "paternal": 0,
+                            "maternal": 0,
+                            "case_id": "justhusky"
+                        },
+                        [
+                            "earlycasualcaiman.CollectMultipleMetrics.alignment_summary_metrics:md5,8c8e5853c6cbf03f025583bb0fda9113",
+                            "earlycasualcaiman.CollectMultipleMetrics.base_distribution_by_cycle_metrics:md5,a8a072fd1c92cbeef2d20803e5957968",
+                            "earlycasualcaiman.CollectMultipleMetrics.insert_size_metrics:md5,bcf2d7c097ccee4d5bd83f81696c6879",
+                            "earlycasualcaiman.CollectMultipleMetrics.quality_by_cycle_metrics:md5,8f0b70b234951a64705cf6d2ccb06109",
+                            "earlycasualcaiman.CollectMultipleMetrics.quality_distribution_metrics:md5,0c5d65609cb9d1bb0afb63b4c2627669"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    {
+                        "QC_BAM:PICARD_COLLECTMULTIPLEMETRICS": {
+                            "picard": "3.4.0"
+                        }
+                    }
+                ]
+            }
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-02T15:05:56.507859"
+        "timestamp": "2025-12-12T16:25:16.687447363"
     },
     "Test with run_picard_collecthsmetrics=true": {
         "content": [
-            [
-                "",
-                "earlycasualcaiman.CollectMultipleMetrics.alignment_summary_metrics",
-                "earlycasualcaiman.CollectMultipleMetrics.base_distribution_by_cycle.pdf",
-                "earlycasualcaiman.CollectMultipleMetrics.base_distribution_by_cycle_metrics",
-                "earlycasualcaiman.CollectMultipleMetrics.insert_size_histogram.pdf",
-                "earlycasualcaiman.CollectMultipleMetrics.insert_size_metrics",
-                "earlycasualcaiman.CollectMultipleMetrics.quality_by_cycle.pdf",
-                "earlycasualcaiman.CollectMultipleMetrics.quality_by_cycle_metrics",
-                "earlycasualcaiman.CollectMultipleMetrics.quality_distribution.pdf",
-                "earlycasualcaiman.CollectMultipleMetrics.quality_distribution_metrics",
-                "earlycasualcaiman.CollectMultipleMetrics.read_length_histogram.pdf"
-            ],
-            [
-                "",
-                "earlycasualcaiman.CollectHsMetrics.coverage_metrics"
-            ]
+            {
+                "hs_metrics": [
+                    [
+                        {
+                            "id": "earlycasualcaiman",
+                            "sample": "earlycasualcaiman",
+                            "single_end": false,
+                            "num_lanes": 1,
+                            "read_group": "'@RG\\tID:earlycasualcaiman\\tPL:illumina\\tSM:earlycasualcaiman'",
+                            "lane": 1,
+                            "sex": 1,
+                            "phenotype": 1,
+                            "paternal": 0,
+                            "maternal": 0,
+                            "case_id": "justhusky"
+                        },
+                        "earlycasualcaiman.CollectHsMetrics.coverage_metrics:md5,a1b193af1934726edcc75fe5299fb73a"
+                    ]
+                ],
+                "multiple_metrics": [
+                    [
+                        {
+                            "id": "earlycasualcaiman",
+                            "sample": "earlycasualcaiman",
+                            "single_end": false,
+                            "num_lanes": 1,
+                            "read_group": "'@RG\\tID:earlycasualcaiman\\tPL:illumina\\tSM:earlycasualcaiman'",
+                            "lane": 1,
+                            "sex": 1,
+                            "phenotype": 1,
+                            "paternal": 0,
+                            "maternal": 0,
+                            "case_id": "justhusky"
+                        },
+                        [
+                            "earlycasualcaiman.CollectMultipleMetrics.alignment_summary_metrics:md5,7edc24dc3d3fe414a470200eca8e968f",
+                            "earlycasualcaiman.CollectMultipleMetrics.base_distribution_by_cycle_metrics:md5,498b9654e61aaa31818251eeeb8fff92",
+                            "earlycasualcaiman.CollectMultipleMetrics.insert_size_metrics:md5,81816a34524bb5e00da75d1c1178e8ef",
+                            "earlycasualcaiman.CollectMultipleMetrics.quality_by_cycle_metrics:md5,14d451f56f603f2b06bdf6227615b8b0",
+                            "earlycasualcaiman.CollectMultipleMetrics.quality_distribution_metrics:md5,1e1ce607caed451c0cc05395023672e5"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    {
+                        "QC_BAM:PICARD_COLLECTMULTIPLEMETRICS": {
+                            "picard": "3.4.0"
+                        }
+                    },
+                    {
+                        "QC_BAM:PICARD_COLLECTHSMETRICS": {
+                            "picard": "3.4.0"
+                        }
+                    }
+                ]
+            }
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-02T15:08:24.865168"
+        "timestamp": "2025-12-12T16:26:35.596343224"
     }
 }
