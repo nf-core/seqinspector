@@ -8,10 +8,10 @@ process RUNDIRPARSER {
         : 'community.wave.seqera.io/library/pip_pyyaml_xmltodict:a4e48bd1ab4b6a53'}"
 
     input:
-    tuple val(dir_meta), path(rundir)
+    tuple val(meta), path(rundir)
 
     output:
-    tuple val(dir_meta), path("*_mqc.*"), emit: multiqc
+    tuple val(meta), path("*_mqc.*"), emit: multiqc
     tuple val("${task.process}"), val('Python'), eval("python --version |& sed '1!d ; s/Python //'"), emit: versions_python, topic: versions
     tuple val("${task.process}"), val('PyYAML'), eval("python -c 'import yaml; print(yaml.__version__)'"), emit: versions_pyyaml, topic: versions
 
