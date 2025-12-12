@@ -9,7 +9,6 @@ nextflow_pipeline {
 
         when {
             params {
-                input  = params.pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/samplesheet.csv'
                 fastq_screen_references = "${projectDir}/assets/example_fastq_screen_references.csv"
                 genome = 'R64-1-1'
                 outdir = "$outputDir"
