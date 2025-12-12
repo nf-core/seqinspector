@@ -73,7 +73,9 @@ nextflow_pipeline {
             )
         }
     }
+
     test("NovaSeq6000 data test sample size exceeds available reads") {
+        tag "warning"
 
         when {
             config "./NovaSeq6000.main_subsample.nf.test.config"
@@ -84,18 +86,29 @@ nextflow_pipeline {
         }
 
         then {
-            def warn_messages = [
-                "Warning: Requested sample_size (120) is larger than available reads in Undetermined_5 (100). Pipeline will continue with 100 reads.",
-                "Warning: Requested sample_size (120) is larger than available reads in SampleA_2 (100). Pipeline will continue with 100 reads.",
-                "Warning: Requested sample_size (120) is larger than available reads in sampletest_4 (100). Pipeline will continue with 100 reads.",
-                "Warning: Requested sample_size (120) is larger than available reads in Sample23_3 (100). Pipeline will continue with 100 reads.",
-                "Warning: Requested sample_size (120) is larger than available reads in Sample1_1 (100). Pipeline will continue with 100 reads."
-            ]
+            // stable_name: All files + folders in ${params.outdir}/ with a stable name
+            def stable_name = getAllFilesFromDir(
+                params.outdir,
+                relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}']
+            )
+            // stable_path: All files in ${params.outdir}/ with stable content
+            def stable_path = getAllFilesFromDir(
+                params.outdir,
+                ignoreFile: 'tests/.nftignore'
+            )
             assert workflow.success
-            for ( msg in warn_messages ) {
-                // Read warning from stdout as nf-test does not capture log messages
-                assert workflow.stdout.contains(msg)
-            }
+            assertAll(
+                { assert snapshot(
+                    // pipeline versions.yml file for multiqc from which Nextflow version is removed because we tests pipelines on multiple Nextflow versions
+                    removeNextflowVersion("$outputDir/pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"),
+                    // All stable path names, with a relative path
+                    stable_name,
+                    // All files with stable contents
+                    stable_path,
+                    // get all messages containing Requested sample_size (120)
+                    filterNextflowOutput(workflow.stdout + workflow.stderr, ignore: ['Downloading plugin'], include:['Requested sample_size (120)'])
+                ).match() }
+            )
         }
     }
 }
