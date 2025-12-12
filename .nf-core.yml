@@ -1,13 +1,16 @@
 lint:
-  actions_ci: false
+  multiqc_config: false
+  files_exist:
+    - tests/default.nf.test
   files_unchanged:
     - .github/CONTRIBUTING.md
-  files_exist:
-    - .github/workflows/ci.yml
+    - docs/images/nf-core-seqinspector_logo_dark.png
+    - docs/images/nf-core-seqinspector_logo_light.png
+    - assets/nf-core-seqinspector_logo_light.png
   nextflow_config:
     - config_defaults:
         - params.fastq_screen_references
-nf_core_version: 3.2.0
+nf_core_version: 3.5.1
 repository_type: pipeline
 template:
   author: Adrien Coulier

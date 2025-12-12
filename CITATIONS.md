@@ -28,6 +28,18 @@
 
 - [Seqtk](https://github.com/lh3/seqtk)
 
+- [BWAMEM2](https://ieeexplore.ieee.org/abstract/document/8820962)
+
+> Vasimuddin Md, Misra S, Li H, Aluru S. Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems. In: 2019 IEEE International Parallel and Distributed Processing Symposium (IPDPS). IEEE; 2019:314-324. doi:10.1109/IPDPS.2019.00041
+
+- [SAMTOOLS](https://academic.oup.com/bioinformatics/article/25/16/2078/204688)
+
+> Danecek P, Bonfield JK, Liddle J, et al. Twelve years of SAMtools and BCFtools. GigaScience. 2021;10(2):giab008. doi:10.1093/gigascience/giab008
+
+- [Picard Tools](https://broadinstitute.github.io/picard/)
+
+> Broad Institute, “Picard Toolkit.” 2019. GitHub Repository. https://broadinstitute.github.io/picard/
+
 ## Software packaging/containerisation tools
 
 - [Anaconda](https://anaconda.com)

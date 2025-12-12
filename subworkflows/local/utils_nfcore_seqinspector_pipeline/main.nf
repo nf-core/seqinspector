@@ -11,6 +11,7 @@
 include { UTILS_NFSCHEMA_PLUGIN     } from '../../nf-core/utils_nfschema_plugin'
 include { paramsSummaryMap          } from 'plugin/nf-schema'
 include { samplesheetToList         } from 'plugin/nf-schema'
+include { paramsHelp                } from 'plugin/nf-schema'
 include { completionEmail           } from '../../nf-core/utils_nfcore_pipeline'
 include { completionSummary         } from '../../nf-core/utils_nfcore_pipeline'
 include { imNotification            } from '../../nf-core/utils_nfcore_pipeline'
@@ -32,10 +33,13 @@ workflow PIPELINE_INITIALISATION {
     nextflow_cli_args //   array: List of positional nextflow CLI args
     outdir            //  string: The output directory where the results will be saved
     input             //  string: Path to input samplesheet
+    help              // boolean: Display help message and exit
+    help_full         // boolean: Show the full help message
+    show_hidden       // boolean: Show hidden parameters in the help message
 
     main:
 
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     //
     // Print version and exit if required and dump pipeline parameters to JSON file
@@ -50,10 +54,35 @@ workflow PIPELINE_INITIALISATION {
     //
     // Validate parameters and generate parameter summary to stdout
     //
+    before_text = """
+-\033[2m----------------------------------------------------\033[0m-
+                                        \033[0;32m,--.\033[0;30m/\033[0;32m,-.\033[0m
+\033[0;34m        ___     __   __   __   ___     \033[0;32m/,-._.--~\'\033[0m
+\033[0;34m  |\\ | |__  __ /  ` /  \\ |__) |__         \033[0;33m}  {\033[0m
+\033[0;34m  | \\| |       \\__, \\__/ |  \\ |___     \033[0;32m\\`-._,-`-,\033[0m
+                                        \033[0;32m`._,._,\'\033[0m
+\033[0;35m  nf-core/seqinspector ${workflow.manifest.version}\033[0m
+-\033[2m----------------------------------------------------\033[0m-
+"""
+    after_text = """${workflow.manifest.doi ? "\n* The pipeline\n" : ""}${workflow.manifest.doi.tokenize(",").collect { doi -> "    https://doi.org/${doi.trim().replace('https://doi.org/','')}"}.join("\n")}${workflow.manifest.doi ? "\n" : ""}
+* The nf-core framework
+    https://doi.org/10.1038/s41587-020-0439-x
+
+* Software dependencies
+    https://github.com/nf-core/seqinspector/blob/master/CITATIONS.md
+"""
+    command = "nextflow run ${workflow.manifest.name} -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>"
+
     UTILS_NFSCHEMA_PLUGIN (
         workflow,
         validate_params,
-        null
+        null,
+        help,
+        help_full,
+        show_hidden,
+        before_text,
+        after_text,
+        command
     )
 
     //
@@ -74,7 +103,7 @@ workflow PIPELINE_INITIALISATION {
     nr_samples = Channel.fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
         .toList().size()
 
-    Channel
+    channel
         .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
         .toList()
         .flatMap { it.withIndex().collect {  entry, idx -> entry + "${idx+1}" } }
@@ -187,7 +216,6 @@ workflow PIPELINE_COMPLETION {
 def validateInputParameters() {
     // genomeExistsError()
 
-    // TODO: Add code to further validate pipeline parameters here
 }
 
 //
@@ -203,17 +231,6 @@ def validateInputSamplesheet(input) {
     }
 
     return [ metas[0], fastqs ]
-}
-//
-// Get attribute from genome config file e.g. fasta
-//
-def getGenomeAttribute(attribute) {
-    if (params.genomes && params.genome && params.genomes.containsKey(params.genome)) {
-        if (params.genomes[ params.genome ].containsKey(attribute)) {
-            return params.genomes[ params.genome ][ attribute ]
-        }
-    }
-    return null
 }
 
 //
@@ -290,3 +307,34 @@ def methodsDescriptionText(mqc_methods_yaml) {
     return description_html.toString()
 }
 
+//
+// Generate report index for MultiQC
+//
+def reportIndexMultiqc(tags, global=true) {
+    def relative_path = global ? ".." : "../.."
+
+    def a_attrs = "target=\"_blank\" class=\"list-group-item list-group-item-action\""
+
+    // Global report path
+    def index_section = "    <a href=\"${relative_path}/global_report/multiqc_report.html\" ${a_attrs}>Global report</a>\n"
+
+    // Group report paths
+    tags
+        .each { tag ->
+            index_section += "    <a href=\"${relative_path}/group_reports/${tag}/multiqc_report.html\" ${a_attrs}>Group report: ${tag}</a>\n"
+        }
+
+    def yaml_file_text = "id: '${workflow.manifest.name.replace('/', '-')}-index'\n" as String
+    yaml_file_text     += "description: 'MultiQC reports collected from running the pipeline.'\n"
+    yaml_file_text     += "section_name: '${workflow.manifest.name} MultiQC Reports Index'\n"
+    yaml_file_text     += "section_href: 'https://github.com/${workflow.manifest.name}'\n"
+    yaml_file_text     += "plot_type: 'html'\n"
+    yaml_file_text     += "data: |\n"
+    yaml_file_text     += "  <h4>Reports</h4>\n"
+    yaml_file_text     += "  <p>Select a report to view (open in a new tab):</p>\n"
+    yaml_file_text     += "  <div class=\"list-group\">\n"
+    yaml_file_text     += "${index_section}"
+    yaml_file_text     += "  </div>\n"
+
+    return yaml_file_text
+}

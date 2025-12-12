@@ -8,12 +8,17 @@ The directories listed below will be created in the results directory after the 
 
 ## Pipeline overview
 
-The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes data using the following steps:
+The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generate output files from the following steps:
 
 - [Seqtk](#seqtk) - Subsample a specific number of reads per sample
 - [FastQC](#fastqc) - Raw read QC
 - [SeqFu Stats](#seqfu_stats) - Statistics for FASTA or FASTQ files
 - [FastQ Screen](#fastqscreen) - Mapping against a set of references for basic contamination QC
+- [BWA-MEM2_INDEX](#bwamem2_index) - Create BWA-MEM2 index of a chosen reference genome OR use pre-built index
+- [BWA-MEM2_MEM](#bwamem2_mem) - Mapping reads against a chosen reference genome
+- [Samtools index](#samtools-index) - Index BAM files with Samtools
+- [Picard collect multiple metrics](#picard-collect-multiple-metrics) - Combine BAM and BAI outputs for Picard
+- [Picard collecthsmetrics](#picard-collecthsmetrics) - Collect alignment QC metrics of hybrid-selection data
 - [MultiQC](#multiqc) - Aggregate report describing results and QC from the whole pipeline
 - [Pipeline information](#pipeline-information) - Report metrics generated during the workflow execution
 
@@ -42,6 +47,19 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 
 [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) gives general quality metrics about your sequenced reads. It provides information about the quality score distribution across your reads, per base sequence content (%A/T/G/C), adapter contamination and overrepresented sequences. For further reading and documentation see the [FastQC help pages](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/).
 
+### SeqFu Stats
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `seqfu_stats/`
+  - `*.tsv`: Tab-separated file containing quality metrics.
+  - `*_mqc.txt`: File containing the same quality metrics as the TSV file, ready to be read by MultiQC.
+
+</details>
+
+[SeqFu](https://telatin.github.io/seqfu2/) is general-purpose program to manipulate and parse information from FASTA/FASTQ files, supporting gzipped input files. Includes functions to interleave and de-interleave FASTQ files, to rename sequences and to count and print statistics on sequence lengths. In this pipeline, the `seqfu stats` module is used to produce general quality metrics statistics.
+
 ### FastQ Screen
 
 <details markdown="1">
@@ -49,7 +67,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 
 - `fastqscreen/`
   - `*_screen.html`: Interactive graphical report.
-  - `*_screen.pdf`: Static graphical report.
+  - `*_screen.png`: Static graphical report.
   - `*_screen.txt` : Text-based report.
 
 </details>
@@ -67,18 +85,65 @@ See `assets/example_fastq_screen_references.csv` for example.
 
 The `.csv` is provided as a pipeline parameter `fastq_screen_references` and is used to construct a `FastQ Screen` configuration file within the context of the process work directory in order to properly mount the references.
 
-### SeqFu Stats
+### BWAMEM2_INDEX
 
 <details markdown="1">
 <summary>Output files</summary>
 
-- `seqfu/`
-  - `*.tsv`: Tab-separated file containing quality metrics.
-  - `*_mqc.txt`: File containing the same quality metrics as the TSV file, ready to be read by MultiQC.
+Generates the full set of bwamem2 indexes:
+
+- `bwamem2_index/`
+  - `*.fa`
+  - `*.fa.amb`
+  - `*.fa.ann`
+  - `*.fa.bwt`
+  - `*.fa.pac`
+
+### BWAMEM2_MEM
+
+[BWA-mem2](https://github.com/bwa-mem2/bwa-mem2) is a tool next version of bwa-mem for mapping sequencies with low divergence against a reference genome with increased processing speed (~1.3-3.1x). Aligned reads are then potentially filtered and coordinate-sorted using [samtools](#samtools-index).
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `bwamem2/`
+  - `*.bam`: The original BAM file containing read alignments to the reference genome.
+  - `*.bam.bai`: BAM index files
+
+### Samtools index
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `samtools_faidex`
+  - `*.fa.fai`
+  - `*.fa.fai`
+
+### Picard collect multiple metrics
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `picard_collectmultiplemetrics`
+  - `*.CollectMultipleMetrics.alignment_summary_metrics`
+  - `*.CollectMultipleMetrics.base_distribution_by_cycle_metrics`
+  - `*.CollectMultipleMetrics.base_distribution_by_cycle.pdf`
+  - `*.CollectMultipleMetrics.quality_by_cycle_metrics`
+  - `*.CollectMultipleMetrics.quality_by_cycle.pdf`
+  - `*.CollectMultipleMetrics.quality_distribution.pdf`
+  - `*.CollectMultipleMetrics.read_length_histogram.pdf`
+
+### Picard CollectHSmetrics
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `picard_collecthsmetrics/`
+  - `*.coverage_metrics`: Tab-separated file containing quality metrics for hybrid-selection data.
 
 </details>
 
-[SeqFu](https://telatin.github.io/seqfu2/) is general-purpose program to manipulate and parse information from FASTA/FASTQ files, supporting gzipped input files. Includes functions to interleave and de-interleave FASTQ files, to rename sequences and to count and print statistics on sequence lengths. In this pipeline, the `seqfu stats` module is used to produce general quality metrics statistics.
+[Picard_collecthsmetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard) is a tool to collect metrics on the aligment SAM/BAM files that are specific for sequence datasets generated through hybrid-selection (mostly used to capture exon-specific sequences for targeted sequencing).
 
 ### MultiQC
 
