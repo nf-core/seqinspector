@@ -758,16 +758,6 @@
                 "genome.fa.ann:md5,4439f90bdaaf2cdf9089c9f7f07b9d6b",
                 "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
                 "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
-                "Sample1_01.bam:md5,9985af901ea635009ba79dfbdae3ef69",
-                "Sample1_01.bam.bai:md5,786cb1fbbadef4acea403f83d4628d5c",
-                "Sample23_03.bam:md5,be8ecb43e6b7df5de7487e51eb5534c7",
-                "Sample23_03.bam.bai:md5,786cb1fbbadef4acea403f83d4628d5c",
-                "SampleA_02.bam:md5,8a253e12f6c92ec39da8d87385895203",
-                "SampleA_02.bam.bai:md5,786cb1fbbadef4acea403f83d4628d5c",
-                "Undetermined_05.bam:md5,c9c86417ec4f050c2a0d775b9af39d29",
-                "Undetermined_05.bam.bai:md5,786cb1fbbadef4acea403f83d4628d5c",
-                "sampletest_04.bam:md5,62395d6d4b5589aae0b0928f4e333805",
-                "sampletest_04.bam.bai:md5,786cb1fbbadef4acea403f83d4628d5c",
                 "Sample1_01_screen.png:md5,562256290643b51e4374c2225a15f463",
                 "Sample1_01_screen.txt:md5,3b184ef10eeb99043a85826534a4ee28",
                 "Sample23_03_screen.png:md5,6bb2caf67b9b2ed25d3d5f32c343e9ab",
@@ -956,12 +946,19 @@
                 "Undetermined_05_seqfu_mqc.txt:md5,bd8be908362c5cb08a72f8ae7ab41b0d",
                 "sampletest_04_seqfu.tsv:md5,a5bea0b9c6015dd1a201ffd433e9b377",
                 "sampletest_04_seqfu_mqc.txt:md5,2180961655bbc8a12f0152d6a4b803a2"
+            ],
+            [
+                "Sample1_01.bam:md5,d06ccfde49cc474faebcab2ebf71b324",
+                "Sample23_03.bam:md5,5ff9f554c6255fd07d3841c6616c5031",
+                "SampleA_02.bam:md5,250d0031520e59ee59a7112ab1ea32e1",
+                "Undetermined_05.bam:md5,8fcc158f1e0736b366152d5e187644ca",
+                "sampletest_04.bam:md5,f80371e37421d97499b3bfd55221ed00"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-12T13:39:06.915289541"
+        "timestamp": "2025-12-12T16:50:45.065344275"
     }
 }
