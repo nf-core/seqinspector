@@ -9,6 +9,7 @@ nextflow_pipeline {
 
         when {
             params {
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/nf-core/test-datasets/'
                 input  = params.pipelines_testdata_base_path + 'seqinspector/testdata/MiSeq/samplesheet.csv'
                 outdir = "$outputDir"
                 skip_tools = "rundirparser"
@@ -43,6 +44,7 @@ nextflow_pipeline {
     test("Miseq data test (skip fastqc)") {
         when {
             params {
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/nf-core/test-datasets/'
                 input  = params.pipelines_testdata_base_path + 'seqinspector/testdata/MiSeq/samplesheet.csv'
                 outdir = "$outputDir"
                 skip_tools = "fastqc,rundirparser"
@@ -77,6 +79,7 @@ nextflow_pipeline {
     test("Miseq data test (skip all tools)") {
         when {
             params {
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/nf-core/test-datasets/'
                 input  = params.pipelines_testdata_base_path + 'seqinspector/testdata/MiSeq/samplesheet.csv'
                 outdir = "$outputDir"
                 skip_tools = "fastqc,fastqscreen,seqfu_stats,seqtk_sample,bwamem2_index,bwamem2_mem,rundirparser"

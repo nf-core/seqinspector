@@ -9,8 +9,9 @@ nextflow_pipeline {
 
         when {
             params {
-                input  = params.pipelines_testdata_base_path + 'seqinspector/testdata/PromethION/samplesheet.csv'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/nf-core/test-datasets/'
                 genome = 'EB1'
+                input  = params.pipelines_testdata_base_path + '/seqinspector/testdata/PromethION/samplesheet.csv'
                 outdir = "$outputDir"
                 skip_tools = "bwamem2_index,bwamem2_mem,rundirparser"
             }
@@ -27,8 +28,8 @@ nextflow_pipeline {
                 params.outdir,
                 ignoreFile: 'tests/.nftignore'
             )
+            assert workflow.success
             assertAll(
-                { assert workflow.success},
                 { assert snapshot(
                     // pipeline versions.yml file for multiqc from which Nextflow version is removed because we tests pipelines on multiple Nextflow versions
                     removeNextflowVersion("$outputDir/pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"),
