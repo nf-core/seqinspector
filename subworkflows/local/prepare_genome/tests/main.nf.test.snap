@@ -14,7 +14,7 @@
                     ]
                 ],
                 "ref_dict": [
-                    "genome.dict:md5,f91ebda0d0bd72d5c22c1f1bcbbc563c"
+                    "genome.dict"
                 ],
                 "reference_fai": [
                     "reference.fasta.fai:md5,bf4047e05f95deb372eb8ffd601cbc29"
@@ -42,7 +42,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-12T18:17:59.250873828"
+        "timestamp": "2025-12-15T11:57:16.786415613"
     },
     "Test without bwamem2 index file path, with run_picard_collecthsmetrics=true and with ref_dict": {
         "content": [
@@ -59,7 +59,7 @@
                     ]
                 ],
                 "ref_dict": [
-                    "/nf-core/test-datasets/raredisease/reference/reference.dict"
+                    "reference.dict"
                 ],
                 "reference_fai": [
                     "reference.fasta.fai:md5,bf4047e05f95deb372eb8ffd601cbc29"
@@ -82,7 +82,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-12T18:19:48.876692867"
+        "timestamp": "2025-12-15T11:56:46.871893037"
     },
     "Test without bwamem2 index file path and with run_picard_collecthsmetrics=false": {
         "content": [
@@ -120,6 +120,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-12T17:27:20.079142637"
+        "timestamp": "2025-12-15T12:00:16.296041182"
     }
 }
