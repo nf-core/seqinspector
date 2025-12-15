@@ -26,15 +26,14 @@ nextflow_workflow {
         then {
             assert workflow.success
             assert snapshot(sanitizeOutput(workflow.out).collectEntries { key, val ->
-                if (key == "bwamem2_index") {
+                if (!val) {
+                    return null
+                }
+                else if (key == "bwamem2_index") {
                     return [key, val.collect { [path(it[1]).list().collect { it }] }]
                 }
                 else if (key == "ref_dict") {
-                    if (val) {
-                        return [key, val.collect { file(it[1]).name }]
-                    } else {
-                        return ['ref_dict']
-                    }
+                    return [key, val.collect { file(it[1]).name }]
                 }
                 else if (key == "reference_fai") {
                     return [key, val.collect { path(it[1]) }]
@@ -67,15 +66,14 @@ nextflow_workflow {
         then {
             assert workflow.success
             assert snapshot(sanitizeOutput(workflow.out).collectEntries { key, val ->
-                if (key == "bwamem2_index") {
+                if (!val) {
+                    return null
+                }
+                else if (key == "bwamem2_index") {
                     return [key, val.collect { [path(it[1]).list().collect { it }] }]
                 }
                 else if (key == "ref_dict") {
-                    if (val) {
-                        return [key, val.collect { file(it[1]).name }]
-                    } else {
-                        return ['ref_dict']
-                    }
+                    return [key, val.collect { file(it[1]).name }]
                 }
                 else if (key == "reference_fai") {
                     return [key, val.collect { path(it[1]) }]
@@ -83,7 +81,6 @@ nextflow_workflow {
                 else if (key == "versions") {
                     return [key, val.collect { path(it).yaml }]
                 }
-                return [key, val]
             }).match()
         }
     }
@@ -108,15 +105,14 @@ nextflow_workflow {
         then {
             assert workflow.success
             assert snapshot(sanitizeOutput(workflow.out).collectEntries { key, val ->
-                if (key == "bwamem2_index") {
+                if (!val) {
+                    return null
+                }
+                else if (key == "bwamem2_index") {
                     return [key, val.collect { [path(it[1]).list().collect { it }] }]
                 }
                 else if (key == "ref_dict") {
-                    if (val) {
-                        return [key, val.collect { file(it[1]).name }]
-                    } else {
-                        return ['ref_dict']
-                    }
+                    return [key, val.collect { file(it[1]).name }]
                 }
                 else if (key == "reference_fai") {
                     return [key, val.collect { path(it[1]) }]
@@ -124,7 +120,6 @@ nextflow_workflow {
                 else if (key == "versions") {
                     return [key, val.collect { path(it).yaml }]
                 }
-                return [key, val]
             }).match()
         }
     }

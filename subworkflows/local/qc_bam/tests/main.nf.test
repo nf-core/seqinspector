@@ -38,7 +38,17 @@ nextflow_workflow {
         then {
             assert workflow.success
             assert snapshot(sanitizeOutput(workflow.out).collectEntries { key, val ->
-                if (key == "versions") {
+                if (!val) {
+                    return null
+                }
+                else if (key == "hs_metrics") {
+                    return [key, val.collect { file(it[1].toString()).name }]
+                }
+                else if (key == "multiple_metrics") {
+                    println val[0][1]
+                    return [key, val.collect { it[1].collect{ file(it.toString()).name } } ]
+                }
+                else if (key == "versions") {
                     return [key, val.collect { path(it).yaml }]
                 }
                 return [key, val]
@@ -79,7 +89,17 @@ nextflow_workflow {
         then {
             assert workflow.success
             assert snapshot(sanitizeOutput(workflow.out).collectEntries { key, val ->
-                if (key == "versions") {
+                if (!val) {
+                    return null
+                }
+                else if (key == "hs_metrics") {
+                    return [key, val.collect { file(it[1].toString()).name }]
+                }
+                else if (key == "multiple_metrics") {
+                    println val[0][1]
+                    return [key, val.collect { it[1].collect{ file(it.toString()).name } } ]
+                }
+                else if (key == "versions") {
                     return [key, val.collect { path(it).yaml }]
                 }
                 return [key, val]
