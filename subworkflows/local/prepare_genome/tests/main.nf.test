@@ -35,9 +35,6 @@ nextflow_workflow {
                 else if (key == "ref_dict") {
                     return [key, val.collect { file(it[1]).name }]
                 }
-                else if (key == "reference_fai") {
-                    return [key, val.collect { path(it[1]) }]
-                }
                 else if (key == "versions") {
                     return [key, val.collect { path(it).yaml }]
                 }
@@ -75,9 +72,6 @@ nextflow_workflow {
                 else if (key == "ref_dict") {
                     return [key, val.collect { file(it[1]).name }]
                 }
-                else if (key == "reference_fai") {
-                    return [key, val.collect { path(it[1]) }]
-                }
                 else if (key == "versions") {
                     return [key, val.collect { path(it).yaml }]
                 }
@@ -113,9 +107,6 @@ nextflow_workflow {
                 }
                 else if (key == "ref_dict") {
                     return [key, val.collect { file(it[1]).name }]
-                }
-                else if (key == "reference_fai") {
-                    return [key, val.collect { path(it[1]) }]
                 }
                 else if (key == "versions") {
                     return [key, val.collect { path(it).yaml }]
