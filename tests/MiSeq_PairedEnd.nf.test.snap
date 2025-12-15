@@ -332,10 +332,6 @@
                 "genome.fa.ann:md5,4439f90bdaaf2cdf9089c9f7f07b9d6b",
                 "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
                 "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
-                "SAMPLE_PAIRED_END_1_01.bam:md5,a2816c39f5907fad768bb65d6a75e757",
-                "SAMPLE_PAIRED_END_1_01.bam.bai:md5,8d7c1e80974444bbdb6361408b09e188",
-                "SAMPLE_PAIRED_END_2_02.bam:md5,f82c6ab5a81de087823a398616bcec08",
-                "SAMPLE_PAIRED_END_2_02.bam.bai:md5,3c4bdff0f906f2234fdeee8eea719210",
                 "SAMPLE_PAIRED_END_1_01_1_screen.png:md5,f52ddd0e65f23f68dd8d58d5453417db",
                 "SAMPLE_PAIRED_END_1_01_1_screen.txt:md5,921b08eeb461a2aa1bd42bba53900f70",
                 "SAMPLE_PAIRED_END_1_01_2_screen.png:md5,908f4fceea8aa546106efdaa7ca78f7d",
@@ -414,12 +410,16 @@
                 "SAMPLE_PAIRED_END_1_01_seqfu_mqc.txt:md5,0aca00c7f64454af520c7e08ec595d2b",
                 "SAMPLE_PAIRED_END_2_02_seqfu.tsv:md5,44a5cb826e001d58208a5855938fa82b",
                 "SAMPLE_PAIRED_END_2_02_seqfu_mqc.txt:md5,ac1740de9ef142c99c993fa9824ead63"
+            ],
+            [
+                "SAMPLE_PAIRED_END_1_01.bam:md5,ac811b20d56132f5e039b3e8fd217405",
+                "SAMPLE_PAIRED_END_2_02.bam:md5,57892fc4314e66e8e20de4f5d82f9b5d"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-12T10:02:03.991667099"
+        "timestamp": "2025-12-12T16:49:17.100345817"
     }
 }

@@ -1,17 +1,19 @@
 nextflow_pipeline {
 
-    name "Test Workflow main.nf on MiSeq data with paired end reads"
+    name "Test Workflow main.nf on PromethION data"
     script "../main.nf"
     tag "seqinspector"
     tag "PIPELINE"
 
-    test("MiSeq data test (paired end reads)") {
+    test("PromethION data test") {
 
         when {
-            config "./MiSeq_PairedEnd.main.nf.test.config"
             params {
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/nf-core/test-datasets/'
+                genome = 'EB1'
+                input  = params.pipelines_testdata_base_path + '/seqinspector/testdata/PromethION/samplesheet.csv'
                 outdir = "$outputDir"
-                skip_tools = "rundirparser"
+                skip_tools = "bwamem2_index,bwamem2_mem,rundirparser"
             }
         }
 
@@ -26,15 +28,19 @@ nextflow_pipeline {
                 params.outdir,
                 ignoreFile: 'tests/.nftignore'
             )
+            // bam_files: All bam files
+            def bam_files  = getAllFilesFromDir(params.outdir, include: ['**/*.bam'])
+            assert workflow.success
             assertAll(
-                { assert workflow.success},
                 { assert snapshot(
                     // pipeline versions.yml file for multiqc from which Nextflow version is removed because we tests pipelines on multiple Nextflow versions
                     removeNextflowVersion("$outputDir/pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"),
                     // All stable path names, with a relative path
                     stable_name,
                     // All files with stable contents
-                    stable_path
+                    stable_path,
+                    // All bam files
+                    bam_files.isEmpty() ? 'No BAM files' : bam_files.collect { file -> file.getName() + ":md5," +  bam(file.toString()).readsMD5 },
                 ).match() }
             )
         }

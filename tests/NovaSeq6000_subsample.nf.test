@@ -1,17 +1,16 @@
 nextflow_pipeline {
 
-    name "Test Workflow main.nf on MiSeq data with single end reads"
+    name "Test Workflow main.nf on NovaSeq6000 data with different sample sizes"
     script "../main.nf"
     tag "seqinspector"
     tag "PIPELINE"
 
-    test("MiSeq data test (single end reads)") {
+    test("NovaSeq6000 data test sample size") {
 
         when {
-            config "./MiSeq.main.nf.test.config"
             params {
+                sample_size = 90
                 outdir = "$outputDir"
-                skip_tools = "rundirparser"
             }
         }
 
@@ -26,26 +25,30 @@ nextflow_pipeline {
                 params.outdir,
                 ignoreFile: 'tests/.nftignore'
             )
+            // bam_files: All bam files
+            def bam_files  = getAllFilesFromDir(params.outdir, include: ['**/*.bam'])
+            assert workflow.success
             assertAll(
-                { assert workflow.success},
                 { assert snapshot(
                     // pipeline versions.yml file for multiqc from which Nextflow version is removed because we tests pipelines on multiple Nextflow versions
                     removeNextflowVersion("$outputDir/pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"),
                     // All stable path names, with a relative path
                     stable_name,
                     // All files with stable contents
-                    stable_path
+                    stable_path,
+                    // All bam files
+                    bam_files.isEmpty() ? 'No BAM files' : bam_files.collect { file -> file.getName() + ":md5," +  bam(file.toString()).readsMD5 },
                 ).match() }
             )
         }
     }
 
-    test("Miseq data test (skip fastqc)") {
+    test("NovaSeq6000 data test relative sample size") {
+
         when {
-            config "./MiSeq.main.nf.test.config"
             params {
                 outdir = "$outputDir"
-                skip_tools = "fastqc,rundirparser"
+                sample_size = 0.9
             }
         }
 
@@ -60,26 +63,31 @@ nextflow_pipeline {
                 params.outdir,
                 ignoreFile: 'tests/.nftignore'
             )
+            // bam_files: All bam files
+            def bam_files  = getAllFilesFromDir(params.outdir, include: ['**/*.bam'])
+            assert workflow.success
             assertAll(
-                { assert workflow.success},
                 { assert snapshot(
                     // pipeline versions.yml file for multiqc from which Nextflow version is removed because we tests pipelines on multiple Nextflow versions
                     removeNextflowVersion("$outputDir/pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"),
                     // All stable path names, with a relative path
                     stable_name,
                     // All files with stable contents
-                    stable_path
+                    stable_path,
+                    // All bam files
+                    bam_files.isEmpty() ? 'No BAM files' : bam_files.collect { file -> file.getName() + ":md5," +  bam(file.toString()).readsMD5 },
                 ).match() }
             )
         }
     }
 
-    test("Miseq data test (skip all tools)") {
+    test("NovaSeq6000 data test sample size exceeds available reads") {
+        tag "warning"
+
         when {
-            config "./MiSeq.main.nf.test.config"
             params {
                 outdir = "$outputDir"
-                skip_tools = "fastqc,fastqscreen,seqfu_stats,seqtk_sample,bwamem2_index,bwamem2_mem,rundirparser"
+                sample_size = 120
             }
         }
 
@@ -94,15 +102,17 @@ nextflow_pipeline {
                 params.outdir,
                 ignoreFile: 'tests/.nftignore'
             )
+            assert workflow.success
             assertAll(
-                { assert workflow.success},
                 { assert snapshot(
                     // pipeline versions.yml file for multiqc from which Nextflow version is removed because we tests pipelines on multiple Nextflow versions
                     removeNextflowVersion("$outputDir/pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"),
                     // All stable path names, with a relative path
                     stable_name,
                     // All files with stable contents
-                    stable_path
+                    stable_path,
+                    // get all messages containing Requested sample_size (120)
+                    filterNextflowOutput(workflow.stdout + workflow.stderr, ignore: ['Downloading plugin'], include:['Requested sample_size (120)'])
                 ).match() }
             )
         }
