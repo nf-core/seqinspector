@@ -98,7 +98,6 @@
                         ]
                     ]
                 ],
-                "ref_dict": null,
                 "reference_fai": [
                     "reference.fasta.fai:md5,bf4047e05f95deb372eb8ffd601cbc29"
                 ],
@@ -120,6 +119,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-15T12:00:16.296041182"
+        "timestamp": "2025-12-15T12:47:55.989932088"
     }
 }
