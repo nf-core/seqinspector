@@ -1,0 +1,124 @@
+{
+    "Test without bwamem2 index file path, with run_picard_collecthsmetrics=true and without ref_dict": {
+        "content": [
+            {
+                "bwamem2_index": [
+                    [
+                        [
+                            "reference.fasta.0123:md5,0f0ff4414949e6787a25a563f19e2a3b",
+                            "reference.fasta.amb:md5,0a85644af00f9a856d874381d24e7803",
+                            "reference.fasta.ann:md5,8fdb46970ca95a4ef54f5f1a02d233cd",
+                            "reference.fasta.bwt.2bit.64:md5,3c0df9450afc5cb0ad5e85870829d9d0",
+                            "reference.fasta.pac:md5,96b449e1316067fdfba91b1399687bc2"
+                        ]
+                    ]
+                ],
+                "ref_dict": [
+                    "genome.dict"
+                ],
+                "reference_fai": [
+                    "reference.fasta.fai:md5,bf4047e05f95deb372eb8ffd601cbc29"
+                ],
+                "versions": [
+                    {
+                        "PREPARE_GENOME:SAMTOOLS_FAIDX": {
+                            "samtools": "1.22.1"
+                        }
+                    },
+                    {
+                        "PREPARE_GENOME:PICARD_CREATESEQUENCEDICTIONARY": {
+                            "picard": "3.4.0"
+                        }
+                    },
+                    {
+                        "PREPARE_GENOME:BWAMEM2_INDEX": {
+                            "bwamem2": "2.2.1"
+                        }
+                    }
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2025-12-15T11:57:16.786415613"
+    },
+    "Test without bwamem2 index file path, with run_picard_collecthsmetrics=true and with ref_dict": {
+        "content": [
+            {
+                "bwamem2_index": [
+                    [
+                        [
+                            "reference.fasta.0123:md5,0f0ff4414949e6787a25a563f19e2a3b",
+                            "reference.fasta.amb:md5,0a85644af00f9a856d874381d24e7803",
+                            "reference.fasta.ann:md5,8fdb46970ca95a4ef54f5f1a02d233cd",
+                            "reference.fasta.bwt.2bit.64:md5,3c0df9450afc5cb0ad5e85870829d9d0",
+                            "reference.fasta.pac:md5,96b449e1316067fdfba91b1399687bc2"
+                        ]
+                    ]
+                ],
+                "ref_dict": [
+                    "reference.dict"
+                ],
+                "reference_fai": [
+                    "reference.fasta.fai:md5,bf4047e05f95deb372eb8ffd601cbc29"
+                ],
+                "versions": [
+                    {
+                        "PREPARE_GENOME:SAMTOOLS_FAIDX": {
+                            "samtools": "1.22.1"
+                        }
+                    },
+                    {
+                        "PREPARE_GENOME:BWAMEM2_INDEX": {
+                            "bwamem2": "2.2.1"
+                        }
+                    }
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2025-12-15T11:56:46.871893037"
+    },
+    "Test without bwamem2 index file path and with run_picard_collecthsmetrics=false": {
+        "content": [
+            {
+                "bwamem2_index": [
+                    [
+                        [
+                            "reference.fasta.0123:md5,0f0ff4414949e6787a25a563f19e2a3b",
+                            "reference.fasta.amb:md5,0a85644af00f9a856d874381d24e7803",
+                            "reference.fasta.ann:md5,8fdb46970ca95a4ef54f5f1a02d233cd",
+                            "reference.fasta.bwt.2bit.64:md5,3c0df9450afc5cb0ad5e85870829d9d0",
+                            "reference.fasta.pac:md5,96b449e1316067fdfba91b1399687bc2"
+                        ]
+                    ]
+                ],
+                "reference_fai": [
+                    "reference.fasta.fai:md5,bf4047e05f95deb372eb8ffd601cbc29"
+                ],
+                "versions": [
+                    {
+                        "PREPARE_GENOME:SAMTOOLS_FAIDX": {
+                            "samtools": "1.22.1"
+                        }
+                    },
+                    {
+                        "PREPARE_GENOME:BWAMEM2_INDEX": {
+                            "bwamem2": "2.2.1"
+                        }
+                    }
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2025-12-15T12:47:55.989932088"
+    }
+}

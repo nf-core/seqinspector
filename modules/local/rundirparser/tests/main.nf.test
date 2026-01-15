@@ -1,0 +1,49 @@
+nextflow_process {
+
+    name "Test Process RUNDIRPARSER"
+    script "../main.nf"
+    process "RUNDIRPARSER"
+    config "./nextflow.config"
+
+    test("NovaSeq6000") {
+
+        when {
+            process {
+                """
+                input[0] = [[],
+                    file(params.pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/200624_A00834_0183_BHMTFYDRXX.tar.gz', checkIfExists: true)
+                ]
+                """
+            }
+        }
+        then {
+            assert process.success
+            assert snapshot(
+                process.out.multiqc[0][1],
+                process.out.findAll { key, val -> key.startsWith("versions")}
+            ).match()
+        }
+    }
+
+    test("NovaSeq6000 - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [[],
+                    file(params.pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/200624_A00834_0183_BHMTFYDRXX.tar.gz', checkIfExists: true)
+                ]
+                """
+            }
+        }
+        then {
+            assert process.success
+            assert snapshot(
+                process.out.multiqc[0][1],
+                process.out.findAll { key, val -> key.startsWith("versions")}
+            ).match()
+        }
+    }
+}
