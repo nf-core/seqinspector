@@ -67,6 +67,7 @@ workflow SEQINSPECTOR {
         // From samplesheet channel serving (sampleMetaObj, sampleReadsPath) tuples:
         // --> Create new rundir channel serving (rundirMetaObj, rundirPath) tuples
         ch_rundir = ch_samplesheet
+            .filter { meta, _reads -> meta.rundir.size() > 0 }
             .map { meta, _reads -> [meta.rundir, meta] }
             .groupTuple()
             .map { rundir, metas ->
@@ -81,6 +82,8 @@ workflow SEQINSPECTOR {
                 //  2. Mix with the ch_multiqc_files channel downstream
                 [dir_meta, rundir]
             }
+
+        ch_rundir.ifEmpty { log.warn "No samples with rundir found, skipping RUNDIRPARSER" }
 
         RUNDIRPARSER(ch_rundir)
 
