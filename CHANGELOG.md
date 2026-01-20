@@ -49,6 +49,7 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#150](https://github.com/nf-core/seqinspector/pull/150) Fix pipeline linting issues
 - [#162](https://github.com/nf-core/seqinspector/pull/162) Fix bugs in qc_bam and prepare_genome subworkflows and add tests
 - [#163](https://github.com/nf-core/seqinspector/pull/163) Run fastqscreen with subsampled data if available
+- [#167](https://github.com/nf-core/seqinspector/pull/167) RunDirParser is now skipped if no Run Directory information is available
 
 ### `Changed`
 
