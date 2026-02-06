@@ -78,7 +78,7 @@ To use FastQ Screen, this pipeline requires a `.csv` detailing:
 
 - the working name of the reference
 - the name of the aligner used to generate its index (which is also the aligner and index used by the tool)
-- the file basename of the reference and its index (e.g. the reference `genoma.fa` and its index `genome.bt2` have the basename `genome`)
+- the file basename of the reference and its index (e.g. the reference `genome.fa` and its index `genome.bt2` have the basename `genome`)
 - the path to a dir where the reference and index files both reside.
 
 See `assets/example_fastq_screen_references.csv` for example.
