@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+# Author: @matrulda
+# Licence: MIT
+
 import os
 import yaml
 import sys
@@ -18,8 +21,10 @@ def read_run_parameters(directory):
         with open(alt_2) as f:
             return xmltodict.parse(f.read())
     else:
-        raise Exception("Could not find Illumina [Rr]unParameters.xml. "
-                        "Please provide RunParameters.xml or skip module.")
+        raise Exception(
+            "Could not find Illumina [Rr]unParameters.xml. "
+            "Please provide RunParameters.xml or skip module."
+        )
 
 
 def find(d, tag):
@@ -71,12 +76,11 @@ def construct_multiqc_yaml(directory):
         "description": "Sequencing metadata gathered from the run directory",
         "plot_type": "table",
         "pconfig": {
-            "id": 'mqc_seq_metadata',
-            "title": 'Run directory Metadata',
+            "id": "mqc_seq_metadata",
+            "title": "Run directory Metadata",
             "col1_header": "Metadata",
-            },
+        },
         "data": data,
-
     }
 
     return metadata
