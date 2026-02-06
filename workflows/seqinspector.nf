@@ -64,10 +64,23 @@ workflow SEQINSPECTOR {
     //
     if (!("rundirparser" in skip_tools)) {
 
+        // Branch the samplesheet channel based on rundir presence
+        ch_samplesheet
+            .branch { meta, reads ->
+                with_rundir: meta.rundir.size() > 0
+                without_rundir: true
+            }
+            .set { ch_rundir_branched }
+
+        // Log warnings for samples without rundir
+        ch_rundir_branched.without_rundir
+            .view { meta, reads ->
+                log.warn "Sample '${meta.id}' does not have a rundir specified"
+            }
+
         // From samplesheet channel serving (sampleMetaObj, sampleReadsPath) tuples:
         // --> Create new rundir channel serving (rundirMetaObj, rundirPath) tuples
-        ch_rundir = ch_samplesheet
-            .filter { meta, _reads -> meta.rundir.size() > 0 }
+        ch_rundir = ch_rundir_branched.with_rundir
             .map { meta, _reads -> [meta.rundir, meta] }
             .groupTuple()
             .map { rundir, metas ->
@@ -89,6 +102,7 @@ workflow SEQINSPECTOR {
 
         ch_multiqc_files = ch_multiqc_files.mix(RUNDIRPARSER.out.multiqc)
     }
+
 
     //
     // MODULE: Run Seqtk sample to perform subsampling
