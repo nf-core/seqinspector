@@ -112,7 +112,7 @@ Changes in 'fastqscreen/fastqscreen/main.nf':
 -
  }
 
-'modules/nf-core/fastqscreen/fastqscreen/tests/main.nf.test.snap' is unchanged
-'modules/nf-core/fastqscreen/fastqscreen/tests/nextflow.config' is unchanged
-'modules/nf-core/fastqscreen/fastqscreen/tests/main.nf.test' is unchanged
+'modules/nf-core/fastqscreen/fastqscreen/tests/main.nf.test' was removed
+'modules/nf-core/fastqscreen/fastqscreen/tests/nextflow.config' was removed
+'modules/nf-core/fastqscreen/fastqscreen/tests/main.nf.test.snap' was removed
 ************************************************************
