@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.0](https://github.com/nf-core/seqinspector/releases/tag/1.0.0) - I NEED A CODENAME HERE
+## [1.0.0](https://github.com/nf-core/seqinspector/releases/tag/1.0.0) - Inspector Gadget
 
 Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-co.re/) template.
 
