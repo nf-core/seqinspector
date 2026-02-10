@@ -1,11 +1,6 @@
 {
     "Miseq data test (skip all tools)": {
         "content": [
-            {
-                "Workflow": {
-                    "nf-core/seqinspector": "v1.0dev"
-                }
-            },
             [
                 "multiqc",
                 "multiqc/global_report",
