@@ -23,8 +23,8 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#100](https://github.com/nf-core/seqinspector/pull/100) Added official logos
 - [#103](https://github.com/nf-core/seqinspector/pull/103) Configure full-tests
 - [#106](https://github.com/nf-core/seqinspector/pull/106) Parse rundir metadata
-- [#108](https://github.com/nf-core/seqinspector/pull/108) Update lists of default steps in the pipeline (#86)
 - [#108](https://github.com/nf-core/seqinspector/pull/108) Test data validation (#94)
+- [#108](https://github.com/nf-core/seqinspector/pull/108) Update lists of default steps in the pipeline (#86)
 - [#110](https://github.com/nf-core/seqinspector/pull/110) Update input schema to accept either tar file or directory as rundir, and fastq messages and patterns
 - [#111](https://github.com/nf-core/seqinspector/pull/111) Short summary of seqinspector in README.md (#84)
 - [#127](https://github.com/nf-core/seqinspector/pull/127) Added alignment tools - bwamem2 - index and mem
@@ -36,6 +36,8 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#156](https://github.com/nf-core/seqinspector/pull/156) Added relative sample_size and warning when a sample has less reads than desired sample_size
 - [#159](https://github.com/nf-core/seqinspector/pull/159) Added a subworkflow QC_BAM including picard_collecthsmetrics for alignment QC of hybrid-selection data
 - [#162](https://github.com/nf-core/seqinspector/pull/162) Add tests for prepare_genome subworkflow
+- [#168](https://github.com/nf-core/seqinspector/pull/168) Add contributors list
+- [#168](https://github.com/nf-core/seqinspector/pull/168) Add logo to the pipeline logo
 
 ### `Fixed`
 
@@ -64,6 +66,7 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#148](https://github.com/nf-core/seqinspector/pull/148), [#152](https://github.com/nf-core/seqinspector/pull/152), [#153](https://github.com/nf-core/seqinspector/pull/153) Update documentation
 - [#158](https://github.com/nf-core/seqinspector/pull/158) Moved picard_collectmultiplemetrics to the subworkflow QC_BAM
 - [#164](https://github.com/nf-core/seqinspector/pull/164) Refactor local subworkflow and pipeline tests
+- [#168](https://github.com/nf-core/seqinspector/pull/168) Adhere to strict syntax
 
 ### `Dependencies`
 
