@@ -60,7 +60,9 @@ sample,fastq_1,fastq_2,rundir,tags
 CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz,200624_A00834_0183_BHMTFYDRXX,lane1:project5:group2
 ```
 
-Each row represents a fastq file (single-end) or a pair of fastq files (paired end).
+Each row represents a fastq file (single-end with only `fastq_1`) or a pair of fastq files (paired end with `fastq_1` and `fastq_2`).
+`rundir` is the path to the runfolder.
+`tags` is a colon-separated list of tags that will be added to the MultiQC report for this `sample`.
 
 Now, you can run the pipeline using:
 
