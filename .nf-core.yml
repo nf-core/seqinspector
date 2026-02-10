@@ -4,14 +4,14 @@ lint:
     - tests/default.nf.test
   files_unchanged:
     - .github/CONTRIBUTING.md
+    - assets/nf-core-seqinspector_logo_light.png
     - docs/images/nf-core-seqinspector_logo_dark.png
     - docs/images/nf-core-seqinspector_logo_light.png
-    - assets/nf-core-seqinspector_logo_light.png
   nextflow_config:
     - config_defaults:
         - params.fastq_screen_references
   nf_test_content: false
-nf_core_version: 3.5.1
+nf_core_version: 3.5.2
 repository_type: pipeline
 template:
   author: Adrien Coulier

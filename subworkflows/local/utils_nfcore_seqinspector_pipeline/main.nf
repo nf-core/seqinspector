@@ -8,15 +8,15 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { UTILS_NFSCHEMA_PLUGIN     } from '../../nf-core/utils_nfschema_plugin'
-include { paramsSummaryMap          } from 'plugin/nf-schema'
-include { samplesheetToList         } from 'plugin/nf-schema'
-include { paramsHelp                } from 'plugin/nf-schema'
-include { completionEmail           } from '../../nf-core/utils_nfcore_pipeline'
-include { completionSummary         } from '../../nf-core/utils_nfcore_pipeline'
-include { imNotification            } from '../../nf-core/utils_nfcore_pipeline'
-include { UTILS_NFCORE_PIPELINE     } from '../../nf-core/utils_nfcore_pipeline'
-include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipeline'
+include { UTILS_NFSCHEMA_PLUGIN   } from '../../nf-core/utils_nfschema_plugin'
+include { paramsSummaryMap        } from 'plugin/nf-schema'
+include { samplesheetToList       } from 'plugin/nf-schema'
+include { paramsHelp              } from 'plugin/nf-schema'
+include { completionEmail         } from '../../nf-core/utils_nfcore_pipeline'
+include { completionSummary       } from '../../nf-core/utils_nfcore_pipeline'
+include { imNotification          } from '../../nf-core/utils_nfcore_pipeline'
+include { UTILS_NFCORE_PIPELINE   } from '../../nf-core/utils_nfcore_pipeline'
+include { UTILS_NEXTFLOW_PIPELINE } from '../../nf-core/utils_nextflow_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -25,17 +25,16 @@ include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipelin
 */
 
 workflow PIPELINE_INITIALISATION {
-
     take:
-    version           // boolean: Display version and exit
-    validate_params   // boolean: Boolean whether to validate parameters against the schema at runtime
-    monochrome_logs   // boolean: Do not use coloured log outputs
+    version // boolean: Display version and exit
+    validate_params // boolean: Boolean whether to validate parameters against the schema at runtime
+    _monochrome_logs // boolean: Do not use coloured log outputs
     nextflow_cli_args //   array: List of positional nextflow CLI args
-    outdir            //  string: The output directory where the results will be saved
-    input             //  string: Path to input samplesheet
-    help              // boolean: Display help message and exit
-    help_full         // boolean: Show the full help message
-    show_hidden       // boolean: Show hidden parameters in the help message
+    outdir //  string: The output directory where the results will be saved
+    input //  string: Path to input samplesheet
+    help // boolean: Display help message and exit
+    help_full // boolean: Show the full help message
+    show_hidden // boolean: Show hidden parameters in the help message
 
     main:
 
@@ -44,11 +43,11 @@ workflow PIPELINE_INITIALISATION {
     //
     // Print version and exit if required and dump pipeline parameters to JSON file
     //
-    UTILS_NEXTFLOW_PIPELINE (
+    UTILS_NEXTFLOW_PIPELINE(
         version,
         true,
         outdir,
-        workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1
+        workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1,
     )
 
     //
@@ -64,7 +63,7 @@ workflow PIPELINE_INITIALISATION {
 \033[0;35m  nf-core/seqinspector ${workflow.manifest.version}\033[0m
 -\033[2m----------------------------------------------------\033[0m-
 """
-    after_text = """${workflow.manifest.doi ? "\n* The pipeline\n" : ""}${workflow.manifest.doi.tokenize(",").collect { doi -> "    https://doi.org/${doi.trim().replace('https://doi.org/','')}"}.join("\n")}${workflow.manifest.doi ? "\n" : ""}
+    after_text = """${workflow.manifest.doi ? "\n* The pipeline\n" : ""}${workflow.manifest.doi.tokenize(",").collect { doi -> "    https://doi.org/${doi.trim().replace('https://doi.org/', '')}" }.join("\n")}${workflow.manifest.doi ? "\n" : ""}
 * The nf-core framework
     https://doi.org/10.1038/s41587-020-0439-x
 
@@ -73,7 +72,7 @@ workflow PIPELINE_INITIALISATION {
 """
     command = "nextflow run ${workflow.manifest.name} -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>"
 
-    UTILS_NFSCHEMA_PLUGIN (
+    UTILS_NFSCHEMA_PLUGIN(
         workflow,
         validate_params,
         null,
@@ -82,74 +81,69 @@ workflow PIPELINE_INITIALISATION {
         show_hidden,
         before_text,
         after_text,
-        command
+        command,
     )
 
     //
     // Check config provided to the pipeline
     //
-    UTILS_NFCORE_PIPELINE (
+    UTILS_NFCORE_PIPELINE(
         nextflow_cli_args
     )
 
     //
     // Custom validation for pipeline parameters
     //
-    validateInputParameters() // Runs additional validation that is not done by $projectDir/nextflow_schema.json
+    validateInputParameters()
+    // Runs additional validation that is not done by $projectDir/nextflow_schema.json
 
     //
-    // Create channel from input file provided through params.input
+    // Create channel from input file provided through params input
     //
-    nr_samples = Channel.fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
-        .toList().size()
-
-    channel
-        .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
+    nr_samples = channel.fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
         .toList()
-        .flatMap { it.withIndex().collect {  entry, idx -> entry + "${idx+1}" } }
-        .map {
-            meta, fastq_1, fastq_2, idx ->
-                def tags = meta.tags ? meta.tags.tokenize(":") : []
-                def pad_positions = [nr_samples.length(), 2].max()
-                def zero_padded_idx = idx.padLeft(pad_positions, "0")
-                def updated_meta = meta + [ id:"${meta.sample}_${zero_padded_idx}", tags:tags ]
-                if (!fastq_2) {
-                    return [
-                        updated_meta.id,
-                        updated_meta + [ single_end:true ],
-                        [ fastq_1 ]
-                    ]
-                } else {
-                    return [
-                        updated_meta.id,
-                        updated_meta + [ single_end:false ],
-                        [ fastq_1, fastq_2 ]
-                    ]
-                }
+        .size()
+
+    channel.fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
+        .toList()
+        .flatMap { item -> item.withIndex().collect { entry, idx -> entry + "${idx + 1}" } }
+        .map { meta, fastq_1, fastq_2, idx ->
+            def tags = meta.tags ? meta.tags.tokenize(":") : []
+            def pad_positions = [nr_samples.length(), 2].max()
+            def zero_padded_idx = idx.padLeft(pad_positions, "0")
+            def updated_meta = meta + [id: "${meta.sample}_${zero_padded_idx}", tags: tags]
+            if (!fastq_2) {
+                return [
+                    updated_meta.id,
+                    updated_meta + [single_end: true],
+                    [fastq_1],
+                ]
+            }
+            else {
+                return [
+                    updated_meta.id,
+                    updated_meta + [single_end: false],
+                    [fastq_1, fastq_2],
+                ]
+            }
         }
         .groupTuple()
-        .map {
-            validateInputSamplesheet(it) // Applies additional group validation checks that schema_input.json cannot do.
+        .map { meta ->
+            validateInputSamplesheet(meta)
         }
-        .transpose() // Replace the map below
-        // .map {
-        //     meta, fastqs ->
-        //         return [ meta, fastqs.flatten() ]
-        // }
+        .transpose()
         .set { ch_samplesheet }
 
     ch_samplesheet
-        .map {
-            meta, fastqs -> meta.tags
+        .map { meta, _fastqs ->
+            meta.tags
         }
         .flatten()
         .unique()
         .map { tag_name -> [tag_name.toLowerCase(), tag_name] }
         .groupTuple()
-        .map {
-            tag_lowercase, tags ->
-                assert tags.size() == 1 :
-                "Tag name collision: " + tags.join(", ")
+        .map { _tag_lowercase, tags ->
+            assert tags.size() == 1 : "Tag name collision: " + tags.join(", ")
         }
 
     emit:
@@ -164,15 +158,14 @@ workflow PIPELINE_INITIALISATION {
 */
 
 workflow PIPELINE_COMPLETION {
-
     take:
-    email           //  string: email address
-    email_on_fail   //  string: email address sent on pipeline failure
+    email //  string: email address
+    email_on_fail //  string: email address sent on pipeline failure
     plaintext_email // boolean: Send plain-text email instead of HTML
-    outdir          //    path: Path to output directory where results will be published
+    outdir //    path: Path to output directory where results will be published
     monochrome_logs // boolean: Disable ANSI colour codes in log output
-    hook_url        //  string: hook URL for notifications
-    multiqc_report  //  string: Path to MultiQC report
+    hook_url //  string: hook URL for notifications
+    multiqc_report //  string: Path to MultiQC report
 
     main:
     summary_params = paramsSummaryMap(workflow, parameters_schema: "nextflow_schema.json")
@@ -201,7 +194,7 @@ workflow PIPELINE_COMPLETION {
     }
 
     workflow.onError {
-        log.error "Pipeline failed. Please refer to troubleshooting docs: https://nf-co.re/docs/usage/troubleshooting"
+        log.error("Pipeline failed. Please refer to troubleshooting docs: https://nf-co.re/docs/usage/troubleshooting")
     }
 }
 
@@ -214,8 +207,7 @@ workflow PIPELINE_COMPLETION {
 // Check and validate pipeline parameters
 //
 def validateInputParameters() {
-    // genomeExistsError()
-
+    genomeExistsError()
 }
 
 //
@@ -225,12 +217,12 @@ def validateInputSamplesheet(input) {
     def (metas, fastqs) = input[1..2]
 
     // Check that multiple runs of the same sample are of the same datatype i.e. single-end / paired-end
-    def endedness_ok = metas.collect{ meta -> meta.single_end }.unique().size == 1
+    def endedness_ok = metas.collect { meta -> meta.single_end }.unique().size == 1
     if (!endedness_ok) {
         error("Please check input samplesheet -> Multiple runs of a sample must be of the same datatype i.e. single-end or paired-end: ${metas[0].id}")
     }
 
-    return [ metas[0], fastqs ]
+    return [metas[0], fastqs]
 }
 
 //
@@ -238,11 +230,7 @@ def validateInputSamplesheet(input) {
 //
 def genomeExistsError() {
     if (params.genomes && params.genome && !params.genomes.containsKey(params.genome)) {
-        def error_string = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" +
-            "  Genome '${params.genome}' not found in any config files provided to the pipeline.\n" +
-            "  Currently, the available genome keys are:\n" +
-            "  ${params.genomes.keySet().join(", ")}\n" +
-            "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        def error_string = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" + "  Genome '${params.genome}' not found in any config files provided to the pipeline.\n" + "  Currently, the available genome keys are:\n" + "  ${params.genomes.keySet().join(", ")}\n" + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         error(error_string)
     }
 }
@@ -252,12 +240,16 @@ def genomeExistsError() {
 def toolCitationText() {
     def citation_text = [
         "Tools used in the workflow included:",
+        "Bowtie2 (Langmead et al. 2012)",
+        "BWAMEM2 (Vasimuddin et al. 2019)",
         "FastQC (Andrews 2010),",
-        "MultiQC (Ewels et al. 2016),",
         "FastQ Screen (Wingett & Andrews 2018)",
+        "MultiQC (Ewels et al. 2016),",
+        "Picard Tool (Broad Institute 2019),",
+        "SAMTOOLS (Danecek et al. 2021),",
         params.sample_size > 0 ? "Seqtk (Li 2021)," : "",
         "SeqFu (Telatin et al. 2021),",
-        "."
+        ".",
     ].join(' ').trim()
 
     return citation_text
@@ -265,11 +257,15 @@ def toolCitationText() {
 
 def toolBibliographyText() {
     def reference_text = [
+        "<li>Langmead S., & Salzberg SL. (2012). Fast gapped-read alignment with Bowtie 2.</li>",
+        "<li>Vasimuddin Md., Misra S., Li H, & Aluru S. (2019). Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems.</li>",
         "<li>Andrews S, (2010) FastQC, URL: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/.</li>",
+        "<li>Wingett SW., & Andrews S. FastQ Screen: A tool for multi-genome mapping and quality control. F1000Res. 2018 Aug 24 [revised 2018 Jan 1];7:1338. doi: 10.12688/f1000research.15931.2. eCollection</li>",
         "<li>Ewels, P., Magnusson, M., Lundin, S., & Käller, M. (2016). MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics, 32(19), 3047–3048. doi: /10.1093/bioinformatics/btw354</li>",
-        "<li>Wingett SW, Andrews S. FastQ Screen: A tool for multi-genome mapping and quality control. F1000Res. 2018 Aug 24 [revised 2018 Jan 1];7:1338. doi: 10.12688/f1000research.15931.2. eCollection</li>",
+        "<li>Broad Institute, (2019) Picard Tools, URL: https://broadinstitute.github.io/picard/.</li>",
+        "<li>Danecek P., Bonfield JK., Liddle J., & al. (2021). Twelve years of SAMtools and BCFtools.</li>",
         params.sample_size > 0 ? "<li>Li, H. SeqTk. Available online: https://github.com/lh3/seqtk (accessed on 6 May 2021)</li>" : "",
-        "<li>Telatin, A.; Fariselli, P.; Birolo, G. SeqFu: A Suite of Utilities for the Robust and Reproducible Manipulation of Sequence Files. Bioengineering 2021, 8, 59. https://doi.org/10.3390/bioengineering8050059</li>"
+        "<li>Telatin, A.; Fariselli, P.; Birolo, G. SeqFu: A Suite of Utilities for the Robust and Reproducible Manipulation of Sequence Files. Bioengineering 2021, 8, 59. https://doi.org/10.3390/bioengineering8050059</li>",
     ].join(' ').trim()
 
     return reference_text
@@ -292,7 +288,10 @@ def methodsDescriptionText(mqc_methods_yaml) {
             temp_doi_ref += "(doi: <a href=\'https://doi.org/${doi_ref.replace("https://doi.org/", "").replace(" ", "")}\'>${doi_ref.replace("https://doi.org/", "").replace(" ", "")}</a>), "
         }
         meta["doi_text"] = temp_doi_ref.substring(0, temp_doi_ref.length() - 2)
-    } else meta["doi_text"] = ""
+    }
+    else {
+        meta["doi_text"] = ""
+    }
     meta["nodoi_text"] = meta.manifest_map.doi ? "" : "<li>If available, make sure to update the text to include the Zenodo DOI of version of the pipeline used. </li>"
 
     // Tool references
@@ -301,7 +300,7 @@ def methodsDescriptionText(mqc_methods_yaml) {
 
     def methods_text = mqc_methods_yaml.text
 
-    def engine =  new groovy.text.SimpleTemplateEngine()
+    def engine = new groovy.text.SimpleTemplateEngine()
     def description_html = engine.createTemplate(methods_text).make(meta)
 
     return description_html.toString()
@@ -310,7 +309,7 @@ def methodsDescriptionText(mqc_methods_yaml) {
 //
 // Generate report index for MultiQC
 //
-def reportIndexMultiqc(tags, global=true) {
+def reportIndexMultiqc(tags, global = true) {
     def relative_path = global ? ".." : "../.."
 
     def a_attrs = "target=\"_blank\" class=\"list-group-item list-group-item-action\""
@@ -319,22 +318,21 @@ def reportIndexMultiqc(tags, global=true) {
     def index_section = "    <a href=\"${relative_path}/global_report/multiqc_report.html\" ${a_attrs}>Global report</a>\n"
 
     // Group report paths
-    tags
-        .each { tag ->
-            index_section += "    <a href=\"${relative_path}/group_reports/${tag}/multiqc_report.html\" ${a_attrs}>Group report: ${tag}</a>\n"
-        }
+    tags.each { tag ->
+        index_section += "    <a href=\"${relative_path}/group_reports/${tag}/multiqc_report.html\" ${a_attrs}>Group report: ${tag}</a>\n"
+    }
 
     def yaml_file_text = "id: '${workflow.manifest.name.replace('/', '-')}-index'\n" as String
-    yaml_file_text     += "description: 'MultiQC reports collected from running the pipeline.'\n"
-    yaml_file_text     += "section_name: '${workflow.manifest.name} MultiQC Reports Index'\n"
-    yaml_file_text     += "section_href: 'https://github.com/${workflow.manifest.name}'\n"
-    yaml_file_text     += "plot_type: 'html'\n"
-    yaml_file_text     += "data: |\n"
-    yaml_file_text     += "  <h4>Reports</h4>\n"
-    yaml_file_text     += "  <p>Select a report to view (open in a new tab):</p>\n"
-    yaml_file_text     += "  <div class=\"list-group\">\n"
-    yaml_file_text     += "${index_section}"
-    yaml_file_text     += "  </div>\n"
+    yaml_file_text += "description: 'MultiQC reports collected from running the pipeline.'\n"
+    yaml_file_text += "section_name: '${workflow.manifest.name} MultiQC Reports Index'\n"
+    yaml_file_text += "section_href: 'https://github.com/${workflow.manifest.name}'\n"
+    yaml_file_text += "plot_type: 'html'\n"
+    yaml_file_text += "data: |\n"
+    yaml_file_text += "  <h4>Reports</h4>\n"
+    yaml_file_text += "  <p>Select a report to view (open in a new tab):</p>\n"
+    yaml_file_text += "  <div class=\"list-group\">\n"
+    yaml_file_text += "${index_section}"
+    yaml_file_text += "  </div>\n"
 
     return yaml_file_text
 }

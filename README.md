@@ -21,19 +21,10 @@
 
 ## Introduction
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/images/nf-core-seqinspector_logo_dark.png">
-  <source media="(prefers-color-scheme: light)" srcset="docs/images/nf-core-seqinspector_logo_light.png">
-  <img alt="Fallback image description" src="docs/images/nf-core-seqinspector_logo_light.png">
-</picture>
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/images/nfcore-seqinspector-logo-hex-dark.png">
-  <source media="(prefers-color-scheme: light)" srcset="docs/images/nfcore-seqinspector-logo-hex-light.png">
-  <img alt="Fallback image description" src="docs/images/nfcore-seqinspector-logo-hex-light.png">
-</picture>
-
-**nf-core/seqinspector** is a bioinformatics pipeline that that processes raw sequence data (FASTQ) to provide comprehensive quality control. It can perform subsampling, quality assessment, duplication level analysis, and complexity evaluation on a per-sample basis, while also detecting adapter content, technical artifacts, and common biological contaminants. The pipeline generates detailed MultiQC reports with flexible output options, ranging from individual sample reports to project-wide summaries, making it particularly useful for sequencing core facilities and research groups with access to sequencing instruments. If provided, nf-core/seqinspector can also parse statistics from an Illumina run folder directory into the final MultiQC reports.
+**nf-core/seqinspector** is a bioinformatics pipeline that processes raw sequence data (FASTQ) to provide comprehensive quality control.
+It can perform subsampling, quality assessment, duplication level analysis, and complexity evaluation on a per-sample basis, while also detecting adapter content, technical artifacts, and common biological contaminants.
+The pipeline generates detailed MultiQC reports with flexible output options, ranging from individual sample reports to project-wide summaries, making it particularly useful for sequencing core facilities and research groups with access to sequencing instruments.
+If provided, nf-core/seqinspector can also parse statistics from an Illumina run folder directory into the final MultiQC reports.
 
 <!-- TODO: add a search tool that accepts a tree for `Compatibility with Data`. -->
 
@@ -69,7 +60,9 @@ sample,fastq_1,fastq_2,rundir,tags
 CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz,200624_A00834_0183_BHMTFYDRXX,lane1:project5:group2
 ```
 
-Each row represents a fastq file (single-end) or a pair of fastq files (paired end).
+Each row represents a fastq file (single-end with only `fastq_1`) or a pair of fastq files (paired end with `fastq_1` and `fastq_2`).
+`rundir` is the path to the runfolder.
+`tags` is a colon-separated list of tags that will be added to the MultiQC report for this `sample`.
 
 Now, you can run the pipeline using:
 
@@ -93,11 +86,29 @@ For more details about the output files and reports, please refer to the
 
 ## Credits
 
-nf-core/seqinspector was originally written by the Swedish [@NationalGenomicsInfrastructure](https://github.com/NationalGenomicsInfrastructure/) and [Clinical Genomics Stockholm](https://clinical.scilifelab.se/).
+nf-core/seqinspector was originally written by [@agrima2010](https://github.com/agrima2010), [@Aratz](https://github.com/Aratz), [@FranBonath](https://github.com/FranBonath), [@kedhammar](https://github.com/kedhammar), and [@MatthiasZepper](https://github.com/MatthiasZepper) from the Swedish [@NationalGenomicsInfrastructure](https://github.com/NationalGenomicsInfrastructure/) and [Clinical Genomics Stockholm](https://clinical.scilifelab.se/).
 
 We thank the following people for their extensive assistance in the development of this pipeline:
 
+- [@adamrtalbot](https://github.com/adamrtalbot)
+- [@alneberg](https://github.com/alneberg)
+- [@beatrizsavinhas](https://github.com/beatrizsavinhas)
+- [@ctuni](https://github.com/ctuni)
+- [@edmundmiller](https://github.com/edmundmiller)
+- [@EliottBo](https://github.com/EliottBo)
+- [@KarNair](https://github.com/KarNair)
+- [@kjellinjonas](https://github.com/kjellinjonas)
 - [@mahesh-panchal](https://github.com/mahesh-panchal)
+- [@matrulda](https://github.com/matrulda)
+- [@maxulysse](https://github.com/maxulysse)
+- [@mirpedrol](https://github.com/mirpedrol)
+- [@nggvs](https://github.com/nggvs)
+- [@nkongenelly](https://github.com/nkongenelly)
+- [@Patricie34](https://github.com/Patricie34)
+- [@pontushojer](https://github.com/pontushojer)
+- [@ramprasadn](https://github.com/ramprasadn)
+- [@rannick](https://github.com/rannick)
+- [@torigiffin](https://github.com/torigiffin)
 
 ## Contributions and Support
 
