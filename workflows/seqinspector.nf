@@ -59,6 +59,8 @@ workflow SEQINSPECTOR {
         params.ref_dict,
     )
 
+    ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
+
     //
     // MODULE: Parse rundir info
     //
@@ -73,10 +75,9 @@ workflow SEQINSPECTOR {
             .set { ch_rundir_branched }
 
         // Log warnings for samples without rundir
-        ch_rundir_branched.without_rundir
-            .view { meta, reads ->
-                log.warn "Sample '${meta.id}' does not have a rundir specified"
-            }
+        ch_rundir_branched.without_rundir.view { meta, reads ->
+            log.warn("Sample '${meta.id}' does not have a rundir specified")
+        }
 
         // From samplesheet channel serving (sampleMetaObj, sampleReadsPath) tuples:
         // --> Create new rundir channel serving (rundirMetaObj, rundirPath) tuples
@@ -96,7 +97,7 @@ workflow SEQINSPECTOR {
                 [dir_meta, rundir]
             }
 
-        ch_rundir.ifEmpty { log.warn "No samples with rundir found, skipping RUNDIRPARSER" }
+        ch_rundir.ifEmpty { log.warn("No samples with rundir found, skipping RUNDIRPARSER") }
 
         RUNDIRPARSER(ch_rundir)
 
