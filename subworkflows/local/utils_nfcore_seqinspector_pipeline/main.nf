@@ -240,9 +240,13 @@ def genomeExistsError() {
 def toolCitationText() {
     def citation_text = [
         "Tools used in the workflow included:",
+        "Bowtie2 (Langmead et al. 2012)",
+        "BWAMEM2 (Vasimuddin et al. 2019)",
         "FastQC (Andrews 2010),",
-        "MultiQC (Ewels et al. 2016),",
         "FastQ Screen (Wingett & Andrews 2018)",
+        "MultiQC (Ewels et al. 2016),",
+        "Picard Tool (Broad Institute 2019),",
+        "SAMTOOLS (Danecek et al. 2021),",
         params.sample_size > 0 ? "Seqtk (Li 2021)," : "",
         "SeqFu (Telatin et al. 2021),",
         ".",
@@ -253,9 +257,13 @@ def toolCitationText() {
 
 def toolBibliographyText() {
     def reference_text = [
+        "<li>Langmead S., & Salzberg SL. (2012). Fast gapped-read alignment with Bowtie 2.</li>",
+        "<li>Vasimuddin Md., Misra S., Li H, & Aluru S. (2019). Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems.</li>",
         "<li>Andrews S, (2010) FastQC, URL: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/.</li>",
+        "<li>Wingett SW., & Andrews S. FastQ Screen: A tool for multi-genome mapping and quality control. F1000Res. 2018 Aug 24 [revised 2018 Jan 1];7:1338. doi: 10.12688/f1000research.15931.2. eCollection</li>",
         "<li>Ewels, P., Magnusson, M., Lundin, S., & Käller, M. (2016). MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics, 32(19), 3047–3048. doi: /10.1093/bioinformatics/btw354</li>",
-        "<li>Wingett SW, Andrews S. FastQ Screen: A tool for multi-genome mapping and quality control. F1000Res. 2018 Aug 24 [revised 2018 Jan 1];7:1338. doi: 10.12688/f1000research.15931.2. eCollection</li>",
+        "<li>Broad Institute, (2019) Picard Tools, URL: https://broadinstitute.github.io/picard/.</li>",
+        "<li>Danecek P., Bonfield JK., Liddle J., & al. (2021). Twelve years of SAMtools and BCFtools.</li>",
         params.sample_size > 0 ? "<li>Li, H. SeqTk. Available online: https://github.com/lh3/seqtk (accessed on 6 May 2021)</li>" : "",
         "<li>Telatin, A.; Fariselli, P.; Birolo, G. SeqFu: A Suite of Utilities for the Robust and Reproducible Manipulation of Sequence Files. Bioengineering 2021, 8, 59. https://doi.org/10.3390/bioengineering8050059</li>",
     ].join(' ').trim()
