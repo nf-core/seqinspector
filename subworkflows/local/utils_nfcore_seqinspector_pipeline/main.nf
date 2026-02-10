@@ -28,7 +28,7 @@ workflow PIPELINE_INITIALISATION {
     take:
     version // boolean: Display version and exit
     validate_params // boolean: Boolean whether to validate parameters against the schema at runtime
-    monochrome_logs // boolean: Do not use coloured log outputs
+    _monochrome_logs // boolean: Do not use coloured log outputs
     nextflow_cli_args //   array: List of positional nextflow CLI args
     outdir //  string: The output directory where the results will be saved
     input //  string: Path to input samplesheet
@@ -106,7 +106,7 @@ workflow PIPELINE_INITIALISATION {
 
     channel.fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
         .toList()
-        .flatMap { it.withIndex().collect { entry, idx -> entry + "${idx + 1}" } }
+        .flatMap { item -> item.withIndex().collect { entry, idx -> entry + "${idx + 1}" } }
         .map { meta, fastq_1, fastq_2, idx ->
             def tags = meta.tags ? meta.tags.tokenize(":") : []
             def pad_positions = [nr_samples.length(), 2].max()
