@@ -10,9 +10,6 @@
                 },
                 "SEQFU_STATS": {
                     "seqfu": "1.22.3"
-                },
-                "Workflow": {
-                    "nf-core/seqinspector": "v1.0dev"
                 }
             },
             [

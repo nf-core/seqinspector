@@ -27,9 +27,6 @@
                 },
                 "SEQTK_SAMPLE": {
                     "seqtk": "1.4-r122"
-                },
-                "Workflow": {
-                    "nf-core/seqinspector": "v1.0dev"
                 }
             },
             [
@@ -1003,9 +1000,6 @@
                 },
                 "SEQTK_SAMPLE": {
                     "seqtk": "1.4-r122"
-                },
-                "Workflow": {
-                    "nf-core/seqinspector": "v1.0dev"
                 }
             },
             [
@@ -1979,9 +1973,6 @@
                 },
                 "SEQTK_SAMPLE": {
                     "seqtk": "1.4-r122"
-                },
-                "Workflow": {
-                    "nf-core/seqinspector": "v1.0dev"
                 }
             },
             [
