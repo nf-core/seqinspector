@@ -2,6 +2,9 @@
     "NovaSeq6000 data test sample size": {
         "content": [
             {
+                "BWAMEM2_INDEX": {
+                    "bwamem2": "2.2.1"
+                },
                 "BWAMEM2_MEM": {
                     "bwamem2": "2.2.1",
                     "samtools": "1.22.1"
@@ -19,6 +22,9 @@
                     "PyYAML": "6.0.2",
                     "Python": "3.13.2"
                 },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": "1.22.1"
+                },
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.22.1"
                 },
@@ -27,9 +33,6 @@
                 },
                 "SEQTK_SAMPLE": {
                     "seqtk": "1.4-r122"
-                },
-                "Workflow": {
-                    "nf-core/seqinspector": "v1.0dev"
                 }
             },
             [
@@ -971,13 +974,16 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-12T16:52:05.081506101"
+        "timestamp": "2026-02-10T17:20:02.068821333"
     },
     "NovaSeq6000 data test relative sample size": {
         "content": [
             {
+                "BWAMEM2_INDEX": {
+                    "bwamem2": "2.2.1"
+                },
                 "BWAMEM2_MEM": {
                     "bwamem2": "2.2.1",
                     "samtools": "1.22.1"
@@ -995,6 +1001,9 @@
                     "PyYAML": "6.0.2",
                     "Python": "3.13.2"
                 },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": "1.22.1"
+                },
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.22.1"
                 },
@@ -1003,9 +1012,6 @@
                 },
                 "SEQTK_SAMPLE": {
                     "seqtk": "1.4-r122"
-                },
-                "Workflow": {
-                    "nf-core/seqinspector": "v1.0dev"
                 }
             },
             [
@@ -1947,13 +1953,16 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-12T16:53:21.397671601"
+        "timestamp": "2026-02-10T17:21:13.638097598"
     },
     "NovaSeq6000 data test sample size exceeds available reads": {
         "content": [
             {
+                "BWAMEM2_INDEX": {
+                    "bwamem2": "2.2.1"
+                },
                 "BWAMEM2_MEM": {
                     "bwamem2": "2.2.1",
                     "samtools": "1.22.1"
@@ -1971,6 +1980,9 @@
                     "PyYAML": "6.0.2",
                     "Python": "3.13.2"
                 },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": "1.22.1"
+                },
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.22.1"
                 },
@@ -1979,9 +1991,6 @@
                 },
                 "SEQTK_SAMPLE": {
                     "seqtk": "1.4-r122"
-                },
-                "Workflow": {
-                    "nf-core/seqinspector": "v1.0dev"
                 }
             },
             [
@@ -2923,8 +2932,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-12T16:54:35.347526634"
+        "timestamp": "2026-02-10T17:22:24.323697018"
     }
 }

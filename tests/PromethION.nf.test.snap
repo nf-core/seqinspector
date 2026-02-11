@@ -8,11 +8,11 @@
                 "FASTQSCREEN_FASTQSCREEN": {
                     "fastqscreen": "0.16.0"
                 },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": "1.22.1"
+                },
                 "SEQFU_STATS": {
                     "seqfu": "1.22.3"
-                },
-                "Workflow": {
-                    "nf-core/seqinspector": "v1.0dev"
                 }
             },
             [
@@ -137,8 +137,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-12T16:55:17.977465362"
+        "timestamp": "2026-02-10T17:23:01.972294667"
     }
 }

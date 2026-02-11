@@ -2,8 +2,8 @@
     "Miseq data test (skip all tools)": {
         "content": [
             {
-                "Workflow": {
-                    "nf-core/seqinspector": "v1.0dev"
+                "SAMTOOLS_FAIDX": {
+                    "samtools": "1.22.1"
                 }
             },
             [
@@ -33,13 +33,16 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-12T16:48:15.085074556"
+        "timestamp": "2026-02-10T17:15:27.612715634"
     },
     "MiSeq data test (single end reads)": {
         "content": [
             {
+                "BWAMEM2_INDEX": {
+                    "bwamem2": "2.2.1"
+                },
                 "BWAMEM2_MEM": {
                     "bwamem2": "2.2.1",
                     "samtools": "1.22.1"
@@ -53,14 +56,14 @@
                 "PICARD_COLLECTMULTIPLEMETRICS": {
                     "picard": "3.4.0"
                 },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": "1.22.1"
+                },
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.22.1"
                 },
                 "SEQFU_STATS": {
                     "seqfu": "1.22.3"
-                },
-                "Workflow": {
-                    "nf-core/seqinspector": "v1.0dev"
                 }
             },
             [
@@ -265,13 +268,16 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-12T16:45:20.420081882"
+        "timestamp": "2026-02-10T17:14:12.684188306"
     },
     "Miseq data test (skip fastqc)": {
         "content": [
             {
+                "BWAMEM2_INDEX": {
+                    "bwamem2": "2.2.1"
+                },
                 "BWAMEM2_MEM": {
                     "bwamem2": "2.2.1",
                     "samtools": "1.22.1"
@@ -282,14 +288,14 @@
                 "PICARD_COLLECTMULTIPLEMETRICS": {
                     "picard": "3.4.0"
                 },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": "1.22.1"
+                },
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.22.1"
                 },
                 "SEQFU_STATS": {
                     "seqfu": "1.22.3"
-                },
-                "Workflow": {
-                    "nf-core/seqinspector": "v1.0dev"
                 }
             },
             [
@@ -439,8 +445,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-12T16:47:54.570558579"
+        "timestamp": "2026-02-10T17:14:58.212405529"
     }
 }

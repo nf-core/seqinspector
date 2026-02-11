@@ -2,6 +2,9 @@
     "NovaSeq6000 data test": {
         "content": [
             {
+                "BWAMEM2_INDEX": {
+                    "bwamem2": "2.2.1"
+                },
                 "BWAMEM2_MEM": {
                     "bwamem2": "2.2.1",
                     "samtools": "1.22.1"
@@ -19,14 +22,14 @@
                     "PyYAML": "6.0.2",
                     "Python": "3.13.2"
                 },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": "1.22.1"
+                },
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.22.1"
                 },
                 "SEQFU_STATS": {
                     "seqfu": "1.22.3"
-                },
-                "Workflow": {
-                    "nf-core/seqinspector": "v1.0dev"
                 }
             },
             [
@@ -957,13 +960,16 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-12T16:50:45.065344275"
+        "timestamp": "2026-02-10T17:17:52.421091867"
     },
     "NovaSeq6000 data test - No rundirs": {
         "content": [
             {
+                "BWAMEM2_INDEX": {
+                    "bwamem2": "2.2.1"
+                },
                 "BWAMEM2_MEM": {
                     "bwamem2": "2.2.1",
                     "samtools": "1.22.1"
@@ -977,14 +983,14 @@
                 "PICARD_COLLECTMULTIPLEMETRICS": {
                     "picard": "3.4.0"
                 },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": "1.22.1"
+                },
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.22.1"
                 },
                 "SEQFU_STATS": {
                     "seqfu": "1.22.3"
-                },
-                "Workflow": {
-                    "nf-core/seqinspector": "v1.0dev"
                 }
             },
             [
@@ -1886,9 +1892,9 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.10.0"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-19T16:52:47.847449885"
+        "timestamp": "2026-02-10T17:18:55.46208782"
     }
 }

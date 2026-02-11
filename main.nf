@@ -51,7 +51,7 @@ workflow NFCORE_SEQINSPECTOR {
         samplesheet,
         params.fasta,
         skip_tools,
-        params.bwamem2
+        params.bwamem2,
     )
 
     emit:
@@ -80,7 +80,7 @@ workflow {
         params.input,
         params.help,
         params.help_full,
-        params.show_hidden
+        params.show_hidden,
     )
 
     //
