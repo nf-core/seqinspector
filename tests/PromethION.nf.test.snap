@@ -1,6 +1,7 @@
 {
     "PromethION data test": {
         "content": [
+            5,
             {
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -137,8 +138,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-02-10T17:23:01.972294667"
+        "timestamp": "2026-02-11T11:13:50.566732998"
     }
 }
