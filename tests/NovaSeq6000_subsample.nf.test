@@ -30,6 +30,7 @@ nextflow_pipeline {
             assert workflow.success
             assertAll(
                 { assert snapshot(
+                    workflow.trace.succeeded().size(),
                     // pipeline versions.yml file for multiqc from which Nextflow version is removed because we tests pipelines on multiple Nextflow versions
                     removeFromYamlMap("$outputDir/pipeline_info/nf_core_seqinspector_software_mqc_versions.yml", "Workflow"),
                     // All stable path names, with a relative path
@@ -68,6 +69,7 @@ nextflow_pipeline {
             assert workflow.success
             assertAll(
                 { assert snapshot(
+                    workflow.trace.succeeded().size(),
                     // pipeline versions.yml file for multiqc from which Nextflow version is removed because we tests pipelines on multiple Nextflow versions
                     removeFromYamlMap("$outputDir/pipeline_info/nf_core_seqinspector_software_mqc_versions.yml", "Workflow"),
                     // All stable path names, with a relative path
@@ -105,6 +107,7 @@ nextflow_pipeline {
             assert workflow.success
             assertAll(
                 { assert snapshot(
+                    workflow.trace.succeeded().size(),
                     // pipeline versions.yml file for multiqc from which Nextflow version is removed because we tests pipelines on multiple Nextflow versions
                     removeFromYamlMap("$outputDir/pipeline_info/nf_core_seqinspector_software_mqc_versions.yml", "Workflow"),
                     // All stable path names, with a relative path

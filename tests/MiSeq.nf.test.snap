@@ -1,6 +1,7 @@
 {
     "Miseq data test (skip all tools)": {
         "content": [
+            2,
             {
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.22.1"
@@ -33,12 +34,13 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-02-10T17:15:27.612715634"
+        "timestamp": "2026-02-11T11:04:44.656020406"
     },
     "MiSeq data test (single end reads)": {
         "content": [
+            9,
             {
                 "BWAMEM2_INDEX": {
                     "bwamem2": "2.2.1"
@@ -268,12 +270,13 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-02-10T17:14:12.684188306"
+        "timestamp": "2026-02-11T11:03:07.801122062"
     },
     "Miseq data test (skip fastqc)": {
         "content": [
+            8,
             {
                 "BWAMEM2_INDEX": {
                     "bwamem2": "2.2.1"
@@ -445,8 +448,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-02-10T17:14:58.212405529"
+        "timestamp": "2026-02-11T11:04:06.426745227"
     }
 }

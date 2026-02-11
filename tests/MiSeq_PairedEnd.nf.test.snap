@@ -1,6 +1,7 @@
 {
     "MiSeq data test (paired end reads)": {
         "content": [
+            16,
             {
                 "BWAMEM2_INDEX": {
                     "bwamem2": "2.2.1"
@@ -421,8 +422,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-02-10T17:16:28.42493386"
+        "timestamp": "2026-02-11T11:06:18.529815388"
     }
 }

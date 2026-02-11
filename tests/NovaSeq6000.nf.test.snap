@@ -1,6 +1,7 @@
 {
     "NovaSeq6000 data test": {
         "content": [
+            38,
             {
                 "BWAMEM2_INDEX": {
                     "bwamem2": "2.2.1"
@@ -960,12 +961,13 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-02-10T17:17:52.421091867"
+        "timestamp": "2026-02-11T11:08:03.880392879"
     },
     "NovaSeq6000 data test - No rundirs": {
         "content": [
+            37,
             {
                 "BWAMEM2_INDEX": {
                     "bwamem2": "2.2.1"
@@ -1893,8 +1895,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-02-10T17:18:55.46208782"
+        "timestamp": "2026-02-11T11:09:20.902763656"
     }
 }

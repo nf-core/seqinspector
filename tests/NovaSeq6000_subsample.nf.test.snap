@@ -1,6 +1,7 @@
 {
     "NovaSeq6000 data test sample size": {
         "content": [
+            43,
             {
                 "BWAMEM2_INDEX": {
                     "bwamem2": "2.2.1"
@@ -974,12 +975,13 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-02-10T17:20:02.068821333"
+        "timestamp": "2026-02-11T11:10:40.164111338"
     },
     "NovaSeq6000 data test relative sample size": {
         "content": [
+            43,
             {
                 "BWAMEM2_INDEX": {
                     "bwamem2": "2.2.1"
@@ -1953,12 +1955,13 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-02-10T17:21:13.638097598"
+        "timestamp": "2026-02-11T11:11:56.554513485"
     },
     "NovaSeq6000 data test sample size exceeds available reads": {
         "content": [
+            43,
             {
                 "BWAMEM2_INDEX": {
                     "bwamem2": "2.2.1"
@@ -2932,8 +2935,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-02-10T17:22:24.323697018"
+        "timestamp": "2026-02-11T11:13:08.854683994"
     }
 }
