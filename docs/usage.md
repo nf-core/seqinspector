@@ -12,7 +12,7 @@ The pipeline is meant to include a large amount of possible QC tools to chose fr
 As such we highly recommend to familiarize yourself with the different QC tools available and to remove any QC tool you would like to exclude with the `--skip-tools` command line parameter.
 For repeated use we suggest to create a params file containing the `--skip-tools` parameters (for details see the "Running the pipeline" section).
 Be aware that some tools are skipped by default and will need to be included in the list of skipped tools when curating your own list.
-To identify defaults included or excluded please check out [the overview compatibility between tools and data type table](https://nf-co.re/seqinspector/#compatibility-between-tools-and-data-type).
+To identify defaults included or excluded please check out [the overview compatibility between tools and data type table](../#compatibility-between-tools-and-data-type).
 
 ### What nf-core/seqinspector is not for
 
