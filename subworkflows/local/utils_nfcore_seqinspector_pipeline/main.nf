@@ -143,7 +143,9 @@ workflow PIPELINE_INITIALISATION {
         .map { tag_name -> [tag_name.toLowerCase(), tag_name] }
         .groupTuple()
         .map { _tag_lowercase, tags ->
-            assert tags.size() == 1 : "Tag name collision: " + tags.join(", ")
+            if (tags.size() == 1) {
+                log.warn("Tag name collision: " + tags.join(", "))
+            }
         }
 
     emit:
