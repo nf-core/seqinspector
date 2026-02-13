@@ -55,6 +55,7 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#169](https://github.com/nf-core/seqinspector/pull/169) Rescue missing versions from PREPARE_GENOME subworkflow
 - [#171](https://github.com/nf-core/seqinspector/pull/171) Rescue number of tasks in the pipeline level tests
 - [#172](https://github.com/nf-core/seqinspector/pull/172) More complete conda environment for rundir parser
+- [#173](https://github.com/nf-core/seqinspector/pull/173) Fix warning message for tag name collision
 
 ### `Changed`
 
@@ -72,6 +73,7 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#164](https://github.com/nf-core/seqinspector/pull/164) Refactor local subworkflow and pipeline tests
 - [#168](https://github.com/nf-core/seqinspector/pull/168) Adhere to strict syntax
 - [#169](https://github.com/nf-core/seqinspector/pull/169) Prepare release 1.0.0
+- [#173](https://github.com/nf-core/seqinspector/pull/173) Improve documentation
 
 ### `Dependencies`
 
