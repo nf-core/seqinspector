@@ -124,7 +124,6 @@ This tool is otherwise not run by default.
 Some tools might not be compatible with your data.
 In this case you can skip them by providing a comma-separated list of tools to be skipped with the `--skip_tools` parameter.
 
-In case you want to make this more permanent, it is recommended to specify this in your own nextflow configuration file.
 The nextflow configuration file can also be use to customise tool arguments.
 See official [nexflow](https://www.nextflow.io/docs/latest/config.html) and [nf-core](https://nf-co.re/docs/usage/configuration#customising-tool-arguments) documentation for further details.
 
