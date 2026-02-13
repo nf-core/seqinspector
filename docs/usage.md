@@ -6,13 +6,18 @@
 
 ### General points
 
-The nf-core/seqinspector pipeline is a general QC pipeline for sequencing data. The current version only supports data in fastq format.
-The pipeline is meant to include a large amount of possible QC tools to chose from, but not all of them may be relevant to your data. As such we highly recommend to familiarize yourself with the different QC tools available and to remove any QC tool you would like to exclude with the `--skip-tools` command line parameter. For repeated use we suggest to create a params file containing the `--skip-tools` parameters (for details see the "Running the pipeline" section).
-Be aware that some tools are skipped by default and will need to be included in the list of skipped tools when curating your own list. To identify defaults included or excluded please check out the overview table in the Introduction.
+The nf-core/seqinspector pipeline is a general QC pipeline for sequencing data.
+The current version only supports data in fastq format.
+The pipeline is meant to include a large amount of possible QC tools to chose from, but not all of them may be relevant to your data.
+As such we highly recommend to familiarize yourself with the different QC tools available and to remove any QC tool you would like to exclude with the `--skip-tools` command line parameter.
+For repeated use we suggest to create a params file containing the `--skip-tools` parameters (for details see the "Running the pipeline" section).
+Be aware that some tools are skipped by default and will need to be included in the list of skipped tools when curating your own list.
+To identify defaults included or excluded please check out [the overview compatibility between tools and data type table](https://nf-co.re/seqinspector/#compatibility-between-tools-and-data-type).
 
 ### What nf-core/seqinspector is not for
 
-The results of the nf-core/seqinspector pipeline are not meant to be used for any downstream analysis, but are exclusively for QC purposes. Even tools that may be used in other pipelines as a starting point for analysis are run in a QC perspective, most likely with a downsampled input.
+The results of the nf-core/seqinspector pipeline are not meant to be used for any downstream analysis, but are exclusively for QC purposes.
+Even tools that may be used in other pipelines as a starting point for analysis are run in a QC perspective, most likely with a downsampled input.
 
 ## Samplesheet input
 
@@ -26,7 +31,7 @@ You will need to create a samplesheet with information about the samples/fastq f
 
 The following simple run dir structure...
 
-```
+```bash
 run_dir
 ├── sample1_lane1_group1_r1.fq.gz
 ├── sample2_lane1_group1_r1.fq.gz
@@ -42,7 +47,6 @@ sample1 path/to/run_dir/sample1_lane1_group1_r1.fq.gz         path/to/run_dir pr
 sample2 path/to/run_dir/sample2_lane1_group1_r1.fq.gz         path/to/run_dir project1:group1
 sample3 path/to/run_dir/sample3_lane2_group2_r1.fq.gz         path/to/run_dir project1:group2
 sample4 path/to/run_dir/sample4_lane2_group3_r1.fq.gz         path/to/run_dir control
-
 ```
 
 | Column    | Description                                                                                                                                                                            |
@@ -100,17 +104,29 @@ genome: 'GRCh37'
 
 You can also generate such `YAML`/`JSON` files via [nf-core/launch](https://nf-co.re/launch).
 
-Optionally, the `sample_size` parameter allows you to subset a random number of reads to be analysed. Both absolute numbers (e.g 100) and relative numbers (e.g 0.25) can be specified.
+### Sample size selection
+
+Optionally, the `sample_size` parameter allows you to subset a random number of reads to be analysed.
+Both absolute numbers (e.g 100) and relative numbers (e.g 0.25) can be specified.
 
 ```bash
 nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 -profile docker
 ```
 
+### Hybrid-selection QC metrics
+
+The pipeline supports hybrid-selection (HS) QC metrics collection .
+Use `--run_picard_collecthsmetrics true` to run the QC tool [picard CollectHSmetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard).
+This tool is otherwise not run by default.
+
 ### Skipping tools
 
-Some tools might not be compatible with your data. In this case you can skip them by providing a comma-separated list of tools to be skipped with the `--skip_tools` parameter.
+Some tools might not be compatible with your data.
+In this case you can skip them by providing a comma-separated list of tools to be skipped with the `--skip_tools` parameter.
 
-In case you want to make this more permanent, it is recommended to specify this in a params file, or even in your own nextflow configuration file. The nextflow configuration file can also be use to customise tool arguments. See official [nexflow](https://www.nextflow.io/docs/latest/config.html) and [nf-core](https://nf-co.re/docs/usage/configuration#customising-tool-arguments) documentation for further details.
+In case you want to make this more permanent, it is recommended to specify this in your own nextflow configuration file.
+The nextflow configuration file can also be use to customise tool arguments.
+See official [nexflow](https://www.nextflow.io/docs/latest/config.html) and [nf-core](https://nf-co.re/docs/usage/configuration#customising-tool-arguments) documentation for further details.
 
 ### Updating the pipeline
 
@@ -170,7 +186,7 @@ If `-profile` is not specified, the pipeline will run locally and expect all sof
 - `apptainer`
   - A generic configuration profile to be used with [Apptainer](https://apptainer.org/)
 - `wave`
-  - A generic configuration profile to enable [Wave](https://seqera.io/wave/) containers. Use together with one of the above (requires Nextflow ` 24.03.0-edge` or later).
+  - A generic configuration profile to enable [Wave](https://seqera.io/wave/) containers. Use together with one of the above (requires Nextflow `24.03.0-edge` or later).
 - `conda`
   - A generic configuration profile to be used with [Conda](https://conda.io/docs/). Please only use Conda as a last resort i.e. when it's not possible to run the pipeline with Docker, Singularity, Podman, Shifter, Charliecloud, or Apptainer.
 
@@ -229,7 +245,3 @@ We recommend adding the following line to your environment to limit this (typica
 ```bash
 NXF_OPTS='-Xms1g -Xmx4g'
 ```
-
-## Hybrid-selection QC metrics
-
-The pipeline supports hybrid-selection (HS) QC metrics collection . Use `--run_picard_collecthsmetrics true` to run the QC tool [picard CollectHSmetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard). This tool is otherwise not run by default.
