@@ -144,7 +144,7 @@ workflow PIPELINE_INITIALISATION {
         .groupTuple()
         .map { _tag_lowercase, tags ->
             if (tags.size() == 1) {
-                log.warn("Tag name collision: " + tags.join(", "))
+                log.warn("Tag name collision: " + tags)
             }
         }
 
