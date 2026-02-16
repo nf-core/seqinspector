@@ -26,6 +26,8 @@ It can perform subsampling, quality assessment, duplication level analysis, and 
 The pipeline generates detailed MultiQC reports with flexible output options, ranging from individual sample reports to project-wide summaries, making it particularly useful for sequencing core facilities and research groups with access to sequencing instruments.
 If provided, nf-core/seqinspector can also parse statistics from an Illumina run folder directory into the final MultiQC reports.
 
+### Compatibility between tools and data type
+
 <!-- TODO: add a search tool that accepts a tree for `Compatibility with Data`. -->
 
 | Tool Type           | Tool Name                                                                                                           | Tool Description                                                                              | Compatibility with Data | Dependencies                                                                                                              | Default tool |
@@ -39,6 +41,8 @@ If provided, nf-core/seqinspector can also parse statistics from an Illumina run
 | `QC`                | [`Picard collect multiple metrics`](https://broadinstitute.github.io/picard/picard-metric-definitions.html)         | Collect multiple QC metrics                                                                   | [RNA, DNA]              | [Bwamem2, SAMtools, `--genome`]                                                                                           | yes          |
 | `QC`                | [`Picard_collecthsmetrics`](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard) | Collect alignment QC metrics of hybrid-selection data.                                        | [RNA, DNA]              | [Bwamem2, SAMtools, `--fasta`, `--run_picard_collecths_metrics`, `--bait_intervals`, `--target_intervals` (`--ref_dict`)] | no           |
 | `Reporting`         | [`MultiQC`](http://multiqc.info/)                                                                                   | Present QC for raw reads                                                                      | [RNA, DNA, synthetic]   | [N/A]                                                                                                                     | yes          |
+
+### Workflow diagram
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/images/seqinspector_tubemap_V1.0_dark.png">
@@ -86,7 +90,9 @@ For more details about the output files and reports, please refer to the
 
 ## Credits
 
-nf-core/seqinspector was originally written by [@agrima2010](https://github.com/agrima2010), [@Aratz](https://github.com/Aratz), [@FranBonath](https://github.com/FranBonath), [@kedhammar](https://github.com/kedhammar), and [@MatthiasZepper](https://github.com/MatthiasZepper) from the Swedish [@NationalGenomicsInfrastructure](https://github.com/NationalGenomicsInfrastructure/) and [Clinical Genomics Stockholm](https://clinical.scilifelab.se/).
+nf-core/seqinspector was originally written by [@agrima2010](https://github.com/agrima2010), [@Aratz](https://github.com/Aratz), [@FranBonath](https://github.com/FranBonath), [@kedhammar](https://github.com/kedhammar), and [@MatthiasZepper](https://github.com/MatthiasZepper) from the Swedish [National Genomics Infrastructure](https://github.com/NationalGenomicsInfrastructure/) and [Clinical Genomics Stockholm](https://clinical.scilifelab.se/).
+
+Maintenance is now lead by Maxime U Garcia ([National Genomics Infrastructure](https://github.com/NationalGenomicsInfrastructure/))
 
 We thank the following people for their extensive assistance in the development of this pipeline:
 
@@ -100,7 +106,6 @@ We thank the following people for their extensive assistance in the development 
 - [@kjellinjonas](https://github.com/kjellinjonas)
 - [@mahesh-panchal](https://github.com/mahesh-panchal)
 - [@matrulda](https://github.com/matrulda)
-- [@maxulysse](https://github.com/maxulysse)
 - [@mirpedrol](https://github.com/mirpedrol)
 - [@nggvs](https://github.com/nggvs)
 - [@nkongenelly](https://github.com/nkongenelly)
