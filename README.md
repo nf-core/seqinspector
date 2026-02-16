@@ -90,7 +90,9 @@ For more details about the output files and reports, please refer to the
 
 ## Credits
 
-nf-core/seqinspector was originally written by [@agrima2010](https://github.com/agrima2010), [@Aratz](https://github.com/Aratz), [@FranBonath](https://github.com/FranBonath), [@kedhammar](https://github.com/kedhammar), and [@MatthiasZepper](https://github.com/MatthiasZepper) from the Swedish [@NationalGenomicsInfrastructure](https://github.com/NationalGenomicsInfrastructure/) and [Clinical Genomics Stockholm](https://clinical.scilifelab.se/).
+nf-core/seqinspector was originally written by [@agrima2010](https://github.com/agrima2010), [@Aratz](https://github.com/Aratz), [@FranBonath](https://github.com/FranBonath), [@kedhammar](https://github.com/kedhammar), and [@MatthiasZepper](https://github.com/MatthiasZepper) from the Swedish [National Genomics Infrastructure](https://github.com/NationalGenomicsInfrastructure/) and [Clinical Genomics Stockholm](https://clinical.scilifelab.se/).
+
+Maintenance is now lead by Maxime U Garcia ([National Genomics Infrastructure](https://github.com/NationalGenomicsInfrastructure/))
 
 We thank the following people for their extensive assistance in the development of this pipeline:
 
@@ -104,7 +106,6 @@ We thank the following people for their extensive assistance in the development 
 - [@kjellinjonas](https://github.com/kjellinjonas)
 - [@mahesh-panchal](https://github.com/mahesh-panchal)
 - [@matrulda](https://github.com/matrulda)
-- [@maxulysse](https://github.com/maxulysse)
 - [@mirpedrol](https://github.com/mirpedrol)
 - [@nggvs](https://github.com/nggvs)
 - [@nkongenelly](https://github.com/nkongenelly)
