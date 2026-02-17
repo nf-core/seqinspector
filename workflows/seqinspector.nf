@@ -67,19 +67,19 @@ workflow SEQINSPECTOR {
     if (!("rundirparser" in skip_tools)) {
 
         // Branch the samplesheet channel based on rundir presence
-        ch_rundir_branched = ch_samplesheet.branch { meta, _reads ->
+        ch_rundir_branch = ch_samplesheet.branch { meta, _reads ->
             with_rundir: meta.rundir.size() > 0
             without_rundir: true
         }
 
         // Log warnings for samples without rundir
-        ch_rundir_branched.without_rundir.view { meta, _reads ->
+        ch_rundir_branch.without_rundir.view { meta, _reads ->
             log.warn("Sample '${meta.id}' does not have a rundir specified")
         }
 
         // From samplesheet channel serving (sampleMetaObj, sampleReadsPath) tuples:
         // --> Create new rundir channel serving (rundirMetaObj, rundirPath) tuples
-        ch_rundir = ch_rundir_branched.with_rundir
+        ch_rundir = ch_rundir_branch.with_rundir
             .map { meta, _reads -> [meta.rundir, meta] }
             .groupTuple()
             .map { rundir, metas ->
@@ -166,10 +166,8 @@ workflow SEQINSPECTOR {
             .transpose()
             .toList()
 
-        FASTQSCREEN_FASTQSCREEN(
-            ch_sample_sized,
-            ch_fastqscreen_refs,
-        )
+        FASTQSCREEN_FASTQSCREEN(ch_sample_sized, ch_fastqscreen_refs)
+
         ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
         ch_versions = ch_versions.mix(FASTQSCREEN_FASTQSCREEN.out.versions)
     }

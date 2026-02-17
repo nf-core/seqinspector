@@ -12,6 +12,7 @@ class UTILS {
         // Pass down workflow for std capture
         def workflow = args.workflow
 
+        // These strings are not stable and should be ignored
         def snapshot_ignore_list = [
             "Creating env using",
             "Downloading plugin",
@@ -26,8 +27,6 @@ class UTILS {
         def stable_content = getAllFilesFromDir(outdir, ignoreFile: 'tests/.nftignore', ignore: [scenario.ignoreFiles ])
         // bam_files: All bam files
         def bam_files = getAllFilesFromDir(outdir, include: ['**/*.bam'], ignore: [scenario.ignoreFiles ])
-        // cram_files: All cram files
-        def fasta_base = 'https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/'
 
         def assertion = []
 
@@ -44,25 +43,26 @@ class UTILS {
             assertion.add(bam_files.isEmpty() ? 'No BAM files' : bam_files.collect { file -> file.getName() + ":md5," + bam(file.toString()).readsMD5 })
         }
 
-        // Always capture stdout and stderr for any WARN message
-        assertion.add(filterNextflowOutput(workflow.stderr + workflow.stdout, include: ["WARN"], ignore: snapshot_ignore_list + (scenario.snapshot_ignoreWarning ?: [])) ?: "No warnings")
+        // If we have a snapshot options in scenario then we allow to capture either stderr, stdout or both
+        // With options to include specific stings
+        def workflow_std = []
+        // Otherwise, we always capture stdout and stderr for any WARN message
+        // Both have additional possibilities to ignore some strings
+        def filter_args = [ignore: snapshot_ignore_list + (scenario.snapshot_ignore ?: [])]
 
-        // Capture std for snapshot
-        // Allow to capture either stderr, stdout or both
-        // Additional possibilities to include and/or ignore some string
         if (scenario.snapshot) {
-            def workflow_std = []
+            workflow_std = scenario.snapshot.split(',')
+                .findAll { it in ['stderr', 'stdout'] }
+                .collect { workflow."$it" }
+                .flatten()
 
-            scenario.snapshot.split(',').each { std ->
-                if (std in ['stderr', 'stdout']) { workflow_std.add(workflow."$std") }
-            }
-
-            if (scenario.snapshot_include) {
-                assertion.add(filterNextflowOutput(workflow_std.flatten(), ignore: snapshot_ignore_list + (scenario.snapshot_ignore ?: []), include:[scenario.snapshot_include]))
-            } else {
-                assertion.add(filterNextflowOutput(workflow_std.flatten(), ignore: snapshot_ignore_list + (scenario.snapshot_ignore ?: [])))
-            }
+            if (scenario.snapshot_include) { filter_args.include = [scenario.snapshot_include] }
+        } else {
+            workflow_std = workflow.stderr + workflow.stdout
+            filter_args.include = ["WARN"]
         }
+
+        assertion.add(filterNextflowOutput(workflow_std, filter_args) ?: "No warnings")
 
         return assertion
     }

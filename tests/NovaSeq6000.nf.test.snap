@@ -959,13 +959,83 @@
                 "sampletest_04.bam:md5,f80371e37421d97499b3bfd55221ed00"
             ],
             [
+                "N E X T F L O W  ~  version [VERSION]",
+                "Launching `[PATH]/tests/../main.nf` [RUN_NAME] DSL2 - revision: [REVISION]",
+                "------------------------------------------------------",
+                "                                        ,--./,-.",
+                "        ___     __   __   __   ___     /,-._.--~'",
+                "  |\\ | |__  __ /  ` /  \\ |__) |__         }  {",
+                "  | \\| |       \\__, \\__/ |  \\ |___     \\`-._,-`-,",
+                "                                        `._,._,'",
+                "  nf-core/seqinspector [VERSION]",
+                "------------------------------------------------------",
+                "Input/output options",
+                "  input                     : https://raw.githubusercontent.com/nf-core/test-datasets/seqinspector/testdata/NovaSeq6000/samplesheet.csv",
+                "  outdir                    : [PATH]/tests/[NFT_HASH]/output",
+                "Reference genome options",
+                "  genome                    : R64-1-1",
+                "  fasta                     : s3://ngi-igenomes/igenomes//Saccharomyces_cerevisiae/Ensembl/R64-1-1/Sequence/WholeGenomeFasta/genome.fa",
+                "Institutional config options",
+                "  config_profile_name       : Test profile",
+                "  config_profile_description: Minimal test dataset to check pipeline function",
+                "Generic options",
+                "  trace_report_suffix       : [TIMESTAMP]",
+                "Core Nextflow options",
+                "  runName                   : [RUN_NAME]",
+                "  launchDir                 : [PATH]/tests/[NFT_HASH]",
+                "  workDir                   : [PATH]/tests/[NFT_HASH]/work",
+                "  projectDir                : [PATH]",
+                "  userName                  : [USER]",
+                "  profile                   : test,[CONTAINER]",
+                "  configFiles               : [PATH]/nextflow.config, [PATH]/nextflow.config, [PATH]/tests/nextflow.config",
+                "!! Only displaying parameters that differ from the pipeline defaults !!",
+                "------------------------------------------------------",
+                "* The nf-core framework",
+                "    https://doi.org/10.1038/s41587-020-0439-x",
+                "* Software dependencies",
+                "    https://github.com/nf-core/seqinspector/blob/master/CITATIONS.md",
+                "-[nf-core/seqinspector] Pipeline completed successfully-",
                 "WARN: Tag name collision: [group1]",
                 "WARN: Tag name collision: [group2]",
                 "WARN: Tag name collision: [lane1]",
-                "WARN: Tag name collision: [test]"
+                "WARN: Tag name collision: [test]",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (Sample1_01)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (Sample23_03)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (SampleA_02)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (Undetermined_05)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (sampletest_04)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQC (Sample1_01)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQC (Sample23_03)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQC (SampleA_02)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQC (Undetermined_05)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQC (sampletest_04)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQSCREEN_FASTQSCREEN (Sample1_01)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQSCREEN_FASTQSCREEN (Sample23_03)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQSCREEN_FASTQSCREEN (SampleA_02)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQSCREEN_FASTQSCREEN (Undetermined_05)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQSCREEN_FASTQSCREEN (sampletest_04)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:MULTIQC_GLOBAL",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:MULTIQC_PER_TAG (1)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:MULTIQC_PER_TAG (2)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:MULTIQC_PER_TAG (3)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:MULTIQC_PER_TAG (4)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:PREPARE_GENOME:BWAMEM2_INDEX (genome.fa)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:PREPARE_GENOME:SAMTOOLS_FAIDX (genome.fa)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:QC_BAM:PICARD_COLLECTMULTIPLEMETRICS (Sample1_01)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:QC_BAM:PICARD_COLLECTMULTIPLEMETRICS (Sample23_03)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:QC_BAM:PICARD_COLLECTMULTIPLEMETRICS (SampleA_02)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:QC_BAM:PICARD_COLLECTMULTIPLEMETRICS (Undetermined_05)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:QC_BAM:PICARD_COLLECTMULTIPLEMETRICS (sampletest_04)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:RUNDIRPARSER (200624_A00834_0183_BHMTFYDRXX)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:SAMTOOLS_INDEX (Sample1_01)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:SAMTOOLS_INDEX (Sample23_03)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:SAMTOOLS_INDEX (SampleA_02)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:SAMTOOLS_INDEX (Undetermined_05)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:SAMTOOLS_INDEX (sampletest_04)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:SEQFU_STATS (seqfu)"
             ]
         ],
-        "timestamp": "2026-02-17T10:41:05.699201263",
+        "timestamp": "2026-02-17T16:11:01.427075006",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -1951,7 +2021,7 @@
                 "WARN: Tag name collision: [test]"
             ]
         ],
-        "timestamp": "2026-02-17T10:52:18.598362849",
+        "timestamp": "2026-02-17T15:50:33.940454174",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -2937,7 +3007,7 @@
                 "WARN: Tag name collision: [test]"
             ]
         ],
-        "timestamp": "2026-02-17T10:53:47.109853833",
+        "timestamp": "2026-02-17T15:52:18.005537349",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -4874,7 +4944,7 @@
                 "WARN: sampletest_04: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads."
             ]
         ],
-        "timestamp": "2026-02-17T10:45:40.556260145",
+        "timestamp": "2026-02-17T15:53:46.460202138",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

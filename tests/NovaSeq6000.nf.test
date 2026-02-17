@@ -9,10 +9,8 @@ nextflow_pipeline {
     def test_scenario = [
         [
             name: "NovaSeq6000 data test",
-            params: [
-                fastq_screen_references : "${projectDir}/assets/example_fastq_screen_references.csv",
-                genome : 'R64-1-1'
-            ]
+            params: [],
+            snapshot: 'stderr,stdout'
         ],
         [
             name: "NovaSeq6000 data test sample size",
@@ -35,8 +33,6 @@ nextflow_pipeline {
         [
             name: "NovaSeq6000 data test - No rundirs",
             params: [
-                fastq_screen_references : "${projectDir}/assets/example_fastq_screen_references.csv",
-                genome : 'R64-1-1',
                 input : pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/samplesheet_no_rundirs.csv'
             ]
         ]
