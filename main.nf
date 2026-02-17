@@ -47,9 +47,20 @@ workflow NFCORE_SEQINSPECTOR {
     //
     SEQINSPECTOR(
         samplesheet,
-        params.fasta,
-        params.skip_tools ? params.skip_tools.split(',') : ['no_skip_tools'],
+        params.bait_intervals,
         params.bwamem2,
+        params.fasta,
+        params.fastq_screen_references,
+        params.multiqc_config,
+        params.multiqc_logo,
+        params.multiqc_methods_description,
+        params.outdir,
+        params.ref_dict,
+        params.run_picard_collecthsmetrics,
+        params.sample_size,
+        params.skip_tools ? params.skip_tools.split(',') : ['no_skip_tools'],
+        params.sort_bam,
+        params.target_intervals,
     )
 
     emit:

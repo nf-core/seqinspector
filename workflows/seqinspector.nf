@@ -1,5 +1,3 @@
-include { samplesheetToList             } from 'plugin/nf-schema'
-
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -28,6 +26,7 @@ include { methodsDescriptionText        } from '../subworkflows/local/utils_nfco
 include { paramsSummaryMap              } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc          } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { reportIndexMultiqc            } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { samplesheetToList             } from 'plugin/nf-schema'
 include { softwareVersionsToYAML        } from 'plugin/nf-core-utils'
 
 /*
@@ -39,9 +38,20 @@ include { softwareVersionsToYAML        } from 'plugin/nf-core-utils'
 workflow SEQINSPECTOR {
     take:
     ch_samplesheet // channel: samplesheet read in from --input
-    fasta_file
-    skip_tools
+    bait_intervals
     bwamem2
+    fasta_file
+    fastq_screen_references
+    multiqc_config
+    multiqc_logo
+    multiqc_methods_description
+    outdir
+    ref_dict
+    run_picard_collecthsmetrics
+    sample_size
+    skip_tools
+    sort_bam
+    target_intervals
 
     main:
     ch_versions = channel.empty()
@@ -55,8 +65,8 @@ workflow SEQINSPECTOR {
         ch_reference_fasta,
         bwamem2,
         skip_tools,
-        params.run_picard_collecthsmetrics,
-        params.ref_dict,
+        run_picard_collecthsmetrics,
+        ref_dict,
     )
 
     ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
@@ -106,8 +116,8 @@ workflow SEQINSPECTOR {
     //
     // MODULE: Run Seqtk sample to perform subsampling
     //
-    if (!("seqtk_sample" in skip_tools) && params.sample_size > 0) {
-        SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, params.sample_size] })
+    if (!("seqtk_sample" in skip_tools) && sample_size > 0) {
+        SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] })
 
         ch_sample_sized = SEQTK_SAMPLE.out.reads
         ch_versions = ch_versions.mix(SEQTK_SAMPLE.out.versions)
@@ -140,8 +150,8 @@ workflow SEQINSPECTOR {
             .map { sample_id, row ->
                 // Check if requested sample size exceeds available reads
                 def sample_reads = row['#Seq'].toInteger()
-                if (params.sample_size > sample_reads) {
-                    log.warn("${sample_id}: Requested sample_size (${params.sample_size}) is larger than available reads (${sample_reads}). Pipeline will continue with ${sample_reads} reads.")
+                if (sample_size > sample_reads) {
+                    log.warn("${sample_id}: Requested sample_size (${sample_size}) is larger than available reads (${sample_reads}). Pipeline will continue with ${sample_reads} reads.")
                 }
             }
         ch_multiqc_files = ch_multiqc_files.mix(SEQFU_STATS.out.multiqc)
@@ -158,7 +168,7 @@ workflow SEQINSPECTOR {
     if (!("fastqscreen" in skip_tools)) {
         ch_fastqscreen_refs = channel.fromList(
                 samplesheetToList(
-                    params.fastq_screen_references,
+                    fastq_screen_references,
                     "${projectDir}/assets/schema_fastq_screen_references.json",
                 )
             )
@@ -178,7 +188,7 @@ workflow SEQINSPECTOR {
             ch_sample_sized,
             PREPARE_GENOME.out.bwamem2_index,
             ch_reference_fasta,
-            params.sort_bam ?: true,
+            sort_bam ?: true,
         )
         ch_bwamem2_mem = BWAMEM2_MEM.out.bam
         ch_versions = ch_versions.mix(BWAMEM2_MEM.out.versions)
@@ -194,8 +204,8 @@ workflow SEQINSPECTOR {
 
         ch_reference_fai = PREPARE_GENOME.out.reference_fai
 
-        ch_bait_intervals = params.bait_intervals ? channel.fromPath(params.bait_intervals).collect() : channel.empty()
-        ch_target_intervals = params.target_intervals ? channel.fromPath(params.target_intervals).collect() : channel.empty()
+        ch_bait_intervals = bait_intervals ? channel.fromPath(bait_intervals).collect() : channel.empty()
+        ch_target_intervals = target_intervals ? channel.fromPath(target_intervals).collect() : channel.empty()
 
         ch_ref_dict = PREPARE_GENOME.out.ref_dict
 
@@ -205,7 +215,7 @@ workflow SEQINSPECTOR {
             ch_samtools_index,
             ch_reference_fasta,
             ch_reference_fai,
-            params.run_picard_collecthsmetrics,
+            run_picard_collecthsmetrics,
             ch_bait_intervals,
             ch_target_intervals,
             ch_ref_dict,
@@ -221,7 +231,7 @@ workflow SEQINSPECTOR {
         softwareVersions: ch_versions.mix(channel.topic("versions")),
         nextflowVersion: workflow.nextflow.version,
     ).collectFile(
-        storeDir: "${params.outdir}/pipeline_info",
+        storeDir: "${outdir}/pipeline_info",
         name: 'nf_core_' + 'seqinspector_software_' + 'mqc_' + 'versions.yml',
         sort: true,
         newLine: true,
@@ -236,11 +246,11 @@ workflow SEQINSPECTOR {
         .flatten()
         .unique()
 
-    ch_multiqc_config = params.multiqc_config
-        ? channel.fromPath(params.multiqc_config, checkIfExists: true)
+    ch_multiqc_config = multiqc_config
+        ? channel.fromPath(multiqc_config, checkIfExists: true)
         : channel.fromPath("${projectDir}/assets/multiqc_config.yml", checkIfExists: true)
-    ch_multiqc_logo = params.multiqc_logo
-        ? channel.fromPath(params.multiqc_logo, checkIfExists: true)
+    ch_multiqc_logo = multiqc_logo
+        ? channel.fromPath(multiqc_logo, checkIfExists: true)
         : channel.empty()
 
     summary_params = paramsSummaryMap(
@@ -250,8 +260,8 @@ workflow SEQINSPECTOR {
     ch_workflow_summary = channel.value(
         paramsSummaryMultiqc(summary_params)
     )
-    ch_multiqc_custom_methods_description = params.multiqc_methods_description
-        ? file(params.multiqc_methods_description, checkIfExists: true)
+    ch_multiqc_custom_methods_description = multiqc_methods_description
+        ? file(multiqc_methods_description, checkIfExists: true)
         : file("${projectDir}/assets/methods_description_template.yml", checkIfExists: true)
     ch_methods_description = channel.value(
         methodsDescriptionText(ch_multiqc_custom_methods_description)
