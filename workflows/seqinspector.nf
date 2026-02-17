@@ -82,7 +82,7 @@ workflow SEQINSPECTOR {
         }
 
         // Log warnings for samples without rundir
-        ch_rundir_branch.without_rundir.view { meta, _reads ->
+        ch_rundir_branch.without_rundir.subscribe { meta, _reads ->
             log.warn("Sample '${meta.id}' does not have a rundir specified")
         }
 
@@ -241,10 +241,7 @@ workflow SEQINSPECTOR {
     // MODULE: MultiQC
     //
 
-    ch_tags = ch_multiqc_files
-        .map { meta, _sample -> meta.tags }
-        .flatten()
-        .unique()
+    ch_tags = ch_multiqc_files.map { meta, _sample -> meta.tags }.flatten().unique()
 
     ch_multiqc_config = multiqc_config
         ? channel.fromPath(multiqc_config, checkIfExists: true)
@@ -253,37 +250,23 @@ workflow SEQINSPECTOR {
         ? channel.fromPath(multiqc_logo, checkIfExists: true)
         : channel.empty()
 
-    summary_params = paramsSummaryMap(
-        workflow,
-        parameters_schema: "nextflow_schema.json"
-    )
-    ch_workflow_summary = channel.value(
-        paramsSummaryMultiqc(summary_params)
-    )
+    summary_params = paramsSummaryMap(workflow, parameters_schema: "nextflow_schema.json")
+    ch_workflow_summary = channel.value(paramsSummaryMultiqc(summary_params))
+
     ch_multiqc_custom_methods_description = multiqc_methods_description
         ? file(multiqc_methods_description, checkIfExists: true)
         : file("${projectDir}/assets/methods_description_template.yml", checkIfExists: true)
-    ch_methods_description = channel.value(
-        methodsDescriptionText(ch_multiqc_custom_methods_description)
-    )
-    ch_multiqc_extra_files = ch_multiqc_extra_files.mix(
-        ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml')
-    )
+    ch_methods_description = channel.value(methodsDescriptionText(ch_multiqc_custom_methods_description))
+
+    ch_multiqc_extra_files = ch_multiqc_extra_files.mix(ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml'))
     ch_multiqc_extra_files = ch_multiqc_extra_files.mix(collated_versions)
     ch_multiqc_extra_files = ch_multiqc_extra_files.mix(
-        ch_methods_description.collectFile(
-            name: 'methods_description_mqc.yaml',
-            sort: true,
-        )
+        ch_methods_description.collectFile(name: 'methods_description_mqc.yaml', sort: true)
     )
     // Add index to other MultiQC reports
     //ch_multiqc_extra_files_global = channel.empty()
     ch_multiqc_extra_files_global = ch_multiqc_extra_files.mix(
-        ch_tags.toList().map { tag_list ->
-            reportIndexMultiqc(tag_list)
-        }.collectFile(
-            name: 'multiqc_index_mqc.yaml'
-        )
+        ch_tags.toList().map { tag_list -> reportIndexMultiqc(tag_list) }.collectFile(name: 'multiqc_index_mqc.yaml')
     )
 
     MULTIQC_GLOBAL(
