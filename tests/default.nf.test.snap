@@ -1001,7 +1001,6 @@
                 "* Software dependencies",
                 "    https://github.com/nf-core/seqinspector/blob/master/CITATIONS.md",
                 "-[nf-core/seqinspector] Pipeline completed successfully-",
-                "Staging foreign file: s3://ngi-igenomes/igenomes/Saccharomyces_cerevisiae/Ensembl/R64-1-1/Sequence/WholeGenomeFasta/genome.fa",
                 "WARN: Tag name collision: [group1]",
                 "WARN: Tag name collision: [group2]",
                 "WARN: Tag name collision: [lane1]",
@@ -1042,7 +1041,7 @@
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:SEQFU_STATS (seqfu)"
             ]
         ],
-        "timestamp": "2026-02-17T11:33:12.313902597",
+        "timestamp": "2026-02-17T12:03:22.163442844",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

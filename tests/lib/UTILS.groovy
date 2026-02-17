@@ -12,6 +12,14 @@ class UTILS {
         // Pass down workflow for std capture
         def workflow = args.workflow
 
+        def snapshot_ignore_list = [
+            "Creating env using",
+            "Downloading plugin",
+            "Pulling Singularity image",
+            "Staging foreign file",
+            "unable to stage foreign file"
+        ]
+
         // stable_name: All files + folders in ${outdir}/ with a stable name
         def stable_name = getAllFilesFromDir(outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
         // stable_content: All files in ${outdir}/ with stable content
@@ -37,11 +45,7 @@ class UTILS {
         }
 
         // Always capture stdout and stderr for any WARN message
-        if (scenario.snapshot_ignoreWarning) {
-            assertion.add(filterNextflowOutput(workflow.stderr + workflow.stdout, include: ["WARN"], ignore: ["Creating env using", "Pulling Singularity image", "unable to stage foreign file", scenario.snapshot_ignoreWarning] ) ?: "No warnings")
-        } else {
-            assertion.add(filterNextflowOutput(workflow.stderr + workflow.stdout, include: ["WARN"], ignore: ["Creating env using", "Pulling Singularity image", "unable to stage foreign file"] ) ?: "No warnings")
-        }
+        assertion.add(filterNextflowOutput(workflow.stderr + workflow.stdout, include: ["WARN"], ignore: snapshot_ignore_list + (scenario.snapshot_ignoreWarning ?: [])) ?: "No warnings")
 
         // Capture std for snapshot
         // Allow to capture either stderr, stdout or both
@@ -54,9 +58,9 @@ class UTILS {
             }
 
             if (scenario.snapshot_include) {
-                assertion.add(filterNextflowOutput(workflow_std.flatten(), ignore: ["Creating env using", "Pulling Singularity image", "unable to stage foreign file", scenario.snapshot_ignore], include:[scenario.snapshot_include]))
+                assertion.add(filterNextflowOutput(workflow_std.flatten(), ignore: snapshot_ignore_list + (scenario.snapshot_ignore ?: []), include:[scenario.snapshot_include]))
             } else {
-                assertion.add(filterNextflowOutput(workflow_std.flatten(), ignore: ["Creating env using", "Pulling Singularity image", "unable to stage foreign file", scenario.snapshot_ignore]))
+                assertion.add(filterNextflowOutput(workflow_std.flatten(), ignore: snapshot_ignore_list + (scenario.snapshot_ignore ?: [])))
             }
         }
 
