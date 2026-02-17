@@ -40,7 +40,7 @@ workflow SEQINSPECTOR {
     ch_samplesheet // channel: samplesheet read in from --input
     bait_intervals
     bwamem2
-    fasta_file
+    fasta_reference
     fastq_screen_references
     multiqc_config
     multiqc_logo
@@ -59,10 +59,9 @@ workflow SEQINSPECTOR {
     ch_multiqc_extra_files = channel.empty()
     ch_bwamem2_mem = channel.empty()
     ch_samtools_index = channel.empty()
-    ch_reference_fasta = fasta_file ? channel.fromPath(fasta_file, checkIfExists: true).map { file -> tuple([id: file.name], file) }.collect() : channel.value([[:], []])
 
     PREPARE_GENOME(
-        ch_reference_fasta,
+        fasta_reference,
         bwamem2,
         skip_tools,
         run_picard_collecthsmetrics,
@@ -119,19 +118,19 @@ workflow SEQINSPECTOR {
     if (!("seqtk_sample" in skip_tools) && sample_size > 0) {
         SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] })
 
-        ch_sample_sized = SEQTK_SAMPLE.out.reads
+        ch_sample = SEQTK_SAMPLE.out.reads
         ch_versions = ch_versions.mix(SEQTK_SAMPLE.out.versions)
     }
     else {
         // No subsampling
-        ch_sample_sized = ch_samplesheet
+        ch_sample = ch_samplesheet
     }
 
     //
     // MODULE: Run FastQC
     //
     if (!("fastqc" in skip_tools)) {
-        FASTQC(ch_sample_sized)
+        FASTQC(ch_sample)
 
         ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
         ch_versions = ch_versions.mix(FASTQC.out.versions)
@@ -141,10 +140,10 @@ workflow SEQINSPECTOR {
     // Module: Run SeqFu stats
     //
     if (!("seqfu_stats" in skip_tools)) {
-        ch_seqfu_stats = SEQFU_STATS(ch_samplesheet.map { meta, reads -> [[id: "seqfu", sample_id: meta.id, tags: meta.tags], reads] })
+        SEQFU_STATS(ch_samplesheet.map { meta, reads -> [[id: "seqfu", sample_id: meta.id, tags: meta.tags], reads] })
 
         // Parse the stats TSV file
-        ch_seqfu_stats.stats
+        SEQFU_STATS.out.stats
             .map { meta, stats -> [meta.sample_id, stats] }
             .splitCsv(header: true, sep: '\t')
             .map { sample_id, row ->
@@ -154,6 +153,7 @@ workflow SEQINSPECTOR {
                     log.warn("${sample_id}: Requested sample_size (${sample_size}) is larger than available reads (${sample_reads}). Pipeline will continue with ${sample_reads} reads.")
                 }
             }
+
         ch_multiqc_files = ch_multiqc_files.mix(SEQFU_STATS.out.multiqc)
         ch_versions = ch_versions.mix(SEQFU_STATS.out.versions)
     }
@@ -176,7 +176,7 @@ workflow SEQINSPECTOR {
             .transpose()
             .toList()
 
-        FASTQSCREEN_FASTQSCREEN(ch_sample_sized, ch_fastqscreen_refs)
+        FASTQSCREEN_FASTQSCREEN(ch_sample, ch_fastqscreen_refs)
 
         ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
         ch_versions = ch_versions.mix(FASTQSCREEN_FASTQSCREEN.out.versions)
@@ -185,9 +185,9 @@ workflow SEQINSPECTOR {
     // MODULE: Align reads with BWA-MEM2
     if (!("bwamem2_mem" in skip_tools)) {
         BWAMEM2_MEM(
-            ch_sample_sized,
+            ch_sample,
             PREPARE_GENOME.out.bwamem2_index,
-            ch_reference_fasta,
+            fasta_reference,
             sort_bam ?: true,
         )
         ch_bwamem2_mem = BWAMEM2_MEM.out.bam
@@ -213,7 +213,7 @@ workflow SEQINSPECTOR {
         QC_BAM(
             ch_bwamem2_mem,
             ch_samtools_index,
-            ch_reference_fasta,
+            fasta_reference,
             ch_reference_fai,
             run_picard_collecthsmetrics,
             ch_bait_intervals,

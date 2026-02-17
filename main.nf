@@ -49,7 +49,7 @@ workflow NFCORE_SEQINSPECTOR {
         samplesheet,
         params.bait_intervals,
         params.bwamem2,
-        params.fasta,
+        params.fasta ? channel.fromPath(params.fasta, checkIfExists: true).map { file -> tuple([id: file.name], file) }.collect() : channel.value([[:], []]),
         params.fastq_screen_references,
         params.multiqc_config,
         params.multiqc_logo,
