@@ -134,12 +134,13 @@
                 "hg001_01_seqfu.tsv:md5,b133752c897afbb4d8721b911fa117d4",
                 "hg001_01_seqfu_mqc.txt:md5,42e3506b02ceb72a6f05cb174505e722"
             ],
-            "No BAM files"
+            "No BAM files",
+            "No warnings"
         ],
+        "timestamp": "2026-02-17T10:30:18.833766777",
         "meta": {
-            "nf-test": "0.9.3",
+            "nf-test": "0.9.4",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-02-11T11:13:50.566732998"
+        }
     }
 }

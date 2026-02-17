@@ -44,6 +44,7 @@ process RUNDIRPARSER {
     fi
 
     # TODO: check what kind of seq platfrom to decide which script to use
+    # or replace with a smarter solution, like the MultiQC_SAV plugin
     parse_illumina.py ${input_dir}
     """
 

@@ -1,0 +1,19 @@
+nextflow_pipeline {
+
+    name "Test pipeline"
+    script "../main.nf"
+
+    def test_scenario = [
+        [
+            name: "-profile test",
+            params: [],
+            snapshot: 'stderr,stdout',
+            snapshot_ignore: 'Downloading plugin|Staging foreign file',
+        ]
+    ]
+
+    // Generate tests for each scenario
+    test_scenario.each { scenario ->
+        test(scenario.name, UTILS.getTest(scenario))
+    }
+}

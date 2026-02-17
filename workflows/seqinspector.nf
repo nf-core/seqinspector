@@ -28,7 +28,7 @@ include { methodsDescriptionText        } from '../subworkflows/local/utils_nfco
 include { paramsSummaryMap              } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc          } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { reportIndexMultiqc            } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
-include { softwareVersionsToYAML        } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { softwareVersionsToYAML        } from 'plugin/nf-core-utils'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -67,15 +67,13 @@ workflow SEQINSPECTOR {
     if (!("rundirparser" in skip_tools)) {
 
         // Branch the samplesheet channel based on rundir presence
-        ch_samplesheet
-            .branch { meta, reads ->
-                with_rundir: meta.rundir.size() > 0
-                without_rundir: true
-            }
-            .set { ch_rundir_branched }
+        ch_rundir_branched = ch_samplesheet.branch { meta, _reads ->
+            with_rundir: meta.rundir.size() > 0
+            without_rundir: true
+        }
 
         // Log warnings for samples without rundir
-        ch_rundir_branched.without_rundir.view { meta, reads ->
+        ch_rundir_branched.without_rundir.view { meta, _reads ->
             log.warn("Sample '${meta.id}' does not have a rundir specified")
         }
 
@@ -109,11 +107,9 @@ workflow SEQINSPECTOR {
     // MODULE: Run Seqtk sample to perform subsampling
     //
     if (!("seqtk_sample" in skip_tools) && params.sample_size > 0) {
-        ch_sample_sized = SEQTK_SAMPLE(
-            ch_samplesheet.map { meta, reads ->
-                [meta, reads, params.sample_size]
-            }
-        ).reads
+        SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, params.sample_size] })
+
+        ch_sample_sized = SEQTK_SAMPLE.out.reads
         ch_versions = ch_versions.mix(SEQTK_SAMPLE.out.versions)
     }
     else {
@@ -125,40 +121,26 @@ workflow SEQINSPECTOR {
     // MODULE: Run FastQC
     //
     if (!("fastqc" in skip_tools)) {
-        FASTQC(
-            ch_sample_sized.map { meta, subsampled ->
-                [meta, subsampled]
-            }
-        )
+        FASTQC(ch_sample_sized)
+
         ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
         ch_versions = ch_versions.mix(FASTQC.out.versions)
     }
-
 
     //
     // Module: Run SeqFu stats
     //
     if (!("seqfu_stats" in skip_tools)) {
-        ch_seqfu_stats = SEQFU_STATS(
-            ch_samplesheet.map { meta, reads ->
-                [[id: "seqfu", sample_id: meta.id, tags: meta.tags], reads]
-            }
-        )
+        ch_seqfu_stats = SEQFU_STATS(ch_samplesheet.map { meta, reads -> [[id: "seqfu", sample_id: meta.id, tags: meta.tags], reads] })
+
+        // Parse the stats TSV file
         ch_seqfu_stats.stats
-            .map { meta, stats ->
-                {
-                    // Parse the stats TSV file
-                    [meta.sample_id, stats]
-                }
-            }
+            .map { meta, stats -> [meta.sample_id, stats] }
             .splitCsv(header: true, sep: '\t')
             .map { sample_id, row ->
                 // Check if requested sample size exceeds available reads
                 def sample_reads = row['#Seq'].toInteger()
                 if (params.sample_size > sample_reads) {
-                    // prntln is used here instead of log.warn/log.info as nf-test captures stdout
-                    // from 'println' but buffers log messages making them unavailable for assertion
-                    // This message will appear in .nextflow.log file and temporarily on runtime stdout.
                     log.warn("${sample_id}: Requested sample_size (${params.sample_size}) is larger than available reads (${sample_reads}). Pipeline will continue with ${sample_reads} reads.")
                 }
             }
@@ -203,9 +185,8 @@ workflow SEQINSPECTOR {
         ch_bwamem2_mem = BWAMEM2_MEM.out.bam
         ch_versions = ch_versions.mix(BWAMEM2_MEM.out.versions)
 
-        SAMTOOLS_INDEX(
-            ch_bwamem2_mem
-        )
+        SAMTOOLS_INDEX(ch_bwamem2_mem)
+
         ch_samtools_index = SAMTOOLS_INDEX.out.bai
         ch_versions = ch_versions.mix(SAMTOOLS_INDEX.out.versions)
     }
@@ -238,33 +219,15 @@ workflow SEQINSPECTOR {
 
     // Collate and save software versions
     //
-    def topic_versions = channel.topic("versions")
-        .distinct()
-        .branch { entry ->
-            versions_file: entry instanceof Path
-            versions_tuple: true
-        }
-
-    def topic_versions_string = topic_versions.versions_tuple
-        .map { process, tool, version ->
-            [process[process.lastIndexOf(':') + 1..-1], "  ${tool}: ${version}"]
-        }
-        .groupTuple(by: 0)
-        .map { process, tool_versions ->
-            tool_versions.unique().sort()
-            "${process}:\n${tool_versions.join('\n')}"
-        }
-
-    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
-        .mix(topic_versions_string)
-        .collectFile(
-            storeDir: "${params.outdir}/pipeline_info",
-            name: 'nf_core_' + 'seqinspector_software_' + 'mqc_' + 'versions.yml',
-            sort: true,
-            newLine: true,
-        )
-        .set { ch_collated_versions }
-
+    def collated_versions = softwareVersionsToYAML(
+        softwareVersions: ch_versions.mix(channel.topic("versions")),
+        nextflowVersion: workflow.nextflow.version,
+    ).collectFile(
+        storeDir: "${params.outdir}/pipeline_info",
+        name: 'nf_core_' + 'seqinspector_software_' + 'mqc_' + 'versions.yml',
+        sort: true,
+        newLine: true,
+    )
 
     //
     // MODULE: MultiQC
@@ -298,7 +261,7 @@ workflow SEQINSPECTOR {
     ch_multiqc_extra_files = ch_multiqc_extra_files.mix(
         ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml')
     )
-    ch_multiqc_extra_files = ch_multiqc_extra_files.mix(ch_collated_versions)
+    ch_multiqc_extra_files = ch_multiqc_extra_files.mix(collated_versions)
     ch_multiqc_extra_files = ch_multiqc_extra_files.mix(
         ch_methods_description.collectFile(
             name: 'methods_description_mqc.yaml',
@@ -343,7 +306,6 @@ workflow SEQINSPECTOR {
         .groupTuple()
         .tap { mqc_by_tag }
         .collectFile { sample_tag, _samples ->
-
             def prefix_tag = "[TAG:${sample_tag}]"
             [
                 "${prefix_tag}_multiqc_extra_config.yml",
