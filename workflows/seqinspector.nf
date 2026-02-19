@@ -119,7 +119,6 @@ workflow SEQINSPECTOR {
         SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] })
 
         ch_sample = SEQTK_SAMPLE.out.reads
-        ch_versions = ch_versions.mix(SEQTK_SAMPLE.out.versions)
     }
     else {
         // No subsampling
@@ -133,7 +132,6 @@ workflow SEQINSPECTOR {
         FASTQC(ch_sample)
 
         ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
-        ch_versions = ch_versions.mix(FASTQC.out.versions)
     }
 
     //
@@ -179,7 +177,6 @@ workflow SEQINSPECTOR {
         FASTQSCREEN_FASTQSCREEN(ch_sample, ch_fastqscreen_refs)
 
         ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
-        ch_versions = ch_versions.mix(FASTQSCREEN_FASTQSCREEN.out.versions)
     }
 
     // MODULE: Align reads with BWA-MEM2
@@ -191,12 +188,10 @@ workflow SEQINSPECTOR {
             sort_bam ?: true,
         )
         ch_bwamem2_mem = BWAMEM2_MEM.out.bam
-        ch_versions = ch_versions.mix(BWAMEM2_MEM.out.versions)
 
         SAMTOOLS_INDEX(ch_bwamem2_mem)
 
         ch_samtools_index = SAMTOOLS_INDEX.out.bai
-        ch_versions = ch_versions.mix(SAMTOOLS_INDEX.out.versions)
     }
 
 

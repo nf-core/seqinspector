@@ -14,7 +14,7 @@ Changes in 'fastqscreen/fastqscreen/environment.yml':
 Changes in 'fastqscreen/fastqscreen/main.nf':
 --- modules/nf-core/fastqscreen/fastqscreen/main.nf
 +++ modules/nf-core/fastqscreen/fastqscreen/main.nf
-@@ -1,22 +1,22 @@
+@@ -1,51 +1,61 @@
  process FASTQSCREEN_FASTQSCREEN {
 -    tag "$meta.id"
 +    tag "${meta.id}"
@@ -43,13 +43,13 @@ Changes in 'fastqscreen/fastqscreen/main.nf':
 +    tuple val(meta), path("*.html"), emit: html
      tuple val(meta), path("*.fastq.gz"), emit: fastq, optional: true
 -    path "versions.yml"                , emit: versions
-+    path "versions.yml", emit: versions
++    tuple val("${task.process}"), val('fastqscreen'), eval('fastq_screen --version 2>&1 | sed "s/^.*FastQ Screen v//; s/ .*\\$//"'), emit: versions_fastqscreen, topic: versions
  
      when:
      task.ext.when == null || task.ext.when
-@@ -24,31 +24,46 @@
+ 
      script:
-     def prefix = task.ext.prefix ?: "${meta.id}"
++    def prefix = task.ext.prefix ?: "${meta.id}"
      def args = task.ext.args ?: ""
 +    def config_content = ref_names.withIndex().collect { name, i -> "DATABASE ${name} ./${ref_dirs[i]}/${ref_basenames[i]} ${ref_aligners[i]}" }.join('\n')
  
@@ -68,7 +68,6 @@ Changes in 'fastqscreen/fastqscreen/main.nf':
 +        .join(' && ')
      """
 -    fastq_screen --threads ${task.cpus} \\
--        --aligner bowtie2 \\
 -        --conf ${database}/fastq_screen.conf \\
 -        $reads \\
 -        $args \\
@@ -85,34 +84,27 @@ Changes in 'fastqscreen/fastqscreen/main.nf':
 +        ${args}
 +
 +    ${mv_cmd}
-+
-+    fastq_screen_version=\$(fastq_screen --version 2>&1 | sed 's/^.*FastQ Screen v//; s/ .*\$//')
-+    echo "\\\"${task.process}\\\":" > versions.yml
-+    echo "    fastqscreen: \$fastq_screen_version" >> versions.yml
      """
  
      stub:
-     def prefix = task.ext.prefix ?: "${meta.id}"
++    def prefix = task.ext.prefix ?: "${meta.id}"
      """
 -    touch test_1_screen.html
 -    touch test_1_screen.png
 -    touch test_1_screen.txt
-+    touch ${prefix}_screen.html
-+    touch ${prefix}_screen.png
-+    touch ${prefix}_screen.txt
- 
+-
 -    cat <<-END_VERSIONS > versions.yml
 -    "${task.process}":
 -        fastqscreen: \$(echo \$(fastq_screen --version 2>&1) | sed 's/^.*FastQ Screen v//; s/ .*\$//')
 -    END_VERSIONS
-+    fastq_screen_version=\$(fastq_screen --version 2>&1 | sed 's/^.*FastQ Screen v//; s/ .*\$//')
-+    echo "\\\"${task.process}\\\":" > versions.yml
-+    echo "    fastqscreen: \$fastq_screen_version" >> versions.yml
++    touch ${prefix}_screen.html
++    touch ${prefix}_screen.png
++    touch ${prefix}_screen.txt
      """
 -
  }
 
-'modules/nf-core/fastqscreen/fastqscreen/tests/main.nf.test' was removed
-'modules/nf-core/fastqscreen/fastqscreen/tests/nextflow.config' was removed
-'modules/nf-core/fastqscreen/fastqscreen/tests/main.nf.test.snap' was removed
+'modules/nf-core/fastqscreen/fastqscreen/tests/main.nf.test' is unchanged
+'modules/nf-core/fastqscreen/fastqscreen/tests/nextflow.config' is unchanged
+'modules/nf-core/fastqscreen/fastqscreen/tests/main.nf.test.snap' is unchanged
 ************************************************************

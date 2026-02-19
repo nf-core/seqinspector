@@ -31,18 +31,15 @@ workflow PREPARE_GENOME {
         else {
             BWAMEM2_INDEX(ch_reference_fasta)
             ch_bwamem2_index = BWAMEM2_INDEX.out.index
-            ch_versions = ch_versions.mix(BWAMEM2_INDEX.out.versions)
         }
     }
 
     if (!("samtools_faidx" in skip_tools)) {
         SAMTOOLS_FAIDX(
-            ch_reference_fasta,
-            [[:], []],
-            true,
+            ch_reference_fasta.map { meta, fasta -> [meta, fasta, []] },
+            false,
         )
         ch_reference_fai = SAMTOOLS_FAIDX.out.fai
-        ch_versions = ch_versions.mix(SAMTOOLS_FAIDX.out.versions)
     }
 
     if (run_picard_collecthsmetrics) {

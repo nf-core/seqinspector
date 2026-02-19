@@ -31,7 +31,6 @@ workflow QC_BAM {
     )
 
     ch_multiple_metrics = PICARD_COLLECTMULTIPLEMETRICS.out.metrics
-    ch_versions = ch_versions.mix(PICARD_COLLECTMULTIPLEMETRICS.out.versions)
 
     if (run_picard_collecthsmetrics) {
 
@@ -48,7 +47,6 @@ workflow QC_BAM {
         )
 
         ch_hs_metrics = PICARD_COLLECTHSMETRICS.out.metrics
-        ch_versions = ch_versions.mix(PICARD_COLLECTHSMETRICS.out.versions)
     }
 
     emit:
