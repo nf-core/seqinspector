@@ -10,21 +10,14 @@
                         "earlycasualcaiman.CollectMultipleMetrics.quality_by_cycle_metrics",
                         "earlycasualcaiman.CollectMultipleMetrics.quality_distribution_metrics"
                     ]
-                ],
-                "versions": [
-                    {
-                        "QC_BAM:PICARD_COLLECTMULTIPLEMETRICS": {
-                            "picard": "3.4.0"
-                        }
-                    }
                 ]
             }
         ],
+        "timestamp": "2026-02-19T12:13:55.371999049",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2025-12-15T13:01:33.166952245"
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
     },
     "Test with run_picard_collecthsmetrics=true": {
         "content": [
@@ -40,25 +33,13 @@
                         "earlycasualcaiman.CollectMultipleMetrics.quality_by_cycle_metrics",
                         "earlycasualcaiman.CollectMultipleMetrics.quality_distribution_metrics"
                     ]
-                ],
-                "versions": [
-                    {
-                        "QC_BAM:PICARD_COLLECTMULTIPLEMETRICS": {
-                            "picard": "3.4.0"
-                        }
-                    },
-                    {
-                        "QC_BAM:PICARD_COLLECTHSMETRICS": {
-                            "picard": "3.4.0"
-                        }
-                    }
                 ]
             }
         ],
+        "timestamp": "2026-02-19T12:15:28.332477673",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2025-12-15T13:02:46.733316125"
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
     }
 }
