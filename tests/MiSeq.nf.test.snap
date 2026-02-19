@@ -45,7 +45,8 @@
                     "bwamem2": "2.2.1"
                 },
                 "BWAMEM2_MEM": {
-                    "bwamem2": "2.2.1"
+                    "bwamem2": "2.2.1",
+                    "samtools": "1.22.1"
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -268,7 +269,7 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-02-19T11:24:33.205172672",
+        "timestamp": "2026-02-19T16:04:51.402781572",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -282,7 +283,8 @@
                     "bwamem2": "2.2.1"
                 },
                 "BWAMEM2_MEM": {
-                    "bwamem2": "2.2.1"
+                    "bwamem2": "2.2.1",
+                    "samtools": "1.22.1"
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -701,7 +703,7 @@
                 "WARN: Tag name collision: [Bpacificus]"
             ]
         ],
-        "timestamp": "2026-02-19T11:26:40.474656064",
+        "timestamp": "2026-02-19T16:07:01.63849991",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -715,7 +717,8 @@
                     "bwamem2": "2.2.1"
                 },
                 "BWAMEM2_MEM": {
-                    "bwamem2": "2.2.1"
+                    "bwamem2": "2.2.1",
+                    "samtools": "1.22.1"
                 },
                 "FASTQSCREEN_FASTQSCREEN": {
                     "fastqscreen": "0.16.0"
@@ -877,7 +880,7 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-02-19T11:25:19.283756126",
+        "timestamp": "2026-02-19T16:05:40.254319275",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

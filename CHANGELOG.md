@@ -58,6 +58,7 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#172](https://github.com/nf-core/seqinspector/pull/172) More complete conda environment for rundir parser
 - [#173](https://github.com/nf-core/seqinspector/pull/173) Fix warning message for tag name collision
 - [#174](https://github.com/nf-core/seqinspector/pull/174) Fix null message when no rundir information is available
+- [#175](https://github.com/nf-core/seqinspector/pull/175) Fix conda setup in CI
 
 ### `Changed`
 
@@ -79,6 +80,7 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#174](https://github.com/nf-core/seqinspector/pull/174) Refactor tests
 - [#174](https://github.com/nf-core/seqinspector/pull/174) More strict syntax
 - [#174](https://github.com/nf-core/seqinspector/pull/174) No params included in workflows
+- [#175](https://github.com/nf-core/seqinspector/pull/175) Update all modules
 
 ### `Dependencies`
 

@@ -17,7 +17,7 @@
                     },
                     "bwamem2/mem": {
                         "branch": "master",
-                        "git_sha": "5dd46a36fca68d6ad1a6b22ec47adc8c6863717d",
+                        "git_sha": "8325a8155a77a336a613a504b8e4d6cea7a2344a",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/bwamem2/mem/bwamem2-mem.diff"
                     },
@@ -28,13 +28,12 @@
                     },
                     "fastqscreen/buildfromindex": {
                         "branch": "master",
-                        "git_sha": "5e748ff2b0f990949081c9e49792622eb3fe9ee9",
-                        "installed_by": ["modules"],
-                        "patch": "modules/nf-core/fastqscreen/buildfromindex/fastqscreen-buildfromindex.diff"
+                        "git_sha": "ab2e7b785ee4fa6d108472862edbf983cea7db49",
+                        "installed_by": ["modules"]
                     },
                     "fastqscreen/fastqscreen": {
                         "branch": "master",
-                        "git_sha": "5e748ff2b0f990949081c9e49792622eb3fe9ee9",
+                        "git_sha": "ab2e7b785ee4fa6d108472862edbf983cea7db49",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/fastqscreen/fastqscreen/fastqscreen-fastqscreen.diff"
                     },

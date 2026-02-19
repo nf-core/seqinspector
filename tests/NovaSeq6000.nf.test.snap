@@ -7,7 +7,8 @@
                     "bwamem2": "2.2.1"
                 },
                 "BWAMEM2_MEM": {
-                    "bwamem2": "2.2.1"
+                    "bwamem2": "2.2.1",
+                    "samtools": "1.22.1"
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -1047,7 +1048,7 @@
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:SEQFU_STATS (seqfu)"
             ]
         ],
-        "timestamp": "2026-02-19T11:28:36.439362293",
+        "timestamp": "2026-02-19T16:08:17.233872508",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -1061,7 +1062,8 @@
                     "bwamem2": "2.2.1"
                 },
                 "BWAMEM2_MEM": {
-                    "bwamem2": "2.2.1"
+                    "bwamem2": "2.2.1",
+                    "samtools": "1.22.1"
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -2045,7 +2047,7 @@
                 "WARN: Tag name collision: [test]"
             ]
         ],
-        "timestamp": "2026-02-19T11:34:26.071342016",
+        "timestamp": "2026-02-19T16:09:22.487870402",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -2059,7 +2061,8 @@
                     "bwamem2": "2.2.1"
                 },
                 "BWAMEM2_MEM": {
-                    "bwamem2": "2.2.1"
+                    "bwamem2": "2.2.1",
+                    "samtools": "1.22.1"
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -3043,7 +3046,7 @@
                 "WARN: Tag name collision: [test]"
             ]
         ],
-        "timestamp": "2026-02-19T11:35:30.560451598",
+        "timestamp": "2026-02-19T16:10:37.885643273",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -3057,7 +3060,8 @@
                     "bwamem2": "2.2.1"
                 },
                 "BWAMEM2_MEM": {
-                    "bwamem2": "2.2.1"
+                    "bwamem2": "2.2.1",
+                    "samtools": "1.22.1"
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -4001,7 +4005,7 @@
                 "WARN: Tag name collision: [test]"
             ]
         ],
-        "timestamp": "2026-02-19T11:30:44.123275575",
+        "timestamp": "2026-02-19T16:13:03.499762737",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -4015,7 +4019,8 @@
                     "bwamem2": "2.2.1"
                 },
                 "BWAMEM2_MEM": {
-                    "bwamem2": "2.2.1"
+                    "bwamem2": "2.2.1",
+                    "samtools": "1.22.1"
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -5004,7 +5009,7 @@
                 "WARN: sampletest_04: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads."
             ]
         ],
-        "timestamp": "2026-02-19T11:36:50.414225534",
+        "timestamp": "2026-02-19T16:11:52.597356515",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
