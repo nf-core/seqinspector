@@ -38,6 +38,7 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#162](https://github.com/nf-core/seqinspector/pull/162) Add tests for prepare_genome subworkflow
 - [#168](https://github.com/nf-core/seqinspector/pull/168) Add contributors list
 - [#168](https://github.com/nf-core/seqinspector/pull/168) Add logo to the pipeline logo
+- [#174](https://github.com/nf-core/seqinspector/pull/174) Add nf-core-utils 0.4.0
 
 ### `Fixed`
 
@@ -56,6 +57,7 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#171](https://github.com/nf-core/seqinspector/pull/171) Rescue number of tasks in the pipeline level tests
 - [#172](https://github.com/nf-core/seqinspector/pull/172) More complete conda environment for rundir parser
 - [#173](https://github.com/nf-core/seqinspector/pull/173) Fix warning message for tag name collision
+- [#174](https://github.com/nf-core/seqinspector/pull/174) Fix null message when no rundir information is available
 
 ### `Changed`
 
@@ -74,9 +76,13 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#168](https://github.com/nf-core/seqinspector/pull/168) Adhere to strict syntax
 - [#169](https://github.com/nf-core/seqinspector/pull/169) Prepare release 1.0.0
 - [#173](https://github.com/nf-core/seqinspector/pull/173) Improve documentation
+- [#174](https://github.com/nf-core/seqinspector/pull/174) Refactor tests
+- [#174](https://github.com/nf-core/seqinspector/pull/174) More strict syntax
+- [#174](https://github.com/nf-core/seqinspector/pull/174) No params included in workflows
 
 ### `Dependencies`
 
 - [#116](https://github.com/nf-core/seqinspector/pull/116) Update MultiQC to 1.28
+- [#174](https://github.com/nf-core/seqinspector/pull/174) Update nf-schema to 2.6.1
 
 ### `Deprecated`

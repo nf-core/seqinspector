@@ -1,5 +1,3 @@
-include { samplesheetToList             } from 'plugin/nf-schema'
-
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -28,7 +26,8 @@ include { methodsDescriptionText        } from '../subworkflows/local/utils_nfco
 include { paramsSummaryMap              } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc          } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { reportIndexMultiqc            } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
-include { softwareVersionsToYAML        } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { samplesheetToList             } from 'plugin/nf-schema'
+include { softwareVersionsToYAML        } from 'plugin/nf-core-utils'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -39,9 +38,20 @@ include { softwareVersionsToYAML        } from '../subworkflows/nf-core/utils_nf
 workflow SEQINSPECTOR {
     take:
     ch_samplesheet // channel: samplesheet read in from --input
-    fasta_file
-    skip_tools
+    bait_intervals
     bwamem2
+    fasta_reference
+    fastq_screen_references
+    multiqc_config
+    multiqc_logo
+    multiqc_methods_description
+    outdir
+    ref_dict
+    run_picard_collecthsmetrics
+    sample_size
+    skip_tools
+    sort_bam
+    target_intervals
 
     main:
     ch_versions = channel.empty()
@@ -49,14 +59,13 @@ workflow SEQINSPECTOR {
     ch_multiqc_extra_files = channel.empty()
     ch_bwamem2_mem = channel.empty()
     ch_samtools_index = channel.empty()
-    ch_reference_fasta = fasta_file ? channel.fromPath(fasta_file, checkIfExists: true).map { file -> tuple([id: file.name], file) }.collect() : channel.value([[:], []])
 
     PREPARE_GENOME(
-        ch_reference_fasta,
+        fasta_reference,
         bwamem2,
         skip_tools,
-        params.run_picard_collecthsmetrics,
-        params.ref_dict,
+        run_picard_collecthsmetrics,
+        ref_dict,
     )
 
     ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
@@ -67,21 +76,19 @@ workflow SEQINSPECTOR {
     if (!("rundirparser" in skip_tools)) {
 
         // Branch the samplesheet channel based on rundir presence
-        ch_samplesheet
-            .branch { meta, reads ->
-                with_rundir: meta.rundir.size() > 0
-                without_rundir: true
-            }
-            .set { ch_rundir_branched }
+        ch_rundir_branch = ch_samplesheet.branch { meta, _reads ->
+            with_rundir: meta.rundir.size() > 0
+            without_rundir: true
+        }
 
         // Log warnings for samples without rundir
-        ch_rundir_branched.without_rundir.view { meta, reads ->
+        ch_rundir_branch.without_rundir.subscribe { meta, _reads ->
             log.warn("Sample '${meta.id}' does not have a rundir specified")
         }
 
         // From samplesheet channel serving (sampleMetaObj, sampleReadsPath) tuples:
         // --> Create new rundir channel serving (rundirMetaObj, rundirPath) tuples
-        ch_rundir = ch_rundir_branched.with_rundir
+        ch_rundir = ch_rundir_branch.with_rundir
             .map { meta, _reads -> [meta.rundir, meta] }
             .groupTuple()
             .map { rundir, metas ->
@@ -108,60 +115,45 @@ workflow SEQINSPECTOR {
     //
     // MODULE: Run Seqtk sample to perform subsampling
     //
-    if (!("seqtk_sample" in skip_tools) && params.sample_size > 0) {
-        ch_sample_sized = SEQTK_SAMPLE(
-            ch_samplesheet.map { meta, reads ->
-                [meta, reads, params.sample_size]
-            }
-        ).reads
+    if (!("seqtk_sample" in skip_tools) && sample_size > 0) {
+        SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] })
+
+        ch_sample = SEQTK_SAMPLE.out.reads
         ch_versions = ch_versions.mix(SEQTK_SAMPLE.out.versions)
     }
     else {
         // No subsampling
-        ch_sample_sized = ch_samplesheet
+        ch_sample = ch_samplesheet
     }
 
     //
     // MODULE: Run FastQC
     //
     if (!("fastqc" in skip_tools)) {
-        FASTQC(
-            ch_sample_sized.map { meta, subsampled ->
-                [meta, subsampled]
-            }
-        )
+        FASTQC(ch_sample)
+
         ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
         ch_versions = ch_versions.mix(FASTQC.out.versions)
     }
-
 
     //
     // Module: Run SeqFu stats
     //
     if (!("seqfu_stats" in skip_tools)) {
-        ch_seqfu_stats = SEQFU_STATS(
-            ch_samplesheet.map { meta, reads ->
-                [[id: "seqfu", sample_id: meta.id, tags: meta.tags], reads]
-            }
-        )
-        ch_seqfu_stats.stats
-            .map { meta, stats ->
-                {
-                    // Parse the stats TSV file
-                    [meta.sample_id, stats]
-                }
-            }
+        SEQFU_STATS(ch_samplesheet.map { meta, reads -> [[id: "seqfu", sample_id: meta.id, tags: meta.tags], reads] })
+
+        // Parse the stats TSV file
+        SEQFU_STATS.out.stats
+            .map { meta, stats -> [meta.sample_id, stats] }
             .splitCsv(header: true, sep: '\t')
             .map { sample_id, row ->
                 // Check if requested sample size exceeds available reads
                 def sample_reads = row['#Seq'].toInteger()
-                if (params.sample_size > sample_reads) {
-                    // prntln is used here instead of log.warn/log.info as nf-test captures stdout
-                    // from 'println' but buffers log messages making them unavailable for assertion
-                    // This message will appear in .nextflow.log file and temporarily on runtime stdout.
-                    log.warn("${sample_id}: Requested sample_size (${params.sample_size}) is larger than available reads (${sample_reads}). Pipeline will continue with ${sample_reads} reads.")
+                if (sample_size > sample_reads) {
+                    log.warn("${sample_id}: Requested sample_size (${sample_size}) is larger than available reads (${sample_reads}). Pipeline will continue with ${sample_reads} reads.")
                 }
             }
+
         ch_multiqc_files = ch_multiqc_files.mix(SEQFU_STATS.out.multiqc)
         ch_versions = ch_versions.mix(SEQFU_STATS.out.versions)
     }
@@ -176,7 +168,7 @@ workflow SEQINSPECTOR {
     if (!("fastqscreen" in skip_tools)) {
         ch_fastqscreen_refs = channel.fromList(
                 samplesheetToList(
-                    params.fastq_screen_references,
+                    fastq_screen_references,
                     "${projectDir}/assets/schema_fastq_screen_references.json",
                 )
             )
@@ -184,10 +176,8 @@ workflow SEQINSPECTOR {
             .transpose()
             .toList()
 
-        FASTQSCREEN_FASTQSCREEN(
-            ch_sample_sized,
-            ch_fastqscreen_refs,
-        )
+        FASTQSCREEN_FASTQSCREEN(ch_sample, ch_fastqscreen_refs)
+
         ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
         ch_versions = ch_versions.mix(FASTQSCREEN_FASTQSCREEN.out.versions)
     }
@@ -195,17 +185,16 @@ workflow SEQINSPECTOR {
     // MODULE: Align reads with BWA-MEM2
     if (!("bwamem2_mem" in skip_tools)) {
         BWAMEM2_MEM(
-            ch_sample_sized,
+            ch_sample,
             PREPARE_GENOME.out.bwamem2_index,
-            ch_reference_fasta,
-            params.sort_bam ?: true,
+            fasta_reference,
+            sort_bam ?: true,
         )
         ch_bwamem2_mem = BWAMEM2_MEM.out.bam
         ch_versions = ch_versions.mix(BWAMEM2_MEM.out.versions)
 
-        SAMTOOLS_INDEX(
-            ch_bwamem2_mem
-        )
+        SAMTOOLS_INDEX(ch_bwamem2_mem)
+
         ch_samtools_index = SAMTOOLS_INDEX.out.bai
         ch_versions = ch_versions.mix(SAMTOOLS_INDEX.out.versions)
     }
@@ -215,8 +204,8 @@ workflow SEQINSPECTOR {
 
         ch_reference_fai = PREPARE_GENOME.out.reference_fai
 
-        ch_bait_intervals = params.bait_intervals ? channel.fromPath(params.bait_intervals).collect() : channel.empty()
-        ch_target_intervals = params.target_intervals ? channel.fromPath(params.target_intervals).collect() : channel.empty()
+        ch_bait_intervals = bait_intervals ? channel.fromPath(bait_intervals).collect() : channel.empty()
+        ch_target_intervals = target_intervals ? channel.fromPath(target_intervals).collect() : channel.empty()
 
         ch_ref_dict = PREPARE_GENOME.out.ref_dict
 
@@ -224,9 +213,9 @@ workflow SEQINSPECTOR {
         QC_BAM(
             ch_bwamem2_mem,
             ch_samtools_index,
-            ch_reference_fasta,
+            fasta_reference,
             ch_reference_fai,
-            params.run_picard_collecthsmetrics,
+            run_picard_collecthsmetrics,
             ch_bait_intervals,
             ch_target_intervals,
             ch_ref_dict,
@@ -238,81 +227,46 @@ workflow SEQINSPECTOR {
 
     // Collate and save software versions
     //
-    def topic_versions = channel.topic("versions")
-        .distinct()
-        .branch { entry ->
-            versions_file: entry instanceof Path
-            versions_tuple: true
-        }
-
-    def topic_versions_string = topic_versions.versions_tuple
-        .map { process, tool, version ->
-            [process[process.lastIndexOf(':') + 1..-1], "  ${tool}: ${version}"]
-        }
-        .groupTuple(by: 0)
-        .map { process, tool_versions ->
-            tool_versions.unique().sort()
-            "${process}:\n${tool_versions.join('\n')}"
-        }
-
-    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
-        .mix(topic_versions_string)
-        .collectFile(
-            storeDir: "${params.outdir}/pipeline_info",
-            name: 'nf_core_' + 'seqinspector_software_' + 'mqc_' + 'versions.yml',
-            sort: true,
-            newLine: true,
-        )
-        .set { ch_collated_versions }
-
+    def collated_versions = softwareVersionsToYAML(
+        softwareVersions: ch_versions.mix(channel.topic("versions")),
+        nextflowVersion: workflow.nextflow.version,
+    ).collectFile(
+        storeDir: "${outdir}/pipeline_info",
+        name: 'nf_core_' + 'seqinspector_software_' + 'mqc_' + 'versions.yml',
+        sort: true,
+        newLine: true,
+    )
 
     //
     // MODULE: MultiQC
     //
 
-    ch_tags = ch_multiqc_files
-        .map { meta, _sample -> meta.tags }
-        .flatten()
-        .unique()
+    ch_tags = ch_multiqc_files.map { meta, _sample -> meta.tags }.flatten().unique()
 
-    ch_multiqc_config = params.multiqc_config
-        ? channel.fromPath(params.multiqc_config, checkIfExists: true)
+    ch_multiqc_config = multiqc_config
+        ? channel.fromPath(multiqc_config, checkIfExists: true)
         : channel.fromPath("${projectDir}/assets/multiqc_config.yml", checkIfExists: true)
-    ch_multiqc_logo = params.multiqc_logo
-        ? channel.fromPath(params.multiqc_logo, checkIfExists: true)
+    ch_multiqc_logo = multiqc_logo
+        ? channel.fromPath(multiqc_logo, checkIfExists: true)
         : channel.empty()
 
-    summary_params = paramsSummaryMap(
-        workflow,
-        parameters_schema: "nextflow_schema.json"
-    )
-    ch_workflow_summary = channel.value(
-        paramsSummaryMultiqc(summary_params)
-    )
-    ch_multiqc_custom_methods_description = params.multiqc_methods_description
-        ? file(params.multiqc_methods_description, checkIfExists: true)
+    summary_params = paramsSummaryMap(workflow, parameters_schema: "nextflow_schema.json")
+    ch_workflow_summary = channel.value(paramsSummaryMultiqc(summary_params))
+
+    ch_multiqc_custom_methods_description = multiqc_methods_description
+        ? file(multiqc_methods_description, checkIfExists: true)
         : file("${projectDir}/assets/methods_description_template.yml", checkIfExists: true)
-    ch_methods_description = channel.value(
-        methodsDescriptionText(ch_multiqc_custom_methods_description)
-    )
+    ch_methods_description = channel.value(methodsDescriptionText(ch_multiqc_custom_methods_description))
+
+    ch_multiqc_extra_files = ch_multiqc_extra_files.mix(ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml'))
+    ch_multiqc_extra_files = ch_multiqc_extra_files.mix(collated_versions)
     ch_multiqc_extra_files = ch_multiqc_extra_files.mix(
-        ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml')
-    )
-    ch_multiqc_extra_files = ch_multiqc_extra_files.mix(ch_collated_versions)
-    ch_multiqc_extra_files = ch_multiqc_extra_files.mix(
-        ch_methods_description.collectFile(
-            name: 'methods_description_mqc.yaml',
-            sort: true,
-        )
+        ch_methods_description.collectFile(name: 'methods_description_mqc.yaml', sort: true)
     )
     // Add index to other MultiQC reports
     //ch_multiqc_extra_files_global = channel.empty()
     ch_multiqc_extra_files_global = ch_multiqc_extra_files.mix(
-        ch_tags.toList().map { tag_list ->
-            reportIndexMultiqc(tag_list)
-        }.collectFile(
-            name: 'multiqc_index_mqc.yaml'
-        )
+        ch_tags.toList().map { tag_list -> reportIndexMultiqc(tag_list) }.collectFile(name: 'multiqc_index_mqc.yaml')
     )
 
     MULTIQC_GLOBAL(
@@ -343,7 +297,6 @@ workflow SEQINSPECTOR {
         .groupTuple()
         .tap { mqc_by_tag }
         .collectFile { sample_tag, _samples ->
-
             def prefix_tag = "[TAG:${sample_tag}]"
             [
                 "${prefix_tag}_multiqc_extra_config.yml",

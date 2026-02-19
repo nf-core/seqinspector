@@ -1,89 +1,45 @@
+def pipelines_testdata_base_path = 'https://raw.githubusercontent.com/nf-core/test-datasets/'
+def projectDir = new File('.').absolutePath
+
 nextflow_pipeline {
 
-    name "Test Workflow main.nf on NovaSeq6000 data"
+    name "Test pipeline"
     script "../main.nf"
-    tag "seqinspector"
-    tag "PIPELINE"
 
-    test("NovaSeq6000 data test") {
+    def test_scenario = [
+        [
+            name: "NovaSeq6000 data test",
+            params: [],
+            snapshot: 'stderr,stdout'
+        ],
+        [
+            name: "NovaSeq6000 data test sample size",
+            params: [
+                sample_size : 90
+            ]
+        ],
+        [
+            name: "NovaSeq6000 data test relative sample size",
+            params: [
+                sample_size : 0.9
+            ]
+        ],
+        [
+            name: "NovaSeq6000 data test sample size exceeds available reads",
+            params: [
+                sample_size : 120
+            ]
+        ],
+        [
+            name: "NovaSeq6000 data test - No rundirs",
+            params: [
+                input : pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/samplesheet_no_rundirs.csv'
+            ]
+        ]
+    ]
 
-        when {
-            params {
-                fastq_screen_references = "${projectDir}/assets/example_fastq_screen_references.csv"
-                genome = 'R64-1-1'
-                outdir = "$outputDir"
-            }
-        }
-
-        then {
-            // stable_name: All files + folders in ${params.outdir}/ with a stable name
-            def stable_name = getAllFilesFromDir(
-                params.outdir,
-                relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}']
-            )
-            // stable_path: All files in ${params.outdir}/ with stable content
-            def stable_path = getAllFilesFromDir(
-                params.outdir,
-                ignoreFile: 'tests/.nftignore'
-            )
-            // bam_files: All bam files
-            def bam_files  = getAllFilesFromDir(params.outdir, include: ['**/*.bam'])
-            assert workflow.success
-            assertAll(
-                { assert snapshot(
-                    workflow.trace.succeeded().size(),
-                    // pipeline versions.yml file for multiqc from which Nextflow version is removed because we tests pipelines on multiple Nextflow versions
-                    removeFromYamlMap("$outputDir/pipeline_info/nf_core_seqinspector_software_mqc_versions.yml", "Workflow"),
-                    // All stable path names, with a relative path
-                    stable_name,
-                    // All files with stable contents
-                    stable_path,
-                    // All bam files
-                    bam_files.isEmpty() ? 'No BAM files' : bam_files.collect { file -> file.getName() + ":md5," +  bam(file.toString()).readsMD5 },
-                ).match() }
-            )
-        }
-    }
-
-    test("NovaSeq6000 data test - No rundirs") {
-
-        when {
-            params {
-                fastq_screen_references = "${projectDir}/assets/example_fastq_screen_references.csv"
-                genome = 'R64-1-1'
-                outdir = "$outputDir"
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/nf-core/test-datasets/'
-                input = params.pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/samplesheet_no_rundirs.csv'
-            }
-        }
-
-        then {
-           // stable_name: All files + folders in ${params.outdir}/ with a stable name
-            def stable_name = getAllFilesFromDir(
-                params.outdir,
-                relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}']
-            )
-            // stable_path: All files in ${params.outdir}/ with stable content
-            def stable_path = getAllFilesFromDir(
-                params.outdir,
-                ignoreFile: 'tests/.nftignore'
-            )
-            // bam_files: All bam files
-            def bam_files  = getAllFilesFromDir(params.outdir, include: ['**/*.bam'])
-            assert workflow.success
-            assertAll(
-                { assert snapshot(
-                    workflow.trace.succeeded().size(),
-                    // pipeline versions.yml file for multiqc from which Nextflow version is removed because we tests pipelines on multiple Nextflow versions
-                    removeFromYamlMap("$outputDir/pipeline_info/nf_core_seqinspector_software_mqc_versions.yml", "Workflow"),
-                    // All stable path names, with a relative path
-                    stable_name,
-                    // All files with stable contents
-                    stable_path,
-                    // All bam files
-                    bam_files.isEmpty() ? 'No BAM files' : bam_files.collect { file -> file.getName() + ":md5," +  bam(file.toString()).readsMD5 },
-                ).match() }
-            )
-        }
+    // Generate tests for each scenario
+    test_scenario.each { scenario ->
+        test(scenario.name, UTILS.getTest(scenario))
     }
 }
