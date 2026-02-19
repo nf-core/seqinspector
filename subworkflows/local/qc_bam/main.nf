@@ -17,10 +17,8 @@ workflow QC_BAM {
     ch_ref_dict // channel: [mandatory for picard_collecthsmetrics] [ val(meta), path(ref_dict) ]
 
     main:
-
     ch_multiple_metrics = channel.empty()
     ch_hs_metrics = channel.empty()
-    ch_versions = channel.empty()
 
     ch_bam_bai = ch_bam.join(ch_bai, failOnDuplicate: true, failOnMismatch: true)
 
@@ -52,5 +50,4 @@ workflow QC_BAM {
     emit:
     multiple_metrics = ch_multiple_metrics
     hs_metrics       = ch_hs_metrics
-    versions         = ch_versions
 }

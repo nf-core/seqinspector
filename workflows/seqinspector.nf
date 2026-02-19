@@ -217,7 +217,6 @@ workflow SEQINSPECTOR {
         )
 
         ch_multiqc_files = ch_multiqc_files.mix(QC_BAM.out.multiple_metrics, QC_BAM.out.hs_metrics)
-        ch_versions = ch_versions.mix(QC_BAM.out.versions)
     }
 
     // Collate and save software versions
