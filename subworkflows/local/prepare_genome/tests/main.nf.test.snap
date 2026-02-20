@@ -13,7 +13,7 @@
                         ]
                     ]
                 ],
-                "ref_dict": [
+                "reference_dict": [
                     "genome.dict"
                 ],
                 "reference_fai": [
@@ -21,7 +21,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-02-20T11:14:59.592335797",
+        "timestamp": "2026-02-20T14:08:10.135732184",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -41,7 +41,7 @@
                         ]
                     ]
                 ],
-                "ref_dict": [
+                "reference_dict": [
                     "reference.dict"
                 ],
                 "reference_fai": [
@@ -49,7 +49,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-02-19T12:12:39.549105919",
+        "timestamp": "2026-02-20T14:07:30.247480534",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
