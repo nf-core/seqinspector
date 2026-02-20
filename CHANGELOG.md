@@ -82,6 +82,8 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#174](https://github.com/nf-core/seqinspector/pull/174) No params included in workflows
 - [#175](https://github.com/nf-core/seqinspector/pull/175) Update all modules and migrate the whole pipeline to using topic versions
 - [#176](https://github.com/nf-core/seqinspector/pull/176) No modules binaries
+- [#177](https://github.com/nf-core/seqinspector/pull/177) Remove non used modules
+- [#177](https://github.com/nf-core/seqinspector/pull/177) Move PREPARE_GENOME to the root main.nf script
 
 ### `Dependencies`
 
