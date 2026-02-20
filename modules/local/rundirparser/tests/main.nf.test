@@ -3,7 +3,6 @@ nextflow_process {
     name "Test Process RUNDIRPARSER"
     script "../main.nf"
     process "RUNDIRPARSER"
-    config "./nextflow.config"
 
     test("NovaSeq6000") {
 
