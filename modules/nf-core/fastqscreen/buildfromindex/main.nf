@@ -3,8 +3,8 @@ process FASTQSCREEN_BUILDFROMINDEX {
 
     conda "${moduleDir}/environment.yml"
     container "${workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container
-        ? 'https://depot.galaxyproject.org/singularity/fastq-screen:0.15.3--pl5321hdfd78af_0'
-        : 'biocontainers/fastq-screen:0.15.3--pl5321hdfd78af_0'}"
+        ? 'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/fc/fc53eee7ca23c32220a9662fbb63c67769756544b6d74a1ee85cf439ea79a7ee/data'
+        : 'community.wave.seqera.io/library/fastq-screen_perl-gdgraph:5c1786a5d5bc1309'}"
 
     input:
     val genome_names
@@ -12,7 +12,7 @@ process FASTQSCREEN_BUILDFROMINDEX {
 
     output:
     path ("FastQ_Screen_Genomes"), emit: database
-    path "versions.yml", emit: versions
+    tuple val("${task.process}"), val('fastqscreen'), eval('fastq_screen --version 2>&1 | sed "s/^.*FastQ Screen v//;"'), emit: versions_fastqscreen, topic: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -21,11 +21,11 @@ process FASTQSCREEN_BUILDFROMINDEX {
     dir = "FastQ_Screen_Genomes"
     folder = indexes.collect { index -> index.toString() }
     database = [genome_names, folder].transpose()
-    copy_indexes = folder.collect { file -> "cp -r ${file} ${dir}/${file}" }.join(" && ")
+    copy_indexes = folder.collect { index -> "cp -r ${index} ${dir}/${index}" }.join(" && ")
 
     // Folder name and index (within folder) name could be different - use bash to look for index name
     config = database
-        .collect { file -> "########## ${file[0]} \nDATABASE ${file[0]} ${dir}/${file[1]}/${file[1] + '_to_be_replaced'}" }
+        .collect { index -> "########## ${index[0]} \nDATABASE ${index[0]} ${dir}/${index[1]}/${index[1] + '_to_be_replaced'}" }
         .join("\n\n")
         .replace("\n", "\\n")
 
@@ -48,11 +48,6 @@ process FASTQSCREEN_BUILDFROMINDEX {
         sed "s/\$TO_REPLACE/\$REPLACE_WITH/g" ${dir}/fastq_screen.conf > new_conf.conf
         mv new_conf.conf ${dir}/fastq_screen.conf
     done
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        fastqscreen: \$(echo \$(fastq_screen --version 2>&1) | sed 's/^.*FastQ Screen v//; s/ .*\$//')
-    END_VERSIONS
     """
 
     stub:
@@ -60,10 +55,5 @@ process FASTQSCREEN_BUILDFROMINDEX {
     """
     mkdir ${dir}
     touch ${dir}/fastq_screen.conf
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        fastqscreen: \$(echo \$(fastq_screen --version 2>&1) | sed 's/^.*FastQ Screen v//; s/ .*\$//')
-    END_VERSIONS
     """
 }

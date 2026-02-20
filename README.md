@@ -50,6 +50,20 @@ If provided, nf-core/seqinspector can also parse statistics from an Illumina run
   <img alt="Fallback image description" src="docs/images/seqinspector_tubemap_V1.0.png">
 </picture>
 
+### Summary of tools and version used in the pipeline
+
+| Tool        | Version |
+| ----------- | ------- |
+| bowtie2     | 2.5.4   |
+| bwamem2     | 2.3     |
+| fastqc      | 0.12.1  |
+| fastqscreen | 0.16.0  |
+| multiqc     | 1.33    |
+| picard      | 3.4.0   |
+| samtools    | 1.22.1  |
+| seqfu       | 1.22.3  |
+| seqtk       | 1.4     |
+
 ## Usage
 
 > [!NOTE]

@@ -54,7 +54,6 @@ workflow SEQINSPECTOR {
     target_intervals
 
     main:
-    ch_versions = channel.empty()
     ch_multiqc_files = channel.empty()
     ch_multiqc_extra_files = channel.empty()
     ch_bwamem2_mem = channel.empty()
@@ -67,8 +66,6 @@ workflow SEQINSPECTOR {
         run_picard_collecthsmetrics,
         ref_dict,
     )
-
-    ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
 
     //
     // MODULE: Parse rundir info
@@ -119,7 +116,6 @@ workflow SEQINSPECTOR {
         SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] })
 
         ch_sample = SEQTK_SAMPLE.out.reads
-        ch_versions = ch_versions.mix(SEQTK_SAMPLE.out.versions)
     }
     else {
         // No subsampling
@@ -133,7 +129,6 @@ workflow SEQINSPECTOR {
         FASTQC(ch_sample)
 
         ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
-        ch_versions = ch_versions.mix(FASTQC.out.versions)
     }
 
     //
@@ -155,7 +150,6 @@ workflow SEQINSPECTOR {
             }
 
         ch_multiqc_files = ch_multiqc_files.mix(SEQFU_STATS.out.multiqc)
-        ch_versions = ch_versions.mix(SEQFU_STATS.out.versions)
     }
 
     //
@@ -179,7 +173,6 @@ workflow SEQINSPECTOR {
         FASTQSCREEN_FASTQSCREEN(ch_sample, ch_fastqscreen_refs)
 
         ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
-        ch_versions = ch_versions.mix(FASTQSCREEN_FASTQSCREEN.out.versions)
     }
 
     // MODULE: Align reads with BWA-MEM2
@@ -191,12 +184,10 @@ workflow SEQINSPECTOR {
             sort_bam ?: true,
         )
         ch_bwamem2_mem = BWAMEM2_MEM.out.bam
-        ch_versions = ch_versions.mix(BWAMEM2_MEM.out.versions)
 
         SAMTOOLS_INDEX(ch_bwamem2_mem)
 
         ch_samtools_index = SAMTOOLS_INDEX.out.bai
-        ch_versions = ch_versions.mix(SAMTOOLS_INDEX.out.versions)
     }
 
 
@@ -222,13 +213,12 @@ workflow SEQINSPECTOR {
         )
 
         ch_multiqc_files = ch_multiqc_files.mix(QC_BAM.out.multiple_metrics, QC_BAM.out.hs_metrics)
-        ch_versions = ch_versions.mix(QC_BAM.out.versions)
     }
 
     // Collate and save software versions
     //
     def collated_versions = softwareVersionsToYAML(
-        softwareVersions: ch_versions.mix(channel.topic("versions")),
+        softwareVersions: channel.topic("versions"),
         nextflowVersion: workflow.nextflow.version,
     ).collectFile(
         storeDir: "${outdir}/pipeline_info",
@@ -327,5 +317,4 @@ workflow SEQINSPECTOR {
     emit:
     global_report   = MULTIQC_GLOBAL.out.report.toList() // channel: [ /path/to/multiqc_report.html ]
     grouped_reports = MULTIQC_PER_TAG.out.report.toList() // channel: [ /path/to/multiqc_report.html ]
-    versions        = ch_versions // channel: [ path(versions.yml) ]
 }

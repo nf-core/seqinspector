@@ -18,31 +18,14 @@
                 ],
                 "reference_fai": [
                     "reference.fasta.fai:md5,bf4047e05f95deb372eb8ffd601cbc29"
-                ],
-                "versions": [
-                    {
-                        "PREPARE_GENOME:SAMTOOLS_FAIDX": {
-                            "samtools": "1.22.1"
-                        }
-                    },
-                    {
-                        "PREPARE_GENOME:PICARD_CREATESEQUENCEDICTIONARY": {
-                            "picard": "3.4.0"
-                        }
-                    },
-                    {
-                        "PREPARE_GENOME:BWAMEM2_INDEX": {
-                            "bwamem2": "2.2.1"
-                        }
-                    }
                 ]
             }
         ],
+        "timestamp": "2026-02-20T11:14:59.592335797",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2025-12-15T11:57:16.786415613"
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
     },
     "Test without bwamem2 index file path, with run_picard_collecthsmetrics=true and with ref_dict": {
         "content": [
@@ -63,26 +46,14 @@
                 ],
                 "reference_fai": [
                     "reference.fasta.fai:md5,bf4047e05f95deb372eb8ffd601cbc29"
-                ],
-                "versions": [
-                    {
-                        "PREPARE_GENOME:SAMTOOLS_FAIDX": {
-                            "samtools": "1.22.1"
-                        }
-                    },
-                    {
-                        "PREPARE_GENOME:BWAMEM2_INDEX": {
-                            "bwamem2": "2.2.1"
-                        }
-                    }
                 ]
             }
         ],
+        "timestamp": "2026-02-19T12:12:39.549105919",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2025-12-15T11:56:46.871893037"
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
     },
     "Test without bwamem2 index file path and with run_picard_collecthsmetrics=false": {
         "content": [
@@ -100,25 +71,13 @@
                 ],
                 "reference_fai": [
                     "reference.fasta.fai:md5,bf4047e05f95deb372eb8ffd601cbc29"
-                ],
-                "versions": [
-                    {
-                        "PREPARE_GENOME:SAMTOOLS_FAIDX": {
-                            "samtools": "1.22.1"
-                        }
-                    },
-                    {
-                        "PREPARE_GENOME:BWAMEM2_INDEX": {
-                            "bwamem2": "2.2.1"
-                        }
-                    }
                 ]
             }
         ],
+        "timestamp": "2026-02-19T12:11:58.258098906",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2025-12-15T12:47:55.989932088"
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
     }
 }

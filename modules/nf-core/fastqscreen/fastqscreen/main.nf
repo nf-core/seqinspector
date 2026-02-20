@@ -16,7 +16,7 @@ process FASTQSCREEN_FASTQSCREEN {
     tuple val(meta), path("*.png"), emit: png, optional: true
     tuple val(meta), path("*.html"), emit: html
     tuple val(meta), path("*.fastq.gz"), emit: fastq, optional: true
-    path "versions.yml", emit: versions
+    tuple val("${task.process}"), val('fastqscreen'), eval('fastq_screen --version 2>&1 | sed "s/^.*FastQ Screen v//;"'), emit: versions_fastqscreen, topic: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -49,21 +49,13 @@ process FASTQSCREEN_FASTQSCREEN {
         ${args}
 
     ${mv_cmd}
-
-    fastq_screen_version=\$(fastq_screen --version 2>&1 | sed 's/^.*FastQ Screen v//; s/ .*\$//')
-    echo "\\\"${task.process}\\\":" > versions.yml
-    echo "    fastqscreen: \$fastq_screen_version" >> versions.yml
     """
 
     stub:
-    def prefix = task.ext.prefix ?: "${meta.id}"
+    def prefix = task.ext.prefix ?: meta.id
     """
     touch ${prefix}_screen.html
     touch ${prefix}_screen.png
     touch ${prefix}_screen.txt
-
-    fastq_screen_version=\$(fastq_screen --version 2>&1 | sed 's/^.*FastQ Screen v//; s/ .*\$//')
-    echo "\\\"${task.process}\\\":" > versions.yml
-    echo "    fastqscreen: \$fastq_screen_version" >> versions.yml
     """
 }
