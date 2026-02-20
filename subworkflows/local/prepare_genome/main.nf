@@ -18,7 +18,6 @@ workflow PREPARE_GENOME {
     ch_bwamem2_index = channel.empty()
     ch_reference_fai = channel.empty()
     ch_ref_dict = channel.empty()
-    ch_versions = channel.empty()
 
     if (!("bwamem2_index" in skip_tools)) {
         // Use pre-built index when --bwamem2 parameter is provided
@@ -49,7 +48,6 @@ workflow PREPARE_GENOME {
         else {
             PICARD_CREATESEQUENCEDICTIONARY(ch_reference_fasta)
             ch_ref_dict = PICARD_CREATESEQUENCEDICTIONARY.out.reference_dict
-            ch_versions = ch_versions.mix(PICARD_CREATESEQUENCEDICTIONARY.out.versions)
         }
     }
 
@@ -57,5 +55,4 @@ workflow PREPARE_GENOME {
     bwamem2_index = ch_bwamem2_index
     reference_fai = ch_reference_fai
     ref_dict      = ch_ref_dict
-    versions      = ch_versions
 }

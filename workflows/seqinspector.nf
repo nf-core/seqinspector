@@ -54,7 +54,6 @@ workflow SEQINSPECTOR {
     target_intervals
 
     main:
-    ch_versions = channel.empty()
     ch_multiqc_files = channel.empty()
     ch_multiqc_extra_files = channel.empty()
     ch_bwamem2_mem = channel.empty()
@@ -67,8 +66,6 @@ workflow SEQINSPECTOR {
         run_picard_collecthsmetrics,
         ref_dict,
     )
-
-    ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
 
     //
     // MODULE: Parse rundir info
@@ -153,7 +150,6 @@ workflow SEQINSPECTOR {
             }
 
         ch_multiqc_files = ch_multiqc_files.mix(SEQFU_STATS.out.multiqc)
-        ch_versions = ch_versions.mix(SEQFU_STATS.out.versions)
     }
 
     //
@@ -222,7 +218,7 @@ workflow SEQINSPECTOR {
     // Collate and save software versions
     //
     def collated_versions = softwareVersionsToYAML(
-        softwareVersions: ch_versions.mix(channel.topic("versions")),
+        softwareVersions: channel.topic("versions"),
         nextflowVersion: workflow.nextflow.version,
     ).collectFile(
         storeDir: "${outdir}/pipeline_info",
@@ -321,5 +317,4 @@ workflow SEQINSPECTOR {
     emit:
     global_report   = MULTIQC_GLOBAL.out.report.toList() // channel: [ /path/to/multiqc_report.html ]
     grouped_reports = MULTIQC_PER_TAG.out.report.toList() // channel: [ /path/to/multiqc_report.html ]
-    versions        = ch_versions // channel: [ path(versions.yml) ]
 }

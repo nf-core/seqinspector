@@ -41,7 +41,6 @@ workflow NFCORE_SEQINSPECTOR {
     samplesheet // channel: samplesheet read in from --input
 
     main:
-
     //
     // WORKFLOW: Run pipeline
     //

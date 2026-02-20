@@ -44,17 +44,17 @@
                     },
                     "picard/collecthsmetrics": {
                         "branch": "master",
-                        "git_sha": "976ed20e328a92cb24ab6c63a8983ed31bf48469",
+                        "git_sha": "a631e12055f6c23ba2c942d3902b3ed1b9eed859",
                         "installed_by": ["modules"]
                     },
                     "picard/collectmultiplemetrics": {
                         "branch": "master",
-                        "git_sha": "74ec93d00bef147da3fb1f2262e8d31c14108f88",
+                        "git_sha": "a631e12055f6c23ba2c942d3902b3ed1b9eed859",
                         "installed_by": ["modules"]
                     },
                     "picard/createsequencedictionary": {
                         "branch": "master",
-                        "git_sha": "df124e87c74d8b40285199f8cc20151f5aa57255",
+                        "git_sha": "a631e12055f6c23ba2c942d3902b3ed1b9eed859",
                         "installed_by": ["modules"]
                     },
                     "samtools/faidx": {
@@ -69,7 +69,7 @@
                     },
                     "seqfu/stats": {
                         "branch": "master",
-                        "git_sha": "e753770db613ce014b3c4bc94f6cba443427b726",
+                        "git_sha": "6b81c03dc4465ac9351b293dc6caada2a5e7556c",
                         "installed_by": ["modules"]
                     },
                     "seqtk/sample": {

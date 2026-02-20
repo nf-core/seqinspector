@@ -18,17 +18,10 @@
                 ],
                 "reference_fai": [
                     "reference.fasta.fai:md5,bf4047e05f95deb372eb8ffd601cbc29"
-                ],
-                "versions": [
-                    {
-                        "PREPARE_GENOME:PICARD_CREATESEQUENCEDICTIONARY": {
-                            "picard": "3.4.0"
-                        }
-                    }
                 ]
             }
         ],
-        "timestamp": "2026-02-19T12:13:22.253331535",
+        "timestamp": "2026-02-20T11:14:59.592335797",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
