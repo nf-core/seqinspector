@@ -10,10 +10,6 @@
 
 ## Pipeline tools
 
-- [Bowtie2](https://www.nature.com/articles/nmeth.1923)
-
-  > Langmead B, Salzberg SL. Fast gapped-read alignment with Bowtie 2. Nat Methods. 2012 Apr;9(4):357-9. doi: 10.1038/nmeth.1923. PubMed PMID: 22388286.
-
 - [BWAMEM2](https://ieeexplore.ieee.org/abstract/document/8820962)
 
   > Vasimuddin Md, Misra S, Li H, Aluru S. Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems. In: 2019 IEEE International Parallel and Distributed Processing Symposium (IPDPS). IEEE; 2019:314-324. doi:10.1109/IPDPS.2019.00041
