@@ -52,7 +52,7 @@ workflow PREPARE_GENOME {
     }
 
     emit:
-    bwamem2_index = ch_bwamem2_index
-    reference_fai = ch_reference_fai
-    ref_dict      = ch_ref_dict
+    bwamem2_index  = ch_bwamem2_index
+    reference_fai  = ch_reference_fai
+    reference_dict = ch_ref_dict
 }

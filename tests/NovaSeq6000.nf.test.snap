@@ -1032,8 +1032,6 @@
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:MULTIQC_PER_TAG (2)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:MULTIQC_PER_TAG (3)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:MULTIQC_PER_TAG (4)",
-                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:PREPARE_GENOME:BWAMEM2_INDEX (genome.fa)",
-                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:PREPARE_GENOME:SAMTOOLS_FAIDX (genome.fa)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:QC_BAM:PICARD_COLLECTMULTIPLEMETRICS (Sample1_01)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:QC_BAM:PICARD_COLLECTMULTIPLEMETRICS (Sample23_03)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:QC_BAM:PICARD_COLLECTMULTIPLEMETRICS (SampleA_02)",
@@ -1045,10 +1043,12 @@
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:SAMTOOLS_INDEX (SampleA_02)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:SAMTOOLS_INDEX (Undetermined_05)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:SAMTOOLS_INDEX (sampletest_04)",
-                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:SEQFU_STATS (seqfu)"
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:SEQFU_STATS (seqfu)",
+                "[NXF_HASH] Submitted process > PREPARE_GENOME:BWAMEM2_INDEX (genome.fa)",
+                "[NXF_HASH] Submitted process > PREPARE_GENOME:SAMTOOLS_FAIDX (genome.fa)"
             ]
         ],
-        "timestamp": "2026-02-19T16:08:17.233872508",
+        "timestamp": "2026-02-20T14:19:24.909594023",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

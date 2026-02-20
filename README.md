@@ -54,7 +54,6 @@ If provided, nf-core/seqinspector can also parse statistics from an Illumina run
 
 | Tool        | Version |
 | ----------- | ------- |
-| bowtie2     | 2.5.4   |
 | bwamem2     | 2.3     |
 | fastqc      | 0.12.1  |
 | fastqscreen | 0.16.0  |
