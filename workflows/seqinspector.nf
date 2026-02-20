@@ -5,29 +5,26 @@
 */
 
 // modules
-include { BWAMEM2_MEM                   } from '../modules/nf-core/bwamem2/mem'
-include { FASTQC                        } from '../modules/nf-core/fastqc'
-include { FASTQSCREEN_FASTQSCREEN       } from '../modules/nf-core/fastqscreen/fastqscreen'
-include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc'
-include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc'
-include { PICARD_COLLECTMULTIPLEMETRICS } from '../modules/nf-core/picard/collectmultiplemetrics'
-include { RUNDIRPARSER                  } from '../modules/local/rundirparser'
-include { SAMTOOLS_FAIDX                } from '../modules/nf-core/samtools/faidx'
-include { SAMTOOLS_INDEX                } from '../modules/nf-core/samtools/index'
-include { SEQFU_STATS                   } from '../modules/nf-core/seqfu/stats'
-include { SEQTK_SAMPLE                  } from '../modules/nf-core/seqtk/sample'
+include { BWAMEM2_MEM                } from '../modules/nf-core/bwamem2/mem'
+include { FASTQC                     } from '../modules/nf-core/fastqc'
+include { FASTQSCREEN_FASTQSCREEN    } from '../modules/nf-core/fastqscreen/fastqscreen'
+include { MULTIQC as MULTIQC_GLOBAL  } from '../modules/nf-core/multiqc'
+include { MULTIQC as MULTIQC_PER_TAG } from '../modules/nf-core/multiqc'
+include { RUNDIRPARSER               } from '../modules/local/rundirparser'
+include { SAMTOOLS_INDEX             } from '../modules/nf-core/samtools/index'
+include { SEQFU_STATS                } from '../modules/nf-core/seqfu/stats'
+include { SEQTK_SAMPLE               } from '../modules/nf-core/seqtk/sample'
 
 // subworkflow
-include { PREPARE_GENOME                } from '../subworkflows/local/prepare_genome'
-include { QC_BAM                        } from '../subworkflows/local/qc_bam'
+include { QC_BAM                     } from '../subworkflows/local/qc_bam'
 
 // functions
-include { methodsDescriptionText        } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
-include { paramsSummaryMap              } from 'plugin/nf-schema'
-include { paramsSummaryMultiqc          } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { reportIndexMultiqc            } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
-include { samplesheetToList             } from 'plugin/nf-schema'
-include { softwareVersionsToYAML        } from 'plugin/nf-core-utils'
+include { methodsDescriptionText     } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { paramsSummaryMap           } from 'plugin/nf-schema'
+include { paramsSummaryMultiqc       } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { reportIndexMultiqc         } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { samplesheetToList          } from 'plugin/nf-schema'
+include { softwareVersionsToYAML     } from 'plugin/nf-core-utils'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -39,7 +36,7 @@ workflow SEQINSPECTOR {
     take:
     ch_samplesheet // channel: samplesheet read in from --input
     bait_intervals
-    bwamem2
+    bwamem2_index
     fasta_reference
     fastq_screen_references
     multiqc_config
@@ -47,6 +44,7 @@ workflow SEQINSPECTOR {
     multiqc_methods_description
     outdir
     ref_dict
+    ref_fai
     run_picard_collecthsmetrics
     sample_size
     skip_tools
@@ -58,14 +56,6 @@ workflow SEQINSPECTOR {
     ch_multiqc_extra_files = channel.empty()
     ch_bwamem2_mem = channel.empty()
     ch_samtools_index = channel.empty()
-
-    PREPARE_GENOME(
-        fasta_reference,
-        bwamem2,
-        skip_tools,
-        run_picard_collecthsmetrics,
-        ref_dict,
-    )
 
     //
     // MODULE: Parse rundir info
@@ -179,7 +169,7 @@ workflow SEQINSPECTOR {
     if (!("bwamem2_mem" in skip_tools)) {
         BWAMEM2_MEM(
             ch_sample,
-            PREPARE_GENOME.out.bwamem2_index,
+            bwamem2_index,
             fasta_reference,
             sort_bam ?: true,
         )
@@ -193,23 +183,18 @@ workflow SEQINSPECTOR {
 
     if (!("picard_collectmultiplemetrics" in skip_tools)) {
 
-        ch_reference_fai = PREPARE_GENOME.out.reference_fai
-
         ch_bait_intervals = bait_intervals ? channel.fromPath(bait_intervals).collect() : channel.empty()
         ch_target_intervals = target_intervals ? channel.fromPath(target_intervals).collect() : channel.empty()
-
-        ch_ref_dict = PREPARE_GENOME.out.ref_dict
-
 
         QC_BAM(
             ch_bwamem2_mem,
             ch_samtools_index,
             fasta_reference,
-            ch_reference_fai,
+            ref_fai,
             run_picard_collecthsmetrics,
             ch_bait_intervals,
             ch_target_intervals,
-            ch_ref_dict,
+            ref_dict,
         )
 
         ch_multiqc_files = ch_multiqc_files.mix(QC_BAM.out.multiple_metrics, QC_BAM.out.hs_metrics)

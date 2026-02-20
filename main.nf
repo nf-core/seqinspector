@@ -17,6 +17,7 @@
 include { SEQINSPECTOR            } from './workflows/seqinspector'
 include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
 include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { PREPARE_GENOME          } from './subworkflows/local/prepare_genome'
 include { getGenomeAttribute      } from 'plugin/nf-core-utils'
 
 /*
@@ -25,47 +26,10 @@ include { getGenomeAttribute      } from 'plugin/nf-core-utils'
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-params.fasta = getGenomeAttribute('fasta')
+params.fasta   = getGenomeAttribute('fasta')
+params.bwamem2 = getGenomeAttribute('bwamem2')
+params.dict    = getGenomeAttribute('dict')
 
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    NAMED WORKFLOWS FOR PIPELINE
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-
-//
-// WORKFLOW: Run main analysis pipeline depending on type of input
-//
-workflow NFCORE_SEQINSPECTOR {
-    take:
-    samplesheet // channel: samplesheet read in from --input
-
-    main:
-    //
-    // WORKFLOW: Run pipeline
-    //
-    SEQINSPECTOR(
-        samplesheet,
-        params.bait_intervals,
-        params.bwamem2,
-        params.fasta ? channel.fromPath(params.fasta, checkIfExists: true).map { file -> tuple([id: file.name], file) }.collect() : channel.value([[:], []]),
-        params.fastq_screen_references,
-        params.multiqc_config,
-        params.multiqc_logo,
-        params.multiqc_methods_description,
-        params.outdir,
-        params.ref_dict,
-        params.run_picard_collecthsmetrics,
-        params.sample_size,
-        params.skip_tools ? params.skip_tools.split(',') : ['no_skip_tools'],
-        params.sort_bam,
-        params.target_intervals,
-    )
-
-    emit:
-    global_report   = SEQINSPECTOR.out.global_report // channel: /path/to/multiqc_report.html
-    grouped_reports = SEQINSPECTOR.out.grouped_reports // channel: /path/to/multiqc_report.html
-}
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     RUN MAIN WORKFLOW
@@ -73,6 +37,10 @@ workflow NFCORE_SEQINSPECTOR {
 */
 
 workflow {
+
+    def fasta = params.fasta
+        ? channel.fromPath(params.fasta, checkIfExists: true).map { file -> tuple([id: file.name], file) }.collect()
+        : channel.value([[:], []])
 
     //
     // SUBWORKFLOW: Run initialisation tasks
@@ -90,11 +58,23 @@ workflow {
         params.show_hidden,
     )
 
+    PREPARE_GENOME(
+        fasta,
+        params.bwamem2,
+        params.skip_tools ? params.skip_tools.split(',') : ['no_skip_tools'],
+        params.run_picard_collecthsmetrics,
+        params.dict,
+    )
+
     //
     // WORKFLOW: Run main workflow
     //
     NFCORE_SEQINSPECTOR(
-        PIPELINE_INITIALISATION.out.samplesheet
+        PIPELINE_INITIALISATION.out.samplesheet,
+        fasta,
+        PREPARE_GENOME.out.bwamem2_index,
+        PREPARE_GENOME.out.reference_dict,
+        PREPARE_GENOME.out.reference_fai,
     )
     //
     // SUBWORKFLOW: Run completion tasks
@@ -108,4 +88,49 @@ workflow {
         params.hook_url,
         NFCORE_SEQINSPECTOR.out.global_report,
     )
+}
+
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    NAMED WORKFLOWS FOR PIPELINE
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+//
+// WORKFLOW: Run main analysis pipeline depending on type of input
+//
+workflow NFCORE_SEQINSPECTOR {
+    take:
+    samplesheet // channel: samplesheet read in from --input
+    fasta
+    bwamem2_index
+    dict
+    fasta_fai
+
+    main:
+    //
+    // WORKFLOW: Run pipeline
+    //
+    SEQINSPECTOR(
+        samplesheet,
+        params.bait_intervals,
+        bwamem2_index,
+        fasta,
+        params.fastq_screen_references,
+        params.multiqc_config,
+        params.multiqc_logo,
+        params.multiqc_methods_description,
+        params.outdir,
+        dict,
+        fasta_fai,
+        params.run_picard_collecthsmetrics,
+        params.sample_size,
+        params.skip_tools ? params.skip_tools.split(',') : ['no_skip_tools'],
+        params.sort_bam,
+        params.target_intervals,
+    )
+
+    emit:
+    global_report   = SEQINSPECTOR.out.global_report // channel: /path/to/multiqc_report.html
+    grouped_reports = SEQINSPECTOR.out.grouped_reports // channel: /path/to/multiqc_report.html
 }
