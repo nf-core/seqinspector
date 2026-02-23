@@ -116,7 +116,7 @@
                     "type": "string",
                     "format": "directory-path",
                     "exists": true,
-                    "fa_icon": "fas fa-copy",
+                    "fa_icon": "fas fa-folder-open",
                     "description": "Path to bwamem2 indices.",
                     "help_text": "If you wish to recompute indices available on igenomes, set `--bwamem2 false`.\n\n> **NB** If none provided, will be generated automatically from the FASTA reference.\n\nIf you use AWS iGenomes, this has already been set for you appropriately."
                 },
@@ -127,7 +127,8 @@
                     "help_text": "If you wish to recompute indices available on igenomes, set `--ic false`.\n\n> **NB** If none provided, will be generated automatically from the FASTA reference.\n\nIf you use AWS iGenomes, this has already been set for you appropriately.",
                     "pattern": "^\\S+.dict$",
                     "format": "file-path",
-                    "exists": true
+                    "exists": true,
+                    "fa_icon": "fas fa-file"
                 },
                 "target_intervals": {
                     "type": "string",
@@ -250,7 +251,7 @@
                 "hook_url": {
                     "type": "string",
                     "description": "Incoming hook URL for messaging service",
-                    "fa_icon": "fas fa-link",
+                    "fa_icon": "fas fa-users",
                     "help_text": "Incoming hook URL for messaging service. Currently, MS Teams and Slack are supported.",
                     "hidden": true
                 },
@@ -295,7 +296,7 @@
                 },
                 "trace_report_suffix": {
                     "type": "string",
-                    "fa_icon": "fas fa-tag",
+                    "fa_icon": "fas fa-calendar-alt",
                     "description": "Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss.",
                     "hidden": true
                 },
