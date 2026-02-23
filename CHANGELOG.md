@@ -59,6 +59,8 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#173](https://github.com/nf-core/seqinspector/pull/173) Fix warning message for tag name collision
 - [#174](https://github.com/nf-core/seqinspector/pull/174) Fix null message when no rundir information is available
 - [#175](https://github.com/nf-core/seqinspector/pull/175) Fix conda setup in CI
+- [#178](https://github.com/nf-core/seqinspector/pull/178) Fix nextflow schema
+- [#178](https://github.com/nf-core/seqinspector/pull/178) Fix links in documentation
 
 ### `Changed`
 

@@ -27,7 +27,8 @@
                     "type": "number",
                     "description": "Take a subset of reads for analysis.",
                     "help_text": "Subset can be used as a fraction of reads (ex/ 0.20) or an absolute number of reads per sample (integer). Pipeline will still run if a sample has less reads than selected subset value.",
-                    "default": 0
+                    "default": 0,
+                    "fa_icon": "fas fa-arrows-alt-h"
                 },
                 "outdir": {
                     "type": "string",
@@ -47,10 +48,24 @@
                     "description": "MultiQC report title. Printed as page header, used for filename if not otherwise specified.",
                     "fa_icon": "fas fa-file-signature"
                 },
+                "run_picard_collecthsmetrics": {
+                    "type": "boolean",
+                    "hidden": true,
+                    "description": "Run picard_colecthsmetrics for QC of bam files.",
+                    "fa_icon": "fas fa-play"
+                },
                 "skip_tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to skip",
-                    "pattern": "^((fastqc|fastqscreen|seqfu_stats|seqtk_sample|bwamem2_index|bwamem2_mem|picard_collectmultiplemetrics|samtools_faidx|samtools_index|rundirparser)?,?)*(?<!,)$"
+                    "pattern": "^((fastqc|fastqscreen|seqfu_stats|seqtk_sample|bwamem2_index|bwamem2_mem|picard_collectmultiplemetrics|samtools_faidx|samtools_index|rundirparser)?,?)*(?<!,)$",
+                    "fa_icon": "fas fa-fast-forward"
+                },
+                "sort_bam": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Sort BAM files after alignment",
+                    "help_text": "If true, BAM files produced by alignment will be sorted by genomic coordinates.",
+                    "fa_icon": "fas fa-sort-alpha-down"
                 }
             }
         },
@@ -73,7 +88,7 @@
                     "mimetype": "text/plain",
                     "pattern": "^\\S+\\.fn?a(sta)?(\\.gz)?$",
                     "description": "Path to FASTA genome file.",
-                    "help_text": "This parameter is *mandatory* if `--genome` is not specified. If you don't have a BWA index available this will be generated for you automatically. Combine with `--save_reference` to save BWA index for future runs.",
+                    "help_text": "This parameter is *mandatory* if `--genome` is not specified. If you don't have a BWA index available this will be generated for you automatically.",
                     "fa_icon": "far fa-file-code"
                 },
                 "igenomes_ignore": {
@@ -102,7 +117,7 @@
                     "format": "directory-path",
                     "exists": true,
                     "fa_icon": "fas fa-copy",
-                    "description": "Path to BWA mem indices.",
+                    "description": "Path to bwamem2 indices.",
                     "help_text": "If you wish to recompute indices available on igenomes, set `--bwamem2 false`.\n\n> **NB** If none provided, will be generated automatically from the FASTA reference.\n\nIf you use AWS iGenomes, this has already been set for you appropriately."
                 },
                 "dict": {
@@ -113,6 +128,24 @@
                     "pattern": "^\\S+.dict$",
                     "format": "file-path",
                     "exists": true
+                },
+                "target_intervals": {
+                    "type": "string",
+                    "description": "Path to target intervals file.",
+                    "hidden": true,
+                    "pattern": "^\\S+.(bed|bed.gz|interval_list)$",
+                    "format": "file-path",
+                    "exists": true,
+                    "fa_icon": "fas fa-file"
+                },
+                "bait_intervals": {
+                    "type": "string",
+                    "description": "Path to bait intervals file.",
+                    "hidden": true,
+                    "pattern": "^\\S+.(bed|bed.gz|interval_list)$",
+                    "format": "file-path",
+                    "exists": true,
+                    "fa_icon": "fas fa-file"
                 }
             }
         },
@@ -177,12 +210,6 @@
                     "fa_icon": "fas fa-question-circle",
                     "hidden": true
                 },
-                "sort_bam": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Sort BAM files after alignment",
-                    "help_text": "If true, BAM files produced by alignment will be sorted by genomic coordinates."
-                },
                 "publish_dir_mode": {
                     "type": "string",
                     "default": "copy",
@@ -223,7 +250,7 @@
                 "hook_url": {
                     "type": "string",
                     "description": "Incoming hook URL for messaging service",
-                    "fa_icon": "fas fa-people-group",
+                    "fa_icon": "fas fa-link",
                     "help_text": "Incoming hook URL for messaging service. Currently, MS Teams and Slack are supported.",
                     "hidden": true
                 },
@@ -231,7 +258,8 @@
                     "type": "string",
                     "description": "Base path / URL for data used in the modules",
                     "hidden": true,
-                    "default": "s3://ngi-igenomes/testdata/nf-core/modules/"
+                    "default": "s3://ngi-igenomes/testdata/nf-core/modules/",
+                    "fa_icon": "fas fa-map"
                 },
                 "multiqc_config": {
                     "type": "string",
@@ -267,50 +295,24 @@
                 },
                 "trace_report_suffix": {
                     "type": "string",
-                    "fa_icon": "far calendar",
+                    "fa_icon": "fas fa-tag",
                     "description": "Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss.",
                     "hidden": true
                 },
                 "help": {
                     "type": ["boolean", "string"],
-                    "description": "Display the help message."
+                    "description": "Display the help message.",
+                    "fa_icon": "fas fa-info"
                 },
                 "help_full": {
                     "type": "boolean",
-                    "description": "Display the full detailed help message."
+                    "description": "Display the full detailed help message.",
+                    "fa_icon": "fas fa-question-circle"
                 },
                 "show_hidden": {
                     "type": "boolean",
-                    "description": "Display hidden parameters in the help message (only works when --help or --help_full are provided)."
-                }
-            }
-        },
-        "picard_collecthsmetrics_options": {
-            "title": "picard_collecthsmetrics options",
-            "type": "object",
-            "description": "",
-            "default": "",
-            "properties": {
-                "run_picard_collecthsmetrics": {
-                    "type": "boolean",
-                    "hidden": true,
-                    "description": "Run picard_colecthsmetrics for QC of bam files."
-                },
-                "bait_intervals": {
-                    "type": "string",
-                    "description": "Path to bait intervals file.",
-                    "hidden": true,
-                    "pattern": "^\\S+.(bed|bed.gz|interval_list)$",
-                    "format": "file-path",
-                    "exists": true
-                },
-                "target_intervals": {
-                    "type": "string",
-                    "description": "Path to target intervals file.",
-                    "hidden": true,
-                    "pattern": "^\\S+.(bed|bed.gz|interval_list)$",
-                    "format": "file-path",
-                    "exists": true
+                    "description": "Display hidden parameters in the help message (only works when --help or --help_full are provided).",
+                    "fa_icon": "fas fa-eye"
                 }
             }
         }
@@ -327,9 +329,6 @@
         },
         {
             "$ref": "#/$defs/generic_options"
-        },
-        {
-            "$ref": "#/$defs/picard_collecthsmetrics_options"
         }
     ]
 }
