@@ -50,7 +50,6 @@
                 },
                 "run_picard_collecthsmetrics": {
                     "type": "boolean",
-                    "hidden": true,
                     "description": "Run picard_collecthsmetrics for QC of bam files.",
                     "fa_icon": "fas fa-play"
                 },
