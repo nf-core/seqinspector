@@ -57,7 +57,7 @@
                 "skip_tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to skip",
-                    "pattern": "^((fastqc|fastqscreen|seqfu_stats|seqtk_sample|bwamem2_index|bwamem2_mem|picard_collectmultiplemetrics|samtools_faidx|samtools_index|rundirparser)?,?)*(?<!,)$",
+                    "pattern": "^((bwamem2_index|bwamem2_mem|fastqc|fastqscreen|picard_collectmultiplemetrics|rundirparser|samtools_faidx|samtools_index|seqfu_stats|seqtk_sample)?,?)*(?<!,)$",
                     "fa_icon": "fas fa-fast-forward"
                 },
                 "sort_bam": {
