@@ -86,6 +86,7 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#176](https://github.com/nf-core/seqinspector/pull/176) No modules binaries
 - [#177](https://github.com/nf-core/seqinspector/pull/177) Remove non used modules
 - [#177](https://github.com/nf-core/seqinspector/pull/177) Move PREPARE_GENOME to the root main.nf script
+- [#179](https://github.com/nf-core/seqinspector/pull/179) Set minimal Nextflow version to 24.10.2
 
 ### `Dependencies`
 
