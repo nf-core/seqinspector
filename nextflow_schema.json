@@ -122,7 +122,6 @@
                 },
                 "dict": {
                     "type": "string",
-                    "hidden": true,
                     "description": "Sequence dictionary for the reference fasta file provided.",
                     "help_text": "If you wish to recompute indices available on igenomes, set `--ic false`.\n\n> **NB** If none provided, will be generated automatically from the FASTA reference.\n\nIf you use AWS iGenomes, this has already been set for you appropriately.",
                     "pattern": "^\\S+.dict$",
@@ -133,7 +132,6 @@
                 "target_intervals": {
                     "type": "string",
                     "description": "Path to target intervals file.",
-                    "hidden": true,
                     "pattern": "^\\S+.(bed|bed.gz|interval_list)$",
                     "format": "file-path",
                     "exists": true,
@@ -142,7 +140,6 @@
                 "bait_intervals": {
                     "type": "string",
                     "description": "Path to bait intervals file.",
-                    "hidden": true,
                     "pattern": "^\\S+.(bed|bed.gz|interval_list)$",
                     "format": "file-path",
                     "exists": true,
