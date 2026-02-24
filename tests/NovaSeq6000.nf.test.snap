@@ -1003,6 +1003,8 @@
                 "  configFiles               : [PATH]/nextflow.config, [PATH]/nextflow.config, [PATH]/tests/nextflow.config",
                 "!! Only displaying parameters that differ from the pipeline defaults !!",
                 "------------------------------------------------------",
+                "* The pipeline",
+                "    https://doi.org/10.5281/zenodo.18757486",
                 "* The nf-core framework",
                 "    https://doi.org/10.1038/s41587-020-0439-x",
                 "* Software dependencies",
@@ -1048,7 +1050,7 @@
                 "[NXF_HASH] Submitted process > PREPARE_GENOME:SAMTOOLS_FAIDX (genome.fa)"
             ]
         ],
-        "timestamp": "2026-02-20T14:19:24.909594023",
+        "timestamp": "2026-02-24T13:33:04.718407731",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

@@ -39,6 +39,7 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#168](https://github.com/nf-core/seqinspector/pull/168) Add contributors list
 - [#168](https://github.com/nf-core/seqinspector/pull/168) Add logo to the pipeline logo
 - [#174](https://github.com/nf-core/seqinspector/pull/174) Add nf-core-utils 0.4.0
+- [#180](https://github.com/nf-core/seqinspector/pull/180) Add Zenodo record
 
 ### `Fixed`
 
