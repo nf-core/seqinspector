@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Fixed`
 
+- [#182](https://github.com/nf-core/seqinspector/pull/182) Keep modules diff to a minimum
+
 ### `Changed`
 
 - [#180](https://github.com/nf-core/seqinspector/pull/180) Add Zenodo record
