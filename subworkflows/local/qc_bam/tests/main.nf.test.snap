@@ -1,0 +1,45 @@
+{
+    "Test with run_picard_collecthsmetrics=false": {
+        "content": [
+            {
+                "multiple_metrics": [
+                    [
+                        "earlycasualcaiman.CollectMultipleMetrics.alignment_summary_metrics",
+                        "earlycasualcaiman.CollectMultipleMetrics.base_distribution_by_cycle_metrics",
+                        "earlycasualcaiman.CollectMultipleMetrics.insert_size_metrics",
+                        "earlycasualcaiman.CollectMultipleMetrics.quality_by_cycle_metrics",
+                        "earlycasualcaiman.CollectMultipleMetrics.quality_distribution_metrics"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-02-19T12:13:55.371999049",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
+    },
+    "Test with run_picard_collecthsmetrics=true": {
+        "content": [
+            {
+                "hs_metrics": [
+                    "earlycasualcaiman.CollectHsMetrics.coverage_metrics"
+                ],
+                "multiple_metrics": [
+                    [
+                        "earlycasualcaiman.CollectMultipleMetrics.alignment_summary_metrics",
+                        "earlycasualcaiman.CollectMultipleMetrics.base_distribution_by_cycle_metrics",
+                        "earlycasualcaiman.CollectMultipleMetrics.insert_size_metrics",
+                        "earlycasualcaiman.CollectMultipleMetrics.quality_by_cycle_metrics",
+                        "earlycasualcaiman.CollectMultipleMetrics.quality_distribution_metrics"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-02-19T12:15:28.332477673",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
+    }
+}

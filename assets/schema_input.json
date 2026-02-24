@@ -1,5 +1,5 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://raw.githubusercontent.com/nf-core/seqinspector/master/assets/schema_input.json",
     "title": "nf-core/seqinspector pipeline - params.input schema",
     "description": "Schema for the file provided with params.input",
@@ -13,41 +13,45 @@
                 "errorMessage": "Sample name must be provided and cannot contain spaces",
                 "meta": ["sample"]
             },
-            "lane": {
-                "type": "integer",
-                "pattern": "^\\d+$",
-                "errorMessage": "Lane ID must be a number",
-                "meta": ["lane"]
-            },
-            "project": {
-                "type": "string",
-                "pattern": "^\\S+$",
-                "errorMessage": "Project ID cannot contain spaces",
-                "meta": ["project"]
-            },
             "fastq_1": {
                 "type": "string",
                 "format": "file-path",
                 "exists": true,
-                "pattern": "^\\S+\\.f(ast)?q\\.gz$",
+                "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
                 "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
             },
             "fastq_2": {
                 "type": "string",
                 "format": "file-path",
                 "exists": true,
-                "pattern": "^\\S+\\.f(ast)?q\\.gz$",
+                "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
                 "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
             },
             "rundir": {
-                "type": "string",
-                "format": "path",
-                "exists": true,
-                "errorMessage": "Run directory must be a path",
+                "oneOf": [
+                    {
+                        "type": "string",
+                        "format": "file-path",
+                        "exists": true,
+                        "pattern": "\\.tar\\.gz$"
+                    },
+                    {
+                        "type": "string",
+                        "format": "directory-path",
+                        "exists": true
+                    }
+                ],
+                "errorMessage": "Run directory must be a path or tar directory",
                 "meta": ["rundir"]
+            },
+            "tags": {
+                "type": "string",
+                "pattern": "^([A-Za-z0-9_-]+:)*([A-Za-z0-9_-]+)$",
+                "errorMessage": "Tags must be separated by colons and only consist of lowercase letters, numbers, underscores and hyphens.",
+                "meta": ["tags"]
             }
         },
-        "required": ["sample", "lane", "fastq_1"],
+        "required": ["sample", "fastq_1"],
         "dependentRequired": {
             "fastq_2": ["fastq_1"]
         }

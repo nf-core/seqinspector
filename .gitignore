@@ -6,3 +6,8 @@ results/
 testing/
 testing*
 *.pyc
+null/
+.nf-test
+.nf-test.log
+modules/nf-core/**/tests/
+subworkflows/nf-core/**/tests/

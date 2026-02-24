@@ -1,10 +1,10 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://raw.githubusercontent.com/nf-core/seqinspector/master/nextflow_schema.json",
     "title": "nf-core/seqinspector pipeline parameters",
     "description": "Pipeline to QC your sequences",
     "type": "object",
-    "definitions": {
+    "$defs": {
         "input_output_options": {
             "title": "Input/output options",
             "type": "object",
@@ -23,6 +23,13 @@
                     "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row. See [usage docs](https://nf-co.re/seqinspector/usage#samplesheet-input).",
                     "fa_icon": "fas fa-file-csv"
                 },
+                "sample_size": {
+                    "type": "number",
+                    "description": "Take a subset of reads for analysis.",
+                    "help_text": "Subset can be used as a fraction of reads (ex/ 0.20) or an absolute number of reads per sample (integer). Pipeline will still run if a sample has less reads than selected subset value.",
+                    "default": 0,
+                    "fa_icon": "fas fa-arrows-alt-h"
+                },
                 "outdir": {
                     "type": "string",
                     "format": "directory-path",
@@ -40,6 +47,24 @@
                     "type": "string",
                     "description": "MultiQC report title. Printed as page header, used for filename if not otherwise specified.",
                     "fa_icon": "fas fa-file-signature"
+                },
+                "run_picard_collecthsmetrics": {
+                    "type": "boolean",
+                    "description": "Run picard_collecthsmetrics for QC of bam files.",
+                    "fa_icon": "fas fa-play"
+                },
+                "skip_tools": {
+                    "type": "string",
+                    "description": "Comma-separated string of tools to skip",
+                    "pattern": "^((bwamem2_index|bwamem2_mem|fastqc|fastqscreen|picard_collectmultiplemetrics|rundirparser|samtools_faidx|samtools_index|seqfu_stats|seqtk_sample)?,?)*(?<!,)$",
+                    "fa_icon": "fas fa-fast-forward"
+                },
+                "sort_bam": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Sort BAM files after alignment",
+                    "help_text": "If true, BAM files produced by alignment will be sorted by genomic coordinates.",
+                    "fa_icon": "fas fa-sort-alpha-down"
                 }
             }
         },
@@ -62,7 +87,7 @@
                     "mimetype": "text/plain",
                     "pattern": "^\\S+\\.fn?a(sta)?(\\.gz)?$",
                     "description": "Path to FASTA genome file.",
-                    "help_text": "This parameter is *mandatory* if `--genome` is not specified. If you don't have a BWA index available this will be generated for you automatically. Combine with `--save_reference` to save BWA index for future runs.",
+                    "help_text": "This parameter is *mandatory* if `--genome` is not specified. If you don't have a BWA index available this will be generated for you automatically.",
                     "fa_icon": "far fa-file-code"
                 },
                 "igenomes_ignore": {
@@ -71,6 +96,53 @@
                     "fa_icon": "fas fa-ban",
                     "hidden": true,
                     "help_text": "Do not load `igenomes.config` when running the pipeline. You may choose this option if you observe clashes between custom parameters and those supplied in `igenomes.config`."
+                },
+                "igenomes_base": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "description": "The base path to the igenomes reference files",
+                    "fa_icon": "fas fa-ban",
+                    "hidden": true,
+                    "default": "s3://ngi-igenomes/igenomes/"
+                },
+                "fastq_screen_references": {
+                    "type": "string",
+                    "default": "${projectDir}/assets/example_fastq_screen_references.csv",
+                    "fa_icon": "fas fa-search",
+                    "description": "A .csv of reference genomes to be mapped against by FastQ Screen"
+                },
+                "bwamem2": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "exists": true,
+                    "fa_icon": "fas fa-folder-open",
+                    "description": "Path to bwamem2 indices.",
+                    "help_text": "If you wish to recompute indices available on igenomes, set `--bwamem2 false`.\n\n> **NB** If none provided, will be generated automatically from the FASTA reference.\n\nIf you use AWS iGenomes, this has already been set for you appropriately."
+                },
+                "dict": {
+                    "type": "string",
+                    "description": "Sequence dictionary for the reference fasta file provided.",
+                    "help_text": "If you wish to recompute indices available on igenomes, set `--ic false`.\n\n> **NB** If none provided, will be generated automatically from the FASTA reference.\n\nIf you use AWS iGenomes, this has already been set for you appropriately.",
+                    "pattern": "^\\S+.dict$",
+                    "format": "file-path",
+                    "exists": true,
+                    "fa_icon": "fas fa-file"
+                },
+                "target_intervals": {
+                    "type": "string",
+                    "description": "Path to target intervals file.",
+                    "pattern": "^\\S+.(bed|bed.gz|interval_list)$",
+                    "format": "file-path",
+                    "exists": true,
+                    "fa_icon": "fas fa-file"
+                },
+                "bait_intervals": {
+                    "type": "string",
+                    "description": "Path to bait intervals file.",
+                    "pattern": "^\\S+.(bed|bed.gz|interval_list)$",
+                    "format": "file-path",
+                    "exists": true,
+                    "fa_icon": "fas fa-file"
                 }
             }
         },
@@ -122,41 +194,6 @@
                 }
             }
         },
-        "max_job_request_options": {
-            "title": "Max job request options",
-            "type": "object",
-            "fa_icon": "fab fa-acquisitions-incorporated",
-            "description": "Set the top limit for requested resources for any single job.",
-            "help_text": "If you are running on a smaller system, a pipeline step requesting more resources than are available may cause the Nextflow to stop the run with an error. These options allow you to cap the maximum resources requested by any single job so that the pipeline will run on your system.\n\nNote that you can not _increase_ the resources requested by any job using these options. For that you will need your own configuration file. See [the nf-core website](https://nf-co.re/usage/configuration) for details.",
-            "properties": {
-                "max_cpus": {
-                    "type": "integer",
-                    "description": "Maximum number of CPUs that can be requested for any single job.",
-                    "default": 16,
-                    "fa_icon": "fas fa-microchip",
-                    "hidden": true,
-                    "help_text": "Use to set an upper-limit for the CPU requirement for each process. Should be an integer e.g. `--max_cpus 1`"
-                },
-                "max_memory": {
-                    "type": "string",
-                    "description": "Maximum amount of memory that can be requested for any single job.",
-                    "default": "128.GB",
-                    "fa_icon": "fas fa-memory",
-                    "pattern": "^\\d+(\\.\\d+)?\\.?\\s*(K|M|G|T)?B$",
-                    "hidden": true,
-                    "help_text": "Use to set an upper-limit for the memory requirement for each process. Should be a string in the format integer-unit e.g. `--max_memory '8.GB'`"
-                },
-                "max_time": {
-                    "type": "string",
-                    "description": "Maximum amount of time that can be requested for any single job.",
-                    "default": "240.h",
-                    "fa_icon": "far fa-clock",
-                    "pattern": "^(\\d+\\.?\\s*(s|m|h|d|day)\\s*)+$",
-                    "hidden": true,
-                    "help_text": "Use to set an upper-limit for the time requirement for each process. Should be a string in the format integer-unit e.g. `--max_time '2.h'`"
-                }
-            }
-        },
         "generic_options": {
             "title": "Generic options",
             "type": "object",
@@ -164,12 +201,6 @@
             "description": "Less common options for the pipeline, typically set in a config file.",
             "help_text": "These options are common to all nf-core pipelines and allow you to customise some of the core preferences for how the pipeline runs.\n\nTypically these options would be set in a Nextflow config file loaded for all pipeline runs, such as `~/.nextflow/config`.",
             "properties": {
-                "help": {
-                    "type": "boolean",
-                    "description": "Display help text.",
-                    "fa_icon": "fas fa-question-circle",
-                    "hidden": true
-                },
                 "version": {
                     "type": "boolean",
                     "description": "Display version and exit.",
@@ -216,9 +247,16 @@
                 "hook_url": {
                     "type": "string",
                     "description": "Incoming hook URL for messaging service",
-                    "fa_icon": "fas fa-people-group",
+                    "fa_icon": "fas fa-link",
                     "help_text": "Incoming hook URL for messaging service. Currently, MS Teams and Slack are supported.",
                     "hidden": true
+                },
+                "modules_testdata_base_path": {
+                    "type": "string",
+                    "description": "Base path / URL for data used in the modules",
+                    "hidden": true,
+                    "default": "s3://ngi-igenomes/testdata/nf-core/modules/",
+                    "fa_icon": "fas fa-map"
                 },
                 "multiqc_config": {
                     "type": "string",
@@ -245,45 +283,49 @@
                     "fa_icon": "fas fa-check-square",
                     "hidden": true
                 },
-                "validationShowHiddenParams": {
-                    "type": "boolean",
-                    "fa_icon": "far fa-eye-slash",
-                    "description": "Show all params when using `--help`",
-                    "hidden": true,
-                    "help_text": "By default, parameters set as _hidden_ in the schema are not shown on the command line when a user runs with `--help`. Specifying this option will tell the pipeline to show all parameters."
-                },
-                "validationFailUnrecognisedParams": {
-                    "type": "boolean",
+                "pipelines_testdata_base_path": {
+                    "type": "string",
                     "fa_icon": "far fa-check-circle",
-                    "description": "Validation of parameters fails when an unrecognised parameter is found.",
-                    "hidden": true,
-                    "help_text": "By default, when an unrecognised parameter is found, it returns a warinig."
+                    "description": "Base URL or local path to location of pipeline test dataset files",
+                    "default": "https://raw.githubusercontent.com/nf-core/test-datasets/",
+                    "hidden": true
                 },
-                "validationLenientMode": {
+                "trace_report_suffix": {
+                    "type": "string",
+                    "fa_icon": "fas fa-tag",
+                    "description": "Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss.",
+                    "hidden": true
+                },
+                "help": {
+                    "type": ["boolean", "string"],
+                    "description": "Display the help message.",
+                    "fa_icon": "fas fa-info"
+                },
+                "help_full": {
                     "type": "boolean",
-                    "fa_icon": "far fa-check-circle",
-                    "description": "Validation of parameters in lenient more.",
-                    "hidden": true,
-                    "help_text": "Allows string values that are parseable as numbers or booleans. For further information see [JSONSchema docs](https://github.com/everit-org/json-schema#lenient-mode)."
+                    "description": "Display the full detailed help message.",
+                    "fa_icon": "fas fa-question-circle"
+                },
+                "show_hidden": {
+                    "type": "boolean",
+                    "description": "Display hidden parameters in the help message (only works when --help or --help_full are provided).",
+                    "fa_icon": "fas fa-eye"
                 }
             }
         }
     },
     "allOf": [
         {
-            "$ref": "#/definitions/input_output_options"
+            "$ref": "#/$defs/input_output_options"
         },
         {
-            "$ref": "#/definitions/reference_genome_options"
+            "$ref": "#/$defs/reference_genome_options"
         },
         {
-            "$ref": "#/definitions/institutional_config_options"
+            "$ref": "#/$defs/institutional_config_options"
         },
         {
-            "$ref": "#/definitions/max_job_request_options"
-        },
-        {
-            "$ref": "#/definitions/generic_options"
+            "$ref": "#/$defs/generic_options"
         }
     ]
 }
