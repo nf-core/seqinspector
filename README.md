@@ -45,9 +45,9 @@ If provided, nf-core/seqinspector can also parse statistics from an Illumina run
 ### Workflow diagram
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/images/seqinspector_tubemap_V1.0_dark.png">
-  <source media="(prefers-color-scheme: light)" srcset="docs/images/seqinspector_tubemap_V1.0.png">
-  <img alt="Fallback image description" src="docs/images/seqinspector_tubemap_V1.0.png">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/seqinspector_tubemap_dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="docs/images/seqinspector_tubemap_light.png">
+  <img alt="Fallback image description" src="docs/images/seqinspector_tubemap_light.png">
 </picture>
 
 ### Summary of tools and version used in the pipeline

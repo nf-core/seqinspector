@@ -3,6 +3,21 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## dev
+
+### `Added`
+
+### `Fixed`
+
+### `Changed`
+
+- [#180](https://github.com/nf-core/seqinspector/pull/180) Add Zenodo record
+- [#181](https://github.com/nf-core/seqinspector/pull/181) Back to dev
+
+### `Dependencies`
+
+### `Deprecated`
+
 ## [1.0.0](https://github.com/nf-core/seqinspector/releases/tag/1.0.0) - Inspector Gadget
 
 Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-co.re/) template.
@@ -39,7 +54,6 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#168](https://github.com/nf-core/seqinspector/pull/168) Add contributors list
 - [#168](https://github.com/nf-core/seqinspector/pull/168) Add logo to the pipeline logo
 - [#174](https://github.com/nf-core/seqinspector/pull/174) Add nf-core-utils 0.4.0
-- [#180](https://github.com/nf-core/seqinspector/pull/180) Add Zenodo record
 
 ### `Fixed`
 
