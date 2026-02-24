@@ -13,8 +13,7 @@
                     "bwamem2/mem": {
                         "branch": "master",
                         "git_sha": "8325a8155a77a336a613a504b8e4d6cea7a2344a",
-                        "installed_by": ["modules"],
-                        "patch": "modules/nf-core/bwamem2/mem/bwamem2-mem.diff"
+                        "installed_by": ["modules"]
                     },
                     "fastqc": {
                         "branch": "master",
