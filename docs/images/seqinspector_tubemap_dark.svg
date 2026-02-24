@@ -7,9 +7,11 @@
    viewBox="0 0 209.39166 196.17035"
    version="1.1"
    id="svg1"
-   inkscape:export-filename="seqinspector_tubemap_V1.0_dark.png"
+   inkscape:export-filename="seqinspector_tubemap_dark.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96"
+   sodipodi:docname="seqinspector_tubemap_dark.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -23,7 +25,17 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
-     inkscape:document-units="mm" />
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.31830329"
+     inkscape:cx="179.07449"
+     inkscape:cy="372.28645"
+     inkscape:window-width="1704"
+     inkscape:window-height="993"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
   <defs
      id="defs1">
     <filter
@@ -1267,9 +1279,9 @@
            transform="matrix(1.0678105,0,0,1.0678105,-102.86973,-32.630444)"><tspan
              x="762.75116"
              y="436.09985"
-             id="tspan3"><tspan
+             id="tspan1620"><tspan
                style="font-family:'Maven Pro';-inkscape-font-specification:'Maven Pro Bold';stroke:none"
-               id="tspan1">Run
+               id="tspan1618">Run
 </tspan></tspan></text>
         <text
            xml:space="preserve"
@@ -1280,9 +1292,9 @@
            transform="matrix(1.0678105,0,0,1.0678105,-87.670319,-17.966784)"><tspan
              x="762.75116"
              y="436.09985"
-             id="tspan5"><tspan
+             id="tspan1624"><tspan
                style="font-family:'Maven Pro';-inkscape-font-specification:'Maven Pro Bold';stroke:none"
-               id="tspan4">metadata</tspan></tspan></text>
+               id="tspan1622">metadata</tspan></tspan></text>
       </g>
     </g>
     <g
@@ -1300,9 +1312,9 @@
            transform="matrix(1.0678105,0,0,1.0678105,-27.188458,-20.454849)"><tspan
              x="752.81775"
              y="436.09985"
-             id="tspan7"><tspan
+             id="tspan1628"><tspan
                style="font-family:'Maven Pro';-inkscape-font-specification:'Maven Pro Bold';text-align:start;text-anchor:start;stroke:none"
-               id="tspan6">seqtk</tspan></tspan></text>
+               id="tspan1626">seqtk</tspan></tspan></text>
       </g>
     </g>
     <text
