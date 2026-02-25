@@ -1030,10 +1030,10 @@
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQSCREEN_FASTQSCREEN (Undetermined_05)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQSCREEN_FASTQSCREEN (sampletest_04)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:MULTIQC_GLOBAL",
-                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:MULTIQC_PER_TAG (1)",
-                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:MULTIQC_PER_TAG (2)",
-                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:MULTIQC_PER_TAG (3)",
-                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:MULTIQC_PER_TAG (4)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:MULTIQC_PER_TAG (group1)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:MULTIQC_PER_TAG (group2)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:MULTIQC_PER_TAG (lane1)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:MULTIQC_PER_TAG (test)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:QC_BAM:PICARD_COLLECTMULTIPLEMETRICS (Sample1_01)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:QC_BAM:PICARD_COLLECTMULTIPLEMETRICS (Sample23_03)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:QC_BAM:PICARD_COLLECTMULTIPLEMETRICS (SampleA_02)",
@@ -1050,7 +1050,7 @@
                 "[NXF_HASH] Submitted process > PREPARE_GENOME:SAMTOOLS_FAIDX (genome.fa)"
             ]
         ],
-        "timestamp": "2026-02-24T13:33:04.718407731",
+        "timestamp": "2026-02-25T19:07:54.653867263",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
