@@ -700,10 +700,10 @@
                 "SAMPLE_PAIRED_END_2_02.bam:md5,57892fc4314e66e8e20de4f5d82f9b5d"
             ],
             [
-                "WARN: Tag name collision: [Bpacificus]"
+                "WARN: Tag name collision: Bpacificus"
             ]
         ],
-        "timestamp": "2026-02-19T16:07:01.63849991",
+        "timestamp": "2026-02-25T18:33:00.017523828",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

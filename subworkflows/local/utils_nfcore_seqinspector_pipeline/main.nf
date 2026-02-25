@@ -104,47 +104,32 @@ workflow PIPELINE_INITIALISATION {
         .toList()
         .size()
 
-    channel.fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
+    ch_samplesheet = channel.fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
         .toList()
         .flatMap { item -> item.withIndex().collect { entry, idx -> entry + "${idx + 1}" } }
         .map { meta, fastq_1, fastq_2, idx ->
             def tags = meta.tags ? meta.tags.tokenize(":") : []
             def pad_positions = [nr_samples.length(), 2].max()
             def zero_padded_idx = idx.padLeft(pad_positions, "0")
-            def updated_meta = meta + [id: "${meta.sample}_${zero_padded_idx}", tags: tags]
-            if (!fastq_2) {
-                return [
-                    updated_meta.id,
-                    updated_meta + [single_end: true],
-                    [fastq_1],
-                ]
-            }
-            else {
-                return [
-                    updated_meta.id,
-                    updated_meta + [single_end: false],
-                    [fastq_1, fastq_2],
-                ]
-            }
+            def new_meta = [id: "${meta.sample}_${zero_padded_idx}"]
+            return [
+                new_meta.id,
+                meta + [id: new_meta.id, tags: tags, single_end: fastq_2 ? false : true],
+                fastq_2 ? [fastq_1, fastq_2] : [fastq_1],
+            ]
         }
         .groupTuple()
-        .map { meta ->
-            validateInputSamplesheet(meta)
-        }
+        .map { meta -> validateInputSamplesheet(meta) }
         .transpose()
-        .set { ch_samplesheet }
 
     ch_samplesheet
-        .map { meta, _fastqs ->
-            meta.tags
-        }
+        .map { meta, _fastqs -> [meta.tags] }
         .flatten()
-        .unique()
         .map { tag_name -> [tag_name.toLowerCase(), tag_name] }
         .groupTuple()
         .map { _tag_lowercase, tags ->
-            if (tags.size() == 1) {
-                log.warn("Tag name collision: " + tags)
+            if (tags.size() > 1) {
+                log.warn("Tag name collision: " + tags[0])
             }
         }
 

@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Fixed`
 
 - [#182](https://github.com/nf-core/seqinspector/pull/182) Keep modules diff to a minimum
+- [#183](https://github.com/nf-core/seqinspector/pull/183) Tag collision warning message is only printed when there is more than one tag
 
 ### `Changed`
 
