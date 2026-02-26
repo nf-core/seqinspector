@@ -114,7 +114,7 @@ workflow PIPELINE_INITIALISATION {
             def new_meta = [id: "${meta.sample}_${zero_padded_idx}"]
             return [
                 new_meta.id,
-                meta + [id: new_meta.id, tags: tags, single_end: fastq_2 ? false : true],
+                meta + [id: new_meta.id, tags: tags.toLowerCase(), single_end: fastq_2 ? false : true],
                 fastq_2 ? [fastq_1, fastq_2] : [fastq_1],
             ]
         }
