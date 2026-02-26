@@ -122,17 +122,6 @@ workflow PIPELINE_INITIALISATION {
         .map { meta -> validateInputSamplesheet(meta) }
         .transpose()
 
-    ch_samplesheet
-        .map { meta, _fastqs -> [meta.tags] }
-        .flatten()
-        .map { tag_name -> [tag_name.toLowerCase(), tag_name] }
-        .groupTuple()
-        .map { _tag_lowercase, tags ->
-            if (tags.size() > 1) {
-                log.warn("Tag name collision: " + tags[0])
-            }
-        }
-
     emit:
     samplesheet = ch_samplesheet
     versions    = ch_versions

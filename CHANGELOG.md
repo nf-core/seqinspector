@@ -10,12 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Fixed`
 
 - [#182](https://github.com/nf-core/seqinspector/pull/182) Keep modules diff to a minimum
-- [#183](https://github.com/nf-core/seqinspector/pull/183) Tag collision warning message is only printed when there is more than one tag
 
 ### `Changed`
 
 - [#180](https://github.com/nf-core/seqinspector/pull/180) Add Zenodo record
 - [#181](https://github.com/nf-core/seqinspector/pull/181) Back to dev
+- [#183](https://github.com/nf-core/seqinspector/pull/183) Remove tag collision warning message that was actually printed for every tag
 
 ### `Dependencies`
 

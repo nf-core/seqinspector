@@ -1010,9 +1010,6 @@
                 "* Software dependencies",
                 "    https://github.com/nf-core/seqinspector/blob/master/CITATIONS.md",
                 "-[nf-core/seqinspector] Pipeline completed successfully-",
-                "WARN: Tag name collision: group1",
-                "WARN: Tag name collision: lane1",
-                "WARN: Tag name collision: test",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (Sample1_01)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (Sample23_03)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (SampleA_02)",
@@ -1049,7 +1046,7 @@
                 "[NXF_HASH] Submitted process > PREPARE_GENOME:SAMTOOLS_FAIDX (genome.fa)"
             ]
         ],
-        "timestamp": "2026-02-25T18:34:18.517870497",
+        "timestamp": "2026-02-26T16:07:55.800206027",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -2041,13 +2038,9 @@
                 "Undetermined_05.bam:md5,2841f21f7f70634f21505ac803ff8221",
                 "sampletest_04.bam:md5,3d1cd701ad22dacc6b194ea16582d647"
             ],
-            [
-                "WARN: Tag name collision: group1",
-                "WARN: Tag name collision: lane1",
-                "WARN: Tag name collision: test"
-            ]
+            "No warnings"
         ],
-        "timestamp": "2026-02-25T18:35:25.78430708",
+        "timestamp": "2026-02-26T16:09:13.261951498",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -3039,13 +3032,9 @@
                 "Undetermined_05.bam:md5,691b83f3c015cf5f2b28ab6d0581d03c",
                 "sampletest_04.bam:md5,b13db1c95389474f089f870b906d3fc0"
             ],
-            [
-                "WARN: Tag name collision: group1",
-                "WARN: Tag name collision: lane1",
-                "WARN: Tag name collision: test"
-            ]
+            "No warnings"
         ],
-        "timestamp": "2026-02-25T18:36:35.686367048",
+        "timestamp": "2026-02-26T16:10:24.618740938",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -3997,13 +3986,10 @@
                 "WARN: Sample 'Sample23_03' does not have a rundir specified",
                 "WARN: Sample 'SampleA_02' does not have a rundir specified",
                 "WARN: Sample 'Undetermined_05' does not have a rundir specified",
-                "WARN: Sample 'sampletest_04' does not have a rundir specified",
-                "WARN: Tag name collision: group1",
-                "WARN: Tag name collision: lane1",
-                "WARN: Tag name collision: test"
+                "WARN: Sample 'sampletest_04' does not have a rundir specified"
             ]
         ],
-        "timestamp": "2026-02-25T18:38:47.749294435",
+        "timestamp": "2026-02-26T16:12:48.476812857",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -4999,14 +4985,11 @@
                 "WARN: Sample1_01: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
                 "WARN: Sample23_03: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
                 "WARN: SampleA_02: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
-                "WARN: Tag name collision: group1",
-                "WARN: Tag name collision: lane1",
-                "WARN: Tag name collision: test",
                 "WARN: Undetermined_05: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
                 "WARN: sampletest_04: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads."
             ]
         ],
-        "timestamp": "2026-02-25T18:37:43.085463203",
+        "timestamp": "2026-02-26T16:11:39.851216993",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
