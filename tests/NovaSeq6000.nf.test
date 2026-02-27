@@ -35,6 +35,12 @@ nextflow_pipeline {
             params: [
                 input : pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/samplesheet_no_rundirs.csv'
             ]
+        ],
+        [
+            name: "NovaSeq6000 data test - tag collision",
+            params: [
+                input : pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/samplesheet_tag_collision.csv'
+            ]
         ]
     ]
 
