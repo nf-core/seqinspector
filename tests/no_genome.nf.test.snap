@@ -169,14 +169,10 @@
             "No BAM files",
             [
                 "WARN: BWAMEM2 and any other downstream processes, will be skipped",
-                "WARN: No fasta was provided, but bwamem2 or picard was requested",
-                "WARN: Tag name collision: [group1]",
-                "WARN: Tag name collision: [group2]",
-                "WARN: Tag name collision: [lane1]",
-                "WARN: Tag name collision: [test]"
+                "WARN: No fasta was provided, but bwamem2 or picard was requested"
             ]
         ],
-        "timestamp": "2026-03-02T12:11:27.312540258",
+        "timestamp": "2026-03-02T12:31:38.936191095",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
