@@ -44,10 +44,10 @@ jobs:
                 enabled = false
               }
               onComplete {
-                message = ':white_check_mark: *seqinspector/matrix.profile* completed successfully! :tada:'
+                message = ':white_check_mark: *seqinspector/${{ matrix.profile }}* completed successfully! :tada:'
               }
               onError {
-                message = ':x: *seqinspector/matrix.profile* failed :crying_cat_face:'
+                message = ':x: *seqinspector/${{ matrix.profile }}* failed :crying_cat_face:'
               }
             }
           parameters: |
