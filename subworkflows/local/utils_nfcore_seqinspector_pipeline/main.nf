@@ -35,6 +35,8 @@ workflow PIPELINE_INITIALISATION {
     help // boolean: Display help message and exit
     help_full // boolean: Show the full help message
     show_hidden // boolean: Show hidden parameters in the help message
+    skip_tools
+    fasta
 
     main:
 
@@ -147,6 +149,11 @@ workflow PIPELINE_INITIALISATION {
                 log.warn("Tag name collision: " + tags)
             }
         }
+
+    if (!fasta && (("bwamem2_index" in skip_tools) || !("bwamem2_mem" in skip_tools))) {
+        log.warn("No fasta was provided, but bwamem2 was requested")
+        log.warn("BWAMEM2 processes will be skipped")
+    }
 
     emit:
     samplesheet = ch_samplesheet
