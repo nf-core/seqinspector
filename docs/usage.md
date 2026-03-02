@@ -127,6 +127,12 @@ Both absolute numbers (e.g 100) and relative numbers (e.g 0.25) can be specified
 nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 -profile docker
 ```
 
+### BWAMEM2 and alignment-based QC tools
+
+If no genome or fasta file is provided, either with `--genome` or `--fasta`,
+the pipeline will not be able to run the alignment step with BWAMEM2,
+and will skip all tools that depend on the alignment file (eg. `picard CollectHsMetrics` and `picard CollectHsMetrics`).
+
 ### Hybrid-selection QC metrics
 
 The pipeline supports hybrid-selection (HS) QC metrics collection .
