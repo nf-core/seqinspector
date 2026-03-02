@@ -61,6 +61,20 @@ sample4 path/to/run_dir/sample4_lane2_group3_r1.fq.gz         path/to/run_dir co
 
 Another [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
 
+### tags
+
+Tags can be used to group samples in special reports, for example in the MultiQC per tag report.
+They are optional and can be used for any purpose you like.
+For example, you could use them to group samples by experimental condition, or by sequencing run.
+Tags are meant to be case-sensitive and should be separated by a colon (`:`) if you want to use multiple tags for a sample.
+Some file systems are not case sensitive, e.g. on MacOS. We recommend precaution when using similar tags with different cases on such file systems.
+A warning will be displayed if you have multiple tags that only differ in case, but the pipeline will not stop and will run as normal.
+
+```bash
+WARN: Tag name collision: [lane1, Lane1, LANE1]
+WARN: On a MacOS system these tags will be considered as one
+```
+
 ## Running the pipeline
 
 A typical command for running the pipeline is as follows:
