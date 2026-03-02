@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Fixed`
 
 - [#182](https://github.com/nf-core/seqinspector/pull/182) Keep modules diff to a minimum
+- [#185](https://github.com/nf-core/seqinspector/pull/185) No failure when no fasta file is provided
 
 ### `Changed`
 

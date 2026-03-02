@@ -151,7 +151,7 @@ workflow PIPELINE_INITIALISATION {
             }
         }
 
-    if (!(fasta) && (("bwamem2_index" in skip_tools) || ("bwamem2_mem" in skip_tools) || ("picard_collectmultiplemetrics" in skip_tools))) {
+    if (!(fasta) && !(("bwamem2_index" in skip_tools) || ("bwamem2_mem" in skip_tools) || ("picard_collectmultiplemetrics" in skip_tools))) {
         log.warn("No fasta was provided, but bwamem2 or picard was requested")
         log.warn("BWAMEM2 and any other downstream processes, will be skipped")
     }
