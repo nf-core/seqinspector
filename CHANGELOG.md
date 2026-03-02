@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Changed`
 
-- [#192](https://github.com/nf-core/seqinspector/pull/192) Back to dev
+- [#191](https://github.com/nf-core/seqinspector/pull/191) Back to dev
 
 ### `Dependencies`
 
