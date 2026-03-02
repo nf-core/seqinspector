@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## dev
+## [1.0.1](https://github.com/nf-core/seqinspector/releases/tag/1.0.1) - Penelope Ruth "Penny" Gadget
 
 ### `Added`
 
@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#181](https://github.com/nf-core/seqinspector/pull/181) Back to dev
 - [#184](https://github.com/nf-core/seqinspector/pull/184) Display the tag name as ID in the MULTIQC_PER_TAG task
 - [#186](https://github.com/nf-core/seqinspector/pull/186) Remove hook_url from the pipeline configuration, cf[tools#4051](https://github.com/nf-core/tools/pull/4051)
+- [#187](https://github.com/nf-core/seqinspector/pull/187) Prepare release 1.0.1
 
 ### `Dependencies`
 
