@@ -40,7 +40,7 @@ workflow {
 
     def fasta = params.fasta
         ? channel.fromPath(params.fasta, checkIfExists: true).map { file -> tuple([id: file.name], file) }.collect()
-        : channel.value([[:], []])
+        : channel.empty()
 
     //
     // SUBWORKFLOW: Run initialisation tasks
@@ -56,6 +56,9 @@ workflow {
         params.help,
         params.help_full,
         params.show_hidden,
+        params.skip_tools ? params.skip_tools.split(',') : ['no_skip_tools'],
+        params.bwamem2,
+        params.fasta,
     )
 
     PREPARE_GENOME(
@@ -85,7 +88,6 @@ workflow {
         params.plaintext_email,
         params.outdir,
         params.monochrome_logs,
-        params.hook_url,
         NFCORE_SEQINSPECTOR.out.global_report,
     )
 }

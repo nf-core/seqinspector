@@ -13,8 +13,7 @@
                     "bwamem2/mem": {
                         "branch": "master",
                         "git_sha": "8325a8155a77a336a613a504b8e4d6cea7a2344a",
-                        "installed_by": ["modules"],
-                        "patch": "modules/nf-core/bwamem2/mem/bwamem2-mem.diff"
+                        "installed_by": ["modules"]
                     },
                     "fastqc": {
                         "branch": "master",
@@ -29,7 +28,7 @@
                     },
                     "multiqc": {
                         "branch": "master",
-                        "git_sha": "575e1a4b51a9bad7a8cd1316a88fb85684ef7c7b",
+                        "git_sha": "2c73cc8fa92cf48de3da0b643fdf357a8a290b36",
                         "installed_by": ["modules"]
                     },
                     "picard/collecthsmetrics": {
@@ -78,7 +77,7 @@
                     },
                     "utils_nfcore_pipeline": {
                         "branch": "master",
-                        "git_sha": "65f5e638d901a51534c68fd5c1c19e8112fb4df1",
+                        "git_sha": "f0b535b3ae20080f8db03dd5388876ad1ec29d70",
                         "installed_by": ["subworkflows"]
                     },
                     "utils_nfschema_plugin": {

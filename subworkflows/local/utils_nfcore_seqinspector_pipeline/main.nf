@@ -14,7 +14,6 @@ include { samplesheetToList       } from 'plugin/nf-schema'
 include { paramsHelp              } from 'plugin/nf-schema'
 include { completionEmail         } from '../../nf-core/utils_nfcore_pipeline'
 include { completionSummary       } from '../../nf-core/utils_nfcore_pipeline'
-include { imNotification          } from '../../nf-core/utils_nfcore_pipeline'
 include { UTILS_NFCORE_PIPELINE   } from '../../nf-core/utils_nfcore_pipeline'
 include { UTILS_NEXTFLOW_PIPELINE } from '../../nf-core/utils_nextflow_pipeline'
 
@@ -35,6 +34,9 @@ workflow PIPELINE_INITIALISATION {
     help // boolean: Display help message and exit
     help_full // boolean: Show the full help message
     show_hidden // boolean: Show hidden parameters in the help message
+    skip_tools
+    bwamem2
+    fasta
 
     main:
 
@@ -104,49 +106,43 @@ workflow PIPELINE_INITIALISATION {
         .toList()
         .size()
 
-    channel.fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
+    ch_samplesheet = channel.fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
         .toList()
         .flatMap { item -> item.withIndex().collect { entry, idx -> entry + "${idx + 1}" } }
         .map { meta, fastq_1, fastq_2, idx ->
             def tags = meta.tags ? meta.tags.tokenize(":") : []
             def pad_positions = [nr_samples.length(), 2].max()
             def zero_padded_idx = idx.padLeft(pad_positions, "0")
-            def updated_meta = meta + [id: "${meta.sample}_${zero_padded_idx}", tags: tags]
-            if (!fastq_2) {
-                return [
-                    updated_meta.id,
-                    updated_meta + [single_end: true],
-                    [fastq_1],
-                ]
-            }
-            else {
-                return [
-                    updated_meta.id,
-                    updated_meta + [single_end: false],
-                    [fastq_1, fastq_2],
-                ]
-            }
+            def new_meta = [id: "${meta.sample}_${zero_padded_idx}"]
+            return [
+                new_meta.id,
+                meta + [id: new_meta.id, tags: tags, single_end: fastq_2 ? false : true],
+                fastq_2 ? [fastq_1, fastq_2] : [fastq_1],
+            ]
         }
         .groupTuple()
-        .map { meta ->
-            validateInputSamplesheet(meta)
-        }
+        .map { meta -> validateInputSamplesheet(meta) }
         .transpose()
-        .set { ch_samplesheet }
 
     ch_samplesheet
         .map { meta, _fastqs ->
-            meta.tags
+            [meta.tags]
         }
         .flatten()
         .unique()
-        .map { tag_name -> [tag_name.toLowerCase(), tag_name] }
+        .map { tag -> [tag.toLowerCase(), tag] }
         .groupTuple()
         .map { _tag_lowercase, tags ->
-            if (tags.size() == 1) {
+            if (tags.size() != 1) {
                 log.warn("Tag name collision: " + tags)
+                log.warn("On a MacOS system these tags will be considered as one")
             }
         }
+
+    if (!(fasta) && !(("bwamem2_index" in skip_tools) || ("bwamem2_mem" in skip_tools) || ("picard_collectmultiplemetrics" in skip_tools))) {
+        log.warn("No fasta was provided, but bwamem2 or picard was requested")
+        log.warn("BWAMEM2 and any other downstream processes, will be skipped")
+    }
 
     emit:
     samplesheet = ch_samplesheet
@@ -166,7 +162,6 @@ workflow PIPELINE_COMPLETION {
     plaintext_email // boolean: Send plain-text email instead of HTML
     outdir //    path: Path to output directory where results will be published
     monochrome_logs // boolean: Disable ANSI colour codes in log output
-    hook_url //  string: hook URL for notifications
     multiqc_report //  string: Path to MultiQC report
 
     main:
@@ -190,9 +185,6 @@ workflow PIPELINE_COMPLETION {
         }
 
         completionSummary(monochrome_logs)
-        if (hook_url) {
-            imNotification(summary_params, hook_url)
-        }
     }
 
     workflow.onError {

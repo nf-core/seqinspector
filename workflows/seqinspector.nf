@@ -171,7 +171,7 @@ workflow SEQINSPECTOR {
             ch_sample,
             bwamem2_index,
             fasta_reference,
-            sort_bam ?: true,
+            sort_bam,
         )
         ch_bwamem2_mem = BWAMEM2_MEM.out.bam
 
@@ -216,49 +216,46 @@ workflow SEQINSPECTOR {
     // MODULE: MultiQC
     //
 
-    ch_tags = ch_multiqc_files.map { meta, _sample -> meta.tags }.flatten().unique()
-
-    ch_multiqc_config = multiqc_config
-        ? channel.fromPath(multiqc_config, checkIfExists: true)
-        : channel.fromPath("${projectDir}/assets/multiqc_config.yml", checkIfExists: true)
-    ch_multiqc_logo = multiqc_logo
-        ? channel.fromPath(multiqc_logo, checkIfExists: true)
-        : channel.empty()
+    ch_multiqc_extra_files = ch_multiqc_extra_files.mix(collated_versions)
 
     summary_params = paramsSummaryMap(workflow, parameters_schema: "nextflow_schema.json")
-    ch_workflow_summary = channel.value(paramsSummaryMultiqc(summary_params))
+
+    ch_multiqc_extra_files = ch_multiqc_extra_files.mix(
+        channel.value(paramsSummaryMultiqc(summary_params)).collectFile(name: 'workflow_summary_mqc.yaml')
+    )
 
     ch_multiqc_custom_methods_description = multiqc_methods_description
         ? file(multiqc_methods_description, checkIfExists: true)
         : file("${projectDir}/assets/methods_description_template.yml", checkIfExists: true)
+
     ch_methods_description = channel.value(methodsDescriptionText(ch_multiqc_custom_methods_description))
 
-    ch_multiqc_extra_files = ch_multiqc_extra_files.mix(ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml'))
-    ch_multiqc_extra_files = ch_multiqc_extra_files.mix(collated_versions)
-    ch_multiqc_extra_files = ch_multiqc_extra_files.mix(
-        ch_methods_description.collectFile(name: 'methods_description_mqc.yaml', sort: true)
-    )
+    ch_multiqc_extra_files = ch_multiqc_extra_files.mix(ch_methods_description.collectFile(name: 'methods_description_mqc.yaml', sort: true))
+
     // Add index to other MultiQC reports
-    //ch_multiqc_extra_files_global = channel.empty()
+    ch_tags = ch_multiqc_files.map { meta, _files -> meta.tags }.flatten().unique()
+
     ch_multiqc_extra_files_global = ch_multiqc_extra_files.mix(
         ch_tags.toList().map { tag_list -> reportIndexMultiqc(tag_list) }.collectFile(name: 'multiqc_index_mqc.yaml')
     )
 
     MULTIQC_GLOBAL(
-        ch_multiqc_files.map { _meta, file -> file }.mix(ch_multiqc_extra_files_global).collect(),
-        ch_multiqc_config.toList(),
-        [],
-        ch_multiqc_logo.toList(),
-        [],
-        [],
+        ch_multiqc_files.map { _meta, files -> [files] }.flatten().collect().combine(ch_multiqc_extra_files_global.collect()).map { files ->
+            [
+                [id: 'seqinspector'],
+                files,
+                multiqc_config
+                    ? file(multiqc_config, checkIfExists: true)
+                    : file("${projectDir}/assets/multiqc_config.yml", checkIfExists: true),
+                multiqc_logo ? file(multiqc_logo, checkIfExists: true) : [],
+                [],
+                [],
+            ]
+        }
     )
 
     ch_multiqc_extra_files_tag = ch_multiqc_extra_files.mix(
-        ch_tags.toList().map { tag_list ->
-            reportIndexMultiqc(tag_list, false)
-        }.collectFile(
-            name: 'multiqc_index_mqc.yaml'
-        )
+        ch_tags.toList().map { tag_list -> reportIndexMultiqc(tag_list, false) }.collectFile(name: 'multiqc_index_mqc.yaml')
     )
 
     multiqc_extra_files_per_tag = ch_tags.combine(ch_multiqc_extra_files_tag)
@@ -284,22 +281,29 @@ workflow SEQINSPECTOR {
         }
         .map { file -> [(file =~ /\[TAG:(.+)\]/)[0][1], file] }
         .join(mqc_by_tag)
-        .multiMap { _sample_tag, config, samples ->
-            samples_per_tag: samples.flatten()
-            config: config
+        .map { sample_tag, config, samples ->
+            [[id: sample_tag], samples.flatten(), config]
         }
 
-
     MULTIQC_PER_TAG(
-        tagged_mqc_files.samples_per_tag,
-        ch_multiqc_config.toList(),
-        tagged_mqc_files.config,
-        ch_multiqc_logo.toList(),
-        [],
-        [],
+        tagged_mqc_files.map { meta, files, config ->
+            [
+                meta,
+                files,
+                [
+                    config,
+                    multiqc_config
+                        ? file(multiqc_config, checkIfExists: true)
+                        : file("${projectDir}/assets/multiqc_config.yml", checkIfExists: true),
+                ],
+                multiqc_logo ? file(multiqc_logo, checkIfExists: true) : [],
+                [],
+                [],
+            ]
+        }
     )
 
     emit:
-    global_report   = MULTIQC_GLOBAL.out.report.toList() // channel: [ /path/to/multiqc_report.html ]
-    grouped_reports = MULTIQC_PER_TAG.out.report.toList() // channel: [ /path/to/multiqc_report.html ]
+    global_report   = MULTIQC_GLOBAL.out.report.map { _meta, report -> [report] }.toList() // channel: [ /path/to/multiqc_report.html ]
+    grouped_reports = MULTIQC_PER_TAG.out.report.map { _meta, report -> [report] }.toList() // channel: [ /path/to/multiqc_report.html ]
 }

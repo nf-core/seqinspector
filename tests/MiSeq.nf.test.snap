@@ -1,37 +1,25 @@
 {
     "Miseq data test (skip all tools)": {
         "content": [
-            2,
+            1,
             {
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.22.1"
                 }
             },
             [
-                "multiqc",
-                "multiqc/global_report",
-                "multiqc/global_report/multiqc_data",
-                "multiqc/global_report/multiqc_data/llms-full.txt",
-                "multiqc/global_report/multiqc_data/multiqc.log",
-                "multiqc/global_report/multiqc_data/multiqc.parquet",
-                "multiqc/global_report/multiqc_data/multiqc_citations.txt",
-                "multiqc/global_report/multiqc_data/multiqc_data.json",
-                "multiqc/global_report/multiqc_data/multiqc_software_versions.txt",
-                "multiqc/global_report/multiqc_data/multiqc_sources.txt",
-                "multiqc/global_report/multiqc_report.html",
                 "pipeline_info",
                 "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
                 "samtools_faidx",
                 "samtools_faidx/genome.fa.fai"
             ],
             [
-                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
                 "genome.fa.fai:md5,6f4c0ce5258e6948135ad006e1f9ee1b"
             ],
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-02-19T11:25:41.926154725",
+        "timestamp": "2026-03-02T10:48:10.364358442",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -699,11 +687,9 @@
                 "SAMPLE_PAIRED_END_1_01.bam:md5,ac811b20d56132f5e039b3e8fd217405",
                 "SAMPLE_PAIRED_END_2_02.bam:md5,57892fc4314e66e8e20de4f5d82f9b5d"
             ],
-            [
-                "WARN: Tag name collision: [Bpacificus]"
-            ]
+            "No warnings"
         ],
-        "timestamp": "2026-02-19T16:07:01.63849991",
+        "timestamp": "2026-02-26T16:06:35.381277259",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

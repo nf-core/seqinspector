@@ -3,6 +3,29 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1](https://github.com/nf-core/seqinspector/releases/tag/1.0.1) - Penelope Ruth "Penny" Gadget
+
+### `Added`
+
+### `Fixed`
+
+- [#182](https://github.com/nf-core/seqinspector/pull/182) Keep modules diff to a minimum
+- [#183](https://github.com/nf-core/seqinspector/pull/183) Fix tag collision warning message that was actually printed for every tag
+- [#185](https://github.com/nf-core/seqinspector/pull/185) No failure when no fasta file is provided
+- [#189](https://github.com/nf-core/seqinspector/pull/189), [#190](https://github.com/nf-core/seqinspector/pull/190) Fix GHA from [#186](https://github.com/nf-core/seqinspector/pull/186)
+
+### `Changed`
+
+- [#180](https://github.com/nf-core/seqinspector/pull/180) Add Zenodo record
+- [#181](https://github.com/nf-core/seqinspector/pull/181) Back to dev
+- [#184](https://github.com/nf-core/seqinspector/pull/184) Display the tag name as ID in the MULTIQC_PER_TAG task
+- [#186](https://github.com/nf-core/seqinspector/pull/186) Remove hook_url from the pipeline configuration, cf[tools#4051](https://github.com/nf-core/tools/pull/4051)
+- [#187](https://github.com/nf-core/seqinspector/pull/187) Prepare release 1.0.1
+
+### `Dependencies`
+
+### `Deprecated`
+
 ## [1.0.0](https://github.com/nf-core/seqinspector/releases/tag/1.0.0) - Inspector Gadget
 
 Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-co.re/) template.
