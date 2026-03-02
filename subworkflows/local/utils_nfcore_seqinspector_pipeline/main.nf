@@ -133,6 +133,7 @@ workflow PIPELINE_INITIALISATION {
         .map { _tag_lowercase, tags ->
             if (tags.size() != 1) {
                 log.warn("Tag name collision: " + tags)
+                log.warn("On a MacOS system these tags will be considered as one")
             }
         }
 

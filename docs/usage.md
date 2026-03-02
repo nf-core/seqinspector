@@ -72,8 +72,7 @@ A warning will be displayed if you have multiple tags that only differ in case, 
 
 ```bash
 WARN: Tag name collision: [lane1, Lane1, LANE1]
-WARN: Tag name collision: [group1, Group1]
-WARN: Tag name collision: [test, Test, TEST]
+WARN: On a MacOS system these tags will be considered as one
 ```
 
 ## Running the pipeline

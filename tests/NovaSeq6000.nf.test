@@ -39,7 +39,8 @@ nextflow_pipeline {
         [
             name: "NovaSeq6000 data test - tag collision",
             params: [
-                input : pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/samplesheet_tag_collision.csv'
+                input : pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/samplesheet_tag_collision.csv',
+                skip_tools: 'bwamem2_index,bwamem2_mem,fastqscreen,picard_collectmultiplemetrics,rundirparser,samtools_faidx,samtools_index,seqfu_stats,seqtk_sample'
             ]
         ]
     ]
