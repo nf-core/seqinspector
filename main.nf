@@ -57,6 +57,7 @@ workflow {
         params.help_full,
         params.show_hidden,
         params.skip_tools ? params.skip_tools.split(',') : ['no_skip_tools'],
+        params.bwamem2,
         params.fasta,
     )
 

@@ -171,7 +171,7 @@ workflow SEQINSPECTOR {
             ch_sample,
             bwamem2_index,
             fasta_reference,
-            sort_bam ?: true,
+            sort_bam,
         )
         ch_bwamem2_mem = BWAMEM2_MEM.out.bam
 

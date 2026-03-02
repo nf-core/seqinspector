@@ -36,6 +36,7 @@ workflow PIPELINE_INITIALISATION {
     help_full // boolean: Show the full help message
     show_hidden // boolean: Show hidden parameters in the help message
     skip_tools
+    bwamem2
     fasta
 
     main:
@@ -150,9 +151,9 @@ workflow PIPELINE_INITIALISATION {
             }
         }
 
-    if (!fasta && (("bwamem2_index" in skip_tools) || !("bwamem2_mem" in skip_tools))) {
-        log.warn("No fasta was provided, but bwamem2 was requested")
-        log.warn("BWAMEM2 processes will be skipped")
+    if (!(fasta) && (("bwamem2_index" in skip_tools) || ("bwamem2_mem" in skip_tools) || ("picard_collectmultiplemetrics" in skip_tools))) {
+        log.warn("No fasta was provided, but bwamem2 or picard was requested")
+        log.warn("BWAMEM2 and any other downstream processes, will be skipped")
     }
 
     emit:
