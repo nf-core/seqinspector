@@ -37,7 +37,7 @@ jobs:
             slack {
               enabled = true
               bot {
-                token = 'secrets.NFSLACK_BOT_TOKEN'
+                token = '${{ secrets.NFSLACK_BOT_TOKEN }}'
                 channel = 'seqinspector'
               }
               onStart {
