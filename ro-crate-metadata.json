@@ -137,7 +137,7 @@
                     "@id": "#max.u.garcia@gmail.com"
                 },
                 {
-                    "@id": "#89784800+kedhammar@users.noreply.github.com"
+                    "@id": "https://orcid.org/0009-0004-5536-7210"
                 },
                 {
                     "@id": "https://orcid.org/0000-0003-1675-0677"
@@ -166,7 +166,7 @@
                     "@id": "#max.u.garcia@gmail.com"
                 },
                 {
-                    "@id": "#89784800+kedhammar@users.noreply.github.com"
+                    "@id": "https://orcid.org/0009-0004-5536-7210"
                 },
                 {
                     "@id": "https://orcid.org/0000-0003-1675-0677"
@@ -366,10 +366,10 @@
             "name": "Maxime U Garcia"
         },
         {
-            "@id": "#89784800+kedhammar@users.noreply.github.com",
+            "@id": "https://orcid.org/0009-0004-5536-7210",
             "@type": "Person",
-            "email": "89784800+kedhammar@users.noreply.github.com",
-            "name": "Alfred Kedhammar"
+            "email": "163723002+agrima2010@users.noreply.github.com",
+            "name": "Agrima Bhatt"
         },
         {
             "@id": "https://orcid.org/0000-0003-1675-0677",
