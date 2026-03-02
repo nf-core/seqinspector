@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#180](https://github.com/nf-core/seqinspector/pull/180) Add Zenodo record
 - [#181](https://github.com/nf-core/seqinspector/pull/181) Back to dev
 - [#184](https://github.com/nf-core/seqinspector/pull/184) Display the tag name as ID in the MULTIQC_PER_TAG task
+- [#186](https://github.com/nf-core/seqinspector/pull/186) Remove hook_url from the pipeline configuration, cf[tools#4051](https://github.com/nf-core/tools/pull/4051)
 
 ### `Dependencies`
 
