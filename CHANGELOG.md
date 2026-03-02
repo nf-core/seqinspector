@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#182](https://github.com/nf-core/seqinspector/pull/182) Keep modules diff to a minimum
 - [#183](https://github.com/nf-core/seqinspector/pull/183) Fix tag collision warning message that was actually printed for every tag
 - [#185](https://github.com/nf-core/seqinspector/pull/185) No failure when no fasta file is provided
+- [#189](https://github.com/nf-core/seqinspector/pull/189) Fix GHA from [#186](https://github.com/nf-core/seqinspector/pull/186)
 
 ### `Changed`
 
