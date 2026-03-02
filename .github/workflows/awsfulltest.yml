@@ -50,7 +50,7 @@ jobs:
                 message = ':x: *seqinspector/matrix.profile* failed :crying_cat_face:'
               }
             }
-            parameters: |
+          parameters: |
             {
               "outdir": "s3://${{ vars.AWS_S3_BUCKET }}/seqinspector/results-${{ steps.revision.outputs.revision }}"
             }
