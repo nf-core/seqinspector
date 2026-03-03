@@ -1,33 +1,19 @@
 {
-    "Test without bwamem2 index file path, with run_picard_collecthsmetrics=true and without ref_dict": {
+    "Test without bwamem2 index file path and with skip_tools = 'picard_collecthsmetrics'": {
         "content": [
             {
-                "bwamem2_index": [
-                    [
-                        [
-                            "reference.fasta.0123:md5,0f0ff4414949e6787a25a563f19e2a3b",
-                            "reference.fasta.amb:md5,0a85644af00f9a856d874381d24e7803",
-                            "reference.fasta.ann:md5,8fdb46970ca95a4ef54f5f1a02d233cd",
-                            "reference.fasta.bwt.2bit.64:md5,3c0df9450afc5cb0ad5e85870829d9d0",
-                            "reference.fasta.pac:md5,96b449e1316067fdfba91b1399687bc2"
-                        ]
-                    ]
-                ],
-                "reference_dict": [
-                    "genome.dict"
-                ],
                 "reference_fai": [
                     "reference.fasta.fai:md5,bf4047e05f95deb372eb8ffd601cbc29"
                 ]
             }
         ],
-        "timestamp": "2026-02-20T14:08:10.135732184",
+        "timestamp": "2026-03-03T16:28:11.444897636",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
         }
     },
-    "Test without bwamem2 index file path, with run_picard_collecthsmetrics=true and with ref_dict": {
+    "Test without bwamem2 index file path, with ref_dict": {
         "content": [
             {
                 "bwamem2_index": [
@@ -49,13 +35,13 @@
                 ]
             }
         ],
-        "timestamp": "2026-02-20T14:07:30.247480534",
+        "timestamp": "2026-03-03T16:28:51.462211372",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
         }
     },
-    "Test without bwamem2 index file path and with run_picard_collecthsmetrics=false": {
+    "Test without bwamem2 index file path and without ref_dict": {
         "content": [
             {
                 "bwamem2_index": [
@@ -69,12 +55,15 @@
                         ]
                     ]
                 ],
+                "reference_dict": [
+                    "genome.dict"
+                ],
                 "reference_fai": [
                     "reference.fasta.fai:md5,bf4047e05f95deb372eb8ffd601cbc29"
                 ]
             }
         ],
-        "timestamp": "2026-02-19T12:11:58.258098906",
+        "timestamp": "2026-03-03T16:29:31.85283234",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

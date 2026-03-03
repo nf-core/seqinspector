@@ -127,6 +127,14 @@ Both absolute numbers (e.g 100) and relative numbers (e.g 0.25) can be specified
 nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 -profile docker
 ```
 
+### Skipping tools
+
+Some tools might not be compatible with your data.
+In this case you can skip them by providing a comma-separated list of tools to be skipped with the `--skip_tools` parameter.
+
+The nextflow configuration file can also be use to customise tool arguments.
+See official [nexflow](https://www.nextflow.io/docs/latest/config.html) and [nf-core](https://nf-co.re/docs/usage/configuration#customising-tool-arguments) documentation for further details.
+
 ### BWAMEM2 and alignment-based QC tools
 
 If no genome or fasta file is provided, either with `--genome` or `--fasta`,
@@ -135,17 +143,7 @@ and will skip all tools that depend on the alignment file (eg. `picard CollectHs
 
 ### Hybrid-selection QC metrics
 
-The pipeline supports hybrid-selection (HS) QC metrics collection .
-Use `--run_picard_collecthsmetrics true` to run the QC tool [picard CollectHSmetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard).
-This tool is otherwise not run by default.
-
-### Skipping tools
-
-Some tools might not be compatible with your data.
-In this case you can skip them by providing a comma-separated list of tools to be skipped with the `--skip_tools` parameter.
-
-The nextflow configuration file can also be use to customise tool arguments.
-See official [nexflow](https://www.nextflow.io/docs/latest/config.html) and [nf-core](https://nf-co.re/docs/usage/configuration#customising-tool-arguments) documentation for further details.
+The pipeline supports hybrid-selection (HS) QC metrics collection via [picard CollectHSmetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard).
 
 ### Updating the pipeline
 

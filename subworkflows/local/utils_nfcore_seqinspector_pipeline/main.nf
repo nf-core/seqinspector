@@ -35,7 +35,6 @@ workflow PIPELINE_INITIALISATION {
     help_full // boolean: Show the full help message
     show_hidden // boolean: Show hidden parameters in the help message
     skip_tools
-    bwamem2
     fasta
 
     main:

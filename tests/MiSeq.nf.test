@@ -10,28 +10,28 @@ nextflow_pipeline {
             name: "MiSeq data test (single end reads)",
             params: [
                 input: pipelines_testdata_base_path + 'seqinspector/testdata/MiSeq/samplesheet.csv',
-                skip_tools: 'rundirparser',
+                skip_tools: 'picard_collecthsmetrics,rundirparser',
             ]
         ],
         [
             name: "Miseq data test (skip fastqc)",
             params: [
                 input: pipelines_testdata_base_path + 'seqinspector/testdata/MiSeq/samplesheet.csv',
-                skip_tools: 'fastqc,rundirparser',
+                skip_tools: 'fastqc,picard_collecthsmetrics,rundirparser',
             ]
         ],
         [
             name: "Miseq data test (skip all tools)",
             params: [
                 input: pipelines_testdata_base_path + 'seqinspector/testdata/MiSeq/samplesheet.csv',
-                skip_tools: 'fastqc,fastqscreen,seqfu_stats,seqtk_sample,bwamem2_index,bwamem2_mem,rundirparser',
+                skip_tools: 'fastqc|fastqscreen|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats|seqtk_sample',
             ]
         ],
         [
             name: "MiSeq data test (paired end reads)",
             params: [
                 input: pipelines_testdata_base_path + 'seqinspector/testdata/Miseq_PairedEnd/samplesheet.csv',
-                skip_tools: 'rundirparser',
+                skip_tools: 'picard_collecthsmetrics,rundirparser',
             ]
         ]
     ]

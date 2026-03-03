@@ -6,19 +6,14 @@ nextflow_workflow {
     tag 'subworkflows'
     tag 'prepare_genome'
 
-    test("Test without bwamem2 index file path and with run_picard_collecthsmetrics=false") {
+    test("Test without bwamem2 index file path and with skip_tools = 'picard_collecthsmetrics'") {
         when {
-            params {
-                run_picard_collecthsmetrics = false
-            }
-
             workflow {
                 """
                 input[0]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/raredisease/reference/reference.fasta', checkIfExists: true)).collect()
                 input[1]  = null
-                input[2]  = ''
-                input[3]  = false
-                input[4]  = null
+                input[2]  = 'picard_collecthsmetrics'
+                input[3]  = null
                 """
             }
         }
@@ -40,19 +35,14 @@ nextflow_workflow {
         }
     }
 
-    test("Test without bwamem2 index file path, with run_picard_collecthsmetrics=true and with ref_dict") {
+    test("Test without bwamem2 index file path, with ref_dict") {
         when {
-            params {
-                run_picard_collecthsmetrics = true
-            }
-
             workflow {
                 """
                 input[0]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/raredisease/reference/reference.fasta', checkIfExists: true)).collect()
                 input[1]  = null
                 input[2]  = ''
-                input[3]  = true
-                input[4]  = params.pipelines_testdata_base_path + '/raredisease/reference/reference.dict'
+                input[3]  = params.pipelines_testdata_base_path + '/raredisease/reference/reference.dict'
                 """
             }
         }
@@ -74,19 +64,14 @@ nextflow_workflow {
         }
     }
 
-    test("Test without bwamem2 index file path, with run_picard_collecthsmetrics=true and without ref_dict") {
+    test("Test without bwamem2 index file path and without ref_dict") {
         when {
-            params {
-                run_picard_collecthsmetrics = true
-            }
-
             workflow {
                 """
                 input[0]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/raredisease/reference/reference.fasta', checkIfExists: true)).collect()
                 input[1]  = null
                 input[2]  = ''
-                input[3]  = true
-                input[4]  = null
+                input[3]  = null
                 """
             }
         }

@@ -11,7 +11,7 @@ nextflow_pipeline {
             params: [
                 genome : 'EB1',
                 input: pipelines_testdata_base_path + 'seqinspector/testdata/PromethION/samplesheet.csv',
-                skip_tools: 'bwamem2_index,bwamem2_mem,rundirparser',
+                skip_tools: 'picard_collecthsmetrics,rundirparser',
             ]
         ]
     ]

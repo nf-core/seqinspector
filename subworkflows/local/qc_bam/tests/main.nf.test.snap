@@ -1,5 +1,5 @@
 {
-    "Test with run_picard_collecthsmetrics=false": {
+    "Test with skip_tools picard_collecthsmetrics": {
         "content": [
             {
                 "multiple_metrics": [
@@ -13,13 +13,13 @@
                 ]
             }
         ],
-        "timestamp": "2026-02-19T12:13:55.371999049",
+        "timestamp": "2026-03-03T16:37:28.752719836",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
         }
     },
-    "Test with run_picard_collecthsmetrics=true": {
+    "Test without skip_tools": {
         "content": [
             {
                 "hs_metrics": [
@@ -36,7 +36,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-02-19T12:15:28.332477673",
+        "timestamp": "2026-03-03T16:41:04.521741513",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

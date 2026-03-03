@@ -6,7 +6,7 @@ nextflow_workflow {
     tag 'subworkflows'
     tag 'qc_bam'
 
-    test("Test with run_picard_collecthsmetrics=false") {
+    test("Test with skip_tools picard_collecthsmetrics") {
 
         when {
             config "./nextflow.config"
@@ -27,10 +27,10 @@ nextflow_workflow {
                 )
                 input[2]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/raredisease/reference/reference.fasta', checkIfExists: true)).collect()
                 input[3]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/raredisease/reference/reference.fasta.fai', checkIfExists: true)).collect()
-                input[4]  = false
+                input[4]  = null
                 input[5]  = null
                 input[6]  = null
-                input[7]  = null
+                input[7]  = 'picard_collecthsmetrics'
                 """
             }
         }
@@ -45,7 +45,6 @@ nextflow_workflow {
                     return [key, val.collect { file(it[1].toString()).name }]
                 }
                 else if (key == "multiple_metrics") {
-                    println val[0][1]
                     return [key, val.collect { it[1].collect{ file(it.toString()).name } } ]
                 }
                 return [key, val]
@@ -54,7 +53,7 @@ nextflow_workflow {
 
     }
 
-    test("Test with run_picard_collecthsmetrics=true") {
+    test("Test without skip_tools") {
 
         when {
             config "./nextflow.config"
@@ -75,10 +74,10 @@ nextflow_workflow {
                 )
                 input[2]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/raredisease/reference/reference.fasta', checkIfExists: true)).collect()
                 input[3]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/raredisease/reference/reference.fasta.fai', checkIfExists: true)).collect()
-                input[4]  = true
+                input[4]  = channel.fromPath(params.pipelines_testdata_base_path + '/raredisease/reference/target.bed', checkIfExists: true).collect()
                 input[5]  = channel.fromPath(params.pipelines_testdata_base_path + '/raredisease/reference/target.bed', checkIfExists: true).collect()
-                input[6]  = channel.fromPath(params.pipelines_testdata_base_path + '/raredisease/reference/target.bed', checkIfExists: true).collect()
-                input[7]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/raredisease/reference/reference.dict', checkIfExists: true)).collect()
+                input[6]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/raredisease/reference/reference.dict', checkIfExists: true)).collect()
+                input[7]  = 'no_skip_tools'
                 """
             }
         }
@@ -93,7 +92,6 @@ nextflow_workflow {
                     return [key, val.collect { file(it[1].toString()).name }]
                 }
                 else if (key == "multiple_metrics") {
-                    println val[0][1]
                     return [key, val.collect { it[1].collect{ file(it.toString()).name } } ]
                 }
                 return [key, val]

@@ -57,7 +57,6 @@ workflow {
         params.help_full,
         params.show_hidden,
         params.skip_tools ? params.skip_tools.split(',') : ['no_skip_tools'],
-        params.bwamem2,
         params.fasta,
     )
 
@@ -65,7 +64,6 @@ workflow {
         fasta,
         params.bwamem2,
         params.skip_tools ? params.skip_tools.split(',') : ['no_skip_tools'],
-        params.run_picard_collecthsmetrics,
         params.dict,
     )
 
@@ -125,7 +123,6 @@ workflow NFCORE_SEQINSPECTOR {
         params.outdir,
         dict,
         fasta_fai,
-        params.run_picard_collecthsmetrics,
         params.sample_size,
         params.skip_tools ? params.skip_tools.split(',') : ['no_skip_tools'],
         params.sort_bam,

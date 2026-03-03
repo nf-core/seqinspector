@@ -45,7 +45,6 @@ workflow SEQINSPECTOR {
     outdir
     ref_dict
     ref_fai
-    run_picard_collecthsmetrics
     sample_size
     skip_tools
     sort_bam
@@ -166,7 +165,7 @@ workflow SEQINSPECTOR {
     }
 
     // MODULE: Align reads with BWA-MEM2
-    if (!("bwamem2_mem" in skip_tools)) {
+    if (!("picard_collecthsmetrics" in skip_tools || "picard_collectmultiplemetrics" in skip_tools)) {
         BWAMEM2_MEM(
             ch_sample,
             bwamem2_index,
@@ -178,23 +177,16 @@ workflow SEQINSPECTOR {
         SAMTOOLS_INDEX(ch_bwamem2_mem)
 
         ch_samtools_index = SAMTOOLS_INDEX.out.bai
-    }
-
-
-    if (!("picard_collectmultiplemetrics" in skip_tools)) {
-
-        ch_bait_intervals = bait_intervals ? channel.fromPath(bait_intervals).collect() : channel.empty()
-        ch_target_intervals = target_intervals ? channel.fromPath(target_intervals).collect() : channel.empty()
 
         QC_BAM(
             ch_bwamem2_mem,
             ch_samtools_index,
             fasta_reference,
             ref_fai,
-            run_picard_collecthsmetrics,
-            ch_bait_intervals,
-            ch_target_intervals,
+            bait_intervals ? channel.fromPath(bait_intervals).collect() : channel.empty(),
+            target_intervals ? channel.fromPath(target_intervals).collect() : channel.empty(),
             ref_dict,
+            skip_tools,
         )
 
         ch_multiqc_files = ch_multiqc_files.mix(QC_BAM.out.multiple_metrics, QC_BAM.out.hs_metrics)
