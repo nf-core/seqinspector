@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Changed`
 
 - [#191](https://github.com/nf-core/seqinspector/pull/191) Back to dev
+- [#192](https://github.com/nf-core/seqinspector/pull/192) Only `skip_tools` to select tools to skip
+- [#192](https://github.com/nf-core/seqinspector/pull/192) Removed `bwamem2_index`, `bwamem2_mem`, `samtools_faidx` and `samtools_index` from `skip_tools` as they can be inferred from downstream tools
+- [#192](https://github.com/nf-core/seqinspector/pull/192) Removed params `run_picard_collecthsmetrics` and add `picard_collecthsmetrics` to `skip_tools`
 
 ### `Dependencies`
 
