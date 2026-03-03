@@ -10,7 +10,7 @@ nextflow_pipeline {
             name: "NovaSeq6000 data test - no genome",
             params: [
                 genome: null,
-                skip_tools: 'fastqscreen,picard_collecthsmetrics,picard_collectmultiplemetrics,rundirparser,seqfu_stats,seqtk_sample',
+                skip_tools: 'fastqc,picard_collecthsmetrics,picard_collectmultiplemetrics,rundirparser,seqfu_stats,seqtk_sample',
             ]
         ]
     ]

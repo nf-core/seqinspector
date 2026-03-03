@@ -985,6 +985,7 @@
                 "Input/output options",
                 "  input                     : https://raw.githubusercontent.com/nf-core/test-datasets/seqinspector/testdata/NovaSeq6000/samplesheet.csv",
                 "  outdir                    : [PATH]/tests/[NFT_HASH]/output",
+                "  skip_tools                : picard_collecthsmetrics",
                 "Reference genome options",
                 "  genome                    : R64-1-1",
                 "  fasta                     : s3://ngi-igenomes/igenomes//Saccharomyces_cerevisiae/Ensembl/R64-1-1/Sequence/WholeGenomeFasta/genome.fa",
@@ -1046,7 +1047,7 @@
                 "[NXF_HASH] Submitted process > PREPARE_GENOME:SAMTOOLS_FAIDX (genome.fa)"
             ]
         ],
-        "timestamp": "2026-03-02T10:50:35.403483793",
+        "timestamp": "2026-03-03T17:45:10.53417218",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

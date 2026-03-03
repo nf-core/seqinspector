@@ -1,25 +1,19 @@
 {
     "Miseq data test (skip all tools)": {
         "content": [
-            1,
+            0,
             {
-                "SAMTOOLS_FAIDX": {
-                    "samtools": "1.22.1"
-                }
+                
             },
             [
                 "pipeline_info",
-                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
-                "samtools_faidx",
-                "samtools_faidx/genome.fa.fai"
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"
             ],
-            [
-                "genome.fa.fai:md5,6f4c0ce5258e6948135ad006e1f9ee1b"
-            ],
+            "No stable content",
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-03-02T10:48:10.364358442",
+        "timestamp": "2026-03-03T17:40:58.610194898",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
