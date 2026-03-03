@@ -168,11 +168,11 @@
             ],
             "No BAM files",
             [
-                "WARN: BWAMEM2 and any other downstream processes, will be skipped",
-                "WARN: No fasta was provided, but bwamem2 or picard was requested"
+                "WARN: BWAMEM2, SAMTOOLS and any other downstream processes, will be skipped",
+                "WARN: No fasta was provided, but picard was requested"
             ]
         ],
-        "timestamp": "2026-03-02T12:31:38.936191095",
+        "timestamp": "2026-03-03T18:04:19.138840581",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
