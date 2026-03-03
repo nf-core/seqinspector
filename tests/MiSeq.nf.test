@@ -24,7 +24,7 @@ nextflow_pipeline {
             name: "Miseq data test (skip all tools)",
             params: [
                 input: pipelines_testdata_base_path + 'seqinspector/testdata/MiSeq/samplesheet.csv',
-                skip_tools: 'fastqc|fastqscreen|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats|seqtk_sample',
+                skip_tools: 'fastqc,fastqscreen,picard_collecthsmetrics,picard_collectmultiplemetrics,rundirparser,seqfu_stats,seqtk_sample',
             ]
         ],
         [
