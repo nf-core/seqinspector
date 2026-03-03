@@ -7,8 +7,7 @@ include { PICARD_COLLECTMULTIPLEMETRICS } from '../../../modules/nf-core/picard/
 
 workflow QC_BAM {
     take:
-    ch_bam // channel: [mandatory] [ val(meta), path(bam)]
-    ch_bai // channel: [mandatory] [ val(meta), path(bai) ]
+    ch_bam_bai // channel: [mandatory] [ val(meta), path(bam), path(bai)]
     ch_reference_fasta // channel: [mandatory] [ val(meta), path(reference_fasta) ]
     ch_reference_fai // channel: [mandatory] [ val(meta), path(reference_fai) ]
     ch_bait_intervals // channel: [mandatory for picard_collecthsmetrics] [ val(meta), path(bait_intervals) ]
@@ -17,21 +16,8 @@ workflow QC_BAM {
     skip_tools
 
     main:
-    ch_multiple_metrics = channel.empty()
     ch_hs_metrics = channel.empty()
-
-    ch_bam_bai = ch_bam.join(ch_bai, failOnDuplicate: true, failOnMismatch: true)
-
-    if (!("picard_collectmultiplemetrics" in skip_tools)) {
-
-        PICARD_COLLECTMULTIPLEMETRICS(
-            ch_bam_bai,
-            ch_reference_fasta,
-            ch_reference_fai,
-        )
-
-        ch_multiple_metrics = PICARD_COLLECTMULTIPLEMETRICS.out.metrics
-    }
+    ch_multiple_metrics = channel.empty()
 
     if (!("picard_collecthsmetrics" in skip_tools)) {
 
@@ -46,6 +32,17 @@ workflow QC_BAM {
         )
 
         ch_hs_metrics = PICARD_COLLECTHSMETRICS.out.metrics
+    }
+
+    if (!("picard_collectmultiplemetrics" in skip_tools)) {
+
+        PICARD_COLLECTMULTIPLEMETRICS(
+            ch_bam_bai,
+            ch_reference_fasta,
+            ch_reference_fai,
+        )
+
+        ch_multiple_metrics = PICARD_COLLECTMULTIPLEMETRICS.out.metrics
     }
 
     emit:

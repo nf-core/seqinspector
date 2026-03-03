@@ -18,7 +18,7 @@ workflow PREPARE_GENOME {
     ch_reference_fai = channel.empty()
     ch_ref_dict = channel.empty()
 
-    if (!("picard_collecthsmetrics" in skip_tools || "picard_collectmultiplemetrics" in skip_tools)) {
+    if (!("picard_collecthsmetrics" in skip_tools && "picard_collectmultiplemetrics" in skip_tools)) {
         // Use pre-built index when --bwamem2 parameter is provided
         // Or build index from reference FASTA
         if (bwamem2) {

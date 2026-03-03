@@ -53,8 +53,6 @@ workflow SEQINSPECTOR {
     main:
     ch_multiqc_files = channel.empty()
     ch_multiqc_extra_files = channel.empty()
-    ch_bwamem2_mem = channel.empty()
-    ch_samtools_index = channel.empty()
 
     //
     // MODULE: Parse rundir info
@@ -165,22 +163,20 @@ workflow SEQINSPECTOR {
     }
 
     // MODULE: Align reads with BWA-MEM2
-    if (!("picard_collecthsmetrics" in skip_tools || "picard_collectmultiplemetrics" in skip_tools)) {
+    if (!(("picard_collecthsmetrics" in skip_tools) && ("picard_collectmultiplemetrics" in skip_tools))) {
         BWAMEM2_MEM(
             ch_sample,
             bwamem2_index,
             fasta_reference,
             sort_bam,
         )
-        ch_bwamem2_mem = BWAMEM2_MEM.out.bam
 
-        SAMTOOLS_INDEX(ch_bwamem2_mem)
+        SAMTOOLS_INDEX(BWAMEM2_MEM.out.bam)
 
-        ch_samtools_index = SAMTOOLS_INDEX.out.bai
+        ch_bam_bai = BWAMEM2_MEM.out.bam.join(SAMTOOLS_INDEX.out.bai, failOnDuplicate: true, failOnMismatch: true)
 
         QC_BAM(
-            ch_bwamem2_mem,
-            ch_samtools_index,
+            ch_bam_bai,
             fasta_reference,
             ref_fai,
             bait_intervals ? channel.fromPath(bait_intervals).collect() : channel.empty(),
