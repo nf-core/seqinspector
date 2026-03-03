@@ -30,9 +30,9 @@ workflow PREPARE_GENOME {
             BWAMEM2_INDEX(ch_reference_fasta)
             ch_bwamem2_index = BWAMEM2_INDEX.out.index
         }
-    }
 
-    if (!("samtools_faidx" in skip_tools)) {
+        // TODO: add support for fasta index via igenomes
+
         SAMTOOLS_FAIDX(
             ch_reference_fasta.map { meta, fasta -> [meta, fasta, []] },
             false,
