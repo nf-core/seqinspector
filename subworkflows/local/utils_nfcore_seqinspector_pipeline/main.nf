@@ -140,7 +140,7 @@ workflow PIPELINE_INITIALISATION {
 
     if (!(fasta) && !(("picard_htsmultiplemetrics" in skip_tools) && ("picard_collectmultiplemetrics" in skip_tools))) {
         log.warn("No fasta was provided, but picard was requested")
-        log.warn("BWAMEM2, SAMTOOLS and any other downstream processes, will be skipped")
+        log.warn("BWAMEM2, SAMTOOLS and PICARD processes, will be skipped")
     }
 
     emit:

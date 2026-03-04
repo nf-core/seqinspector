@@ -168,7 +168,7 @@
             ],
             "No BAM files",
             [
-                "WARN: BWAMEM2, SAMTOOLS and any other downstream processes, will be skipped",
+                "WARN: BWAMEM2, SAMTOOLS and PICARD processes, will be skipped",
                 "WARN: No fasta was provided, but picard was requested"
             ]
         ],
