@@ -13,7 +13,7 @@
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-03-03T17:40:58.610194898",
+        "timestamp": "2026-03-05T16:55:16.91082134",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -689,7 +689,7 @@
             "nextflow": "25.10.4"
         }
     },
-    "Miseq data test (skip fastqc)": {
+    "Miseq data test (no fastqc)": {
         "content": [
             8,
             {
@@ -860,7 +860,7 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-02-19T16:05:40.254319275",
+        "timestamp": "2026-03-05T16:47:40.595637972",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

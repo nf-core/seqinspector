@@ -46,7 +46,7 @@ workflow SEQINSPECTOR {
     ref_dict
     ref_fai
     sample_size
-    skip_tools
+    tools
     sort_bam
     target_intervals
 
@@ -57,7 +57,7 @@ workflow SEQINSPECTOR {
     //
     // MODULE: Parse rundir info
     //
-    if (!("rundirparser" in skip_tools)) {
+    if ("rundirparser" in tools) {
 
         // Branch the samplesheet channel based on rundir presence
         ch_rundir_branch = ch_samplesheet.branch { meta, _reads ->
@@ -99,7 +99,7 @@ workflow SEQINSPECTOR {
     //
     // MODULE: Run Seqtk sample to perform subsampling
     //
-    if (!("seqtk_sample" in skip_tools) && sample_size > 0) {
+    if (sample_size) {
         SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] })
 
         ch_sample = SEQTK_SAMPLE.out.reads
@@ -112,7 +112,7 @@ workflow SEQINSPECTOR {
     //
     // MODULE: Run FastQC
     //
-    if (!("fastqc" in skip_tools)) {
+    if ("fastqc" in tools) {
         FASTQC(ch_sample)
 
         ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
@@ -121,7 +121,7 @@ workflow SEQINSPECTOR {
     //
     // Module: Run SeqFu stats
     //
-    if (!("seqfu_stats" in skip_tools)) {
+    if ("seqfu_stats" in tools) {
         SEQFU_STATS(ch_samplesheet.map { meta, reads -> [[id: "seqfu", sample_id: meta.id, tags: meta.tags], reads] })
 
         // Parse the stats TSV file
@@ -146,7 +146,7 @@ workflow SEQINSPECTOR {
     // Parse the reference info needed to create a FastQ Screen config file
     // and transpose it into a tuple containing lists for each property
 
-    if (!("fastqscreen" in skip_tools)) {
+    if ("fastqscreen" in tools) {
         ch_fastqscreen_refs = channel.fromList(
                 samplesheetToList(
                     fastq_screen_references,
@@ -163,7 +163,7 @@ workflow SEQINSPECTOR {
     }
 
     // MODULE: Align reads with BWA-MEM2
-    if (!(("picard_collecthsmetrics" in skip_tools) && ("picard_collectmultiplemetrics" in skip_tools))) {
+    if (("picard_collecthsmetrics" in tools) || ("picard_collectmultiplemetrics" in tools)) {
         BWAMEM2_MEM(
             ch_sample,
             bwamem2_index,
@@ -182,7 +182,7 @@ workflow SEQINSPECTOR {
             bait_intervals ? channel.fromPath(bait_intervals).collect() : channel.empty(),
             target_intervals ? channel.fromPath(target_intervals).collect() : channel.empty(),
             ref_dict,
-            skip_tools,
+            tools,
         )
 
         ch_multiqc_files = ch_multiqc_files.mix(QC_BAM.out.multiple_metrics, QC_BAM.out.hs_metrics)

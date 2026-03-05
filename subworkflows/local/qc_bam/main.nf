@@ -13,13 +13,13 @@ workflow QC_BAM {
     ch_bait_intervals // channel: [mandatory for picard_collecthsmetrics] [ val(meta), path(bait_intervals) ]
     ch_target_intervals // channel: [mandatory for picard_collecthsmetrics] [ val(meta), path(target_intervals) ]
     ch_ref_dict // channel: [mandatory for picard_collecthsmetrics] [ val(meta), path(ref_dict) ]
-    skip_tools
+    tools
 
     main:
     ch_hs_metrics = channel.empty()
     ch_multiple_metrics = channel.empty()
 
-    if (!("picard_collecthsmetrics" in skip_tools)) {
+    if ("picard_collecthsmetrics" in tools) {
 
         ch_hsmetrics_in = ch_bam_bai.combine(ch_bait_intervals).combine(ch_target_intervals)
 
@@ -34,7 +34,7 @@ workflow QC_BAM {
         ch_hs_metrics = PICARD_COLLECTHSMETRICS.out.metrics
     }
 
-    if (!("picard_collectmultiplemetrics" in skip_tools)) {
+    if ("picard_collectmultiplemetrics" in tools) {
 
         PICARD_COLLECTMULTIPLEMETRICS(
             ch_bam_bai,

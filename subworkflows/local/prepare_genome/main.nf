@@ -9,7 +9,7 @@ workflow PREPARE_GENOME {
     take:
     ch_reference_fasta
     bwamem2
-    skip_tools
+    tools
     ref_dict // path: [mandatory for collecthsmetrics] path(ref_dict)
 
     main:
@@ -18,7 +18,7 @@ workflow PREPARE_GENOME {
     ch_reference_fai = channel.empty()
     ch_ref_dict = channel.empty()
 
-    if (!("picard_collecthsmetrics" in skip_tools && "picard_collectmultiplemetrics" in skip_tools)) {
+    if ("picard_collecthsmetrics" in tools || "picard_collectmultiplemetrics" in tools) {
         // Use pre-built index when --bwamem2 parameter is provided
         // Or build index from reference FASTA
         if (bwamem2) {
@@ -40,7 +40,7 @@ workflow PREPARE_GENOME {
         ch_reference_fai = SAMTOOLS_FAIDX.out.fai
     }
 
-    if (!("picard_collecthsmetrics" in skip_tools)) {
+    if ("picard_collecthsmetrics" in tools) {
         if (ref_dict) {
             ch_ref_dict = channel.fromPath(ref_dict, checkIfExists: true).map { dict -> [[id: dict.simpleName], dict] }
         }

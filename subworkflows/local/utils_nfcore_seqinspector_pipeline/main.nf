@@ -34,7 +34,7 @@ workflow PIPELINE_INITIALISATION {
     help // boolean: Display help message and exit
     help_full // boolean: Show the full help message
     show_hidden // boolean: Show hidden parameters in the help message
-    skip_tools
+    tools
     fasta
 
     main:
@@ -85,12 +85,12 @@ workflow PIPELINE_INITIALISATION {
         command,
     )
 
+    log.info("tools: " + tools.join(","))
+
     //
     // Check config provided to the pipeline
     //
-    UTILS_NFCORE_PIPELINE(
-        nextflow_cli_args
-    )
+    UTILS_NFCORE_PIPELINE(nextflow_cli_args)
 
     //
     // Custom validation for pipeline parameters
@@ -138,7 +138,7 @@ workflow PIPELINE_INITIALISATION {
             }
         }
 
-    if (!(fasta) && !(("picard_htsmultiplemetrics" in skip_tools) && ("picard_collectmultiplemetrics" in skip_tools))) {
+    if (!(fasta) && (("picard_collecthsmetrics" in tools) || ("picard_collectmultiplemetrics" in tools))) {
         log.warn("No fasta was provided, but picard was requested")
         log.warn("BWAMEM2, SAMTOOLS and PICARD processes, will be skipped")
     }

@@ -6,7 +6,7 @@ nextflow_workflow {
     tag 'subworkflows'
     tag 'qc_bam'
 
-    test("Test with skip_tools picard_collecthsmetrics") {
+    test("Test with picard_collectmultiplemetrics") {
 
         when {
             config "./nextflow.config"
@@ -25,7 +25,7 @@ nextflow_workflow {
                 input[3]  = null
                 input[4]  = null
                 input[5]  = null
-                input[6]  = 'picard_collecthsmetrics'
+                input[6]  = 'picard_collectmultiplemetrics'
                 """
             }
         }
@@ -48,7 +48,7 @@ nextflow_workflow {
 
     }
 
-    test("Test without skip_tools") {
+    test("Test with picard_collecthsmetrics and picard_collectmultiplemetrics") {
 
         when {
             config "./nextflow.config"
@@ -67,7 +67,7 @@ nextflow_workflow {
                 input[3]  = channel.fromPath(params.pipelines_testdata_base_path + '/raredisease/reference/target.bed', checkIfExists: true).collect()
                 input[4]  = channel.fromPath(params.pipelines_testdata_base_path + '/raredisease/reference/target.bed', checkIfExists: true).collect()
                 input[5]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/raredisease/reference/reference.dict', checkIfExists: true)).collect()
-                input[6]  = 'no_skip_tools'
+                input[6]  = ['picard_collecthsmetrics', 'picard_collectmultiplemetrics']
                 """
             }
         }

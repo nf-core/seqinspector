@@ -56,14 +56,14 @@ workflow {
         params.help,
         params.help_full,
         params.show_hidden,
-        params.skip_tools ? params.skip_tools.split(',') : ['no_skip_tools'],
+        setup_tools(params.tools_setup, params.tools, params.skip_tools),
         params.fasta,
     )
 
     PREPARE_GENOME(
         fasta,
         params.bwamem2,
-        params.skip_tools ? params.skip_tools.split(',') : ['no_skip_tools'],
+        setup_tools(params.tools_setup, params.tools, params.skip_tools),
         params.dict,
     )
 
@@ -124,7 +124,7 @@ workflow NFCORE_SEQINSPECTOR {
         dict,
         fasta_fai,
         params.sample_size,
-        params.skip_tools ? params.skip_tools.split(',') : ['no_skip_tools'],
+        setup_tools(params.tools_setup, params.tools, params.skip_tools),
         params.sort_bam,
         params.target_intervals,
     )
@@ -132,4 +132,68 @@ workflow NFCORE_SEQINSPECTOR {
     emit:
     global_report   = SEQINSPECTOR.out.global_report // channel: /path/to/multiqc_report.html
     grouped_reports = SEQINSPECTOR.out.grouped_reports // channel: /path/to/multiqc_report.html
+}
+
+// FUNCTIONS
+
+def setup_tools(input_setup, input_tools, input_skip) {
+
+    // Trying hopefully a simpler approach than https://github.com/nf-core/seqinspector/pull/23
+
+    // All tools available (cf tools from schema)
+    // fastqc|fastqscreen|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats
+    // Other tools are run by default if a downstream tools is selected
+    // SEQTK_SAMPLE is run by default if params.sample > 0, and is therefore not in this list
+
+    // Any tools in skip tools will override any selection made via tools or tools_setup
+
+    def setup_list = input_setup ? input_setup.tokenize(',').sort().unique() : ['no_setup']
+    def tools_list = input_tools ? input_tools.tokenize(',').sort().unique() : []
+    def skip_list = input_skip ? input_skip.tokenize(',').sort().unique() : []
+
+    // Current list actually used are default, minimal and promethion
+    // The others are here as a showcase for what could be done
+
+    if ('all' in setup_list) {
+        tools_list << 'fastqc'
+        tools_list << 'fastqscreen'
+        tools_list << 'picard_collecthsmetrics'
+        tools_list << 'picard_collectmultiplemetrics'
+        tools_list << 'rundirparser'
+        tools_list << 'seqfu_stats'
+    }
+    if ('bam' in setup_list) {
+        tools_list << 'picard_collecthsmetrics'
+        tools_list << 'picard_collectmultiplemetrics'
+    }
+    if ('fastq' in setup_list) {
+        tools_list << 'fastqc'
+        tools_list << 'fastqscreen'
+    }
+    if ('default' in setup_list) {
+        tools_list << 'fastqc'
+        tools_list << 'fastqscreen'
+        tools_list << 'picard_collectmultiplemetrics'
+        tools_list << 'rundirparser'
+        tools_list << 'seqfu_stats'
+    }
+    if ('illumina' in setup_list) {
+        tools_list << 'rundirparser'
+        tools_list << 'seqfu_stats'
+    }
+    if ('minimal' in setup_list) {
+        tools_list << 'fastqc'
+        tools_list << 'fastqscreen'
+        tools_list << 'picard_collectmultiplemetrics'
+        tools_list << 'seqfu_stats'
+    }
+    if ('promethion' in setup_list) {
+        tools_list << 'fastqc'
+        tools_list << 'fastqscreen'
+        tools_list << 'seqfu_stats'
+    }
+
+    tools_list = tools_list.sort().unique() - skip_list
+
+    return tools_list
 }

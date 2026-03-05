@@ -48,10 +48,22 @@
                     "description": "MultiQC report title. Printed as page header, used for filename if not otherwise specified.",
                     "fa_icon": "fas fa-file-signature"
                 },
+                "tools": {
+                    "type": "string",
+                    "description": "Comma-separated string of tools to run",
+                    "pattern": "^((fastqc|fastqscreen|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats)?,?)*(?<!,)$",
+                    "fa_icon": "fas fa-fast-forward"
+                },
+                "tools_setup": {
+                    "type": "string",
+                    "description": "Select some default setup for the tools to be run, tools can still be used to add tools",
+                    "pattern": "^((all|bam|fastq|default|illumina|minimal|promethion)?,?)*(?<!,)$",
+                    "fa_icon": "fas fa-fast-forward"
+                },
                 "skip_tools": {
                     "type": "string",
-                    "description": "Comma-separated string of tools to skip",
-                    "pattern": "^((fastqc|fastqscreen|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats|seqtk_sample)?,?)*(?<!,)$",
+                    "description": "Comma-separated string of tools to skip - overrides any other means of tools selection",
+                    "pattern": "^((fastqc|fastqscreen|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats)?,?)*(?<!,)$",
                     "fa_icon": "fas fa-fast-forward"
                 },
                 "sort_bam": {

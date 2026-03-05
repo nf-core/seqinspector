@@ -6,13 +6,13 @@ nextflow_workflow {
     tag 'subworkflows'
     tag 'prepare_genome'
 
-    test("Test without bwamem2 index file path and with skip_tools = 'picard_collecthsmetrics'") {
+    test("Test without bwamem2 index and without picard") {
         when {
             workflow {
                 """
                 input[0]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/raredisease/reference/reference.fasta', checkIfExists: true)).collect()
                 input[1]  = null
-                input[2]  = 'picard_collecthsmetrics'
+                input[2]  = ''
                 input[3]  = null
                 """
             }
@@ -35,13 +35,13 @@ nextflow_workflow {
         }
     }
 
-    test("Test without bwamem2 index file path, with ref_dict") {
+    test("Test without bwamem2 index, with ref_dict and picard_collecthsmetrics") {
         when {
             workflow {
                 """
                 input[0]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/raredisease/reference/reference.fasta', checkIfExists: true)).collect()
                 input[1]  = null
-                input[2]  = ''
+                input[2]  = 'picard_collecthsmetrics'
                 input[3]  = params.pipelines_testdata_base_path + '/raredisease/reference/reference.dict'
                 """
             }
@@ -64,13 +64,13 @@ nextflow_workflow {
         }
     }
 
-    test("Test without bwamem2 index file path and without ref_dict") {
+    test("Test without bwamem2 index file path and without ref_dict, with picard_collecthsmetrics") {
         when {
             workflow {
                 """
                 input[0]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/raredisease/reference/reference.fasta', checkIfExists: true)).collect()
                 input[1]  = null
-                input[2]  = ''
+                input[2]  = 'picard_collecthsmetrics'
                 input[3]  = null
                 """
             }

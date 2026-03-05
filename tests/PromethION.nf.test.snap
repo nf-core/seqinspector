@@ -1,16 +1,13 @@
 {
     "PromethION data test": {
         "content": [
-            5,
+            4,
             {
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
                 "FASTQSCREEN_FASTQSCREEN": {
                     "fastqscreen": "0.16.0"
-                },
-                "SAMTOOLS_FAIDX": {
-                    "samtools": "1.22.1"
                 },
                 "SEQFU_STATS": {
                     "seqfu": "1.22.3"
@@ -106,8 +103,6 @@
                 "multiqc/global_report/multiqc_report.html",
                 "pipeline_info",
                 "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
-                "samtools_faidx",
-                "samtools_faidx/genome.fa.fai",
                 "seqfu_stats",
                 "seqfu_stats/hg001_01_seqfu.tsv",
                 "seqfu_stats/hg001_01_seqfu_mqc.txt"
@@ -131,14 +126,13 @@
                 "multiqc_fastq_screen.txt:md5,0ab0d1c4c3e3393afdb50ad0e116e394",
                 "multiqc_fastqc.txt:md5,b71aaffef9767dfe9d83fde0d31a3a1b",
                 "multiqc_seqfu_mqc.txt:md5,9595d608ff5709f2bdec8cb1016416c0",
-                "genome.fa.fai:md5,59557cd3a71ca5e0840285b6088ec1d6",
                 "hg001_01_seqfu.tsv:md5,b133752c897afbb4d8721b911fa117d4",
                 "hg001_01_seqfu_mqc.txt:md5,42e3506b02ceb72a6f05cb174505e722"
             ],
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-03-02T10:45:19.506600611",
+        "timestamp": "2026-03-05T15:44:59.709468008",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
