@@ -67,24 +67,33 @@ For further information/help, please consult the [nf-core/seqinspector documenta
 
 To make the `nf-core/seqinspector` code and processing logic more understandable for new contributors and to ensure quality, we semi-standardise the way the code and other contributions are written.
 
-### Adding a new step
+### Adding a new tool
 
-If you wish to contribute a new step, please use the following coding standards:
+The nf-core/seqinspector pipeline has a strong emphasis on a broad spectrum of tools to select from. Therefore we made this list below to help everyone to identify the steps required to add a new tool to this pipeline to ensure the tool will be integrated smoothly.
+
+If you wish to add a new tool to the seqinspector pipeline, please use the following checklist:
 
 1. Define the corresponding input channel into your new process from the expected previous process channel.
 2. Write the process block (see below).
 3. Define the output channel if needed (see below).
 4. Add any new parameters to `nextflow.config` with a default (see below).
 5. Add any new parameters to `nextflow_schema.json` with help text (via the `nf-core pipelines schema build` tool).
-6. Add sanity checks and validation for all relevant parameters.
-7. Perform local tests to validate that the new code works as expected.
-8. If applicable, add a new test in the `tests` directory.
-9. Update MultiQC config `assets/multiqc_config.yml` so relevant suffixes, file name clean up and module plots are in the appropriate order. If applicable, add a [MultiQC](https://https://multiqc.info/) module.
-10. Add a description of the output files and if relevant any appropriate images from the MultiQC report to `docs/output.md`.
+6. Make sure that relevant outputs of your tool are added to the Multiqc report by adding them to the `ch_multiqc_files` channel.
+7. Add sanity checks and validation for all relevant parameters.
+8. Perform local tests to validate that the new code works as expected, both with internet access, but also offline.
+9. If applicable, add a new test in the `tests` directory.
+10. Update MultiQC config `assets/multiqc_config.yml` so relevant suffixes, file name clean up and module plots are in the appropriate order. If applicable, add a [MultiQC](https://https://multiqc.info/) module.
+11. Add your tool to the tools selection:
+    - In the local subworkflow `utils_nfcore_seqinspector_pipeline` find the lists of tool lists in `main.nf` and add your tool to the list `all` and any other appropriate list.
+    - In the `nextflow_schema.json` add your tool to the pattern of the `tools` properties.
+12. Add your tool to the table `Compatibility between tools and data type` on in the `README.md` file found in the base directory of seqinspector.
+13. Add a description of the output files and if relevant any appropriate images from the MultiQC report to `docs/output.md`.
+14. Update the metromap (can be found in `assets`) to include your new step.
+15. Update the `CHANGELOG.md` file in the base directory of the pipeline.
 
 ### Things to consider regarding displaying results for a new tool
 
-- If a MultiQC module exist for the tool, use the standard settings for it to start with.
+- If a MultiQC module exist for the tool, start by using the standard settings of the module.
 - If no Multiqc module exists, the results of the tool should be made available in the results directory.
 - If a tool doesn’t produce output files, the stdout should be channeled into a output file that can be accessible from the outdir of the pipeline.
 
