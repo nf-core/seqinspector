@@ -132,7 +132,7 @@ workflow SEQINSPECTOR {
 
         ch_rundir.ifEmpty { log.warn("No samples with rundir found, skipping CHECKQC") }
 
-        CHECKQC(ch_rundir, "assets/checkqc_config.yaml")
+        CHECKQC(ch_rundir, "${projectDir}/assets/checkqc_config.yaml")
 
         ch_multiqc_files = ch_multiqc_files.mix(CHECKQC.out.report)
     }
