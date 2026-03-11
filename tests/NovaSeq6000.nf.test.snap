@@ -10,7 +10,7 @@
                     "bwamem2": "2.2.1",
                     "samtools": "1.22.1"
                 },
-                "FASTQC": {
+                "FASTQC_RAW": {
                     "fastqc": "0.12.1"
                 },
                 "FASTQSCREEN_FASTQSCREEN": {
@@ -984,7 +984,7 @@
                 "------------------------------------------------------",
                 "Input/output options",
                 "  input                     : https://raw.githubusercontent.com/nf-core/test-datasets/seqinspector/testdata/NovaSeq6000/samplesheet.csv",
-                "  outdir                    : [PATH]/tests/[NFT_HASH]/output",
+                "  outdir                    : [PATH]/.nf-test/tests/[NFT_HASH]/output",
                 "  tools_setup               : default",
                 "Reference genome options",
                 "  genome                    : R64-1-1",
@@ -996,11 +996,11 @@
                 "  trace_report_suffix       : [TIMESTAMP]",
                 "Core Nextflow options",
                 "  runName                   : [RUN_NAME]",
-                "  launchDir                 : [PATH]/tests/[NFT_HASH]",
-                "  workDir                   : [PATH]/tests/[NFT_HASH]/work",
+                "  launchDir                 : [PATH]/.nf-test/tests/[NFT_HASH]",
+                "  workDir                   : [PATH]/.nf-test/tests/[NFT_HASH]/work",
                 "  projectDir                : [PATH]",
                 "  userName                  : [USER]",
-                "  profile                   : test,[CONTAINER]",
+                "  profile                   : [CONTAINER],test",
                 "  configFiles               : [PATH]/nextflow.config, [PATH]/nextflow.config, [PATH]/tests/nextflow.config",
                 "!! Only displaying parameters that differ from the pipeline defaults !!",
                 "------------------------------------------------------",
@@ -1014,16 +1014,17 @@
                 "  Tools selected to be run  : fastqc,fastqscreen,picard_collectmultiplemetrics,rundirparser,seqfu_stats",
                 "------------------------------------------------------",
                 "-[nf-core/seqinspector] Pipeline completed successfully-",
+                "WARN: Singularity cache directory has not been defined -- Remote image will be stored in the path: [PATH]/.nf-test/tests/[NFT_HASH]/work/[CONTAINER] -- Use the environment variable NXF_SINGULARITY_CACHEDIR to specify a different location",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (Sample1_01)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (Sample23_03)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (SampleA_02)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (Undetermined_05)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (sampletest_04)",
-                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQC (Sample1_01)",
-                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQC (Sample23_03)",
-                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQC (SampleA_02)",
-                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQC (Undetermined_05)",
-                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQC (sampletest_04)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQC_RAW (Sample1_01)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQC_RAW (Sample23_03)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQC_RAW (SampleA_02)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQC_RAW (Undetermined_05)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQC_RAW (sampletest_04)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQSCREEN_FASTQSCREEN (Sample1_01)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQSCREEN_FASTQSCREEN (Sample23_03)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQSCREEN_FASTQSCREEN (SampleA_02)",
@@ -1050,11 +1051,11 @@
                 "[NXF_HASH] Submitted process > PREPARE_GENOME:SAMTOOLS_FAIDX (genome.fa)"
             ]
         ],
-        "timestamp": "2026-03-11T08:59:54.671845262",
         "meta": {
-            "nf-test": "0.9.4",
+            "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        }
+        },
+        "timestamp": "2026-03-11T12:36:07.116682717"
     },
     "NovaSeq6000 data test sample size": {
         "content": [
@@ -1067,7 +1068,7 @@
                     "bwamem2": "2.2.1",
                     "samtools": "1.22.1"
                 },
-                "FASTQC": {
+                "FASTQC_RAW": {
                     "fastqc": "0.12.1"
                 },
                 "FASTQSCREEN_FASTQSCREEN": {
@@ -2042,13 +2043,15 @@
                 "Undetermined_05.bam:md5,2841f21f7f70634f21505ac803ff8221",
                 "sampletest_04.bam:md5,3d1cd701ad22dacc6b194ea16582d647"
             ],
-            "No warnings"
+            [
+                "WARN: Singularity cache directory has not been defined -- Remote image will be stored in the path: [PATH]/.nf-test/tests/[NFT_HASH]/work/[CONTAINER] -- Use the environment variable NXF_SINGULARITY_CACHEDIR to specify a different location"
+            ]
         ],
-        "timestamp": "2026-02-26T16:09:13.261951498",
         "meta": {
-            "nf-test": "0.9.4",
+            "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        }
+        },
+        "timestamp": "2026-03-11T12:38:26.363834273"
     },
     "NovaSeq6000 data test relative sample size": {
         "content": [
@@ -2061,7 +2064,7 @@
                     "bwamem2": "2.2.1",
                     "samtools": "1.22.1"
                 },
-                "FASTQC": {
+                "FASTQC_RAW": {
                     "fastqc": "0.12.1"
                 },
                 "FASTQSCREEN_FASTQSCREEN": {
@@ -3036,13 +3039,15 @@
                 "Undetermined_05.bam:md5,691b83f3c015cf5f2b28ab6d0581d03c",
                 "sampletest_04.bam:md5,b13db1c95389474f089f870b906d3fc0"
             ],
-            "No warnings"
+            [
+                "WARN: Singularity cache directory has not been defined -- Remote image will be stored in the path: [PATH]/.nf-test/tests/[NFT_HASH]/work/[CONTAINER] -- Use the environment variable NXF_SINGULARITY_CACHEDIR to specify a different location"
+            ]
         ],
-        "timestamp": "2026-02-26T16:10:24.618740938",
         "meta": {
-            "nf-test": "0.9.4",
+            "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        }
+        },
+        "timestamp": "2026-03-11T12:40:52.321754763"
     },
     "NovaSeq6000 data test - No rundirs": {
         "content": [
@@ -3993,11 +3998,11 @@
                 "WARN: Sample 'sampletest_04' does not have a rundir specified"
             ]
         ],
-        "timestamp": "2026-02-26T16:12:48.476812857",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
-        }
+        },
+        "timestamp": "2026-02-26T16:12:48.476812857"
     },
     "NovaSeq6000 data test sample size exceeds available reads": {
         "content": [
@@ -4993,11 +4998,11 @@
                 "WARN: sampletest_04: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads."
             ]
         ],
-        "timestamp": "2026-02-26T16:11:39.851216993",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
-        }
+        },
+        "timestamp": "2026-02-26T16:11:39.851216993"
     },
     "NovaSeq6000 data test - tag collision": {
         "content": [
@@ -5784,10 +5789,10 @@
                 "WARN: Tag name collision: [test, Test, TEST]"
             ]
         ],
-        "timestamp": "2026-03-05T17:17:27.813602253",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
-        }
+        },
+        "timestamp": "2026-03-05T17:17:27.813602253"
     }
 }

@@ -13,11 +13,11 @@
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-03-05T16:55:16.91082134",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
-        }
+        },
+        "timestamp": "2026-03-05T16:55:16.91082134"
     },
     "MiSeq data test (single end reads)": {
         "content": [
@@ -30,7 +30,7 @@
                     "bwamem2": "2.2.1",
                     "samtools": "1.22.1"
                 },
-                "FASTQC": {
+                "FASTQC_RAW": {
                     "fastqc": "0.12.1"
                 },
                 "FASTQSCREEN_FASTQSCREEN": {
@@ -249,13 +249,15 @@
             [
                 "SAMPLE_SINGLE_END_01.bam:md5,9acd4428f95f70c1393671680ab9270f"
             ],
-            "No warnings"
+            [
+                "WARN: Singularity cache directory has not been defined -- Remote image will be stored in the path: [PATH]/.nf-test/tests/[NFT_HASH]/work/[CONTAINER] -- Use the environment variable NXF_SINGULARITY_CACHEDIR to specify a different location"
+            ]
         ],
-        "timestamp": "2026-02-19T16:04:51.402781572",
         "meta": {
-            "nf-test": "0.9.4",
+            "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        }
+        },
+        "timestamp": "2026-03-11T12:30:47.420814675"
     },
     "MiSeq data test (paired end reads)": {
         "content": [
@@ -268,7 +270,7 @@
                     "bwamem2": "2.2.1",
                     "samtools": "1.22.1"
                 },
-                "FASTQC": {
+                "FASTQC_RAW": {
                     "fastqc": "0.12.1"
                 },
                 "FASTQSCREEN_FASTQSCREEN": {
@@ -681,13 +683,15 @@
                 "SAMPLE_PAIRED_END_1_01.bam:md5,ac811b20d56132f5e039b3e8fd217405",
                 "SAMPLE_PAIRED_END_2_02.bam:md5,57892fc4314e66e8e20de4f5d82f9b5d"
             ],
-            "No warnings"
+            [
+                "WARN: Singularity cache directory has not been defined -- Remote image will be stored in the path: [PATH]/.nf-test/tests/[NFT_HASH]/work/[CONTAINER] -- Use the environment variable NXF_SINGULARITY_CACHEDIR to specify a different location"
+            ]
         ],
-        "timestamp": "2026-02-26T16:06:35.381277259",
         "meta": {
-            "nf-test": "0.9.4",
+            "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        }
+        },
+        "timestamp": "2026-03-11T12:33:36.159959124"
     },
     "Miseq data test (no fastqc)": {
         "content": [
@@ -858,12 +862,14 @@
             [
                 "SAMPLE_SINGLE_END_01.bam:md5,9acd4428f95f70c1393671680ab9270f"
             ],
-            "No warnings"
+            [
+                "WARN: Singularity cache directory has not been defined -- Remote image will be stored in the path: [PATH]/.nf-test/tests/[NFT_HASH]/work/[CONTAINER] -- Use the environment variable NXF_SINGULARITY_CACHEDIR to specify a different location"
+            ]
         ],
-        "timestamp": "2026-03-05T16:47:40.595637972",
         "meta": {
-            "nf-test": "0.9.4",
+            "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        }
+        },
+        "timestamp": "2026-03-11T12:31:47.745588893"
     }
 }
