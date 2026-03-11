@@ -19,6 +19,7 @@ include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_seqi
 include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
 include { PREPARE_GENOME          } from './subworkflows/local/prepare_genome'
 include { getGenomeAttribute      } from 'plugin/nf-core-utils'
+include { setupTools              } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -42,6 +43,8 @@ workflow {
         ? channel.fromPath(params.fasta, checkIfExists: true).map { file -> tuple([id: file.name], file) }.collect()
         : channel.empty()
 
+    def tools = setupTools(params.tools_setup, params.tools, params.skip_tools)
+
     //
     // SUBWORKFLOW: Run initialisation tasks
     //
@@ -56,16 +59,14 @@ workflow {
         params.help,
         params.help_full,
         params.show_hidden,
-        params.skip_tools ? params.skip_tools.split(',') : ['no_skip_tools'],
-        params.bwamem2,
+        tools,
         params.fasta,
     )
 
     PREPARE_GENOME(
         fasta,
         params.bwamem2,
-        params.skip_tools ? params.skip_tools.split(',') : ['no_skip_tools'],
-        params.run_picard_collecthsmetrics,
+        tools,
         params.dict,
     )
 
@@ -78,6 +79,7 @@ workflow {
         PREPARE_GENOME.out.bwamem2_index,
         PREPARE_GENOME.out.reference_dict,
         PREPARE_GENOME.out.reference_fai,
+        tools,
     )
     //
     // SUBWORKFLOW: Run completion tasks
@@ -108,6 +110,7 @@ workflow NFCORE_SEQINSPECTOR {
     bwamem2_index
     dict
     fasta_fai
+    tools
 
     main:
     //
@@ -125,9 +128,8 @@ workflow NFCORE_SEQINSPECTOR {
         params.outdir,
         dict,
         fasta_fai,
-        params.run_picard_collecthsmetrics,
         params.sample_size,
-        params.skip_tools ? params.skip_tools.split(',') : ['no_skip_tools'],
+        tools,
         params.sort_bam,
         params.target_intervals,
     )

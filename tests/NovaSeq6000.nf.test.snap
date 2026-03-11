@@ -985,6 +985,7 @@
                 "Input/output options",
                 "  input                     : https://raw.githubusercontent.com/nf-core/test-datasets/seqinspector/testdata/NovaSeq6000/samplesheet.csv",
                 "  outdir                    : [PATH]/tests/[NFT_HASH]/output",
+                "  tools_setup               : default",
                 "Reference genome options",
                 "  genome                    : R64-1-1",
                 "  fasta                     : s3://ngi-igenomes/igenomes//Saccharomyces_cerevisiae/Ensembl/R64-1-1/Sequence/WholeGenomeFasta/genome.fa",
@@ -1009,6 +1010,9 @@
                 "    https://doi.org/10.1038/s41587-020-0439-x",
                 "* Software dependencies",
                 "    https://github.com/nf-core/seqinspector/blob/master/CITATIONS.md",
+                "Extra informations",
+                "  Tools selected to be run  : fastqc,fastqscreen,picard_collectmultiplemetrics,rundirparser,seqfu_stats",
+                "------------------------------------------------------",
                 "-[nf-core/seqinspector] Pipeline completed successfully-",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (Sample1_01)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (Sample23_03)",
@@ -1046,7 +1050,7 @@
                 "[NXF_HASH] Submitted process > PREPARE_GENOME:SAMTOOLS_FAIDX (genome.fa)"
             ]
         ],
-        "timestamp": "2026-03-02T10:50:35.403483793",
+        "timestamp": "2026-03-11T08:59:54.671845262",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -5780,7 +5784,7 @@
                 "WARN: Tag name collision: [test, Test, TEST]"
             ]
         ],
-        "timestamp": "2026-03-02T12:05:37.0426631",
+        "timestamp": "2026-03-05T17:17:27.813602253",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

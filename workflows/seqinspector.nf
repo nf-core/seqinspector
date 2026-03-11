@@ -45,22 +45,19 @@ workflow SEQINSPECTOR {
     outdir
     ref_dict
     ref_fai
-    run_picard_collecthsmetrics
     sample_size
-    skip_tools
+    tools
     sort_bam
     target_intervals
 
     main:
     ch_multiqc_files = channel.empty()
     ch_multiqc_extra_files = channel.empty()
-    ch_bwamem2_mem = channel.empty()
-    ch_samtools_index = channel.empty()
 
     //
     // MODULE: Parse rundir info
     //
-    if (!("rundirparser" in skip_tools)) {
+    if ('rundirparser' in tools) {
 
         // Branch the samplesheet channel based on rundir presence
         ch_rundir_branch = ch_samplesheet.branch { meta, _reads ->
@@ -102,45 +99,36 @@ workflow SEQINSPECTOR {
     //
     // MODULE: Run Seqtk sample to perform subsampling
     //
-    if (!("seqtk_sample" in skip_tools) && sample_size > 0) {
-        SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] })
 
-        ch_sample = SEQTK_SAMPLE.out.reads
-    }
-    else {
-        // No subsampling
-        ch_sample = ch_samplesheet
-    }
+    SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] }.filter { sample_size })
+
+    ch_sample = sample_size ? SEQTK_SAMPLE.out.reads : ch_samplesheet
 
     //
     // MODULE: Run FastQC
     //
-    if (!("fastqc" in skip_tools)) {
-        FASTQC(ch_sample)
+    FASTQC(ch_sample.filter { 'fastqc' in tools })
 
-        ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
-    }
+    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
 
     //
     // Module: Run SeqFu stats
     //
-    if (!("seqfu_stats" in skip_tools)) {
-        SEQFU_STATS(ch_samplesheet.map { meta, reads -> [[id: "seqfu", sample_id: meta.id, tags: meta.tags], reads] })
+    SEQFU_STATS(ch_samplesheet.map { meta, reads -> [[id: "seqfu", sample_id: meta.id, tags: meta.tags], reads] }.filter { 'seqfu_stats' in tools })
 
-        // Parse the stats TSV file
-        SEQFU_STATS.out.stats
-            .map { meta, stats -> [meta.sample_id, stats] }
-            .splitCsv(header: true, sep: '\t')
-            .map { sample_id, row ->
-                // Check if requested sample size exceeds available reads
-                def sample_reads = row['#Seq'].toInteger()
-                if (sample_size > sample_reads) {
-                    log.warn("${sample_id}: Requested sample_size (${sample_size}) is larger than available reads (${sample_reads}). Pipeline will continue with ${sample_reads} reads.")
-                }
+    // Parse the stats TSV file
+    SEQFU_STATS.out.stats
+        .map { meta, stats -> [meta.sample_id, stats] }
+        .splitCsv(header: true, sep: '\t')
+        .map { sample_id, row ->
+            // Check if requested sample size exceeds available reads
+            def sample_reads = row['#Seq'].toInteger()
+            if (sample_size > sample_reads) {
+                log.warn("${sample_id}: Requested sample_size (${sample_size}) is larger than available reads (${sample_reads}). Pipeline will continue with ${sample_reads} reads.")
             }
+        }
 
-        ch_multiqc_files = ch_multiqc_files.mix(SEQFU_STATS.out.multiqc)
-    }
+    ch_multiqc_files = ch_multiqc_files.mix(SEQFU_STATS.out.multiqc)
 
     //
     // MODULE: Run FastQ Screen
@@ -149,56 +137,41 @@ workflow SEQINSPECTOR {
     // Parse the reference info needed to create a FastQ Screen config file
     // and transpose it into a tuple containing lists for each property
 
-    if (!("fastqscreen" in skip_tools)) {
-        ch_fastqscreen_refs = channel.fromList(
-                samplesheetToList(
-                    fastq_screen_references,
-                    "${projectDir}/assets/schema_fastq_screen_references.json",
-                )
+    FASTQSCREEN_FASTQSCREEN(
+        ch_sample.filter { 'fastqscreen' in tools },
+        channel.fromList(
+            samplesheetToList(
+                fastq_screen_references,
+                "${projectDir}/assets/schema_fastq_screen_references.json",
             )
-            .toList()
-            .transpose()
-            .toList()
+        ).toList().transpose().toList(),
+    )
 
-        FASTQSCREEN_FASTQSCREEN(ch_sample, ch_fastqscreen_refs)
-
-        ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
-    }
+    ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
 
     // MODULE: Align reads with BWA-MEM2
-    if (!("bwamem2_mem" in skip_tools)) {
-        BWAMEM2_MEM(
-            ch_sample,
-            bwamem2_index,
-            fasta_reference,
-            sort_bam,
-        )
-        ch_bwamem2_mem = BWAMEM2_MEM.out.bam
+    BWAMEM2_MEM(
+        ch_sample.filter { ('picard_collecthsmetrics' in tools) || ('picard_collectmultiplemetrics' in tools) },
+        bwamem2_index,
+        fasta_reference,
+        sort_bam,
+    )
 
-        SAMTOOLS_INDEX(ch_bwamem2_mem)
+    SAMTOOLS_INDEX(BWAMEM2_MEM.out.bam)
 
-        ch_samtools_index = SAMTOOLS_INDEX.out.bai
-    }
+    ch_bam_bai = BWAMEM2_MEM.out.bam.join(SAMTOOLS_INDEX.out.bai, failOnDuplicate: true, failOnMismatch: true)
 
+    QC_BAM(
+        ch_bam_bai,
+        fasta_reference,
+        ref_fai,
+        bait_intervals ? channel.fromPath(bait_intervals).collect() : channel.empty(),
+        target_intervals ? channel.fromPath(target_intervals).collect() : channel.empty(),
+        ref_dict,
+        tools,
+    )
 
-    if (!("picard_collectmultiplemetrics" in skip_tools)) {
-
-        ch_bait_intervals = bait_intervals ? channel.fromPath(bait_intervals).collect() : channel.empty()
-        ch_target_intervals = target_intervals ? channel.fromPath(target_intervals).collect() : channel.empty()
-
-        QC_BAM(
-            ch_bwamem2_mem,
-            ch_samtools_index,
-            fasta_reference,
-            ref_fai,
-            run_picard_collecthsmetrics,
-            ch_bait_intervals,
-            ch_target_intervals,
-            ref_dict,
-        )
-
-        ch_multiqc_files = ch_multiqc_files.mix(QC_BAM.out.multiple_metrics, QC_BAM.out.hs_metrics)
-    }
+    ch_multiqc_files = ch_multiqc_files.mix(QC_BAM.out.multiple_metrics, QC_BAM.out.hs_metrics)
 
     // Collate and save software versions
     //

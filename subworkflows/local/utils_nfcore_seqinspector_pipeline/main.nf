@@ -34,8 +34,7 @@ workflow PIPELINE_INITIALISATION {
     help // boolean: Display help message and exit
     help_full // boolean: Show the full help message
     show_hidden // boolean: Show hidden parameters in the help message
-    skip_tools
-    bwamem2
+    tools
     fasta
 
     main:
@@ -86,12 +85,14 @@ workflow PIPELINE_INITIALISATION {
         command,
     )
 
+    log.info("\033[1;37mExtra informations\033[0m")
+    log.info("\033[0;34m  Tools selected to be run  :\033[0;32m " + tools.join(",") + "\033[0m")
+    log.info("-\033[2m----------------------------------------------------\033[0m-")
+
     //
     // Check config provided to the pipeline
     //
-    UTILS_NFCORE_PIPELINE(
-        nextflow_cli_args
-    )
+    UTILS_NFCORE_PIPELINE(nextflow_cli_args)
 
     //
     // Custom validation for pipeline parameters
@@ -139,9 +140,9 @@ workflow PIPELINE_INITIALISATION {
             }
         }
 
-    if (!(fasta) && !(("bwamem2_index" in skip_tools) || ("bwamem2_mem" in skip_tools) || ("picard_collectmultiplemetrics" in skip_tools))) {
-        log.warn("No fasta was provided, but bwamem2 or picard was requested")
-        log.warn("BWAMEM2 and any other downstream processes, will be skipped")
+    if (!(fasta) && (("picard_collecthsmetrics" in tools) || ("picard_collectmultiplemetrics" in tools))) {
+        log.warn("No fasta was provided, but picard was requested")
+        log.warn("BWAMEM2, SAMTOOLS and PICARD processes, will be skipped")
     }
 
     emit:
@@ -296,6 +297,69 @@ def methodsDescriptionText(mqc_methods_yaml) {
     def description_html = engine.createTemplate(methods_text).make(meta)
 
     return description_html.toString()
+}
+
+
+def setupTools(input_setup, input_tools, input_skip) {
+
+    // Trying hopefully a simpler approach than https://github.com/nf-core/seqinspector/pull/23
+
+    // All tools available (cf tools from schema)
+    // fastqc|fastqscreen|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats
+    // Other tools are run by default if a downstream tools is selected
+    // SEQTK_SAMPLE is run by default if params.sample > 0, and is therefore not in this list
+
+    // Any tools in skip tools will override any selection made via tools or tools_setup
+
+    def setup_list = input_setup ? input_setup.tokenize(',').sort().unique() : ['no_setup']
+    def tools_list = input_tools ? input_tools.tokenize(',').sort().unique() : []
+    def skip_list = input_skip ? input_skip.tokenize(',').sort().unique() : []
+
+    // Current list actually used are default, minimal and promethion
+    // The others are here as a showcase for what could be done
+
+    if ('all' in setup_list) {
+        tools_list << 'fastqc'
+        tools_list << 'fastqscreen'
+        tools_list << 'picard_collecthsmetrics'
+        tools_list << 'picard_collectmultiplemetrics'
+        tools_list << 'rundirparser'
+        tools_list << 'seqfu_stats'
+    }
+    if ('bam' in setup_list) {
+        tools_list << 'picard_collecthsmetrics'
+        tools_list << 'picard_collectmultiplemetrics'
+    }
+    if ('fastq' in setup_list) {
+        tools_list << 'fastqc'
+        tools_list << 'fastqscreen'
+    }
+    if ('default' in setup_list) {
+        tools_list << 'fastqc'
+        tools_list << 'fastqscreen'
+        tools_list << 'picard_collectmultiplemetrics'
+        tools_list << 'rundirparser'
+        tools_list << 'seqfu_stats'
+    }
+    if ('illumina' in setup_list) {
+        tools_list << 'rundirparser'
+        tools_list << 'seqfu_stats'
+    }
+    if ('minimal' in setup_list) {
+        tools_list << 'fastqc'
+        tools_list << 'fastqscreen'
+        tools_list << 'picard_collectmultiplemetrics'
+        tools_list << 'seqfu_stats'
+    }
+    if ('ont' in setup_list) {
+        tools_list << 'fastqc'
+        tools_list << 'fastqscreen'
+        tools_list << 'seqfu_stats'
+    }
+
+    tools_list = tools_list.sort().unique() - skip_list
+
+    return tools_list
 }
 
 //

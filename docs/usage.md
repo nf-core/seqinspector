@@ -127,18 +127,6 @@ Both absolute numbers (e.g 100) and relative numbers (e.g 0.25) can be specified
 nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 -profile docker
 ```
 
-### BWAMEM2 and alignment-based QC tools
-
-If no genome or fasta file is provided, either with `--genome` or `--fasta`,
-the pipeline will not be able to run the alignment step with BWAMEM2,
-and will skip all tools that depend on the alignment file (eg. `picard CollectHsMetrics` and `picard CollectHsMetrics`).
-
-### Hybrid-selection QC metrics
-
-The pipeline supports hybrid-selection (HS) QC metrics collection .
-Use `--run_picard_collecthsmetrics true` to run the QC tool [picard CollectHSmetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard).
-This tool is otherwise not run by default.
-
 ### Skipping tools
 
 Some tools might not be compatible with your data.
@@ -146,6 +134,18 @@ In this case you can skip them by providing a comma-separated list of tools to b
 
 The nextflow configuration file can also be use to customise tool arguments.
 See official [nexflow](https://www.nextflow.io/docs/latest/config.html) and [nf-core](https://nf-co.re/docs/usage/configuration#customising-tool-arguments) documentation for further details.
+
+### Available functionality and tools
+
+#### BWAMEM2 and alignment-based QC tools
+
+If no genome or fasta file is provided, either with `--genome` or `--fasta`,
+the pipeline will not be able to run the alignment step with BWAMEM2,
+and will skip all tools that depend on the alignment file (eg. `picard CollectHsMetrics` and `picard CollectHsMetrics`).
+
+#### Hybrid-selection QC metrics
+
+The pipeline supports hybrid-selection (HS) QC metrics collection via [picard CollectHSmetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard).
 
 ### Updating the pipeline
 
