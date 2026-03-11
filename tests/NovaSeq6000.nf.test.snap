@@ -2043,9 +2043,7 @@
                 "Undetermined_05.bam:md5,2841f21f7f70634f21505ac803ff8221",
                 "sampletest_04.bam:md5,3d1cd701ad22dacc6b194ea16582d647"
             ],
-            [
-                "WARN: Singularity cache directory has not been defined -- Remote image will be stored in the path: [PATH]/.nf-test/tests/[NFT_HASH]/work/[CONTAINER] -- Use the environment variable NXF_SINGULARITY_CACHEDIR to specify a different location"
-            ]
+           "No warnings"
         ],
         "meta": {
             "nf-test": "0.9.3",
@@ -3039,9 +3037,7 @@
                 "Undetermined_05.bam:md5,691b83f3c015cf5f2b28ab6d0581d03c",
                 "sampletest_04.bam:md5,b13db1c95389474f089f870b906d3fc0"
             ],
-            [
-                "WARN: Singularity cache directory has not been defined -- Remote image will be stored in the path: [PATH]/.nf-test/tests/[NFT_HASH]/work/[CONTAINER] -- Use the environment variable NXF_SINGULARITY_CACHEDIR to specify a different location"
-            ]
+           "No warnings"
         ],
         "meta": {
             "nf-test": "0.9.3",
