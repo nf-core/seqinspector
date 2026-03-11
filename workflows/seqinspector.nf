@@ -131,7 +131,7 @@ workflow SEQINSPECTOR {
     //
     // MODULE: Run FastQC on trimmed reads
     //
-    FASTQC_TRIMMED(ch_trimmed.filter { 'fastp' in tools })
+    FASTQC_TRIMMED(ch_trimmed.filter { 'fastqc_trim' in tools })
 
     ch_multiqc_files = ch_multiqc_files.mix(FASTQC_TRIMMED.out.zip)
     //
