@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Changed`
 
-- [#203](https://github.com/nf-core/seqinspector/pull/203) document how to add a tool to tool selection
+- [#205](https://github.com/nf-core/seqinspector/pull/205) document how to add a tool to tool selection and how to use tool selection
 - [#191](https://github.com/nf-core/seqinspector/pull/191) Back to dev
 - [#192](https://github.com/nf-core/seqinspector/pull/192) Refactor the tools selection logic
 - [#192](https://github.com/nf-core/seqinspector/pull/192) Removed `bwamem2_index`, `bwamem2_mem`, `samtools_faidx` and `samtools_index` from the list of tools as they can be inferred from downstream tools
