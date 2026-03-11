@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#202](https://github.com/nf-core/seqinspector/pull/202) Added support for fasta fai file as input (via params or igenomes) for the pipeline
+
 ### `Fixed`
 
 ### `Changed`
