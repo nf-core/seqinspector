@@ -27,9 +27,10 @@ include { setupTools              } from './subworkflows/local/utils_nfcore_seqi
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-params.fasta   = getGenomeAttribute('fasta')
 params.bwamem2 = getGenomeAttribute('bwamem2')
 params.dict    = getGenomeAttribute('dict')
+params.fai     = getGenomeAttribute('fai')
+params.fasta   = getGenomeAttribute('fasta')
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -40,7 +41,7 @@ params.dict    = getGenomeAttribute('dict')
 workflow {
 
     def fasta = params.fasta
-        ? channel.fromPath(params.fasta, checkIfExists: true).map { file -> tuple([id: file.name], file) }.collect()
+        ? channel.fromPath(params.fasta, checkIfExists: true).map { file -> tuple([id: params.genome ?: 'custom'], file) }.collect()
         : channel.empty()
 
     def tools = setupTools(params.tools_setup, params.tools, params.skip_tools)
@@ -66,8 +67,10 @@ workflow {
     PREPARE_GENOME(
         fasta,
         params.bwamem2,
-        tools,
+        params.fai,
         params.dict,
+        params.genome ?: 'custom',
+        tools,
     )
 
     //
