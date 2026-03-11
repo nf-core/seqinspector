@@ -14,6 +14,7 @@ include { RUNDIRPARSER               } from '../modules/local/rundirparser'
 include { SAMTOOLS_INDEX             } from '../modules/nf-core/samtools/index'
 include { SEQFU_STATS                } from '../modules/nf-core/seqfu/stats'
 include { SEQTK_SAMPLE               } from '../modules/nf-core/seqtk/sample'
+include { CHECKQC                    } from '../modules/nf-core/checkqc/main'
 
 // subworkflow
 include { QC_BAM                     } from '../subworkflows/local/qc_bam'
