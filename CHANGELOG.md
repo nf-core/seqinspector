@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## dev
 
 ### `Added`
+- [#204](https://github.com/nf-core/seqinspector/pull/204) Added Fastp module
 
 ### `Fixed`
 
