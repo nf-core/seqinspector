@@ -3060,7 +3060,7 @@
                     "bwamem2": "2.2.1",
                     "samtools": "1.22.1"
                 },
-                "FASTQC": {
+                "FASTQC_RAW": {
                     "fastqc": "0.12.1"
                 },
                 "FASTQSCREEN_FASTQSCREEN": {
@@ -3995,14 +3995,15 @@
                 "WARN: Sample 'Sample23_03' does not have a rundir specified",
                 "WARN: Sample 'SampleA_02' does not have a rundir specified",
                 "WARN: Sample 'Undetermined_05' does not have a rundir specified",
-                "WARN: Sample 'sampletest_04' does not have a rundir specified"
+                "WARN: Sample 'sampletest_04' does not have a rundir specified",
+                "WARN: Singularity cache directory has not been defined -- Remote image will be stored in the path: [PATH]/.nf-test/tests/[NFT_HASH]/work/[CONTAINER] -- Use the environment variable NXF_SINGULARITY_CACHEDIR to specify a different location"
             ]
         ],
         "meta": {
-            "nf-test": "0.9.4",
+            "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-02-26T16:12:48.476812857"
+        "timestamp": "2026-03-11T13:51:57.938850869"
     },
     "NovaSeq6000 data test sample size exceeds available reads": {
         "content": [
@@ -4015,7 +4016,7 @@
                     "bwamem2": "2.2.1",
                     "samtools": "1.22.1"
                 },
-                "FASTQC": {
+                "FASTQC_RAW": {
                     "fastqc": "0.12.1"
                 },
                 "FASTQSCREEN_FASTQSCREEN": {
@@ -4994,21 +4995,22 @@
                 "WARN: Sample1_01: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
                 "WARN: Sample23_03: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
                 "WARN: SampleA_02: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
+                "WARN: Singularity cache directory has not been defined -- Remote image will be stored in the path: [PATH]/.nf-test/tests/[NFT_HASH]/work/[CONTAINER] -- Use the environment variable NXF_SINGULARITY_CACHEDIR to specify a different location",
                 "WARN: Undetermined_05: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
                 "WARN: sampletest_04: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads."
             ]
         ],
         "meta": {
-            "nf-test": "0.9.4",
+            "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-02-26T16:11:39.851216993"
+        "timestamp": "2026-03-11T13:49:46.91271818"
     },
     "NovaSeq6000 data test - tag collision": {
         "content": [
             15,
             {
-                "FASTQC": {
+                "FASTQC_RAW": {
                     "fastqc": "0.12.1"
                 }
             },
@@ -5784,15 +5786,16 @@
             "No BAM files",
             [
                 "WARN: On a MacOS system these tags will be considered as one",
+                "WARN: Singularity cache directory has not been defined -- Remote image will be stored in the path: [PATH]/.nf-test/tests/[NFT_HASH]/work/[CONTAINER] -- Use the environment variable NXF_SINGULARITY_CACHEDIR to specify a different location",
                 "WARN: Tag name collision: [group1, Group1]",
                 "WARN: Tag name collision: [lane1, Lane1, LANE1]",
                 "WARN: Tag name collision: [test, Test, TEST]"
             ]
         ],
         "meta": {
-            "nf-test": "0.9.4",
+            "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-05T17:17:27.813602253"
+        "timestamp": "2026-03-11T13:53:46.852739994"
     }
 }
