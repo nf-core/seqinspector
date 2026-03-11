@@ -187,7 +187,7 @@ def setup_tools(input_setup, input_tools, input_skip) {
         tools_list << 'picard_collectmultiplemetrics'
         tools_list << 'seqfu_stats'
     }
-    if ('promethion' in setup_list) {
+    if ('ont' in setup_list) {
         tools_list << 'fastqc'
         tools_list << 'fastqscreen'
         tools_list << 'seqfu_stats'

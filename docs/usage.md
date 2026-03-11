@@ -134,14 +134,14 @@ In this case you can skip them by providing a comma-separated list of tools to b
 
 The nextflow configuration file can also be use to customise tool arguments.
 See official [nexflow](https://www.nextflow.io/docs/latest/config.html) and [nf-core](https://nf-co.re/docs/usage/configuration#customising-tool-arguments) documentation for further details.
-
-### BWAMEM2 and alignment-based QC tools
+### Available functionality and tools
+#### BWAMEM2 and alignment-based QC tools
 
 If no genome or fasta file is provided, either with `--genome` or `--fasta`,
 the pipeline will not be able to run the alignment step with BWAMEM2,
 and will skip all tools that depend on the alignment file (eg. `picard CollectHsMetrics` and `picard CollectHsMetrics`).
 
-### Hybrid-selection QC metrics
+#### Hybrid-selection QC metrics
 
 The pipeline supports hybrid-selection (HS) QC metrics collection via [picard CollectHSmetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard).
 
