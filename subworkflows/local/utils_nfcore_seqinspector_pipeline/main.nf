@@ -325,6 +325,7 @@ def setupTools(input_setup, input_tools, input_skip) {
         tools_list << 'picard_collectmultiplemetrics'
         tools_list << 'rundirparser'
         tools_list << 'seqfu_stats'
+        tools_list << 'checkqc'
     }
     if ('bam' in setup_list) {
         tools_list << 'picard_collecthsmetrics'
@@ -344,6 +345,7 @@ def setupTools(input_setup, input_tools, input_skip) {
     if ('illumina' in setup_list) {
         tools_list << 'rundirparser'
         tools_list << 'seqfu_stats'
+        tools_list << 'checkqc'
     }
     if ('minimal' in setup_list) {
         tools_list << 'fastqc'
