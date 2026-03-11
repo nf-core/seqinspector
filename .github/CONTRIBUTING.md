@@ -86,6 +86,7 @@ If you wish to add a new tool to the seqinspector pipeline, please use the follo
 11. Add your tool to the tools selection:
     - In the local subworkflow `utils_nfcore_seqinspector_pipeline` find the lists of tool lists in `main.nf` and add your tool to the list `all` and any other appropriate list.
     - In the `nextflow_schema.json` add your tool to the pattern of the `tools` properties.
+    - update the list of tools in the `Tools Selection` section in the `usage.md` file.
 12. Add your tool to the table `Compatibility between tools and data type` on in the `README.md` file found in the base directory of seqinspector.
 13. Add a description of the output files and if relevant any appropriate images from the MultiQC report to `docs/output.md`.
 14. Update the metromap (can be found in `assets`) to include your new step.

@@ -318,6 +318,9 @@ def setupTools(input_setup, input_tools, input_skip) {
     // Current list actually used are default, minimal and promethion
     // The others are here as a showcase for what could be done
 
+    // please update the usage.md section about tools selection when adding new tools here!
+
+
     if ('all' in setup_list) {
         tools_list << 'fastqc'
         tools_list << 'fastqscreen'
@@ -334,7 +337,7 @@ def setupTools(input_setup, input_tools, input_skip) {
         tools_list << 'fastqc'
         tools_list << 'fastqscreen'
     }
-    if ('default' in setup_list) {
+    if ('default' in setup_list) { 
         tools_list << 'fastqc'
         tools_list << 'fastqscreen'
         tools_list << 'picard_collectmultiplemetrics'
