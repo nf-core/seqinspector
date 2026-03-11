@@ -57,7 +57,7 @@ workflow SEQINSPECTOR {
     //
     // MODULE: Parse rundir info
     //
-    if ("rundirparser" in tools) {
+    if ('rundirparser' in tools) {
 
         // Branch the samplesheet channel based on rundir presence
         ch_rundir_branch = ch_samplesheet.branch { meta, _reads ->
@@ -99,45 +99,36 @@ workflow SEQINSPECTOR {
     //
     // MODULE: Run Seqtk sample to perform subsampling
     //
-    if (sample_size) {
-        SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] })
 
-        ch_sample = SEQTK_SAMPLE.out.reads
-    }
-    else {
-        // No subsampling
-        ch_sample = ch_samplesheet
-    }
+    SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] }.filter { sample_size })
+
+    ch_sample = sample_size ? SEQTK_SAMPLE.out.reads : ch_samplesheet
 
     //
     // MODULE: Run FastQC
     //
-    if ("fastqc" in tools) {
-        FASTQC(ch_sample)
+    FASTQC(ch_sample.filter { 'fastqc' in tools })
 
-        ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
-    }
+    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
 
     //
     // Module: Run SeqFu stats
     //
-    if ("seqfu_stats" in tools) {
-        SEQFU_STATS(ch_samplesheet.map { meta, reads -> [[id: "seqfu", sample_id: meta.id, tags: meta.tags], reads] })
+    SEQFU_STATS(ch_samplesheet.map { meta, reads -> [[id: "seqfu", sample_id: meta.id, tags: meta.tags], reads] }.filter { 'seqfu_stats' in tools })
 
-        // Parse the stats TSV file
-        SEQFU_STATS.out.stats
-            .map { meta, stats -> [meta.sample_id, stats] }
-            .splitCsv(header: true, sep: '\t')
-            .map { sample_id, row ->
-                // Check if requested sample size exceeds available reads
-                def sample_reads = row['#Seq'].toInteger()
-                if (sample_size > sample_reads) {
-                    log.warn("${sample_id}: Requested sample_size (${sample_size}) is larger than available reads (${sample_reads}). Pipeline will continue with ${sample_reads} reads.")
-                }
+    // Parse the stats TSV file
+    SEQFU_STATS.out.stats
+        .map { meta, stats -> [meta.sample_id, stats] }
+        .splitCsv(header: true, sep: '\t')
+        .map { sample_id, row ->
+            // Check if requested sample size exceeds available reads
+            def sample_reads = row['#Seq'].toInteger()
+            if (sample_size > sample_reads) {
+                log.warn("${sample_id}: Requested sample_size (${sample_size}) is larger than available reads (${sample_reads}). Pipeline will continue with ${sample_reads} reads.")
             }
+        }
 
-        ch_multiqc_files = ch_multiqc_files.mix(SEQFU_STATS.out.multiqc)
-    }
+    ch_multiqc_files = ch_multiqc_files.mix(SEQFU_STATS.out.multiqc)
 
     //
     // MODULE: Run FastQ Screen
@@ -146,47 +137,43 @@ workflow SEQINSPECTOR {
     // Parse the reference info needed to create a FastQ Screen config file
     // and transpose it into a tuple containing lists for each property
 
-    if ("fastqscreen" in tools) {
-        ch_fastqscreen_refs = channel.fromList(
-                samplesheetToList(
-                    fastq_screen_references,
-                    "${projectDir}/assets/schema_fastq_screen_references.json",
-                )
+    ch_fastqscreen_refs = channel.fromList(
+            samplesheetToList(
+                fastq_screen_references,
+                "${projectDir}/assets/schema_fastq_screen_references.json",
             )
-            .toList()
-            .transpose()
-            .toList()
+        )
+        .toList()
+        .transpose()
+        .toList()
 
-        FASTQSCREEN_FASTQSCREEN(ch_sample, ch_fastqscreen_refs)
+    FASTQSCREEN_FASTQSCREEN(ch_sample.filter { 'fastqscreen' in tools }, ch_fastqscreen_refs)
 
-        ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
-    }
+    ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
 
     // MODULE: Align reads with BWA-MEM2
-    if (("picard_collecthsmetrics" in tools) || ("picard_collectmultiplemetrics" in tools)) {
-        BWAMEM2_MEM(
-            ch_sample,
-            bwamem2_index,
-            fasta_reference,
-            sort_bam,
-        )
+    BWAMEM2_MEM(
+        ch_sample.filter { ('picard_collecthsmetrics' in tools) || ('picard_collectmultiplemetrics' in tools) },
+        bwamem2_index,
+        fasta_reference,
+        sort_bam,
+    )
 
-        SAMTOOLS_INDEX(BWAMEM2_MEM.out.bam)
+    SAMTOOLS_INDEX(BWAMEM2_MEM.out.bam)
 
-        ch_bam_bai = BWAMEM2_MEM.out.bam.join(SAMTOOLS_INDEX.out.bai, failOnDuplicate: true, failOnMismatch: true)
+    ch_bam_bai = BWAMEM2_MEM.out.bam.join(SAMTOOLS_INDEX.out.bai, failOnDuplicate: true, failOnMismatch: true)
 
-        QC_BAM(
-            ch_bam_bai,
-            fasta_reference,
-            ref_fai,
-            bait_intervals ? channel.fromPath(bait_intervals).collect() : channel.empty(),
-            target_intervals ? channel.fromPath(target_intervals).collect() : channel.empty(),
-            ref_dict,
-            tools,
-        )
+    QC_BAM(
+        ch_bam_bai,
+        fasta_reference,
+        ref_fai,
+        bait_intervals ? channel.fromPath(bait_intervals).collect() : channel.empty(),
+        target_intervals ? channel.fromPath(target_intervals).collect() : channel.empty(),
+        ref_dict,
+        tools,
+    )
 
-        ch_multiqc_files = ch_multiqc_files.mix(QC_BAM.out.multiple_metrics, QC_BAM.out.hs_metrics)
-    }
+    ch_multiqc_files = ch_multiqc_files.mix(QC_BAM.out.multiple_metrics, QC_BAM.out.hs_metrics)
 
     // Collate and save software versions
     //
