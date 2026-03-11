@@ -133,9 +133,7 @@ workflow SEQINSPECTOR {
     //
     FASTQC_TRIMMED(ch_trimmed.filter { 'fastp' in tools })
 
-    if ('fastp' in tools) {
-        ch_multiqc_files = ch_multiqc_files.mix(FASTQC_TRIMMED.out.zip)
-    }
+    ch_multiqc_files = ch_multiqc_files.mix(FASTQC_TRIMMED.out.zip)
     //
     // Module: Run SeqFu stats
     //
