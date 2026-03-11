@@ -16,7 +16,7 @@ workflow PREPARE_GENOME {
 
     main:
     // Initialize all channels that will be used to generate references files
-    def ch_fasta = fasta ? channel.fromPath(file(fasta)).map { fasta_ -> [[id: genome], fasta_] } : channel.empty()
+    def ch_fasta = fasta ? channel.fromPath(file(fasta)).map { fasta_ -> [[id: genome], fasta_] }.collect() : channel.empty()
     def ch_bwamem2 = channel.empty()
     def ch_dict = channel.empty()
     def ch_fai = channel.empty()
