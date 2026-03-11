@@ -9,8 +9,17 @@ nextflow_pipeline {
         [
             name: "NovaSeq6000 data test - Fastp",
             params: [
-                genome: null,
                 tools: 'fastp',
+                tools_setup: null,
+            ]
+        ]
+    ]
+
+       def test_scenario = [
+        [
+            name: "NovaSeq6000 data test - Fastp and fastqc_trim",
+            params: [
+                tools: 'fastp,fastqc_trim',
                 tools_setup: null,
             ]
         ]
