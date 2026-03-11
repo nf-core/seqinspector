@@ -7,7 +7,7 @@
 // modules
 include { BWAMEM2_MEM                } from '../modules/nf-core/bwamem2/mem'
 include { FASTQC as FASTQC_RAW       } from '../modules/nf-core/fastqc'
-include { FASTQC as FASTQC_TRIMMED   } from '../modules/nf-core/fastqc'
+include { FASTQC as FASTQC_TRIM   } from '../modules/nf-core/fastqc'
 include { FASTP                      } from '../modules/nf-core/fastp/main'
 include { FASTQSCREEN_FASTQSCREEN    } from '../modules/nf-core/fastqscreen/fastqscreen'
 include { MULTIQC as MULTIQC_GLOBAL  } from '../modules/nf-core/multiqc'
@@ -131,9 +131,9 @@ workflow SEQINSPECTOR {
     //
     // MODULE: Run FastQC on trimmed reads
     //
-    FASTQC_TRIMMED(ch_trimmed.filter { 'fastqc_trim' in tools })
+    FASTQC_TRIM(ch_trimmed.filter { 'fastqc_trim' in tools })
 
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQC_TRIMMED.out.zip)
+    ch_multiqc_files = ch_multiqc_files.mix(FASTQC_TRIM.out.zip)
     //
     // Module: Run SeqFu stats
     //
