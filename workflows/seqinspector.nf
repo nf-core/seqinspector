@@ -119,16 +119,14 @@ workflow SEQINSPECTOR {
 
     FASTP(
         // Provide a tuple channel: [ meta, reads, adapter_fasta ]
-        ch_sample.filter { 'fastp' in tools }.map { meta, reads -> [ meta, reads, [] ] },
+        ch_sample.map { meta, reads -> [ meta, reads, [] ] }.filter { 'fastp' in tools },
         false,        // discard_trimmed_pass
         false,        // save_trimmed_fail
         false         // save_merged
     )
 
     ch_trimmed = ('fastp' in tools) ? FASTP.out.reads : ch_sample
-    if ('fastp' in tools) {
-        ch_multiqc_files = ch_multiqc_files.mix(FASTP.out.json)
-    }
+    ch_multiqc_files = ch_multiqc_files.mix(FASTP.out.json)
 
     //
     // MODULE: Run FastQC on trimmed reads

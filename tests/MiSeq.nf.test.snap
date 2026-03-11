@@ -249,7 +249,7 @@
             [
                 "SAMPLE_SINGLE_END_01.bam:md5,9acd4428f95f70c1393671680ab9270f"
             ],
-           "No warnings"
+            "No warnings"
         ],
         "meta": {
             "nf-test": "0.9.3",
@@ -681,7 +681,7 @@
                 "SAMPLE_PAIRED_END_1_01.bam:md5,ac811b20d56132f5e039b3e8fd217405",
                 "SAMPLE_PAIRED_END_2_02.bam:md5,57892fc4314e66e8e20de4f5d82f9b5d"
             ],
-           "No warnings"
+            "No warnings"
         ],
         "meta": {
             "nf-test": "0.9.3",
@@ -858,7 +858,7 @@
             [
                 "SAMPLE_SINGLE_END_01.bam:md5,9acd4428f95f70c1393671680ab9270f"
             ],
-           "No warnings"
+            "No warnings"
         ],
         "meta": {
             "nf-test": "0.9.3",

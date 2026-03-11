@@ -984,7 +984,7 @@
                 "------------------------------------------------------",
                 "Input/output options",
                 "  input                     : https://raw.githubusercontent.com/nf-core/test-datasets/seqinspector/testdata/NovaSeq6000/samplesheet.csv",
-                "  outdir                    : [PATH]/.nf-test/tests/[NFT_HASH]/output",
+                "  outdir                    : [PATH]/tests/[NFT_HASH]/output",
                 "  tools_setup               : default",
                 "Reference genome options",
                 "  genome                    : R64-1-1",
@@ -996,11 +996,11 @@
                 "  trace_report_suffix       : [TIMESTAMP]",
                 "Core Nextflow options",
                 "  runName                   : [RUN_NAME]",
-                "  launchDir                 : [PATH]/.nf-test/tests/[NFT_HASH]",
-                "  workDir                   : [PATH]/.nf-test/tests/[NFT_HASH]/work",
+                "  launchDir                 : [PATH]/tests/[NFT_HASH]",
+                "  workDir                   : [PATH]/tests/[NFT_HASH]/work",
                 "  projectDir                : [PATH]",
                 "  userName                  : [USER]",
-                "  profile                   : [CONTAINER],test",
+                "  profile                   : test,[CONTAINER]",
                 "  configFiles               : [PATH]/nextflow.config, [PATH]/nextflow.config, [PATH]/tests/nextflow.config",
                 "!! Only displaying parameters that differ from the pipeline defaults !!",
                 "------------------------------------------------------",
@@ -1014,7 +1014,6 @@
                 "  Tools selected to be run  : fastqc,fastqscreen,picard_collectmultiplemetrics,rundirparser,seqfu_stats",
                 "------------------------------------------------------",
                 "-[nf-core/seqinspector] Pipeline completed successfully-",
-                ,
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (Sample1_01)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (Sample23_03)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (SampleA_02)",
@@ -2043,7 +2042,7 @@
                 "Undetermined_05.bam:md5,2841f21f7f70634f21505ac803ff8221",
                 "sampletest_04.bam:md5,3d1cd701ad22dacc6b194ea16582d647"
             ],
-           "No warnings"
+            "No warnings"
         ],
         "meta": {
             "nf-test": "0.9.3",
@@ -3037,7 +3036,7 @@
                 "Undetermined_05.bam:md5,691b83f3c015cf5f2b28ab6d0581d03c",
                 "sampletest_04.bam:md5,b13db1c95389474f089f870b906d3fc0"
             ],
-           "No warnings"
+            "No warnings"
         ],
         "meta": {
             "nf-test": "0.9.3",
@@ -3991,8 +3990,7 @@
                 "WARN: Sample 'Sample23_03' does not have a rundir specified",
                 "WARN: Sample 'SampleA_02' does not have a rundir specified",
                 "WARN: Sample 'Undetermined_05' does not have a rundir specified",
-                "WARN: Sample 'sampletest_04' does not have a rundir specified",
-
+                "WARN: Sample 'sampletest_04' does not have a rundir specified"
             ]
         ],
         "meta": {
@@ -4991,7 +4989,6 @@
                 "WARN: Sample1_01: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
                 "WARN: Sample23_03: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
                 "WARN: SampleA_02: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
-                ,
                 "WARN: Undetermined_05: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
                 "WARN: sampletest_04: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads."
             ]
@@ -5782,7 +5779,6 @@
             "No BAM files",
             [
                 "WARN: On a MacOS system these tags will be considered as one",
-                ,
                 "WARN: Tag name collision: [group1, Group1]",
                 "WARN: Tag name collision: [lane1, Lane1, LANE1]",
                 "WARN: Tag name collision: [test, Test, TEST]"
