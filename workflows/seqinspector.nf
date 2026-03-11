@@ -137,17 +137,15 @@ workflow SEQINSPECTOR {
     // Parse the reference info needed to create a FastQ Screen config file
     // and transpose it into a tuple containing lists for each property
 
-    ch_fastqscreen_refs = channel.fromList(
+    FASTQSCREEN_FASTQSCREEN(
+        ch_sample.filter { 'fastqscreen' in tools },
+        channel.fromList(
             samplesheetToList(
                 fastq_screen_references,
                 "${projectDir}/assets/schema_fastq_screen_references.json",
             )
-        )
-        .toList()
-        .transpose()
-        .toList()
-
-    FASTQSCREEN_FASTQSCREEN(ch_sample.filter { 'fastqscreen' in tools }, ch_fastqscreen_refs)
+        ).toList().transpose().toList(),
+    )
 
     ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
 
