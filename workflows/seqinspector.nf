@@ -12,6 +12,7 @@ include { FASTQE                     } from '../modules/nf-core/fastqe'
 include { FASTQSCREEN_FASTQSCREEN    } from '../modules/nf-core/fastqscreen/fastqscreen'
 include { MULTIQC as MULTIQC_GLOBAL  } from '../modules/nf-core/multiqc'
 include { MULTIQC as MULTIQC_PER_TAG } from '../modules/nf-core/multiqc'
+include { MULTIQCSAV as MULTIQC_SAV  } from '../modules/nf-core/multiqcsav'
 include { RUNDIRPARSER               } from '../modules/local/rundirparser'
 include { SAMTOOLS_INDEX             } from '../modules/nf-core/samtools/index'
 include { SEQFU_STATS                } from '../modules/nf-core/seqfu/stats'
@@ -249,6 +250,38 @@ workflow SEQINSPECTOR {
         }
     )
 
+    ch_sav_in = ch_rundir.map{ meta, files ->
+        def xml = []
+        def interop = []
+        files.eachFileRecurse { file ->
+            if (file.fileName.toString() in ['RunInfo.xml','RunParameters.xml']) {
+                xml << file
+            } else if (file.parent.name == 'InterOp' && file.fileName.toString().endsWith(".bin")) {
+                interop << file
+            }
+        }
+
+        return [meta, xml, interop]
+    }.combine(
+        ch_multiqc_files.map { _meta, files -> files }.flatten().collect()
+        .combine(ch_multiqc_extra_files_global.collect()).map { files -> [files.flatten()] }
+    ).map { meta, xml, interop, extra_files  ->
+        return [
+            meta,
+            xml,
+            interop,
+            extra_files,
+            multiqc_config
+                ? file(multiqc_config, checkIfExists: true)
+                : file("${projectDir}/assets/multiqc_config.yml", checkIfExists: true),
+            multiqc_logo ? file(multiqc_logo, checkIfExists: true) : [],
+            [],
+            []
+        ]
+    }
+
+    MULTIQC_SAV(ch_sav_in)
+
     ch_multiqc_extra_files_tag = ch_multiqc_extra_files.mix(
         ch_tags.toList().map { tag_list -> reportIndexMultiqc(tag_list, false) }.collectFile(name: 'multiqc_index_mqc.yaml')
     )
@@ -299,6 +332,7 @@ workflow SEQINSPECTOR {
     )
 
     emit:
-    global_report   = MULTIQC_GLOBAL.out.report.map { _meta, report -> [report] }.toList() // channel: [ /path/to/multiqc_report.html ]
-    grouped_reports = MULTIQC_PER_TAG.out.report.map { _meta, report -> [report] }.toList() // channel: [ /path/to/multiqc_report.html ]
+    global_report       = MULTIQC_GLOBAL.out.report.map { _meta, report -> [report] }.toList() // channel: [ /path/to/multiqc_report.html ]
+    global_sav_report   = MULTIQC_SAV.out.report.map { _meta, report -> [report] }.toList() // channel: [ /path/to/multiqc_report.html ]
+    grouped_reports     = MULTIQC_PER_TAG.out.report.map { _meta, report -> [report] }.toList() // channel: [ /path/to/multiqc_report.html ]
 }
