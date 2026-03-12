@@ -270,21 +270,6 @@
                 "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"
             ],
             [
-                "Sample1_01.fastp.fastq.gz:md5,9f2f4855422bd18576efbc8af0368517",
-                "Sample1_01.fastp.json:md5,c0577779b5c67ada3143e64a0847c538",
-                "Sample1_01.fastp.log:md5,d2b4e9fc723c1fdd89d3865aff46182e",
-                "Sample23_03.fastp.fastq.gz:md5,036238392d51face00be9710c0c14523",
-                "Sample23_03.fastp.json:md5,1aca0d2d9244004f03ba19e550139bd8",
-                "Sample23_03.fastp.log:md5,70cdfd9d8045249a6ebee0442a453bc0",
-                "SampleA_02.fastp.fastq.gz:md5,bcc1ed324745e894356ff3b66d023156",
-                "SampleA_02.fastp.json:md5,cafbf97939fe706f8fdb29c4f78d42d5",
-                "SampleA_02.fastp.log:md5,a5f464da40e928b50197a7c55f033003",
-                "Undetermined_05.fastp.fastq.gz:md5,2d64ba05e69ae081f95581cc8f0ffd36",
-                "Undetermined_05.fastp.json:md5,b955117f9d47e100c5775876293420e4",
-                "Undetermined_05.fastp.log:md5,675e69c94f6588a67eea18e54f354f16",
-                "sampletest_04.fastp.fastq.gz:md5,e81c2337941970a3bafa2c0adf8bebb1",
-                "sampletest_04.fastp.json:md5,cea4e76afeeae51ee1ab93b3d1164312",
-                "sampletest_04.fastp.log:md5,5730596c2cbf82906c936ac6fecf3f1d",
                 "fastp-seq-content-gc-plot_Read_1_After_filtering.txt:md5,abdf85cb2f0503e810af139950588f70",
                 "fastp-seq-content-gc-plot_Read_1_Before_filtering.txt:md5,abdf85cb2f0503e810af139950588f70",
                 "fastp-seq-content-n-plot_Read_1_After_filtering.txt:md5,8aafe701b59b4e70ccec86748c7d6eb3",
@@ -334,7 +319,7 @@
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-03-11T22:12:37.670776",
+        "timestamp": "2026-03-12T09:39:52.117621338",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -865,21 +850,6 @@
                 "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"
             ],
             [
-                "Sample1_01.fastp.fastq.gz:md5,9f2f4855422bd18576efbc8af0368517",
-                "Sample1_01.fastp.json:md5,c0577779b5c67ada3143e64a0847c538",
-                "Sample1_01.fastp.log:md5,7d927ba1059b38f57885d66363119c60",
-                "Sample23_03.fastp.fastq.gz:md5,036238392d51face00be9710c0c14523",
-                "Sample23_03.fastp.json:md5,1aca0d2d9244004f03ba19e550139bd8",
-                "Sample23_03.fastp.log:md5,70cdfd9d8045249a6ebee0442a453bc0",
-                "SampleA_02.fastp.fastq.gz:md5,bcc1ed324745e894356ff3b66d023156",
-                "SampleA_02.fastp.json:md5,cafbf97939fe706f8fdb29c4f78d42d5",
-                "SampleA_02.fastp.log:md5,a5f464da40e928b50197a7c55f033003",
-                "Undetermined_05.fastp.fastq.gz:md5,2d64ba05e69ae081f95581cc8f0ffd36",
-                "Undetermined_05.fastp.json:md5,b955117f9d47e100c5775876293420e4",
-                "Undetermined_05.fastp.log:md5,ca4152b0f75969be0125c8264348e283",
-                "sampletest_04.fastp.fastq.gz:md5,e81c2337941970a3bafa2c0adf8bebb1",
-                "sampletest_04.fastp.json:md5,cea4e76afeeae51ee1ab93b3d1164312",
-                "sampletest_04.fastp.log:md5,2a737d4c54f965c9478778d680b8a14d",
                 "fastp-seq-content-gc-plot_Read_1_After_filtering.txt:md5,abdf85cb2f0503e810af139950588f70",
                 "fastp-seq-content-gc-plot_Read_1_Before_filtering.txt:md5,abdf85cb2f0503e810af139950588f70",
                 "fastp-seq-content-n-plot_Read_1_After_filtering.txt:md5,8aafe701b59b4e70ccec86748c7d6eb3",
@@ -984,7 +954,7 @@
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-03-11T22:16:04.654241",
+        "timestamp": "2026-03-12T09:40:57.144227581",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

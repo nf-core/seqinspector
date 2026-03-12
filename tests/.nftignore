@@ -1,9 +1,8 @@
 .DS_Store
 bwamem2_mem/*.bam
 bwamem2_mem/*.bam.bai
-fastqc/*_raw_fastqc.{html,zip}
-fastqc/*_trimmed_fastqc.{html,zip}
-fastp/*.fastp.{html,zip}
+fastp/*.fastp.*
+fastqc/*_fastqc.{html,zip}
 fastqscreen/*_screen.html
 multiqc/{global_report,group_reports/*}/multiqc_data/fastqc_top_overrepresented_sequences_table.txt
 multiqc/{global_report,group_reports/*}/multiqc_data/llms-full.txt
