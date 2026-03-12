@@ -1,7 +1,7 @@
 {
     "PromethION data test": {
         "content": [
-            4,
+            5,
             {
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -105,7 +105,18 @@
                 "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
                 "seqfu_stats",
                 "seqfu_stats/hg001_01_seqfu.tsv",
-                "seqfu_stats/hg001_01_seqfu_mqc.txt"
+                "seqfu_stats/hg001_01_seqfu_mqc.txt",
+                "toulligqc",
+                "toulligqc/hg001_01Toulligqc-report-2026-03-12-104516",
+                "toulligqc/hg001_01Toulligqc-report-2026-03-12-104516/images",
+                "toulligqc/hg001_01Toulligqc-report-2026-03-12-104516/images/Correlation_between_read_length_and_PHRED_score.html",
+                "toulligqc/hg001_01Toulligqc-report-2026-03-12-104516/images/Distribution_of_read_lengths.html",
+                "toulligqc/hg001_01Toulligqc-report-2026-03-12-104516/images/PHRED_score_density_distribution.html",
+                "toulligqc/hg001_01Toulligqc-report-2026-03-12-104516/images/PHRED_score_distribution.html",
+                "toulligqc/hg001_01Toulligqc-report-2026-03-12-104516/images/Read_count_histogram.html",
+                "toulligqc/hg001_01Toulligqc-report-2026-03-12-104516/images/plotly.min.js",
+                "toulligqc/hg001_01Toulligqc-report-2026-03-12-104516/report.data",
+                "toulligqc/hg001_01Toulligqc-report-2026-03-12-104516/report.html"
             ],
             [
                 "hg001_01_screen.png:md5,b9c58e388f18ad11f4c2e29e9b573a5e",
@@ -127,12 +138,20 @@
                 "multiqc_fastqc.txt:md5,b71aaffef9767dfe9d83fde0d31a3a1b",
                 "multiqc_seqfu_mqc.txt:md5,9595d608ff5709f2bdec8cb1016416c0",
                 "hg001_01_seqfu.tsv:md5,b133752c897afbb4d8721b911fa117d4",
-                "hg001_01_seqfu_mqc.txt:md5,42e3506b02ceb72a6f05cb174505e722"
+                "hg001_01_seqfu_mqc.txt:md5,42e3506b02ceb72a6f05cb174505e722",
+                "Correlation_between_read_length_and_PHRED_score.html:md5,6e5f33dd990a549d80cf379af5065771",
+                "Distribution_of_read_lengths.html:md5,c28295024a11240fac57f7d28c9f2f0d",
+                "PHRED_score_density_distribution.html:md5,6dc07e9180f1138d1cfbbdf6c0ac3dc3",
+                "PHRED_score_distribution.html:md5,8b9f3b326719767657e4fcdf95ef479d",
+                "Read_count_histogram.html:md5,b2201c1f9b37ab1e53f74242193db3af",
+                "plotly.min.js:md5,059f6ecfa3930aa0b85b6ef4591390e4",
+                "report.data:md5,35108b206b91914f9c6a2ff2cecfbdf6",
+                "report.html:md5,81a22cb990cea59e914eddaa5fbea873"
             ],
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-03-05T15:44:59.709468008",
+        "timestamp": "2026-03-12T11:45:42.526263521",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
