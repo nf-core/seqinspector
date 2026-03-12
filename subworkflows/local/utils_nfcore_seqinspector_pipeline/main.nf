@@ -143,6 +143,11 @@ workflow PIPELINE_INITIALISATION {
     if (!(fasta) && (("picard_collecthsmetrics" in tools) || ("picard_collectmultiplemetrics" in tools))) {
         log.warn("No fasta was provided, but picard was requested")
         log.warn("BWAMEM2, SAMTOOLS and PICARD processes, will be skipped")
+
+    }
+
+    if ('toulligqc' in tools && 'emulate_amd64' in workflow.profile.tokenize(",")) {
+        error("ToulligQC is not compatible with the 'emulate_amd64' profile. Please remove ToulligQC from the list of tools if you wish to run seqinspector on this architecture.")
     }
 
     emit:

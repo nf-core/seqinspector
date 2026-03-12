@@ -68,7 +68,7 @@
                     },
                     "toulligqc": {
                         "branch": "master",
-                        "git_sha": "81880787133db07d9b4c1febd152c090eb8325dc",
+                        "git_sha": "d9137377f4dd6246242829772eb1949b96de1ef0",
                         "installed_by": ["modules"]
                     }
                 }
