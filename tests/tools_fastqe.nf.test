@@ -7,11 +7,10 @@ nextflow_pipeline {
 
     def test_scenario = [
         [
-            name: "PromethION data test",
+            name: "NovaSeq6000 data test - fastqe",
             params: [
-                genome : 'EB1',
-                input: pipelines_testdata_base_path + 'seqinspector/testdata/PromethION/samplesheet.csv',
-                tools_bundle: 'ont',
+                tools: 'fastqe',
+                tools_bundle: null,
             ]
         ]
     ]

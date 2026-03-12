@@ -15,6 +15,11 @@
                         "git_sha": "8325a8155a77a336a613a504b8e4d6cea7a2344a",
                         "installed_by": ["modules"]
                     },
+                    "fastp": {
+                        "branch": "master",
+                        "git_sha": "1fb5a73bce8e4ac7079b0a9461b23d11e877ad14",
+                        "installed_by": ["modules"]
+                    },
                     "fastqc": {
                         "branch": "master",
                         "git_sha": "3009f27c4e4b6e99da4eeebe82799e13924a4a1f",
@@ -33,6 +38,9 @@
                     "krona/ktupdatetaxonomy": {
                         "branch": "master",
                         "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                    "fastqe": {
+                        "branch": "master",
+                        "git_sha": "c448a28daf17a09a668dd2072ec283f0b480c914",
                         "installed_by": ["modules"]
                     },
                     "fastqscreen/fastqscreen": {

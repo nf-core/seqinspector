@@ -31,6 +31,10 @@
 > Telatin A, Fariselli P, Birolo G. SeqFu: A Suite of Utilities for the Robust and Reproducible Manipulation of Sequence Files. Bioengineering 2021, 8, 59. doi.org/10.3390/bioengineering8050059
   > Andrews, S. (2010). FastQC: A Quality Control Tool for High Throughput Sequence Data [Online].
 
+- [Fastp](https://doi.org/10.1093/bioinformatics/bty560)
+
+  > Shifu Chen, Yanqing Zhou, Yaru Chen, Jia Gu, fastp: an ultra-fast all-in-one FASTQ preprocessor, Bioinformatics, Volume 34, Issue 17, September 2018, Pages i884–i890.
+
 - [FastQ Screen](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/)
 
   > Wingett SW and Andrews S. FastQ Screen: A tool for multi-genome mapping and quality control [version 2; referees: 4 approved]. F1000Research 2018, 7:1338 (https://doi.org/10.12688/f1000research.15931.2)
