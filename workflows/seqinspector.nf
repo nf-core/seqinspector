@@ -99,7 +99,7 @@ workflow SEQINSPECTOR {
 
 
     //
-    // MODULE: Run Seqtk sample 
+    // MODULE: Run Seqtk sample
     //
 
     SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] }.filter { sample_size })
