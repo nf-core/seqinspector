@@ -6,9 +6,3 @@ channels:
 dependencies:
   - bioconda::fastq-screen=0.16.0
   - bioconda::perl-gdgraph=1.54
-  # - gzip
-  # - SAMtools
-  # - bowtie
-  # - bowtie2
-  # - bwa
-  # - bismark
