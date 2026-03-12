@@ -7,7 +7,7 @@
 // modules
 include { BWAMEM2_MEM                } from '../modules/nf-core/bwamem2/mem'
 include { FASTQC as FASTQC_RAW       } from '../modules/nf-core/fastqc'
-include { FASTQC as FASTQC_TRIM   } from '../modules/nf-core/fastqc'
+include { FASTQC as FASTQC_TRIM      } from '../modules/nf-core/fastqc'
 include { FASTP                      } from '../modules/nf-core/fastp/main'
 include { FASTQSCREEN_FASTQSCREEN    } from '../modules/nf-core/fastqscreen/fastqscreen'
 include { MULTIQC as MULTIQC_GLOBAL  } from '../modules/nf-core/multiqc'
@@ -99,7 +99,7 @@ workflow SEQINSPECTOR {
 
 
     //
-    // MODULE: Run Seqtk sample to perform subsampling
+    // MODULE: Run Seqtk sample 
     //
 
     SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] }.filter { sample_size })
