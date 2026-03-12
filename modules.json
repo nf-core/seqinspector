@@ -17,7 +17,7 @@
                     },
                     "checkqc": {
                         "branch": "master",
-                        "git_sha": "b06df7c554e1eb06c35ad96c506b49444e0a1729",
+                        "git_sha": "389ed64090aa4594276fb3d53923432c7728c5b4",
                         "installed_by": ["modules"]
                     },
                     "fastqc": {
