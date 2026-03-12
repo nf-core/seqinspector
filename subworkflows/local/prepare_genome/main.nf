@@ -23,9 +23,7 @@ workflow PREPARE_GENOME {
 
     // Use pre-built index when --bwamem2 parameter is provided or build index from reference FASTA if necessary
     if (bwamem2) {
-        ch_bwamem2 = channel.fromPath(bwamem2)
-            .map { index_dir -> tuple([id: genome], index_dir) }
-            .collect()
+        ch_bwamem2 = channel.fromPath(bwamem2).map { bwamem2_ -> [[id: genome], bwamem2_] }.collect()
     }
     else {
         BWAMEM2_INDEX(ch_fasta.filter { 'picard_collecthsmetrics' in tools || 'picard_collectmultiplemetrics' in tools })
@@ -34,7 +32,7 @@ workflow PREPARE_GENOME {
 
     // Use pre-built index when --dict parameter is provided or build index from reference FASTA if necessary
     if (dict) {
-        ch_dict = channel.fromPath(dict).map { _dict -> [[id: genome], dict] }
+        ch_dict = channel.fromPath(dict).map { _dict -> [[id: genome], dict] }.collect()
     }
     else {
         PICARD_CREATESEQUENCEDICTIONARY(ch_fasta.filter { 'picard_collecthsmetrics' in tools })
@@ -43,13 +41,11 @@ workflow PREPARE_GENOME {
 
     // Use pre-built index when --fai parameter is provided or build index from reference FASTA if necessary
     if (fai) {
-        ch_fai = channel.fromPath(fai)
-            .map { index_dir -> tuple([id: genome], index_dir) }
-            .collect()
+        ch_fai = channel.fromPath(fai).map { fai_ -> [[id: genome], fai_] }.collect()
     }
     else {
         SAMTOOLS_FAIDX(
-            ch_fasta.map { meta, _fasta -> [meta, _fasta, []] }.filter { 'picard_collecthsmetrics' in tools || 'picard_collectmultiplemetrics' in tools },
+            ch_fasta.map { meta, fasta_ -> [meta, fasta_, []] }.filter { 'picard_collecthsmetrics' in tools || 'picard_collectmultiplemetrics' in tools },
             false,
         )
         ch_fai = SAMTOOLS_FAIDX.out.fai
