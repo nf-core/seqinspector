@@ -10,7 +10,7 @@ nextflow_pipeline {
             name: "MiSeq data test (single end reads)",
             params: [
                 input: pipelines_testdata_base_path + 'seqinspector/testdata/MiSeq/samplesheet.csv',
-                tools_setup: 'minimal',
+                tools_bundle: 'minimal',
             ]
         ],
         [
@@ -18,7 +18,7 @@ nextflow_pipeline {
             params: [
                 input: pipelines_testdata_base_path + 'seqinspector/testdata/MiSeq/samplesheet.csv',
                 skip_tools: 'fastqc',
-                tools_setup: 'minimal',
+                tools_bundle: 'minimal',
             ]
         ],
         [
@@ -26,14 +26,14 @@ nextflow_pipeline {
             params: [
                 input: pipelines_testdata_base_path + 'seqinspector/testdata/MiSeq/samplesheet.csv',
                 skip_tools: 'fastqc,fastqscreen,picard_collectmultiplemetrics,seqfu_stats',
-                tools_setup: 'minimal',
+                tools_bundle: 'minimal',
             ]
         ],
         [
             name: "MiSeq data test (paired end reads)",
             params: [
                 input: pipelines_testdata_base_path + 'seqinspector/testdata/Miseq_PairedEnd/samplesheet.csv',
-                tools_setup: 'minimal',
+                tools_bundle: 'minimal',
             ]
         ]
     ]

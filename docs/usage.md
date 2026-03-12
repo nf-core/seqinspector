@@ -127,13 +127,140 @@ Both absolute numbers (e.g 100) and relative numbers (e.g 0.25) can be specified
 nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 -profile docker
 ```
 
-### Skipping tools
+### Tools selection
 
-Some tools might not be compatible with your data.
-In this case you can skip them by providing a comma-separated list of tools to be skipped with the `--skip_tools` parameter.
+Tools selection is an integral part of sequinspector and, as the pipeline grows, it will become more and more important to select tools of interest.
+By **default**, the pipeline does run a subsection of tools as defined in the `utils_nfcore_seqinspector_pipeline` subworkflow. Currently, the following tools are run as default:
+
+- fastqc
+- fastqscreen
+- picard_collectmultiplemetrics
+- rundirparser
+- seqfu_stats
+
+#### Choose specific tools
+
+It is possible to choose individual tools to run using the `--tools` parameter and add all desired tools in a comma separated string. For example:
+
+```showLineNumbers
+--tools fastqscreen,rundirparser
+```
+
+Be aware that the default tools will still be run. In order to ONLY run the selection, one has to specify `--tools_bundle null` as well:
+
+```showLineNumbers
+--tools fastqscreen,rundirparser --tools_bundle null
+```
+
+Currently the `tools` param can have the following values: fastqc, fastqscreen, picard_collecthsmetrics, picard_collectmultiplemetrics, rundirparser and seqfu_stats.
+
+#### Skip specific tools
+
+Some tools might not be compatible with your data or you do not require all tools that are going to be run. In this case you can skip them by providing a comma-separated list of tools to be skipped with the `--skip_tools` parameter.
 
 The nextflow configuration file can also be use to customise tool arguments.
 See official [nexflow](https://www.nextflow.io/docs/latest/config.html) and [nf-core](https://nf-co.re/docs/usage/configuration#customising-tool-arguments) documentation for further details.
+
+#### Choose pre-defined bundles of tools
+
+It is possible to also chose bundles of pre-specified tools using the `tools_bundle` parameter. It is still possible to remove tools using the `skip_tools` parameters or add additional tools with the `tools` parameter when chosing a predefined setup with `tools_bundle`.
+
+Currently, the following bundles are available:
+
+:::info{title="default"}{collapse}
+
+Requirements:
+
+- specification of the `genome` parameter
+- specification of the Illumina runfolder
+
+Tools:
+
+- fastqc
+- fastqscreen
+- picard_collectmultiplemetrics
+- rundirparser
+- seqfu_stats
+
+:::
+
+:::info{title="all"}{collapse}
+
+Requirements:
+
+- specification of the `genome` parameter
+- specification of the Illumina runfolder
+
+Tools:
+
+- fastqc
+- fastqscreen
+- picard_collecthsmetrics
+- picard_collectmultiplemetrics
+- rundirparser
+- seqfu_stats
+
+:::
+
+:::info{title="minimal"}{collapse}
+
+Requirements:
+
+- specification of the `genome` parameter
+
+Tools:
+
+- fastqc
+- fastqscreen
+- picard_collectmultiplemetrics
+- seqfu_stats
+
+:::
+
+:::info{title="bam"}{collapse}
+
+Requirements:
+
+- specification of the `genome` parameter
+
+Tools:
+
+- picard_collecthsmetrics
+- picard_collectmultiplemetrics
+
+:::
+
+:::info{title="fastq"}{collapse}
+
+Tools:
+
+- fastqc
+- fastqscreen
+
+:::
+
+:::info{title="illumina"}{collapse}
+
+Requirements:
+
+- Specification of the Illumina runfolder
+
+Tools:
+
+- rundirparser
+- seqfu_stats
+
+:::
+
+:::info{title="ont"}{collapse}
+
+Tools:
+
+- fastqc
+- fastqscreen
+- seqfu_stats
+
+:::
 
 ### Available functionality and tools
 
