@@ -16,14 +16,14 @@ workflow PREPARE_GENOME {
 
     main:
     // Initialize all channels that will be used to generate references files
-    def ch_fasta = fasta ? channel.fromPath(file(fasta)).map { fasta_ -> [[id: genome], fasta_] }.collect() : channel.empty()
+    def ch_fasta = fasta ? channel.fromPath(fasta, checkIfExists: true).map { fasta_ -> [[id: genome], fasta_] }.collect() : channel.empty()
     def ch_bwamem2 = channel.empty()
     def ch_dict = channel.empty()
     def ch_fai = channel.empty()
 
     // Use pre-built index when --bwamem2 parameter is provided or build index from reference FASTA if necessary
     if (bwamem2) {
-        ch_bwamem2 = channel.fromPath(bwamem2).map { bwamem2_ -> [[id: genome], bwamem2_] }.collect()
+        ch_bwamem2 = channel.fromPath(bwamem2, checkIfExists: true).map { bwamem2_ -> [[id: genome], bwamem2_] }.collect()
     }
     else {
         BWAMEM2_INDEX(ch_fasta.filter { 'picard_collecthsmetrics' in tools || 'picard_collectmultiplemetrics' in tools })
@@ -32,7 +32,7 @@ workflow PREPARE_GENOME {
 
     // Use pre-built index when --dict parameter is provided or build index from reference FASTA if necessary
     if (dict) {
-        ch_dict = channel.fromPath(dict).map { _dict -> [[id: genome], dict] }.collect()
+        ch_dict = channel.fromPath(dict, checkIfExists: true).map { _dict -> [[id: genome], dict] }.collect()
     }
     else {
         PICARD_CREATESEQUENCEDICTIONARY(ch_fasta.filter { 'picard_collecthsmetrics' in tools })
@@ -41,7 +41,7 @@ workflow PREPARE_GENOME {
 
     // Use pre-built index when --fai parameter is provided or build index from reference FASTA if necessary
     if (fai) {
-        ch_fai = channel.fromPath(fai).map { fai_ -> [[id: genome], fai_] }.collect()
+        ch_fai = channel.fromPath(fai, checkIfExists: true).map { fai_ -> [[id: genome], fai_] }.collect()
     }
     else {
         SAMTOOLS_FAIDX(
