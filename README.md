@@ -37,6 +37,7 @@ If provided, nf-core/seqinspector can also parse statistics from an Illumina run
 | `Indexing, Mapping` | [`Bwamem2`](https://github.com/bwa-mem2/bwa-mem2)                                                                   | Align reads to reference                                                                      | [RNA, DNA]              | [N/A]                                                                                   | yes          |
 | `Indexing`          | [`SAMtools`](http://github.com/samtools)                                                                            | Index aligned BAM files, create FASTA index                                                   | [DNA]                   | [N/A]                                                                                   | yes          |
 | `QC`                | [`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)                                              | Read QC                                                                                       | [RNA, DNA]              | [N/A]                                                                                   | yes          |
+| `QC`                | [`FASTQE`](https://fastqe.com/)                                                                                     | Read QC                                                                                       | [RNA, DNA]              | [N/A]                                                                                   | yes          |
 | `QC`                | [`FastqScreen`](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/)                                   | Basic contamination detection                                                                 | [RNA, DNA]              | [N/A]                                                                                   | yes          |
 | `QC`                | [`SeqFu Stats`](https://github.com/telatin/seqfu2)                                                                  | Sequence statistics                                                                           | [RNA, DNA]              | [N/A]                                                                                   | yes          |
 | `QC`                | [`Picard collect multiple metrics`](https://broadinstitute.github.io/picard/picard-metric-definitions.html)         | Collect multiple QC metrics                                                                   | [RNA, DNA]              | [Bwamem2, SAMtools, `--genome`]                                                         | yes          |
@@ -57,6 +58,7 @@ If provided, nf-core/seqinspector can also parse statistics from an Illumina run
 | ----------- | ------- |
 | bwamem2     | 2.3     |
 | fastqc      | 0.12.1  |
+| fastqe      | 0.5.2   |
 | fastqscreen | 0.16.0  |
 | multiqc     | 1.33    |
 | picard      | 3.4.0   |

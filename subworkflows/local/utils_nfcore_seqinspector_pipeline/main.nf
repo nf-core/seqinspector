@@ -300,23 +300,23 @@ def methodsDescriptionText(mqc_methods_yaml) {
 }
 
 
-def defineToolsList(input_setup, input_tools, input_skip) {
+def defineToolsList(input_bundle, input_tools, input_skip) {
 
     // SEQTK_SAMPLE is run by default if params.sample > 0, and can therefore not be chose on it's own
     // Any tools in skip_tools will override any selection made via tools or tools_bundle
 
-    def bundle_list = input_setup ? input_setup.tokenize(',').sort().unique() : ['no_setup']
+    def bundle_list = input_bundle ? input_bundle.tokenize(',').sort().unique() : ['no_setup']
     def tools_list = input_tools ? input_tools.tokenize(',').sort().unique() : []
     def skip_list = input_skip ? input_skip.tokenize(',').sort().unique() : []
 
     // Current list actually used are default, minimal and promethion, we should probably always have a list `all`
     // The others are here as a showcase for what could be done
 
-    // please update the usage.md section about tools selection when adding new tools here!
-
+    // please update the docs/usage.md section about tools selection when adding new tools here!
 
     if ('all' in bundle_list) {
         tools_list << 'fastqc'
+        tools_list << 'fastqe'
         tools_list << 'fastqscreen'
         tools_list << 'picard_collecthsmetrics'
         tools_list << 'picard_collectmultiplemetrics'

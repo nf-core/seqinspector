@@ -12,6 +12,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 
 - [Seqtk](#seqtk) - Subsample a specific number of reads per sample
 - [FastQC](#fastqc) - Raw read QC
+- [FASTQE](#fastqe) - Raw read QC
 - [SeqFu Stats](#seqfu-stats) - Statistics for FASTA or FASTQ files
 - [FastQ Screen](#fastq-screen) - Mapping against a set of references for basic contamination QC
 - [BWA-MEM2_INDEX](#bwamem2_index) - Create BWA-MEM2 index of a chosen reference genome OR use pre-built index
@@ -46,6 +47,18 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 </details>
 
 [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) gives general quality metrics about your sequenced reads. It provides information about the quality score distribution across your reads, per base sequence content (%A/T/G/C), adapter contamination and overrepresented sequences. For further reading and documentation see the [FastQC help pages](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/).
+
+### FASTQE
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `fastqe/`
+  - `*.tsv`: FASTQE report containing quality metrics in emoji.
+
+</details>
+
+[FASTQE](https://fastqe.com/) Compute quality stats for FASTQ files and print those stats as emoji... for some reason.
 
 ### SeqFu Stats
 
