@@ -19,7 +19,7 @@ include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_seqi
 include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
 include { PREPARE_GENOME          } from './subworkflows/local/prepare_genome'
 include { getGenomeAttribute      } from 'plugin/nf-core-utils'
-include { setupTools              } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { defineToolsList              } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -40,7 +40,7 @@ params.fasta   = getGenomeAttribute('fasta')
 
 workflow {
 
-    def tools = setupTools(params.tools_setup, params.tools, params.skip_tools)
+    def tools = defineToolsList(params.tools_bundle, params.tools, params.skip_tools)
 
     //
     // SUBWORKFLOW: Run initialisation tasks

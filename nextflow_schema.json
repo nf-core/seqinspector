@@ -54,7 +54,7 @@
                     "pattern": "^((fastqc|fastqscreen|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats)?,?)*(?<!,)$",
                     "fa_icon": "fas fa-sort-amount-asc"
                 },
-                "tools_setup": {
+                "tools_bundle": {
                     "type": "string",
                     "description": "Select some default setup for the tools to be run, tools can still be used to add tools",
                     "pattern": "^((all|bam|fastq|default|illumina|minimal|ont)?,?)*(?<!,)$",
