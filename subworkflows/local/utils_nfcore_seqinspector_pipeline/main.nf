@@ -300,25 +300,22 @@ def methodsDescriptionText(mqc_methods_yaml) {
 }
 
 
-def setupTools(input_setup, input_tools, input_skip) {
+def defineToolsList(input_setup, input_tools, input_skip) {
 
-    // Trying hopefully a simpler approach than https://github.com/nf-core/seqinspector/pull/23
+    // SEQTK_SAMPLE is run by default if params.sample > 0, and can therefore not be chose on it's own
+    // Any tools in skip_tools will override any selection made via tools or tools_bundle
 
-    // All tools available (cf tools from schema)
-    // fastqc|fastqscreen|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats
-    // Other tools are run by default if a downstream tools is selected
-    // SEQTK_SAMPLE is run by default if params.sample > 0, and is therefore not in this list
-
-    // Any tools in skip tools will override any selection made via tools or tools_setup
-
-    def setup_list = input_setup ? input_setup.tokenize(',').sort().unique() : ['no_setup']
+    def bundle_list = input_setup ? input_setup.tokenize(',').sort().unique() : ['no_setup']
     def tools_list = input_tools ? input_tools.tokenize(',').sort().unique() : []
     def skip_list = input_skip ? input_skip.tokenize(',').sort().unique() : []
 
-    // Current list actually used are default, minimal and promethion
+    // Current list actually used are default, minimal and promethion, we should probably always have a list `all`
     // The others are here as a showcase for what could be done
 
-    if ('all' in setup_list) {
+    // please update the usage.md section about tools selection when adding new tools here!
+
+
+    if ('all' in bundle_list) {
         tools_list << 'fastqc'
         tools_list << 'fastqscreen'
         tools_list << 'picard_collecthsmetrics'
@@ -326,32 +323,32 @@ def setupTools(input_setup, input_tools, input_skip) {
         tools_list << 'rundirparser'
         tools_list << 'seqfu_stats'
     }
-    if ('bam' in setup_list) {
+    if ('bam' in bundle_list) {
         tools_list << 'picard_collecthsmetrics'
         tools_list << 'picard_collectmultiplemetrics'
     }
-    if ('fastq' in setup_list) {
+    if ('fastq' in bundle_list) {
         tools_list << 'fastqc'
         tools_list << 'fastqscreen'
     }
-    if ('default' in setup_list) {
+    if ('default' in bundle_list) {
         tools_list << 'fastqc'
         tools_list << 'fastqscreen'
         tools_list << 'picard_collectmultiplemetrics'
         tools_list << 'rundirparser'
         tools_list << 'seqfu_stats'
     }
-    if ('illumina' in setup_list) {
+    if ('illumina' in bundle_list) {
         tools_list << 'rundirparser'
         tools_list << 'seqfu_stats'
     }
-    if ('minimal' in setup_list) {
+    if ('minimal' in bundle_list) {
         tools_list << 'fastqc'
         tools_list << 'fastqscreen'
         tools_list << 'picard_collectmultiplemetrics'
         tools_list << 'seqfu_stats'
     }
-    if ('ont' in setup_list) {
+    if ('ont' in bundle_list) {
         tools_list << 'fastqc'
         tools_list << 'fastqscreen'
         tools_list << 'seqfu_stats'

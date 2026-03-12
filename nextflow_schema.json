@@ -54,7 +54,7 @@
                     "pattern": "^((fastqc|fastqscreen|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats)?,?)*(?<!,)$",
                     "fa_icon": "fas fa-sort-amount-asc"
                 },
-                "tools_setup": {
+                "tools_bundle": {
                     "type": "string",
                     "description": "Select some default setup for the tools to be run, tools can still be used to add tools",
                     "pattern": "^((all|bam|fastq|default|illumina|minimal|ont)?,?)*(?<!,)$",
@@ -87,16 +87,6 @@
                     "fa_icon": "fas fa-book",
                     "help_text": "If using a reference genome configured in the pipeline using iGenomes, use this parameter to give the ID for the reference. This is then used to build the full paths for all required reference genome files e.g. `--genome GRCh38`. \n\nSee the [nf-core website docs](https://nf-co.re/usage/reference_genomes) for more details."
                 },
-                "fasta": {
-                    "type": "string",
-                    "format": "file-path",
-                    "exists": true,
-                    "mimetype": "text/plain",
-                    "pattern": "^\\S+\\.fn?a(sta)?(\\.gz)?$",
-                    "description": "Path to FASTA genome file.",
-                    "help_text": "This parameter is *mandatory* if `--genome` is not specified. If you don't have a BWA index available this will be generated for you automatically.",
-                    "fa_icon": "far fa-file-code"
-                },
                 "igenomes_ignore": {
                     "type": "boolean",
                     "description": "Do not load the iGenomes reference config.",
@@ -118,6 +108,16 @@
                     "fa_icon": "fas fa-search",
                     "description": "A .csv of reference genomes to be mapped against by FastQ Screen"
                 },
+                "fasta": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "mimetype": "text/plain",
+                    "pattern": "^\\S+\\.fn?a(sta)?(\\.gz)?$",
+                    "description": "Path to FASTA genome file.",
+                    "help_text": "This parameter is *mandatory* if `--genome` is not specified.",
+                    "fa_icon": "far fa-file-code"
+                },
                 "bwamem2": {
                     "type": "string",
                     "format": "directory-path",
@@ -129,8 +129,17 @@
                 "dict": {
                     "type": "string",
                     "description": "Sequence dictionary for the reference fasta file provided.",
-                    "help_text": "If you wish to recompute indices available on igenomes, set `--ic false`.\n\n> **NB** If none provided, will be generated automatically from the FASTA reference.\n\nIf you use AWS iGenomes, this has already been set for you appropriately.",
+                    "help_text": "If you wish to recompute indices available on igenomes, set `--dict false`.\n\n> **NB** If none provided, will be generated automatically from the FASTA reference.\n\nIf you use AWS iGenomes, this has already been set for you appropriately.",
                     "pattern": "^\\S+.dict$",
+                    "format": "file-path",
+                    "exists": true,
+                    "fa_icon": "fas fa-file"
+                },
+                "fai": {
+                    "type": "string",
+                    "description": "Fasta index for the reference fasta file provided.",
+                    "help_text": "If you wish to recompute indices available on igenomes, set `--fai false`.\n\n> **NB** If none provided, will be generated automatically from the FASTA reference.\n\nIf you use AWS iGenomes, this has already been set for you appropriately.",
+                    "pattern": "^\\S+.fai$",
                     "format": "file-path",
                     "exists": true,
                     "fa_icon": "fas fa-file"
