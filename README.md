@@ -40,9 +40,12 @@ If provided, nf-core/seqinspector can also parse statistics from an Illumina run
 | `QC`                | [`FASTQE`](https://fastqe.com/)                                                                                     | Read QC                                                                                       | [RNA, DNA]              | [N/A]                                                                                   | yes          |
 | `QC`                | [`FastqScreen`](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/)                                   | Basic contamination detection                                                                 | [RNA, DNA]              | [N/A]                                                                                   | yes          |
 | `QC`                | [`SeqFu Stats`](https://github.com/telatin/seqfu2)                                                                  | Sequence statistics                                                                           | [RNA, DNA]              | [N/A]                                                                                   | yes          |
+| `Taxonomic Classification`                | [`Kraken2`](https://ccb.jhu.edu/software/kraken2/)         | Performs taxonomic classification and/or profiling                                                                   | [RNA, DNA]              | No         |
 | `QC`                | [`Picard collect multiple metrics`](https://broadinstitute.github.io/picard/picard-metric-definitions.html)         | Collect multiple QC metrics                                                                   | [RNA, DNA]              | [Bwamem2, SAMtools, `--genome`]                                                         | yes          |
 | `QC`                | [`Picard_collecthsmetrics`](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard) | Collect alignment QC metrics of hybrid-selection data.                                        | [RNA, DNA]              | [Bwamem2, SAMtools, `--fasta`, `--bait_intervals`, `--target_intervals` (`--ref_dict`)] | no           |
 | `Reporting`         | [`MultiQC`](http://multiqc.info/)                                                                                   | Present QC for raw reads                                                                      | [RNA, DNA, synthetic]   | [N/A]                                                                                   | yes          |
+| `Reporting`                | [`Krona`](https://hpc.nih.gov/apps/kronatools.html)         | Plotting Kraken2 results                                                                   | [RNA, DNA]              | No         |
+
 
 ### Workflow diagram
 
@@ -61,6 +64,8 @@ If provided, nf-core/seqinspector can also parse statistics from an Illumina run
 | fastqc      | 0.12.1  |
 | fastqe      | 0.5.2   |
 | fastqscreen | 0.16.0  |
+| kraken2     | 2.1.3   |
+| krona       | 2.8.1   |
 | multiqc     | 1.33    |
 | picard      | 3.4.0   |
 | samtools    | 1.22.1  |
