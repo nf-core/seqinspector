@@ -8,14 +8,14 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { UTILS_NFSCHEMA_PLUGIN     } from '../../nf-core/utils_nfschema_plugin'
-include { paramsSummaryMap          } from 'plugin/nf-schema'
-include { samplesheetToList         } from 'plugin/nf-schema'
-include { completionEmail           } from '../../nf-core/utils_nfcore_pipeline'
-include { completionSummary         } from '../../nf-core/utils_nfcore_pipeline'
-include { imNotification            } from '../../nf-core/utils_nfcore_pipeline'
-include { UTILS_NFCORE_PIPELINE     } from '../../nf-core/utils_nfcore_pipeline'
-include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipeline'
+include { UTILS_NFSCHEMA_PLUGIN   } from '../../nf-core/utils_nfschema_plugin'
+include { paramsSummaryMap        } from 'plugin/nf-schema'
+include { samplesheetToList       } from 'plugin/nf-schema'
+include { paramsHelp              } from 'plugin/nf-schema'
+include { completionEmail         } from '../../nf-core/utils_nfcore_pipeline'
+include { completionSummary       } from '../../nf-core/utils_nfcore_pipeline'
+include { UTILS_NFCORE_PIPELINE   } from '../../nf-core/utils_nfcore_pipeline'
+include { UTILS_NEXTFLOW_PIPELINE } from '../../nf-core/utils_nextflow_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -24,100 +24,126 @@ include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipelin
 */
 
 workflow PIPELINE_INITIALISATION {
-
     take:
-    version           // boolean: Display version and exit
-    validate_params   // boolean: Boolean whether to validate parameters against the schema at runtime
-    monochrome_logs   // boolean: Do not use coloured log outputs
+    version // boolean: Display version and exit
+    validate_params // boolean: Boolean whether to validate parameters against the schema at runtime
+    _monochrome_logs // boolean: Do not use coloured log outputs
     nextflow_cli_args //   array: List of positional nextflow CLI args
-    outdir            //  string: The output directory where the results will be saved
-    input             //  string: Path to input samplesheet
+    outdir //  string: The output directory where the results will be saved
+    input //  string: Path to input samplesheet
+    help // boolean: Display help message and exit
+    help_full // boolean: Show the full help message
+    show_hidden // boolean: Show hidden parameters in the help message
+    tools
+    fasta
 
     main:
 
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     //
     // Print version and exit if required and dump pipeline parameters to JSON file
     //
-    UTILS_NEXTFLOW_PIPELINE (
+    UTILS_NEXTFLOW_PIPELINE(
         version,
         true,
         outdir,
-        workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1
+        workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1,
     )
 
     //
     // Validate parameters and generate parameter summary to stdout
     //
-    UTILS_NFSCHEMA_PLUGIN (
+    before_text = """
+-\033[2m----------------------------------------------------\033[0m-
+                                        \033[0;32m,--.\033[0;30m/\033[0;32m,-.\033[0m
+\033[0;34m        ___     __   __   __   ___     \033[0;32m/,-._.--~\'\033[0m
+\033[0;34m  |\\ | |__  __ /  ` /  \\ |__) |__         \033[0;33m}  {\033[0m
+\033[0;34m  | \\| |       \\__, \\__/ |  \\ |___     \033[0;32m\\`-._,-`-,\033[0m
+                                        \033[0;32m`._,._,\'\033[0m
+\033[0;35m  nf-core/seqinspector ${workflow.manifest.version}\033[0m
+-\033[2m----------------------------------------------------\033[0m-
+"""
+    after_text = """${workflow.manifest.doi ? "\n* The pipeline\n" : ""}${workflow.manifest.doi.tokenize(",").collect { doi -> "    https://doi.org/${doi.trim().replace('https://doi.org/', '')}" }.join("\n")}${workflow.manifest.doi ? "\n" : ""}
+* The nf-core framework
+    https://doi.org/10.1038/s41587-020-0439-x
+
+* Software dependencies
+    https://github.com/nf-core/seqinspector/blob/master/CITATIONS.md
+"""
+    command = "nextflow run ${workflow.manifest.name} -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>"
+
+    UTILS_NFSCHEMA_PLUGIN(
         workflow,
         validate_params,
-        null
+        null,
+        help,
+        help_full,
+        show_hidden,
+        before_text,
+        after_text,
+        command,
     )
+
+    log.info("\033[1;37mExtra informations\033[0m")
+    log.info("\033[0;34m  Tools selected to be run  :\033[0;32m " + tools.join(",") + "\033[0m")
+    log.info("-\033[2m----------------------------------------------------\033[0m-")
 
     //
     // Check config provided to the pipeline
     //
-    UTILS_NFCORE_PIPELINE (
-        nextflow_cli_args
-    )
+    UTILS_NFCORE_PIPELINE(nextflow_cli_args)
 
     //
     // Custom validation for pipeline parameters
     //
-    validateInputParameters() // Runs additional validation that is not done by $projectDir/nextflow_schema.json
+    validateInputParameters()
+    // Runs additional validation that is not done by $projectDir/nextflow_schema.json
 
     //
-    // Create channel from input file provided through params.input
+    // Create channel from input file provided through params input
     //
-
-    Channel
-        .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
+    nr_samples = channel.fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
         .toList()
-        .flatMap { it.withIndex().collect {  entry, idx -> entry + "${idx+1}" } }
-        .map {
-            meta, fastq_1, fastq_2, idx ->
-                def tags = meta.tags ? meta.tags.tokenize(":") : []
-                def updated_meta = meta + [ id:"${meta.sample}_${idx}", tags:tags ]
-                if (!fastq_2) {
-                    return [
-                        updated_meta.id,
-                        updated_meta + [ single_end:true ],
-                        [ fastq_1 ]
-                    ]
-                } else {
-                    return [
-                        updated_meta.id,
-                        updated_meta + [ single_end:false ],
-                        [ fastq_1, fastq_2 ]
-                    ]
-                }
+        .size()
+
+    ch_samplesheet = channel.fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
+        .toList()
+        .flatMap { item -> item.withIndex().collect { entry, idx -> entry + "${idx + 1}" } }
+        .map { meta, fastq_1, fastq_2, idx ->
+            def tags = meta.tags ? meta.tags.tokenize(":") : []
+            def pad_positions = [nr_samples.length(), 2].max()
+            def zero_padded_idx = idx.padLeft(pad_positions, "0")
+            def new_meta = [id: "${meta.sample}_${zero_padded_idx}"]
+            return [
+                new_meta.id,
+                meta + [id: new_meta.id, tags: tags, single_end: fastq_2 ? false : true],
+                fastq_2 ? [fastq_1, fastq_2] : [fastq_1],
+            ]
         }
         .groupTuple()
-        .map {
-            validateInputSamplesheet(it) // Applies additional group validation checks that schema_input.json cannot do.
-        }
-        .transpose() // Replace the map below
-        // .map {
-        //     meta, fastqs ->
-        //         return [ meta, fastqs.flatten() ]
-        // }
-        .set { ch_samplesheet }
+        .map { meta -> validateInputSamplesheet(meta) }
+        .transpose()
 
     ch_samplesheet
-        .map {
-            meta, fastqs -> meta.tags
+        .map { meta, _fastqs ->
+            [meta.tags]
         }
         .flatten()
         .unique()
-        .map { tag_name -> [tag_name.toLowerCase(), tag_name] }
+        .map { tag -> [tag.toLowerCase(), tag] }
         .groupTuple()
-        .map {
-            tag_lowercase, tags ->
-                assert tags.size() == 1 :
-                "Tag name collision: " + tags.join(", ")
+        .map { _tag_lowercase, tags ->
+            if (tags.size() != 1) {
+                log.warn("Tag name collision: " + tags)
+                log.warn("On a MacOS system these tags will be considered as one")
+            }
         }
+
+    if (!(fasta) && (("picard_collecthsmetrics" in tools) || ("picard_collectmultiplemetrics" in tools))) {
+        log.warn("No fasta was provided, but picard was requested")
+        log.warn("BWAMEM2, SAMTOOLS and PICARD processes, will be skipped")
+    }
 
     emit:
     samplesheet = ch_samplesheet
@@ -131,15 +157,13 @@ workflow PIPELINE_INITIALISATION {
 */
 
 workflow PIPELINE_COMPLETION {
-
     take:
-    email           //  string: email address
-    email_on_fail   //  string: email address sent on pipeline failure
+    email //  string: email address
+    email_on_fail //  string: email address sent on pipeline failure
     plaintext_email // boolean: Send plain-text email instead of HTML
-    outdir          //    path: Path to output directory where results will be published
+    outdir //    path: Path to output directory where results will be published
     monochrome_logs // boolean: Disable ANSI colour codes in log output
-    hook_url        //  string: hook URL for notifications
-    multiqc_report  //  string: Path to MultiQC report
+    multiqc_report //  string: Path to MultiQC report
 
     main:
     summary_params = paramsSummaryMap(workflow, parameters_schema: "nextflow_schema.json")
@@ -162,13 +186,10 @@ workflow PIPELINE_COMPLETION {
         }
 
         completionSummary(monochrome_logs)
-        if (hook_url) {
-            imNotification(summary_params, hook_url)
-        }
     }
 
     workflow.onError {
-        log.error "Pipeline failed. Please refer to troubleshooting docs: https://nf-co.re/docs/usage/troubleshooting"
+        log.error("Pipeline failed. Please refer to troubleshooting docs: https://nf-co.re/docs/usage/troubleshooting")
     }
 }
 
@@ -181,9 +202,7 @@ workflow PIPELINE_COMPLETION {
 // Check and validate pipeline parameters
 //
 def validateInputParameters() {
-    // genomeExistsError()
-
-    // TODO: Add code to further validate pipeline parameters here
+    genomeExistsError()
 }
 
 //
@@ -193,23 +212,12 @@ def validateInputSamplesheet(input) {
     def (metas, fastqs) = input[1..2]
 
     // Check that multiple runs of the same sample are of the same datatype i.e. single-end / paired-end
-    def endedness_ok = metas.collect{ meta -> meta.single_end }.unique().size == 1
+    def endedness_ok = metas.collect { meta -> meta.single_end }.unique().size == 1
     if (!endedness_ok) {
         error("Please check input samplesheet -> Multiple runs of a sample must be of the same datatype i.e. single-end or paired-end: ${metas[0].id}")
     }
 
-    return [ metas[0], fastqs ]
-}
-//
-// Get attribute from genome config file e.g. fasta
-//
-def getGenomeAttribute(attribute) {
-    if (params.genomes && params.genome && params.genomes.containsKey(params.genome)) {
-        if (params.genomes[ params.genome ].containsKey(attribute)) {
-            return params.genomes[ params.genome ][ attribute ]
-        }
-    }
-    return null
+    return [metas[0], fastqs]
 }
 
 //
@@ -217,11 +225,7 @@ def getGenomeAttribute(attribute) {
 //
 def genomeExistsError() {
     if (params.genomes && params.genome && !params.genomes.containsKey(params.genome)) {
-        def error_string = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" +
-            "  Genome '${params.genome}' not found in any config files provided to the pipeline.\n" +
-            "  Currently, the available genome keys are:\n" +
-            "  ${params.genomes.keySet().join(", ")}\n" +
-            "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        def error_string = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" + "  Genome '${params.genome}' not found in any config files provided to the pipeline.\n" + "  Currently, the available genome keys are:\n" + "  ${params.genomes.keySet().join(", ")}\n" + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         error(error_string)
     }
 }
@@ -229,27 +233,33 @@ def genomeExistsError() {
 // Generate methods description for MultiQC
 //
 def toolCitationText() {
-    // TODO nf-core: Optionally add in-text citation tools to this list.
-    // Can use ternary operators to dynamically construct based conditions, e.g. params["run_xyz"] ? "Tool (Foo et al. 2023)" : "",
-    // Uncomment function in methodsDescriptionText to render in MultiQC report
     def citation_text = [
-            "Tools used in the workflow included:",
-            "FastQC (Andrews 2010),",
-            "MultiQC (Ewels et al. 2016)",
-            "."
-        ].join(' ').trim()
+        "Tools used in the workflow included:",
+        "BWAMEM2 (Vasimuddin et al. 2019)",
+        "FastQC (Andrews 2010),",
+        "FastQ Screen (Wingett & Andrews 2018)",
+        "MultiQC (Ewels et al. 2016),",
+        "Picard Tool (Broad Institute 2019),",
+        "SAMTOOLS (Danecek et al. 2021),",
+        params.sample_size > 0 ? "Seqtk (Li 2021)," : "",
+        "SeqFu (Telatin et al. 2021),",
+        ".",
+    ].join(' ').trim()
 
     return citation_text
 }
 
 def toolBibliographyText() {
-    // TODO nf-core: Optionally add bibliographic entries to this list.
-    // Can use ternary operators to dynamically construct based conditions, e.g. params["run_xyz"] ? "<li>Author (2023) Pub name, Journal, DOI</li>" : "",
-    // Uncomment function in methodsDescriptionText to render in MultiQC report
     def reference_text = [
-            "<li>Andrews S, (2010) FastQC, URL: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).</li>",
-            "<li>Ewels, P., Magnusson, M., Lundin, S., & Käller, M. (2016). MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics , 32(19), 3047–3048. doi: /10.1093/bioinformatics/btw354</li>"
-        ].join(' ').trim()
+        "<li>Vasimuddin Md., Misra S., Li H, & Aluru S. (2019). Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems.</li>",
+        "<li>Andrews S, (2010) FastQC, URL: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/.</li>",
+        "<li>Wingett SW., & Andrews S. FastQ Screen: A tool for multi-genome mapping and quality control. F1000Res. 2018 Aug 24 [revised 2018 Jan 1];7:1338. doi: 10.12688/f1000research.15931.2. eCollection</li>",
+        "<li>Ewels, P., Magnusson, M., Lundin, S., & Käller, M. (2016). MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics, 32(19), 3047–3048. doi: /10.1093/bioinformatics/btw354</li>",
+        "<li>Broad Institute, (2019) Picard Tools, URL: https://broadinstitute.github.io/picard/.</li>",
+        "<li>Danecek P., Bonfield JK., Liddle J., & al. (2021). Twelve years of SAMtools and BCFtools.</li>",
+        params.sample_size > 0 ? "<li>Li, H. SeqTk. Available online: https://github.com/lh3/seqtk (accessed on 6 May 2021)</li>" : "",
+        "<li>Telatin, A.; Fariselli, P.; Birolo, G. SeqFu: A Suite of Utilities for the Robust and Reproducible Manipulation of Sequence Files. Bioengineering 2021, 8, 59. https://doi.org/10.3390/bioengineering8050059</li>",
+    ].join(' ').trim()
 
     return reference_text
 }
@@ -271,23 +281,114 @@ def methodsDescriptionText(mqc_methods_yaml) {
             temp_doi_ref += "(doi: <a href=\'https://doi.org/${doi_ref.replace("https://doi.org/", "").replace(" ", "")}\'>${doi_ref.replace("https://doi.org/", "").replace(" ", "")}</a>), "
         }
         meta["doi_text"] = temp_doi_ref.substring(0, temp_doi_ref.length() - 2)
-    } else meta["doi_text"] = ""
+    }
+    else {
+        meta["doi_text"] = ""
+    }
     meta["nodoi_text"] = meta.manifest_map.doi ? "" : "<li>If available, make sure to update the text to include the Zenodo DOI of version of the pipeline used. </li>"
 
     // Tool references
-    meta["tool_citations"] = ""
-    meta["tool_bibliography"] = ""
-
-    // TODO nf-core: Only uncomment below if logic in toolCitationText/toolBibliographyText has been filled!
-    // meta["tool_citations"] = toolCitationText().replaceAll(", \\.", ".").replaceAll("\\. \\.", ".").replaceAll(", \\.", ".")
-    // meta["tool_bibliography"] = toolBibliographyText()
-
+    meta["tool_citations"] = toolCitationText().replaceAll(", \\.", ".").replaceAll("\\. \\.", ".").replaceAll(", \\.", ".")
+    meta["tool_bibliography"] = toolBibliographyText()
 
     def methods_text = mqc_methods_yaml.text
 
-    def engine =  new groovy.text.SimpleTemplateEngine()
+    def engine = new groovy.text.SimpleTemplateEngine()
     def description_html = engine.createTemplate(methods_text).make(meta)
 
     return description_html.toString()
 }
 
+
+def setupTools(input_setup, input_tools, input_skip) {
+
+    // Trying hopefully a simpler approach than https://github.com/nf-core/seqinspector/pull/23
+
+    // All tools available (cf tools from schema)
+    // fastqc|fastqscreen|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats
+    // Other tools are run by default if a downstream tools is selected
+    // SEQTK_SAMPLE is run by default if params.sample > 0, and is therefore not in this list
+
+    // Any tools in skip tools will override any selection made via tools or tools_setup
+
+    def setup_list = input_setup ? input_setup.tokenize(',').sort().unique() : ['no_setup']
+    def tools_list = input_tools ? input_tools.tokenize(',').sort().unique() : []
+    def skip_list = input_skip ? input_skip.tokenize(',').sort().unique() : []
+
+    // Current list actually used are default, minimal and promethion
+    // The others are here as a showcase for what could be done
+
+    if ('all' in setup_list) {
+        tools_list << 'fastqc'
+        tools_list << 'fastqscreen'
+        tools_list << 'picard_collecthsmetrics'
+        tools_list << 'picard_collectmultiplemetrics'
+        tools_list << 'rundirparser'
+        tools_list << 'seqfu_stats'
+    }
+    if ('bam' in setup_list) {
+        tools_list << 'picard_collecthsmetrics'
+        tools_list << 'picard_collectmultiplemetrics'
+    }
+    if ('fastq' in setup_list) {
+        tools_list << 'fastqc'
+        tools_list << 'fastqscreen'
+    }
+    if ('default' in setup_list) {
+        tools_list << 'fastqc'
+        tools_list << 'fastqscreen'
+        tools_list << 'picard_collectmultiplemetrics'
+        tools_list << 'rundirparser'
+        tools_list << 'seqfu_stats'
+    }
+    if ('illumina' in setup_list) {
+        tools_list << 'rundirparser'
+        tools_list << 'seqfu_stats'
+    }
+    if ('minimal' in setup_list) {
+        tools_list << 'fastqc'
+        tools_list << 'fastqscreen'
+        tools_list << 'picard_collectmultiplemetrics'
+        tools_list << 'seqfu_stats'
+    }
+    if ('ont' in setup_list) {
+        tools_list << 'fastqc'
+        tools_list << 'fastqscreen'
+        tools_list << 'seqfu_stats'
+    }
+
+    tools_list = tools_list.sort().unique() - skip_list
+
+    return tools_list
+}
+
+//
+// Generate report index for MultiQC
+//
+def reportIndexMultiqc(tags, global = true) {
+    def relative_path = global ? ".." : "../.."
+
+    def a_attrs = "target=\"_blank\" class=\"list-group-item list-group-item-action\""
+
+    // Global report path
+    def index_section = "    <a href=\"${relative_path}/global_report/multiqc_report.html\" ${a_attrs}>Global report</a>\n"
+
+    // Group report paths
+    tags.each { tag ->
+        index_section += "    <a href=\"${relative_path}/group_reports/${tag}/multiqc_report.html\" ${a_attrs}>Group report: ${tag}</a>\n"
+    }
+
+    def yaml_file_text = "id: '${workflow.manifest.name.replace('/', '-')}-index'\n" as String
+    yaml_file_text += "description: 'MultiQC reports collected from running the pipeline.'\n"
+    yaml_file_text += "section_name: '${workflow.manifest.name} MultiQC Reports Index'\n"
+    yaml_file_text += "section_href: 'https://github.com/${workflow.manifest.name}'\n"
+    yaml_file_text += "plot_type: 'html'\n"
+    yaml_file_text += "data: |\n"
+    yaml_file_text += "  <h4>Reports</h4>\n"
+    yaml_file_text += "  <p>Select a report to view (open in a new tab):</p>\n"
+    yaml_file_text += "  <div class=\"list-group\">\n"
+    yaml_file_text += "${index_section}"
+    yaml_file_text += "  </div>\n"
+
+    return yaml_file_text
+}
