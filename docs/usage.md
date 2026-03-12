@@ -130,7 +130,8 @@ nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results -
 ### Tools selection
 
 Tools selection is an integral part of sequinspector and, as the pipeline grows, it will become more and more important to select tools of interest.
-By **default**, the pipeline does run a subsection of tools as defined in the `utils_nfcore_seqinspector_pipeline` subworkflow. Currently, the following tools are run as default:
+By **default**, the pipeline does run a subsection of tools as defined in the `utils_nfcore_seqinspector_pipeline` subworkflow.
+Currently, the following tools are run as default:
 
 - fastqc
 - fastqscreen
