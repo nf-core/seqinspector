@@ -795,11 +795,11 @@
                 "Undetermined_05_screen.txt:md5,3b184ef10eeb99043a85826534a4ee28",
                 "sampletest_04_screen.png:md5,1fb60070e8f4b70de0c1b3786b54f27e",
                 "sampletest_04_screen.txt:md5,3b184ef10eeb99043a85826534a4ee28",
-                "Sample1_01.fq_lint.txt:md5,bd9caa21caf984450ccfd4692df8488f",
-                "Sample23_03.fq_lint.txt:md5,45efe7613ab3d7bc69e7a6560342b9a6",
-                "SampleA_02.fq_lint.txt:md5,b2439fae93aa19b090e1b975884c0f88",
-                "Undetermined_05.fq_lint.txt:md5,a4efc7ea4d8e0f4b3bd6c128ee4599e2",
-                "sampletest_04.fq_lint.txt:md5,82388504bef0bdb9c4bfa3277b120626",
+                "Sample1_01.fq_lint.txt:md5,bcc2e5db70a62e5281850fd89906e3f9",
+                "Sample23_03.fq_lint.txt:md5,098ddf964531c919ae7450e902e3833f",
+                "SampleA_02.fq_lint.txt:md5,0a255f997248d0ab18811b8ee8ec90c6",
+                "Undetermined_05.fq_lint.txt:md5,b8744b3a5069ce713987547f17de88b2",
+                "sampletest_04.fq_lint.txt:md5,9a3baaff806b08b735de58efe33777e2",
                 "fastq_screen_plot.txt:md5,990122d48fa4c1a170107a1ba034e4cf",
                 "fastqc-status-check-heatmap.txt:md5,7a64380ec42aac56949a2d9a4176d4d9",
                 "fastqc_overrepresented_sequences_plot.txt:md5,c7908980f1dba22b45cf6de14a66a686",
@@ -987,7 +987,7 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-03-12T15:13:58.949357388",
+        "timestamp": "2026-03-12T15:50:25.579194461",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
