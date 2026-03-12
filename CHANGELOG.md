@@ -84,7 +84,6 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#174](https://github.com/nf-core/seqinspector/pull/174) Add nf-core-utils 0.4.0
 - [#180](https://github.com/nf-core/seqinspector/pull/180) Add Zenodo record
 
-
 ### `Fixed`
 
 - [#71](https://github.com/nf-core/seqinspector/pull/71) FASTQSCREEN does not fail when multiple reads are provided
