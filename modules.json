@@ -22,7 +22,7 @@
                     },
                     "fastqe": {
                         "branch": "master",
-                        "git_sha": "cab0b8fdc4f785810f49423d8141a0773c21eb3b",
+                        "git_sha": "c448a28daf17a09a668dd2072ec283f0b480c914",
                         "installed_by": ["modules"]
                     },
                     "fastqscreen/fastqscreen": {

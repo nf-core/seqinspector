@@ -113,13 +113,9 @@ workflow SEQINSPECTOR {
     ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
 
     // FASTQE
-    FASTQE(
-        ch_sample_sized.map {
-            meta, subsampled -> [meta, subsampled]
-        }
-    )
+    FASTQE(ch_sample.filter { 'fastqe' in tools })
+
     ch_multiqc_files = ch_multiqc_files.mix(FASTQE.out.tsv)
-    ch_versions = ch_versions.mix(FASTQE.out.versions.first())
 
     //
     // Module: Run SeqFu stats

@@ -1,0 +1,93 @@
+{
+    "NovaSeq6000 data test - fastqe": {
+        "content": [
+            10,
+            {
+                "FASTQE": {
+                    "fastqe": "0.5.2"
+                }
+            },
+            [
+                "fastqe",
+                "fastqe/Sample1_01.tsv",
+                "fastqe/Sample23_03.tsv",
+                "fastqe/SampleA_02.tsv",
+                "fastqe/Undetermined_05.tsv",
+                "fastqe/sampletest_04.tsv",
+                "multiqc",
+                "multiqc/global_report",
+                "multiqc/global_report/multiqc_data",
+                "multiqc/global_report/multiqc_data/llms-full.txt",
+                "multiqc/global_report/multiqc_data/multiqc.log",
+                "multiqc/global_report/multiqc_data/multiqc.parquet",
+                "multiqc/global_report/multiqc_data/multiqc_citations.txt",
+                "multiqc/global_report/multiqc_data/multiqc_data.json",
+                "multiqc/global_report/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/global_report/multiqc_data/multiqc_sources.txt",
+                "multiqc/global_report/multiqc_report.html",
+                "multiqc/group_reports",
+                "multiqc/group_reports/group1",
+                "multiqc/group_reports/group1/multiqc_data",
+                "multiqc/group_reports/group1/multiqc_data/llms-full.txt",
+                "multiqc/group_reports/group1/multiqc_data/multiqc.log",
+                "multiqc/group_reports/group1/multiqc_data/multiqc.parquet",
+                "multiqc/group_reports/group1/multiqc_data/multiqc_citations.txt",
+                "multiqc/group_reports/group1/multiqc_data/multiqc_data.json",
+                "multiqc/group_reports/group1/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/group_reports/group1/multiqc_data/multiqc_sources.txt",
+                "multiqc/group_reports/group1/multiqc_report.html",
+                "multiqc/group_reports/group2",
+                "multiqc/group_reports/group2/multiqc_data",
+                "multiqc/group_reports/group2/multiqc_data/llms-full.txt",
+                "multiqc/group_reports/group2/multiqc_data/multiqc.log",
+                "multiqc/group_reports/group2/multiqc_data/multiqc.parquet",
+                "multiqc/group_reports/group2/multiqc_data/multiqc_citations.txt",
+                "multiqc/group_reports/group2/multiqc_data/multiqc_data.json",
+                "multiqc/group_reports/group2/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/group_reports/group2/multiqc_data/multiqc_sources.txt",
+                "multiqc/group_reports/group2/multiqc_report.html",
+                "multiqc/group_reports/lane1",
+                "multiqc/group_reports/lane1/multiqc_data",
+                "multiqc/group_reports/lane1/multiqc_data/llms-full.txt",
+                "multiqc/group_reports/lane1/multiqc_data/multiqc.log",
+                "multiqc/group_reports/lane1/multiqc_data/multiqc.parquet",
+                "multiqc/group_reports/lane1/multiqc_data/multiqc_citations.txt",
+                "multiqc/group_reports/lane1/multiqc_data/multiqc_data.json",
+                "multiqc/group_reports/lane1/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/group_reports/lane1/multiqc_data/multiqc_sources.txt",
+                "multiqc/group_reports/lane1/multiqc_report.html",
+                "multiqc/group_reports/test",
+                "multiqc/group_reports/test/multiqc_data",
+                "multiqc/group_reports/test/multiqc_data/llms-full.txt",
+                "multiqc/group_reports/test/multiqc_data/multiqc.log",
+                "multiqc/group_reports/test/multiqc_data/multiqc.parquet",
+                "multiqc/group_reports/test/multiqc_data/multiqc_citations.txt",
+                "multiqc/group_reports/test/multiqc_data/multiqc_data.json",
+                "multiqc/group_reports/test/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/group_reports/test/multiqc_data/multiqc_sources.txt",
+                "multiqc/group_reports/test/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"
+            ],
+            [
+                "Sample1_01.tsv:md5,ef7c34c84ce94cfc5010ac720629eb22",
+                "Sample23_03.tsv:md5,5a7f11be59de743508346ad0b2cfd079",
+                "SampleA_02.tsv:md5,20497be1d84e80c7265cfe3567e3df9a",
+                "Undetermined_05.tsv:md5,42b93f4317d2f8ecef87d449cf711760",
+                "sampletest_04.tsv:md5,c242014dfe030603db9fc014161f3112",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
+            ],
+            "No BAM files",
+            "No warnings"
+        ],
+        "timestamp": "2026-03-12T11:31:53.090554509",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
+    }
+}
