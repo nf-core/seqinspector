@@ -795,11 +795,6 @@
                 "Undetermined_05_screen.txt:md5,3b184ef10eeb99043a85826534a4ee28",
                 "sampletest_04_screen.png:md5,1fb60070e8f4b70de0c1b3786b54f27e",
                 "sampletest_04_screen.txt:md5,3b184ef10eeb99043a85826534a4ee28",
-                "Sample1_01.fq_lint.txt:md5,8476bc2f5c87aa3d0a2cad108566a17b",
-                "Sample23_03.fq_lint.txt:md5,1f58609c74b3ef4fb7d49d225cca390d",
-                "SampleA_02.fq_lint.txt:md5,a6b6d7e03ba6d51fc7f33f1939acb538",
-                "Undetermined_05.fq_lint.txt:md5,1d12e37cf77c1e863ef1bc634dff2bb7",
-                "sampletest_04.fq_lint.txt:md5,e2fdf73852ecf0f54812cb7bcb599fe1",
                 "fastq_screen_plot.txt:md5,990122d48fa4c1a170107a1ba034e4cf",
                 "fastqc-status-check-heatmap.txt:md5,7a64380ec42aac56949a2d9a4176d4d9",
                 "fastqc_overrepresented_sequences_plot.txt:md5,c7908980f1dba22b45cf6de14a66a686",
@@ -1069,7 +1064,7 @@
                 "[NXF_HASH] Submitted process > PREPARE_GENOME:SAMTOOLS_FAIDX (genome.fa)"
             ]
         ],
-        "timestamp": "2026-03-12T15:37:51.305099722",
+        "timestamp": "2026-03-12T16:18:44.078233725",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -1880,11 +1875,6 @@
                 "Undetermined_05_screen.txt:md5,14d10b0c3b63e18f223a0dc589abee36",
                 "sampletest_04_screen.png:md5,a88937eb54785ee921549d3c894df45d",
                 "sampletest_04_screen.txt:md5,14d10b0c3b63e18f223a0dc589abee36",
-                "Sample1_01.fq_lint.txt:md5,6f4e8d9241146b6bc0d5add1daa7026b",
-                "Sample23_03.fq_lint.txt:md5,fcfc0fbf37dd2bff8f070dac2382cb95",
-                "SampleA_02.fq_lint.txt:md5,7c5ca21b629860086448da05adae34c9",
-                "Undetermined_05.fq_lint.txt:md5,97e052d284cebf453c15fecc5ef64deb",
-                "sampletest_04.fq_lint.txt:md5,fcf07bc1a7187de0df04138b889ab110",
                 "fastq_screen_plot.txt:md5,a9fac509f9eb26a068afbad8268544f3",
                 "fastqc-status-check-heatmap.txt:md5,2d47d1eefb8a17f6e9148e08e6764438",
                 "fastqc_overrepresented_sequences_plot.txt:md5,0319c932634ad92c3fcb695efc1e3842",
@@ -2077,7 +2067,7 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-03-12T15:39:11.450032559",
+        "timestamp": "2026-03-12T16:20:40.276575593",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -2888,11 +2878,6 @@
                 "Undetermined_05_screen.txt:md5,20926a4045b2ecf4bc76007047cc645a",
                 "sampletest_04_screen.png:md5,a88937eb54785ee921549d3c894df45d",
                 "sampletest_04_screen.txt:md5,20926a4045b2ecf4bc76007047cc645a",
-                "Sample1_01.fq_lint.txt:md5,b662d0ad0705409a4fc83e5b8965e6aa",
-                "Sample23_03.fq_lint.txt:md5,114be7273086b5a1c87d44c5d44dc001",
-                "SampleA_02.fq_lint.txt:md5,0314d75819aefb231b9599fccaecfb33",
-                "Undetermined_05.fq_lint.txt:md5,0e6fa4b2e7a276283b785746690b2d6b",
-                "sampletest_04.fq_lint.txt:md5,73bb56747d658c6abdd5f4cb961d7c3c",
                 "fastq_screen_plot.txt:md5,6e74f2231fd3e0ac72e1196d02fe5e90",
                 "fastqc-status-check-heatmap.txt:md5,2d47d1eefb8a17f6e9148e08e6764438",
                 "fastqc_overrepresented_sequences_plot.txt:md5,58f05a5aec002a72d7f6828378b78a9c",
@@ -3085,7 +3070,7 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-03-12T15:40:35.890535884",
+        "timestamp": "2026-03-12T16:22:35.271019752",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -3861,11 +3846,6 @@
                 "Undetermined_05_screen.txt:md5,3b184ef10eeb99043a85826534a4ee28",
                 "sampletest_04_screen.png:md5,1fb60070e8f4b70de0c1b3786b54f27e",
                 "sampletest_04_screen.txt:md5,3b184ef10eeb99043a85826534a4ee28",
-                "Sample1_01.fq_lint.txt:md5,2b12ff5ce99f95f8b9e22e726a9bc59e",
-                "Sample23_03.fq_lint.txt:md5,772c357fcdc051ffdc9b62d4e2814d45",
-                "SampleA_02.fq_lint.txt:md5,d60d6961ba4b54839ed00c73735ead4d",
-                "Undetermined_05.fq_lint.txt:md5,aa182f7b93564afd533dbe004ac4aaf6",
-                "sampletest_04.fq_lint.txt:md5,ab96f9163e9ddb611cec68a7688a7583",
                 "fastq_screen_plot.txt:md5,990122d48fa4c1a170107a1ba034e4cf",
                 "fastqc-status-check-heatmap.txt:md5,7a64380ec42aac56949a2d9a4176d4d9",
                 "fastqc_overrepresented_sequences_plot.txt:md5,c7908980f1dba22b45cf6de14a66a686",
@@ -4054,7 +4034,7 @@
                 "WARN: Sample 'sampletest_04' does not have a rundir specified"
             ]
         ],
-        "timestamp": "2026-03-12T15:43:30.657972257",
+        "timestamp": "2026-03-12T16:26:16.838135479",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -4865,11 +4845,6 @@
                 "Undetermined_05_screen.txt:md5,3b184ef10eeb99043a85826534a4ee28",
                 "sampletest_04_screen.png:md5,a88937eb54785ee921549d3c894df45d",
                 "sampletest_04_screen.txt:md5,3b184ef10eeb99043a85826534a4ee28",
-                "Sample1_01.fq_lint.txt:md5,f6bfd965e15cbbe1df5c1720fa3386c0",
-                "Sample23_03.fq_lint.txt:md5,ef6fee1a5cf4e937344e0743df16f881",
-                "SampleA_02.fq_lint.txt:md5,66caf5c4e3edb4914227ffbfd3625037",
-                "Undetermined_05.fq_lint.txt:md5,4ea9af0089f2c8abe418957e54a30a87",
-                "sampletest_04.fq_lint.txt:md5,967bb66a6947adc0cceaca8ee4756ffc",
                 "fastq_screen_plot.txt:md5,990122d48fa4c1a170107a1ba034e4cf",
                 "fastqc-status-check-heatmap.txt:md5,7a64380ec42aac56949a2d9a4176d4d9",
                 "fastqc_overrepresented_sequences_plot.txt:md5,c7908980f1dba22b45cf6de14a66a686",
@@ -5068,7 +5043,7 @@
                 "WARN: sampletest_04: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads."
             ]
         ],
-        "timestamp": "2026-03-12T15:42:04.305573558",
+        "timestamp": "2026-03-12T16:24:28.456349297",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
