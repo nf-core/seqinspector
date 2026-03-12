@@ -48,6 +48,22 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 
 [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) gives general quality metrics about your sequenced reads. It provides information about the quality score distribution across your reads, per base sequence content (%A/T/G/C), adapter contamination and overrepresented sequences. For further reading and documentation see the [FastQC help pages](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/).
 
+### FastP
+
+[FastP](https://github.com/OpenGene/fastp) is a tool designed to provide all-in-one preprocessing for FastQ files and as such is used for trimming and splitting.
+The resulting trimmed files are not published.
+We only keep the reports for MultiQC and the pipeline report.
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `fastp/`
+  - `*.fastp.html`: FastP HTML report.
+  - `*.fastp.json`: FastP report containing quality metrics in JSON format.
+  - `*.fastp.log`: FastP log file containing quality metrics.
+
+</details>
+
 ### FASTQE
 
 <details markdown="1">
