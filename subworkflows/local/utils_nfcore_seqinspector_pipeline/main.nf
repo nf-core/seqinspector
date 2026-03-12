@@ -331,7 +331,7 @@ def defineToolsList(input_setup, input_tools, input_skip) {
         tools_list << 'fastqc'
         tools_list << 'fastqscreen'
     }
-    if ('default' in setup_list) {
+    if ('default' in bundle_list) {
         tools_list << 'fastqc'
         tools_list << 'fastqscreen'
         tools_list << 'picard_collectmultiplemetrics'
