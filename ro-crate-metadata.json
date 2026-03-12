@@ -105,7 +105,7 @@
             },
             "mentions": [
                 {
-                    "@id": "#1ad9760e-3a4a-4237-b8a6-17a530495e4b"
+                    "@id": "#f1a844d5-f7b0-453f-a2e1-a30c22317c16"
                 }
             ],
             "name": "nf-core/seqinspector"
@@ -134,19 +134,16 @@
             ],
             "creator": [
                 {
-                    "@id": "https://orcid.org/0000-0003-2702-1103"
-                },
-                {
-                    "@id": "#max.u.garcia@gmail.com"
-                },
-                {
-                    "@id": "#max.u.garcia@gmail.com"
+                    "@id": "#89784800+kedhammar@users.noreply.github.com"
                 },
                 {
                     "@id": "https://orcid.org/0000-0002-1270-1504"
                 },
                 {
-                    "@id": "#89784800+kedhammar@users.noreply.github.com"
+                    "@id": "#max.u.garcia@gmail.com"
+                },
+                {
+                    "@id": "https://orcid.org/0000-0003-2702-1103"
                 },
                 {
                     "@id": "https://orcid.org/0000-0003-1675-0677"
@@ -156,7 +153,7 @@
                 }
             ],
             "dateCreated": "",
-            "dateModified": "2026-03-12T12:24:47Z",
+            "dateModified": "2026-03-12T12:54:53Z",
             "dct:conformsTo": "https://bioschemas.org/profiles/ComputationalWorkflow/1.0-RELEASE/",
             "keywords": [
                 "nf-core",
@@ -169,16 +166,16 @@
             ],
             "maintainer": [
                 {
-                    "@id": "https://orcid.org/0000-0003-2702-1103"
-                },
-                {
-                    "@id": "#max.u.garcia@gmail.com"
+                    "@id": "#89784800+kedhammar@users.noreply.github.com"
                 },
                 {
                     "@id": "https://orcid.org/0000-0002-1270-1504"
                 },
                 {
-                    "@id": "#89784800+kedhammar@users.noreply.github.com"
+                    "@id": "#max.u.garcia@gmail.com"
+                },
+                {
+                    "@id": "https://orcid.org/0000-0003-2702-1103"
                 },
                 {
                     "@id": "https://orcid.org/0000-0003-1675-0677"
@@ -217,11 +214,11 @@
             "version": "!>=25.10.2"
         },
         {
-            "@id": "#1ad9760e-3a4a-4237-b8a6-17a530495e4b",
+            "@id": "#f1a844d5-f7b0-453f-a2e1-a30c22317c16",
             "@type": "TestSuite",
             "instance": [
                 {
-                    "@id": "#f3860e65-5317-471f-9e13-fa80493b9312"
+                    "@id": "#95d79684-19b8-44dd-9d53-2be1f3b012fe"
                 }
             ],
             "mainEntity": {
@@ -230,7 +227,7 @@
             "name": "Test suite for nf-core/seqinspector"
         },
         {
-            "@id": "#f3860e65-5317-471f-9e13-fa80493b9312",
+            "@id": "#95d79684-19b8-44dd-9d53-2be1f3b012fe",
             "@type": "TestInstance",
             "name": "GitHub Actions workflow for testing nf-core/seqinspector",
             "resource": "repos/nf-core/seqinspector/actions/workflows/nf-test.yml",
@@ -369,16 +366,10 @@
             "url": "https://nf-co.re/"
         },
         {
-            "@id": "https://orcid.org/0000-0003-2702-1103",
+            "@id": "#89784800+kedhammar@users.noreply.github.com",
             "@type": "Person",
-            "email": "adrien.coulier@medsci.uu.se",
-            "name": "Adrien Coulier"
-        },
-        {
-            "@id": "#max.u.garcia@gmail.com",
-            "@type": "Person",
-            "email": "max.u.garcia@gmail.com",
-            "name": "Maxime U Garcia"
+            "email": "89784800+kedhammar@users.noreply.github.com",
+            "name": "Alfred Kedhammar"
         },
         {
             "@id": "https://orcid.org/0000-0002-1270-1504",
@@ -387,10 +378,16 @@
             "name": "Franziska Bonath"
         },
         {
-            "@id": "#89784800+kedhammar@users.noreply.github.com",
+            "@id": "#max.u.garcia@gmail.com",
             "@type": "Person",
-            "email": "89784800+kedhammar@users.noreply.github.com",
-            "name": "Alfred Kedhammar"
+            "email": "max.u.garcia@gmail.com",
+            "name": "Maxime U Garcia"
+        },
+        {
+            "@id": "https://orcid.org/0000-0003-2702-1103",
+            "@type": "Person",
+            "email": "adrien.coulier@medsci.uu.se",
+            "name": "Adrien Coulier"
         },
         {
             "@id": "https://orcid.org/0000-0003-1675-0677",

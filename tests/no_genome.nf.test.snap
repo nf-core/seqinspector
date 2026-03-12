@@ -172,9 +172,9 @@
                 "WARN: No fasta was provided, but picard was requested"
             ]
         ],
-        "timestamp": "2026-03-05T16:38:56.036557764",
+        "timestamp": "2026-03-11T13:40:10.196660406",
         "meta": {
-            "nf-test": "0.9.4",
+            "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         }
     }
