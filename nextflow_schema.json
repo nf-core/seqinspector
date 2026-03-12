@@ -51,7 +51,7 @@
                 "tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to run",
-                    "pattern": "^((fq|fastp|fastqc|fastqe|fastqscreen|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats)?,?)*(?<!,)$",
+                    "pattern": "^((fastp|fastqc|fastqe|fastqscreen|fq_lint|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats)?,?)*(?<!,)$",
                     "fa_icon": "fas fa-sort-amount-asc"
                 },
                 "tools_bundle": {
@@ -62,8 +62,9 @@
                 },
                 "skip_tools": {
                     "type": "string",
-                    "description": "Comma-separated string of tools to skip",
-                    "pattern": "^((fq|fastqc|fastqscreen|seqfu_stats|seqtk_sample)?,?)*(?<!,)$"
+                    "description": "Comma-separated string of tools to skip - overrides any other means of tools selection",
+                    "pattern": "^((fastp|fastqc|fastqe|fastqscreen|fq_lint|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats)?,?)*(?<!,)$",
+                    "fa_icon": "fas fa-window-close "
                 }
             }
         },
@@ -80,6 +81,7 @@
                 },
                 "continue_with_lint_fail": {
                     "type": "boolean",
+                    "default": true,
                     "description": "Whether to continue with the pipeline if linting fails for a single sample.",
                     "help_text": "If set to true, the pipeline will continue with the remaining samples if linting fails for a single sample. If set to false, the pipeline will terminate if linting fails for a single sample.",
                     "fa_icon": "fas fa-window-close "

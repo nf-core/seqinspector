@@ -318,6 +318,7 @@ def defineToolsList(input_bundle, input_tools, input_skip) {
         tools_list << 'fastqc'
         tools_list << 'fastqe'
         tools_list << 'fastqscreen'
+        tools_list << 'fq_lint'
         tools_list << 'picard_collecthsmetrics'
         tools_list << 'picard_collectmultiplemetrics'
         tools_list << 'rundirparser'
@@ -330,10 +331,12 @@ def defineToolsList(input_bundle, input_tools, input_skip) {
     if ('fastq' in bundle_list) {
         tools_list << 'fastqc'
         tools_list << 'fastqscreen'
+        tools_list << 'fq_lint'
     }
     if ('default' in bundle_list) {
         tools_list << 'fastqc'
         tools_list << 'fastqscreen'
+        tools_list << 'fq_lint'
         tools_list << 'picard_collectmultiplemetrics'
         tools_list << 'rundirparser'
         tools_list << 'seqfu_stats'

@@ -61,7 +61,7 @@ workflow SEQINSPECTOR {
     //
     // MODULE: Run FQ_LINT to catch early errors
     //
-    FQ_LINT(ch_samplesheet.filter { ("fq" in tools) })
+    FQ_LINT(ch_samplesheet.filter { ("fq_lint" in tools) })
 
     // This catches all FASTQs that pass linting
     // If you use an error strategy that allows FQ_LINT to fail,
