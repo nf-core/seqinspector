@@ -996,9 +996,6 @@
             "No stable content",
             "No BAM files",
             [
-                "WARN: Failed to render execution report -- see the log file for details",
-                "WARN: Failed to render execution timeline -- see the log file for details",
-                "WARN: Got an interrupted exception while taking agent result | java.lang.InterruptedException",
                 "WARN: No samples with rundir found, skipping RUNDIRPARSER"
             ]
         ],
