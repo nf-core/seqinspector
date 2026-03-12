@@ -11,7 +11,7 @@ nextflow_pipeline {
             params: [
                 genome: null,
                 tools: 'fastqscreen,picard_collecthsmetrics',
-                tools_setup: null,
+                tools_bundle: null,
             ]
         ]
     ]
