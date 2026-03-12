@@ -1,0 +1,54 @@
+//
+// Prepare reference genome files
+
+include { BWAMEM2_INDEX                   } from '../../../modules/nf-core/bwamem2/index'
+include { PICARD_CREATESEQUENCEDICTIONARY } from '../../../modules/nf-core/picard/createsequencedictionary'
+include { SAMTOOLS_FAIDX                  } from '../../../modules/nf-core/samtools/faidx'
+
+workflow PREPARE_GENOME {
+    take:
+    ch_reference_fasta
+    bwamem2
+    tools
+    ref_dict // path: [mandatory for collecthsmetrics] path(ref_dict)
+
+    main:
+    // Initialize all channels that might be used later
+    ch_bwamem2_index = channel.empty()
+    ch_reference_fai = channel.empty()
+    ch_ref_dict = channel.empty()
+
+    // Use pre-built index when --bwamem2 parameter is provided
+    // Or build index from reference FASTA
+    if (bwamem2) {
+        ch_bwamem2_index = channel.fromPath(bwamem2, checkIfExists: true)
+            .map { index_dir -> tuple([id: index_dir.name], index_dir) }
+            .collect()
+    }
+    else {
+        BWAMEM2_INDEX(ch_reference_fasta.filter { 'picard_collecthsmetrics' in tools || 'picard_collectmultiplemetrics' in tools })
+        ch_bwamem2_index = BWAMEM2_INDEX.out.index
+    }
+
+    // TODO: add support for fasta index via igenomes
+
+    SAMTOOLS_FAIDX(
+        ch_reference_fasta.map { meta, fasta -> [meta, fasta, []] }.filter { 'picard_collecthsmetrics' in tools || 'picard_collectmultiplemetrics' in tools },
+        false,
+    )
+
+    ch_reference_fai = SAMTOOLS_FAIDX.out.fai
+
+    if (ref_dict) {
+        ch_ref_dict = channel.fromPath(ref_dict, checkIfExists: true).map { dict -> [[id: dict.simpleName], dict] }
+    }
+    else {
+        PICARD_CREATESEQUENCEDICTIONARY(ch_reference_fasta.filter { 'picard_collecthsmetrics' in tools })
+        ch_ref_dict = PICARD_CREATESEQUENCEDICTIONARY.out.reference_dict
+    }
+
+    emit:
+    bwamem2_index  = ch_bwamem2_index
+    reference_dict = ch_ref_dict
+    reference_fai  = ch_reference_fai
+}

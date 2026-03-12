@@ -1,0 +1,95 @@
+nextflow_workflow {
+
+    name "Test Workflow PREPARE_GENOME"
+    script "subworkflows/local/prepare_genome/main.nf"
+    workflow "PREPARE_GENOME"
+    tag 'subworkflows'
+    tag 'prepare_genome'
+
+    test("Test without bwamem2 index and without picard") {
+        when {
+            workflow {
+                """
+                input[0]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/raredisease/reference/reference.fasta', checkIfExists: true)).collect()
+                input[1]  = null
+                input[2]  = ''
+                input[3]  = null
+                """
+            }
+        }
+
+        then {
+            assert workflow.success
+            assert snapshot(sanitizeOutput(workflow.out).collectEntries { key, val ->
+                if (!val) {
+                    return null
+                }
+                else if (key == "bwamem2_index") {
+                    return [key, val.collect { [path(it[1]).list().collect { it }] }]
+                }
+                else if (key == "reference_dict") {
+                    return [key, val.collect { file(it[1]).name }]
+                }
+                return [key, val.collect { path(it[1]) }]
+            }).match()
+        }
+    }
+
+    test("Test without bwamem2 index, with ref_dict and picard_collecthsmetrics") {
+        when {
+            workflow {
+                """
+                input[0]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/raredisease/reference/reference.fasta', checkIfExists: true)).collect()
+                input[1]  = null
+                input[2]  = 'picard_collecthsmetrics'
+                input[3]  = params.pipelines_testdata_base_path + '/raredisease/reference/reference.dict'
+                """
+            }
+        }
+
+        then {
+            assert workflow.success
+            assert snapshot(sanitizeOutput(workflow.out).collectEntries { key, val ->
+                if (!val) {
+                    return null
+                }
+                else if (key == "bwamem2_index") {
+                    return [key, val.collect { [path(it[1]).list().collect { it }] }]
+                }
+                else if (key == "reference_dict") {
+                    return [key, val.collect { file(it[1]).name }]
+                }
+                return [key, val.collect { path(it[1]) }]
+            }).match()
+        }
+    }
+
+    test("Test without bwamem2 index file path and without ref_dict, with picard_collecthsmetrics") {
+        when {
+            workflow {
+                """
+                input[0]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/raredisease/reference/reference.fasta', checkIfExists: true)).collect()
+                input[1]  = null
+                input[2]  = 'picard_collecthsmetrics'
+                input[3]  = null
+                """
+            }
+        }
+
+        then {
+            assert workflow.success
+            assert snapshot(sanitizeOutput(workflow.out).collectEntries { key, val ->
+                if (!val) {
+                    return null
+                }
+                else if (key == "bwamem2_index") {
+                    return [key, val.collect { [path(it[1]).list().collect { it }] }]
+                }
+                else if (key == "reference_dict") {
+                    return [key, val.collect { file(it[1]).name }]
+                }
+                return [key, val.collect { path(it[1]) }]
+            }).match()
+        }
+    }
+}

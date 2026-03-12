@@ -24,14 +24,14 @@
                     "fa_icon": "fas fa-file-csv"
                 },
                 "sample_size": {
-                    "type": "integer",
-                    "description": "Take this number of reads as a subset.",
-                    "help_text": "Choose the size of the subset or 0, if no subsampling shall be performed. Note that it refers to an absolute number.",
-                    "default": 0
+                    "type": "number",
+                    "description": "Take a subset of reads for analysis.",
+                    "help_text": "Subset can be used as a fraction of reads (ex/ 0.20) or an absolute number of reads per sample (integer). Pipeline will still run if a sample has less reads than selected subset value.",
+                    "default": 0,
+                    "fa_icon": "fas fa-arrows-alt-h"
                 },
                 "outdir": {
                     "type": "string",
-                    "default": null,
                     "format": "directory-path",
                     "description": "The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.",
                     "fa_icon": "fas fa-folder-open"
@@ -48,10 +48,30 @@
                     "description": "MultiQC report title. Printed as page header, used for filename if not otherwise specified.",
                     "fa_icon": "fas fa-file-signature"
                 },
+                "tools": {
+                    "type": "string",
+                    "description": "Comma-separated string of tools to run",
+                    "pattern": "^((fastqc|fastqscreen|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats)?,?)*(?<!,)$",
+                    "fa_icon": "fas fa-sort-amount-asc"
+                },
+                "tools_setup": {
+                    "type": "string",
+                    "description": "Select some default setup for the tools to be run, tools can still be used to add tools",
+                    "pattern": "^((all|bam|fastq|default|illumina|minimal|ont)?,?)*(?<!,)$",
+                    "fa_icon": "fas fa-window-restore"
+                },
                 "skip_tools": {
                     "type": "string",
-                    "description": "Comma-separated string of tools to skip",
-                    "pattern": "^((fastqc|fastqscreen|seqfu_stats|seqtk_sample)?,?)*(?<!,)$"
+                    "description": "Comma-separated string of tools to skip - overrides any other means of tools selection",
+                    "pattern": "^((fastqc|fastqscreen|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats)?,?)*(?<!,)$",
+                    "fa_icon": "fas fa-window-close "
+                },
+                "sort_bam": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Sort BAM files after alignment",
+                    "help_text": "If true, BAM files produced by alignment will be sorted by genomic coordinates.",
+                    "fa_icon": "fas fa-sort-alpha-down"
                 }
             }
         },
@@ -74,7 +94,7 @@
                     "mimetype": "text/plain",
                     "pattern": "^\\S+\\.fn?a(sta)?(\\.gz)?$",
                     "description": "Path to FASTA genome file.",
-                    "help_text": "This parameter is *mandatory* if `--genome` is not specified. If you don't have a BWA index available this will be generated for you automatically. Combine with `--save_reference` to save BWA index for future runs.",
+                    "help_text": "This parameter is *mandatory* if `--genome` is not specified. If you don't have a BWA index available this will be generated for you automatically.",
                     "fa_icon": "far fa-file-code"
                 },
                 "igenomes_ignore": {
@@ -94,9 +114,42 @@
                 },
                 "fastq_screen_references": {
                     "type": "string",
-                    "default": "./assets/example_fastq_screen_references.csv",
+                    "default": "${projectDir}/assets/example_fastq_screen_references.csv",
                     "fa_icon": "fas fa-search",
                     "description": "A .csv of reference genomes to be mapped against by FastQ Screen"
+                },
+                "bwamem2": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "exists": true,
+                    "fa_icon": "fas fa-folder-open",
+                    "description": "Path to bwamem2 indices.",
+                    "help_text": "If you wish to recompute indices available on igenomes, set `--bwamem2 false`.\n\n> **NB** If none provided, will be generated automatically from the FASTA reference.\n\nIf you use AWS iGenomes, this has already been set for you appropriately."
+                },
+                "dict": {
+                    "type": "string",
+                    "description": "Sequence dictionary for the reference fasta file provided.",
+                    "help_text": "If you wish to recompute indices available on igenomes, set `--ic false`.\n\n> **NB** If none provided, will be generated automatically from the FASTA reference.\n\nIf you use AWS iGenomes, this has already been set for you appropriately.",
+                    "pattern": "^\\S+.dict$",
+                    "format": "file-path",
+                    "exists": true,
+                    "fa_icon": "fas fa-file"
+                },
+                "target_intervals": {
+                    "type": "string",
+                    "description": "Path to target intervals file.",
+                    "pattern": "^\\S+.(bed|bed.gz|interval_list)$",
+                    "format": "file-path",
+                    "exists": true,
+                    "fa_icon": "fas fa-file"
+                },
+                "bait_intervals": {
+                    "type": "string",
+                    "description": "Path to bait intervals file.",
+                    "pattern": "^\\S+.(bed|bed.gz|interval_list)$",
+                    "format": "file-path",
+                    "exists": true,
+                    "fa_icon": "fas fa-file"
                 }
             }
         },
@@ -198,12 +251,12 @@
                     "fa_icon": "fas fa-palette",
                     "hidden": true
                 },
-                "hook_url": {
+                "modules_testdata_base_path": {
                     "type": "string",
-                    "description": "Incoming hook URL for messaging service",
-                    "fa_icon": "fas fa-people-group",
-                    "help_text": "Incoming hook URL for messaging service. Currently, MS Teams and Slack are supported.",
-                    "hidden": true
+                    "description": "Base path / URL for data used in the modules",
+                    "hidden": true,
+                    "default": "s3://ngi-igenomes/testdata/nf-core/modules/",
+                    "fa_icon": "fas fa-map"
                 },
                 "multiqc_config": {
                     "type": "string",
@@ -239,9 +292,24 @@
                 },
                 "trace_report_suffix": {
                     "type": "string",
-                    "fa_icon": "far calendar",
+                    "fa_icon": "fas fa-tag",
                     "description": "Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss.",
                     "hidden": true
+                },
+                "help": {
+                    "type": ["boolean", "string"],
+                    "description": "Display the help message.",
+                    "fa_icon": "fas fa-info"
+                },
+                "help_full": {
+                    "type": "boolean",
+                    "description": "Display the full detailed help message.",
+                    "fa_icon": "fas fa-question-circle"
+                },
+                "show_hidden": {
+                    "type": "boolean",
+                    "description": "Display hidden parameters in the help message (only works when --help or --help_full are provided).",
+                    "fa_icon": "fas fa-eye"
                 }
             }
         }
