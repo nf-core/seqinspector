@@ -124,7 +124,7 @@ workflow SEQINSPECTOR {
 
     FASTP(
         ch_sample.map { meta, reads -> [meta, reads, []] }.filter { 'fastp' in tools },
-        false,
+        true,
         false,
         false,
     )
