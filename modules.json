@@ -33,7 +33,7 @@
                     },
                     "fq/lint": {
                         "branch": "master",
-                        "git_sha": "a1abf90966a2a4016d3c3e41e228bfcbd4811ccc",
+                        "git_sha": "14b8e6cceb84242e16094fe979762e05bc8de526",
                         "installed_by": ["modules"]
                     },
                     "multiqc": {

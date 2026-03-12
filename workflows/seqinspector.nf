@@ -8,7 +8,7 @@
 // modules
 include { BWAMEM2_MEM                } from '../modules/nf-core/bwamem2/mem'
 include { FASTQC                     } from '../modules/nf-core/fastqc'
-include { FQ_LINT                    } from '../modules/nf-core/fq/lint/main'
+include { FQ_LINT                    } from '../modules/nf-core/fq/lint'
 include { FASTQE                     } from '../modules/nf-core/fastqe'
 include { FASTQSCREEN_FASTQSCREEN    } from '../modules/nf-core/fastqscreen/fastqscreen'
 include { MULTIQC as MULTIQC_GLOBAL  } from '../modules/nf-core/multiqc'
@@ -16,7 +16,7 @@ include { MULTIQC as MULTIQC_PER_TAG } from '../modules/nf-core/multiqc'
 include { RUNDIRPARSER               } from '../modules/local/rundirparser'
 include { SAMTOOLS_INDEX             } from '../modules/nf-core/samtools/index'
 include { SEQFU_STATS                } from '../modules/nf-core/seqfu/stats'
-include { SEQTK_SAMPLE               } from '../modules/nf-core/seqtk/sample/main'
+include { SEQTK_SAMPLE               } from '../modules/nf-core/seqtk/sample'
 
 // subworkflow
 include { QC_BAM                     } from '../subworkflows/local/qc_bam'
@@ -60,20 +60,16 @@ workflow SEQINSPECTOR {
     //
     // MODULE: Run FQ_LINT to catch early errors
     //
-    if ( !("fq" in skip_tools) ) {
-        FQ_LINT (
-            ch_samplesheet
-        )
-        ch_versions = ch_versions.mix(FQ_LINT.out.versions.first())
-        // This catches all FASTQs that pass linting
-        // If you use an error strategy that allows FQ_LINT to fail,
-        // only valid FASTQ files will be passed to the next module
-        ch_samplesheet = FQ_LINT.out.lint
-                            .join(ch_samplesheet)
-                            .map { meta, fq_lint, reads ->
-                                [meta, reads]
-                            }
-    }
+    FQ_LINT(ch_samplesheet.filter { ("fq" in tools) })
+
+    // This catches all FASTQs that pass linting
+    // If you use an error strategy that allows FQ_LINT to fail,
+    // only valid FASTQ files will be passed to the next module
+    ch_samplesheet = FQ_LINT.out.lint
+        .join(ch_samplesheet)
+        .map { meta, _fq_lint, reads ->
+            [meta, reads]
+        }
     //
     // MODULE: Parse rundir info
     //
