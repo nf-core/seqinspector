@@ -6,8 +6,7 @@
 
 // modules
 include { BWAMEM2_MEM                } from '../modules/nf-core/bwamem2/mem'
-include { FASTQC as FASTQC_RAW       } from '../modules/nf-core/fastqc'
-include { FASTQC as FASTQC_TRIM      } from '../modules/nf-core/fastqc'
+include { FASTQC                     } from '../modules/nf-core/fastqc'
 include { FASTP                      } from '../modules/nf-core/fastp/main'
 include { FASTQSCREEN_FASTQSCREEN    } from '../modules/nf-core/fastqscreen/fastqscreen'
 include { MULTIQC as MULTIQC_GLOBAL  } from '../modules/nf-core/multiqc'
@@ -109,9 +108,9 @@ workflow SEQINSPECTOR {
     //
     // MODULE: Run FastQC on subsampled reads
     //
-    FASTQC_RAW(ch_sample.filter { 'fastqc' in tools })
+    FASTQC(ch_sample.filter { 'fastqc' in tools })
 
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQC_RAW.out.zip)
+    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
 
     //
     // MODULE: Run fastp for adapter trimming and quality filtering
@@ -128,12 +127,6 @@ workflow SEQINSPECTOR {
     ch_trimmed = ('fastp' in tools) ? FASTP.out.reads : ch_sample
     ch_multiqc_files = ch_multiqc_files.mix(FASTP.out.json)
 
-    //
-    // MODULE: Run FastQC on trimmed reads
-    //
-    FASTQC_TRIM(ch_trimmed.filter { 'fastqc_trim' in tools })
-
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQC_TRIM.out.zip)
     //
     // Module: Run SeqFu stats
     //

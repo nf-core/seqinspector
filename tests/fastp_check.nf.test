@@ -12,16 +12,8 @@ nextflow_pipeline {
                 tools: 'fastp',
                 tools_setup: null,
             ]
-        ],
-        [
-            name: "NovaSeq6000 data test - Fastp and fastqc_trim",
-            params: [
-                tools: 'fastp,fastqc_trim',
-                tools_setup: null,
-            ]
         ]
     ]
-
     // Generate tests for each scenario
     test_scenario.each { scenario ->
         test(scenario.name, UTILS.getTest(scenario))
