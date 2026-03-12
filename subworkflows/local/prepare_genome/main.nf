@@ -32,7 +32,7 @@ workflow PREPARE_GENOME {
 
     // Use pre-built index when --dict parameter is provided or build index from reference FASTA if necessary
     if (dict) {
-        ch_dict = channel.fromPath(dict, checkIfExists: true).map { _dict -> [[id: genome], dict] }.collect()
+        ch_dict = channel.fromPath(dict, checkIfExists: true).map { dict_ -> [[id: genome], dict_] }.collect()
     }
     else {
         PICARD_CREATESEQUENCEDICTIONARY(ch_fasta.filter { 'picard_collecthsmetrics' in tools })
