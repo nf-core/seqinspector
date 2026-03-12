@@ -63,14 +63,13 @@ workflow SEQINSPECTOR {
     //
     FQ_LINT(ch_samplesheet.filter { ("fq_lint" in tools) })
 
-    // This catches all FASTQs that pass linting
-    // If you use an error strategy that allows FQ_LINT to fail,
-    // only valid FASTQ files will be passed to the next module
-    ch_samplesheet = FQ_LINT.out.lint
-        .join(ch_samplesheet)
-        .map { meta, _fq_lint, reads ->
-            [meta, reads]
-        }
+    if ("fq_lint" in tools) {
+        // This catches all FASTQs that pass linting
+        // If you use an error strategy that allows FQ_LINT to fail,
+        // only valid FASTQ files will be passed to the next module
+        ch_samplesheet = FQ_LINT.out.lint.join(ch_samplesheet).map { meta, _fq_lint, reads -> [meta, reads] }
+    }
+
     //
     // MODULE: Parse rundir info
     //
