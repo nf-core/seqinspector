@@ -146,10 +146,10 @@ It is possible to choose individual tools to run using the `--tools` parameter a
 --tools fastqscreen,rundirparser
 ```
 
-Be aware that the default tools will still be run. In order to ONLY run the selection, one has to specify `--setup_tools null` as well:
+Be aware that the default tools will still be run. In order to ONLY run the selection, one has to specify `--tools_bundle null` as well:
 
 ```showLineNumbers
---tools fastqscreen,rundirparser --setup_tools null
+--tools fastqscreen,rundirparser --tools_bundle null
 ```
 
 Currently the `tools` param can have the following values: fastqc, fastqscreen, picard_collecthsmetrics, picard_collectmultiplemetrics, rundirparser and seqfu_stats.
