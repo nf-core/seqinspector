@@ -25,6 +25,11 @@
                         "git_sha": "3009f27c4e4b6e99da4eeebe82799e13924a4a1f",
                         "installed_by": ["modules"]
                     },
+                    "fastqe": {
+                        "branch": "master",
+                        "git_sha": "c448a28daf17a09a668dd2072ec283f0b480c914",
+                        "installed_by": ["modules"]
+                    },
                     "fastqscreen/fastqscreen": {
                         "branch": "master",
                         "git_sha": "ab2e7b785ee4fa6d108472862edbf983cea7db49",

@@ -19,7 +19,7 @@ include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_seqi
 include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
 include { PREPARE_GENOME          } from './subworkflows/local/prepare_genome'
 include { getGenomeAttribute      } from 'plugin/nf-core-utils'
-include { defineToolsList              } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { defineToolsList         } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
