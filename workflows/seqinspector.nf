@@ -1,24 +1,31 @@
-include { samplesheetToList } from 'plugin/nf-schema'
-
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { SEQTK_SAMPLE                  } from '../modules/nf-core/seqtk/sample/main'
-include { FASTQC                        } from '../modules/nf-core/fastqc/main'
-include { FASTQE                        } from '../modules/nf-core/fastqe/main'
-include { SEQFU_STATS                   } from '../modules/nf-core/seqfu/stats'
-include { FASTQSCREEN_FASTQSCREEN       } from '../modules/nf-core/fastqscreen/fastqscreen/main'
+// modules
+include { BWAMEM2_MEM                } from '../modules/nf-core/bwamem2/mem'
+include { FASTQC                     } from '../modules/nf-core/fastqc'
+include { FASTQE                     } from '../modules/nf-core/fastqe'
+include { FASTQSCREEN_FASTQSCREEN    } from '../modules/nf-core/fastqscreen/fastqscreen'
+include { MULTIQC as MULTIQC_GLOBAL  } from '../modules/nf-core/multiqc'
+include { MULTIQC as MULTIQC_PER_TAG } from '../modules/nf-core/multiqc'
+include { RUNDIRPARSER               } from '../modules/local/rundirparser'
+include { SAMTOOLS_INDEX             } from '../modules/nf-core/samtools/index'
+include { SEQFU_STATS                } from '../modules/nf-core/seqfu/stats'
+include { SEQTK_SAMPLE               } from '../modules/nf-core/seqtk/sample'
 
-include { MULTIQC as MULTIQC_GLOBAL     } from '../modules/nf-core/multiqc/main'
-include { MULTIQC as MULTIQC_PER_TAG    } from '../modules/nf-core/multiqc/main'
+// subworkflow
+include { QC_BAM                     } from '../subworkflows/local/qc_bam'
 
-include { paramsSummaryMap              } from 'plugin/nf-schema'
-include { paramsSummaryMultiqc          } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { softwareVersionsToYAML        } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { methodsDescriptionText        } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
+// functions
+include { methodsDescriptionText     } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { paramsSummaryMap           } from 'plugin/nf-schema'
+include { paramsSummaryMultiqc       } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { reportIndexMultiqc         } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { samplesheetToList          } from 'plugin/nf-schema'
+include { softwareVersionsToYAML     } from 'plugin/nf-core-utils'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -27,42 +34,83 @@ include { methodsDescriptionText        } from '../subworkflows/local/utils_nfco
 */
 
 workflow SEQINSPECTOR {
-
     take:
-    ch_samplesheet               // channel: samplesheet read in from --input
+    ch_samplesheet // channel: samplesheet read in from --input
+    bait_intervals
+    bwamem2_index
+    fasta_reference
+    fastq_screen_references
+    multiqc_config
+    multiqc_logo
+    multiqc_methods_description
+    outdir
+    ref_dict
+    ref_fai
+    sample_size
+    tools
+    sort_bam
+    target_intervals
 
     main:
+    ch_multiqc_files = channel.empty()
+    ch_multiqc_extra_files = channel.empty()
 
-    ch_versions            = Channel.empty()
-    ch_multiqc_files       = Channel.empty()
-    ch_multiqc_extra_files = Channel.empty()
-    ch_multiqc_reports     = Channel.empty()
+    //
+    // MODULE: Parse rundir info
+    //
+    if ('rundirparser' in tools) {
+
+        // Branch the samplesheet channel based on rundir presence
+        ch_rundir_branch = ch_samplesheet.branch { meta, _reads ->
+            with_rundir: meta.rundir.size() > 0
+            without_rundir: true
+        }
+
+        // Log warnings for samples without rundir
+        ch_rundir_branch.without_rundir.subscribe { meta, _reads ->
+            log.warn("Sample '${meta.id}' does not have a rundir specified")
+        }
+
+        // From samplesheet channel serving (sampleMetaObj, sampleReadsPath) tuples:
+        // --> Create new rundir channel serving (rundirMetaObj, rundirPath) tuples
+        ch_rundir = ch_rundir_branch.with_rundir
+            .map { meta, _reads -> [meta.rundir, meta] }
+            .groupTuple()
+            .map { rundir, metas ->
+                // Collect all unique tags into a list
+                def all_tags = metas.collect { meta -> meta.tags }.flatten().unique()
+                // Create a new meta object whose attributes are...
+                //  1. tags: The list of merged tags, used for grouping MultiQC reports
+                //  2. dirname: The simple name of the rundir, used for setting unique output names in publishDir
+                def dir_meta = [tags: all_tags, dirname: rundir.simpleName]
+                // Return the new structure, to...
+                //  1. Feed into rundir specific processes
+                //  2. Mix with the ch_multiqc_files channel downstream
+                [dir_meta, rundir]
+            }
+
+        ch_rundir.ifEmpty { log.warn("No samples with rundir found, skipping RUNDIRPARSER") }
+
+        RUNDIRPARSER(ch_rundir)
+
+        ch_multiqc_files = ch_multiqc_files.mix(RUNDIRPARSER.out.multiqc)
+    }
+
 
     //
     // MODULE: Run Seqtk sample to perform subsampling
     //
-    if (params.sample_size > 0 ) {
-        ch_sample_sized = SEQTK_SAMPLE(
-            ch_samplesheet.map {
-                meta, reads -> [meta, reads, params.sample_size]
-            }
-        ).reads
-        ch_versions = ch_versions.mix(SEQTK_SAMPLE.out.versions.first())
-    } else {
-        // No do subsample
-        ch_sample_sized = ch_samplesheet
-    }
+
+    SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] }.filter { sample_size })
+
+    ch_sample = sample_size ? SEQTK_SAMPLE.out.reads : ch_samplesheet
 
     //
     // MODULE: Run FastQC
     //
-    FASTQC (
-        ch_sample_sized.map {
-            meta, subsampled -> [meta, subsampled]
-        }
-    )
+    FASTQC(ch_sample.filter { 'fastqc' in tools })
+
     ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
-    ch_versions = ch_versions.mix(FASTQC.out.versions.first())
 
     // FASTQE
     FASTQE(
@@ -76,11 +124,21 @@ workflow SEQINSPECTOR {
     //
     // Module: Run SeqFu stats
     //
-    SEQFU_STATS (
-        ch_samplesheet
-    )
+    SEQFU_STATS(ch_samplesheet.map { meta, reads -> [[id: "seqfu", sample_id: meta.id, tags: meta.tags], reads] }.filter { 'seqfu_stats' in tools })
+
+    // Parse the stats TSV file
+    SEQFU_STATS.out.stats
+        .map { meta, stats -> [meta.sample_id, stats] }
+        .splitCsv(header: true, sep: '\t')
+        .map { sample_id, row ->
+            // Check if requested sample size exceeds available reads
+            def sample_reads = row['#Seq'].toInteger()
+            if (sample_size > sample_reads) {
+                log.warn("${sample_id}: Requested sample_size (${sample_size}) is larger than available reads (${sample_reads}). Pipeline will continue with ${sample_reads} reads.")
+            }
+        }
+
     ch_multiqc_files = ch_multiqc_files.mix(SEQFU_STATS.out.multiqc)
-    ch_versions = ch_versions.mix(SEQFU_STATS.out.versions.first())
 
     //
     // MODULE: Run FastQ Screen
@@ -89,94 +147,111 @@ workflow SEQINSPECTOR {
     // Parse the reference info needed to create a FastQ Screen config file
     // and transpose it into a tuple containing lists for each property
 
-    ch_fastqscreen_refs = Channel
-        .fromList(samplesheetToList(
-            "${projectDir}/assets/example_fastq_screen_references.csv",
-            "${projectDir}/assets/schema_fastq_screen_references.json"
-        ))
-        .toList()
-        .transpose()
-        .toList()
-
-    FASTQSCREEN_FASTQSCREEN (
-        ch_samplesheet,
-        ch_fastqscreen_refs
+    FASTQSCREEN_FASTQSCREEN(
+        ch_sample.filter { 'fastqscreen' in tools },
+        channel.fromList(
+            samplesheetToList(
+                fastq_screen_references,
+                "${projectDir}/assets/schema_fastq_screen_references.json",
+            )
+        ).toList().transpose().toList(),
     )
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
-    ch_versions = ch_versions.mix(FASTQSCREEN_FASTQSCREEN.out.versions.first())
 
-    //
+    ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
+
+    // MODULE: Align reads with BWA-MEM2
+    BWAMEM2_MEM(
+        ch_sample.filter { ('picard_collecthsmetrics' in tools) || ('picard_collectmultiplemetrics' in tools) },
+        bwamem2_index,
+        fasta_reference,
+        sort_bam,
+    )
+
+    SAMTOOLS_INDEX(BWAMEM2_MEM.out.bam)
+
+    ch_bam_bai = BWAMEM2_MEM.out.bam.join(SAMTOOLS_INDEX.out.bai, failOnDuplicate: true, failOnMismatch: true)
+
+    QC_BAM(
+        ch_bam_bai,
+        fasta_reference,
+        ref_fai,
+        bait_intervals ? channel.fromPath(bait_intervals).collect() : channel.empty(),
+        target_intervals ? channel.fromPath(target_intervals).collect() : channel.empty(),
+        ref_dict,
+        tools,
+    )
+
+    ch_multiqc_files = ch_multiqc_files.mix(QC_BAM.out.multiple_metrics, QC_BAM.out.hs_metrics)
+
     // Collate and save software versions
     //
-    softwareVersionsToYAML(ch_versions)
-        .collectFile(
-            storeDir: "${params.outdir}/pipeline_info",
-            name: 'nf_core_'  + 'pipeline_software_' +  'mqc_'  + 'versions.yml',
-            sort: true,
-            newLine: true
-        ).set { ch_collated_versions }
-
+    def collated_versions = softwareVersionsToYAML(
+        softwareVersions: channel.topic("versions"),
+        nextflowVersion: workflow.nextflow.version,
+    ).collectFile(
+        storeDir: "${outdir}/pipeline_info",
+        name: 'nf_core_' + 'seqinspector_software_' + 'mqc_' + 'versions.yml',
+        sort: true,
+        newLine: true,
+    )
 
     //
     // MODULE: MultiQC
     //
-    ch_multiqc_config = params.multiqc_config ?
-        Channel.fromPath(params.multiqc_config, checkIfExists: true) :
-        Channel.fromPath("$projectDir/assets/multiqc_config.yml", checkIfExists: true)
-    ch_multiqc_logo   = params.multiqc_logo ?
-        Channel.fromPath(params.multiqc_logo, checkIfExists: true) :
-        Channel.empty()
 
-    summary_params                        = paramsSummaryMap(
-        workflow, parameters_schema: "nextflow_schema.json")
-    ch_workflow_summary                   = Channel.value(
-        paramsSummaryMultiqc(summary_params))
-    ch_multiqc_custom_methods_description = params.multiqc_methods_description ?
-        file(params.multiqc_methods_description, checkIfExists: true) :
-        file("$projectDir/assets/methods_description_template.yml", checkIfExists: true)
-    ch_methods_description                = Channel.value(
-        methodsDescriptionText(ch_multiqc_custom_methods_description))
+    ch_multiqc_extra_files = ch_multiqc_extra_files.mix(collated_versions)
+
+    summary_params = paramsSummaryMap(workflow, parameters_schema: "nextflow_schema.json")
 
     ch_multiqc_extra_files = ch_multiqc_extra_files.mix(
-        ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml'))
-    ch_multiqc_extra_files = ch_multiqc_extra_files.mix(ch_collated_versions)
-    ch_multiqc_extra_files = ch_multiqc_extra_files.mix(
-        ch_methods_description.collectFile(
-            name: 'methods_description_mqc.yaml',
-            sort: true
-        )
+        channel.value(paramsSummaryMultiqc(summary_params)).collectFile(name: 'workflow_summary_mqc.yaml')
     )
 
-    MULTIQC_GLOBAL (
-        ch_multiqc_files
-            .map { meta, file -> file }
-            .mix(ch_multiqc_extra_files)
-            .collect(),
-        ch_multiqc_config.toList(),
-        [],
-        ch_multiqc_logo.toList(),
-        [],
-        []
+    ch_multiqc_custom_methods_description = multiqc_methods_description
+        ? file(multiqc_methods_description, checkIfExists: true)
+        : file("${projectDir}/assets/methods_description_template.yml", checkIfExists: true)
+
+    ch_methods_description = channel.value(methodsDescriptionText(ch_multiqc_custom_methods_description))
+
+    ch_multiqc_extra_files = ch_multiqc_extra_files.mix(ch_methods_description.collectFile(name: 'methods_description_mqc.yaml', sort: true))
+
+    // Add index to other MultiQC reports
+    ch_tags = ch_multiqc_files.map { meta, _files -> meta.tags }.flatten().unique()
+
+    ch_multiqc_extra_files_global = ch_multiqc_extra_files.mix(
+        ch_tags.toList().map { tag_list -> reportIndexMultiqc(tag_list) }.collectFile(name: 'multiqc_index_mqc.yaml')
     )
 
-    ch_tags = ch_multiqc_files
-        .map { meta, sample -> meta.tags }
-        .flatten()
-        .unique()
+    MULTIQC_GLOBAL(
+        ch_multiqc_files.map { _meta, files -> [files] }.flatten().collect().combine(ch_multiqc_extra_files_global.collect()).map { files ->
+            [
+                [id: 'seqinspector'],
+                files,
+                multiqc_config
+                    ? file(multiqc_config, checkIfExists: true)
+                    : file("${projectDir}/assets/multiqc_config.yml", checkIfExists: true),
+                multiqc_logo ? file(multiqc_logo, checkIfExists: true) : [],
+                [],
+                [],
+            ]
+        }
+    )
 
-    multiqc_extra_files_per_tag = ch_tags
-        .combine(ch_multiqc_extra_files)
+    ch_multiqc_extra_files_tag = ch_multiqc_extra_files.mix(
+        ch_tags.toList().map { tag_list -> reportIndexMultiqc(tag_list, false) }.collectFile(name: 'multiqc_index_mqc.yaml')
+    )
+
+    multiqc_extra_files_per_tag = ch_tags.combine(ch_multiqc_extra_files_tag)
 
     // Group samples by tag
     tagged_mqc_files = ch_tags
         .combine(ch_multiqc_files)
-        .filter { sample_tag, meta, sample -> sample_tag in meta.tags }
-        .map { sample_tag, meta, sample -> [sample_tag, sample] }
+        .filter { sample_tag, meta, _sample -> sample_tag in meta.tags }
+        .map { sample_tag, _meta, sample -> [sample_tag, sample] }
         .mix(multiqc_extra_files_per_tag)
         .groupTuple()
         .tap { mqc_by_tag }
-        .collectFile {
-            sample_tag, samples ->
+        .collectFile { sample_tag, _samples ->
             def prefix_tag = "[TAG:${sample_tag}]"
             [
                 "${prefix_tag}_multiqc_extra_config.yml",
@@ -184,33 +259,34 @@ workflow SEQINSPECTOR {
                     |output_fn_name: \"${prefix_tag}_multiqc_report.html\"
                     |data_dir_name:  \"${prefix_tag}_multiqc_data\"
                     |plots_dir_name: \"${prefix_tag}_multiqc_plots\"
-                """.stripMargin()
+                """.stripMargin(),
             ]
         }
-        .map { file -> [ (file =~ /\[TAG:(.+)\]/)[0][1], file ] }
+        .map { file -> [(file =~ /\[TAG:(.+)\]/)[0][1], file] }
         .join(mqc_by_tag)
-        .multiMap { sample_tag, config, samples ->
-            samples_per_tag: samples
-            config: config
+        .map { sample_tag, config, samples ->
+            [[id: sample_tag], samples.flatten(), config]
         }
 
     MULTIQC_PER_TAG(
-        tagged_mqc_files.samples_per_tag,
-        ch_multiqc_config.toList(),
-        tagged_mqc_files.config,
-        ch_multiqc_logo.toList(),
-        [],
-        []
+        tagged_mqc_files.map { meta, files, config ->
+            [
+                meta,
+                files,
+                [
+                    config,
+                    multiqc_config
+                        ? file(multiqc_config, checkIfExists: true)
+                        : file("${projectDir}/assets/multiqc_config.yml", checkIfExists: true),
+                ],
+                multiqc_logo ? file(multiqc_logo, checkIfExists: true) : [],
+                [],
+                [],
+            ]
+        }
     )
 
     emit:
-    global_report   = MULTIQC_GLOBAL.out.report.toList()    // channel: [ /path/to/multiqc_report.html ]
-    grouped_reports = MULTIQC_PER_TAG.out.report.toList()   // channel: [ /path/to/multiqc_report.html ]
-    versions        = ch_versions                           // channel: [ path(versions.yml) ]
+    global_report   = MULTIQC_GLOBAL.out.report.map { _meta, report -> [report] }.toList() // channel: [ /path/to/multiqc_report.html ]
+    grouped_reports = MULTIQC_PER_TAG.out.report.map { _meta, report -> [report] }.toList() // channel: [ /path/to/multiqc_report.html ]
 }
-
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    THE END
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/

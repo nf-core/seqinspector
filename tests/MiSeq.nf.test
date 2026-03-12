@@ -1,0 +1,45 @@
+def pipelines_testdata_base_path = 'https://raw.githubusercontent.com/nf-core/test-datasets/'
+
+nextflow_pipeline {
+
+    name "Test pipeline"
+    script "../main.nf"
+
+    def test_scenario = [
+        [
+            name: "MiSeq data test (single end reads)",
+            params: [
+                input: pipelines_testdata_base_path + 'seqinspector/testdata/MiSeq/samplesheet.csv',
+                tools_setup: 'minimal',
+            ]
+        ],
+        [
+            name: "Miseq data test (no fastqc)",
+            params: [
+                input: pipelines_testdata_base_path + 'seqinspector/testdata/MiSeq/samplesheet.csv',
+                skip_tools: 'fastqc',
+                tools_setup: 'minimal',
+            ]
+        ],
+        [
+            name: "Miseq data test (skip all tools)",
+            params: [
+                input: pipelines_testdata_base_path + 'seqinspector/testdata/MiSeq/samplesheet.csv',
+                skip_tools: 'fastqc,fastqscreen,picard_collectmultiplemetrics,seqfu_stats',
+                tools_setup: 'minimal',
+            ]
+        ],
+        [
+            name: "MiSeq data test (paired end reads)",
+            params: [
+                input: pipelines_testdata_base_path + 'seqinspector/testdata/Miseq_PairedEnd/samplesheet.csv',
+                tools_setup: 'minimal',
+            ]
+        ]
+    ]
+
+    // Generate tests for each scenario
+    test_scenario.each { scenario ->
+        test(scenario.name, UTILS.getTest(scenario))
+    }
+}
