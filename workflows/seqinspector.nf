@@ -180,12 +180,11 @@ workflow SEQINSPECTOR {
 
     // This provides useful stats of long reads
 
-    if (!("toulligqc" in skip_tools)) {
+    if ("toulligqc" in tools) {
         TOULLIGQC (
             ch_samplesheet
         )
         ch_multiqc_files.mix(TOULLIGQC.out.report_data)
-        ch_versions = ch_versions.mix(TOULLIGQC.out.versions.first())
     }
 
     //
