@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#204](https://github.com/nf-core/seqinspector/pull/204) Added Fastp module
 - [#202](https://github.com/nf-core/seqinspector/pull/202) Added support for fasta fai file as input (via params or igenomes) for the pipeline
 - [#206](https://github.com/nf-core/seqinspector/pull/206) Added FASTQE for more comprehensive QC of FASTQ files
+- [#208](https://github.com/nf-core/seqinspector/pull/208) Add FASTQ linting for early validation with FQ/LINT
 
 ### `Fixed`
 
@@ -63,8 +64,6 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#53](https://github.com/nf-core/seqinspector/pull/53), [#64](https://github.com/nf-core/seqinspector/pull/64) Add FastQ-Screen database multiplexing and limit scope of nf-test in CI
 - [#56](https://github.com/nf-core/seqinspector/pull/56) Added SeqFu stats module
 - [#63](https://github.com/nf-core/seqinspector/pull/63) Contribution guidelines added about displaying results for new tools
-- [#53](https://github.com/nf-core/seqinspector/pull/53) Add FastQ-Screen database multiplexing and limit scope of nf-test in CI.
-- [#67](https://github.com/nf-core/seqinspector/pull/67) Add FASTQ linting for early validation
 - [#68](https://github.com/nf-core/seqinspector/pull/68) Add tool selector
 - [#75](https://github.com/nf-core/seqinspector/pull/75) Set up nft-utils
 - [#96](https://github.com/nf-core/seqinspector/pull/96) Added missing citations to citation tool

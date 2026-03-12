@@ -10,9 +10,6 @@
 
 ## Pipeline tools
 
-- [FQ](https://github.com/stjude-rust-labs/fq)
-
-- [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
 - [BWAMEM2](https://ieeexplore.ieee.org/abstract/document/8820962)
 
   > Vasimuddin Md, Misra S, Li H, Aluru S. Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems. In: 2019 IEEE International Parallel and Distributed Processing Symposium (IPDPS). IEEE; 2019:314-324. doi:10.1109/IPDPS.2019.00041
@@ -28,6 +25,8 @@
 - [FastQ Screen](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/)
 
   > Wingett SW and Andrews S. FastQ Screen: A tool for multi-genome mapping and quality control [version 2; referees: 4 approved]. F1000Research 2018, 7:1338 (https://doi.org/10.12688/f1000research.15931.2)
+
+- [FQ](https://github.com/stjude-rust-labs/fq)
 
 - [MultiQC](https://pubmed.ncbi.nlm.nih.gov/27312411/)
 
