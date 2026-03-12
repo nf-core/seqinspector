@@ -51,7 +51,7 @@
                 "tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to run",
-                    "pattern": "^((fastqc|fastqe|fastqscreen|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats)?,?)*(?<!,)$",
+                    "pattern": "^((fastp|fastqc|fastqe|fastqscreen|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats)?,?)*(?<!,)$",
                     "fa_icon": "fas fa-sort-amount-asc"
                 },
                 "tools_bundle": {
@@ -63,7 +63,7 @@
                 "skip_tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to skip - overrides any other means of tools selection",
-                    "pattern": "^((fastqc|fastqe|fastqscreen|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats)?,?)*(?<!,)$",
+                    "pattern": "^((fastp|fastqc|fastqe|fastqscreen|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats)?,?)*(?<!,)$",
                     "fa_icon": "fas fa-window-close "
                 },
                 "sort_bam": {
