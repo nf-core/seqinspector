@@ -200,6 +200,7 @@ Tools:
 - picard_collectmultiplemetrics
 - rundirparser
 - seqfu_stats
+- toulligqc
 
 :::
 
@@ -260,6 +261,7 @@ Tools:
 - fastqc
 - fastqscreen
 - seqfu_stats
+- toulligqc
 
 :::
 

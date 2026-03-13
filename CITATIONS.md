@@ -18,6 +18,14 @@
 
   > Andrews, S. (2010). FastQC: A Quality Control Tool for High Throughput Sequence Data [Online].
 
+- [Kraken2](https://doi.org/10.1186/s13059-019-1891-0)
+
+  > Wood, D. E., Lu, J., & Langmead, B. (2019). Improved metagenomic analysis with Kraken 2. Genome Biology, 20(1), 257. https://doi.org/10.1186/s13059-019-1891-0
+
+- [Krona](https://doi.org/10.1186/1471-2105-12-385)
+
+  > Ondov, B. D., Bergman, N. H., & Phillippy, A. M. (2011). Interactive metagenomic visualization in a Web browser. BMC Bioinformatics, 12. https://doi.org/10.1186/1471-2105-12-385
+
 - [Fastp](https://doi.org/10.1093/bioinformatics/bty560)
 
   > Shifu Chen, Yanqing Zhou, Yaru Chen, Jia Gu, fastp: an ultra-fast all-in-one FASTQ preprocessor, Bioinformatics, Volume 34, Issue 17, September 2018, Pages i884–i890.
@@ -25,6 +33,8 @@
 - [FastQ Screen](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/)
 
   > Wingett SW and Andrews S. FastQ Screen: A tool for multi-genome mapping and quality control [version 2; referees: 4 approved]. F1000Research 2018, 7:1338 (https://doi.org/10.12688/f1000research.15931.2)
+
+- [FQ](https://github.com/stjude-rust-labs/fq)
 
 - [MultiQC](https://pubmed.ncbi.nlm.nih.gov/27312411/)
 
@@ -43,6 +53,8 @@
   > Telatin A, Fariselli P, Birolo G. SeqFu: A Suite of Utilities for the Robust and Reproducible Manipulation of Sequence Files. Bioengineering 2021, 8, 59. doi.org/10.3390/bioengineering8050059
 
 - [Seqtk](https://github.com/lh3/seqtk)
+
+- [ToulligQC](https://github.com/GenomiqueENS/toulligQ)
 
 ## Software packaging/containerisation tools
 

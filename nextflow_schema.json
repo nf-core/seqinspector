@@ -51,7 +51,7 @@
                 "tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to run",
-                    "pattern": "^((fastp|fastqc|fastqe|fastqscreen|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats)?,?)*(?<!,)$",
+                    "pattern": "^((fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats|toulligqc)?,?)*(?<!,)$",
                     "fa_icon": "fas fa-sort-amount-asc"
                 },
                 "tools_bundle": {
@@ -63,15 +63,60 @@
                 "skip_tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to skip - overrides any other means of tools selection",
-                    "pattern": "^((fastp|fastqc|fastqe|fastqscreen|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats)?,?)*(?<!,)$",
+                    "pattern": "^((fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats|toulligqc)?,?)*(?<!,)$",
                     "fa_icon": "fas fa-window-close "
+                }
+            }
+        },
+        "validation_options": {
+            "title": "Validation options",
+            "type": "object",
+            "description": "Options for validating and screening FASTQ files.",
+            "default": "",
+            "properties": {
+                "fq_lint_args": {
+                    "type": "string",
+                    "description": "Arguments to pass to FQ lint",
+                    "help_text": "Arguments to pass to FQ lint. This can be used to disable overly strict linting. See https://github.com/stjude-rust-labs/fq?tab=readme-ov-file#lint for more information."
                 },
-                "sort_bam": {
+                "continue_with_lint_fail": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Sort BAM files after alignment",
-                    "help_text": "If true, BAM files produced by alignment will be sorted by genomic coordinates.",
-                    "fa_icon": "fas fa-sort-alpha-down"
+                    "description": "Whether to continue with the pipeline if linting fails for a single sample.",
+                    "help_text": "If set to true, the pipeline will continue with the remaining samples if linting fails for a single sample. If set to false, the pipeline will terminate if linting fails for a single sample.",
+                    "fa_icon": "fas fa-window-close "
+                }
+            }
+        },
+        "kraken2_options": {
+            "title": "Kraken2 options",
+            "type": "object",
+            "description": "Options for Kraken2",
+            "default": "",
+            "properties": {
+                "kraken2_db": {
+                    "type": "string",
+                    "exists": true,
+                    "mimetype": "text/plain",
+                    "description": "Path to Kraken2 database file, either a gzipped file or the path to the uncompressed database.",
+                    "fa_icon": "fas fa-database"
+                },
+                "kraken2_save_reads": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-save",
+                    "description": "Turn on saving of Kraken2-aligned reads",
+                    "help_text": "Save reads that do and do not have a taxonomic classification in your output results directory in FASTQ format.\n\n> Modifies tool parameter(s):\n> - kraken2: `--classified-out` and `--unclassified-out`"
+                },
+                "kraken2_save_readclassifications": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-save",
+                    "description": "Turn on saving of Kraken2 per-read taxonomic assignment file",
+                    "help_text": "Save a text file that contains a list of each read that had a taxonomic assignment, with information on specific taxonomic taxonomic assignment that that read recieved.\n\n> Modifies tool parameter(s):\n> - kraken2: `--output`"
+                },
+                "kraken_save_uncompressed_db": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-save",
+                    "description": "Turn on saving of uncompressed Kraken2 DB"
                 }
             }
         },
@@ -326,6 +371,12 @@
     "allOf": [
         {
             "$ref": "#/$defs/input_output_options"
+        },
+        {
+            "$ref": "#/$defs/validation_options"
+        },
+        {
+            "$ref": "#/$defs/kraken2_options"
         },
         {
             "$ref": "#/$defs/reference_genome_options"

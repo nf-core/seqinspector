@@ -4,12 +4,14 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
+
 // modules
 include { BWAMEM2_MEM                } from '../modules/nf-core/bwamem2/mem'
 include { FASTP                      } from '../modules/nf-core/fastp'
 include { FASTQC                     } from '../modules/nf-core/fastqc'
 include { FASTQE                     } from '../modules/nf-core/fastqe'
 include { FASTQSCREEN_FASTQSCREEN    } from '../modules/nf-core/fastqscreen/fastqscreen'
+include { FQ_LINT                    } from '../modules/nf-core/fq/lint'
 include { MULTIQC as MULTIQC_GLOBAL  } from '../modules/nf-core/multiqc'
 include { MULTIQC as MULTIQC_PER_TAG } from '../modules/nf-core/multiqc'
 include { MULTIQCSAV as MULTIQC_SAV  } from '../modules/nf-core/multiqcsav'
@@ -17,8 +19,10 @@ include { RUNDIRPARSER               } from '../modules/local/rundirparser'
 include { SAMTOOLS_INDEX             } from '../modules/nf-core/samtools/index'
 include { SEQFU_STATS                } from '../modules/nf-core/seqfu/stats'
 include { SEQTK_SAMPLE               } from '../modules/nf-core/seqtk/sample'
+include { TOULLIGQC                  } from '../modules/nf-core/toulligqc'
 
 // subworkflow
+include { PHYLOGENETIC_QC            } from '../subworkflows/local/phylogenetic_qc'
 include { QC_BAM                     } from '../subworkflows/local/qc_bam'
 
 // functions
@@ -50,14 +54,28 @@ workflow SEQINSPECTOR {
     ref_fai
     sample_size
     tools
-    sort_bam
     target_intervals
+    kraken2_db
+    kraken2_save_reads
+    kraken2_save_readclassifications
 
     main:
     ch_multiqc_files = channel.empty()
     ch_multiqc_extra_files = channel.empty()
     ch_global_reports = Channel.empty()
     ch_sav_reports = Channel.empty()
+
+    //
+    // MODULE: Run FQ_LINT to catch early errors
+    //
+    FQ_LINT(ch_samplesheet.filter { ("fq_lint" in tools) })
+
+    if ("fq_lint" in tools) {
+        // This catches all FASTQs that pass linting
+        // If you use an error strategy that allows FQ_LINT to fail,
+        // only valid FASTQ files will be passed to the next module
+        ch_samplesheet = FQ_LINT.out.lint.join(ch_samplesheet).map { meta, _fq_lint, reads -> [meta, reads] }
+    }
 
     //
     // MODULE: Parse rundir info
@@ -213,6 +231,8 @@ workflow SEQINSPECTOR {
     ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
 
     // MODULE: Align reads with BWA-MEM2
+    def sort_bam = true
+    // we always sort bam
     BWAMEM2_MEM(
         ch_sample.filter { ('picard_collecthsmetrics' in tools) || ('picard_collectmultiplemetrics' in tools) },
         bwamem2_index,
@@ -222,7 +242,7 @@ workflow SEQINSPECTOR {
 
     SAMTOOLS_INDEX(BWAMEM2_MEM.out.bam)
 
-    ch_bam_bai = BWAMEM2_MEM.out.bam.join(SAMTOOLS_INDEX.out.bai, failOnDuplicate: true, failOnMismatch: true)
+    ch_bam_bai = BWAMEM2_MEM.out.bam.join(SAMTOOLS_INDEX.out.index, failOnDuplicate: true, failOnMismatch: true)
 
     QC_BAM(
         ch_bam_bai,
@@ -236,6 +256,31 @@ workflow SEQINSPECTOR {
 
     ch_multiqc_files = ch_multiqc_files.mix(QC_BAM.out.multiple_metrics, QC_BAM.out.hs_metrics)
 
+    //
+    // SUBWORKFLOW: Run kraken2 and produce krona plots
+    //
+
+    if ('kraken2' in tools) {
+        PHYLOGENETIC_QC(
+            ch_samplesheet,
+            kraken2_db,
+            kraken2_save_reads,
+            kraken2_save_readclassifications,
+        )
+        ch_multiqc_files = ch_multiqc_files.mix(PHYLOGENETIC_QC.out.mqc)
+    }
+
+    //
+    // MODULE: Run ToulligQC
+    //
+
+    // This provides useful stats of long reads
+
+    TOULLIGQC(ch_samplesheet.filter { "toulligqc" in tools })
+
+    ch_multiqc_files.mix(TOULLIGQC.out.report_data)
+
+    //
     // Collate and save software versions
     //
     def collated_versions = softwareVersionsToYAML(

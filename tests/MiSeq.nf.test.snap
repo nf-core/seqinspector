@@ -13,7 +13,7 @@
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-03-05T16:55:16.91082134",
+        "timestamp": "2026-03-13T15:50:57.184570049",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -40,10 +40,10 @@
                     "picard": "3.4.0"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SEQFU_STATS": {
                     "seqfu": "1.22.3"
@@ -251,7 +251,7 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-03-12T12:30:24.057223079",
+        "timestamp": "2026-03-13T15:49:45.741235401",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -278,10 +278,10 @@
                     "picard": "3.4.0"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SEQFU_STATS": {
                     "seqfu": "1.22.3"
@@ -683,7 +683,7 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-03-12T12:33:14.134461741",
+        "timestamp": "2026-03-13T15:51:53.447400027",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -707,10 +707,10 @@
                     "picard": "3.4.0"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SEQFU_STATS": {
                     "seqfu": "1.22.3"
@@ -860,9 +860,9 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-03-11T12:31:47.745588893",
+        "timestamp": "2026-03-13T15:50:38.317313792",
         "meta": {
-            "nf-test": "0.9.3",
+            "nf-test": "0.9.4",
             "nextflow": "25.10.4"
         }
     }

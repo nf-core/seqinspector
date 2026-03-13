@@ -1,7 +1,7 @@
 {
     "PromethION data test": {
         "content": [
-            4,
+            5,
             {
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -11,6 +11,9 @@
                 },
                 "SEQFU_STATS": {
                     "seqfu": "1.22.3"
+                },
+                "TOULLIGQC": {
+                    "toulligqc": "2.8.4"
                 }
             },
             [
@@ -105,7 +108,18 @@
                 "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
                 "seqfu_stats",
                 "seqfu_stats/hg001_01_seqfu.tsv",
-                "seqfu_stats/hg001_01_seqfu_mqc.txt"
+                "seqfu_stats/hg001_01_seqfu_mqc.txt",
+                "toulligqc",
+                "toulligqc/hg001_01",
+                "toulligqc/hg001_01/images",
+                "toulligqc/hg001_01/images/Correlation_between_read_length_and_PHRED_score.html",
+                "toulligqc/hg001_01/images/Distribution_of_read_lengths.html",
+                "toulligqc/hg001_01/images/PHRED_score_density_distribution.html",
+                "toulligqc/hg001_01/images/PHRED_score_distribution.html",
+                "toulligqc/hg001_01/images/Read_count_histogram.html",
+                "toulligqc/hg001_01/images/plotly.min.js",
+                "toulligqc/hg001_01/report.data",
+                "toulligqc/hg001_01/report.html"
             ],
             [
                 "hg001_01_screen.png:md5,b9c58e388f18ad11f4c2e29e9b573a5e",
@@ -132,7 +146,7 @@
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-03-12T12:43:06.926798167",
+        "timestamp": "2026-03-13T10:19:41.243464188",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

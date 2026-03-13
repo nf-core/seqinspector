@@ -36,6 +36,7 @@ workflow PIPELINE_INITIALISATION {
     show_hidden // boolean: Show hidden parameters in the help message
     tools
     fasta
+    kraken2_db
 
     main:
 
@@ -143,6 +144,14 @@ workflow PIPELINE_INITIALISATION {
     if (!(fasta) && (("picard_collecthsmetrics" in tools) || ("picard_collectmultiplemetrics" in tools))) {
         log.warn("No fasta was provided, but picard was requested")
         log.warn("BWAMEM2, SAMTOOLS and PICARD processes, will be skipped")
+    }
+
+    if ('toulligqc' in tools && 'emulate_amd64' in workflow.profile.tokenize(",")) {
+        error("ToulligQC is not compatible with the 'emulate_amd64' profile. Please remove ToulligQC from the list of tools if you wish to run seqinspector on this architecture.")
+    }
+
+    if (!(kraken2_db) && ("kraken2" in tools)) {
+        error("No kraken2_db was provided, but Kraken2 was requested")
     }
 
     emit:
@@ -318,10 +327,12 @@ def defineToolsList(input_bundle, input_tools, input_skip) {
         tools_list << 'fastqc'
         tools_list << 'fastqe'
         tools_list << 'fastqscreen'
+        tools_list << 'fq_lint'
         tools_list << 'picard_collecthsmetrics'
         tools_list << 'picard_collectmultiplemetrics'
         tools_list << 'rundirparser'
         tools_list << 'seqfu_stats'
+        tools_list << 'toulligqc'
     }
     if ('bam' in bundle_list) {
         tools_list << 'picard_collecthsmetrics'
@@ -330,10 +341,12 @@ def defineToolsList(input_bundle, input_tools, input_skip) {
     if ('fastq' in bundle_list) {
         tools_list << 'fastqc'
         tools_list << 'fastqscreen'
+        tools_list << 'fq_lint'
     }
     if ('default' in bundle_list) {
         tools_list << 'fastqc'
         tools_list << 'fastqscreen'
+        tools_list << 'fq_lint'
         tools_list << 'picard_collectmultiplemetrics'
         tools_list << 'rundirparser'
         tools_list << 'seqfu_stats'
@@ -353,6 +366,7 @@ def defineToolsList(input_bundle, input_tools, input_skip) {
         tools_list << 'fastqc'
         tools_list << 'fastqscreen'
         tools_list << 'seqfu_stats'
+        tools_list << 'toulligqc'
     }
 
     tools_list = tools_list.sort().unique() - skip_list

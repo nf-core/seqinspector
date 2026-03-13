@@ -1,7 +1,7 @@
 {
     "NovaSeq6000 data test": {
         "content": [
-            38,
+            43,
             {
                 "BWAMEM2_INDEX": {
                     "bwamem2": "2.2.1"
@@ -16,6 +16,9 @@
                 "FASTQSCREEN_FASTQSCREEN": {
                     "fastqscreen": "0.16.0"
                 },
+                "FQ_LINT": {
+                    "fq": "0.12.0"
+                },
                 "PICARD_COLLECTMULTIPLEMETRICS": {
                     "picard": "3.4.0"
                 },
@@ -24,10 +27,10 @@
                     "Python": "3.13.2"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SEQFU_STATS": {
                     "seqfu": "1.22.3"
@@ -79,6 +82,12 @@
                 "fastqscreen/sampletest_04_screen.html",
                 "fastqscreen/sampletest_04_screen.png",
                 "fastqscreen/sampletest_04_screen.txt",
+                "fq",
+                "fq/Sample1_01.fq_lint.txt",
+                "fq/Sample23_03.fq_lint.txt",
+                "fq/SampleA_02.fq_lint.txt",
+                "fq/Undetermined_05.fq_lint.txt",
+                "fq/sampletest_04.fq_lint.txt",
                 "multiqc",
                 "multiqc/global_report",
                 "multiqc/global_report/multiqc_data",
@@ -1011,7 +1020,7 @@
                 "* Software dependencies",
                 "    https://github.com/nf-core/seqinspector/blob/master/CITATIONS.md",
                 "Extra informations",
-                "  Tools selected to be run  : fastqc,fastqscreen,picard_collectmultiplemetrics,rundirparser,seqfu_stats",
+                "  Tools selected to be run  : fastqc,fastqscreen,fq_lint,picard_collectmultiplemetrics,rundirparser,seqfu_stats",
                 "------------------------------------------------------",
                 "-[nf-core/seqinspector] Pipeline completed successfully-",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (Sample1_01)",
@@ -1029,6 +1038,11 @@
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQSCREEN_FASTQSCREEN (SampleA_02)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQSCREEN_FASTQSCREEN (Undetermined_05)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FASTQSCREEN_FASTQSCREEN (sampletest_04)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FQ_LINT (Sample1_01)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FQ_LINT (Sample23_03)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FQ_LINT (SampleA_02)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FQ_LINT (Undetermined_05)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:FQ_LINT (sampletest_04)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:MULTIQC_GLOBAL (seqinspector)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:MULTIQC_PER_TAG (group1)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:MULTIQC_PER_TAG (group2)",
@@ -1050,7 +1064,7 @@
                 "[NXF_HASH] Submitted process > PREPARE_GENOME:SAMTOOLS_FAIDX (genome.fa)"
             ]
         ],
-        "timestamp": "2026-03-12T12:34:46.665013891",
+        "timestamp": "2026-03-13T15:53:03.277536715",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -1058,7 +1072,7 @@
     },
     "NovaSeq6000 data test sample size": {
         "content": [
-            43,
+            48,
             {
                 "BWAMEM2_INDEX": {
                     "bwamem2": "2.2.1"
@@ -1073,6 +1087,9 @@
                 "FASTQSCREEN_FASTQSCREEN": {
                     "fastqscreen": "0.16.0"
                 },
+                "FQ_LINT": {
+                    "fq": "0.12.0"
+                },
                 "PICARD_COLLECTMULTIPLEMETRICS": {
                     "picard": "3.4.0"
                 },
@@ -1081,10 +1098,10 @@
                     "Python": "3.13.2"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SEQFU_STATS": {
                     "seqfu": "1.22.3"
@@ -1139,6 +1156,12 @@
                 "fastqscreen/sampletest_04_screen.html",
                 "fastqscreen/sampletest_04_screen.png",
                 "fastqscreen/sampletest_04_screen.txt",
+                "fq",
+                "fq/Sample1_01.fq_lint.txt",
+                "fq/Sample23_03.fq_lint.txt",
+                "fq/SampleA_02.fq_lint.txt",
+                "fq/Undetermined_05.fq_lint.txt",
+                "fq/sampletest_04.fq_lint.txt",
                 "multiqc",
                 "multiqc/global_report",
                 "multiqc/global_report/multiqc_data",
@@ -2044,7 +2067,7 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-03-12T12:36:13.008207456",
+        "timestamp": "2026-03-13T15:54:08.436701914",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -2052,7 +2075,7 @@
     },
     "NovaSeq6000 data test relative sample size": {
         "content": [
-            43,
+            48,
             {
                 "BWAMEM2_INDEX": {
                     "bwamem2": "2.2.1"
@@ -2067,6 +2090,9 @@
                 "FASTQSCREEN_FASTQSCREEN": {
                     "fastqscreen": "0.16.0"
                 },
+                "FQ_LINT": {
+                    "fq": "0.12.0"
+                },
                 "PICARD_COLLECTMULTIPLEMETRICS": {
                     "picard": "3.4.0"
                 },
@@ -2075,10 +2101,10 @@
                     "Python": "3.13.2"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SEQFU_STATS": {
                     "seqfu": "1.22.3"
@@ -2133,6 +2159,12 @@
                 "fastqscreen/sampletest_04_screen.html",
                 "fastqscreen/sampletest_04_screen.png",
                 "fastqscreen/sampletest_04_screen.txt",
+                "fq",
+                "fq/Sample1_01.fq_lint.txt",
+                "fq/Sample23_03.fq_lint.txt",
+                "fq/SampleA_02.fq_lint.txt",
+                "fq/Undetermined_05.fq_lint.txt",
+                "fq/sampletest_04.fq_lint.txt",
                 "multiqc",
                 "multiqc/global_report",
                 "multiqc/global_report/multiqc_data",
@@ -3038,7 +3070,7 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-03-12T12:37:45.561548185",
+        "timestamp": "2026-03-13T15:55:15.892319993",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -3046,7 +3078,7 @@
     },
     "NovaSeq6000 data test - No rundirs": {
         "content": [
-            37,
+            42,
             {
                 "BWAMEM2_INDEX": {
                     "bwamem2": "2.2.1"
@@ -3061,14 +3093,17 @@
                 "FASTQSCREEN_FASTQSCREEN": {
                     "fastqscreen": "0.16.0"
                 },
+                "FQ_LINT": {
+                    "fq": "0.12.0"
+                },
                 "PICARD_COLLECTMULTIPLEMETRICS": {
                     "picard": "3.4.0"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SEQFU_STATS": {
                     "seqfu": "1.22.3"
@@ -3120,6 +3155,12 @@
                 "fastqscreen/sampletest_04_screen.html",
                 "fastqscreen/sampletest_04_screen.png",
                 "fastqscreen/sampletest_04_screen.txt",
+                "fq",
+                "fq/Sample1_01.fq_lint.txt",
+                "fq/Sample23_03.fq_lint.txt",
+                "fq/SampleA_02.fq_lint.txt",
+                "fq/Undetermined_05.fq_lint.txt",
+                "fq/sampletest_04.fq_lint.txt",
                 "multiqc",
                 "multiqc/global_report",
                 "multiqc/global_report/multiqc_data",
@@ -3993,7 +4034,7 @@
                 "WARN: Sample 'sampletest_04' does not have a rundir specified"
             ]
         ],
-        "timestamp": "2026-03-12T12:41:10.758735252",
+        "timestamp": "2026-03-13T15:57:07.115797171",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -4001,7 +4042,7 @@
     },
     "NovaSeq6000 data test sample size exceeds available reads": {
         "content": [
-            43,
+            48,
             {
                 "BWAMEM2_INDEX": {
                     "bwamem2": "2.2.1"
@@ -4016,6 +4057,9 @@
                 "FASTQSCREEN_FASTQSCREEN": {
                     "fastqscreen": "0.16.0"
                 },
+                "FQ_LINT": {
+                    "fq": "0.12.0"
+                },
                 "PICARD_COLLECTMULTIPLEMETRICS": {
                     "picard": "3.4.0"
                 },
@@ -4024,10 +4068,10 @@
                     "Python": "3.13.2"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SEQFU_STATS": {
                     "seqfu": "1.22.3"
@@ -4082,6 +4126,12 @@
                 "fastqscreen/sampletest_04_screen.html",
                 "fastqscreen/sampletest_04_screen.png",
                 "fastqscreen/sampletest_04_screen.txt",
+                "fq",
+                "fq/Sample1_01.fq_lint.txt",
+                "fq/Sample23_03.fq_lint.txt",
+                "fq/SampleA_02.fq_lint.txt",
+                "fq/Undetermined_05.fq_lint.txt",
+                "fq/sampletest_04.fq_lint.txt",
                 "multiqc",
                 "multiqc/global_report",
                 "multiqc/global_report/multiqc_data",
@@ -4993,7 +5043,7 @@
                 "WARN: sampletest_04: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads."
             ]
         ],
-        "timestamp": "2026-03-12T12:39:32.395239796",
+        "timestamp": "2026-03-13T15:56:14.759821206",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -5784,7 +5834,7 @@
                 "WARN: Tag name collision: [test, Test, TEST]"
             ]
         ],
-        "timestamp": "2026-03-12T12:42:15.400987636",
+        "timestamp": "2026-03-13T15:57:49.731500962",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

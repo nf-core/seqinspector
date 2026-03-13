@@ -27,7 +27,7 @@
                     },
                     "fastqe": {
                         "branch": "master",
-                        "git_sha": "c448a28daf17a09a668dd2072ec283f0b480c914",
+                        "git_sha": "c7b8a51247112b76b89dd87b9dbe081085113590",
                         "installed_by": ["modules"]
                     },
                     "fastqscreen/fastqscreen": {
@@ -35,6 +35,26 @@
                         "git_sha": "ab2e7b785ee4fa6d108472862edbf983cea7db49",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/fastqscreen/fastqscreen/fastqscreen-fastqscreen.diff"
+                    },
+                    "fq/lint": {
+                        "branch": "master",
+                        "git_sha": "14b8e6cceb84242e16094fe979762e05bc8de526",
+                        "installed_by": ["modules"]
+                    },
+                    "kraken2/kraken2": {
+                        "branch": "master",
+                        "git_sha": "71a39f3598935d64ffd65f0960e4d2d4a42ab778",
+                        "installed_by": ["modules"]
+                    },
+                    "krona/ktimporttaxonomy": {
+                        "branch": "master",
+                        "git_sha": "939bb089705e5995ef8a158d48f6951314e95584",
+                        "installed_by": ["modules"]
+                    },
+                    "krona/ktupdatetaxonomy": {
+                        "branch": "master",
+                        "git_sha": "939bb089705e5995ef8a158d48f6951314e95584",
+                        "installed_by": ["modules"]
                     },
                     "multiqc": {
                         "branch": "master",
@@ -58,12 +78,12 @@
                     },
                     "samtools/faidx": {
                         "branch": "master",
-                        "git_sha": "b2e78932ef01165fd85829513eaca29eff8e640a",
+                        "git_sha": "4e3e10e502ec6ab6b1c4b4fecd923ff1fa287338",
                         "installed_by": ["modules"]
                     },
                     "samtools/index": {
                         "branch": "master",
-                        "git_sha": "1d2fbdcbca677bbe8da0f9d0d2bb7c02f2cab1c9",
+                        "git_sha": "4e3e10e502ec6ab6b1c4b4fecd923ff1fa287338",
                         "installed_by": ["modules"]
                     },
                     "seqfu/stats": {
@@ -74,6 +94,16 @@
                     "seqtk/sample": {
                         "branch": "master",
                         "git_sha": "a46713779030a5f508117080cbf4b693dd4c6e33",
+                        "installed_by": ["modules"]
+                    },
+                    "toulligqc": {
+                        "branch": "master",
+                        "git_sha": "d9137377f4dd6246242829772eb1949b96de1ef0",
+                        "installed_by": ["modules"]
+                    },
+                    "untar": {
+                        "branch": "master",
+                        "git_sha": "447f7bc0fa41dfc2400c8cad4c0291880dc060cf",
                         "installed_by": ["modules"]
                     }
                 }

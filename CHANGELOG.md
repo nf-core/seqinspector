@@ -7,9 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#109](https://github.com/nf-core/seqinspector/pull/109) Adds ToulligQC module for long read QC
 - [#204](https://github.com/nf-core/seqinspector/pull/204) Added Fastp module
 - [#202](https://github.com/nf-core/seqinspector/pull/202) Added support for fasta fai file as input (via params or igenomes) for the pipeline
 - [#206](https://github.com/nf-core/seqinspector/pull/206) Added FASTQE for more comprehensive QC of FASTQ files
+- [#208](https://github.com/nf-core/seqinspector/pull/208) Add FASTQ linting for early validation with FQ/LINT
+- [#210](https://github.com/nf-core/seqinspector/pull/210) Added kraken2 subworkflow
 
 ### `Fixed`
 
@@ -21,10 +24,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#192](https://github.com/nf-core/seqinspector/pull/192) Removed params `run_picard_collecthsmetrics` and add `picard_collecthsmetrics` to the list of tools
 - [#192](https://github.com/nf-core/seqinspector/pull/192) Removed `seqtk_sample` from the list of tools as it can be inferred from `params.sample_size`
 - [#205](https://github.com/nf-core/seqinspector/pull/205) document how to add a tool to tool selection and how to use tool selection
+- [#215](https://github.com/nf-core/seqinspector/pull/215) Update all modules
 
 ### `Dependencies`
 
 ### `Deprecated`
+
+- [#213](https://github.com/nf-core/seqinspector/pull/213) Removed `sort_bam` params as we always need sorted BAM files for the QC_BAM subworkflow
 
 ## [1.0.1](https://github.com/nf-core/seqinspector/releases/tag/1.0.1) - Penelope Ruth "Penny" Gadget
 
