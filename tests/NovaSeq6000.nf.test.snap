@@ -1,7 +1,7 @@
 {
     "NovaSeq6000 data test": {
         "content": [
-            43,
+            44,
             {
                 "BWAMEM2_INDEX": {
                     "bwamem2": "2.2.1"
@@ -1050,6 +1050,7 @@
                 "Input/output options",
                 "  input                     : https://raw.githubusercontent.com/nf-core/test-datasets/seqinspector/testdata/NovaSeq6000/samplesheet.csv",
                 "  outdir                    : [PATH]/tests/[NFT_HASH]/output",
+                "  tools                     : checkqc",
                 "  tools_bundle              : default",
                 "Reference genome options",
                 "  genome                    : R64-1-1",
@@ -1076,7 +1077,7 @@
                 "* Software dependencies",
                 "    https://github.com/nf-core/seqinspector/blob/master/CITATIONS.md",
                 "Extra informations",
-                "  Tools selected to be run  : fastqc,fastqscreen,fq_lint,picard_collectmultiplemetrics,rundirparser,seqfu_stats",
+                "  Tools selected to be run  : checkqc,fastqc,fastqscreen,fq_lint,picard_collectmultiplemetrics,rundirparser,seqfu_stats",
                 "------------------------------------------------------",
                 "-[nf-core/seqinspector] Pipeline completed successfully-",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (Sample1_01)",
@@ -1121,7 +1122,7 @@
                 "[NXF_HASH] Submitted process > PREPARE_GENOME:SAMTOOLS_FAIDX (genome.fa)"
             ]
         ],
-        "timestamp": "2026-03-12T16:18:44.078233725",
+        "timestamp": "2026-03-13T10:18:02.426461184",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.2"
