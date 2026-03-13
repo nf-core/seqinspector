@@ -14,7 +14,7 @@ include { FASTQSCREEN_FASTQSCREEN    } from '../modules/nf-core/fastqscreen/fast
 include { FQ_LINT                    } from '../modules/nf-core/fq/lint'
 include { MULTIQC as MULTIQC_GLOBAL  } from '../modules/nf-core/multiqc'
 include { MULTIQC as MULTIQC_PER_TAG } from '../modules/nf-core/multiqc'
-include { MULTIQCSAV as MULTIQC_SAV  } from '../modules/nf-core/multiqcsav'
+include { MULTIQCSAV  } from '../modules/nf-core/multiqcsav'
 include { RUNDIRPARSER               } from '../modules/local/rundirparser'
 include { SAMTOOLS_INDEX             } from '../modules/nf-core/samtools/index'
 include { SEQFU_STATS                } from '../modules/nf-core/seqfu/stats'
@@ -336,13 +336,13 @@ workflow SEQINSPECTOR {
                 [],
             ]
         }
-    log.info("ch_global_input.... ${ch_global_input}")
     // Run global MultiQC only when needed
-    ch_global_reports = ch_multiqc_decision.run_global.view { it -> log.info("globsl decision.... ${it}") }.filter { decision ->
-        decision
-            == "run_global"
-    }.concat(ch_global_input.collect()).last().view { it -> log.info("final global files.....${it}") }
-        | MULTIQC_GLOBAL
+    ch_global_reports = ch_multiqc_decision.run_global.view { it -> log.info("globsl decision.... ${it}")}
+    .filter { decision -> decision == "run_global" }.view{ it -> log.info("Global filter decision ...${it}")}
+    .concat(ch_global_input.collect())  // Wait for decision, then emit input
+    .last()
+    .view { it -> log.info("final global files.....${it}")}
+    | MULTIQC_GLOBAL
 
     ch_sav_input = ch_rundir
         .map { metas, rundir ->
@@ -381,16 +381,19 @@ workflow SEQINSPECTOR {
 
     log.info("sav ch_sav_input.collect() ...${ch_sav_input.collect()}")
     // Run SAV MultiQC only when needed
-    ch_sav_reports = ch_multiqc_decision.run_sav.view { it -> log.info("sav decision ...${it}") }.filter { decision ->
-        decision
-            == "run_sav"
-    }.combine(
-        ch_sav_input.map { _decision, files ->
-            log.info("Passing files to MULTIQC_SAV:............. ${files}")
-            return files
+    ch_sav_reports = ch_multiqc_decision.run_sav.view{ it -> log.info("sav decision ...${it}")}
+    .filter { decision -> decision == "run_sav" }.view{ it -> log.info("SAV filter decision ...${it}")}
+    .combine( ch_sav_input.map { tuple -> 
+            log.info("Passing files to MULTIQC_SAV:............. ${tuple}")
+            return tuple
         }
-    ).view { it -> log.info("final sav files.....${it}") }
-        | MULTIQC_SAV
+    )
+    .map { files -> 
+        def (_, file1, file2, file3, file4, file5, file6, file7, file8) = files
+        return [file1, file2, file3, file4, file5, file6, file7, file8]
+    }
+    .view { it -> log.info("final sav files.....${it}")}
+    | MULTIQCSAV
 
 
     ch_multiqc_extra_files_tag = ch_multiqc_extra_files.mix(
