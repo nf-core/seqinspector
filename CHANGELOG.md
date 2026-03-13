@@ -27,7 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Deprecated`
 
-- [#212](https://github.com/nf-core/seqinspector/pull/212) Removed `sort_bam` params as we always need sorted BAM files for the QC_BAM subworkflow
+- [#213](https://github.com/nf-core/seqinspector/pull/213) Removed `sort_bam` params as we always need sorted BAM files for the QC_BAM subworkflow
 
 ## [1.0.1](https://github.com/nf-core/seqinspector/releases/tag/1.0.1) - Penelope Ruth "Penny" Gadget
 
