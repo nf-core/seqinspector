@@ -14,9 +14,11 @@ workflow PHYLOGENETIC_QC {
     main:
     ch_reads    = reads
     ch_versions = Channel.empty()
+
     //
     // MODULE: Untar kraken2_db or read it as it is if not compressed
     //
+    
     if (params.kraken2_db.endsWith('.gz')) {
         UNTAR_KRAKEN2_DB ( [ [:], params.kraken2_db ])
         ch_kraken2_db = UNTAR_KRAKEN2_DB.out.untar.map { it[1] }

@@ -214,25 +214,26 @@ workflow SEQINSPECTOR {
     // SUBWORKFLOW: Run kraken2 and produce krona plots
     //
     if (('kraken2' in tools) && ('krona' in tools)) {
+
     PHYLOGENETIC_QC (  ,
         ch_samplesheet
     )
-    ch_multiqc_files = ch_multiqc_files.mix(PHYLOGENETIC_QC.out.mqc)
-    ch_versions = ch_versions.mix(PHYLOGENETIC_QC.out.versions.first())
+    ch_multiqc_files = ch_multiqc_files.mix(PHYLOGENETIC_QC.out.multiqc)
+
     }
 
+ // Collate and save software versions
     //
-    // Collate and save software versions
-    //
-    softwareVersionsToYAML(ch_versions)
-            .collectFile(
-            storeDir: "${params.outdir}/pipeline_info",
-            name: 'nf_core_'  +  'seqinspector_software_'  + 'mqc_'  + 'versions.yml',
-            sort: true,
-            newLine: true
-        ).set { ch_collated_versions }
-
-
+    def collated_versions = softwareVersionsToYAML(
+        softwareVersions: channel.topic("versions"),
+        nextflowVersion: workflow.nextflow.version,
+    ).collectFile(
+        storeDir: "${outdir}/pipeline_info",
+        name: 'nf_core_' + 'seqinspector_software_' + 'mqc_' + 'versions.yml',
+        sort: true,
+        newLine: true,
+    )
+    
     //
     // MODULE: MultiQC
     //
