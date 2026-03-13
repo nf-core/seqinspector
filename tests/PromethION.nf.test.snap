@@ -110,16 +110,16 @@
                 "seqfu_stats/hg001_01_seqfu.tsv",
                 "seqfu_stats/hg001_01_seqfu_mqc.txt",
                 "toulligqc",
-                "toulligqc/hg001_01Toulligqc-report-2026-03-13-074136",
-                "toulligqc/hg001_01Toulligqc-report-2026-03-13-074136/images",
-                "toulligqc/hg001_01Toulligqc-report-2026-03-13-074136/images/Correlation_between_read_length_and_PHRED_score.html",
-                "toulligqc/hg001_01Toulligqc-report-2026-03-13-074136/images/Distribution_of_read_lengths.html",
-                "toulligqc/hg001_01Toulligqc-report-2026-03-13-074136/images/PHRED_score_density_distribution.html",
-                "toulligqc/hg001_01Toulligqc-report-2026-03-13-074136/images/PHRED_score_distribution.html",
-                "toulligqc/hg001_01Toulligqc-report-2026-03-13-074136/images/Read_count_histogram.html",
-                "toulligqc/hg001_01Toulligqc-report-2026-03-13-074136/images/plotly.min.js",
-                "toulligqc/hg001_01Toulligqc-report-2026-03-13-074136/report.data",
-                "toulligqc/hg001_01Toulligqc-report-2026-03-13-074136/report.html"
+                "toulligqc/hg001_01",
+                "toulligqc/hg001_01/images",
+                "toulligqc/hg001_01/images/Correlation_between_read_length_and_PHRED_score.html",
+                "toulligqc/hg001_01/images/Distribution_of_read_lengths.html",
+                "toulligqc/hg001_01/images/PHRED_score_density_distribution.html",
+                "toulligqc/hg001_01/images/PHRED_score_distribution.html",
+                "toulligqc/hg001_01/images/Read_count_histogram.html",
+                "toulligqc/hg001_01/images/plotly.min.js",
+                "toulligqc/hg001_01/report.data",
+                "toulligqc/hg001_01/report.html"
             ],
             [
                 "hg001_01_screen.png:md5,b9c58e388f18ad11f4c2e29e9b573a5e",
@@ -141,20 +141,12 @@
                 "multiqc_fastqc.txt:md5,b71aaffef9767dfe9d83fde0d31a3a1b",
                 "multiqc_seqfu_mqc.txt:md5,9595d608ff5709f2bdec8cb1016416c0",
                 "hg001_01_seqfu.tsv:md5,b133752c897afbb4d8721b911fa117d4",
-                "hg001_01_seqfu_mqc.txt:md5,42e3506b02ceb72a6f05cb174505e722",
-                "Correlation_between_read_length_and_PHRED_score.html:md5,41968629863774c0b39589022d5d9416",
-                "Distribution_of_read_lengths.html:md5,e23d9c672cfd4d32539e7f81c4474106",
-                "PHRED_score_density_distribution.html:md5,67d712ed41c922b8894b5982f94d0670",
-                "PHRED_score_distribution.html:md5,6d44a9e9159e9396f728159d9e93255f",
-                "Read_count_histogram.html:md5,c161a7f25042a985196a9f315d2a3e87",
-                "plotly.min.js:md5,059f6ecfa3930aa0b85b6ef4591390e4",
-                "report.data:md5,1a174d64f84470242936cdd84613e245",
-                "report.html:md5,c42b07f1104e2901b915f5ed44e43c04"
+                "hg001_01_seqfu_mqc.txt:md5,42e3506b02ceb72a6f05cb174505e722"
             ],
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-03-13T08:41:49.576095637",
+        "timestamp": "2026-03-13T10:19:41.243464188",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
