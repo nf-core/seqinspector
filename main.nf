@@ -19,7 +19,7 @@ include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_seqi
 include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
 include { PREPARE_GENOME          } from './subworkflows/local/prepare_genome'
 include { getGenomeAttribute      } from 'plugin/nf-core-utils'
-include { setupTools              } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { defineToolsList         } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -27,9 +27,10 @@ include { setupTools              } from './subworkflows/local/utils_nfcore_seqi
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-params.fasta   = getGenomeAttribute('fasta')
 params.bwamem2 = getGenomeAttribute('bwamem2')
 params.dict    = getGenomeAttribute('dict')
+params.fai     = getGenomeAttribute('fai')
+params.fasta   = getGenomeAttribute('fasta')
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -39,11 +40,7 @@ params.dict    = getGenomeAttribute('dict')
 
 workflow {
 
-    def fasta = params.fasta
-        ? channel.fromPath(params.fasta, checkIfExists: true).map { file -> tuple([id: file.name], file) }.collect()
-        : channel.empty()
-
-    def tools = setupTools(params.tools_setup, params.tools, params.skip_tools)
+    def tools = defineToolsList(params.tools_bundle, params.tools, params.skip_tools)
 
     //
     // SUBWORKFLOW: Run initialisation tasks
@@ -64,10 +61,12 @@ workflow {
     )
 
     PREPARE_GENOME(
-        fasta,
+        params.fasta,
         params.bwamem2,
-        tools,
         params.dict,
+        params.fai,
+        params.genome ?: 'custom',
+        tools,
     )
 
     //
@@ -75,10 +74,10 @@ workflow {
     //
     NFCORE_SEQINSPECTOR(
         PIPELINE_INITIALISATION.out.samplesheet,
-        fasta,
-        PREPARE_GENOME.out.bwamem2_index,
-        PREPARE_GENOME.out.reference_dict,
-        PREPARE_GENOME.out.reference_fai,
+        PREPARE_GENOME.out.fasta,
+        PREPARE_GENOME.out.bwamem2,
+        PREPARE_GENOME.out.dict,
+        PREPARE_GENOME.out.fai,
         tools,
     )
     //
@@ -107,9 +106,9 @@ workflow NFCORE_SEQINSPECTOR {
     take:
     samplesheet // channel: samplesheet read in from --input
     fasta
-    bwamem2_index
+    bwamem2
     dict
-    fasta_fai
+    fai
     tools
 
     main:
@@ -119,7 +118,7 @@ workflow NFCORE_SEQINSPECTOR {
     SEQINSPECTOR(
         samplesheet,
         params.bait_intervals,
-        bwamem2_index,
+        bwamem2,
         fasta,
         params.fastq_screen_references,
         params.multiqc_config,
@@ -127,7 +126,7 @@ workflow NFCORE_SEQINSPECTOR {
         params.multiqc_methods_description,
         params.outdir,
         dict,
-        fasta_fai,
+        fai,
         params.sample_size,
         tools,
         params.sort_bam,

@@ -7,7 +7,9 @@
 // modules
 include { TOULLIGQC                     } from '../modules/nf-core/toulligqc'
 include { BWAMEM2_MEM                } from '../modules/nf-core/bwamem2/mem'
+include { FASTP                      } from '../modules/nf-core/fastp'
 include { FASTQC                     } from '../modules/nf-core/fastqc'
+include { FASTQE                     } from '../modules/nf-core/fastqe'
 include { FASTQSCREEN_FASTQSCREEN    } from '../modules/nf-core/fastqscreen/fastqscreen'
 include { MULTIQC as MULTIQC_GLOBAL  } from '../modules/nf-core/multiqc'
 include { MULTIQC as MULTIQC_PER_TAG } from '../modules/nf-core/multiqc'
@@ -98,7 +100,7 @@ workflow SEQINSPECTOR {
 
 
     //
-    // MODULE: Run Seqtk sample to perform subsampling
+    // MODULE: Run Seqtk sample
     //
 
     SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] }.filter { sample_size })
@@ -106,11 +108,31 @@ workflow SEQINSPECTOR {
     ch_sample = sample_size ? SEQTK_SAMPLE.out.reads : ch_samplesheet
 
     //
-    // MODULE: Run FastQC
+    // MODULE: Run FastQC on subsampled reads
     //
     FASTQC(ch_sample.filter { 'fastqc' in tools })
 
     ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
+
+    // FASTQE
+    FASTQE(ch_sample.filter { 'fastqe' in tools })
+
+    ch_multiqc_files = ch_multiqc_files.mix(FASTQE.out.tsv)
+
+    //
+    // MODULE: Run fastp for adapter trimming and quality filtering
+    //
+
+    FASTP(
+        ch_sample.map { meta, reads -> [meta, reads, []] }.filter { 'fastp' in tools },
+        true,
+        false,
+        false,
+    )
+
+    ch_multiqc_files = ch_multiqc_files.mix(FASTP.out.json)
+
+    // ch_trimmed = 'fastp' in tools ? FASTP.out.reads : ch_sample
 
     //
     // Module: Run SeqFu stats
