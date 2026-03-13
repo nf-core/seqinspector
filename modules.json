@@ -45,6 +45,21 @@
                         "git_sha": "14b8e6cceb84242e16094fe979762e05bc8de526",
                         "installed_by": ["modules"]
                     },
+                    "kraken2/kraken2": {
+                        "branch": "master",
+                        "git_sha": "71a39f3598935d64ffd65f0960e4d2d4a42ab778",
+                        "installed_by": ["modules"]
+                    },
+                    "krona/ktimporttaxonomy": {
+                        "branch": "master",
+                        "git_sha": "939bb089705e5995ef8a158d48f6951314e95584",
+                        "installed_by": ["modules"]
+                    },
+                    "krona/ktupdatetaxonomy": {
+                        "branch": "master",
+                        "git_sha": "939bb089705e5995ef8a158d48f6951314e95584",
+                        "installed_by": ["modules"]
+                    },
                     "multiqc": {
                         "branch": "master",
                         "git_sha": "2c73cc8fa92cf48de3da0b643fdf357a8a290b36",
@@ -88,6 +103,11 @@
                     "toulligqc": {
                         "branch": "master",
                         "git_sha": "d9137377f4dd6246242829772eb1949b96de1ef0",
+                        "installed_by": ["modules"]
+                    },
+                    "untar": {
+                        "branch": "master",
+                        "git_sha": "447f7bc0fa41dfc2400c8cad4c0291880dc060cf",
                         "installed_by": ["modules"]
                     }
                 }

@@ -36,6 +36,7 @@ workflow PIPELINE_INITIALISATION {
     show_hidden // boolean: Show hidden parameters in the help message
     tools
     fasta
+    kraken2_db
 
     main:
 
@@ -147,6 +148,10 @@ workflow PIPELINE_INITIALISATION {
 
     if ('toulligqc' in tools && 'emulate_amd64' in workflow.profile.tokenize(",")) {
         error("ToulligQC is not compatible with the 'emulate_amd64' profile. Please remove ToulligQC from the list of tools if you wish to run seqinspector on this architecture.")
+    }
+
+    if (!(kraken2_db) && ("kraken2" in tools)) {
+        error("No kraken2_db was provided, but Kraken2 was requested")
     }
 
     emit:

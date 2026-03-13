@@ -7,6 +7,7 @@
     Website: https://nf-co.re/seqinspector
     Slack  : https://nfcore.slack.com/channels/seqinspector
 ----------------------------------------------------------------------------------------
+*/
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -14,12 +15,13 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { SEQINSPECTOR            } from './workflows/seqinspector'
-include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
-include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
-include { PREPARE_GENOME          } from './subworkflows/local/prepare_genome'
-include { getGenomeAttribute      } from 'plugin/nf-core-utils'
-include { defineToolsList         } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { SEQINSPECTOR             } from './workflows/seqinspector'
+include { PIPELINE_INITIALISATION  } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { PIPELINE_COMPLETION      } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { PREPARE_GENOME           } from './subworkflows/local/prepare_genome'
+include { UNTAR as UNTAR_KRAKEN2DB } from './modules/nf-core/untar'
+include { getGenomeAttribute       } from 'plugin/nf-core-utils'
+include { defineToolsList          } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -58,6 +60,7 @@ workflow {
         params.show_hidden,
         tools,
         params.fasta,
+        params.kraken2_db,
     )
 
     PREPARE_GENOME(
@@ -69,6 +72,15 @@ workflow {
         tools,
     )
 
+    // KRAKEN2_DB initialisation
+    def ch_kraken2_db = channel.empty()
+    if ('kraken2' in tools) {
+        UNTAR_KRAKEN2DB(channel.fromPath(params.kraken2_db, checkIfExists: true).map { file -> [[id: 'kraken2_db'], file] }.filter { (params.kraken2_db.endsWith('.gz')) })
+        ch_kraken2_db = params.kraken2_db.endsWith('.gz')
+            ? UNTAR_KRAKEN2DB.out.untar.map { _meta, archive -> [archive] }
+            : channel.fromPath(params.kraken2_db, checkIfExists: true).collect()
+    }
+
     //
     // WORKFLOW: Run main workflow
     //
@@ -79,7 +91,11 @@ workflow {
         PREPARE_GENOME.out.dict,
         PREPARE_GENOME.out.fai,
         tools,
+        ch_kraken2_db,
+        params.kraken2_save_reads,
+        params.kraken2_save_readclassifications,
     )
+
     //
     // SUBWORKFLOW: Run completion tasks
     //
@@ -110,6 +126,9 @@ workflow NFCORE_SEQINSPECTOR {
     dict
     fai
     tools
+    kraken2_db
+    kraken2_save_reads
+    kraken2_save_readclassifications
 
     main:
     //
@@ -131,6 +150,9 @@ workflow NFCORE_SEQINSPECTOR {
         params.sample_size,
         tools,
         params.target_intervals,
+        kraken2_db,
+        kraken2_save_reads,
+        kraken2_save_readclassifications,
     )
 
     emit:
