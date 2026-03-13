@@ -999,7 +999,7 @@
                 "WARN: No samples with rundir found, skipping RUNDIRPARSER"
             ]
         ],
-        "timestamp": "2026-03-13T09:21:12.553502671",
+        "timestamp": "2026-03-13T16:00:47.718722732",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

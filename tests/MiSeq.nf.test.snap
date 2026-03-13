@@ -1,7 +1,7 @@
 {
     "Miseq data test (skip all tools)": {
         "content": [
-            2,
+            0,
             {
                 
             },
@@ -13,7 +13,7 @@
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-03-13T13:31:48.223124",
+        "timestamp": "2026-03-13T15:50:57.184570049",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -21,7 +21,7 @@
     },
     "MiSeq data test (single end reads)": {
         "content": [
-            11,
+            9,
             {
                 "BWAMEM2_INDEX": {
                     "bwamem2": "2.2.1"
@@ -251,7 +251,7 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-03-13T13:24:39.285249",
+        "timestamp": "2026-03-13T15:49:45.741235401",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -259,7 +259,7 @@
     },
     "MiSeq data test (paired end reads)": {
         "content": [
-            18,
+            16,
             {
                 "BWAMEM2_INDEX": {
                     "bwamem2": "2.2.1"
@@ -683,7 +683,7 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-03-13T13:52:38.447161",
+        "timestamp": "2026-03-13T15:51:53.447400027",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -691,7 +691,7 @@
     },
     "Miseq data test (no fastqc)": {
         "content": [
-            10,
+            8,
             {
                 "BWAMEM2_INDEX": {
                     "bwamem2": "2.2.1"
@@ -860,7 +860,7 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-03-13T13:28:36.937038",
+        "timestamp": "2026-03-13T15:50:38.317313792",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

@@ -15,13 +15,13 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { SEQINSPECTOR            } from './workflows/seqinspector'
-include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
-include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
-include { PREPARE_GENOME          } from './subworkflows/local/prepare_genome'
-include { getGenomeAttribute      } from 'plugin/nf-core-utils'
-include { defineToolsList         } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
-include { UNTAR as UNTAR_KRAKEN2_DB } from './modules/nf-core/untar'
+include { PIPELINE_COMPLETION      } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { PIPELINE_INITIALISATION  } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { PREPARE_GENOME           } from './subworkflows/local/prepare_genome'
+include { SEQINSPECTOR             } from './workflows/seqinspector'
+include { UNTAR as UNTAR_KRAKEN2DB } from './modules/nf-core/untar'
+include { defineToolsList          } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { getGenomeAttribute       } from 'plugin/nf-core-utils'
 
 
 /*
@@ -61,6 +61,7 @@ workflow {
         params.show_hidden,
         tools,
         params.fasta,
+        params.kraken2_db,
     )
 
     PREPARE_GENOME(
@@ -72,18 +73,13 @@ workflow {
         tools,
     )
 
-    // KRAKEN2 Parameter Initialisation:
+    // KRAKEN2_DB initialisation
+    def ch_kraken2_db = channel.empty()
     if ('kraken2' in tools) {
-        if (params.kraken2_db && params.kraken2_db.endsWith('.gz')) {
-            UNTAR_KRAKEN2_DB( [ [:], params.kraken2_db ] )
-            ch_kraken2_db = UNTAR_KRAKEN2_DB.out.untar.map { it[1] }
-        } else if (params.kraken2_db) {
-            ch_kraken2_db = Channel.fromPath(params.kraken2_db, checkIfExists: true).collect()
-        } else {
-            error "kraken2 is selected but --kraken2_db is not set"
-        }
-    } else {
-        ch_kraken2_db = Channel.empty()
+        UNTAR_KRAKEN2DB(channel.fromPath(params.kraken2_db, checkIfExists: true).map { file -> [[id: 'kraken2_db'], file] }.filter { (params.kraken2_db.endsWith('.gz')) })
+        ch_kraken2_db = params.kraken2_db.endsWith('.gz')
+            ? UNTAR_KRAKEN2DB.out.untar.map { _meta, archive -> [archive] }
+            : channel.fromPath(params.kraken2_db, checkIfExists: true).collect()
     }
 
     //

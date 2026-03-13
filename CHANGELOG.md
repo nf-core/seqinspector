@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#202](https://github.com/nf-core/seqinspector/pull/202) Added support for fasta fai file as input (via params or igenomes) for the pipeline
 - [#206](https://github.com/nf-core/seqinspector/pull/206) Added FASTQE for more comprehensive QC of FASTQ files
 - [#208](https://github.com/nf-core/seqinspector/pull/208) Add FASTQ linting for early validation with FQ/LINT
+- [#210](https://github.com/nf-core/seqinspector/pull/210) Added kraken2 subworkflow
 
 ### `Fixed`
 
@@ -62,11 +63,8 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#2](https://github.com/nf-core/seqinspector/pull/2) Input workflow and schema definition
 - [#13](https://github.com/nf-core/seqinspector/pull/13) Generate reports per run, per project and per lane
 - [#20](https://github.com/nf-core/seqinspector/pull/20) Use tags to generate group reports
-- [#49](https://github.com/nf-core/seqinspector/pull/49) Merge with template 3.0.2.
-- [#47](https://github.com/nf-core/seqinspector/pull/47) Added kraken2 subworkflow
-- [#56](https://github.com/nf-core/seqinspector/pull/56) Added SeqFu stats module.
-- [#51](https://github.com/nf-core/seqinspector/pull/51) Add nf-test to CI.
 - [#50](https://github.com/nf-core/seqinspector/pull/50) Add an optional subsampling step
+- [#51](https://github.com/nf-core/seqinspector/pull/51) Add nf-test to CI
 - [#53](https://github.com/nf-core/seqinspector/pull/53), [#64](https://github.com/nf-core/seqinspector/pull/64) Add FastQ-Screen database multiplexing and limit scope of nf-test in CI
 - [#56](https://github.com/nf-core/seqinspector/pull/56) Added SeqFu stats module
 - [#63](https://github.com/nf-core/seqinspector/pull/63) Contribution guidelines added about displaying results for new tools

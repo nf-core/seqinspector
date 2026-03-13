@@ -16,7 +16,7 @@
 
 - [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
 
-> Andrews, S. (2010). FastQC: A Quality Control Tool for High Throughput Sequence Data [Online].
+  > Andrews, S. (2010). FastQC: A Quality Control Tool for High Throughput Sequence Data [Online].
 
 - [Kraken2](https://doi.org/10.1186/s13059-019-1891-0)
 
@@ -25,11 +25,6 @@
 - [Krona](https://doi.org/10.1186/1471-2105-12-385)
 
   > Ondov, B. D., Bergman, N. H., & Phillippy, A. M. (2011). Interactive metagenomic visualization in a Web browser. BMC Bioinformatics, 12. https://doi.org/10.1186/1471-2105-12-385
-
-- [SeqFu](https://telatin.github.io/seqfu2/)
-
-> Telatin A, Fariselli P, Birolo G. SeqFu: A Suite of Utilities for the Robust and Reproducible Manipulation of Sequence Files. Bioengineering 2021, 8, 59. doi.org/10.3390/bioengineering8050059
-> Andrews, S. (2010). FastQC: A Quality Control Tool for High Throughput Sequence Data [Online].
 
 - [Fastp](https://doi.org/10.1093/bioinformatics/bty560)
 
