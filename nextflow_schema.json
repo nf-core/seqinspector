@@ -65,13 +65,6 @@
                     "description": "Comma-separated string of tools to skip - overrides any other means of tools selection",
                     "pattern": "^((fastp|fastqc|fastqe|fastqscreen|fq_lint|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats|toulligqc)?,?)*(?<!,)$",
                     "fa_icon": "fas fa-window-close "
-                },
-                "sort_bam": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Sort BAM files after alignment",
-                    "help_text": "If true, BAM files produced by alignment will be sorted by genomic coordinates.",
-                    "fa_icon": "fas fa-sort-alpha-down"
                 }
             }
         },
