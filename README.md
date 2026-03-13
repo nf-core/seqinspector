@@ -43,6 +43,7 @@ If provided, nf-core/seqinspector can also parse statistics from an Illumina run
 | `QC`                | [`SeqFu Stats`](https://github.com/telatin/seqfu2)                                                                  | Sequence statistics                                                                           | [RNA, DNA]              | [N/A]                                                                                   | yes          |
 | `QC`                | [`Picard collect multiple metrics`](https://broadinstitute.github.io/picard/picard-metric-definitions.html)         | Collect multiple QC metrics                                                                   | [RNA, DNA]              | [Bwamem2, SAMtools, `--genome`]                                                         | yes          |
 | `QC`                | [`Picard_collecthsmetrics`](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard) | Collect alignment QC metrics of hybrid-selection data.                                        | [RNA, DNA]              | [Bwamem2, SAMtools, `--fasta`, `--bait_intervals`, `--target_intervals` (`--ref_dict`)] | no           |
+| `QC`                | [`ToulligQC`](https://github.com/GenomiqueENS/toulligQC)                                                            | dedicated QC for Oxford Nanopore runs                                                         | [DNA, RNA, synthetic]   | Only for ONT data                                                                       | no           |
 | `Reporting`         | [`MultiQC`](http://multiqc.info/)                                                                                   | Present QC for raw reads                                                                      | [RNA, DNA, synthetic]   | [N/A]                                                                                   | yes          |
 
 ### Workflow diagram
@@ -132,6 +133,7 @@ We thank the following people for their extensive assistance in the development 
 - [@pontushojer](https://github.com/pontushojer)
 - [@ramprasadn](https://github.com/ramprasadn)
 - [@rannick](https://github.com/rannick)
+- [@TMAdams](https://github.com/TMAdams)
 - [@torigiffin](https://github.com/torigiffin)
 
 ## Contributions and Support
