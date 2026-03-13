@@ -227,7 +227,7 @@ workflow SEQINSPECTOR {
     )
     ch_multiqc_files = ch_multiqc_files.mix(PHYLOGENETIC_QC.out.mqc)
 
-    // Collate and save software versions
+    //
     // MODULE: Run ToulligQC
     //
 
