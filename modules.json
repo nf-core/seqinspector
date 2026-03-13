@@ -15,6 +15,11 @@
                         "git_sha": "8325a8155a77a336a613a504b8e4d6cea7a2344a",
                         "installed_by": ["modules"]
                     },
+                    "checkqc": {
+                        "branch": "master",
+                        "git_sha": "389ed64090aa4594276fb3d53923432c7728c5b4",
+                        "installed_by": ["modules"]
+                    },
                     "fastp": {
                         "branch": "master",
                         "git_sha": "1fb5a73bce8e4ac7079b0a9461b23d11e877ad14",
@@ -33,8 +38,7 @@
                     "fastqscreen/fastqscreen": {
                         "branch": "master",
                         "git_sha": "ab2e7b785ee4fa6d108472862edbf983cea7db49",
-                        "installed_by": ["modules"],
-                        "patch": "modules/nf-core/fastqscreen/fastqscreen/fastqscreen-fastqscreen.diff"
+                        "installed_by": ["modules"]
                     },
                     "fq/lint": {
                         "branch": "master",
