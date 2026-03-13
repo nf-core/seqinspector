@@ -216,8 +216,8 @@ workflow SEQINSPECTOR {
     //
     PHYLOGENETIC_QC(
         ch_samplesheet.filter{('kraken2' in tools)},
-        kraken2_db,  
-    )    
+        kraken2_db,
+    )
     ch_multiqc_files = ch_multiqc_files.mix(PHYLOGENETIC_QC.out.mqc)
 
  // Collate and save software versions

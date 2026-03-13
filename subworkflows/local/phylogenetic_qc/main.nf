@@ -19,7 +19,7 @@ workflow PHYLOGENETIC_QC {
     //
  KRAKEN2_KRAKEN2 (
         ch_reads,
-        kraken2_db,  
+        kraken2_db,
         params.kraken2_save_reads,
         params.kraken2_save_readclassifications
     )
