@@ -21,8 +21,8 @@ include { SEQTK_SAMPLE               } from '../modules/nf-core/seqtk/sample'
 include { TOULLIGQC                  } from '../modules/nf-core/toulligqc'
 
 // subworkflow
-include { QC_BAM                     } from '../subworkflows/local/qc_bam'
 include { PHYLOGENETIC_QC            } from '../subworkflows/local/phylogenetic_qc'
+include { QC_BAM                     } from '../subworkflows/local/qc_bam'
 
 // functions
 include { methodsDescriptionText     } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
