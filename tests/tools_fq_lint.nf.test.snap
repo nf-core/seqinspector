@@ -27,10 +27,10 @@
                     "Python": "3.13.2"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SEQFU_STATS": {
                     "seqfu": "1.22.3"
@@ -1013,7 +1013,7 @@
                     "bwamem2": "2.2.1"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 }
             },
             [

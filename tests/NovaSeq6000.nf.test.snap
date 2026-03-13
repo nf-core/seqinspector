@@ -27,10 +27,10 @@
                     "Python": "3.13.2"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SEQFU_STATS": {
                     "seqfu": "1.22.3"
@@ -1098,10 +1098,10 @@
                     "Python": "3.13.2"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SEQFU_STATS": {
                     "seqfu": "1.22.3"
@@ -2101,10 +2101,10 @@
                     "Python": "3.13.2"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SEQFU_STATS": {
                     "seqfu": "1.22.3"
@@ -3100,10 +3100,10 @@
                     "picard": "3.4.0"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SEQFU_STATS": {
                     "seqfu": "1.22.3"
@@ -4068,10 +4068,10 @@
                     "Python": "3.13.2"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SEQFU_STATS": {
                     "seqfu": "1.22.3"

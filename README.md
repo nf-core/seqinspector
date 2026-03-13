@@ -69,7 +69,7 @@ If provided, nf-core/seqinspector can also parse statistics from an Illumina run
 | krona       | 2.8.1   |
 | multiqc     | 1.33    |
 | picard      | 3.4.0   |
-| samtools    | 1.22.1  |
+| samtools    | 1.23    |
 | seqfu       | 1.22.3  |
 | seqtk       | 1.4     |
 
