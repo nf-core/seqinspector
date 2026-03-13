@@ -4,11 +4,13 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
+
 // modules
 include { TOULLIGQC                     } from '../modules/nf-core/toulligqc'
 include { BWAMEM2_MEM                } from '../modules/nf-core/bwamem2/mem'
 include { FASTP                      } from '../modules/nf-core/fastp'
 include { FASTQC                     } from '../modules/nf-core/fastqc'
+include { FQ_LINT                    } from '../modules/nf-core/fq/lint'
 include { FASTQE                     } from '../modules/nf-core/fastqe'
 include { FASTQSCREEN_FASTQSCREEN    } from '../modules/nf-core/fastqscreen/fastqscreen'
 include { MULTIQC as MULTIQC_GLOBAL  } from '../modules/nf-core/multiqc'
@@ -56,6 +58,18 @@ workflow SEQINSPECTOR {
     main:
     ch_multiqc_files = channel.empty()
     ch_multiqc_extra_files = channel.empty()
+
+    //
+    // MODULE: Run FQ_LINT to catch early errors
+    //
+    FQ_LINT(ch_samplesheet.filter { ("fq_lint" in tools) })
+
+    if ("fq_lint" in tools) {
+        // This catches all FASTQs that pass linting
+        // If you use an error strategy that allows FQ_LINT to fail,
+        // only valid FASTQ files will be passed to the next module
+        ch_samplesheet = FQ_LINT.out.lint.join(ch_samplesheet).map { meta, _fq_lint, reads -> [meta, reads] }
+    }
 
     //
     // MODULE: Parse rundir info

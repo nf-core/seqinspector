@@ -33,6 +33,7 @@ If provided, nf-core/seqinspector can also parse statistics from an Illumina run
 | Tool Type           | Tool Name                                                                                                           | Tool Description                                                                              | Compatibility with Data | Dependencies                                                                            | Default tool |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | ----------------------- | --------------------------------------------------------------------------------------- | ------------ |
 | `Subsampling`       | [`Seqtk`](https://github.com/lh3/seqtk)                                                                             | Global subsampling of reads. Only performs subsampling if `--sample_size` parameter is given. | [RNA, DNA]              | [N/A]                                                                                   | no           |
+| `Lint FASTQs`       | [`fq`](https://github.com/stjude-rust-labs/fq)                                                                      | fq filters, generates, subsamples, and validates FASTQ files.                                 | [RNA, DNA, synthetic]   | [N/A]                                                                                   | yes          |
 | `Trimming`          | [`Fastp`](https://github.com/OpenGene/fastp)                                                                        | Trimming of reads. Only performs trimming if `--tools` parameter is given.                    | [RNA, DNA, synthetic]   | [N/A]                                                                                   | no           |
 | `Indexing, Mapping` | [`Bwamem2`](https://github.com/bwa-mem2/bwa-mem2)                                                                   | Align reads to reference                                                                      | [RNA, DNA]              | [N/A]                                                                                   | yes          |
 | `Indexing`          | [`SAMtools`](http://github.com/samtools)                                                                            | Index aligned BAM files, create FASTA index                                                   | [DNA]                   | [N/A]                                                                                   | yes          |
@@ -58,6 +59,7 @@ If provided, nf-core/seqinspector can also parse statistics from an Illumina run
 | Tool        | Version |
 | ----------- | ------- |
 | bwamem2     | 2.3     |
+| fq/lint     | 0.12.0  |
 | fastp       | 1.1.0   |
 | fastqc      | 0.12.1  |
 | fastqe      | 0.5.2   |
