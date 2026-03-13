@@ -94,6 +94,13 @@
             "description": "Options for Kraken2",
             "default": "",
             "properties": {
+                "kraken2_db": {
+                    "type": "string",
+                    "exists": true,
+                    "mimetype": "text/plain",
+                    "description": "Path to Kraken2 database file, either a gzipped file or the path to the uncompressed database.",
+                    "fa_icon": "fas fa-database"
+                },
                 "kraken2_save_reads": {
                     "type": "boolean",
                     "fa_icon": "fas fa-save",
@@ -131,13 +138,6 @@
                     "fa_icon": "fas fa-ban",
                     "hidden": true,
                     "help_text": "Do not load `igenomes.config` when running the pipeline. You may choose this option if you observe clashes between custom parameters and those supplied in `igenomes.config`."
-                },
-                "kraken2_db": {
-                    "type": "string",
-                    "exists": true,
-                    "mimetype": "text/plain",
-                    "description": "Path to Kraken2 database file, either a gzipped file or the path to the uncompressed database.",
-                    "fa_icon": "fas fa-database"
                 },
                 "igenomes_base": {
                     "type": "string",
