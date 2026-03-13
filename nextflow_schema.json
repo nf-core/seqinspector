@@ -85,13 +85,6 @@
                     "description": "Whether to continue with the pipeline if linting fails for a single sample.",
                     "help_text": "If set to true, the pipeline will continue with the remaining samples if linting fails for a single sample. If set to false, the pipeline will terminate if linting fails for a single sample.",
                     "fa_icon": "fas fa-window-close "
-                },
-                "sort_bam": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Sort BAM files after alignment",
-                    "help_text": "If true, BAM files produced by alignment will be sorted by genomic coordinates.",
-                    "fa_icon": "fas fa-sort-alpha-down"
                 }
             }
         },
