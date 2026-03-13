@@ -55,7 +55,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 <summary>Output files</summary>
 
 - `checkqc/`
-  - `checkqc_report.json`: Reports sequencing metrics that is not fulfilled. Note that the CheckQC module in MultiQC currently does not support BCL Convert data, so if the report if based on data from that demultiplexer it will not be visualized in the MutliQC report.
+  - `checkqc_report.json`: Reports sequencing metrics that are not fulfilled. Note that the CheckQC module in MultiQC currently does not support BCL Convert data, so if the report if based on data from that demultiplexer it will not be visualized in the MutliQC report. Results can be found in the output directory.
 
 </details>
 
