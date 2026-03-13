@@ -51,7 +51,6 @@ workflow SEQINSPECTOR {
     ref_fai
     sample_size
     tools
-    sort_bam
     target_intervals
 
     main:
@@ -186,6 +185,8 @@ workflow SEQINSPECTOR {
     ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
 
     // MODULE: Align reads with BWA-MEM2
+    def sort_bam = true
+    // we always sort bam
     BWAMEM2_MEM(
         ch_sample.filter { ('picard_collecthsmetrics' in tools) || ('picard_collectmultiplemetrics' in tools) },
         bwamem2_index,
