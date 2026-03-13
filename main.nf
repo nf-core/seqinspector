@@ -73,11 +73,17 @@ workflow {
     )
 
     // KRAKEN2 Parameter Initialisation:
-    if (params.kraken2_db.endsWith('.gz')) {
-        UNTAR_KRAKEN2_DB( [ [:], params.kraken2_db ] )
-        ch_kraken2_db = UNTAR_KRAKEN2_DB.out.untar.map { it[1] }
+    if ('kraken2' in tools) {
+        if (params.kraken2_db && params.kraken2_db.endsWith('.gz')) {
+            UNTAR_KRAKEN2_DB( [ [:], params.kraken2_db ] )
+            ch_kraken2_db = UNTAR_KRAKEN2_DB.out.untar.map { it[1] }
+        } else if (params.kraken2_db) {
+            ch_kraken2_db = Channel.fromPath(params.kraken2_db, checkIfExists: true).collect()
+        } else {
+            error "kraken2 is selected but --kraken2_db is not set"
+        }
     } else {
-        ch_kraken2_db = Channel.fromPath(params.kraken2_db, checkIfExists: true).collect()
+        ch_kraken2_db = Channel.empty()
     }
 
     //
