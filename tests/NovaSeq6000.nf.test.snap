@@ -1122,7 +1122,7 @@
                 "[NXF_HASH] Submitted process > PREPARE_GENOME:SAMTOOLS_FAIDX (genome.fa)"
             ]
         ],
-        "timestamp": "2026-03-13T10:18:02.426461184",
+        "timestamp": "2026-03-13T13:23:48.846109058",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.2"
@@ -2125,10 +2125,10 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-03-12T16:20:40.276575593",
+        "timestamp": "2026-03-13T13:32:49.347143681",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nextflow": "25.10.2"
         }
     },
     "NovaSeq6000 data test relative sample size": {
@@ -3128,10 +3128,10 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-03-12T16:22:35.271019752",
+        "timestamp": "2026-03-13T13:26:41.591026679",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nextflow": "25.10.2"
         }
     },
     "NovaSeq6000 data test - No rundirs": {
@@ -4092,10 +4092,10 @@
                 "WARN: Sample 'sampletest_04' does not have a rundir specified"
             ]
         ],
-        "timestamp": "2026-03-12T16:26:16.838135479",
+        "timestamp": "2026-03-13T13:28:45.181835916",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nextflow": "25.10.2"
         }
     },
     "NovaSeq6000 data test sample size exceeds available reads": {
@@ -5101,10 +5101,10 @@
                 "WARN: sampletest_04: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads."
             ]
         ],
-        "timestamp": "2026-03-12T16:24:28.456349297",
+        "timestamp": "2026-03-13T13:27:49.421009962",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nextflow": "25.10.2"
         }
     },
     "NovaSeq6000 data test - tag collision": {
@@ -5892,10 +5892,10 @@
                 "WARN: Tag name collision: [test, Test, TEST]"
             ]
         ],
-        "timestamp": "2026-03-12T15:44:33.503707412",
+        "timestamp": "2026-03-13T13:29:34.78905167",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nextflow": "25.10.2"
         }
     }
 }
