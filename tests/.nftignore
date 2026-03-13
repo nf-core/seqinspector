@@ -5,6 +5,8 @@ fastp/*.fastp.*
 fastqc/*_fastqc.{html,zip}
 fastqscreen/*_screen.html
 fq/*fq_lint.txt
+kraken2/*.kraken2.report.txt
+kraken2/krona/*.html
 multiqc/{global_report,group_reports/*}/multiqc_data/fastqc_top_overrepresented_sequences_table.txt
 multiqc/{global_report,group_reports/*}/multiqc_data/llms-full.txt
 multiqc/{global_report,group_reports/*}/multiqc_data/multiqc.log

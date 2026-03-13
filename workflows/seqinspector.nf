@@ -21,6 +21,7 @@ include { SEQTK_SAMPLE               } from '../modules/nf-core/seqtk/sample'
 include { TOULLIGQC                  } from '../modules/nf-core/toulligqc'
 
 // subworkflow
+include { PHYLOGENETIC_QC            } from '../subworkflows/local/phylogenetic_qc'
 include { QC_BAM                     } from '../subworkflows/local/qc_bam'
 
 // functions
@@ -53,6 +54,9 @@ workflow SEQINSPECTOR {
     sample_size
     tools
     target_intervals
+    kraken2_db
+    kraken2_save_reads
+    kraken2_save_readclassifications
 
     main:
     ch_multiqc_files = channel.empty()
@@ -210,6 +214,20 @@ workflow SEQINSPECTOR {
     )
 
     ch_multiqc_files = ch_multiqc_files.mix(QC_BAM.out.multiple_metrics, QC_BAM.out.hs_metrics)
+
+    //
+    // SUBWORKFLOW: Run kraken2 and produce krona plots
+    //
+
+    if ('kraken2' in tools) {
+        PHYLOGENETIC_QC(
+            ch_samplesheet,
+            kraken2_db,
+            kraken2_save_reads,
+            kraken2_save_readclassifications,
+        )
+        ch_multiqc_files = ch_multiqc_files.mix(PHYLOGENETIC_QC.out.mqc)
+    }
 
     //
     // MODULE: Run ToulligQC

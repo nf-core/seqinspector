@@ -1,0 +1,32 @@
+def pipelines_testdata_base_path = 'https://raw.githubusercontent.com/nf-core/test-datasets/'
+
+nextflow_pipeline {
+
+    name "Test pipeline"
+    script "../main.nf"
+
+    def test_scenario = [
+        [
+            name: "NovaSeq6000 data test - kraken2",
+            params: [
+                kraken2_db: pipelines_testdata_base_path + '/taxprofiler/data/database/kraken2/testdb-kraken2.tar.gz',
+                tools: 'kraken2',
+                tools_bundle: null,
+            ]
+        ],
+        [
+            name: "NovaSeq6000 data test - kraken2 - no_db",
+            params: [
+                tools: 'kraken2',
+                tools_bundle: null,
+            ],
+            failure:true,
+            snapshot_include: 'Kraken2',
+            snapshot: 'stdout,stderr'
+        ]
+    ]
+    // Generate tests for each scenario
+    test_scenario.each { scenario ->
+        test(scenario.name, UTILS.getTest(scenario))
+    }
+}

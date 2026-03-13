@@ -1064,7 +1064,7 @@
                 "[NXF_HASH] Submitted process > PREPARE_GENOME:SAMTOOLS_FAIDX (genome.fa)"
             ]
         ],
-        "timestamp": "2026-03-12T16:18:44.078233725",
+        "timestamp": "2026-03-13T15:53:03.277536715",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -2067,7 +2067,7 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-03-12T16:20:40.276575593",
+        "timestamp": "2026-03-13T15:54:08.436701914",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -3070,7 +3070,7 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-03-12T16:22:35.271019752",
+        "timestamp": "2026-03-13T15:55:15.892319993",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -4034,7 +4034,7 @@
                 "WARN: Sample 'sampletest_04' does not have a rundir specified"
             ]
         ],
-        "timestamp": "2026-03-12T16:26:16.838135479",
+        "timestamp": "2026-03-13T15:57:07.115797171",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -5043,7 +5043,7 @@
                 "WARN: sampletest_04: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads."
             ]
         ],
-        "timestamp": "2026-03-12T16:24:28.456349297",
+        "timestamp": "2026-03-13T15:56:14.759821206",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -5834,7 +5834,7 @@
                 "WARN: Tag name collision: [test, Test, TEST]"
             ]
         ],
-        "timestamp": "2026-03-12T15:44:33.503707412",
+        "timestamp": "2026-03-13T15:57:49.731500962",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
