@@ -21,6 +21,8 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_seqi
 include { PREPARE_GENOME          } from './subworkflows/local/prepare_genome'
 include { getGenomeAttribute      } from 'plugin/nf-core-utils'
 include { defineToolsList         } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { UNTAR as UNTAR_KRAKEN2_DB } from './modules/nf-core/untar'
+
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -70,6 +72,14 @@ workflow {
         tools,
     )
 
+    // KRAKEN2 Parameter Initialisation:
+    if (params.kraken2_db.endsWith('.gz')) {
+        UNTAR_KRAKEN2_DB( [ [:], params.kraken2_db ] )
+        ch_kraken2_db = UNTAR_KRAKEN2_DB.out.untar.map { it[1] }
+    } else {
+        ch_kraken2_db = Channel.fromPath(params.kraken2_db, checkIfExists: true).collect()
+    }
+
     //
     // WORKFLOW: Run main workflow
     //
@@ -80,6 +90,7 @@ workflow {
         PREPARE_GENOME.out.dict,
         PREPARE_GENOME.out.fai,
         tools,
+        ch_kraken2_db,
     )
     //
     // SUBWORKFLOW: Run completion tasks
@@ -111,6 +122,7 @@ workflow NFCORE_SEQINSPECTOR {
     dict
     fai
     tools
+    kraken2_db
 
     main:
     //
@@ -132,6 +144,7 @@ workflow NFCORE_SEQINSPECTOR {
         tools,
         params.sort_bam,
         params.target_intervals,
+        kraken2_db,
     )
 
     emit:
