@@ -13,6 +13,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 - [Seqtk](#seqtk) - Subsample a specific number of reads per sample
 - [FastQC](#fastqc) - Raw read QC
 - [FASTQE](#fastqe) - Raw read QC
+- [CheckQC](#checkqc) - QC of an Illumina run
 - [SeqFu Stats](#seqfu-stats) - Statistics for FASTA or FASTQ files
 - [FastQ Screen](#fastq-screen) - Mapping against a set of references for basic contamination QC
 - [BWA-MEM2_INDEX](#bwamem2_index) - Create BWA-MEM2 index of a chosen reference genome OR use pre-built index
@@ -47,6 +48,16 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 </details>
 
 [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) gives general quality metrics about your sequenced reads. It provides information about the quality score distribution across your reads, per base sequence content (%A/T/G/C), adapter contamination and overrepresented sequences. For further reading and documentation see the [FastQC help pages](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/).
+
+### CheckQC
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `checkqc/`
+  - `checkqc_report.json`: Reports sequencing metrics that is not fulfilled. Note that the CheckQC module in MultiQC currently does not support BCL Convert data, so if the report if based on data from that demultiplexer it will not be visualized in the MutliQC report.
+
+</details>
 
 ### FastP
 
