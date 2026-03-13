@@ -2,10 +2,10 @@
 // Seqinspector Phylogenetic classification of reads, to check for contamination and adjacent issues
 //
 
-include { UNTAR as UNTAR_KRAKEN2_DB } from '../../modules/nf-core/untar'
-include { KRAKEN2_KRAKEN2 } from '../../modules/nf-core/kraken2/kraken2'
-include { KRONA_KTUPDATETAXONOMY } from '../../modules/nf-core/krona/ktupdatetaxonomy'
-include { KRONA_KTIMPORTTAXONOMY } from '../../modules/nf-core/krona/ktimporttaxonomy'
+include { UNTAR as UNTAR_KRAKEN2_DB } from '../../../modules/nf-core/untar'
+include { KRAKEN2_KRAKEN2 } from '../../../modules/nf-core/kraken2/kraken2'
+include { KRONA_KTUPDATETAXONOMY } from '../../../modules/nf-core/krona/ktupdatetaxonomy'
+include { KRONA_KTIMPORTTAXONOMY } from '../../../modules/nf-core/krona/ktimporttaxonomy'
 
 workflow PHYLOGENETIC_QC {
     take:
@@ -18,7 +18,7 @@ workflow PHYLOGENETIC_QC {
     //
     // MODULE: Untar kraken2_db or read it as it is if not compressed
     //
-    
+
     if (params.kraken2_db.endsWith('.gz')) {
         UNTAR_KRAKEN2_DB ( [ [:], params.kraken2_db ])
         ch_kraken2_db = UNTAR_KRAKEN2_DB.out.untar.map { it[1] }

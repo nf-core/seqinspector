@@ -215,7 +215,7 @@ workflow SEQINSPECTOR {
     //
     if (('kraken2' in tools) && ('krona' in tools)) {
 
-    PHYLOGENETIC_QC (  ,
+    PHYLOGENETIC_QC ( 
         ch_samplesheet
     )
     ch_multiqc_files = ch_multiqc_files.mix(PHYLOGENETIC_QC.out.multiqc)
@@ -233,7 +233,7 @@ workflow SEQINSPECTOR {
         sort: true,
         newLine: true,
     )
-    
+
     //
     // MODULE: MultiQC
     //
