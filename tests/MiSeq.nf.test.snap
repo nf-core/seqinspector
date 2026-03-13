@@ -43,7 +43,7 @@
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SEQFU_STATS": {
                     "seqfu": "1.22.3"
@@ -281,7 +281,7 @@
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SEQFU_STATS": {
                     "seqfu": "1.22.3"
@@ -710,7 +710,7 @@
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23"
                 },
                 "SEQFU_STATS": {
                     "seqfu": "1.22.3"
