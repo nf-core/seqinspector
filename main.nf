@@ -15,14 +15,13 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { PIPELINE_COMPLETION      } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
-include { PIPELINE_INITIALISATION  } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
-include { PREPARE_GENOME           } from './subworkflows/local/prepare_genome'
 include { SEQINSPECTOR             } from './workflows/seqinspector'
+include { PIPELINE_INITIALISATION  } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { PIPELINE_COMPLETION      } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { PREPARE_GENOME           } from './subworkflows/local/prepare_genome'
 include { UNTAR as UNTAR_KRAKEN2DB } from './modules/nf-core/untar'
-include { defineToolsList          } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
 include { getGenomeAttribute       } from 'plugin/nf-core-utils'
-
+include { defineToolsList          } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
