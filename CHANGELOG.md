@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#109](https://github.com/nf-core/seqinspector/pull/109) Adds ToulligQC module for long read QC
 - [#204](https://github.com/nf-core/seqinspector/pull/204) Added Fastp module
 - [#202](https://github.com/nf-core/seqinspector/pull/202) Added support for fasta fai file as input (via params or igenomes) for the pipeline
 - [#206](https://github.com/nf-core/seqinspector/pull/206) Added FASTQE for more comprehensive QC of FASTQ files
@@ -69,8 +70,6 @@ Initial release of nf-core/seqinspector, created with the [nf-core](https://nf-c
 - [#96](https://github.com/nf-core/seqinspector/pull/96) Added missing citations to citation tool
 - [#100](https://github.com/nf-core/seqinspector/pull/100) Added official logos
 - [#103](https://github.com/nf-core/seqinspector/pull/103) Configure full-tests
-- [#109](https://github.com/nf-core/seqinspector/pull/109) Adds ToulligQC module for long read QC
-- [#110](https://github.com/nf-core/seqinspector/pull/110) Update input schema to accept either tar file or directory as rundir, and fastq messages and patterns.
 - [#106](https://github.com/nf-core/seqinspector/pull/106) Parse rundir metadata
 - [#108](https://github.com/nf-core/seqinspector/pull/108) Test data validation (#94)
 - [#108](https://github.com/nf-core/seqinspector/pull/108) Update lists of default steps in the pipeline (#86)
