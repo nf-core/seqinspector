@@ -341,6 +341,7 @@ def defineToolsList(input_bundle, input_tools, input_skip) {
     if ('illumina' in bundle_list) {
         tools_list << 'rundirparser'
         tools_list << 'seqfu_stats'
+        tools_list << 'multiqcsav'
     }
     if ('minimal' in bundle_list) {
         tools_list << 'fastqc'

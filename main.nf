@@ -135,6 +135,5 @@ workflow NFCORE_SEQINSPECTOR {
 
     emit:
     global_report       = SEQINSPECTOR.out.global_report // channel: /path/to/multiqc_report.html
-    global_sav_report   = SEQINSPECTOR.out.global_sav_report // channel: /path/to/multiqc_report.html
     grouped_reports     = SEQINSPECTOR.out.grouped_reports // channel: /path/to/multiqc_report.html
 }
