@@ -27,7 +27,7 @@
                     },
                     "fastqe": {
                         "branch": "master",
-                        "git_sha": "c448a28daf17a09a668dd2072ec283f0b480c914",
+                        "git_sha": "c7b8a51247112b76b89dd87b9dbe081085113590",
                         "installed_by": ["modules"]
                     },
                     "fastqscreen/fastqscreen": {
@@ -68,7 +68,7 @@
                     },
                     "samtools/index": {
                         "branch": "master",
-                        "git_sha": "1d2fbdcbca677bbe8da0f9d0d2bb7c02f2cab1c9",
+                        "git_sha": "3420080823fd8ad8c344d7eb876ee0abc6bfa593",
                         "installed_by": ["modules"]
                     },
                     "seqfu/stats": {
