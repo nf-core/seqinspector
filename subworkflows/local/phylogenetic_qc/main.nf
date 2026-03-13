@@ -2,10 +2,10 @@
 // Seqinspector Phylogenetic classification of reads, to check for contamination and adjacent issues
 //
 
-include { UNTAR as UNTAR_KRAKEN2_DB } from '../../modules/nf-core/untar/main.nf'
-include { KRAKEN2_KRAKEN2 } from '../../modules/nf-core/kraken2/kraken2/main.nf'
-include { KRONA_KTUPDATETAXONOMY } from '../../modules/nf-core/krona/ktupdatetaxonomy/main.nf'
-include { KRONA_KTIMPORTTAXONOMY } from '../../modules/nf-core/krona/ktimporttaxonomy/main.nf'
+include { UNTAR as UNTAR_KRAKEN2_DB } from '../../modules/nf-core/untar'
+include { KRAKEN2_KRAKEN2 } from '../../modules/nf-core/kraken2/kraken2'
+include { KRONA_KTUPDATETAXONOMY } from '../../modules/nf-core/krona/ktupdatetaxonomy'
+include { KRONA_KTIMPORTTAXONOMY } from '../../modules/nf-core/krona/ktimporttaxonomy'
 
 workflow PHYLOGENETIC_QC {
     take:
