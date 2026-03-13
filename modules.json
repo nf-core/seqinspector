@@ -99,6 +99,9 @@
                     "untar": {
                         "branch": "master",
                         "git_sha": "447f7bc0fa41dfc2400c8cad4c0291880dc060cf",
+                    "toulligqc": {
+                        "branch": "master",
+                        "git_sha": "d9137377f4dd6246242829772eb1949b96de1ef0",
                         "installed_by": ["modules"]
                     }
                 }

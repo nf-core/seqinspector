@@ -145,6 +145,10 @@ workflow PIPELINE_INITIALISATION {
         log.warn("BWAMEM2, SAMTOOLS and PICARD processes, will be skipped")
     }
 
+    if ('toulligqc' in tools && 'emulate_amd64' in workflow.profile.tokenize(",")) {
+        error("ToulligQC is not compatible with the 'emulate_amd64' profile. Please remove ToulligQC from the list of tools if you wish to run seqinspector on this architecture.")
+    }
+
     emit:
     samplesheet = ch_samplesheet
     versions    = ch_versions
@@ -323,6 +327,7 @@ def defineToolsList(input_bundle, input_tools, input_skip) {
         tools_list << 'picard_collectmultiplemetrics'
         tools_list << 'rundirparser'
         tools_list << 'seqfu_stats'
+        tools_list << 'toulligqc'
     }
     if ('bam' in bundle_list) {
         tools_list << 'picard_collecthsmetrics'
@@ -355,6 +360,7 @@ def defineToolsList(input_bundle, input_tools, input_skip) {
         tools_list << 'fastqc'
         tools_list << 'fastqscreen'
         tools_list << 'seqfu_stats'
+        tools_list << 'toulligqc'
     }
 
     tools_list = tools_list.sort().unique() - skip_list

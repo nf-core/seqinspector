@@ -9,15 +9,16 @@
 include { BWAMEM2_MEM                } from '../modules/nf-core/bwamem2/mem'
 include { FASTP                      } from '../modules/nf-core/fastp'
 include { FASTQC                     } from '../modules/nf-core/fastqc'
-include { FQ_LINT                    } from '../modules/nf-core/fq/lint'
 include { FASTQE                     } from '../modules/nf-core/fastqe'
 include { FASTQSCREEN_FASTQSCREEN    } from '../modules/nf-core/fastqscreen/fastqscreen'
+include { FQ_LINT                    } from '../modules/nf-core/fq/lint'
 include { MULTIQC as MULTIQC_GLOBAL  } from '../modules/nf-core/multiqc'
 include { MULTIQC as MULTIQC_PER_TAG } from '../modules/nf-core/multiqc'
 include { RUNDIRPARSER               } from '../modules/local/rundirparser'
 include { SAMTOOLS_INDEX             } from '../modules/nf-core/samtools/index'
 include { SEQFU_STATS                } from '../modules/nf-core/seqfu/stats'
 include { SEQTK_SAMPLE               } from '../modules/nf-core/seqtk/sample'
+include { TOULLIGQC                  } from '../modules/nf-core/toulligqc'
 
 // subworkflow
 include { QC_BAM                     } from '../subworkflows/local/qc_bam'
@@ -52,7 +53,6 @@ workflow SEQINSPECTOR {
     ref_fai
     sample_size
     tools
-    sort_bam
     target_intervals
     kraken2_db
 
@@ -188,6 +188,8 @@ workflow SEQINSPECTOR {
     ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
 
     // MODULE: Align reads with BWA-MEM2
+    def sort_bam = true
+    // we always sort bam
     BWAMEM2_MEM(
         ch_sample.filter { ('picard_collecthsmetrics' in tools) || ('picard_collectmultiplemetrics' in tools) },
         bwamem2_index,
@@ -224,6 +226,17 @@ workflow SEQINSPECTOR {
     }
 
  // Collate and save software versions
+    // MODULE: Run ToulligQC
+    //
+
+    // This provides useful stats of long reads
+
+    TOULLIGQC(ch_samplesheet.filter { "toulligqc" in tools })
+
+    ch_multiqc_files.mix(TOULLIGQC.out.report_data)
+
+    //
+    // Collate and save software versions
     //
     def collated_versions = softwareVersionsToYAML(
         softwareVersions: channel.topic("versions"),

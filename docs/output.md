@@ -204,6 +204,17 @@ Generates the full set of bwamem2 indexes:
 
 [Picard_collecthsmetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard) is a tool to collect metrics on the aligment SAM/BAM files that are specific for sequence datasets generated through hybrid-selection (mostly used to capture exon-specific sequences for targeted sequencing).
 
+### ToulligQC
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `toulligqc/`
+  - `*.data`: ToulligQC output text file containing log information and all analysis results
+  - `*.html`: ToulligQC html report file
+
+[ToulligQC](https://github.com/GenomiqueENS/toulligQC) is dedicated to the QC analyses of Oxford Nanopore runs. This software is written in Python and developped by the GenomiqueENS core facility of the Institute of Biology of the Ecole Normale Superieure (IBENS).
+
 ### MultiQC
 
 nf-core/seqinspector will generate the following MultiQC reports:

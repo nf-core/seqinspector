@@ -148,7 +148,6 @@ workflow NFCORE_SEQINSPECTOR {
         fai,
         params.sample_size,
         tools,
-        params.sort_bam,
         params.target_intervals,
         kraken2_db,
     )
