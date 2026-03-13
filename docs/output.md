@@ -14,8 +14,8 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 - [FastQC](#fastqc) - Raw read QC
 - [Kraken2](#kraken2) - Phylogenetic assignment of reads using k-mers
 - [Krona](#krona) - Interactive visualization of Kraken2 results
-- [SeqFu Stats](#seqfu_stats) - Statistics for FASTA or FASTQ files
-- [FastQ Screen](#fastqscreen) - Mapping against a set of references for basic contamination QC
+- [SeqFu Stats](#seqfu-stats) - Statistics for FASTA or FASTQ files
+- [FastQ Screen](#fastq-screen) - Mapping against a set of references for basic contamination QC
 - [BWA-MEM2_INDEX](#bwamem2_index) - Create BWA-MEM2 index of a chosen reference genome OR use pre-built index
 - [BWA-MEM2_MEM](#bwamem2_mem) - Mapping reads against a chosen reference genome
 - [Samtools index](#samtools-index) - Index BAM files with Samtools
