@@ -19,7 +19,7 @@ nextflow_pipeline {
                 input: pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/samplesheet_wrongpair.csv',
                 continue_with_lint_fail: false,
             ],
-            snapshot_ignore:'Failed,exception',
+            snapshot_ignore:['Failed','exception'],
             failure:true
         ],
         [
