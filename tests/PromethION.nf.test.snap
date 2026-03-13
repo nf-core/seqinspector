@@ -132,7 +132,7 @@
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-03-05T15:44:59.709468008",
+        "timestamp": "2026-03-12T15:45:23.633995745",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

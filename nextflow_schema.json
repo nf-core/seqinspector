@@ -51,10 +51,10 @@
                 "tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to run",
-                    "pattern": "^((fastqc|fastqscreen|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats|checkqc)?,?)*(?<!,)$",
+                    "pattern": "^((checkqc|fastp|fastqc|fastqe|fastqscreen|fq_lint|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats)?,?)*(?<!,)$",
                     "fa_icon": "fas fa-sort-amount-asc"
                 },
-                "tools_setup": {
+                "tools_bundle": {
                     "type": "string",
                     "description": "Select some default setup for the tools to be run, tools can still be used to add tools",
                     "pattern": "^((all|bam|fastq|default|illumina|minimal|ont)?,?)*(?<!,)$",
@@ -63,7 +63,27 @@
                 "skip_tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to skip - overrides any other means of tools selection",
-                    "pattern": "^((fastqc|fastqscreen|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats|checkqc)?,?)*(?<!,)$",
+                    "pattern": "^((checkqc|fastp|fastqc|fastqe|fastqscreen|fq_lint|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats)?,?)*(?<!,)$",
+                    "fa_icon": "fas fa-window-close "
+                }
+            }
+        },
+        "validation_options": {
+            "title": "Validation options",
+            "type": "object",
+            "description": "Options for validating and screening FASTQ files.",
+            "default": "",
+            "properties": {
+                "fq_lint_args": {
+                    "type": "string",
+                    "description": "Arguments to pass to FQ lint",
+                    "help_text": "Arguments to pass to FQ lint. This can be used to disable overly strict linting. See https://github.com/stjude-rust-labs/fq?tab=readme-ov-file#lint for more information."
+                },
+                "continue_with_lint_fail": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to continue with the pipeline if linting fails for a single sample.",
+                    "help_text": "If set to true, the pipeline will continue with the remaining samples if linting fails for a single sample. If set to false, the pipeline will terminate if linting fails for a single sample.",
                     "fa_icon": "fas fa-window-close "
                 },
                 "sort_bam": {
@@ -87,16 +107,6 @@
                     "fa_icon": "fas fa-book",
                     "help_text": "If using a reference genome configured in the pipeline using iGenomes, use this parameter to give the ID for the reference. This is then used to build the full paths for all required reference genome files e.g. `--genome GRCh38`. \n\nSee the [nf-core website docs](https://nf-co.re/usage/reference_genomes) for more details."
                 },
-                "fasta": {
-                    "type": "string",
-                    "format": "file-path",
-                    "exists": true,
-                    "mimetype": "text/plain",
-                    "pattern": "^\\S+\\.fn?a(sta)?(\\.gz)?$",
-                    "description": "Path to FASTA genome file.",
-                    "help_text": "This parameter is *mandatory* if `--genome` is not specified. If you don't have a BWA index available this will be generated for you automatically.",
-                    "fa_icon": "far fa-file-code"
-                },
                 "igenomes_ignore": {
                     "type": "boolean",
                     "description": "Do not load the iGenomes reference config.",
@@ -118,6 +128,16 @@
                     "fa_icon": "fas fa-search",
                     "description": "A .csv of reference genomes to be mapped against by FastQ Screen"
                 },
+                "fasta": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "mimetype": "text/plain",
+                    "pattern": "^\\S+\\.fn?a(sta)?(\\.gz)?$",
+                    "description": "Path to FASTA genome file.",
+                    "help_text": "This parameter is *mandatory* if `--genome` is not specified.",
+                    "fa_icon": "far fa-file-code"
+                },
                 "bwamem2": {
                     "type": "string",
                     "format": "directory-path",
@@ -129,8 +149,17 @@
                 "dict": {
                     "type": "string",
                     "description": "Sequence dictionary for the reference fasta file provided.",
-                    "help_text": "If you wish to recompute indices available on igenomes, set `--ic false`.\n\n> **NB** If none provided, will be generated automatically from the FASTA reference.\n\nIf you use AWS iGenomes, this has already been set for you appropriately.",
+                    "help_text": "If you wish to recompute indices available on igenomes, set `--dict false`.\n\n> **NB** If none provided, will be generated automatically from the FASTA reference.\n\nIf you use AWS iGenomes, this has already been set for you appropriately.",
                     "pattern": "^\\S+.dict$",
+                    "format": "file-path",
+                    "exists": true,
+                    "fa_icon": "fas fa-file"
+                },
+                "fai": {
+                    "type": "string",
+                    "description": "Fasta index for the reference fasta file provided.",
+                    "help_text": "If you wish to recompute indices available on igenomes, set `--fai false`.\n\n> **NB** If none provided, will be generated automatically from the FASTA reference.\n\nIf you use AWS iGenomes, this has already been set for you appropriately.",
+                    "pattern": "^\\S+.fai$",
                     "format": "file-path",
                     "exists": true,
                     "fa_icon": "fas fa-file"
@@ -317,6 +346,9 @@
     "allOf": [
         {
             "$ref": "#/$defs/input_output_options"
+        },
+        {
+            "$ref": "#/$defs/validation_options"
         },
         {
             "$ref": "#/$defs/reference_genome_options"

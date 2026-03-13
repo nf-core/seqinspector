@@ -19,10 +19,19 @@
                         "branch": "master",
                         "git_sha": "389ed64090aa4594276fb3d53923432c7728c5b4",
                         "installed_by": ["modules"]
+                    "fastp": {
+                        "branch": "master",
+                        "git_sha": "1fb5a73bce8e4ac7079b0a9461b23d11e877ad14",
+                        "installed_by": ["modules"]
                     },
                     "fastqc": {
                         "branch": "master",
                         "git_sha": "3009f27c4e4b6e99da4eeebe82799e13924a4a1f",
+                        "installed_by": ["modules"]
+                    },
+                    "fastqe": {
+                        "branch": "master",
+                        "git_sha": "c448a28daf17a09a668dd2072ec283f0b480c914",
                         "installed_by": ["modules"]
                     },
                     "fastqscreen/fastqscreen": {
@@ -30,6 +39,11 @@
                         "git_sha": "ab2e7b785ee4fa6d108472862edbf983cea7db49",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/fastqscreen/fastqscreen/fastqscreen-fastqscreen.diff"
+                    },
+                    "fq/lint": {
+                        "branch": "master",
+                        "git_sha": "14b8e6cceb84242e16094fe979762e05bc8de526",
+                        "installed_by": ["modules"]
                     },
                     "multiqc": {
                         "branch": "master",
