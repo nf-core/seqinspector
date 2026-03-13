@@ -205,7 +205,6 @@ Tools:
 - seqfu_stats
 </details>
 
-
 <details>
 <summary>minimal</summary>
 
@@ -244,7 +243,6 @@ Tools:
 - fastqscreen
 
 </details>
-
 
 <details>
 <summary>illumina</summary>
