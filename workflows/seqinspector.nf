@@ -62,8 +62,8 @@ workflow SEQINSPECTOR {
     main:
     ch_multiqc_files = channel.empty()
     ch_multiqc_extra_files = channel.empty()
-    ch_global_reports = Channel.empty()
-    ch_sav_reports = Channel.empty()
+    ch_global_reports = channel.empty()
+    ch_sav_reports = channel.empty()
 
     //
     // MODULE: Run FQ_LINT to catch early errors
@@ -80,7 +80,7 @@ workflow SEQINSPECTOR {
     //
     // MODULE: Parse rundir info
     //
-    if ('rundirparser' in tools ) {
+    if ('rundirparser' in tools) {
 
         // Branch the samplesheet channel based on rundir presence
         ch_rundir_branch = ch_samplesheet.branch { meta, _reads ->
@@ -110,16 +110,16 @@ workflow SEQINSPECTOR {
                 //  2. Mix with the ch_multiqc_files channel downstream
                 [[dir_meta, rundir]]
             }
-        ch_rundir.count().view() // remove this
+        ch_rundir.count().view()
+        // remove this
 
-        ch_rundir.ifEmpty { 
+        ch_rundir.ifEmpty {
             log.warn("No samples with rundir found, skipping RUNDIRPARSER")
         }
 
         RUNDIRPARSER(ch_rundir)
 
         ch_multiqc_files = ch_multiqc_files.mix(RUNDIRPARSER.out.multiqc)
-
     }
 
     //
@@ -128,8 +128,8 @@ workflow SEQINSPECTOR {
 
     if ('multiqcsav' in tools) {
         // Determine if we need global MultiQC based on conditions
-        ch_need_global = ch_rundir_branch.without_rundir.count()
-        // TODO: Don't use ch_rundir
+        ch_need_global = ch_rundir_branch.without_rundir
+            .count()
             .combine(ch_rundir.count())
             .map { samples_without, rundir_count ->
                 def need_global = (samples_without > 0) || (rundir_count > 1) || (rundir_count == 0)
@@ -145,17 +145,16 @@ workflow SEQINSPECTOR {
                         log.warn("No samples with rundir found, will run global MultiQC instead")
                     }
                 }
-                return need_global ? "run_global": "run_sav"
+                return need_global ? "run_global" : "run_sav"
             }
-
-        // Use this channel to conditionally run processes
-        
     }
 
-    ch_need_global.branch { need_global ->
-        run_global: need_global == "run_global"
-        run_sav: need_global == "run_sav"
-    }.set{ ch_multiqc_decision }
+    ch_need_global
+        .branch { need_global ->
+            run_global: need_global == "run_global"
+            run_sav: need_global == "run_sav"
+        }
+        .set { ch_multiqc_decision }
 
     //
     // MODULE: Run Seqtk sample
@@ -320,8 +319,12 @@ workflow SEQINSPECTOR {
         ch_tags.toList().map { tag_list -> reportIndexMultiqc(tag_list) }.collectFile(name: 'multiqc_index_mqc.yaml')
     )
 
-    ch_global_input = ch_multiqc_files.map { _meta, files -> [files] }.flatten().collect()
-        .combine(ch_multiqc_extra_files_global.collect()).map { files ->
+    ch_global_input = ch_multiqc_files
+        .map { _meta, files -> [files] }
+        .flatten()
+        .collect()
+        .combine(ch_multiqc_extra_files_global.collect())
+        .map { files ->
             [
                 [id: 'seqinspector'],
                 files,
@@ -335,56 +338,59 @@ workflow SEQINSPECTOR {
         }
     log.info("ch_global_input.... ${ch_global_input}")
     // Run global MultiQC only when needed
-    ch_global_reports = ch_multiqc_decision.run_global.view { it -> log.info("globsl decision.... ${it}")}
-    .filter { decision -> decision == "run_global" }
-    .concat(ch_global_input.collect())  // Wait for decision, then emit input
-    .last()
-    .view { it -> log.info("final global files.....${it}")}
-    | MULTIQC_GLOBAL
+    ch_global_reports = ch_multiqc_decision.run_global.view { it -> log.info("globsl decision.... ${it}") }.filter { decision ->
+        decision
+            == "run_global"
+    }.concat(ch_global_input.collect()).last().view { it -> log.info("final global files.....${it}") }
+        | MULTIQC_GLOBAL
 
-    ch_sav_input = ch_rundir.map { metas, rundir ->
-        log.info("metas, rundir......${metas}....${rundir}")
-        def xml = []
-        def interop = []
+    ch_sav_input = ch_rundir
+        .map { metas, rundir ->
+            log.info("metas, rundir......${metas}....${rundir}")
+            def xml = []
+            def interop = []
 
-        rundir.eachFileRecurse { file ->
-            if (file.fileName.toString() in ['RunInfo.xml','RunParameters.xml']) {
-                xml << file
-            } else if (file.parent.name == 'InterOp' && file.fileName.toString().endsWith(".bin")) {
-                interop << file
+            rundir.eachFileRecurse { file ->
+                if (file.fileName.toString() in ['RunInfo.xml', 'RunParameters.xml']) {
+                    xml << file
+                }
+                else if (file.parent.name == 'InterOp' && file.fileName.toString().endsWith(".bin")) {
+                    interop << file
+                }
             }
+            log.info("xml, interop......${xml}....${interop[0]}")
+            return [metas, xml, interop]
         }
-        log.info("xml, interop......${xml}....${interop[0]}")
-        return [metas, xml, interop]
-    }.combine(
-        ch_multiqc_files.map { _meta, files -> files }.flatten().collect()
-        .combine(ch_multiqc_extra_files_global.collect()).map { files -> [files.flatten()] }
-    ).map { meta, xml, interop, extra_files  ->
-        return [
-            meta,
-            xml,
-            interop,
-            extra_files,
-            multiqc_config
-                ? file(multiqc_config, checkIfExists: true)
-                : file("${projectDir}/assets/multiqc_config.yml", checkIfExists: true),
-            multiqc_logo ? file(multiqc_logo, checkIfExists: true) : [],
-            [],
-            []
-        ]
-    }
+        .combine(
+            ch_multiqc_files.map { _meta, files -> files }.flatten().collect().combine(ch_multiqc_extra_files_global.collect()).map { files -> [files.flatten()] }
+        )
+        .map { meta, xml, interop, extra_files ->
+            return [
+                meta,
+                xml,
+                interop,
+                extra_files,
+                multiqc_config
+                    ? file(multiqc_config, checkIfExists: true)
+                    : file("${projectDir}/assets/multiqc_config.yml", checkIfExists: true),
+                multiqc_logo ? file(multiqc_logo, checkIfExists: true) : [],
+                [],
+                [],
+            ]
+        }
 
     log.info("sav ch_sav_input.collect() ...${ch_sav_input.collect()}")
     // Run SAV MultiQC only when needed
-    ch_sav_reports = ch_multiqc_decision.run_sav.view{ it -> log.info("sav decision ...${it}")}
-    .filter { decision -> decision == "run_sav" }
-    .combine( ch_sav_input.map { decision, files -> 
+    ch_sav_reports = ch_multiqc_decision.run_sav.view { it -> log.info("sav decision ...${it}") }.filter { decision ->
+        decision
+            == "run_sav"
+    }.combine(
+        ch_sav_input.map { _decision, files ->
             log.info("Passing files to MULTIQC_SAV:............. ${files}")
             return files
         }
-    )
-    .view { it -> log.info("final sav files.....${it}")}
-    | MULTIQC_SAV
+    ).view { it -> log.info("final sav files.....${it}") }
+        | MULTIQC_SAV
 
 
     ch_multiqc_extra_files_tag = ch_multiqc_extra_files.mix(
@@ -435,8 +441,8 @@ workflow SEQINSPECTOR {
             ]
         }
     )
-  
+
     emit:
-    global_report       = ch_global_reports.report.mix(ch_sav_reports.report).map { _meta, report -> [report] }.toList() // channel: [ /path/to/multiqc_report.html ]
-    grouped_reports     = MULTIQC_PER_TAG.out.report.map { _meta, report -> [report] }.toList() // channel: [ /path/to/multiqc_report.html ]
+    global_report   = ch_global_reports.report.mix(ch_sav_reports.report).map { _meta, report -> [report] }.toList() // channel: [ /path/to/multiqc_report.html ]
+    grouped_reports = MULTIQC_PER_TAG.out.report.map { _meta, report -> [report] }.toList() // channel: [ /path/to/multiqc_report.html ]
 }
