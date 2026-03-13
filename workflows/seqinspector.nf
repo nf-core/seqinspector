@@ -6,19 +6,19 @@
 
 
 // modules
-include { TOULLIGQC                     } from '../modules/nf-core/toulligqc'
 include { BWAMEM2_MEM                } from '../modules/nf-core/bwamem2/mem'
 include { FASTP                      } from '../modules/nf-core/fastp'
 include { FASTQC                     } from '../modules/nf-core/fastqc'
-include { FQ_LINT                    } from '../modules/nf-core/fq/lint'
 include { FASTQE                     } from '../modules/nf-core/fastqe'
 include { FASTQSCREEN_FASTQSCREEN    } from '../modules/nf-core/fastqscreen/fastqscreen'
+include { FQ_LINT                    } from '../modules/nf-core/fq/lint'
 include { MULTIQC as MULTIQC_GLOBAL  } from '../modules/nf-core/multiqc'
 include { MULTIQC as MULTIQC_PER_TAG } from '../modules/nf-core/multiqc'
 include { RUNDIRPARSER               } from '../modules/local/rundirparser'
 include { SAMTOOLS_INDEX             } from '../modules/nf-core/samtools/index'
 include { SEQFU_STATS                } from '../modules/nf-core/seqfu/stats'
 include { SEQTK_SAMPLE               } from '../modules/nf-core/seqtk/sample'
+include { TOULLIGQC                  } from '../modules/nf-core/toulligqc'
 
 // subworkflow
 include { QC_BAM                     } from '../subworkflows/local/qc_bam'
@@ -216,12 +216,9 @@ workflow SEQINSPECTOR {
 
     // This provides useful stats of long reads
 
-    if ("toulligqc" in tools) {
-        TOULLIGQC (
-            ch_samplesheet
-        )
-        ch_multiqc_files.mix(TOULLIGQC.out.report_data)
-    }
+    TOULLIGQC(ch_samplesheet.filter { "toulligqc" in tools })
+
+    ch_multiqc_files.mix(TOULLIGQC.out.report_data)
 
     //
     // Collate and save software versions
