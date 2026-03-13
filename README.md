@@ -37,6 +37,7 @@ If provided, nf-core/seqinspector can also parse statistics from an Illumina run
 | `Trimming`          | [`Fastp`](https://github.com/OpenGene/fastp)                                                                        | Trimming of reads. Only performs trimming if `--tools` parameter is given.                    | [RNA, DNA, synthetic]   | [N/A]                                                                                   | no           |
 | `Indexing, Mapping` | [`Bwamem2`](https://github.com/bwa-mem2/bwa-mem2)                                                                   | Align reads to reference                                                                      | [RNA, DNA]              | [N/A]                                                                                   | yes          |
 | `Indexing`          | [`SAMtools`](http://github.com/samtools)                                                                            | Index aligned BAM files, create FASTA index                                                   | [DNA]                   | [N/A]                                                                                   | yes          |
+| `QC`                | [`checkQC`](https://github.com/Molmed/checkQC)                                              | Read QC                                                                                       | [RNA, DNA]              | [N/A]                                                                                   | no          |
 | `QC`                | [`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)                                              | Read QC                                                                                       | [RNA, DNA]              | [N/A]                                                                                   | yes          |
 | `QC`                | [`FASTQE`](https://fastqe.com/)                                                                                     | Read QC                                                                                       | [RNA, DNA]              | [N/A]                                                                                   | yes          |
 | `QC`                | [`FastqScreen`](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/)                                   | Basic contamination detection                                                                 | [RNA, DNA]              | [N/A]                                                                                   | yes          |
@@ -58,6 +59,7 @@ If provided, nf-core/seqinspector can also parse statistics from an Illumina run
 | Tool        | Version |
 | ----------- | ------- |
 | bwamem2     | 2.3     |
+| checkQC     | 4.1.0   |
 | fq/lint     | 0.12.0  |
 | fastp       | 1.1.0   |
 | fastqc      | 0.12.1  |

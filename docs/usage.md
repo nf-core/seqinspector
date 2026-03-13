@@ -168,7 +168,8 @@ It is possible to also chose bundles of pre-specified tools using the `tools_bun
 
 Currently, the following bundles are available:
 
-:::info{title="default"}{collapse}
+<details>
+<summary>default</summary>
 
 Requirements:
 
@@ -183,9 +184,10 @@ Tools:
 - rundirparser
 - seqfu_stats
 
-:::
+</details>
 
-:::info{title="all"}{collapse}
+<details>
+<summary>all</summary>
 
 Requirements:
 
@@ -194,16 +196,18 @@ Requirements:
 
 Tools:
 
+- checkQC
 - fastqc
 - fastqscreen
 - picard_collecthsmetrics
 - picard_collectmultiplemetrics
 - rundirparser
 - seqfu_stats
+</details>
 
-:::
 
-:::info{title="minimal"}{collapse}
+<details>
+<summary>minimal</summary>
 
 Requirements:
 
@@ -215,10 +219,10 @@ Tools:
 - fastqscreen
 - picard_collectmultiplemetrics
 - seqfu_stats
+</details>
 
-:::
-
-:::info{title="bam"}{collapse}
+<details>
+<summary>bam</summary>
 
 Requirements:
 
@@ -229,18 +233,21 @@ Tools:
 - picard_collecthsmetrics
 - picard_collectmultiplemetrics
 
-:::
+</details>
 
-:::info{title="fastq"}{collapse}
+<details>
+<summary>fastq</summary>
 
 Tools:
 
 - fastqc
 - fastqscreen
 
-:::
+</details>
 
-:::info{title="illumina"}{collapse}
+
+<details>
+<summary>illumina</summary>
 
 Requirements:
 
@@ -248,20 +255,20 @@ Requirements:
 
 Tools:
 
+- checkQC
 - rundirparser
 - seqfu_stats
+</details>
 
-:::
-
-:::info{title="ont"}{collapse}
+<details>
+<summary>ont</summary>
 
 Tools:
 
 - fastqc
 - fastqscreen
 - seqfu_stats
-
-:::
+</details>
 
 ### Available functionality and tools
 
@@ -366,6 +373,17 @@ To use a different container from the default container or conda environment spe
 A pipeline might not always support every possible argument or option of a particular tool used in pipeline. Fortunately, nf-core pipelines provide some freedom to users to insert additional parameters that the pipeline does not include by default.
 
 To learn how to provide additional arguments to a particular tool of the pipeline, please see the [customising tool arguments](https://nf-co.re/docs/usage/configuration#customising-tool-arguments) section of the nf-core website.
+
+#### Custom config for checkQC
+
+To run checkQC with custom configuration, add a yml file with the custom configuration to the rundir and add the following code block to any of your [nextflow config files](https://www.nextflow.io/docs/latest/config.html#configuration-files).
+
+```bash
+process {
+    withName: CHECKQC {
+        ext.args = '--config */custom_checkqc.yml'
+    }
+```
 
 ### nf-core/configs
 
