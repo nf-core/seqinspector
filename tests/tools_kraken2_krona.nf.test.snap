@@ -3,22 +3,33 @@
         "content": [
             17,
             {
-                
+                "KRAKEN2_KRAKEN2": {
+                    "kraken2": "2.1.6",
+                    "pigz": "2.8"
+                },
+                "KRONA_KTIMPORTTAXONOMY": {
+                    "krona": "2.8.1"
+                },
+                "KRONA_KTUPDATETAXONOMY": {
+                    "krona": "2.8.1"
+                },
+                "UNTAR_KRAKEN2_DB": {
+                    "untar": "1.34"
+                }
             },
             [
-                "kraken2_reports",
-                "kraken2_reports/Sample1_01.kraken2.report.txt",
-                "kraken2_reports/Sample23_03.kraken2.report.txt",
-                "kraken2_reports/SampleA_02.kraken2.report.txt",
-                "kraken2_reports/Undetermined_05.kraken2.report.txt",
-                "kraken2_reports/krona_reports",
-                "kraken2_reports/krona_reports/Sample1_01.html",
-                "kraken2_reports/krona_reports/Sample23_03.html",
-                "kraken2_reports/krona_reports/SampleA_02.html",
-                "kraken2_reports/krona_reports/Undetermined_05.html",
-                "kraken2_reports/krona_reports/sampletest_04.html",
-                "kraken2_reports/sampletest_04.kraken2.report.txt",
-                "kraken2_reports/versions.yml",
+                "kraken2",
+                "kraken2/Sample1_01.kraken2.report.txt",
+                "kraken2/Sample23_03.kraken2.report.txt",
+                "kraken2/SampleA_02.kraken2.report.txt",
+                "kraken2/Undetermined_05.kraken2.report.txt",
+                "kraken2/krona",
+                "kraken2/krona/Sample1_01.html",
+                "kraken2/krona/Sample23_03.html",
+                "kraken2/krona/SampleA_02.html",
+                "kraken2/krona/Undetermined_05.html",
+                "kraken2/krona/sampletest_04.html",
+                "kraken2/sampletest_04.kraken2.report.txt",
                 "multiqc",
                 "multiqc/global_report",
                 "multiqc/global_report/multiqc_data",
@@ -140,17 +151,6 @@
                 "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"
             ],
             [
-                "Sample1_01.kraken2.report.txt:md5,af1a51fe57eb6d428350ff4a4bf759d4",
-                "Sample23_03.kraken2.report.txt:md5,af1a51fe57eb6d428350ff4a4bf759d4",
-                "SampleA_02.kraken2.report.txt:md5,af1a51fe57eb6d428350ff4a4bf759d4",
-                "Undetermined_05.kraken2.report.txt:md5,af1a51fe57eb6d428350ff4a4bf759d4",
-                "Sample1_01.html:md5,e974807175173ca6b7dd4b717c8e600f",
-                "Sample23_03.html:md5,0575129eb55a839ebe6e803f44831858",
-                "SampleA_02.html:md5,eeae35fbb660c672104eae8478edab66",
-                "Undetermined_05.html:md5,03898e5be1130c12a09d3762e1c18b15",
-                "sampletest_04.html:md5,bee0ef3fe879d0447188e77c77c2d1ac",
-                "sampletest_04.kraken2.report.txt:md5,af1a51fe57eb6d428350ff4a4bf759d4",
-                "versions.yml:md5,5a3ead1a0a6b38ea4cc237069ec2316f",
                 "kraken-top-n-plot.txt:md5,f3cf965c0db18dc74d44431b39e5d7e3",
                 "multiqc_citations.txt:md5,6c7f11ec8908181ce5daed75ddb6dc32",
                 "multiqc_kraken.txt:md5,80ae50c85e3b4746675619c1db06bdde",
@@ -170,7 +170,7 @@
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-03-13T13:18:08.757901",
+        "timestamp": "2026-03-13T15:04:13.180731055",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

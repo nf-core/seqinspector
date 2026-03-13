@@ -25,19 +25,6 @@
                         "git_sha": "3009f27c4e4b6e99da4eeebe82799e13924a4a1f",
                         "installed_by": ["modules"]
                     },
-                    "kraken2/kraken2": {
-                        "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
-                        "installed_by": ["modules"]
-                    },
-                    "krona/ktimporttaxonomy": {
-                        "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
-                        "installed_by": ["modules"]
-                    },
-                    "krona/ktupdatetaxonomy": {
-                        "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
                     "fastqe": {
                         "branch": "master",
                         "git_sha": "c448a28daf17a09a668dd2072ec283f0b480c914",
@@ -52,6 +39,21 @@
                     "fq/lint": {
                         "branch": "master",
                         "git_sha": "14b8e6cceb84242e16094fe979762e05bc8de526",
+                        "installed_by": ["modules"]
+                    },
+                    "kraken2/kraken2": {
+                        "branch": "master",
+                        "git_sha": "71a39f3598935d64ffd65f0960e4d2d4a42ab778",
+                        "installed_by": ["modules"]
+                    },
+                    "krona/ktimporttaxonomy": {
+                        "branch": "master",
+                        "git_sha": "939bb089705e5995ef8a158d48f6951314e95584",
+                        "installed_by": ["modules"]
+                    },
+                    "krona/ktupdatetaxonomy": {
+                        "branch": "master",
+                        "git_sha": "939bb089705e5995ef8a158d48f6951314e95584",
                         "installed_by": ["modules"]
                     },
                     "multiqc": {
@@ -89,14 +91,14 @@
                         "git_sha": "6b81c03dc4465ac9351b293dc6caada2a5e7556c",
                         "installed_by": ["modules"]
                     },
-                    "untar": {
-                        "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
-                        "installed_by": ["modules"]
-                    },
                     "seqtk/sample": {
                         "branch": "master",
                         "git_sha": "a46713779030a5f508117080cbf4b693dd4c6e33",
+                        "installed_by": ["modules"]
+                    },
+                    "untar": {
+                        "branch": "master",
+                        "git_sha": "447f7bc0fa41dfc2400c8cad4c0291880dc060cf",
                         "installed_by": ["modules"]
                     }
                 }
