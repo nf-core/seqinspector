@@ -93,7 +93,10 @@ workflow {
         PREPARE_GENOME.out.fai,
         tools,
         ch_kraken2_db,
+        params.kraken2_save_reads,
+        params.kraken2_save_readclassifications,
     )
+
     //
     // SUBWORKFLOW: Run completion tasks
     //
@@ -125,6 +128,8 @@ workflow NFCORE_SEQINSPECTOR {
     fai
     tools
     kraken2_db
+    kraken2_save_reads
+    kraken2_save_readclassifications
 
     main:
     //
@@ -146,6 +151,8 @@ workflow NFCORE_SEQINSPECTOR {
         tools,
         params.target_intervals,
         kraken2_db,
+        kraken2_save_reads,
+        kraken2_save_readclassifications,
     )
 
     emit:
