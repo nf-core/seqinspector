@@ -58,7 +58,8 @@
                     "type": "string",
                     "description": "Select some default setup for the tools to be run, tools can still be used to add tools",
                     "pattern": "^((all|bam|fastq|default|illumina|minimal|ont)?,?)*(?<!,)$",
-                    "fa_icon": "fas fa-window-restore"
+                    "fa_icon": "fas fa-window-restore",
+                    "default": "default"
                 },
                 "skip_tools": {
                     "type": "string",
@@ -359,5 +360,11 @@
         {
             "$ref": "#/$defs/generic_options"
         }
-    ]
+    ],
+    "properties": {
+        "checkqc_config": {
+            "type": "string",
+            "description": "Path to custom CheckQC config"
+        }
+    }
 }

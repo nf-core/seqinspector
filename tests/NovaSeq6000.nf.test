@@ -45,7 +45,14 @@ nextflow_pipeline {
                 tools_bundle: null,
                 tools: 'fastqc',
             ]
-        ]
+        ],
+        [
+            name: "NovaSeq6000 data test - Checkqc with config",
+            params: [
+                checkqc_config: "$projectDir/assets/checkqc_config.yml",
+                tools: 'checkqc',
+            ]
+        ],
     ]
 
     // Generate tests for each scenario

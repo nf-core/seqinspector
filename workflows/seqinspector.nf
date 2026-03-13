@@ -42,6 +42,7 @@ workflow SEQINSPECTOR {
     ch_samplesheet // channel: samplesheet read in from --input
     bait_intervals
     bwamem2_index
+    checkqc_config
     fasta_reference
     fastq_screen_references
     multiqc_config
@@ -148,7 +149,11 @@ workflow SEQINSPECTOR {
 
         ch_rundir.ifEmpty { log.warn("No samples with rundir found, skipping CHECKQC") }
 
-        CHECKQC(ch_rundir, [])
+        CHECKQC(ch_rundir,
+                checkqc_config
+                    ? file(checkqc_config, checkIfExists: true)
+                    : []
+        )
 
         ch_multiqc_files = ch_multiqc_files.mix(CHECKQC.out.report)
     }

@@ -119,6 +119,7 @@ workflow NFCORE_SEQINSPECTOR {
         samplesheet,
         params.bait_intervals,
         bwamem2,
+        params.checkqc_config,
         fasta,
         params.fastq_screen_references,
         params.multiqc_config,
