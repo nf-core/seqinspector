@@ -219,13 +219,15 @@ workflow SEQINSPECTOR {
     // SUBWORKFLOW: Run kraken2 and produce krona plots
     //
 
-    PHYLOGENETIC_QC(
-        ch_samplesheet.filter { ('kraken2' in tools) },
-        kraken2_db,
-        kraken2_save_reads,
-        kraken2_save_readclassifications,
-    )
-    ch_multiqc_files = ch_multiqc_files.mix(PHYLOGENETIC_QC.out.mqc)
+    if ('kraken2' in tools) {
+        PHYLOGENETIC_QC(
+            ch_samplesheet,
+            kraken2_db,
+            kraken2_save_reads,
+            kraken2_save_readclassifications,
+        )
+        ch_multiqc_files = ch_multiqc_files.mix(PHYLOGENETIC_QC.out.mqc)
+    }
 
     //
     // MODULE: Run ToulligQC
