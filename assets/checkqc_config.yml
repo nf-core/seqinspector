@@ -619,7 +619,7 @@ nextseq500_high:
         warning: 1.5
         error: unknown
   151:
-      handlers:
+    handlers:
       - name: ClusterPFHandler
         warning: 100
         error: unknown
@@ -634,7 +634,7 @@ nextseq500_high:
         warning: 1.5
         error: unknown
   301:
-      handlers:
+    handlers:
       - name: ClusterPFHandler
         warning: 60
         error: unknown
@@ -666,7 +666,7 @@ nextseq500_mid:
         warning: 1.5
         error: unknown
   151:
-      handlers:
+    handlers:
       - name: ClusterPFHandler
         warning: 32
         error: unknown
@@ -681,7 +681,7 @@ nextseq500_mid:
         warning: 1.5
         error: unknown
   301:
-      handlers:
+    handlers:
       - name: ClusterPFHandler
         warning: 32
         error: unknown
@@ -713,7 +713,7 @@ nextseq550_high:
         warning: 1.5
         error: unknown
   151:
-      handlers:
+    handlers:
       - name: ClusterPFHandler
         warning: 100
         error: unknown
@@ -728,7 +728,7 @@ nextseq550_high:
         warning: 1.5
         error: unknown
   301:
-      handlers:
+    handlers:
       - name: ClusterPFHandler
         warning: 100
         error: unknown
@@ -760,7 +760,7 @@ nextseq550_mid:
         warning: 1.5
         error: unknown
   151:
-      handlers:
+    handlers:
       - name: ClusterPFHandler
         warning: 32
         error: unknown
@@ -775,7 +775,7 @@ nextseq550_mid:
         warning: 1.5
         error: unknown
   301:
-      handlers:
+    handlers:
       - name: ClusterPFHandler
         warning: 32
         error: unknown
@@ -789,4 +789,3 @@ nextseq550_mid:
         allow_missing_error_rate: False
         warning: 1.5
         error: unknown
-
