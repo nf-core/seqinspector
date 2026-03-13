@@ -213,8 +213,8 @@ workflow SEQINSPECTOR {
     //
     // SUBWORKFLOW: Run kraken2 and produce krona plots
     //
-    PHYLOGENETIC_QC(ch_samplesheet.filter{('kraken2' in tools) && ('krona' in tools)})
-    ch_multiqc_files = ch_multiqc_files.mix(PHYLOGENETIC_QC.out.multiqc)
+    PHYLOGENETIC_QC(ch_samplesheet.filter{('kraken2' in tools)})
+    ch_multiqc_files = ch_multiqc_files.mix(PHYLOGENETIC_QC.out.mqc)
 
  // Collate and save software versions
     //
