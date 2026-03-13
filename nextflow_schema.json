@@ -48,18 +48,6 @@
                     "description": "MultiQC report title. Printed as page header, used for filename if not otherwise specified.",
                     "fa_icon": "fas fa-file-signature"
                 },
-                "kraken2_save_reads": {
-                    "type": "boolean",
-                    "fa_icon": "fas fa-save",
-                    "description": "Turn on saving of Kraken2-aligned reads",
-                    "help_text": "Save reads that do and do not have a taxonomic classification in your output results directory in FASTQ format.\n\n> Modifies tool parameter(s):\n> - kraken2: `--classified-out` and `--unclassified-out`"
-                },
-                "kraken2_save_readclassifications": {
-                    "type": "boolean",
-                    "fa_icon": "fas fa-save",
-                    "description": "Turn on saving of Kraken2 per-read taxonomic assignment file",
-                    "help_text": "Save a text file that contains a list of each read that had a taxonomic assignment, with information on specific taxonomic taxonomic assignment that that read recieved.\n\n> Modifies tool parameter(s):\n> - kraken2: `--output`"
-                },
                 "tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to run",
@@ -97,6 +85,31 @@
                     "description": "Whether to continue with the pipeline if linting fails for a single sample.",
                     "help_text": "If set to true, the pipeline will continue with the remaining samples if linting fails for a single sample. If set to false, the pipeline will terminate if linting fails for a single sample.",
                     "fa_icon": "fas fa-window-close "
+                }
+            }
+        },
+        "Kraken2_options": {
+            "title": "Kraken2 options",
+            "type": "object",
+            "description": "Options for Kraken2",
+            "default": "",
+            "properties": {
+                "kraken2_save_reads": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-save",
+                    "description": "Turn on saving of Kraken2-aligned reads",
+                    "help_text": "Save reads that do and do not have a taxonomic classification in your output results directory in FASTQ format.\n\n> Modifies tool parameter(s):\n> - kraken2: `--classified-out` and `--unclassified-out`"
+                },
+                "kraken2_save_readclassifications": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-save",
+                    "description": "Turn on saving of Kraken2 per-read taxonomic assignment file",
+                    "help_text": "Save a text file that contains a list of each read that had a taxonomic assignment, with information on specific taxonomic taxonomic assignment that that read recieved.\n\n> Modifies tool parameter(s):\n> - kraken2: `--output`"
+                },
+                "kraken_save_uncompressed_db": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-save",
+                    "description": "Turn on saving of uncompressed Kraken2 DB"
                 }
             }
         },
@@ -363,6 +376,9 @@
             "$ref": "#/$defs/validation_options"
         },
         {
+            "$ref": "#/$defs/kraken2_options"
+        },
+        {
             "$ref": "#/$defs/reference_genome_options"
         },
         {
@@ -371,10 +387,5 @@
         {
             "$ref": "#/$defs/generic_options"
         }
-    ],
-    "properties": {
-        "save_uncompressed_k2db": {
-            "type": "boolean"
-        }
-    }
+    ]
 }
