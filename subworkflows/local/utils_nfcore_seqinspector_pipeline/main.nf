@@ -333,6 +333,7 @@ def defineToolsList(input_bundle, input_tools, input_skip) {
         tools_list << 'rundirparser'
         tools_list << 'seqfu_stats'
         tools_list << 'toulligqc'
+        tools_list << 'multiqcsav'
     }
     if ('bam' in bundle_list) {
         tools_list << 'picard_collecthsmetrics'
@@ -354,6 +355,7 @@ def defineToolsList(input_bundle, input_tools, input_skip) {
     if ('illumina' in bundle_list) {
         tools_list << 'rundirparser'
         tools_list << 'seqfu_stats'
+        tools_list << 'multiqcsav'
     }
     if ('minimal' in bundle_list) {
         tools_list << 'fastqc'

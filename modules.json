@@ -61,6 +61,11 @@
                         "git_sha": "2c73cc8fa92cf48de3da0b643fdf357a8a290b36",
                         "installed_by": ["modules"]
                     },
+                    "multiqcsav": {
+                        "branch": "master",
+                        "git_sha": "2c73cc8fa92cf48de3da0b643fdf357a8a290b36",
+                        "installed_by": ["modules"]
+                    },
                     "picard/collecthsmetrics": {
                         "branch": "master",
                         "git_sha": "a631e12055f6c23ba2c942d3902b3ed1b9eed859",
