@@ -64,6 +64,7 @@ workflow SEQINSPECTOR {
     ch_multiqc_extra_files = channel.empty()
     ch_global_reports = channel.empty()
     ch_sav_reports = channel.empty()
+    ch_need_global = channel.of("run_global")
 
     //
     // MODULE: Run FQ_LINT to catch early errors
@@ -110,8 +111,6 @@ workflow SEQINSPECTOR {
                 //  2. Mix with the ch_multiqc_files channel downstream
                 [dir_meta, rundir]
             }
-        ch_rundir.count().view()
-        // remove this
 
         ch_rundir.ifEmpty {
             log.warn("No samples with rundir found, skipping RUNDIRPARSER")
@@ -128,6 +127,12 @@ workflow SEQINSPECTOR {
 
     if ('multiqcsav' in tools) {
         // Determine if we need global MultiQC based on conditions
+        // Branch the samplesheet channel based on rundir presence
+        ch_rundir_branch = ch_samplesheet.branch { meta, _reads ->
+            with_rundir: meta.rundir.size() > 0
+            without_rundir: true
+        }
+
         ch_need_global = ch_rundir_branch.without_rundir
             .count()
             .combine(ch_rundir.count())
@@ -318,9 +323,7 @@ workflow SEQINSPECTOR {
         ch_tags.toList().map { tag_list -> reportIndexMultiqc(tag_list) }.collectFile(name: 'multiqc_index_mqc.yaml')
     )
 
-    //
     // Run global MultiQC only when needed
-    //
     ch_global_reports = ch_multiqc_decision.run_global
     .combine( prepareGlobalInput(ch_multiqc_files, ch_multiqc_extra_files_global, multiqc_config, multiqc_logo).map { tuple -> tuple })
     .map { files -> 
@@ -329,9 +332,7 @@ workflow SEQINSPECTOR {
     }
     | MULTIQC_GLOBAL
     
-    //
     // Run SAV MultiQC only when needed
-    //
     ch_sav_reports = ch_multiqc_decision.run_sav
     .combine( prepareSavInput(ch_rundir, ch_multiqc_files, ch_multiqc_extra_files_global, multiqc_config, multiqc_logo).map { tuple -> tuple })
     .map { files -> 
