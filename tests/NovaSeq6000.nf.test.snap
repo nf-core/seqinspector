@@ -994,7 +994,6 @@
                 "Input/output options",
                 "  input                     : https://raw.githubusercontent.com/nf-core/test-datasets/seqinspector/testdata/NovaSeq6000/samplesheet.csv",
                 "  outdir                    : [PATH]/tests/[NFT_HASH]/output",
-                "  tools_bundle              : default",
                 "Reference genome options",
                 "  genome                    : R64-1-1",
                 "  fasta                     : s3://ngi-igenomes/igenomes//Saccharomyces_cerevisiae/Ensembl/R64-1-1/Sequence/WholeGenomeFasta/genome.fa",
@@ -1064,7 +1063,7 @@
                 "[NXF_HASH] Submitted process > PREPARE_GENOME:SAMTOOLS_FAIDX (genome.fa)"
             ]
         ],
-        "timestamp": "2026-03-13T15:53:03.277536715",
+        "timestamp": "2026-03-16T09:53:50.996018165",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -2070,7 +2069,7 @@
         "timestamp": "2026-03-13T15:54:08.436701914",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nextflow": "25.10.2"
         }
     },
     "NovaSeq6000 data test relative sample size": {
@@ -3073,7 +3072,7 @@
         "timestamp": "2026-03-13T15:55:15.892319993",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nextflow": "25.10.2"
         }
     },
     "NovaSeq6000 data test - No rundirs": {
@@ -4037,7 +4036,7 @@
         "timestamp": "2026-03-13T15:57:07.115797171",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nextflow": "25.10.2"
         }
     },
     "NovaSeq6000 data test sample size exceeds available reads": {
@@ -5046,7 +5045,7 @@
         "timestamp": "2026-03-13T15:56:14.759821206",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nextflow": "25.10.2"
         }
     },
     "NovaSeq6000 data test - tag collision": {
@@ -5837,7 +5836,7 @@
         "timestamp": "2026-03-13T15:57:49.731500962",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nextflow": "25.10.2"
         }
     }
 }

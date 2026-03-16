@@ -168,7 +168,8 @@ It is possible to also chose bundles of pre-specified tools using the `tools_bun
 
 Currently, the following bundles are available:
 
-:::info{title="default"}{collapse}
+<details>
+<summary>default</summary>
 
 Requirements:
 
@@ -183,9 +184,10 @@ Tools:
 - rundirparser
 - seqfu_stats
 
-:::
+</details>
 
-:::info{title="all"}{collapse}
+<details>
+<summary>all</summary>
 
 Requirements:
 
@@ -194,6 +196,7 @@ Requirements:
 
 Tools:
 
+- checkQC
 - fastqc
 - fastqscreen
 - picard_collecthsmetrics
@@ -202,9 +205,10 @@ Tools:
 - seqfu_stats
 - toulligqc
 
-:::
+</details>
 
-:::info{title="minimal"}{collapse}
+<details>
+<summary>minimal</summary>
 
 Requirements:
 
@@ -216,10 +220,10 @@ Tools:
 - fastqscreen
 - picard_collectmultiplemetrics
 - seqfu_stats
+</details>
 
-:::
-
-:::info{title="bam"}{collapse}
+<details>
+<summary>bam</summary>
 
 Requirements:
 
@@ -230,18 +234,20 @@ Tools:
 - picard_collecthsmetrics
 - picard_collectmultiplemetrics
 
-:::
+</details>
 
-:::info{title="fastq"}{collapse}
+<details>
+<summary>fastq</summary>
 
 Tools:
 
 - fastqc
 - fastqscreen
 
-:::
+</details>
 
-:::info{title="illumina"}{collapse}
+<details>
+<summary>illumina</summary>
 
 Requirements:
 
@@ -249,12 +255,13 @@ Requirements:
 
 Tools:
 
+- checkQC
 - rundirparser
 - seqfu_stats
+</details>
 
-:::
-
-:::info{title="ont"}{collapse}
+<details>
+<summary>ont</summary>
 
 Tools:
 
@@ -263,7 +270,7 @@ Tools:
 - seqfu_stats
 - toulligqc
 
-:::
+</details>
 
 ### Available functionality and tools
 

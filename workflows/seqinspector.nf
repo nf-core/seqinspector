@@ -7,6 +7,7 @@
 
 // modules
 include { BWAMEM2_MEM                } from '../modules/nf-core/bwamem2/mem'
+include { CHECKQC                    } from '../modules/nf-core/checkqc'
 include { FASTP                      } from '../modules/nf-core/fastp'
 include { FASTQC                     } from '../modules/nf-core/fastqc'
 include { FASTQE                     } from '../modules/nf-core/fastqe'
@@ -43,6 +44,7 @@ workflow SEQINSPECTOR {
     ch_samplesheet // channel: samplesheet read in from --input
     bait_intervals
     bwamem2_index
+    checkqc_config
     fasta_reference
     fastq_screen_references
     multiqc_config
@@ -113,6 +115,52 @@ workflow SEQINSPECTOR {
         RUNDIRPARSER(ch_rundir)
 
         ch_multiqc_files = ch_multiqc_files.mix(RUNDIRPARSER.out.multiqc)
+    }
+
+    //
+    // MODULE: CheckQC
+    //
+    if ('checkqc' in tools) {
+
+        // Branch the samplesheet channel based on rundir presence
+        ch_rundir_branch = ch_samplesheet.branch { meta, _reads ->
+            with_rundir: meta.rundir.size() > 0
+            without_rundir: true
+        }
+
+        // Log warnings for samples without rundir
+        ch_rundir_branch.without_rundir.subscribe { meta, _reads ->
+            log.warn("Sample '${meta.id}' does not have a rundir specified")
+        }
+
+        // From samplesheet channel serving (sampleMetaObj, sampleReadsPath) tuples:
+        // --> Create new rundir channel serving (rundirMetaObj, rundirPath) tuples
+        ch_rundir = ch_rundir_branch.with_rundir
+            .map { meta, _reads -> [meta.rundir, meta] }
+            .groupTuple()
+            .map { rundir, metas ->
+                // Collect all unique tags into a list
+                def all_tags = metas.collect { meta -> meta.tags }.flatten().unique()
+                // Create a new meta object whose attributes are...
+                //  1. tags: The list of merged tags, used for grouping MultiQC reports
+                //  2. dirname: The simple name of the rundir, used for setting unique output names in publishDir
+                def dir_meta = [tags: all_tags, dirname: rundir.simpleName]
+                // Return the new structure, to...
+                //  1. Feed into rundir specific processes
+                //  2. Mix with the ch_multiqc_files channel downstream
+                [dir_meta, rundir]
+            }
+
+        ch_rundir.ifEmpty { log.warn("No samples with rundir found, skipping CHECKQC") }
+
+        CHECKQC(
+            ch_rundir,
+            checkqc_config
+                ? file(checkqc_config, checkIfExists: true)
+                : [],
+        )
+
+        ch_multiqc_files = ch_multiqc_files.mix(CHECKQC.out.report)
     }
 
 
