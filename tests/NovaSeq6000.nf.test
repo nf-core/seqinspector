@@ -43,7 +43,7 @@ nextflow_pipeline {
                 tools_bundle: null,
                 tools: 'fastqc',
             ]
-        ]
+        ],
     ]
 
     // Generate tests for each scenario

@@ -324,16 +324,17 @@ def defineToolsList(input_bundle, input_tools, input_skip) {
     // please update the docs/usage.md section about tools selection when adding new tools here!
 
     if ('all' in bundle_list) {
+        tools_list << 'checkqc'
         tools_list << 'fastqc'
         tools_list << 'fastqe'
         tools_list << 'fastqscreen'
         tools_list << 'fq_lint'
+        tools_list << 'multiqcsav'
         tools_list << 'picard_collecthsmetrics'
         tools_list << 'picard_collectmultiplemetrics'
         tools_list << 'rundirparser'
         tools_list << 'seqfu_stats'
         tools_list << 'toulligqc'
-        tools_list << 'multiqcsav'
     }
     if ('bam' in bundle_list) {
         tools_list << 'picard_collecthsmetrics'
@@ -353,9 +354,10 @@ def defineToolsList(input_bundle, input_tools, input_skip) {
         tools_list << 'seqfu_stats'
     }
     if ('illumina' in bundle_list) {
+        tools_list << 'checkqc'
+        tools_list << 'multiqcsav'
         tools_list << 'rundirparser'
         tools_list << 'seqfu_stats'
-        tools_list << 'multiqcsav'
     }
     if ('minimal' in bundle_list) {
         tools_list << 'fastqc'

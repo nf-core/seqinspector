@@ -7,6 +7,7 @@
 
 // modules
 include { BWAMEM2_MEM                } from '../modules/nf-core/bwamem2/mem'
+include { CHECKQC                    } from '../modules/nf-core/checkqc'
 include { FASTP                      } from '../modules/nf-core/fastp'
 include { FASTQC                     } from '../modules/nf-core/fastqc'
 include { FASTQE                     } from '../modules/nf-core/fastqe'
@@ -14,7 +15,7 @@ include { FASTQSCREEN_FASTQSCREEN    } from '../modules/nf-core/fastqscreen/fast
 include { FQ_LINT                    } from '../modules/nf-core/fq/lint'
 include { MULTIQC as MULTIQC_GLOBAL  } from '../modules/nf-core/multiqc'
 include { MULTIQC as MULTIQC_PER_TAG } from '../modules/nf-core/multiqc'
-include { MULTIQCSAV  } from '../modules/nf-core/multiqcsav'
+include { MULTIQCSAV                 } from '../modules/nf-core/multiqcsav'
 include { RUNDIRPARSER               } from '../modules/local/rundirparser'
 include { SAMTOOLS_INDEX             } from '../modules/nf-core/samtools/index'
 include { SEQFU_STATS                } from '../modules/nf-core/seqfu/stats'
@@ -44,6 +45,7 @@ workflow SEQINSPECTOR {
     ch_samplesheet // channel: samplesheet read in from --input
     bait_intervals
     bwamem2_index
+    checkqc_config
     fasta_reference
     fastq_screen_references
     multiqc_config
@@ -127,12 +129,6 @@ workflow SEQINSPECTOR {
 
     if ('multiqcsav' in tools) {
         // Determine if we need global MultiQC based on conditions
-        // Branch the samplesheet channel based on rundir presence
-        ch_rundir_branch = ch_samplesheet.branch { meta, _reads ->
-            with_rundir: meta.rundir.size() > 0
-            without_rundir: true
-        }
-
         ch_need_global = ch_rundir_branch.without_rundir
             .count()
             .combine(ch_rundir.count())
@@ -151,14 +147,60 @@ workflow SEQINSPECTOR {
                 }
                 return need_global ? "run_global" : "run_sav"
             }
+
+        ch_need_global
+            .branch { need_global ->
+                run_global: need_global == "run_global"
+                run_sav: need_global == "run_sav"
+            }
+            .set { ch_multiqc_decision }
     }
 
-    ch_need_global
-        .branch { need_global ->
-            run_global: need_global == "run_global"
-            run_sav: need_global == "run_sav"
+    // MODULE: CheckQC
+    //
+    if ('checkqc' in tools) {
+
+        // Branch the samplesheet channel based on rundir presence
+        ch_rundir_branch = ch_samplesheet.branch { meta, _reads ->
+            with_rundir: meta.rundir.size() > 0
+            without_rundir: true
         }
-        .set { ch_multiqc_decision }
+
+        // Log warnings for samples without rundir
+        ch_rundir_branch.without_rundir.subscribe { meta, _reads ->
+            log.warn("Sample '${meta.id}' does not have a rundir specified")
+        }
+
+        // From samplesheet channel serving (sampleMetaObj, sampleReadsPath) tuples:
+        // --> Create new rundir channel serving (rundirMetaObj, rundirPath) tuples
+        ch_rundir = ch_rundir_branch.with_rundir
+            .map { meta, _reads -> [meta.rundir, meta] }
+            .groupTuple()
+            .map { rundir, metas ->
+                // Collect all unique tags into a list
+                def all_tags = metas.collect { meta -> meta.tags }.flatten().unique()
+                // Create a new meta object whose attributes are...
+                //  1. tags: The list of merged tags, used for grouping MultiQC reports
+                //  2. dirname: The simple name of the rundir, used for setting unique output names in publishDir
+                def dir_meta = [tags: all_tags, dirname: rundir.simpleName]
+                // Return the new structure, to...
+                //  1. Feed into rundir specific processes
+                //  2. Mix with the ch_multiqc_files channel downstream
+                [dir_meta, rundir]
+            }
+
+        ch_rundir.ifEmpty { log.warn("No samples with rundir found, skipping CHECKQC") }
+
+        CHECKQC(
+            ch_rundir,
+            checkqc_config
+                ? file(checkqc_config, checkIfExists: true)
+                : [],
+        )
+
+        ch_multiqc_files = ch_multiqc_files.mix(CHECKQC.out.report)
+    }
+
 
     //
     // MODULE: Run Seqtk sample
@@ -324,22 +366,18 @@ workflow SEQINSPECTOR {
     )
 
     // Run global MultiQC only when needed
-    ch_global_reports = ch_multiqc_decision.run_global
-    .combine( prepareGlobalInput(ch_multiqc_files, ch_multiqc_extra_files_global, multiqc_config, multiqc_logo).map { tuple -> tuple })
-    .map { files -> 
-        def (_, file1, file2, file3, file4, file5, file6) = files
+    ch_global_reports = ch_multiqc_decision.run_global.combine(prepareGlobalInput(ch_multiqc_files, ch_multiqc_extra_files_global, multiqc_config, multiqc_logo).map { tuple -> tuple }).map { files ->
+        def (_file0, file1, file2, file3, file4, file5, file6) = files
         return [file1, file2, file3, file4, file5, file6]
     }
-    | MULTIQC_GLOBAL
-    
+        | MULTIQC_GLOBAL
+
     // Run SAV MultiQC only when needed
-    ch_sav_reports = ch_multiqc_decision.run_sav
-    .combine( prepareSavInput(ch_rundir, ch_multiqc_files, ch_multiqc_extra_files_global, multiqc_config, multiqc_logo).map { tuple -> tuple })
-    .map { files -> 
-        def (_, file1, file2, file3, file4, file5, file6, file7, file8) = files
+    ch_sav_reports = ch_multiqc_decision.run_sav.combine(prepareSavInput(ch_rundir, ch_multiqc_files, ch_multiqc_extra_files_global, multiqc_config, multiqc_logo).map { tuple -> tuple }).map { files ->
+        def (_file0, file1, file2, file3, file4, file5, file6, file7, file8) = files
         return [file1, file2, file3, file4, file5, file6, file7, file8]
     }
-    | MULTIQCSAV
+        | MULTIQCSAV
 
     ch_multiqc_extra_files_tag = ch_multiqc_extra_files.mix(
         ch_tags.toList().map { tag_list -> reportIndexMultiqc(tag_list, false) }.collectFile(name: 'multiqc_index_mqc.yaml')
@@ -399,7 +437,9 @@ workflow SEQINSPECTOR {
 // Function for global input preparation
 def prepareGlobalInput(multiqc_files, extra_files, config, logo) {
     return multiqc_files
-        .map { _meta, files -> [files] }.flatten().collect()
+        .map { _meta, files -> [files] }
+        .flatten()
+        .collect()
         .combine(extra_files.collect())
         .map { files ->
             [
@@ -407,35 +447,43 @@ def prepareGlobalInput(multiqc_files, extra_files, config, logo) {
                 files,
                 config ?: file("${projectDir}/assets/multiqc_config.yml", checkIfExists: true),
                 logo ?: [],
-                [], []
+                [],
+                [],
             ]
         }
 }
 
-// Function for SAV input preparation  
+// Function for SAV input preparation
 def prepareSavInput(rundir_ch, multiqc_files, extra_files, config, logo) {
-    return rundir_ch.map { metas, rundir ->
-        def xml = []
-        def interop = []
-        
-        rundir.eachFileRecurse { file ->
-            if (file.fileName.toString() in ['RunInfo.xml','RunParameters.xml']) {
-                xml << file
-            } else if (file.parent.name == 'InterOp' && file.fileName.toString().endsWith(".bin")) {
-                interop << file
+    return rundir_ch
+        .map { metas, rundir ->
+            def xml = []
+            def interop = []
+
+            rundir.eachFileRecurse { file ->
+                if (file.fileName.toString() in ['RunInfo.xml', 'RunParameters.xml']) {
+                    xml << file
+                }
+                else if (file.parent.name == 'InterOp' && file.fileName.toString().endsWith(".bin")) {
+                    interop << file
+                }
             }
+
+            return [metas, xml, interop]
         }
-        
-        return [metas, xml, interop]
-    }.combine(
-        multiqc_files.map { _meta, files -> files }.flatten().collect()
-            .combine(extra_files.collect())
-            .map { files -> [files.flatten()] }
-    ).map { meta, xml, interop, extrafiles ->
-        [
-            meta, xml, interop, extrafiles,
-            config ?: file("${projectDir}/assets/multiqc_config.yml", checkIfExists: true),
-            logo ?: [], [], []
-        ]
-    }
+        .combine(
+            multiqc_files.map { _meta, files -> files }.flatten().collect().combine(extra_files.collect()).map { files -> [files.flatten()] }
+        )
+        .map { meta, xml, interop, extrafiles ->
+            [
+                meta,
+                xml,
+                interop,
+                extrafiles,
+                config ?: file("${projectDir}/assets/multiqc_config.yml", checkIfExists: true),
+                logo ?: [],
+                [],
+                [],
+            ]
+        }
 }

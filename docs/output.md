@@ -13,6 +13,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 - [Seqtk](#seqtk) - Subsample a specific number of reads per sample
 - [FastQC](#fastqc) - Raw read QC
 - [FASTQE](#fastqe) - Raw read QC
+- [CheckQC](#checkqc) - QC of an Illumina run
 - [Kraken2](#kraken2) - Phylogenetic assignment of reads using k-mers
 - [Krona](#krona) - Interactive visualization of Kraken2 results
 - [SeqFu Stats](#seqfu-stats) - Statistics for FASTA or FASTQ files
@@ -49,6 +50,16 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 </details>
 
 [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) gives general quality metrics about your sequenced reads. It provides information about the quality score distribution across your reads, per base sequence content (%A/T/G/C), adapter contamination and overrepresented sequences. For further reading and documentation see the [FastQC help pages](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/).
+
+### CheckQC
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `checkqc/`
+  - `checkqc_report.json`: Reports sequencing metrics that are not fulfilled. Note that the CheckQC module in MultiQC currently does not support BCL Convert data, so if the report if based on data from that demultiplexer it will not be visualized in the MutliQC report. Results can be found in the output directory.
+
+</details>
 
 ### Kraken2
 
