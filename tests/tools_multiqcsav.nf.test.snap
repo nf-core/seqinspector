@@ -1,0 +1,22 @@
+{
+    "NovaSeq6000 data test - multiqcsav": {
+        "content": [
+            0,
+            {
+                
+            },
+            [
+                "pipeline_info",
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"
+            ],
+            "No stable content",
+            "No BAM files",
+            "No warnings"
+        ],
+        "timestamp": "2026-03-16T13:22:01.78442336",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
+    }
+}
