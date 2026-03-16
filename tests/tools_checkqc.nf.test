@@ -13,6 +13,14 @@ nextflow_pipeline {
                 tools: 'checkqc',
                 tools_bundle: null
             ]
+        ],
+        [
+            name: "NovaSeq6000 data test - checkqc with config",
+            params: [
+                checkqc_config: "$projectDir/assets/checkqc_config.yml",
+                tools: 'checkqc',
+                tools_bundle: null
+            ]
         ]
     ]
 

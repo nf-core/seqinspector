@@ -86,6 +86,12 @@
                     "description": "Whether to continue with the pipeline if linting fails for a single sample.",
                     "help_text": "If set to true, the pipeline will continue with the remaining samples if linting fails for a single sample. If set to false, the pipeline will terminate if linting fails for a single sample.",
                     "fa_icon": "fas fa-window-close "
+                },
+                "checkqc_config": {
+                    "type": "string",
+                    "format": "file-path",
+                    "description": "Path to custom CheckQC config",
+                    "fa_icon": "fas fa-cog"
                 }
             }
         },
@@ -388,11 +394,5 @@
         {
             "$ref": "#/$defs/generic_options"
         }
-    ],
-    "properties": {
-        "checkqc_config": {
-            "type": "string",
-            "description": "Path to custom CheckQC config"
-        }
-    }
+    ]
 }
