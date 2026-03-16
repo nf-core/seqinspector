@@ -249,7 +249,7 @@ workflow SEQINSPECTOR {
 
     SAMTOOLS_INDEX(BWAMEM2_MEM.out.bam)
 
-    ch_bam_bai = BWAMEM2_MEM.out.bam.join(SAMTOOLS_INDEX.out.bai, failOnDuplicate: true, failOnMismatch: true)
+    ch_bam_bai = BWAMEM2_MEM.out.bam.join(SAMTOOLS_INDEX.out.index, failOnDuplicate: true, failOnMismatch: true)
 
     QC_BAM(
         ch_bam_bai,
