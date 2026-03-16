@@ -111,12 +111,48 @@ class UTILS {
                 tag scenario.tag
             }
 
+            if (scenario.rundir_folder) {
+                setup {
+                    println ""
+                    println ""
+                    println "Downloading rundir"
+                    def rundir_url = "https://github.com/nf-core/test-datasets/raw/seqinspector/testdata/NovaSeq6000/200624_A00834_0183_BHMTFYDRXX.tar.gz"
+                    def download_rundir_command = ['bash', '-c', "curl -L --retry 5 ${rundir_url} | tar xzf - -C ${launchDir}"]
+                    def download_rundir_process = download_rundir_command.execute()
+                    download_rundir_process.waitFor()
+
+                    if (download_rundir_process.exitValue() != 0) {
+                        throw new RuntimeException("Error - failed to download rundir: ${download_rundir_process.err.text}")
+                    } else {
+                        println "Rundir downloaded"
+                    }
+
+                    println ""
+                    println "Downloading samplesheet"
+                    def samplesheet_url = "https://raw.githubusercontent.com/nf-core/test-datasets/seqinspector/testdata/NovaSeq6000/samplesheet.csv"
+                    def download_samplesheet_command = ['bash', '-c', "curl -L --retry 5 ${samplesheet_url} > ${launchDir}/samplesheet.csv"]
+                    def download_samplesheet_process = download_samplesheet_command.execute()
+                    download_samplesheet_process.waitFor()
+
+                    if (download_samplesheet_process.exitValue() != 0) {
+                        throw new RuntimeException("Error - failed to download samplesheet: ${download_samplesheet_process.err.text}")
+                    } else {
+                        println "Samplesheet downloaded"
+                    }
+
+                    def sed_command = ['bash', '-c', "sed -i 's|https://github.com/nf-core/test-datasets/raw/seqinspector/testdata/NovaSeq6000/200624_A00834_0183_BHMTFYDRXX.tar.gz|$launchDir/200624_A00834_0183_BHMTFYDRXX|' ${launchDir}/samplesheet.csv"]
+                    def sed_process = sed_command.execute()
+                    sed_process.waitFor()
+                }
+            }
+
             when {
                 params {
                     // Mandatory, as we always need an outdir
                     outdir = "${outputDir}"
                     // Apply scenario-specific params
                     scenario.params.each { key, value ->
+                        if (scenario.rundir_folder) delegate.input = "${launchDir}/samplesheet.csv"
                         delegate."$key" = value
                     }
                 }

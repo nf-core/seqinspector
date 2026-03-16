@@ -114,9 +114,7 @@ workflow SEQINSPECTOR {
                 [dir_meta, rundir]
             }
 
-        ch_rundir.ifEmpty {
-            log.warn("No samples with rundir found, skipping RUNDIRPARSER")
-        }
+        ch_rundir.ifEmpty { log.warn("No samples with rundir found, skipping RUNDIRPARSER") }
 
         RUNDIRPARSER(ch_rundir)
 
