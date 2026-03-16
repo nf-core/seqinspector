@@ -7,6 +7,7 @@
 
 // modules
 include { BWAMEM2_MEM                } from '../modules/nf-core/bwamem2/mem'
+include { CHECKQC                    } from '../modules/nf-core/checkqc'
 include { FASTP                      } from '../modules/nf-core/fastp'
 include { FASTQC                     } from '../modules/nf-core/fastqc'
 include { FASTQE                     } from '../modules/nf-core/fastqe'
@@ -18,7 +19,6 @@ include { RUNDIRPARSER               } from '../modules/local/rundirparser'
 include { SAMTOOLS_INDEX             } from '../modules/nf-core/samtools/index'
 include { SEQFU_STATS                } from '../modules/nf-core/seqfu/stats'
 include { SEQTK_SAMPLE               } from '../modules/nf-core/seqtk/sample'
-include { CHECKQC                    } from '../modules/nf-core/checkqc/main'
 include { TOULLIGQC                  } from '../modules/nf-core/toulligqc'
 
 // subworkflow
@@ -153,10 +153,11 @@ workflow SEQINSPECTOR {
 
         ch_rundir.ifEmpty { log.warn("No samples with rundir found, skipping CHECKQC") }
 
-        CHECKQC(ch_rundir,
-                checkqc_config
-                    ? file(checkqc_config, checkIfExists: true)
-                    : []
+        CHECKQC(
+            ch_rundir,
+            checkqc_config
+                ? file(checkqc_config, checkIfExists: true)
+                : [],
         )
 
         ch_multiqc_files = ch_multiqc_files.mix(CHECKQC.out.report)

@@ -8,13 +8,13 @@ nextflow_pipeline {
 
     def test_scenario = [
         [
-            name: "NovaSeq6000 data test",
+            name: "NovaSeq6000 data test - checkqc",
             params: [
                 tools: 'checkqc',
-                ],
-            snapshot: 'stderr,stdout'
-        ],
+                tools_bundle: null
+            ]
         ]
+    ]
 
     // Generate tests for each scenario
     test_scenario.each { scenario ->
