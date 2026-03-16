@@ -38,7 +38,8 @@
                     "fastqscreen/fastqscreen": {
                         "branch": "master",
                         "git_sha": "ab2e7b785ee4fa6d108472862edbf983cea7db49",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/fastqscreen/fastqscreen/fastqscreen-fastqscreen.diff"
                     },
                     "fq/lint": {
                         "branch": "master",
