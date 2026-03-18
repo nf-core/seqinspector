@@ -111,12 +111,12 @@ class UTILS {
                 tag scenario.tag
             }
 
-            if (scenario.rundir_folder) {
+            if (scenario.rundir_folder && scenario.rundir_samplesheet) {
                 setup {
                     println ""
                     println ""
-                    println "Downloading rundir"
-                    def rundir_url = "https://github.com/nf-core/test-datasets/raw/seqinspector/testdata/NovaSeq6000/200624_A00834_0183_BHMTFYDRXX.tar.gz"
+                    println "Downloading rundir: " + scenario.rundir_folder
+                    def rundir_url = scenario.rundir_folder
                     def download_rundir_command = ['bash', '-c', "curl -L --retry 5 ${rundir_url} | tar xzf - -C ${launchDir}"]
                     def download_rundir_process = download_rundir_command.execute()
                     download_rundir_process.waitFor()
@@ -124,12 +124,12 @@ class UTILS {
                     if (download_rundir_process.exitValue() != 0) {
                         throw new RuntimeException("Error - failed to download rundir: ${download_rundir_process.err.text}")
                     } else {
-                        println "Rundir downloaded"
+                        println "Rundir downloaded and extracted"
                     }
 
                     println ""
-                    println "Downloading samplesheet"
-                    def samplesheet_url = "https://raw.githubusercontent.com/nf-core/test-datasets/seqinspector/testdata/NovaSeq6000/samplesheet.csv"
+                    println "Downloading samplesheet: " + scenario.rundir_samplesheet
+                    def samplesheet_url = scenario.rundir_samplesheet
                     def download_samplesheet_command = ['bash', '-c', "curl -L --retry 5 ${samplesheet_url} > ${launchDir}/samplesheet.csv"]
                     def download_samplesheet_process = download_samplesheet_command.execute()
                     download_samplesheet_process.waitFor()
@@ -137,10 +137,10 @@ class UTILS {
                     if (download_samplesheet_process.exitValue() != 0) {
                         throw new RuntimeException("Error - failed to download samplesheet: ${download_samplesheet_process.err.text}")
                     } else {
-                        println "Samplesheet downloaded"
+                        println "Samplesheet downloaded and modified"
                     }
 
-                    def sed_command = ['bash', '-c', "sed -i 's|https://github.com/nf-core/test-datasets/raw/seqinspector/testdata/NovaSeq6000/200624_A00834_0183_BHMTFYDRXX.tar.gz|$launchDir/200624_A00834_0183_BHMTFYDRXX|' ${launchDir}/samplesheet.csv"]
+                    def sed_command = ['bash', '-c', 'sed -i \"s|https://.*/\\([^/]*\\)\\.tar\\.gz|$launchDir/\\1|\" ${launchDir}/samplesheet.csv']
                     def sed_process = sed_command.execute()
                     sed_process.waitFor()
                 }

@@ -107,11 +107,10 @@
             "No BAM files",
             [
                 "WARN: BWAMEM2, SAMTOOLS and PICARD processes, will be skipped",
-                "WARN: No fasta was provided, but picard was requested",
-                "WARN: rundir is a tar.gz"
+                "WARN: No fasta was provided, but picard was requested"
             ]
         ],
-        "timestamp": "2026-03-16T17:29:52.50038848",
+        "timestamp": "2026-03-18T14:19:46.732314811",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

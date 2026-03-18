@@ -96,11 +96,9 @@
                 "hg001_01_seqfu_mqc.txt:md5,42e3506b02ceb72a6f05cb174505e722"
             ],
             "No BAM files",
-            [
-                "WARN: rundir is a tar.gz"
-            ]
+            "No warnings"
         ],
-        "timestamp": "2026-03-16T17:29:13.514804045",
+        "timestamp": "2026-03-18T14:18:56.547537751",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

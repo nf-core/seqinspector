@@ -9,9 +9,10 @@ nextflow_pipeline {
         [
             name: "MiSeq data test (single end reads)",
             params: [
-                input: pipelines_testdata_base_path + 'seqinspector/testdata/MiSeq/samplesheet.csv',
                 tools_bundle: 'minimal',
-            ]
+            ],
+            rundir_folder: pipelines_testdata_base_path + 'seqinspector/testdata/MiSeq/220422_M11111_0222_000000000-K9H97.tar.gz',
+            rundir_samplesheet: pipelines_testdata_base_path + 'seqinspector/testdata/MiSeq/samplesheet.csv'
         ],
         [
             name: "Miseq data test (no fastqc)",

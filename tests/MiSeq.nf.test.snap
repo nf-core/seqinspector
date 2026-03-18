@@ -11,11 +11,9 @@
             ],
             "No stable content",
             "No BAM files",
-            [
-                "WARN: rundir is a tar.gz"
-            ]
+            "No warnings"
         ],
-        "timestamp": "2026-03-16T17:19:39.269660756",
+        "timestamp": "2026-03-18T14:04:18.160126582",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -179,11 +177,9 @@
             [
                 "SAMPLE_SINGLE_END_01.bam:md5,9acd4428f95f70c1393671680ab9270f"
             ],
-            [
-                "WARN: rundir is a tar.gz"
-            ]
+            "No warnings"
         ],
-        "timestamp": "2026-03-16T17:18:37.018240273",
+        "timestamp": "2026-03-18T14:02:57.870790037",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -396,11 +392,9 @@
                 "SAMPLE_PAIRED_END_1_01.bam:md5,ac811b20d56132f5e039b3e8fd217405",
                 "SAMPLE_PAIRED_END_2_02.bam:md5,57892fc4314e66e8e20de4f5d82f9b5d"
             ],
-            [
-                "WARN: rundir is a tar.gz"
-            ]
+            "No warnings"
         ],
-        "timestamp": "2026-03-16T17:20:39.078426794",
+        "timestamp": "2026-03-18T14:11:15.284206139",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -536,11 +530,9 @@
             [
                 "SAMPLE_SINGLE_END_01.bam:md5,9acd4428f95f70c1393671680ab9270f"
             ],
-            [
-                "WARN: rundir is a tar.gz"
-            ]
+            "No warnings"
         ],
-        "timestamp": "2026-03-16T17:19:24.636766751",
+        "timestamp": "2026-03-18T14:03:58.058224812",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

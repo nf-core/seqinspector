@@ -1818,11 +1818,10 @@
                 "WARN: On a MacOS system these tags will be considered as one",
                 "WARN: Tag name collision: [group1, Group1]",
                 "WARN: Tag name collision: [lane1, Lane1, LANE1]",
-                "WARN: Tag name collision: [test, Test, TEST]",
-                "WARN: rundir is a tar.gz"
+                "WARN: Tag name collision: [test, Test, TEST]"
             ]
         ],
-        "timestamp": "2026-03-16T17:28:30.805519815",
+        "timestamp": "2026-03-18T14:18:10.37991292",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

@@ -365,16 +365,18 @@ workflow SEQINSPECTOR {
     ch_multiqc_files = ch_multiqc_files.map { _meta, files -> [files] }.collect().combine(ch_multiqc_extra_files_global.collect()).map { files -> [[id: 'seqinspector'], files] }
 
     MULTIQC_GLOBAL(
-        ch_rundir.map { meta, rundir ->
+        ch_rundir.map { _meta, rundir ->
             def xml = []
             def interop = []
 
-            if (rundir.toString().endsWith('tar.gz')) {
-                log.warn('rundir is a tar.gz')
-            }
-            else {
-                interop = files(file(rundir).resolve("InterOp/*.bin"), checkIfExists: true)
-                xml = files(file(rundir).resolve("*.xml"), checkIfExists: true)
+            if (('chekqc' in tools) || ('multiqcsav' in tools) || ('rundirparser' in tools)) {
+                if (rundir.toString().endsWith('tar.gz')) {
+                    log.warn('rundir is a tar.gz')
+                }
+                else if ('multiqcsav' in tools) {
+                    interop = files(file(rundir).resolve("InterOp/*.bin"), checkIfExists: true)
+                    xml = files(file(rundir).resolve("*.xml"), checkIfExists: true)
+                }
             }
             return [[id: 'seqinspector'], xml, interop]
         }.join(ch_multiqc_files, by: 0).map { meta, xml, interop, multiqc_files ->
