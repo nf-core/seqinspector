@@ -27,7 +27,7 @@
                     },
                     "fastqc": {
                         "branch": "master",
-                        "git_sha": "6fbc98fa4f4f5976a311f8cf46332dcf38eb1bfc",
+                        "git_sha": "f89e009050fa3ea88b81f08a4fc6fe2afbae778b",
                         "installed_by": ["modules"]
                     },
                     "fastqe": {
@@ -63,12 +63,12 @@
                     },
                     "multiqc": {
                         "branch": "master",
-                        "git_sha": "2c73cc8fa92cf48de3da0b643fdf357a8a290b36",
+                        "git_sha": "cb9f4bec379866ca560f7f79d9a9a06bea8c9b51",
                         "installed_by": ["modules"]
                     },
                     "multiqcsav": {
                         "branch": "master",
-                        "git_sha": "2c73cc8fa92cf48de3da0b643fdf357a8a290b36",
+                        "git_sha": "cb9f4bec379866ca560f7f79d9a9a06bea8c9b51",
                         "installed_by": ["modules"]
                     },
                     "picard/collecthsmetrics": {
