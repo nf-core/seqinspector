@@ -140,9 +140,35 @@ class UTILS {
                         println "Samplesheet downloaded and modified"
                     }
 
-                    def sed_command = ['bash', '-c', 'sed -i \"s|https://.*/\\([^/]*\\)\\.tar\\.gz|$launchDir/\\1|\" ${launchDir}/samplesheet.csv']
-                    def sed_process = sed_command.execute()
-                    sed_process.waitFor()
+                    println "Modifying rundir column in the CSV file"
+
+                    // Dynamically find the rundir column index
+                    def header_command = ['bash', '-c', "head -n 1 ${launchDir}/samplesheet.csv"]
+                    def header_process = header_command.execute()
+                    header_process.waitFor()
+
+                    if (header_process.exitValue() != 0) {
+                        println "Error reading CSV header: ${header_process.err.text}"
+                    } else {
+                        def header = header_process.text.trim().split(',').toList() // Convert array to list
+                        def rundir_index = header.indexOf('rundir') + 1 // awk columns are 1-based
+
+                        if (rundir_index > 0) {
+                            println "Found rundir column at index: ${rundir_index}"
+
+                            def awk_command = ['bash', '-c', "awk -F, -v OFS=, -v col=${rundir_index} '{if (NR == 1) {print \$0} else {sub(\".*/\", \"\", \$col); sub(\"\\\\.tar\\\\.gz\", \"\", \$col); print \$0}}' ${launchDir}/samplesheet.csv > ${launchDir}/samplesheet_updated.csv"]
+                            def awk_process = awk_command.execute()
+                            awk_process.waitFor()
+
+                            if (awk_process.exitValue() != 0) {
+                                println "Error modifying rundir column: ${awk_process.err.text}"
+                            } else {
+                                println "CSV file modified successfully. Updated file: ${launchDir}/samplesheet_updated.csv"
+                            }
+                        } else {
+                            println "Error: rundir column not found in the CSV header."
+                        }
+                    }
                 }
             }
 
@@ -152,7 +178,7 @@ class UTILS {
                     outdir = "${outputDir}"
                     // Apply scenario-specific params
                     scenario.params.each { key, value ->
-                        if (scenario.rundir_folder) delegate.input = "${launchDir}/samplesheet.csv"
+                        if (scenario.rundir_folder && scenario.rundir_samplesheet) delegate.input = "${launchDir}/samplesheet_updated.csv"
                         delegate."$key" = value
                     }
                 }

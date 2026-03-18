@@ -40,8 +40,17 @@
                 "multiqc/global_report/multiqc_data/multiqc_data.json",
                 "multiqc/global_report/multiqc_data/multiqc_fastqc.txt",
                 "multiqc/global_report/multiqc_data/multiqc_general_stats.txt",
+                "multiqc/global_report/multiqc_data/multiqc_sav.txt",
                 "multiqc/global_report/multiqc_data/multiqc_software_versions.txt",
                 "multiqc/global_report/multiqc_data/multiqc_sources.txt",
+                "multiqc/global_report/multiqc_data/sav-intensity-vs-cycle-plot.txt",
+                "multiqc/global_report/multiqc_data/sav-lane-metrics-summary-table.txt",
+                "multiqc/global_report/multiqc_data/sav-pf-vs-occ-plot.txt",
+                "multiqc/global_report/multiqc_data/sav-qscore-heatmap-plot.txt",
+                "multiqc/global_report/multiqc_data/sav-qscore-histogram-plot.txt",
+                "multiqc/global_report/multiqc_data/sav-read-metrics-summary-table.txt",
+                "multiqc/global_report/multiqc_data/sav-summary-clusters-reads-lane-plot_Clusters.txt",
+                "multiqc/global_report/multiqc_data/sav-summary-clusters-reads-lane-plot_Reads.txt",
                 "multiqc/global_report/multiqc_plots",
                 "multiqc/global_report/multiqc_plots/pdf",
                 "multiqc/global_report/multiqc_plots/png",
@@ -104,17 +113,24 @@
                 "fastqc_sequence_length_distribution_plot.txt:md5,9d4fd245e8e1d5baa473a8bdffcd3e38",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
                 "multiqc_fastqc.txt:md5,23b698f1e957a26f49a9ad9bbdece908",
+                "multiqc_sav.txt:md5,28056766e8c9917cd1cd715b37ab3ac3",
+                "sav-intensity-vs-cycle-plot.txt:md5,17b1f5cfb2d0d200ce6341483eaafc17",
+                "sav-lane-metrics-summary-table.txt:md5,7759b5caa6c41701eedf7d640f5b3855",
+                "sav-pf-vs-occ-plot.txt:md5,b632e7602ded52e528f29930ff949087",
+                "sav-qscore-heatmap-plot.txt:md5,7c842e1152c451667ad85ab50336dd59",
+                "sav-qscore-histogram-plot.txt:md5,b4e6ef0d32113e403c00ce1cf2f179dc",
+                "sav-read-metrics-summary-table.txt:md5,67c8914255705ee915ef0f4c9f79851b",
+                "sav-summary-clusters-reads-lane-plot_Clusters.txt:md5,455720e9c81085d102ad6328ea29b3ba",
+                "sav-summary-clusters-reads-lane-plot_Reads.txt:md5,e065c617aef911133450f85afecc2779",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
             ],
             "No BAM files",
-            [
-                "WARN: rundir is a tar.gz"
-            ]
+            "No warnings"
         ],
-        "timestamp": "2026-03-18T13:57:56.324135943",
+        "timestamp": "2026-03-18T15:20:47.296294835",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
