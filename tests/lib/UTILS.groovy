@@ -136,34 +136,27 @@ class UTILS {
 
                     if (download_samplesheet_process.exitValue() != 0) {
                         throw new RuntimeException("Error - failed to download samplesheet: ${download_samplesheet_process.err.text}")
-                    } else {
-                        println "Samplesheet downloaded and modified"
                     }
 
-                    println "Modifying rundir column in the CSV file"
-
-                    // Dynamically find the rundir column index
+                    // Dynamically find the rundir column index, and replace the rundir tar.gz url by the extracted folder
                     def header_command = ['bash', '-c', "head -n 1 ${launchDir}/samplesheet.csv"]
                     def header_process = header_command.execute()
                     header_process.waitFor()
-
                     if (header_process.exitValue() != 0) {
-                        println "Error reading CSV header: ${header_process.err.text}"
+                        println "Error reading samplesheet header: ${header_process.err.text}"
                     } else {
-                        def header = header_process.text.trim().split(',').toList() // Convert array to list
+                        def header = header_process.text.trim().split(',').toList()
                         def rundir_index = header.indexOf('rundir') + 1 // awk columns are 1-based
 
                         if (rundir_index > 0) {
-                            println "Found rundir column at index: ${rundir_index}"
-
                             def awk_command = ['bash', '-c', "awk -F, -v OFS=, -v col=${rundir_index} '{if (NR == 1) {print \$0} else {sub(\".*/\", \"\", \$col); sub(\"\\\\.tar\\\\.gz\", \"\", \$col); print \$0}}' ${launchDir}/samplesheet.csv > ${launchDir}/samplesheet_updated.csv"]
                             def awk_process = awk_command.execute()
                             awk_process.waitFor()
 
                             if (awk_process.exitValue() != 0) {
-                                println "Error modifying rundir column: ${awk_process.err.text}"
+                                println "Error - failed to modify rundir column: ${awk_process.err.text}"
                             } else {
-                                println "CSV file modified successfully. Updated file: ${launchDir}/samplesheet_updated.csv"
+                                println "Samplesheet download and updated: ${launchDir}/samplesheet_updated.csv"
                             }
                         } else {
                             println "Error: rundir column not found in the CSV header."
