@@ -12,8 +12,8 @@ nextflow_pipeline {
                 genome: null,
                 tools: 'fastqscreen,picard_collecthsmetrics',
                 tools_bundle: null,
-            ]
-        ]
+            ],
+        ],
     ]
 
     // Generate tests for each scenario

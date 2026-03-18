@@ -11,8 +11,8 @@ nextflow_pipeline {
             params: [
                 tools: 'fastqe',
                 tools_bundle: null,
-            ]
-        ]
+            ],
+        ],
     ]
 
     // Generate tests for each scenario

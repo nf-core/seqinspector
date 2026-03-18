@@ -15,8 +15,8 @@ nextflow_pipeline {
             ],
             failure: true,
             snapshot_include: 'ToulligQC',
-            snapshot: 'stdout,stderr'
-        ]
+            snapshot: 'stdout,stderr',
+        ],
     ]
 
     // Generate tests for each scenario

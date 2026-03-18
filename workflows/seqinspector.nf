@@ -108,10 +108,10 @@ workflow SEQINSPECTOR {
 
     // Log warnings for samples without rundir
 
-    if (('chekqc' in tools) || ('multiqcsav' in tools) || ('rundirparser' in tools)) {
+    if (('checkqc' in tools) || ('multiqcsav' in tools) || ('rundirparser' in tools)) {
         ch_rundir_branch.without_rundir.subscribe { meta, _reads -> log.warn("Sample '${meta.id}' does not have a rundir specified") }
 
-        if ('chekqc' in tools) {
+        if ('checkqc' in tools) {
             ch_rundir.ifEmpty { log.warn("No samples with rundir found, skipping CHECKQC") }
         }
 
@@ -129,11 +129,12 @@ workflow SEQINSPECTOR {
     //
 
     CHECKQC(
-        ch_rundir.filter { 'chekqc' in tools },
+        ch_rundir.filter { 'checkqc' in tools },
         checkqc_config
             ? file(checkqc_config, checkIfExists: true)
             : [],
     )
+
     ch_multiqc_files = ch_multiqc_files.mix(CHECKQC.out.report)
 
     //
@@ -369,7 +370,7 @@ workflow SEQINSPECTOR {
             def xml = []
             def interop = []
 
-            if (('chekqc' in tools) || ('multiqcsav' in tools) || ('rundirparser' in tools)) {
+            if (('checkqc' in tools) || ('multiqcsav' in tools) || ('rundirparser' in tools)) {
                 if (rundir.toString().endsWith('tar.gz')) {
                     log.warn('rundir is a tar.gz')
                 }

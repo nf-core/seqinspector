@@ -11,9 +11,10 @@ nextflow_pipeline {
             params: [
                 tools: 'fastp',
                 tools_bundle: null,
-            ]
-        ]
+            ],
+        ],
     ]
+
     // Generate tests for each scenario
     test_scenario.each { scenario ->
         test(scenario.name, UTILS.getTest(scenario))
