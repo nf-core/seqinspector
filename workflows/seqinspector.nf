@@ -70,9 +70,9 @@ workflow SEQINSPECTOR {
     // MODULE: Run FQ_LINT to catch early errors
     //
 
-    FQ_LINT(ch_samplesheet.filter { ("fq_lint" in tools) })
+    FQ_LINT(ch_samplesheet.filter { ('fq_lint' in tools) })
 
-    if ("fq_lint" in tools) {
+    if ('fq_lint' in tools) {
         // This catches all FASTQs that pass linting
         // If you use an error strategy that allows FQ_LINT to fail,
         // only valid FASTQ files will be passed to the next module
@@ -98,7 +98,7 @@ workflow SEQINSPECTOR {
                     tags: meta.collect { meta_ -> meta_.tags }.flatten().unique(),
                     id: rundir ? false : meta.collect { meta_ -> meta_.id }.flatten().unique().sort(),
                 ],
-                rundir,
+                rundir ? file(rundir, checkIfExists: true) : null,
             ]
         }
 
@@ -111,15 +111,21 @@ workflow SEQINSPECTOR {
         }
 
         if ('checkqc' in tools) {
-            ch_rundir.ifEmpty { log.warn("No samples with rundir found, skipping CHECKQC") }
+            ch_rundir
+                .filter { _meta, rundir -> rundir }
+                .ifEmpty { log.warn("No samples with rundir found, skipping CHECKQC") }
         }
 
         if ('multiqcsav' in tools) {
-            ch_rundir.ifEmpty { log.warn("No samples with rundir found, skipping MULTIQC_SAV") }
+            ch_rundir
+                .filter { _meta, rundir -> rundir }
+                .ifEmpty { log.warn("No samples with rundir found, skipping MULTIQC_SAV") }
         }
 
         if ('rundirparser' in tools) {
-            ch_rundir.ifEmpty { log.warn("No samples with rundir found, skipping RUNDIRPARSER") }
+            ch_rundir
+                .filter { _meta, rundir -> rundir }
+                .ifEmpty { log.warn("No samples with rundir found, skipping RUNDIRPARSER") }
         }
     }
 
@@ -128,7 +134,7 @@ workflow SEQINSPECTOR {
     //
 
     CHECKQC(
-        ch_rundir.filter { 'checkqc' in tools },
+        ch_rundir.filter { _meta, rundir -> (rundir && 'checkqc' in tools) },
         checkqc_config
             ? file(checkqc_config, checkIfExists: true)
             : [],
@@ -140,7 +146,7 @@ workflow SEQINSPECTOR {
     // MODULE: RUNDIRPARSER
     //
 
-    RUNDIRPARSER(ch_rundir.filter { ("rundirparser" in tools) })
+    RUNDIRPARSER(ch_rundir.filter { _meta, rundir -> (rundir && 'rundirparser' in tools) })
     ch_multiqc_files = ch_multiqc_files.mix(RUNDIRPARSER.out.multiqc)
 
     // STEP 01: LONGREADS
@@ -149,7 +155,7 @@ workflow SEQINSPECTOR {
     // MODULE: TOULLIGQC
     // This provides useful stats of long reads
 
-    TOULLIGQC(ch_samplesheet.filter { "toulligqc" in tools })
+    TOULLIGQC(ch_samplesheet.filter { 'toulligqc' in tools })
 
     ch_multiqc_files.mix(TOULLIGQC.out.report_data)
 

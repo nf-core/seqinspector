@@ -25,10 +25,10 @@ nextflow_pipeline {
             rundir_samplesheet: pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/samplesheet_missing_rundir.csv',
         ],
         [
-            name: "NovaSeq6000 data test - fastqc,multiqcsav - no rundir",
+            name: "NovaSeq6000 data test - fastqc,multiqcsav,rundirparser - no rundir",
             params: [
                 input: pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/samplesheet_no_rundirs.csv',
-                tools: 'fastqc,multiqcsav',
+                tools: 'checkqc,fastqc,multiqcsav,rundirparser',
                 tools_bundle: null,
             ],
         ],
