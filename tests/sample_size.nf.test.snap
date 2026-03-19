@@ -325,10 +325,10 @@
                 "sampletest_04.bam:md5,3d1cd701ad22dacc6b194ea16582d647"
             ],
             [
-                "WARN: rundir is a tar.gz"
+                "WARN: More than one rundir, or sample(s) missing rundir, skipping skipping MULTIQC_SAV"
             ]
         ],
-        "timestamp": "2026-03-19T10:58:09.3304817",
+        "timestamp": "2026-03-19T15:39:11.010947609",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -660,10 +660,10 @@
                 "sampletest_04.bam:md5,b13db1c95389474f089f870b906d3fc0"
             ],
             [
-                "WARN: rundir is a tar.gz"
+                "WARN: More than one rundir, or sample(s) missing rundir, skipping skipping MULTIQC_SAV"
             ]
         ],
-        "timestamp": "2026-03-19T10:59:06.353106803",
+        "timestamp": "2026-03-19T15:40:08.083267816",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -995,15 +995,15 @@
                 "sampletest_04.bam:md5,f80371e37421d97499b3bfd55221ed00"
             ],
             [
+                "WARN: More than one rundir, or sample(s) missing rundir, skipping skipping MULTIQC_SAV",
                 "WARN: Sample1_01: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
                 "WARN: Sample23_03: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
                 "WARN: SampleA_02: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
                 "WARN: Undetermined_05: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
-                "WARN: rundir is a tar.gz",
                 "WARN: sampletest_04: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads."
             ]
         ],
-        "timestamp": "2026-03-19T11:00:02.283486",
+        "timestamp": "2026-03-19T15:41:01.911676109",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

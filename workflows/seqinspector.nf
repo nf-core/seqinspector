@@ -83,10 +83,18 @@ workflow SEQINSPECTOR {
 
     // Parse RUNDIR INFO
 
+    // Calculate the global rundir_size for the entire samplesheet
+    rundir_size = ch_samplesheet
+        .map { meta, _reads -> [meta.rundir ? meta.rundir.simpleName : 'no_rundir'] }
+        .flatten()
+        .collect()
+        .map { rundir -> [rundir.size()] }
+
     ch_rundir = ch_samplesheet
         .map { meta, _reads -> [meta.rundir ?: null, meta] }
         .groupTuple()
-        .map { rundir, meta ->
+        .combine(rundir_size)
+        .map { rundir, meta, _rundir_size ->
             // Return for all the rundir specific processes and to mix with ch_multiqc_files
             //   - meta map:
             //     - dirname: Simple name of the rundir, used for setting unique output names in publishDir
@@ -97,6 +105,7 @@ workflow SEQINSPECTOR {
                     dirname: rundir ? rundir.simpleName : 'no_rundir',
                     tags: meta.collect { meta_ -> meta_.tags }.flatten().unique(),
                     id: rundir ? false : meta.collect { meta_ -> meta_.id }.flatten().unique().sort(),
+                    rundir_size: _rundir_size,
                 ],
                 rundir ? file(rundir, checkIfExists: true) : null,
             ]
@@ -352,17 +361,16 @@ workflow SEQINSPECTOR {
     ch_multiqc_files = ch_multiqc_files.map { _meta, files -> [files] }.collect().combine(ch_multiqc_extra_files_global.collect()).map { files -> [[id: 'seqinspector'], files] }
 
     MULTIQC_GLOBAL(
-        ch_rundir.map { _meta, rundir ->
+        ch_rundir.map { meta, rundir ->
             def xml = []
             def interop = []
 
-            if (('multiqcsav' in tools) && !(rundir)) {
-                log.warn("No samples with rundir found, skipping MULTIQC_SAV")
-            }
-
             if ((rundir) && (('checkqc' in tools) || ('multiqcsav' in tools) || ('rundirparser' in tools))) {
-                if (rundir.toString().endsWith('tar.gz')) {
-                    log.warn('rundir is a tar.gz')
+                if (meta.rundir_size > 1) {
+                    log.warn("More than one rundir, or sample(s) missing rundir, skipping skipping MULTIQC_SAV")
+                }
+                else if (rundir.toString().endsWith('tar.gz')) {
+                    log.warn("rundir: ${rundir.toString().name()} is a tar.gz")
                 }
                 else if ('multiqcsav' in tools) {
                     interop = files(file(rundir).resolve("InterOp/*.bin"), checkIfExists: true)
@@ -444,49 +452,4 @@ workflow SEQINSPECTOR {
     emit:
     global_report   = MULTIQC_GLOBAL.out.report.map { _meta, report -> [report] }.toList() // channel: [ /path/to/multiqc_report.html ]
     grouped_reports = MULTIQC_PER_TAG.out.report.map { _meta, report -> [report] }.toList() // channel: [ /path/to/multiqc_report.html ]
-}
-
-// FUNCTIONS
-
-// Function for SAV input preparation
-def prepareSavInput(rundir_ch, multiqc_files, extra_files, config, logo) {
-    return rundir_ch
-        .map { metas, rundir ->
-            def xml = []
-            def interop = []
-
-            if (!rundir) {
-                log.warn('no rundir')
-            }
-            else if (rundir.toString().endsWith('tar.gz')) {
-                log.warn('rundir is a tar.gz')
-            }
-            else {
-                rundir.eachFileRecurse { file ->
-                    if (file.fileName.toString() in ['RunInfo.xml', 'RunParameters.xml']) {
-                        xml << file
-                    }
-                    else if (file.parent.name == 'InterOp' && file.fileName.toString().endsWith(".bin")) {
-                        interop << file
-                    }
-                }
-            }
-
-            return [metas, xml, interop]
-        }
-        .combine(
-            multiqc_files.map { _meta, files -> files }.flatten().collect().combine(extra_files.collect()).map { files -> [files.flatten()] }
-        )
-        .map { meta, xml, interop, extrafiles ->
-            [
-                meta,
-                xml,
-                interop,
-                extrafiles,
-                config ?: file("${projectDir}/assets/multiqc_config.yml", checkIfExists: true),
-                logo ?: [],
-                [],
-                [],
-            ]
-        }
 }

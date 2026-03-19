@@ -89,10 +89,10 @@
             ],
             "No BAM files",
             [
-                "WARN: rundir is a tar.gz"
+                "WARN: More than one rundir, or sample(s) missing rundir, skipping skipping MULTIQC_SAV"
             ]
         ],
-        "timestamp": "2026-03-19T14:19:52.397954559",
+        "timestamp": "2026-03-19T15:37:38.457060288",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

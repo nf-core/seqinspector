@@ -83,10 +83,10 @@
             ],
             "No BAM files",
             [
-                "WARN: rundir is a tar.gz"
+                "WARN: More than one rundir, or sample(s) missing rundir, skipping skipping MULTIQC_SAV"
             ]
         ],
-        "timestamp": "2026-03-18T15:40:11.679496278",
+        "timestamp": "2026-03-19T15:42:03.371114173",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -176,10 +176,10 @@
             ],
             "No BAM files",
             [
-                "WARN: rundir is a tar.gz"
+                "WARN: More than one rundir, or sample(s) missing rundir, skipping skipping MULTIQC_SAV"
             ]
         ],
-        "timestamp": "2026-03-18T15:42:18.2537962",
+        "timestamp": "2026-03-19T15:42:32.048213387",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
