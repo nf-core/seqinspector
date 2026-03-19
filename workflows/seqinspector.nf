@@ -120,6 +120,11 @@ workflow SEQINSPECTOR {
             ch_rundir
                 .filter { _meta, rundir -> rundir }
                 .ifEmpty { log.warn("No samples with rundir found, skipping MULTIQC_SAV") }
+
+            // To get multiQC to run even when no tools are being run
+            if (tools.size == 1) {
+                ch_multiqc_files = ch_multiqc_files.mix(ch_rundir.map { meta, _rundir -> [meta, []] })
+            }
         }
 
         if ('rundirparser' in tools) {
@@ -127,9 +132,6 @@ workflow SEQINSPECTOR {
                 .filter { _meta, rundir -> rundir }
                 .ifEmpty { log.warn("No samples with rundir found, skipping RUNDIRPARSER") }
         }
-
-        // To get multiQC to run even when no tools are being run
-        ch_multiqc_files = ch_multiqc_files.mix(ch_rundir.map { meta, _rundir -> [meta, []] })
     }
 
     //
