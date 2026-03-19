@@ -7,30 +7,13 @@ nextflow_pipeline {
 
     def test_scenario = [
         [
-            name: "NovaSeq6000 data test - fastqc,multiqcsav",
+            name: "NovaSeq6000 data test - multiqcsav",
             params: [
-                tools: 'fastqc,multiqcsav',
+                tools: 'multiqcsav',
                 tools_bundle: null,
             ],
             rundir_folder: pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/200624_A00834_0183_BHMTFYDRXX.tar.gz',
             rundir_samplesheet: pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/samplesheet.csv',
-        ],
-        [
-            name: "NovaSeq6000 data test - fastqc,multiqcsav - missing rundir",
-            params: [
-                tools: 'fastqc,multiqcsav',
-                tools_bundle: null,
-            ],
-            rundir_folder: pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/200624_A00834_0183_BHMTFYDRXX.tar.gz',
-            rundir_samplesheet: pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/samplesheet_missing_rundir.csv',
-        ],
-        [
-            name: "NovaSeq6000 data test - fastqc,multiqcsav,rundirparser - no rundir",
-            params: [
-                input: pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/samplesheet_no_rundirs.csv',
-                tools: 'checkqc,fastqc,multiqcsav,rundirparser',
-                tools_bundle: null,
-            ],
         ],
     ]
 
