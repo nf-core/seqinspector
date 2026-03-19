@@ -7,16 +7,9 @@ nextflow_pipeline {
 
     def test_scenario = [
         [
-            name: "MiSeq data test - single end reads",
+            name: "MiSeq data test",
             params: [
-                input: pipelines_testdata_base_path + 'seqinspector/testdata/MiSeq/samplesheet.csv',
-                tools_bundle: 'minimal',
-            ],
-        ],
-        [
-            name: "MiSeq data test - paired end reads",
-            params: [
-                input: pipelines_testdata_base_path + 'seqinspector/testdata/Miseq_PairedEnd/samplesheet.csv',
+                input: pipelines_testdata_base_path + 'seqinspector_new/samplesheet/1.0/miseq.csv',
                 tools_bundle: 'minimal',
             ],
         ],
