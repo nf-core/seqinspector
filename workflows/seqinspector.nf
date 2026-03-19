@@ -129,6 +129,9 @@ workflow SEQINSPECTOR {
         }
     }
 
+    // To get multiQC to run even when no tools are being run
+    ch_multiqc_files = ch_multiqc_files.mix(ch_rundir.map { meta, _rundir -> [meta, []] })
+
     //
     // MODULE: CHECKQC
     //
@@ -347,7 +350,7 @@ workflow SEQINSPECTOR {
     ch_multiqc_files = ch_multiqc_files.map { _meta, files -> [files] }.collect().combine(ch_multiqc_extra_files_global.collect()).map { files -> [[id: 'seqinspector'], files] }
 
     MULTIQC_GLOBAL(
-        ch_rundir.map { meta, rundir ->
+        ch_rundir.map { _meta, rundir ->
             def xml = []
             def interop = []
 
