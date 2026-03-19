@@ -72,12 +72,12 @@ workflow SEQINSPECTOR {
 
     FQ_LINT(ch_samplesheet.filter { ('fq_lint' in tools) })
 
-    if ('fq_lint' in tools) {
-        // This catches all FASTQs that pass linting
-        // If you use an error strategy that allows FQ_LINT to fail,
-        // only valid FASTQ files will be passed to the next module
-        ch_samplesheet = FQ_LINT.out.lint.join(ch_samplesheet).map { meta, _fq_lint, reads -> [meta, reads] }
-    }
+    // This catches all FASTQs that pass linting
+    // If you use an error strategy that allows FQ_LINT to fail,
+    // only valid FASTQ files will be passed to the next module
+    ch_samplesheet = 'fq_lint' in tools
+        ? FQ_LINT.out.lint.join(ch_samplesheet).map { meta, _fq_lint, reads -> [meta, reads] }
+        : ch_samplesheet
 
     // STEP 01: ILLUMINA RUNDIR INFORMATION
 
@@ -126,14 +126,14 @@ workflow SEQINSPECTOR {
         }
 
         if ('multiqcsav' in tools) {
-            ch_rundir
-                .filter { _meta, rundir -> rundir }
-                .ifEmpty { log.warn("No samples with rundir found, skipping MULTIQC_SAV") }
-
             // To get multiQC to run even when no tools are being run
             if (tools.size == 1) {
                 ch_multiqc_files = ch_multiqc_files.mix(ch_rundir.map { meta, _rundir -> [meta, []] })
             }
+
+            ch_rundir
+                .filter { _meta, rundir -> rundir }
+                .ifEmpty { log.warn("No samples with rundir found, skipping MULTIQC_SAV") }
         }
 
         if ('rundirparser' in tools) {
@@ -179,22 +179,20 @@ workflow SEQINSPECTOR {
     // MODULE: SEQFU_STATS
     //
 
-    SEQFU_STATS(ch_samplesheet.map { meta, reads -> [[id: "seqfu", sample_id: meta.id, tags: meta.tags], reads] }.filter { 'seqfu_stats' in tools })
+    SEQFU_STATS(ch_samplesheet.filter { 'seqfu_stats' in tools })
 
     // Parse the stats TSV file
     SEQFU_STATS.out.stats
-        .map { meta, stats -> [meta.sample_id, stats] }
         .splitCsv(header: true, sep: '\t')
-        .map { sample_id, row ->
+        .map { meta, row ->
             // Check if requested sample size exceeds available reads
             def sample_reads = row['#Seq'].toInteger()
             if (sample_size > sample_reads) {
-                log.warn("${sample_id}: Requested sample_size (${sample_size}) is larger than available reads (${sample_reads}). Pipeline will continue with ${sample_reads} reads.")
+                log.warn("${meta.id}: Requested sample_size (${sample_size}) is larger than available reads (${sample_reads}). Pipeline will continue with ${sample_reads} reads.")
             }
         }
 
     ch_multiqc_files = ch_multiqc_files.mix(SEQFU_STATS.out.multiqc)
-
 
     // STEP 03: SUBSAMPLE
 
@@ -217,7 +215,10 @@ workflow SEQINSPECTOR {
 
     ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
 
-    // FASTQE
+    //
+    // MODULE: FASTQE
+    //
+
     FASTQE(ch_sample.filter { 'fastqe' in tools })
 
     ch_multiqc_files = ch_multiqc_files.mix(FASTQE.out.tsv)
@@ -277,6 +278,7 @@ workflow SEQINSPECTOR {
     //
     // MODULE: SAMTOOLS_INDEX to create BAM index
     //
+
     SAMTOOLS_INDEX(BWAMEM2_MEM.out.bam)
 
     //
@@ -311,9 +313,7 @@ workflow SEQINSPECTOR {
         ch_multiqc_files = ch_multiqc_files.mix(PHYLOGENETIC_QC.out.mqc)
     }
 
-    //
     // Collate and save software versions
-    //
     def collated_versions = softwareVersionsToYAML(
         softwareVersions: channel.topic("versions"),
         nextflowVersion: workflow.nextflow.version,
@@ -396,17 +396,17 @@ workflow SEQINSPECTOR {
         }
     )
 
-    //
-    // Run MultiQC per tag
-    //
-
-    ch_multiqc_extra_files_tag = ch_multiqc_extra_files.mix(
-        ch_tags.toList().map { tag_list -> reportIndexMultiqc(tag_list, false) }.collectFile(name: 'multiqc_index_mqc.yaml')
-    )
-
-    multiqc_extra_files_per_tag = ch_tags.combine(ch_multiqc_extra_files_tag)
+    ch_multiqc_files.view()
+    ch_tags.view()
 
     // Group samples by tag
+
+    multiqc_extra_files_per_tag = ch_tags.combine(
+        ch_multiqc_extra_files.mix(
+            ch_tags.toList().map { tag_list -> reportIndexMultiqc(tag_list, false) }.collectFile(name: 'multiqc_index_mqc.yaml')
+        )
+    )
+
     tagged_mqc_files = ch_tags
         .combine(ch_multiqc_files)
         .filter { sample_tag, meta, _sample -> sample_tag in meta.tags }
@@ -427,15 +427,16 @@ workflow SEQINSPECTOR {
         }
         .map { file -> [(file =~ /\[TAG:(.+)\]/)[0][1], file] }
         .join(mqc_by_tag)
-        .map { sample_tag, config, samples ->
-            [[id: sample_tag], samples.flatten(), config]
-        }
+
+    //
+    // Run MultiQC per tag
+    //
 
     MULTIQC_PER_TAG(
-        tagged_mqc_files.map { meta, files, config ->
+        tagged_mqc_files.map { sample_tag, config, files ->
             [
-                meta,
-                files,
+                [id: sample_tag],
+                files.flatten(),
                 [
                     config,
                     multiqc_config
