@@ -38,8 +38,14 @@
                 "multiqc/global_report/multiqc_data/multiqc_sources.txt",
                 "multiqc/global_report/multiqc_plots",
                 "multiqc/global_report/multiqc_plots/pdf",
+                "multiqc/global_report/multiqc_plots/pdf/fastq_screen_plot-cnt.pdf",
+                "multiqc/global_report/multiqc_plots/pdf/fastq_screen_plot-pct.pdf",
                 "multiqc/global_report/multiqc_plots/png",
+                "multiqc/global_report/multiqc_plots/png/fastq_screen_plot-cnt.png",
+                "multiqc/global_report/multiqc_plots/png/fastq_screen_plot-pct.png",
                 "multiqc/global_report/multiqc_plots/svg",
+                "multiqc/global_report/multiqc_plots/svg/fastq_screen_plot-cnt.svg",
+                "multiqc/global_report/multiqc_plots/svg/fastq_screen_plot-pct.svg",
                 "multiqc/global_report/multiqc_report.html",
                 "multiqc/group_reports",
                 "multiqc/group_reports/group1",
@@ -110,7 +116,7 @@
                 "WARN: No fasta was provided, but picard was requested"
             ]
         ],
-        "timestamp": "2026-03-18T14:19:46.732314811",
+        "timestamp": "2026-03-19T17:53:29.074674982",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

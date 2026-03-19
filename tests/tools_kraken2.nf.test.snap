@@ -54,8 +54,14 @@
                 "multiqc/global_report/multiqc_data/multiqc_sources.txt",
                 "multiqc/global_report/multiqc_plots",
                 "multiqc/global_report/multiqc_plots/pdf",
+                "multiqc/global_report/multiqc_plots/pdf/kraken-top-n-plot-cnt.pdf",
+                "multiqc/global_report/multiqc_plots/pdf/kraken-top-n-plot-pct.pdf",
                 "multiqc/global_report/multiqc_plots/png",
+                "multiqc/global_report/multiqc_plots/png/kraken-top-n-plot-cnt.png",
+                "multiqc/global_report/multiqc_plots/png/kraken-top-n-plot-pct.png",
                 "multiqc/global_report/multiqc_plots/svg",
+                "multiqc/global_report/multiqc_plots/svg/kraken-top-n-plot-cnt.svg",
+                "multiqc/global_report/multiqc_plots/svg/kraken-top-n-plot-pct.svg",
                 "multiqc/global_report/multiqc_report.html",
                 "multiqc/group_reports",
                 "multiqc/group_reports/group1",
@@ -91,7 +97,7 @@
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-03-18T14:24:49.837829515",
+        "timestamp": "2026-03-19T18:01:36.490293712",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

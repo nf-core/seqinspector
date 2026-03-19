@@ -30,14 +30,13 @@
     "NovaSeq6000 data test - Fail fq_lint": {
         "content": [
             [
-                "pipeline_info",
-                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"
+                "pipeline_info"
             ],
             "No stable content",
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-03-19T15:43:54.408156273",
+        "timestamp": "2026-03-19T17:59:38.029870515",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

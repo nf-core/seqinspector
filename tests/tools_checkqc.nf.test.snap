@@ -24,8 +24,14 @@
                 "multiqc/global_report/multiqc_data/multiqc_sources.txt",
                 "multiqc/global_report/multiqc_plots",
                 "multiqc/global_report/multiqc_plots/pdf",
+                "multiqc/global_report/multiqc_plots/pdf/checkqc_reads-per-sample-plot-cnt.pdf",
+                "multiqc/global_report/multiqc_plots/pdf/checkqc_reads-per-sample-plot-pct.pdf",
                 "multiqc/global_report/multiqc_plots/png",
+                "multiqc/global_report/multiqc_plots/png/checkqc_reads-per-sample-plot-cnt.png",
+                "multiqc/global_report/multiqc_plots/png/checkqc_reads-per-sample-plot-pct.png",
                 "multiqc/global_report/multiqc_plots/svg",
+                "multiqc/global_report/multiqc_plots/svg/checkqc_reads-per-sample-plot-cnt.svg",
+                "multiqc/global_report/multiqc_plots/svg/checkqc_reads-per-sample-plot-pct.svg",
                 "multiqc/global_report/multiqc_report.html",
                 "multiqc/group_reports",
                 "multiqc/group_reports/group1",
@@ -86,7 +92,7 @@
                 "WARN: More than one rundir, or sample(s) missing rundir, skipping skipping MULTIQC_SAV"
             ]
         ],
-        "timestamp": "2026-03-19T15:42:03.371114173",
+        "timestamp": "2026-03-19T17:57:35.441093248",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -117,8 +123,14 @@
                 "multiqc/global_report/multiqc_data/multiqc_sources.txt",
                 "multiqc/global_report/multiqc_plots",
                 "multiqc/global_report/multiqc_plots/pdf",
+                "multiqc/global_report/multiqc_plots/pdf/checkqc_reads-per-sample-plot-cnt.pdf",
+                "multiqc/global_report/multiqc_plots/pdf/checkqc_reads-per-sample-plot-pct.pdf",
                 "multiqc/global_report/multiqc_plots/png",
+                "multiqc/global_report/multiqc_plots/png/checkqc_reads-per-sample-plot-cnt.png",
+                "multiqc/global_report/multiqc_plots/png/checkqc_reads-per-sample-plot-pct.png",
                 "multiqc/global_report/multiqc_plots/svg",
+                "multiqc/global_report/multiqc_plots/svg/checkqc_reads-per-sample-plot-cnt.svg",
+                "multiqc/global_report/multiqc_plots/svg/checkqc_reads-per-sample-plot-pct.svg",
                 "multiqc/global_report/multiqc_report.html",
                 "multiqc/group_reports",
                 "multiqc/group_reports/group1",
@@ -179,7 +191,7 @@
                 "WARN: More than one rundir, or sample(s) missing rundir, skipping skipping MULTIQC_SAV"
             ]
         ],
-        "timestamp": "2026-03-19T15:42:32.048213387",
+        "timestamp": "2026-03-19T17:58:07.195073232",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
