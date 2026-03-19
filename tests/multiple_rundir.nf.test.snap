@@ -1,0 +1,101 @@
+{
+    "MiSeq data test - fastqc,multiqcsav - multiple rundir": {
+        "content": [
+            6,
+            {
+                "FASTQC": {
+                    "fastqc": "0.12.1"
+                }
+            },
+            [
+                "fastqc",
+                "fastqc/SAMPLE_PAIRED_END_1_01_1_fastqc.html",
+                "fastqc/SAMPLE_PAIRED_END_1_01_1_fastqc.zip",
+                "fastqc/SAMPLE_PAIRED_END_1_01_2_fastqc.html",
+                "fastqc/SAMPLE_PAIRED_END_1_01_2_fastqc.zip",
+                "fastqc/SAMPLE_PAIRED_END_2_02_1_fastqc.html",
+                "fastqc/SAMPLE_PAIRED_END_2_02_1_fastqc.zip",
+                "fastqc/SAMPLE_PAIRED_END_2_02_2_fastqc.html",
+                "fastqc/SAMPLE_PAIRED_END_2_02_2_fastqc.zip",
+                "fastqc/SAMPLE_SINGLE_END_03_fastqc.html",
+                "fastqc/SAMPLE_SINGLE_END_03_fastqc.zip",
+                "multiqc",
+                "multiqc/global_report",
+                "multiqc/global_report/multiqc_data",
+                "multiqc/global_report/multiqc_data/fastqc-status-check-heatmap.txt",
+                "multiqc/global_report/multiqc_data/fastqc_adapter_content_plot.txt",
+                "multiqc/global_report/multiqc_data/fastqc_overrepresented_sequences_plot.txt",
+                "multiqc/global_report/multiqc_data/fastqc_per_base_n_content_plot.txt",
+                "multiqc/global_report/multiqc_data/fastqc_per_base_sequence_quality_plot.txt",
+                "multiqc/global_report/multiqc_data/fastqc_per_sequence_gc_content_plot_Counts.txt",
+                "multiqc/global_report/multiqc_data/fastqc_per_sequence_gc_content_plot_Percentages.txt",
+                "multiqc/global_report/multiqc_data/fastqc_per_sequence_quality_scores_plot.txt",
+                "multiqc/global_report/multiqc_data/fastqc_sequence_counts_plot.txt",
+                "multiqc/global_report/multiqc_data/fastqc_sequence_duplication_levels_plot.txt",
+                "multiqc/global_report/multiqc_data/fastqc_top_overrepresented_sequences_table.txt",
+                "multiqc/global_report/multiqc_data/llms-full.txt",
+                "multiqc/global_report/multiqc_data/multiqc.log",
+                "multiqc/global_report/multiqc_data/multiqc.parquet",
+                "multiqc/global_report/multiqc_data/multiqc_citations.txt",
+                "multiqc/global_report/multiqc_data/multiqc_data.json",
+                "multiqc/global_report/multiqc_data/multiqc_fastqc.txt",
+                "multiqc/global_report/multiqc_data/multiqc_general_stats.txt",
+                "multiqc/global_report/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/global_report/multiqc_data/multiqc_sources.txt",
+                "multiqc/global_report/multiqc_plots",
+                "multiqc/global_report/multiqc_plots/pdf",
+                "multiqc/global_report/multiqc_plots/png",
+                "multiqc/global_report/multiqc_plots/svg",
+                "multiqc/global_report/multiqc_report.html",
+                "multiqc/group_reports",
+                "multiqc/group_reports/Bpacificus",
+                "multiqc/group_reports/Bpacificus/multiqc_data",
+                "multiqc/group_reports/Bpacificus/multiqc_data/llms-full.txt",
+                "multiqc/group_reports/Bpacificus/multiqc_data/multiqc.log",
+                "multiqc/group_reports/Bpacificus/multiqc_data/multiqc.parquet",
+                "multiqc/group_reports/Bpacificus/multiqc_data/multiqc_citations.txt",
+                "multiqc/group_reports/Bpacificus/multiqc_data/multiqc_data.json",
+                "multiqc/group_reports/Bpacificus/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/group_reports/Bpacificus/multiqc_data/multiqc_sources.txt",
+                "multiqc/group_reports/Bpacificus/multiqc_report.html",
+                "multiqc/group_reports/K9H97",
+                "multiqc/group_reports/K9H97/multiqc_data",
+                "multiqc/group_reports/K9H97/multiqc_data/llms-full.txt",
+                "multiqc/group_reports/K9H97/multiqc_data/multiqc.log",
+                "multiqc/group_reports/K9H97/multiqc_data/multiqc.parquet",
+                "multiqc/group_reports/K9H97/multiqc_data/multiqc_citations.txt",
+                "multiqc/group_reports/K9H97/multiqc_data/multiqc_data.json",
+                "multiqc/group_reports/K9H97/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/group_reports/K9H97/multiqc_data/multiqc_sources.txt",
+                "multiqc/group_reports/K9H97/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"
+            ],
+            [
+                "fastqc-status-check-heatmap.txt:md5,e3a5fad758ee6a23842910c756f1c68b",
+                "fastqc_adapter_content_plot.txt:md5,4b7007431bd26127365b0f25120d48f2",
+                "fastqc_overrepresented_sequences_plot.txt:md5,cdd9a605d646e68673a57da84dca2783",
+                "fastqc_per_base_n_content_plot.txt:md5,a1847fed862a151e4ea821765256c35c",
+                "fastqc_per_base_sequence_quality_plot.txt:md5,c9b9d940ce31ad13938fa3772d3ad4e7",
+                "fastqc_per_sequence_gc_content_plot_Counts.txt:md5,dce3e67f609fdaaea4453fb7188e9fc6",
+                "fastqc_per_sequence_gc_content_plot_Percentages.txt:md5,db975d3ea75953bbe3da4d345a7cecdd",
+                "fastqc_per_sequence_quality_scores_plot.txt:md5,1ade1ab4ffdaad4517ca49d3939bdac8",
+                "fastqc_sequence_counts_plot.txt:md5,98d35ef8e2fbd373b5afa62458283fca",
+                "fastqc_sequence_duplication_levels_plot.txt:md5,ae9c9102460b28ef9537cc5d6103737d",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+                "multiqc_fastqc.txt:md5,76799a64cbef084c20e7f12d3de6c133",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
+            ],
+            "No BAM files",
+            [
+                "WARN: rundir is a tar.gz"
+            ]
+        ],
+        "timestamp": "2026-03-19T14:19:52.397954559",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
+    }
+}
