@@ -63,7 +63,6 @@ workflow SEQINSPECTOR {
     main:
     ch_multiqc_files = channel.empty()
     ch_multiqc_extra_files = channel.empty()
-    ch_need_global = channel.empty()
 
     // STEP 00: EARLY SKIP FAILING MALFORMED FASTQ FILES
 
@@ -84,39 +83,39 @@ workflow SEQINSPECTOR {
 
     // Parse RUNDIR INFO
 
-    // Branch the samplesheet channel based on rundir presence
-    ch_rundir_branch = ch_samplesheet.branch { meta, _reads ->
-        with_rundir: meta.rundir.size() > 0
-        without_rundir: true
-    }
-
-    ch_rundir = ch_rundir_branch.with_rundir
-        .map { meta, _reads -> [meta.rundir, meta] }
+    ch_rundir = ch_samplesheet
+        .map { meta, _reads -> [meta.rundir ?: null, meta] }
         .groupTuple()
-        .map { rundir, metas ->
-            // Collect all unique tags into a list
-            def all_tags = metas.collect { meta -> meta.tags }.flatten().unique()
-            // Create a new meta object whose attributes are...
-            //  1. tags: The list of merged tags, used for grouping MultiQC reports
-            //  2. dirname: The simple name of the rundir, used for setting unique output names in publishDir
-            def dir_meta = [tags: all_tags, dirname: rundir.simpleName]
-            // Return the new structure, to...
-            //  1. Feed into rundir specific processes
-            //  2. Mix with the ch_multiqc_files channel downstream
-            [dir_meta, rundir]
+        .map { rundir, meta ->
+            // Return for all the rundir specific processes and to mix with ch_multiqc_files
+            //   - meta map:
+            //     - dirname: Simple name of the rundir, used for setting unique output names in publishDir
+            //     - tags: List of merged tags, used for grouping MultiQC reports
+            //   - rundir
+            [
+                [
+                    dirname: rundir ? rundir.simpleName : 'no_rundir',
+                    tags: meta.collect { meta_ -> meta_.tags }.flatten().unique(),
+                    id: rundir ? false : meta.collect { meta_ -> meta_.id }.flatten().unique().sort(),
+                ],
+                rundir,
+            ]
         }
 
     // Log warnings for samples without rundir
-
     if (('checkqc' in tools) || ('multiqcsav' in tools) || ('rundirparser' in tools)) {
-        ch_rundir_branch.without_rundir.subscribe { meta, _reads -> log.warn("Sample '${meta.id}' does not have a rundir specified") }
+        ch_rundir.map { meta, _rundir ->
+            if (!_rundir) {
+                log.warn("No rundir for sample(s): ${meta.id.join(', ')}")
+            }
+        }
 
         if ('checkqc' in tools) {
             ch_rundir.ifEmpty { log.warn("No samples with rundir found, skipping CHECKQC") }
         }
 
         if ('multiqcsav' in tools) {
-            ch_rundir.ifEmpty { log.warn("No samples with rundir found, skipping RUNDIRPARSER") }
+            ch_rundir.ifEmpty { log.warn("No samples with rundir found, skipping MULTIQC_SAV") }
         }
 
         if ('rundirparser' in tools) {
@@ -136,30 +135,6 @@ workflow SEQINSPECTOR {
     )
 
     ch_multiqc_files = ch_multiqc_files.mix(CHECKQC.out.report)
-
-    //
-    // If we have more than one rundir, we prefer not to run MULTQCSAV and get information from other rundirs
-    //
-
-    // Determine if we need global MultiQC based on conditions
-    ch_need_global = ch_rundir_branch.without_rundir
-        .count()
-        .combine(ch_rundir.count())
-        .map { samples_without, rundir_count ->
-            def need_global = (!('multiqcsav' in tools) || ((samples_without > 0) || (rundir_count != 1)))
-            if (need_global) {
-                if ((samples_without > 0) && ('multiqcsav' in tools)) {
-                    log.warn("Samples without rundir found, will run global MultiQC instead")
-                }
-                if ((rundir_count > 1) && ('multiqcsav' in tools)) {
-                    log.warn("More than one rundir found, will run global MultiQC instead")
-                }
-                if ((rundir_count == 0) && ('multiqcsav' in tools)) {
-                    log.warn("No samples with rundir found, will run global MultiQC instead")
-                }
-            }
-            return need_global ? ["run_global"] : ["run_sav"]
-        }
 
     //
     // MODULE: RUNDIRPARSER
@@ -366,11 +341,15 @@ workflow SEQINSPECTOR {
     ch_multiqc_files = ch_multiqc_files.map { _meta, files -> [files] }.collect().combine(ch_multiqc_extra_files_global.collect()).map { files -> [[id: 'seqinspector'], files] }
 
     MULTIQC_GLOBAL(
-        ch_rundir.map { _meta, rundir ->
+        ch_rundir.map { meta, rundir ->
             def xml = []
             def interop = []
 
-            if (('checkqc' in tools) || ('multiqcsav' in tools) || ('rundirparser' in tools)) {
+            if (('multiqcsav' in tools) && !(rundir)) {
+                log.warn("No samples with rundir found, skipping MULTIQC_SAV")
+            }
+
+            if ((rundir) && (('checkqc' in tools) || ('multiqcsav' in tools) || ('rundirparser' in tools))) {
                 if (rundir.toString().endsWith('tar.gz')) {
                     log.warn('rundir is a tar.gz')
                 }
@@ -381,10 +360,12 @@ workflow SEQINSPECTOR {
             }
             return [[id: 'seqinspector'], xml, interop]
         }.join(ch_multiqc_files, by: 0).map { meta, xml, interop, multiqc_files ->
+            def final_xml = xml.flatten().unique()
+            def final_interop = interop.flatten().unique()
             return [
                 meta,
-                xml.flatten().unique(),
-                interop.flatten().unique(),
+                final_xml,
+                final_interop,
                 multiqc_files.flatten().unique(),
                 multiqc_config
                     ? file(multiqc_config, checkIfExists: true)
