@@ -1,25 +1,5 @@
 {
-    "Miseq data test (skip all tools)": {
-        "content": [
-            0,
-            {
-                
-            },
-            [
-                "pipeline_info",
-                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"
-            ],
-            "No stable content",
-            "No BAM files",
-            "No warnings"
-        ],
-        "timestamp": "2026-03-18T14:04:18.160126582",
-        "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
-        }
-    },
-    "MiSeq data test (single end reads)": {
+    "MiSeq data test - single end reads": {
         "content": [
             9,
             {
@@ -179,13 +159,13 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-03-18T15:26:09.617670819",
+        "timestamp": "2026-03-19T10:54:07.831419485",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
         }
     },
-    "MiSeq data test (paired end reads)": {
+    "MiSeq data test - paired end reads": {
         "content": [
             16,
             {
@@ -394,145 +374,7 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-03-18T14:11:15.284206139",
-        "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
-        }
-    },
-    "Miseq data test (no fastqc)": {
-        "content": [
-            8,
-            {
-                "BWAMEM2_INDEX": {
-                    "bwamem2": "2.2.1"
-                },
-                "BWAMEM2_MEM": {
-                    "bwamem2": "2.2.1",
-                    "samtools": "1.22.1"
-                },
-                "FASTQSCREEN_FASTQSCREEN": {
-                    "fastqscreen": "0.16.0"
-                },
-                "PICARD_COLLECTMULTIPLEMETRICS": {
-                    "picard": "3.4.0"
-                },
-                "SAMTOOLS_FAIDX": {
-                    "samtools": "1.23"
-                },
-                "SAMTOOLS_INDEX": {
-                    "samtools": "1.23"
-                },
-                "SEQFU_STATS": {
-                    "seqfu": "1.22.3"
-                }
-            },
-            [
-                "bwamem2_index",
-                "bwamem2_index/bwamem2",
-                "bwamem2_index/bwamem2/genome.fa.0123",
-                "bwamem2_index/bwamem2/genome.fa.amb",
-                "bwamem2_index/bwamem2/genome.fa.ann",
-                "bwamem2_index/bwamem2/genome.fa.bwt.2bit.64",
-                "bwamem2_index/bwamem2/genome.fa.pac",
-                "bwamem2_mem",
-                "bwamem2_mem/SAMPLE_SINGLE_END_01.bam",
-                "bwamem2_mem/SAMPLE_SINGLE_END_01.bam.bai",
-                "fastqscreen",
-                "fastqscreen/SAMPLE_SINGLE_END_01_screen.html",
-                "fastqscreen/SAMPLE_SINGLE_END_01_screen.png",
-                "fastqscreen/SAMPLE_SINGLE_END_01_screen.txt",
-                "multiqc",
-                "multiqc/global_report",
-                "multiqc/global_report/multiqc_data",
-                "multiqc/global_report/multiqc_data/fastq_screen_plot.txt",
-                "multiqc/global_report/multiqc_data/llms-full.txt",
-                "multiqc/global_report/multiqc_data/multiqc.log",
-                "multiqc/global_report/multiqc_data/multiqc.parquet",
-                "multiqc/global_report/multiqc_data/multiqc_citations.txt",
-                "multiqc/global_report/multiqc_data/multiqc_data.json",
-                "multiqc/global_report/multiqc_data/multiqc_fastq_screen.txt",
-                "multiqc/global_report/multiqc_data/multiqc_picard_AlignmentSummaryMetrics.txt",
-                "multiqc/global_report/multiqc_data/multiqc_picard_baseContent.txt",
-                "multiqc/global_report/multiqc_data/multiqc_picard_quality_by_cycle.txt",
-                "multiqc/global_report/multiqc_data/multiqc_picard_quality_score_distribution.txt",
-                "multiqc/global_report/multiqc_data/multiqc_seqfu_mqc.txt",
-                "multiqc/global_report/multiqc_data/multiqc_software_versions.txt",
-                "multiqc/global_report/multiqc_data/multiqc_sources.txt",
-                "multiqc/global_report/multiqc_data/picard_MarkIlluminaAdapters_histogram.txt",
-                "multiqc/global_report/multiqc_data/picard_MeanQualityByCycle_histogram.txt",
-                "multiqc/global_report/multiqc_data/picard_MeanQualityByCycle_histogram_1.txt",
-                "multiqc/global_report/multiqc_data/picard_QualityScoreDistribution_histogram.txt",
-                "multiqc/global_report/multiqc_data/picard_alignment_readlength_plot.txt",
-                "multiqc/global_report/multiqc_data/picard_alignment_summary.txt",
-                "multiqc/global_report/multiqc_data/picard_base_distribution_by_cycle__Adenine.txt",
-                "multiqc/global_report/multiqc_data/picard_base_distribution_by_cycle__Cytosine.txt",
-                "multiqc/global_report/multiqc_data/picard_base_distribution_by_cycle__Guanine.txt",
-                "multiqc/global_report/multiqc_data/picard_base_distribution_by_cycle__Thymine.txt",
-                "multiqc/global_report/multiqc_data/picard_base_distribution_by_cycle__Undetermined.txt",
-                "multiqc/global_report/multiqc_data/picard_quality_by_cycle.txt",
-                "multiqc/global_report/multiqc_data/picard_quality_score_distribution.txt",
-                "multiqc/global_report/multiqc_plots",
-                "multiqc/global_report/multiqc_plots/pdf",
-                "multiqc/global_report/multiqc_plots/png",
-                "multiqc/global_report/multiqc_plots/svg",
-                "multiqc/global_report/multiqc_report.html",
-                "picard_collectmultiplemetrics",
-                "picard_collectmultiplemetrics/SAMPLE_SINGLE_END_01.CollectMultipleMetrics.alignment_summary_metrics",
-                "picard_collectmultiplemetrics/SAMPLE_SINGLE_END_01.CollectMultipleMetrics.base_distribution_by_cycle.pdf",
-                "picard_collectmultiplemetrics/SAMPLE_SINGLE_END_01.CollectMultipleMetrics.base_distribution_by_cycle_metrics",
-                "picard_collectmultiplemetrics/SAMPLE_SINGLE_END_01.CollectMultipleMetrics.quality_by_cycle.pdf",
-                "picard_collectmultiplemetrics/SAMPLE_SINGLE_END_01.CollectMultipleMetrics.quality_by_cycle_metrics",
-                "picard_collectmultiplemetrics/SAMPLE_SINGLE_END_01.CollectMultipleMetrics.quality_distribution.pdf",
-                "picard_collectmultiplemetrics/SAMPLE_SINGLE_END_01.CollectMultipleMetrics.quality_distribution_metrics",
-                "picard_collectmultiplemetrics/SAMPLE_SINGLE_END_01.CollectMultipleMetrics.read_length_histogram.pdf",
-                "pipeline_info",
-                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
-                "samtools_faidx",
-                "samtools_faidx/genome.fa.fai",
-                "seqfu_stats",
-                "seqfu_stats/SAMPLE_SINGLE_END_01_seqfu.tsv",
-                "seqfu_stats/SAMPLE_SINGLE_END_01_seqfu_mqc.txt"
-            ],
-            [
-                "genome.fa.0123:md5,8af61f4bc59cc2fe7b396db46a2173f3",
-                "genome.fa.amb:md5,657cfdf0628d140d645d8d01a24f0c5f",
-                "genome.fa.ann:md5,4439f90bdaaf2cdf9089c9f7f07b9d6b",
-                "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
-                "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
-                "SAMPLE_SINGLE_END_01_screen.png:md5,ad98ae0f39335aede67e0a233cf16616",
-                "SAMPLE_SINGLE_END_01_screen.txt:md5,588b1b1f2d307fae7272ab0819e4bac5",
-                "fastq_screen_plot.txt:md5,7d120ba49a8a9220f85efb05e55bfae1",
-                "multiqc_citations.txt:md5,5f52d7a0141e4234c6069df9ef575c9a",
-                "multiqc_fastq_screen.txt:md5,1cfa6a74e8e735bf59da770f6cb25959",
-                "multiqc_picard_AlignmentSummaryMetrics.txt:md5,3b5a594aed12f8c904c57ee0b75ae990",
-                "multiqc_picard_baseContent.txt:md5,06ef2cbc8f27964c4d84ce70bf75c152",
-                "multiqc_picard_quality_by_cycle.txt:md5,4cf5e6149b8feb8da1e6bb885e4a5829",
-                "multiqc_picard_quality_score_distribution.txt:md5,7f2087055d3268efd2f6de24aa556e2c",
-                "multiqc_seqfu_mqc.txt:md5,7ec63bc3465b3fc8e316e2443ec4c848",
-                "picard_MarkIlluminaAdapters_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
-                "picard_MeanQualityByCycle_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
-                "picard_MeanQualityByCycle_histogram_1.txt:md5,4cf5e6149b8feb8da1e6bb885e4a5829",
-                "picard_QualityScoreDistribution_histogram.txt:md5,7f2087055d3268efd2f6de24aa556e2c",
-                "picard_alignment_readlength_plot.txt:md5,5dbb52fb316ab11457e8b2bbd5eb6e2a",
-                "picard_alignment_summary.txt:md5,fcc65f1b88cadefaf095d0aec6ef7634",
-                "picard_base_distribution_by_cycle__Adenine.txt:md5,770aa7550d7d8f78c5ab8841a577078d",
-                "picard_base_distribution_by_cycle__Cytosine.txt:md5,264b9e23455de2556e8188951fc4c31d",
-                "picard_base_distribution_by_cycle__Guanine.txt:md5,b44066e25c38fc8345c7d1c878245602",
-                "picard_base_distribution_by_cycle__Thymine.txt:md5,55c04c3520e955d4d403635fe1dd01c5",
-                "picard_base_distribution_by_cycle__Undetermined.txt:md5,a65cb6ad0f510954d869c6c23d97b950",
-                "picard_quality_by_cycle.txt:md5,d754b0c0d9aac602637d0c923dc88834",
-                "picard_quality_score_distribution.txt:md5,d86da8fb7d48098fd5ec4a8419a8bc9e",
-                "genome.fa.fai:md5,6f4c0ce5258e6948135ad006e1f9ee1b",
-                "SAMPLE_SINGLE_END_01_seqfu.tsv:md5,33a9e44386f308d43881a58394b6b17c",
-                "SAMPLE_SINGLE_END_01_seqfu_mqc.txt:md5,e67e819605ab49182aacf1d676dc885d"
-            ],
-            [
-                "SAMPLE_SINGLE_END_01.bam:md5,9acd4428f95f70c1393671680ab9270f"
-            ],
-            "No warnings"
-        ],
-        "timestamp": "2026-03-18T14:03:58.058224812",
+        "timestamp": "2026-03-19T10:55:00.37620962",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

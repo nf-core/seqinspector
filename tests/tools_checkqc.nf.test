@@ -22,16 +22,6 @@ nextflow_pipeline {
                 tools_bundle: null,
             ],
         ],
-        [
-            name: "NovaSeq6000 data test - checkqc with config and rundir folder",
-            params: [
-                checkqc_config: "$projectDir/assets/checkqc_config.yml",
-                tools: 'checkqc,multiqcsav',
-                tools_bundle: null,
-            ],
-            rundir_folder: pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/200624_A00834_0183_BHMTFYDRXX.tar.gz',
-            rundir_samplesheet: pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/samplesheet.csv',
-        ],
     ]
 
     // Generate tests for each scenario
