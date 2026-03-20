@@ -5,7 +5,7 @@
 include { PICARD_COLLECTHSMETRICS       } from '../../../modules/nf-core/picard/collecthsmetrics'
 include { PICARD_COLLECTMULTIPLEMETRICS } from '../../../modules/nf-core/picard/collectmultiplemetrics'
 
-workflow QC_BAM {
+workflow BAM_QC {
     take:
     ch_bam_bai // channel: [mandatory] [ val(meta), path(bam), path(bai)]
     ch_reference_fasta // channel: [mandatory] [ val(meta), path(reference_fasta) ]

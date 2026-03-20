@@ -1,10 +1,10 @@
 nextflow_workflow {
 
-    name "Test Workflow QC_BAM"
-    script "subworkflows/local/qc_bam/main.nf"
-    workflow "QC_BAM"
+    name "Test Workflow BAM_QC"
+    script "subworkflows/local/bam_qc/main.nf"
+    workflow "BAM_QC"
     tag 'subworkflows'
-    tag 'qc_bam'
+    tag 'bam_qc'
 
     test("Test with picard_collectmultiplemetrics") {
 

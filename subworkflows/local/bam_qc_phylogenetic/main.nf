@@ -6,7 +6,7 @@ include { KRAKEN2_KRAKEN2        } from '../../../modules/nf-core/kraken2/kraken
 include { KRONA_KTIMPORTTAXONOMY } from '../../../modules/nf-core/krona/ktimporttaxonomy'
 include { KRONA_KTUPDATETAXONOMY } from '../../../modules/nf-core/krona/ktupdatetaxonomy'
 
-workflow PHYLOGENETIC_QC {
+workflow BAM_QC_PHYLOGENETIC {
     take:
     reads
     kraken2_db
