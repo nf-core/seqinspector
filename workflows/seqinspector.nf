@@ -4,7 +4,6 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-
 // modules
 include { BWAMEM2_MEM                  } from '../modules/nf-core/bwamem2/mem'
 include { CHECKQC                      } from '../modules/nf-core/checkqc'
@@ -22,8 +21,8 @@ include { SEQTK_SAMPLE                 } from '../modules/nf-core/seqtk/sample'
 include { TOULLIGQC                    } from '../modules/nf-core/toulligqc'
 
 // subworkflow
-include { PHYLOGENETIC_QC              } from '../subworkflows/local/phylogenetic_qc'
-include { QC_BAM                       } from '../subworkflows/local/qc_bam'
+include { BAM_QC                       } from '../subworkflows/local/bam_qc'
+include { BAM_QC_PHYLOGENETIC          } from '../subworkflows/local/bam_qc_phylogenetic'
 
 // functions
 include { methodsDescriptionText       } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
@@ -87,6 +86,7 @@ workflow SEQINSPECTOR {
     rundir_number = ch_samplesheet
         .map { meta, _reads -> [meta.rundir ? meta.rundir.simpleName : 'no_rundir'] }
         .flatten()
+        .unique()
         .collect()
         .map { rundir -> [rundir.size()] }
 
@@ -96,12 +96,12 @@ workflow SEQINSPECTOR {
         .combine(rundir_number)
         .map { rundir, meta, _rundir_number ->
             // Return for all the rundir specific processes and to mix with ch_multiqc_files
-            //   - meta map:
+            //   - meta: (map)
             //     - dirname: Simple name of the rundir, used for setting unique output names in publishDir
             //     - id: List all sample of the rundir
             //     - rundir_number: number of total rundir, no rundir counts as one
             //     - tags: List of merged tags, used for grouping MultiQC reports
-            //   - rundir
+            //   - rundir: path to rundir or null when no rundir
             [
                 [
                     dirname: rundir ? rundir.simpleName : 'no_rundir',
@@ -204,7 +204,6 @@ workflow SEQINSPECTOR {
     //
 
     SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] }.filter { sample_size })
-
     ch_sample = sample_size ? SEQTK_SAMPLE.out.reads : ch_samplesheet
 
     // STEP 04: MORE QC ON FASTQ FILES (CAN BE SUMSAMPLED)
@@ -214,7 +213,6 @@ workflow SEQINSPECTOR {
     //
 
     FASTQC(ch_sample.filter { 'fastqc' in tools })
-
     ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
 
     //
@@ -222,18 +220,21 @@ workflow SEQINSPECTOR {
     //
 
     FASTQE(ch_sample.filter { 'fastqe' in tools })
-
     ch_multiqc_files = ch_multiqc_files.mix(FASTQE.out.tsv)
 
     //
     // MODULE: FASTP for adapter trimming and quality filtering
-    //
+    //   Default behavior we currently don't support
+
+    def discard_trimmed_pass = true
+    def save_trimmed_fail = false
+    def save_merged = false
 
     FASTP(
         ch_sample.map { meta, reads -> [meta, reads, []] }.filter { 'fastp' in tools },
-        true,
-        false,
-        false,
+        discard_trimmed_pass,
+        save_trimmed_fail,
+        save_merged,
     )
 
     ch_multiqc_files = ch_multiqc_files.mix(FASTP.out.json)
@@ -244,10 +245,8 @@ workflow SEQINSPECTOR {
 
     //
     // MODULE: Run FASTQSCREEN
-    //
-
-    // Parse the reference info needed to create a FastQ Screen config file
-    // and transpose it into a tuple containing lists for each property
+    //   Parse the reference info needed to create a FastQ Screen config file
+    //   and transpose it into a tuple containing lists for each property
 
     FASTQSCREEN_FASTQSCREEN(
         ch_sample.filter { 'fastqscreen' in tools },
@@ -266,16 +265,16 @@ workflow SEQINSPECTOR {
 
     //
     // MODULE: BWAMEM2_MEM to align reads
-    //
+    //   Always sort bam
+
     def sort_bam = true
-    // we always sort bam
+
     BWAMEM2_MEM(
         ch_sample.filter { ('picard_collecthsmetrics' in tools) || ('picard_collectmultiplemetrics' in tools) },
         bwamem2_index,
         fasta_reference,
         sort_bam,
     )
-
 
     //
     // MODULE: SAMTOOLS_INDEX to create BAM index
@@ -284,10 +283,10 @@ workflow SEQINSPECTOR {
     SAMTOOLS_INDEX(BWAMEM2_MEM.out.bam)
 
     //
-    // SUBWORKFLOW: QC_BAM
-    // Run picard_collecthsmetrics and/or picard_collectmultiplemetrics
+    // SUBWORKFLOW: BAM_QC
+    //   Run picard_collecthsmetrics and/or picard_collectmultiplemetrics
 
-    QC_BAM(
+    BAM_QC(
         BWAMEM2_MEM.out.bam.join(SAMTOOLS_INDEX.out.index, failOnDuplicate: true, failOnMismatch: true),
         fasta_reference,
         ref_fai,
@@ -297,22 +296,22 @@ workflow SEQINSPECTOR {
         tools,
     )
 
-    ch_multiqc_files = ch_multiqc_files.mix(QC_BAM.out.multiple_metrics, QC_BAM.out.hs_metrics)
+    ch_multiqc_files = ch_multiqc_files.mix(BAM_QC.out.multiple_metrics, BAM_QC.out.hs_metrics)
 
     // STEP 07: METAGENOMIC QC
 
     //
-    // SUBWORKFLOW: PHYLOGENETIC_QC
-    // Run KRAKEN2 and produce KRONA plots
+    // SUBWORKFLOW: BAM_QC_PHYLOGENETIC
+    //   Run KRAKEN2 and produce KRONA plots
 
     if ('kraken2' in tools) {
-        PHYLOGENETIC_QC(
+        BAM_QC_PHYLOGENETIC(
             ch_samplesheet,
             kraken2_db,
             kraken2_save_reads,
             kraken2_save_readclassifications,
         )
-        ch_multiqc_files = ch_multiqc_files.mix(PHYLOGENETIC_QC.out.mqc)
+        ch_multiqc_files = ch_multiqc_files.mix(BAM_QC_PHYLOGENETIC.out.mqc)
     }
 
     // Collate and save software versions
