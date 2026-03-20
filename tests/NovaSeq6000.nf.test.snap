@@ -1022,7 +1022,7 @@
                 "  Tools selected to be run  : fastqc,fastqscreen,fq_lint,picard_collectmultiplemetrics,rundirparser,seqfu_stats",
                 "------------------------------------------------------",
                 "-[nf-core/seqinspector] Pipeline completed successfully-",
-                "WARN: rundir: 200624_A00834_0183_BHMTFYDRXX is a tar.gz",
+                "WARN: Rundir: 200624_A00834_0183_BHMTFYDRXX is a tar.gz",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (Sample1_01)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (Sample23_03)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (SampleA_02)",
