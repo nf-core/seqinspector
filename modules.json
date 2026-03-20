@@ -106,6 +106,11 @@
                         "git_sha": "a46713779030a5f508117080cbf4b693dd4c6e33",
                         "installed_by": ["modules"]
                     },
+                    "sequali": {
+                        "branch": "master",
+                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "installed_by": ["modules"]
+                    },
                     "toulligqc": {
                         "branch": "master",
                         "git_sha": "d9137377f4dd6246242829772eb1949b96de1ef0",
@@ -114,11 +119,6 @@
                     "untar": {
                         "branch": "master",
                         "git_sha": "447f7bc0fa41dfc2400c8cad4c0291880dc060cf",
-                        "installed_by": ["modules"]
-                    },
-                    "sequali": {
-                        "branch": "master",
-                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
                         "installed_by": ["modules"]
                     }
                 }
