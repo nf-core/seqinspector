@@ -328,7 +328,11 @@ workflow SEQINSPECTOR {
     // tuple  val(meta), path(xml), path(interop_bin, stageAs: "InterOp/*"), path(extra_multiqc_files, stageAs: "?/*"), path(multiqc_config, stageAs: "?/*"), path(multiqc_logo), path(replace_names), path(sample_names)
     //
 
-    ch_multiqc_global_files = ch_multiqc_files.map { _meta, files -> [files] }.collect().combine(ch_multiqc_extra_files_global.collect()).map { files -> [[id: 'seqinspector'], files] }
+    ch_multiqc_global_files = ch_multiqc_files
+        .map { _meta, files -> [files] }
+        .collect()
+        .combine(ch_multiqc_extra_files_global.collect())
+        .map { files -> [[id: 'seqinspector'], files] }
 
     MULTIQC_GLOBAL(
         ch_rundir.map { meta, rundir ->

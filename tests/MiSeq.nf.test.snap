@@ -2,9 +2,7 @@
     "Miseq data test (skip all tools)": {
         "content": [
             0,
-            {
-                
-            },
+            "No versions",
             [
                 "pipeline_info",
                 "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"
