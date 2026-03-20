@@ -194,7 +194,6 @@ workflow SEQINSPECTOR {
 
     ch_multiqc_files = ch_multiqc_files.mix(FASTP.out.json)
 
-    // ch_trimmed = 'fastp' in tools ? FASTP.out.reads : ch_sample
     //
     // MODULE: Run Sequali
     //
@@ -205,7 +204,6 @@ workflow SEQINSPECTOR {
             }
         )
         ch_multiqc_files = ch_multiqc_files.mix(SEQUALI.out.json)
-        SEQUALI.out.versions.into(channel.topic("versions"))
     }
 
     //
