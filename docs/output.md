@@ -59,7 +59,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 
 - `sequali/`
   - `*.html`: Sequali report containing quality metrics.
-  - `*.jsom`: JSON containing the Sequali data, used for generating MultiQC report.
+  - `*.json`: JSON containing the Sequali data, used for generating MultiQC report.
 
 </details>
 

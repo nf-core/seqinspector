@@ -202,14 +202,14 @@ workflow SEQINSPECTOR {
     //
     // MODULE: Run Sequali
     //
-    if ("sequali" in tools)) {
+    if ("sequali" in tools) {
         SEQUALI (
-            ch_sample_sized.map {
-                meta, subsampled -> [meta, subsampled]
+            ch_sample.map {
+                meta, reads -> [meta, reads]
             }
         )
         ch_multiqc_files = ch_multiqc_files.mix(SEQUALI.out.json)
-        ch_versions = ch_versions.mix(SEQUALI.out.versions.first())
+        SEQUALI.out.versions.into(channel.topic("versions"))
     }
 
     //
