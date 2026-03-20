@@ -76,145 +76,89 @@ workflow SEQINSPECTOR {
         ch_samplesheet = FQ_LINT.out.lint.join(ch_samplesheet).map { meta, _fq_lint, reads -> [meta, reads] }
     }
 
-    //
-    // MODULE: Parse rundir info
-    //
-    if ('rundirparser' in tools) {
+    // Parse RUNDIR INFO
 
-        // Branch the samplesheet channel based on rundir presence
-        ch_rundir_branch = ch_samplesheet.branch { meta, _reads ->
-            with_rundir: meta.rundir.size() > 0
-            without_rundir: true
-        }
+    // Calculate the global rundir_number for the entire samplesheet
+    rundir_number = ch_samplesheet
+        .map { meta, _reads -> [meta.rundir ? meta.rundir.simpleName : 'no_rundir'] }
+        .flatten()
+        .collect()
+        .map { rundir -> [rundir.size()] }
 
-        // Log warnings for samples without rundir
-        ch_rundir_branch.without_rundir.subscribe { meta, _reads ->
-            log.warn("Sample '${meta.id}' does not have a rundir specified")
-        }
-
-        // From samplesheet channel serving (sampleMetaObj, sampleReadsPath) tuples:
-        // --> Create new rundir channel serving (rundirMetaObj, rundirPath) tuples
-        ch_rundir = ch_rundir_branch.with_rundir
-            .map { meta, _reads -> [meta.rundir, meta] }
-            .groupTuple()
-            .map { rundir, metas ->
-                // Collect all unique tags into a list
-                def all_tags = metas.collect { meta -> meta.tags }.flatten().unique()
-                // Create a new meta object whose attributes are...
-                //  1. tags: The list of merged tags, used for grouping MultiQC reports
-                //  2. dirname: The simple name of the rundir, used for setting unique output names in publishDir
-                def dir_meta = [tags: all_tags, dirname: rundir.simpleName]
-                // Return the new structure, to...
-                //  1. Feed into rundir specific processes
-                //  2. Mix with the ch_multiqc_files channel downstream
-                [dir_meta, rundir]
-            }
-
-        ch_rundir.ifEmpty { log.warn("No samples with rundir found, skipping RUNDIRPARSER") }
-
-        RUNDIRPARSER(ch_rundir)
-
-        ch_multiqc_files = ch_multiqc_files.mix(RUNDIRPARSER.out.multiqc)
-    }
-
-    //
-    // MODULE: Determine whether to run Multiqc_global or Multiqc_sav
-    //
-
-    if ('multiqcsav' in tools) {
-        // Get the number of rundir
-        rundir_number = ch_samplesheet
-            .map { meta, _reads -> [meta.rundir ? meta.rundir.simpleName : 'no_rundir'] }
-            .flatten()
-            .unique()
-            .collect()
-            .map { rundir -> [rundir.size()] }
-
-        ch_rundir = ch_samplesheet
-            .map { meta, _reads -> [meta.rundir ?: null, meta] }
-            .groupTuple()
-            .combine(rundir_number)
-            .map { rundir, meta, _rundir_number ->
-                // Return for all the rundir specific processes and to mix with ch_multiqc_files
-                //   - meta map:
-                //     - dirname: Simple name of the rundir, used for setting unique output names in publishDir
-                //     - id: List of all sample ids for the rundir
-                //     - rundir_number: Total number of rundir, no rundir will count as 1
-                //     - tags: List of merged tags, used for grouping MultiQC reports
-                //   - rundir
-
+    ch_rundir = ch_samplesheet
+        .map { meta, _reads -> [meta.rundir ?: null, meta] }
+        .groupTuple()
+        .combine(rundir_number)
+        .map { rundir, meta, _rundir_number ->
+            // Return for all the rundir specific processes and to mix with ch_multiqc_files
+            //   - meta map:
+            //     - dirname: Simple name of the rundir, used for setting unique output names in publishDir
+            //     - id: List all sample of the rundir
+            //     - rundir_number: number of total rundir, no rundir counts as one
+            //     - tags: List of merged tags, used for grouping MultiQC reports
+            //   - rundir
+            [
                 [
-                    [
-                        dirname: rundir ? rundir.simpleName : 'no_rundir',
-                        id: rundir ? false : meta.collect { meta_ -> meta_.id }.flatten().unique().sort(),
-                        rundir_number: _rundir_number,
-                        tags: meta.collect { meta_ -> meta_.tags }.flatten().unique(),
-                    ],
-                    rundir ? file(rundir, checkIfExists: true) : null,
-                ]
-            }
+                    dirname: rundir ? rundir.simpleName : 'no_rundir',
+                    id: rundir ? false : meta.collect { meta_ -> meta_.id }.flatten().unique().sort(),
+                    rundir_number: _rundir_number,
+                    tags: meta.collect { meta_ -> meta_.tags }.flatten().unique(),
+                ],
+                rundir ? file(rundir, checkIfExists: true) : null,
+            ]
+        }
 
-        // Log warnings for samples without rundir
-        ch_rundir.map { meta, _rundir ->
-            if (!_rundir) {
+    // Log warnings for samples without rundir
+    if (('checkqc' in tools) || ('multiqcsav' in tools) || ('rundirparser' in tools)) {
+        ch_rundir.map { meta, rundir ->
+            if (!rundir) {
                 log.warn("No rundir for sample(s): ${meta.id.join(', ')}")
             }
         }
 
-        if (tools.size == 1) {
-            ch_multiqc_files = ch_multiqc_files.mix(ch_rundir.map { meta, _rundir -> [meta, []] })
+        if ('checkqc' in tools) {
+            ch_rundir
+                .filter { _meta, rundir -> rundir }
+                .ifEmpty { log.warn("No samples with rundir found, skipping CHECKQC") }
         }
 
-        ch_rundir
-            .filter { _meta, rundir -> rundir }
-            .ifEmpty { log.warn("No samples with rundir found, skipping MULTIQC_SAV") }
-    }
-
-    // MODULE: CheckQC
-    //
-    if ('checkqc' in tools) {
-
-        // Branch the samplesheet channel based on rundir presence
-        ch_rundir_branch = ch_samplesheet.branch { meta, _reads ->
-            with_rundir: meta.rundir.size() > 0
-            without_rundir: true
-        }
-
-        // Log warnings for samples without rundir
-        ch_rundir_branch.without_rundir.subscribe { meta, _reads ->
-            log.warn("Sample '${meta.id}' does not have a rundir specified")
-        }
-
-        // From samplesheet channel serving (sampleMetaObj, sampleReadsPath) tuples:
-        // --> Create new rundir channel serving (rundirMetaObj, rundirPath) tuples
-        ch_rundir = ch_rundir_branch.with_rundir
-            .map { meta, _reads -> [meta.rundir, meta] }
-            .groupTuple()
-            .map { rundir, metas ->
-                // Collect all unique tags into a list
-                def all_tags = metas.collect { meta -> meta.tags }.flatten().unique()
-                // Create a new meta object whose attributes are...
-                //  1. tags: The list of merged tags, used for grouping MultiQC reports
-                //  2. dirname: The simple name of the rundir, used for setting unique output names in publishDir
-                def dir_meta = [tags: all_tags, dirname: rundir.simpleName]
-                // Return the new structure, to...
-                //  1. Feed into rundir specific processes
-                //  2. Mix with the ch_multiqc_files channel downstream
-                [dir_meta, rundir]
+        if ('multiqcsav' in tools) {
+            // To get multiQC to run even when no tools are being run
+            if (tools.size == 1) {
+                ch_multiqc_files = ch_multiqc_files.mix(ch_rundir.map { meta, _rundir -> [meta, []] })
             }
 
-        ch_rundir.ifEmpty { log.warn("No samples with rundir found, skipping CHECKQC") }
+            ch_rundir
+                .filter { _meta, rundir -> rundir }
+                .ifEmpty { log.warn("No samples with rundir found, skipping MULTIQC_SAV") }
+        }
 
-        CHECKQC(
-            ch_rundir,
-            checkqc_config
-                ? file(checkqc_config, checkIfExists: true)
-                : [],
-        )
-
-        ch_multiqc_files = ch_multiqc_files.mix(CHECKQC.out.report)
+        if ('rundirparser' in tools) {
+            ch_rundir
+                .filter { _meta, rundir -> rundir }
+                .ifEmpty { log.warn("No samples with rundir found, skipping RUNDIRPARSER") }
+        }
     }
 
+    //
+    // MODULE: CHECKQC
+    //
+
+    CHECKQC(
+        ch_rundir.filter { _meta, rundir -> (rundir && 'checkqc' in tools) },
+        checkqc_config
+            ? file(checkqc_config, checkIfExists: true)
+            : [],
+    )
+
+    ch_multiqc_files = ch_multiqc_files.mix(CHECKQC.out.report)
+
+    //
+    // MODULE: RUNDIRPARSER
+    //
+
+    RUNDIRPARSER(ch_rundir.filter { _meta, rundir -> (rundir && 'rundirparser' in tools) })
+    ch_multiqc_files = ch_multiqc_files.mix(RUNDIRPARSER.out.multiqc)
 
     //
     // MODULE: Run Seqtk sample
@@ -386,20 +330,21 @@ workflow SEQINSPECTOR {
 
     ch_multiqc_global_files = ch_multiqc_files.map { _meta, files -> [files] }.collect().combine(ch_multiqc_extra_files_global.collect()).map { files -> [[id: 'seqinspector'], files] }
 
-    // Run MULTIQC SAV
     MULTIQC_GLOBAL(
         ch_rundir.map { meta, rundir ->
             def xml = []
             def interop = []
 
             if ((rundir) && (('checkqc' in tools) || ('multiqcsav' in tools) || ('rundirparser' in tools))) {
-                if (meta.rundir_number > 1) {
+                if ((meta.rundir_number > 1) && ('multiqcsav' in tools)) {
                     log.warn("More than one rundir, or sample(s) missing rundir, skipping skipping MULTIQC_SAV")
                 }
-                else if (rundir.toString().endsWith('tar.gz')) {
-                    log.warn("rundir: ${rundir.toString().name()} is a tar.gz")
+
+                if (rundir.toString().endsWith('tar.gz')) {
+                    log.warn("Rundir: ${meta.dirname} is a tar.gz")
                 }
-                else if ('multiqcsav' in tools) {
+
+                if ('multiqcsav' in tools) {
                     interop = files(file(rundir).resolve("InterOp/*.bin"), checkIfExists: true)
                     xml = files(file(rundir).resolve("*.xml"), checkIfExists: true)
                 }
@@ -423,14 +368,15 @@ workflow SEQINSPECTOR {
         }
     )
 
-    ch_multiqc_extra_files_tag = ch_multiqc_extra_files.mix(
-        ch_tags.toList().map { tag_list -> reportIndexMultiqc(tag_list, false) }.collectFile(name: 'multiqc_index_mqc.yaml')
+    // Group samples by tag
+
+    multiqc_extra_files_per_tag = ch_tags.combine(
+        ch_multiqc_extra_files.mix(
+            ch_tags.toList().map { tag_list -> reportIndexMultiqc(tag_list, false) }.collectFile(name: 'multiqc_index_mqc.yaml')
+        )
     )
 
-    multiqc_extra_files_per_tag = ch_tags.combine(ch_multiqc_extra_files_tag)
-
-    // Group samples by tag
-    tagged_mqc_files = ch_tags
+    ch_multiqc_per_tag_files = ch_tags
         .combine(ch_multiqc_files)
         .filter { sample_tag, meta, _sample -> sample_tag in meta.tags }
         .map { sample_tag, _meta, sample -> [sample_tag, sample] }
@@ -450,15 +396,16 @@ workflow SEQINSPECTOR {
         }
         .map { file -> [(file =~ /\[TAG:(.+)\]/)[0][1], file] }
         .join(mqc_by_tag)
-        .map { sample_tag, config, samples ->
-            [[id: sample_tag], samples.flatten(), config]
-        }
+
+    //
+    // Run MultiQC per tag
+    //
 
     MULTIQC_PER_TAG(
-        tagged_mqc_files.map { meta, files, config ->
+        ch_multiqc_per_tag_files.map { sample_tag, config, files ->
             [
-                meta,
-                files,
+                [id: sample_tag],
+                files.flatten(),
                 [
                     config,
                     multiqc_config

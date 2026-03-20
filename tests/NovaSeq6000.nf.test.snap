@@ -1022,6 +1022,7 @@
                 "  Tools selected to be run  : fastqc,fastqscreen,fq_lint,picard_collectmultiplemetrics,rundirparser,seqfu_stats",
                 "------------------------------------------------------",
                 "-[nf-core/seqinspector] Pipeline completed successfully-",
+                "WARN: rundir: 200624_A00834_0183_BHMTFYDRXX is a tar.gz",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (Sample1_01)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (Sample23_03)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (SampleA_02)",
@@ -1063,7 +1064,7 @@
                 "[NXF_HASH] Submitted process > PREPARE_GENOME:SAMTOOLS_FAIDX (genome.fa)"
             ]
         ],
-        "timestamp": "2026-03-16T09:53:50.996018165",
+        "timestamp": "2026-03-20T12:49:50.330891522",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -2064,12 +2065,14 @@
                 "Undetermined_05.bam:md5,2841f21f7f70634f21505ac803ff8221",
                 "sampletest_04.bam:md5,3d1cd701ad22dacc6b194ea16582d647"
             ],
-            "No warnings"
+            [
+                "WARN: Rundir: 200624_A00834_0183_BHMTFYDRXX is a tar.gz"
+            ]
         ],
-        "timestamp": "2026-03-13T15:54:08.436701914",
+        "timestamp": "2026-03-20T12:51:02.322742717",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.4"
         }
     },
     "NovaSeq6000 data test relative sample size": {
@@ -3067,12 +3070,14 @@
                 "Undetermined_05.bam:md5,691b83f3c015cf5f2b28ab6d0581d03c",
                 "sampletest_04.bam:md5,b13db1c95389474f089f870b906d3fc0"
             ],
-            "No warnings"
+            [
+                "WARN: Rundir: 200624_A00834_0183_BHMTFYDRXX is a tar.gz"
+            ]
         ],
-        "timestamp": "2026-03-13T15:55:15.892319993",
+        "timestamp": "2026-03-20T12:52:14.124210556",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.4"
         }
     },
     "NovaSeq6000 data test - No rundirs": {
@@ -4025,18 +4030,14 @@
                 "sampletest_04.bam:md5,f80371e37421d97499b3bfd55221ed00"
             ],
             [
-                "WARN: No samples with rundir found, skipping RUNDIRPARSER",
-                "WARN: Sample 'Sample1_01' does not have a rundir specified",
-                "WARN: Sample 'Sample23_03' does not have a rundir specified",
-                "WARN: Sample 'SampleA_02' does not have a rundir specified",
-                "WARN: Sample 'Undetermined_05' does not have a rundir specified",
-                "WARN: Sample 'sampletest_04' does not have a rundir specified"
+                "WARN: No rundir for sample(s): Sample1_01, Sample23_03, SampleA_02, Undetermined_05, sampletest_04",
+                "WARN: No samples with rundir found, skipping RUNDIRPARSER"
             ]
         ],
-        "timestamp": "2026-03-13T15:57:07.115797171",
+        "timestamp": "2026-03-20T12:06:51.271912464",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.4"
         }
     },
     "NovaSeq6000 data test sample size exceeds available reads": {
@@ -5035,6 +5036,7 @@
                 "sampletest_04.bam:md5,f80371e37421d97499b3bfd55221ed00"
             ],
             [
+                "WARN: Rundir: 200624_A00834_0183_BHMTFYDRXX is a tar.gz",
                 "WARN: Sample1_01: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
                 "WARN: Sample23_03: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
                 "WARN: SampleA_02: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
@@ -5042,10 +5044,10 @@
                 "WARN: sampletest_04: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads."
             ]
         ],
-        "timestamp": "2026-03-13T15:56:14.759821206",
+        "timestamp": "2026-03-20T12:53:30.79418782",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.4"
         }
     },
     "NovaSeq6000 data test - tag collision": {
