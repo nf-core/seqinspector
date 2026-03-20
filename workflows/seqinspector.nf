@@ -358,7 +358,7 @@ workflow SEQINSPECTOR {
     // tuple  val(meta), path(xml), path(interop_bin, stageAs: "InterOp/*"), path(extra_multiqc_files, stageAs: "?/*"), path(multiqc_config, stageAs: "?/*"), path(multiqc_logo), path(replace_names), path(sample_names)
     //
 
-    ch_multiqc_files = ch_multiqc_files.map { _meta, files -> [files] }.collect().combine(ch_multiqc_extra_files_global.collect()).map { files -> [[id: 'seqinspector'], files] }
+    ch_multiqc_global_files = ch_multiqc_files.map { _meta, files -> [files] }.collect().combine(ch_multiqc_extra_files_global.collect()).map { files -> [[id: 'seqinspector'], files] }
 
     MULTIQC_GLOBAL(
         ch_rundir.map { meta, rundir ->
@@ -378,7 +378,7 @@ workflow SEQINSPECTOR {
                 }
             }
             return [[id: 'seqinspector'], xml, interop]
-        }.join(ch_multiqc_files, by: 0).map { meta, xml, interop, multiqc_files ->
+        }.join(ch_multiqc_global_files, by: 0).map { meta, xml, interop, multiqc_files ->
             def final_xml = xml.flatten().unique()
             def final_interop = interop.flatten().unique()
             return [
@@ -404,7 +404,7 @@ workflow SEQINSPECTOR {
         )
     )
 
-    tagged_mqc_files = ch_tags
+    ch_multiqc_per_tag_files = ch_tags
         .combine(ch_multiqc_files)
         .filter { sample_tag, meta, _sample -> sample_tag in meta.tags }
         .map { sample_tag, _meta, sample -> [sample_tag, sample] }
@@ -430,7 +430,7 @@ workflow SEQINSPECTOR {
     //
 
     MULTIQC_PER_TAG(
-        tagged_mqc_files.map { sample_tag, config, files ->
+        ch_multiqc_per_tag_files.map { sample_tag, config, files ->
             [
                 [id: sample_tag],
                 files.flatten(),
