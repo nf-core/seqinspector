@@ -1,0 +1,53 @@
+def pipelines_testdata_base_path = 'https://raw.githubusercontent.com/nf-core/test-datasets/'
+def projectDir = new File('.').absolutePath
+
+nextflow_pipeline {
+
+    name "Test pipeline"
+    script "../main.nf"
+
+    def test_scenario = [
+        [
+            name: "NovaSeq6000 data test",
+            params: [],
+            snapshot: 'stderr,stdout'
+        ],
+        [
+            name: "NovaSeq6000 data test sample size",
+            params: [
+                sample_size: 90
+            ]
+        ],
+        [
+            name: "NovaSeq6000 data test relative sample size",
+            params: [
+                sample_size: 0.9
+            ]
+        ],
+        [
+            name: "NovaSeq6000 data test sample size exceeds available reads",
+            params: [
+                sample_size: 120
+            ]
+        ],
+        [
+            name: "NovaSeq6000 data test - No rundirs",
+            params: [
+                input: pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/samplesheet_no_rundirs.csv'
+            ]
+        ],
+        [
+            name: "NovaSeq6000 data test - tag collision",
+            params: [
+                input: pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/samplesheet_tag_collision.csv',
+                tools_bundle: null,
+                tools: 'fastqc',
+            ]
+        ],
+    ]
+
+    // Generate tests for each scenario
+    test_scenario.each { scenario ->
+        test(scenario.name, UTILS.getTest(scenario))
+    }
+}

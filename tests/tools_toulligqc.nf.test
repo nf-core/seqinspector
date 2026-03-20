@@ -1,0 +1,26 @@
+def pipelines_testdata_base_path = 'https://raw.githubusercontent.com/nf-core/test-datasets/'
+
+nextflow_pipeline {
+
+    name "Test pipeline"
+    script "../main.nf"
+    profile "emulate_amd64,test"
+
+    def test_scenario = [
+        [
+            name: "MiSeq data test (single end reads), toulligqc fail",
+            params: [
+                input: pipelines_testdata_base_path + 'seqinspector/testdata/MiSeq/samplesheet.csv',
+                tools: "toulligqc"
+            ],
+            failure: true,
+            snapshot_include: 'ToulligQC',
+            snapshot: 'stdout,stderr'
+        ]
+    ]
+
+    // Generate tests for each scenario
+    test_scenario.each { scenario ->
+        test(scenario.name, UTILS.getTest(scenario))
+    }
+}

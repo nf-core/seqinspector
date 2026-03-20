@@ -1,0 +1,65 @@
+{
+    "NovaSeq6000 data test - args for fq/lint": {
+        "content": [
+            5,
+            {
+                "FQ_LINT": {
+                    "fq": "0.12.0"
+                }
+            },
+            [
+                "fq",
+                "fq/Sample1_01.fq_lint.txt",
+                "fq/Sample23_03.fq_lint.txt",
+                "fq/SampleA_02.fq_lint.txt",
+                "fq/Undetermined_05.fq_lint.txt",
+                "fq/sampletest_04.fq_lint.txt",
+                "pipeline_info",
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"
+            ],
+            "No stable content",
+            "No BAM files",
+            "No warnings"
+        ],
+        "timestamp": "2026-03-16T09:40:34.164513363",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
+    },
+    "NovaSeq6000 data test - Fail fq_lint": {
+        "content": [
+            [
+                "pipeline_info"
+            ],
+            "No stable content",
+            "No BAM files",
+            "No warnings"
+        ],
+        "timestamp": "2026-03-16T09:40:03.529857594",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
+    },
+    "NovaSeq6000 data test - fq_lint force success": {
+        "content": [
+            0,
+            {
+                
+            },
+            [
+                "pipeline_info",
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"
+            ],
+            "No stable content",
+            "No BAM files",
+            "No warnings"
+        ],
+        "timestamp": "2026-03-16T09:39:43.387936168",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
+    }
+}

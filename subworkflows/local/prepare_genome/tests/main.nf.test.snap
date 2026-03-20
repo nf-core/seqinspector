@@ -1,0 +1,75 @@
+{
+    "[fasta, [], dict, []] - picard": {
+        "content": [
+            {
+                "bwamem2": [
+                    [
+                        [
+                            "reference.fasta.0123:md5,0f0ff4414949e6787a25a563f19e2a3b",
+                            "reference.fasta.amb:md5,0a85644af00f9a856d874381d24e7803",
+                            "reference.fasta.ann:md5,8fdb46970ca95a4ef54f5f1a02d233cd",
+                            "reference.fasta.bwt.2bit.64:md5,3c0df9450afc5cb0ad5e85870829d9d0",
+                            "reference.fasta.pac:md5,96b449e1316067fdfba91b1399687bc2"
+                        ]
+                    ]
+                ],
+                "fai": [
+                    "reference.fasta.fai:md5,bf4047e05f95deb372eb8ffd601cbc29"
+                ],
+                "fasta": [
+                    "reference.fasta"
+                ]
+            }
+        ],
+        "timestamp": "2026-03-11T14:13:54.972231147",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
+    },
+    "[fasta, [], [], []] - picard": {
+        "content": [
+            {
+                "bwamem2": [
+                    [
+                        [
+                            "reference.fasta.0123:md5,0f0ff4414949e6787a25a563f19e2a3b",
+                            "reference.fasta.amb:md5,0a85644af00f9a856d874381d24e7803",
+                            "reference.fasta.ann:md5,8fdb46970ca95a4ef54f5f1a02d233cd",
+                            "reference.fasta.bwt.2bit.64:md5,3c0df9450afc5cb0ad5e85870829d9d0",
+                            "reference.fasta.pac:md5,96b449e1316067fdfba91b1399687bc2"
+                        ]
+                    ]
+                ],
+                "dict": [
+                    "genome.dict"
+                ],
+                "fai": [
+                    "reference.fasta.fai:md5,bf4047e05f95deb372eb8ffd601cbc29"
+                ],
+                "fasta": [
+                    "reference.fasta"
+                ]
+            }
+        ],
+        "timestamp": "2026-03-11T14:10:57.158082934",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
+    },
+    "[fasta, [], [], []] - no picard": {
+        "content": [
+            {
+                "fasta": [
+                    "reference.fasta"
+                ]
+            }
+        ],
+        "timestamp": "2026-03-11T13:48:35.379329888",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
+    }
+}

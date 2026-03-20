@@ -2,15 +2,26 @@
 
 ## :warning: Please read this documentation on the nf-core website: [https://nf-co.re/seqinspector/usage](https://nf-co.re/seqinspector/usage)
 
-> _Documentation of pipeline parameters is generated automatically from the pipeline schema and can no longer be found in markdown files._
-
 ## Introduction
 
-<!-- TODO nf-core: Add documentation about anything specific to running your pipeline. For general topics, please point to (and add to) the main nf-core website. -->
+### General points
+
+The nf-core/seqinspector pipeline is a general QC pipeline for sequencing data.
+The current version only supports data in fastq format.
+The pipeline is meant to include a large amount of possible QC tools to chose from, but not all of them may be relevant to your data.
+As such we highly recommend to familiarize yourself with the different QC tools available and to remove any QC tool you would like to exclude with the `--skip-tools` command line parameter.
+For repeated use we suggest to create a params file containing the `--skip-tools` parameters (for details see the "Running the pipeline" section).
+Be aware that some tools are skipped by default and will need to be included in the list of skipped tools when curating your own list.
+To identify defaults included or excluded please check out [the overview compatibility between tools and data type table](../#compatibility-between-tools-and-data-type).
+
+### What nf-core/seqinspector is not for
+
+The results of the nf-core/seqinspector pipeline are not meant to be used for any downstream analysis, but are exclusively for QC purposes.
+Even tools that may be used in other pipelines as a starting point for analysis are run in a QC perspective, most likely with a downsampled input.
 
 ## Samplesheet input
 
-You will need to create a samplesheet with information about the samples you would like to analyse before running the pipeline. Use this parameter to specify its location.
+You will need to create a samplesheet with information about the samples/fastq files you would like to analyse before running the pipeline. Use this parameter to specify its location.
 
 ```bash
 --input '[path to samplesheet file]'
@@ -20,7 +31,7 @@ You will need to create a samplesheet with information about the samples you wou
 
 The following simple run dir structure...
 
-```
+```bash
 run_dir
 ├── sample1_lane1_group1_r1.fq.gz
 ├── sample2_lane1_group1_r1.fq.gz
@@ -36,7 +47,6 @@ sample1 path/to/run_dir/sample1_lane1_group1_r1.fq.gz         path/to/run_dir pr
 sample2 path/to/run_dir/sample2_lane1_group1_r1.fq.gz         path/to/run_dir project1:group1
 sample3 path/to/run_dir/sample3_lane2_group2_r1.fq.gz         path/to/run_dir project1:group2
 sample4 path/to/run_dir/sample4_lane2_group3_r1.fq.gz         path/to/run_dir control
-
 ```
 
 | Column    | Description                                                                                                                                                                            |
@@ -44,14 +54,30 @@ sample4 path/to/run_dir/sample4_lane2_group3_r1.fq.gz         path/to/run_dir co
 | `sample`  | Custom sample name. This entry will be identical for multiple sequencing libraries/runs from the same sample. Spaces in sample names are automatically converted to underscores (`_`). |
 | `fastq_1` | Full path to FastQ file for Illumina short reads 1. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                             |
 | `fastq_2` | Full path to FastQ file for Illumina short reads 2. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz" (optional).                                                  |
-| `rundir`  | Path to the runfolder containing extra information about the sequencing run (optional).                                                                                                |
+| `rundir`  | Path to the runfolder containing extra information about the sequencing run (optional\*).                                                                                              |
 | `tags`    | Colon-separated list of tags to group samples in special reports.                                                                                                                      |
+
+\*If rundir is not provided, the RUNDIRPARSER module is skipped and the sequencing run metadata is not collected.
 
 Another [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
 
+### tags
+
+Tags can be used to group samples in special reports, for example in the MultiQC per tag report.
+They are optional and can be used for any purpose you like.
+For example, you could use them to group samples by experimental condition, or by sequencing run.
+Tags are meant to be case-sensitive and should be separated by a colon (`:`) if you want to use multiple tags for a sample.
+Some file systems are not case sensitive, e.g. on MacOS. We recommend precaution when using similar tags with different cases on such file systems.
+A warning will be displayed if you have multiple tags that only differ in case, but the pipeline will not stop and will run as normal.
+
+```bash
+WARN: Tag name collision: [lane1, Lane1, LANE1]
+WARN: On a MacOS system these tags will be considered as one
+```
+
 ## Running the pipeline
 
-The typical command for running the pipeline is as follows:
+A typical command for running the pipeline is as follows:
 
 ```bash
 nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --genome GRCh37 -profile docker
@@ -92,17 +118,171 @@ genome: 'GRCh37'
 
 You can also generate such `YAML`/`JSON` files via [nf-core/launch](https://nf-co.re/launch).
 
-Optionally, the `sample_size` parameter allows you to subset a random number of reads to be analysed. Note that it refers to an absolute number.
+### Sample size selection
+
+Optionally, the `sample_size` parameter allows you to subset a random number of reads to be analysed.
+Both absolute numbers (e.g 100) and relative numbers (e.g 0.25) can be specified.
 
 ```bash
 nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 -profile docker
 ```
 
-### Skipping tools
+### Tools selection
 
-Some tools might not be compatible with your data. In this case it might be desired to skip some of them. This can be done easily by providing a comma-separated list of tools to be skipped with the `--skip_tools` parameter.
+Tools selection is an integral part of sequinspector and, as the pipeline grows, it will become more and more important to select tools of interest.
+By **default**, the pipeline does run a subsection of tools as defined in the `utils_nfcore_seqinspector_pipeline` subworkflow.
+Currently, the following tools are run as default:
 
-In case you want to make this more permanent, it is recommended to specify this in a params file, or even in your own nextflow configuration file. The nextflow configuration file can also be use to customise tool arguments. See official [nexflow](https://www.nextflow.io/docs/latest/config.html) and [nf-core](https://nf-co.re/docs/usage/configuration#customising-tool-arguments) documentation for further details.
+- fastqc
+- fastqscreen
+- picard_collectmultiplemetrics
+- rundirparser
+- seqfu_stats
+
+#### Choose specific tools
+
+It is possible to choose individual tools to run using the `--tools` parameter and add all desired tools in a comma separated string. For example:
+
+```showLineNumbers
+--tools fastqscreen,rundirparser
+```
+
+Be aware that the default tools will still be run. In order to ONLY run the selection, one has to specify `--tools_bundle null` as well:
+
+```showLineNumbers
+--tools fastqscreen,rundirparser --tools_bundle null
+```
+
+Currently the `tools` param can have the following values: fastqc, fastqscreen, picard_collecthsmetrics, picard_collectmultiplemetrics, rundirparser and seqfu_stats.
+
+#### Skip specific tools
+
+Some tools might not be compatible with your data or you do not require all tools that are going to be run. In this case you can skip them by providing a comma-separated list of tools to be skipped with the `--skip_tools` parameter.
+
+The nextflow configuration file can also be use to customise tool arguments.
+See official [nexflow](https://www.nextflow.io/docs/latest/config.html) and [nf-core](https://nf-co.re/docs/usage/configuration#customising-tool-arguments) documentation for further details.
+
+#### Choose pre-defined bundles of tools
+
+It is possible to also chose bundles of pre-specified tools using the `tools_bundle` parameter. It is still possible to remove tools using the `skip_tools` parameters or add additional tools with the `tools` parameter when chosing a predefined setup with `tools_bundle`.
+
+Currently, the following bundles are available:
+
+<details>
+<summary>default</summary>
+
+Requirements:
+
+- specification of the `genome` parameter
+- specification of the Illumina runfolder
+
+Tools:
+
+- fastqc
+- fastqscreen
+- picard_collectmultiplemetrics
+- rundirparser
+- seqfu_stats
+
+</details>
+
+<details>
+<summary>all</summary>
+
+Requirements:
+
+- specification of the `genome` parameter
+- specification of the Illumina runfolder
+
+Tools:
+
+- checkQC
+- fastqc
+- fastqscreen
+- picard_collecthsmetrics
+- picard_collectmultiplemetrics
+- rundirparser
+- seqfu_stats
+- toulligqc
+
+</details>
+
+<details>
+<summary>minimal</summary>
+
+Requirements:
+
+- specification of the `genome` parameter
+
+Tools:
+
+- fastqc
+- fastqscreen
+- picard_collectmultiplemetrics
+- seqfu_stats
+</details>
+
+<details>
+<summary>bam</summary>
+
+Requirements:
+
+- specification of the `genome` parameter
+
+Tools:
+
+- picard_collecthsmetrics
+- picard_collectmultiplemetrics
+
+</details>
+
+<details>
+<summary>fastq</summary>
+
+Tools:
+
+- fastqc
+- fastqscreen
+
+</details>
+
+<details>
+<summary>illumina</summary>
+
+Requirements:
+
+- Specification of the Illumina runfolder
+
+Tools:
+
+- checkQC
+- rundirparser
+- seqfu_stats
+</details>
+
+<details>
+<summary>ont</summary>
+
+Tools:
+
+- fastqc
+- fastqscreen
+- seqfu_stats
+- toulligqc
+
+</details>
+
+### Available functionality and tools
+
+#### BWAMEM2 and alignment-based QC tools
+
+If no genome or fasta file is provided, either with `--genome` or `--fasta`,
+the pipeline will not be able to run the alignment step with BWAMEM2,
+and will skip all tools that depend on the alignment file (eg. `picard CollectHsMetrics` and `picard CollectHsMetrics`).
+
+#### Hybrid-selection QC metrics
+
+The pipeline supports hybrid-selection (HS) QC metrics collection via [picard CollectHSmetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard).
 
 ### Updating the pipeline
 
@@ -123,7 +303,7 @@ This version number will be logged in reports when you run the pipeline, so that
 To further assist in reproducibility, you can use share and reuse [parameter files](#running-the-pipeline) to repeat pipeline runs with the same settings without having to write out a command with every single parameter.
 
 > [!TIP]
-> If you wish to share such profile (such as upload as supplementary material for academic publications), make sure to NOT include cluster specific paths to files, nor institutional specific profiles.
+> If you wish to share such profiles (such as upload as supplementary material for academic publications), make sure to NOT include cluster specific paths to files, nor institutional specific profiles.
 
 ## Core Nextflow arguments
 
@@ -158,11 +338,11 @@ If `-profile` is not specified, the pipeline will run locally and expect all sof
 - `shifter`
   - A generic configuration profile to be used with [Shifter](https://nersc.gitlab.io/development/shifter/how-to-use/)
 - `charliecloud`
-  - A generic configuration profile to be used with [Charliecloud](https://hpc.github.io/charliecloud/)
+  - A generic configuration profile to be used with [Charliecloud](https://charliecloud.io/)
 - `apptainer`
   - A generic configuration profile to be used with [Apptainer](https://apptainer.org/)
 - `wave`
-  - A generic configuration profile to enable [Wave](https://seqera.io/wave/) containers. Use together with one of the above (requires Nextflow ` 24.03.0-edge` or later).
+  - A generic configuration profile to enable [Wave](https://seqera.io/wave/) containers. Use together with one of the above (requires Nextflow `24.03.0-edge` or later).
 - `conda`
   - A generic configuration profile to be used with [Conda](https://conda.io/docs/). Please only use Conda as a last resort i.e. when it's not possible to run the pipeline with Docker, Singularity, Podman, Shifter, Charliecloud, or Apptainer.
 
