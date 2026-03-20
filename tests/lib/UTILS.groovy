@@ -32,7 +32,7 @@ class UTILS {
 
         if (!scenario.failure) {
             assertion.add(workflow.trace.succeeded().size())
-            assertion.add(removeFromYamlMap("${outdir}/pipeline_info/nf_core_seqinspector_software_mqc_versions.yml", "Workflow"))
+            assertion.add(removeFromYamlMap("${outdir}/pipeline_info/nf_core_seqinspector_software_mqc_versions.yml", "Workflow")?: 'No versions')
         }
 
         // At least always pipeline_info/ is created and stable
@@ -111,12 +111,67 @@ class UTILS {
                 tag scenario.tag
             }
 
+            if (scenario.rundir_folder && scenario.rundir_samplesheet) {
+                setup {
+                    println ""
+                    println ""
+                    println "Downloading rundir: " + scenario.rundir_folder
+                    def rundir_url = scenario.rundir_folder
+                    def download_rundir_command = ['bash', '-c', "curl -L --retry 5 ${rundir_url} | tar xzf - -C ${launchDir}"]
+                    def download_rundir_process = download_rundir_command.execute()
+                    download_rundir_process.waitFor()
+
+                    if (download_rundir_process.exitValue() != 0) {
+                        throw new RuntimeException("Error - failed to download rundir: ${download_rundir_process.err.text}")
+                    } else {
+                        println "Rundir downloaded and extracted"
+                    }
+
+                    println ""
+                    println "Downloading samplesheet: " + scenario.rundir_samplesheet
+                    def samplesheet_url = scenario.rundir_samplesheet
+                    def download_samplesheet_command = ['bash', '-c', "curl -L --retry 5 ${samplesheet_url} > ${launchDir}/samplesheet.csv"]
+                    def download_samplesheet_process = download_samplesheet_command.execute()
+                    download_samplesheet_process.waitFor()
+
+                    if (download_samplesheet_process.exitValue() != 0) {
+                        throw new RuntimeException("Error - failed to download samplesheet: ${download_samplesheet_process.err.text}")
+                    }
+
+                    // Dynamically find the rundir column index, and replace the rundir tar.gz url by the extracted folder
+                    def header_command = ['bash', '-c', "head -n 1 ${launchDir}/samplesheet.csv"]
+                    def header_process = header_command.execute()
+                    header_process.waitFor()
+                    if (header_process.exitValue() != 0) {
+                        println "Error reading samplesheet header: ${header_process.err.text}"
+                    } else {
+                        def header = header_process.text.trim().split(',').toList()
+                        def rundir_index = header.indexOf('rundir') + 1 // awk columns are 1-based
+
+                        if (rundir_index > 0) {
+                            def awk_command = ['bash', '-c', "awk -F, -v OFS=, -v col=${rundir_index} '{if (NR == 1) {print \$0} else {sub(\".*/\", \"\", \$col); sub(\"\\\\.tar\\\\.gz\", \"\", \$col); print \$0}}' ${launchDir}/samplesheet.csv > ${launchDir}/samplesheet_updated.csv"]
+                            def awk_process = awk_command.execute()
+                            awk_process.waitFor()
+
+                            if (awk_process.exitValue() != 0) {
+                                println "Error - failed to modify rundir column: ${awk_process.err.text}"
+                            } else {
+                                println "Samplesheet download and updated: ${launchDir}/samplesheet_updated.csv"
+                            }
+                        } else {
+                            println "Error: rundir column not found in the CSV header."
+                        }
+                    }
+                }
+            }
+
             when {
                 params {
                     // Mandatory, as we always need an outdir
                     outdir = "${outputDir}"
                     // Apply scenario-specific params
                     scenario.params.each { key, value ->
+                        if (scenario.rundir_folder && scenario.rundir_samplesheet) delegate.input = "${launchDir}/samplesheet_updated.csv"
                         delegate."$key" = value
                     }
                 }
