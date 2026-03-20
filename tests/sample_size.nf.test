@@ -11,18 +11,24 @@ nextflow_pipeline {
             name: "NovaSeq6000 data test sample size",
             params: [
                 sample_size: 90,
+                tools: 'seqfu_stats',
+                tools_bundle: null,
             ],
         ],
         [
             name: "NovaSeq6000 data test relative sample size",
             params: [
                 sample_size: 0.9,
+                tools: 'seqfu_stats',
+                tools_bundle: null,
             ],
         ],
         [
             name: "NovaSeq6000 data test sample size exceeds available reads",
             params: [
                 sample_size: 120,
+                tools: 'seqfu_stats',
+                tools_bundle: null,
             ],
         ],
     ]
