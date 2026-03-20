@@ -83,8 +83,8 @@ workflow SEQINSPECTOR {
 
     // Parse RUNDIR INFO
 
-    // Calculate the global rundir_size for the entire samplesheet
-    rundir_size = ch_samplesheet
+    // Calculate the global rundir_number for the entire samplesheet
+    rundir_number = ch_samplesheet
         .map { meta, _reads -> [meta.rundir ? meta.rundir.simpleName : 'no_rundir'] }
         .flatten()
         .collect()
@@ -93,19 +93,21 @@ workflow SEQINSPECTOR {
     ch_rundir = ch_samplesheet
         .map { meta, _reads -> [meta.rundir ?: null, meta] }
         .groupTuple()
-        .combine(rundir_size)
-        .map { rundir, meta, _rundir_size ->
+        .combine(rundir_number)
+        .map { rundir, meta, _rundir_number ->
             // Return for all the rundir specific processes and to mix with ch_multiqc_files
             //   - meta map:
             //     - dirname: Simple name of the rundir, used for setting unique output names in publishDir
+            //     - id: List all sample of the rundir
+            //     - rundir_number: number of total rundir, no rundir counts as one
             //     - tags: List of merged tags, used for grouping MultiQC reports
             //   - rundir
             [
                 [
                     dirname: rundir ? rundir.simpleName : 'no_rundir',
-                    tags: meta.collect { meta_ -> meta_.tags }.flatten().unique(),
                     id: rundir ? false : meta.collect { meta_ -> meta_.id }.flatten().unique().sort(),
-                    rundir_size: _rundir_size,
+                    rundir_number: _rundir_number,
+                    tags: meta.collect { meta_ -> meta_.tags }.flatten().unique(),
                 ],
                 rundir ? file(rundir, checkIfExists: true) : null,
             ]
@@ -113,8 +115,8 @@ workflow SEQINSPECTOR {
 
     // Log warnings for samples without rundir
     if (('checkqc' in tools) || ('multiqcsav' in tools) || ('rundirparser' in tools)) {
-        ch_rundir.map { meta, _rundir ->
-            if (!_rundir) {
+        ch_rundir.map { meta, rundir ->
+            if (!rundir) {
                 log.warn("No rundir for sample(s): ${meta.id.join(', ')}")
             }
         }
@@ -358,21 +360,25 @@ workflow SEQINSPECTOR {
     // tuple  val(meta), path(xml), path(interop_bin, stageAs: "InterOp/*"), path(extra_multiqc_files, stageAs: "?/*"), path(multiqc_config, stageAs: "?/*"), path(multiqc_logo), path(replace_names), path(sample_names)
     //
 
-    ch_multiqc_global_files = ch_multiqc_files.map { _meta, files -> [files] }.collect().combine(ch_multiqc_extra_files_global.collect()).map { files -> [[id: 'seqinspector'], files] }
+    ch_multiqc_global_files = ch_multiqc_files
+        .map { _meta, files -> [files] }
+        .collect()
+        .combine(ch_multiqc_extra_files_global.collect())
+        .map { files -> [[id: 'seqinspector'], files] }
 
     MULTIQC_GLOBAL(
         ch_rundir.map { meta, rundir ->
             def xml = []
             def interop = []
 
-            if ((rundir) && (('checkqc' in tools) || ('multiqcsav' in tools) || ('rundirparser' in tools))) {
-                if (meta.rundir_size > 1) {
+            if ((rundir) && ('multiqcsav' in tools)) {
+                if (meta.rundir_number > 1) {
                     log.warn("More than one rundir, or sample(s) missing rundir, skipping skipping MULTIQC_SAV")
                 }
                 else if (rundir.toString().endsWith('tar.gz')) {
-                    log.warn("rundir: ${rundir.toString().name()} is a tar.gz")
+                    log.warn("Rundir: ${meta.dirname} is a tar.gz")
                 }
-                else if ('multiqcsav' in tools) {
+                else {
                     interop = files(file(rundir).resolve("InterOp/*.bin"), checkIfExists: true)
                     xml = files(file(rundir).resolve("*.xml"), checkIfExists: true)
                 }

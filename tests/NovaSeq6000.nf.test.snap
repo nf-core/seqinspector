@@ -1022,7 +1022,6 @@
                 "  Tools selected to be run  : fastqc,fastqscreen,fq_lint,picard_collectmultiplemetrics,rundirparser,seqfu_stats",
                 "------------------------------------------------------",
                 "-[nf-core/seqinspector] Pipeline completed successfully-",
-                "WARN: More than one rundir, or sample(s) missing rundir, skipping skipping MULTIQC_SAV",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (Sample1_01)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (Sample23_03)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (SampleA_02)",
@@ -1068,7 +1067,7 @@
                 "[NXF_HASH] Submitted process > PREPARE_GENOME:SAMTOOLS_FAIDX (genome.fa)"
             ]
         ],
-        "timestamp": "2026-03-20T10:50:24.573413656",
+        "timestamp": "2026-03-20T14:12:49.188087415",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
