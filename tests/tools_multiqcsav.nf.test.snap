@@ -2,9 +2,7 @@
     "NovaSeq6000 data test - multiqcsav": {
         "content": [
             5,
-            {
-                
-            },
+            "No versions",
             [
                 "multiqc",
                 "multiqc/global_report",
@@ -126,7 +124,7 @@
                 "WARN: More than one rundir, or sample(s) missing rundir, skipping skipping MULTIQC_SAV"
             ]
         ],
-        "timestamp": "2026-03-20T12:57:29.922516085",
+        "timestamp": "2026-03-20T13:27:47.123570446",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
