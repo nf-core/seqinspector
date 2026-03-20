@@ -6,33 +6,32 @@
 
 
 // modules
-include { BWAMEM2_MEM                } from '../modules/nf-core/bwamem2/mem'
-include { CHECKQC                    } from '../modules/nf-core/checkqc'
-include { FASTP                      } from '../modules/nf-core/fastp'
-include { FASTQC                     } from '../modules/nf-core/fastqc'
-include { FASTQE                     } from '../modules/nf-core/fastqe'
-include { FASTQSCREEN_FASTQSCREEN    } from '../modules/nf-core/fastqscreen/fastqscreen'
-include { FQ_LINT                    } from '../modules/nf-core/fq/lint'
-include { MULTIQC as MULTIQC_GLOBAL  } from '../modules/nf-core/multiqc'
-include { MULTIQC as MULTIQC_PER_TAG } from '../modules/nf-core/multiqc'
-include { MULTIQCSAV                 } from '../modules/nf-core/multiqcsav'
-include { RUNDIRPARSER               } from '../modules/local/rundirparser'
-include { SAMTOOLS_INDEX             } from '../modules/nf-core/samtools/index'
-include { SEQFU_STATS                } from '../modules/nf-core/seqfu/stats'
-include { SEQTK_SAMPLE               } from '../modules/nf-core/seqtk/sample'
-include { TOULLIGQC                  } from '../modules/nf-core/toulligqc'
+include { BWAMEM2_MEM                  } from '../modules/nf-core/bwamem2/mem'
+include { CHECKQC                      } from '../modules/nf-core/checkqc'
+include { FASTP                        } from '../modules/nf-core/fastp'
+include { FASTQC                       } from '../modules/nf-core/fastqc'
+include { FASTQE                       } from '../modules/nf-core/fastqe'
+include { FASTQSCREEN_FASTQSCREEN      } from '../modules/nf-core/fastqscreen/fastqscreen'
+include { FQ_LINT                      } from '../modules/nf-core/fq/lint'
+include { MULTIQC as MULTIQC_PER_TAG   } from '../modules/nf-core/multiqc'
+include { MULTIQCSAV as MULTIQC_GLOBAL } from '../modules/nf-core/multiqcsav'
+include { RUNDIRPARSER                 } from '../modules/local/rundirparser'
+include { SAMTOOLS_INDEX               } from '../modules/nf-core/samtools/index'
+include { SEQFU_STATS                  } from '../modules/nf-core/seqfu/stats'
+include { SEQTK_SAMPLE                 } from '../modules/nf-core/seqtk/sample'
+include { TOULLIGQC                    } from '../modules/nf-core/toulligqc'
 
 // subworkflow
-include { PHYLOGENETIC_QC            } from '../subworkflows/local/phylogenetic_qc'
-include { QC_BAM                     } from '../subworkflows/local/qc_bam'
+include { PHYLOGENETIC_QC              } from '../subworkflows/local/phylogenetic_qc'
+include { QC_BAM                       } from '../subworkflows/local/qc_bam'
 
 // functions
-include { methodsDescriptionText     } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
-include { paramsSummaryMap           } from 'plugin/nf-schema'
-include { paramsSummaryMultiqc       } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { reportIndexMultiqc         } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
-include { samplesheetToList          } from 'plugin/nf-schema'
-include { softwareVersionsToYAML     } from 'plugin/nf-core-utils'
+include { methodsDescriptionText       } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { paramsSummaryMap             } from 'plugin/nf-schema'
+include { paramsSummaryMultiqc         } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { reportIndexMultiqc           } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { samplesheetToList            } from 'plugin/nf-schema'
+include { softwareVersionsToYAML       } from 'plugin/nf-core-utils'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -64,9 +63,6 @@ workflow SEQINSPECTOR {
     main:
     ch_multiqc_files = channel.empty()
     ch_multiqc_extra_files = channel.empty()
-    ch_global_reports = channel.empty()
-    ch_sav_reports = channel.empty()
-    ch_need_global = channel.of("run_global")
 
     //
     // MODULE: Run FQ_LINT to catch early errors
@@ -126,62 +122,52 @@ workflow SEQINSPECTOR {
     //
 
     if ('multiqcsav' in tools) {
+        // Get the number of rundir
+        rundir_number = ch_samplesheet
+            .map { meta, _reads -> [meta.rundir ? meta.rundir.simpleName : 'no_rundir'] }
+            .flatten()
+            .unique()
+            .collect()
+            .map { rundir -> [rundir.size()] }
 
-        // Branch the samplesheet channel based on rundir presence
-        ch_rundir_branch = ch_samplesheet.branch { meta, _reads ->
-            with_rundir: meta.rundir.size() > 0
-            without_rundir: true
-        }
+        ch_rundir = ch_samplesheet
+            .map { meta, _reads -> [meta.rundir ?: null, meta] }
+            .groupTuple()
+            .combine(rundir_number)
+            .map { rundir, meta, _rundir_number ->
+                // Return for all the rundir specific processes and to mix with ch_multiqc_files
+                //   - meta map:
+                //     - dirname: Simple name of the rundir, used for setting unique output names in publishDir
+                //     - id: List of all sample ids for the rundir
+                //     - rundir_number: Total number of rundir, no rundir will count as 1
+                //     - tags: List of merged tags, used for grouping MultiQC reports
+                //   - rundir
+
+                [
+                    [
+                        dirname: rundir ? rundir.simpleName : 'no_rundir',
+                        id: rundir ? false : meta.collect { meta_ -> meta_.id }.flatten().unique().sort(),
+                        rundir_number: _rundir_number,
+                        tags: meta.collect { meta_ -> meta_.tags }.flatten().unique(),
+                    ],
+                    rundir ? file(rundir, checkIfExists: true) : null,
+                ]
+            }
 
         // Log warnings for samples without rundir
-        ch_rundir_branch.without_rundir.subscribe { meta, _reads ->
-            log.warn("Sample '${meta.id}' does not have a rundir specified")
+        ch_rundir.map { meta, _rundir ->
+            if (!_rundir) {
+                log.warn("No rundir for sample(s): ${meta.id.join(', ')}")
+            }
         }
 
-        // From samplesheet channel serving (sampleMetaObj, sampleReadsPath) tuples:
-        // --> Create new rundir channel serving (rundirMetaObj, rundirPath) tuples
-        ch_rundir = ch_rundir_branch.with_rundir
-            .map { meta, _reads -> [meta.rundir, meta] }
-            .groupTuple()
-            .map { rundir, metas ->
-                // Collect all unique tags into a list
-                def all_tags = metas.collect { meta -> meta.tags }.flatten().unique()
-                // Create a new meta object whose attributes are...
-                //  1. tags: The list of merged tags, used for grouping MultiQC reports
-                //  2. dirname: The simple name of the rundir, used for setting unique output names in publishDir
-                def dir_meta = [tags: all_tags, dirname: rundir.simpleName]
-                // Return the new structure, to...
-                //  1. Feed into rundir specific processes
-                //  2. Mix with the ch_multiqc_files channel downstream
-                [dir_meta, rundir]
-            }
+        if (tools.size == 1) {
+            ch_multiqc_files = ch_multiqc_files.mix(ch_rundir.map { meta, _rundir -> [meta, []] })
+        }
 
-        // Determine if we need global MultiQC based on conditions
-        ch_need_global = ch_rundir_branch.without_rundir
-            .count()
-            .combine(ch_rundir.count())
-            .map { samples_without, rundir_count ->
-                def need_global = (samples_without > 0) || (rundir_count != 1)
-                if (need_global) {
-                    if (samples_without > 0) {
-                        log.warn("Samples without rundir found, will run global MultiQC instead")
-                    }
-                    if (rundir_count > 1) {
-                        log.warn("More than one rundir found, will run global MultiQC instead")
-                    }
-                    if (rundir_count == 0) {
-                        log.warn("No samples with rundir found, will run global MultiQC instead")
-                    }
-                }
-                return need_global ? "run_global" : "run_sav"
-            }
-
-        ch_need_global
-            .branch { need_global ->
-                run_global: need_global == "run_global"
-                run_sav: need_global == "run_sav"
-            }
-            .set { ch_multiqc_decision }
+        ch_rundir
+            .filter { _meta, rundir -> rundir }
+            .ifEmpty { log.warn("No samples with rundir found, skipping MULTIQC_SAV") }
     }
 
     // MODULE: CheckQC
@@ -393,19 +379,49 @@ workflow SEQINSPECTOR {
         ch_tags.toList().map { tag_list -> reportIndexMultiqc(tag_list) }.collectFile(name: 'multiqc_index_mqc.yaml')
     )
 
-    // Run global MultiQC only when needed
-    ch_global_reports = ch_multiqc_decision.run_global.combine(prepareGlobalInput(ch_multiqc_files, ch_multiqc_extra_files_global, multiqc_config, multiqc_logo).map { tuple -> tuple }).map { files ->
-        def (_file0, file1, file2, file3, file4, file5, file6) = files
-        return [file1, file2, file3, file4, file5, file6]
-    }
-        | MULTIQC_GLOBAL
+    //
+    // Run MultiQC for all samples with SAV plugin
+    // tuple  val(meta), path(xml), path(interop_bin, stageAs: "InterOp/*"), path(extra_multiqc_files, stageAs: "?/*"), path(multiqc_config, stageAs: "?/*"), path(multiqc_logo), path(replace_names), path(sample_names)
+    //
 
-    // Run SAV MultiQC only when needed
-    ch_sav_reports = ch_multiqc_decision.run_sav.combine(prepareSavInput(ch_rundir, ch_multiqc_files, ch_multiqc_extra_files_global, multiqc_config, multiqc_logo).map { tuple -> tuple }).map { files ->
-        def (_file0, file1, file2, file3, file4, file5, file6, file7, file8) = files
-        return [file1, file2, file3, file4, file5, file6, file7, file8]
-    }
-        | MULTIQCSAV
+    ch_multiqc_global_files = ch_multiqc_files.map { _meta, files -> [files] }.collect().combine(ch_multiqc_extra_files_global.collect()).map { files -> [[id: 'seqinspector'], files] }
+
+    // Run MULTIQC SAV
+    MULTIQC_GLOBAL(
+        ch_rundir.map { meta, rundir ->
+            def xml = []
+            def interop = []
+
+            if ((rundir) && (('checkqc' in tools) || ('multiqcsav' in tools) || ('rundirparser' in tools))) {
+                if (meta.rundir_number > 1) {
+                    log.warn("More than one rundir, or sample(s) missing rundir, skipping skipping MULTIQC_SAV")
+                }
+                else if (rundir.toString().endsWith('tar.gz')) {
+                    log.warn("rundir: ${rundir.toString().name()} is a tar.gz")
+                }
+                else if ('multiqcsav' in tools) {
+                    interop = files(file(rundir).resolve("InterOp/*.bin"), checkIfExists: true)
+                    xml = files(file(rundir).resolve("*.xml"), checkIfExists: true)
+                }
+            }
+            return [[id: 'seqinspector'], xml, interop]
+        }.join(ch_multiqc_global_files, by: 0).map { meta, xml, interop, multiqc_files ->
+            def final_xml = xml.flatten().unique()
+            def final_interop = interop.flatten().unique()
+            return [
+                meta,
+                final_xml,
+                final_interop,
+                multiqc_files.flatten().unique(),
+                multiqc_config
+                    ? file(multiqc_config, checkIfExists: true)
+                    : file("${projectDir}/assets/multiqc_config.yml", checkIfExists: true),
+                multiqc_logo ? file(multiqc_logo, checkIfExists: true) : [],
+                [],
+                [],
+            ]
+        }
+    )
 
     ch_multiqc_extra_files_tag = ch_multiqc_extra_files.mix(
         ch_tags.toList().map { tag_list -> reportIndexMultiqc(tag_list, false) }.collectFile(name: 'multiqc_index_mqc.yaml')
@@ -457,61 +473,6 @@ workflow SEQINSPECTOR {
     )
 
     emit:
-    global_report   = ch_global_reports.report.mix(ch_sav_reports.report).map { _meta, report -> [report] }.toList() // channel: [ /path/to/multiqc_report.html ]
+    global_report   = MULTIQC_GLOBAL.out.report.map { _meta, report -> [report] }.toList() // channel: [ /path/to/multiqc_report.html ]
     grouped_reports = MULTIQC_PER_TAG.out.report.map { _meta, report -> [report] }.toList() // channel: [ /path/to/multiqc_report.html ]
-}
-
-
-// Function for global input preparation
-def prepareGlobalInput(multiqc_files, extra_files, config, logo) {
-    return multiqc_files
-        .map { _meta, files -> [files] }
-        .flatten()
-        .collect()
-        .combine(extra_files.collect())
-        .map { files ->
-            [
-                [id: 'seqinspector'],
-                files,
-                config ?: file("${projectDir}/assets/multiqc_config.yml", checkIfExists: true),
-                logo ?: [],
-                [],
-                [],
-            ]
-        }
-}
-
-// Function for SAV input preparation
-def prepareSavInput(rundir_ch, multiqc_files, extra_files, config, logo) {
-    return rundir_ch
-        .map { metas, rundir ->
-            def xml = []
-            def interop = []
-
-            rundir.eachFileRecurse { file ->
-                if (file.fileName.toString() in ['RunInfo.xml', 'RunParameters.xml']) {
-                    xml << file
-                }
-                else if (file.parent.name == 'InterOp' && file.fileName.toString().endsWith(".bin")) {
-                    interop << file
-                }
-            }
-
-            return [metas, xml, interop]
-        }
-        .combine(
-            multiqc_files.map { _meta, files -> files }.flatten().collect().combine(extra_files.collect()).map { files -> [files.flatten()] }
-        )
-        .map { meta, xml, interop, extrafiles ->
-            [
-                meta,
-                xml,
-                interop,
-                extrafiles,
-                config ?: file("${projectDir}/assets/multiqc_config.yml", checkIfExists: true),
-                logo ?: [],
-                [],
-                [],
-            ]
-        }
 }

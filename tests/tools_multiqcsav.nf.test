@@ -12,9 +12,11 @@ nextflow_pipeline {
                 tools: 'multiqcsav',
                 tools_bundle: null,
             ],
-            rundir_folder: true
-        ]
+            rundir_folder: pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/200624_A00834_0183_BHMTFYDRXX.tar.gz',
+            rundir_samplesheet: pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/samplesheet.csv',
+        ],
     ]
+
     // Generate tests for each scenario
     test_scenario.each { scenario ->
         test(scenario.name, UTILS.getTest(scenario))
