@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#204](https://github.com/nf-core/seqinspector/pull/204) Added Fastp module
 - [#206](https://github.com/nf-core/seqinspector/pull/206) Added FASTQE for more comprehensive QC of FASTQ files
 - [#208](https://github.com/nf-core/seqinspector/pull/208) Add FASTQ linting for early validation with FQ/LINT
+- [#209](https://github.com/nf-core/seqinspector/pull/209) Add MULTIQC SAV support
 - [#210](https://github.com/nf-core/seqinspector/pull/210) Added kraken2 subworkflow
 - [#212](https://github.com/nf-core/seqinspector/pull/212) Add CheckQC module
 - [#134](https://github.com/nf-core/seqinspector/pull/134) Added sequali module.
