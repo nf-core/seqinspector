@@ -994,11 +994,9 @@
                 "Undetermined_05.bam:md5,2841f21f7f70634f21505ac803ff8221",
                 "sampletest_04.bam:md5,3d1cd701ad22dacc6b194ea16582d647"
             ],
-            [
-                "WARN: More than one rundir, or sample(s) missing rundir, skipping skipping MULTIQC_SAV"
-            ]
+            "No warnings"
         ],
-        "timestamp": "2026-03-20T10:54:22.39765167",
+        "timestamp": "2026-03-20T14:25:00.722671724",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -1999,11 +1997,9 @@
                 "Undetermined_05.bam:md5,691b83f3c015cf5f2b28ab6d0581d03c",
                 "sampletest_04.bam:md5,b13db1c95389474f089f870b906d3fc0"
             ],
-            [
-                "WARN: More than one rundir, or sample(s) missing rundir, skipping skipping MULTIQC_SAV"
-            ]
+            "No warnings"
         ],
-        "timestamp": "2026-03-20T10:55:26.793736578",
+        "timestamp": "2026-03-20T14:26:12.991620416",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -3005,7 +3001,6 @@
                 "sampletest_04.bam:md5,f80371e37421d97499b3bfd55221ed00"
             ],
             [
-                "WARN: More than one rundir, or sample(s) missing rundir, skipping skipping MULTIQC_SAV",
                 "WARN: Sample1_01: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
                 "WARN: Sample23_03: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
                 "WARN: SampleA_02: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
@@ -3013,7 +3008,7 @@
                 "WARN: sampletest_04: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads."
             ]
         ],
-        "timestamp": "2026-03-20T10:56:30.563903656",
+        "timestamp": "2026-03-20T14:27:27.565274342",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
