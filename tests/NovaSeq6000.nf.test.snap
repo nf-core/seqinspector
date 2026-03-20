@@ -1022,6 +1022,11 @@
                 "  Tools selected to be run  : fastqc,fastqscreen,fq_lint,picard_collectmultiplemetrics,rundirparser,seqfu_stats",
                 "------------------------------------------------------",
                 "-[nf-core/seqinspector] Pipeline completed successfully-",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BAM_QC:PICARD_COLLECTMULTIPLEMETRICS (Sample1_01)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BAM_QC:PICARD_COLLECTMULTIPLEMETRICS (Sample23_03)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BAM_QC:PICARD_COLLECTMULTIPLEMETRICS (SampleA_02)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BAM_QC:PICARD_COLLECTMULTIPLEMETRICS (Undetermined_05)",
+                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BAM_QC:PICARD_COLLECTMULTIPLEMETRICS (sampletest_04)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (Sample1_01)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (Sample23_03)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:BWAMEM2_MEM (SampleA_02)",
@@ -1047,11 +1052,6 @@
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:MULTIQC_PER_TAG (group2)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:MULTIQC_PER_TAG (lane1)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:MULTIQC_PER_TAG (test)",
-                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:QC_BAM:PICARD_COLLECTMULTIPLEMETRICS (Sample1_01)",
-                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:QC_BAM:PICARD_COLLECTMULTIPLEMETRICS (Sample23_03)",
-                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:QC_BAM:PICARD_COLLECTMULTIPLEMETRICS (SampleA_02)",
-                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:QC_BAM:PICARD_COLLECTMULTIPLEMETRICS (Undetermined_05)",
-                "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:QC_BAM:PICARD_COLLECTMULTIPLEMETRICS (sampletest_04)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:RUNDIRPARSER (200624_A00834_0183_BHMTFYDRXX)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:SAMTOOLS_INDEX (Sample1_01)",
                 "[NXF_HASH] Submitted process > NFCORE_SEQINSPECTOR:SEQINSPECTOR:SAMTOOLS_INDEX (Sample23_03)",
@@ -1067,7 +1067,7 @@
                 "[NXF_HASH] Submitted process > PREPARE_GENOME:SAMTOOLS_FAIDX (genome.fa)"
             ]
         ],
-        "timestamp": "2026-03-20T14:12:49.188087415",
+        "timestamp": "2026-03-20T18:06:58.528995517",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
