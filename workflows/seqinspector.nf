@@ -396,9 +396,6 @@ workflow SEQINSPECTOR {
         }
     )
 
-    ch_multiqc_files.view()
-    ch_tags.view()
-
     // Group samples by tag
 
     multiqc_extra_files_per_tag = ch_tags.combine(
