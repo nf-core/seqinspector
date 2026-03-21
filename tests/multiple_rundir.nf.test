@@ -9,7 +9,7 @@ nextflow_pipeline {
         [
             name: "MiSeq data test - fastqc,multiqcsav - multiple rundir",
             params: [
-                input: pipelines_testdata_base_path + 'seqinspector_new/samplesheet/1.0/miseq.csv',
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/miseq.csv',
                 tools: 'fastqc,multiqcsav',
                 tools_bundle: null,
             ],

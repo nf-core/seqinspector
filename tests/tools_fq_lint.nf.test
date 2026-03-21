@@ -9,7 +9,7 @@ nextflow_pipeline {
         [
             name: "NovaSeq6000 data test - fq_lint force success",
             params: [
-                input: pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/samplesheet_wrongpair.csv',
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/novaseq6000_wrongpair.csv',
                 continue_with_lint_fail: true,
                 tools: 'fq_lint',
                 tools_bundle: null,
@@ -18,7 +18,7 @@ nextflow_pipeline {
         [
             name: "NovaSeq6000 data test - Fail fq_lint",
             params: [
-                input: pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/samplesheet_wrongpair.csv',
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/novaseq6000_wrongpair.csv',
                 continue_with_lint_fail: false,
                 tools: 'fq_lint',
                 tools_bundle: null,

@@ -8,9 +8,9 @@ nextflow_pipeline {
 
     def test_scenario = [
         [
-            name: "MiSeq data test (single end reads), toulligqc fail",
+            name: "PromethION data test - toulligqc fail",
             params: [
-                input: pipelines_testdata_base_path + 'seqinspector/testdata/MiSeq/samplesheet.csv',
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/promethion.csv',
                 tools: "toulligqc"
             ],
             failure: true,
