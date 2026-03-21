@@ -992,7 +992,7 @@
                 "  nf-core/seqinspector [VERSION]",
                 "------------------------------------------------------",
                 "Input/output options",
-                "  input                     : https://raw.githubusercontent.com/nf-core/test-datasets/seqinspector/testdata/NovaSeq6000/samplesheet.csv",
+                "  input                     : https://raw.githubusercontent.com/nf-core/test-datasets/seqinspector/samplesheet/1.0/novaseq6000.csv",
                 "  outdir                    : [PATH]/tests/[NFT_HASH]/output",
                 "Reference genome options",
                 "  genome                    : R64-1-1",
@@ -1067,7 +1067,7 @@
                 "[NXF_HASH] Submitted process > PREPARE_GENOME:SAMTOOLS_FAIDX (genome.fa)"
             ]
         ],
-        "timestamp": "2026-03-20T18:06:58.528995517",
+        "timestamp": "2026-03-21T13:09:16.262379259",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
