@@ -33,6 +33,6 @@ workflow FASTQ_QC_PHYLOGENETIC {
     KRONA_KTIMPORTTAXONOMY(KRAKEN2_KRAKEN2.out.report, krona_ktupdatetaxonomy_db)
 
     emit:
-    mqc         = KRAKEN2_KRAKEN2.out.report
     krona_plots = KRONA_KTIMPORTTAXONOMY.out.html.collect()
+    mqc         = KRAKEN2_KRAKEN2.out.report
 }

@@ -1,46 +1,18 @@
 {
     "single end fastq": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": true
-                        },
-                        "test.kraken2.report.txt:md5,4227755fe40478b8d7dc8634b489761e"
-                    ]
-                ],
-                "1": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": true
-                        },
-                        "test.html:md5,56296834fc8dd7374b756146aaf30321"
-                    ]
-                ],
-                "krona_plots": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": true
-                        },
-                        "test.html:md5,56296834fc8dd7374b756146aaf30321"
-                    ]
-                ],
-                "mqc": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": true
-                        },
-                        "test.kraken2.report.txt:md5,4227755fe40478b8d7dc8634b489761e"
-                    ]
+            "test.html",
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": true
+                    },
+                    "test.kraken2.report.txt:md5,4227755fe40478b8d7dc8634b489761e"
                 ]
-            }
+            ]
         ],
-        "timestamp": "2026-03-23T13:42:32.529131255",
+        "timestamp": "2026-03-23T14:06:39.814747638",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.03.0"

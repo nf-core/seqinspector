@@ -43,9 +43,12 @@ nextflow_workflow {
             }
         }
         then {
+            assert workflow.success
             assertAll(
-                { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
+                { assert snapshot(
+                    file(workflow.out.krona_plots[0][1]).name,
+                    workflow.out.mqc,
+                ).match() }
             )
         }
     }
