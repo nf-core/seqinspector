@@ -1,0 +1,21 @@
+{
+    "single end fastq": {
+        "content": [
+            "test.html",
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": true
+                    },
+                    "test.kraken2.report.txt:md5,4227755fe40478b8d7dc8634b489761e"
+                ]
+            ]
+        ],
+        "timestamp": "2026-03-23T14:06:39.814747638",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "26.03.0"
+        }
+    }
+}
