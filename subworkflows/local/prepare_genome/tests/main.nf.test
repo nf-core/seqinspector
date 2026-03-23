@@ -10,7 +10,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = file(params.pipelines_testdata_base_path + '/raredisease/reference/reference.fasta', checkIfExists: true)
+                input[0] = file(params.pipelines_testdata_base_path + 'raredisease/reference/reference.fasta', checkIfExists: true)
                 input[1] = null
                 input[2] = null
                 input[3] = null
@@ -41,9 +41,9 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = file(params.pipelines_testdata_base_path + '/raredisease/reference/reference.fasta', checkIfExists: true)
+                input[0] = file(params.pipelines_testdata_base_path + 'raredisease/reference/reference.fasta', checkIfExists: true)
                 input[1] = null
-                input[2] = file(params.pipelines_testdata_base_path + '/raredisease/reference/reference.dict', checkIfExists: true)
+                input[2] = file(params.pipelines_testdata_base_path + 'raredisease/reference/reference.dict', checkIfExists: true)
                 input[3] = null
                 input[4] = 'genome'
                 input[5] = 'picard_collecthsmetrics'
@@ -75,7 +75,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = file(params.pipelines_testdata_base_path + '/raredisease/reference/reference.fasta', checkIfExists: true)
+                input[0] = file(params.pipelines_testdata_base_path + 'raredisease/reference/reference.fasta', checkIfExists: true)
                 input[1] = null
                 input[2] = null
                 input[3] = null

@@ -4,7 +4,6 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-
 // modules
 include { BWAMEM2_MEM                  } from '../modules/nf-core/bwamem2/mem'
 include { CHECKQC                      } from '../modules/nf-core/checkqc'
@@ -22,8 +21,8 @@ include { SEQTK_SAMPLE                 } from '../modules/nf-core/seqtk/sample'
 include { TOULLIGQC                    } from '../modules/nf-core/toulligqc'
 
 // subworkflow
-include { PHYLOGENETIC_QC              } from '../subworkflows/local/phylogenetic_qc'
-include { QC_BAM                       } from '../subworkflows/local/qc_bam'
+include { BAM_QC                       } from '../subworkflows/local/bam_qc'
+include { BAM_QC_PHYLOGENETIC          } from '../subworkflows/local/bam_qc_phylogenetic'
 
 // functions
 include { methodsDescriptionText       } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
@@ -64,17 +63,22 @@ workflow SEQINSPECTOR {
     ch_multiqc_files = channel.empty()
     ch_multiqc_extra_files = channel.empty()
 
+    // STEP 00: EARLY SKIP FAILING MALFORMED FASTQ FILES
+
     //
     // MODULE: Run FQ_LINT to catch early errors
     //
-    FQ_LINT(ch_samplesheet.filter { ("fq_lint" in tools) })
 
-    if ("fq_lint" in tools) {
-        // This catches all FASTQs that pass linting
-        // If you use an error strategy that allows FQ_LINT to fail,
-        // only valid FASTQ files will be passed to the next module
-        ch_samplesheet = FQ_LINT.out.lint.join(ch_samplesheet).map { meta, _fq_lint, reads -> [meta, reads] }
-    }
+    FQ_LINT(ch_samplesheet.filter { ('fq_lint' in tools) })
+
+    // This catches all FASTQs that pass linting
+    // If you use an error strategy that allows FQ_LINT to fail,
+    // only valid FASTQ files will be passed to the next module
+    ch_samplesheet = 'fq_lint' in tools
+        ? FQ_LINT.out.lint.join(ch_samplesheet).map { meta, _fq_lint, reads -> [meta, reads] }
+        : ch_samplesheet
+
+    // STEP 01: ILLUMINA RUNDIR INFORMATION
 
     // Parse RUNDIR INFO
 
@@ -82,6 +86,7 @@ workflow SEQINSPECTOR {
     rundir_number = ch_samplesheet
         .map { meta, _reads -> [meta.rundir ? meta.rundir.simpleName : 'no_rundir'] }
         .flatten()
+        .unique()
         .collect()
         .map { rundir -> [rundir.size()] }
 
@@ -91,12 +96,12 @@ workflow SEQINSPECTOR {
         .combine(rundir_number)
         .map { rundir, meta, _rundir_number ->
             // Return for all the rundir specific processes and to mix with ch_multiqc_files
-            //   - meta map:
+            //   - meta: (map)
             //     - dirname: Simple name of the rundir, used for setting unique output names in publishDir
             //     - id: List all sample of the rundir
             //     - rundir_number: number of total rundir, no rundir counts as one
             //     - tags: List of merged tags, used for grouping MultiQC reports
-            //   - rundir
+            //   - rundir: path to rundir or null when no rundir
             [
                 [
                     dirname: rundir ? rundir.simpleName : 'no_rundir',
@@ -160,66 +165,88 @@ workflow SEQINSPECTOR {
     RUNDIRPARSER(ch_rundir.filter { _meta, rundir -> (rundir && 'rundirparser' in tools) })
     ch_multiqc_files = ch_multiqc_files.mix(RUNDIRPARSER.out.multiqc)
 
+    // STEP 01: LONGREADS
+
     //
-    // MODULE: Run Seqtk sample
+    // MODULE: TOULLIGQC
+    // This provides useful stats of long reads
+
+    TOULLIGQC(ch_samplesheet.filter { 'toulligqc' in tools })
+
+    ch_multiqc_files.mix(TOULLIGQC.out.report_data)
+
+    // STEP 02: BASIC QC ON FASTQ FILES
+
+    //
+    // MODULE: SEQFU_STATS
+    //
+
+    SEQFU_STATS(ch_samplesheet.filter { 'seqfu_stats' in tools })
+
+    // Parse the stats TSV file
+    SEQFU_STATS.out.stats
+        .splitCsv(header: true, sep: '\t')
+        .map { meta, row ->
+            // Check if requested sample size exceeds available reads
+            def sample_reads = row['#Seq'].toInteger()
+            if (sample_size > sample_reads) {
+                log.warn("${meta.id}: Requested sample_size (${sample_size}) is larger than available reads (${sample_reads}). Pipeline will continue with ${sample_reads} reads.")
+            }
+        }
+
+    ch_multiqc_files = ch_multiqc_files.mix(SEQFU_STATS.out.multiqc)
+
+    // STEP 03: SUBSAMPLE
+
+    //
+    // MODULE: SEQTK_SAMPLE
+    // Any downstream tool will be run on subsampled reads if seqtk is run
     //
 
     SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] }.filter { sample_size })
-
     ch_sample = sample_size ? SEQTK_SAMPLE.out.reads : ch_samplesheet
 
-    //
-    // MODULE: Run FastQC on subsampled reads
-    //
-    FASTQC(ch_sample.filter { 'fastqc' in tools })
+    // STEP 04: MORE QC ON FASTQ FILES (CAN BE SUMSAMPLED)
 
+    //
+    // MODULE: FASTQC
+    //
+
+    FASTQC(ch_sample.filter { 'fastqc' in tools })
     ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
 
-    // FASTQE
-    FASTQE(ch_sample.filter { 'fastqe' in tools })
+    //
+    // MODULE: FASTQE
+    //
 
+    FASTQE(ch_sample.filter { 'fastqe' in tools })
     ch_multiqc_files = ch_multiqc_files.mix(FASTQE.out.tsv)
 
     //
-    // MODULE: Run fastp for adapter trimming and quality filtering
-    //
+    // MODULE: FASTP for adapter trimming and quality filtering
+    //   Default behavior we currently don't support
+
+    def discard_trimmed_pass = true
+    def save_trimmed_fail = false
+    def save_merged = false
 
     FASTP(
         ch_sample.map { meta, reads -> [meta, reads, []] }.filter { 'fastp' in tools },
-        true,
-        false,
-        false,
+        discard_trimmed_pass,
+        save_trimmed_fail,
+        save_merged,
     )
 
     ch_multiqc_files = ch_multiqc_files.mix(FASTP.out.json)
 
     // ch_trimmed = 'fastp' in tools ? FASTP.out.reads : ch_sample
 
-    //
-    // Module: Run SeqFu stats
-    //
-    SEQFU_STATS(ch_samplesheet.map { meta, reads -> [[id: "seqfu", sample_id: meta.id, tags: meta.tags], reads] }.filter { 'seqfu_stats' in tools })
-
-    // Parse the stats TSV file
-    SEQFU_STATS.out.stats
-        .map { meta, stats -> [meta.sample_id, stats] }
-        .splitCsv(header: true, sep: '\t')
-        .map { sample_id, row ->
-            // Check if requested sample size exceeds available reads
-            def sample_reads = row['#Seq'].toInteger()
-            if (sample_size > sample_reads) {
-                log.warn("${sample_id}: Requested sample_size (${sample_size}) is larger than available reads (${sample_reads}). Pipeline will continue with ${sample_reads} reads.")
-            }
-        }
-
-    ch_multiqc_files = ch_multiqc_files.mix(SEQFU_STATS.out.multiqc)
+    // STEP 05: FASTQSCREEN
 
     //
-    // MODULE: Run FastQ Screen
-    //
-
-    // Parse the reference info needed to create a FastQ Screen config file
-    // and transpose it into a tuple containing lists for each property
+    // MODULE: Run FASTQSCREEN
+    //   Parse the reference info needed to create a FastQ Screen config file
+    //   and transpose it into a tuple containing lists for each property
 
     FASTQSCREEN_FASTQSCREEN(
         ch_sample.filter { 'fastqscreen' in tools },
@@ -233,9 +260,15 @@ workflow SEQINSPECTOR {
 
     ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
 
-    // MODULE: Align reads with BWA-MEM2
+
+    // STEP 06: ALIGN AND QC ON BAM FILES
+
+    //
+    // MODULE: BWAMEM2_MEM to align reads
+    //   Always sort bam
+
     def sort_bam = true
-    // we always sort bam
+
     BWAMEM2_MEM(
         ch_sample.filter { ('picard_collecthsmetrics' in tools) || ('picard_collectmultiplemetrics' in tools) },
         bwamem2_index,
@@ -243,12 +276,18 @@ workflow SEQINSPECTOR {
         sort_bam,
     )
 
+    //
+    // MODULE: SAMTOOLS_INDEX to create BAM index
+    //
+
     SAMTOOLS_INDEX(BWAMEM2_MEM.out.bam)
 
-    ch_bam_bai = BWAMEM2_MEM.out.bam.join(SAMTOOLS_INDEX.out.index, failOnDuplicate: true, failOnMismatch: true)
+    //
+    // SUBWORKFLOW: BAM_QC
+    //   Run picard_collecthsmetrics and/or picard_collectmultiplemetrics
 
-    QC_BAM(
-        ch_bam_bai,
+    BAM_QC(
+        BWAMEM2_MEM.out.bam.join(SAMTOOLS_INDEX.out.index, failOnDuplicate: true, failOnMismatch: true),
         fasta_reference,
         ref_fai,
         bait_intervals ? channel.fromPath(bait_intervals).collect() : channel.empty(),
@@ -257,35 +296,25 @@ workflow SEQINSPECTOR {
         tools,
     )
 
-    ch_multiqc_files = ch_multiqc_files.mix(QC_BAM.out.multiple_metrics, QC_BAM.out.hs_metrics)
+    ch_multiqc_files = ch_multiqc_files.mix(BAM_QC.out.multiple_metrics, BAM_QC.out.hs_metrics)
+
+    // STEP 07: METAGENOMIC QC
 
     //
-    // SUBWORKFLOW: Run kraken2 and produce krona plots
-    //
+    // SUBWORKFLOW: BAM_QC_PHYLOGENETIC
+    //   Run KRAKEN2 and produce KRONA plots
 
     if ('kraken2' in tools) {
-        PHYLOGENETIC_QC(
+        BAM_QC_PHYLOGENETIC(
             ch_samplesheet,
             kraken2_db,
             kraken2_save_reads,
             kraken2_save_readclassifications,
         )
-        ch_multiqc_files = ch_multiqc_files.mix(PHYLOGENETIC_QC.out.mqc)
+        ch_multiqc_files = ch_multiqc_files.mix(BAM_QC_PHYLOGENETIC.out.mqc)
     }
 
-    //
-    // MODULE: Run ToulligQC
-    //
-
-    // This provides useful stats of long reads
-
-    TOULLIGQC(ch_samplesheet.filter { "toulligqc" in tools })
-
-    ch_multiqc_files.mix(TOULLIGQC.out.report_data)
-
-    //
     // Collate and save software versions
-    //
     def collated_versions = softwareVersionsToYAML(
         softwareVersions: channel.topic("versions"),
         nextflowVersion: workflow.nextflow.version,
@@ -295,6 +324,8 @@ workflow SEQINSPECTOR {
         sort: true,
         newLine: true,
     )
+
+    // STEP 08: MULTIQC (GLOBAL USING SAV AND PER TAG)
 
     //
     // MODULE: MultiQC
@@ -339,16 +370,14 @@ workflow SEQINSPECTOR {
             def xml = []
             def interop = []
 
-            if ((rundir) && (('checkqc' in tools) || ('multiqcsav' in tools) || ('rundirparser' in tools))) {
-                if ((meta.rundir_number > 1) && ('multiqcsav' in tools)) {
+            if ((rundir) && ('multiqcsav' in tools)) {
+                if (meta.rundir_number > 1) {
                     log.warn("More than one rundir, or sample(s) missing rundir, skipping skipping MULTIQC_SAV")
                 }
-
-                if (rundir.toString().endsWith('tar.gz')) {
+                else if (rundir.toString().endsWith('tar.gz')) {
                     log.warn("Rundir: ${meta.dirname} is a tar.gz")
                 }
-
-                if ('multiqcsav' in tools) {
+                else {
                     interop = files(file(rundir).resolve("InterOp/*.bin"), checkIfExists: true)
                     xml = files(file(rundir).resolve("*.xml"), checkIfExists: true)
                 }

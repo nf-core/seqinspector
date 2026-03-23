@@ -10,10 +10,10 @@ nextflow_pipeline {
             name: "PromethION data test",
             params: [
                 genome : 'EB1',
-                input: pipelines_testdata_base_path + 'seqinspector/testdata/PromethION/samplesheet.csv',
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/promethion.csv',
                 tools_bundle: 'ont',
-            ]
-        ]
+            ],
+        ],
     ]
 
     // Generate tests for each scenario

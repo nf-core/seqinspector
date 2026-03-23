@@ -67,7 +67,7 @@ If provided, nf-core/seqinspector can also parse statistics from an Illumina run
 | fastqc      | 0.12.1  |
 | fastqe      | 0.5.2   |
 | fastqscreen | 0.16.0  |
-| kraken2     | 2.1.3   |
+| kraken2     | 2.1.6   |
 | krona       | 2.8.1   |
 | multiqc     | 1.33    |
 | multiqcsav  | 0.2.0   |

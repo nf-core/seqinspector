@@ -27,7 +27,7 @@
                     },
                     "fastqc": {
                         "branch": "master",
-                        "git_sha": "f89e009050fa3ea88b81f08a4fc6fe2afbae778b",
+                        "git_sha": "4f6c351f7bbc62173b30f5a430e21ec907720676",
                         "installed_by": ["modules"]
                     },
                     "fastqe": {
@@ -63,7 +63,7 @@
                     },
                     "multiqc": {
                         "branch": "master",
-                        "git_sha": "2c73cc8fa92cf48de3da0b643fdf357a8a290b36",
+                        "git_sha": "cb9f4bec379866ca560f7f79d9a9a06bea8c9b51",
                         "installed_by": ["modules"]
                     },
                     "multiqcsav": {
@@ -88,12 +88,12 @@
                     },
                     "samtools/faidx": {
                         "branch": "master",
-                        "git_sha": "4e3e10e502ec6ab6b1c4b4fecd923ff1fa287338",
+                        "git_sha": "156feda0cb6589cd29c04902004fa3b53bc00205",
                         "installed_by": ["modules"]
                     },
                     "samtools/index": {
                         "branch": "master",
-                        "git_sha": "4e3e10e502ec6ab6b1c4b4fecd923ff1fa287338",
+                        "git_sha": "156feda0cb6589cd29c04902004fa3b53bc00205",
                         "installed_by": ["modules"]
                     },
                     "seqfu/stats": {

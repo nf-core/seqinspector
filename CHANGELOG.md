@@ -18,6 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Fixed`
 
+- [#216](https://github.com/nf-core/seqinspector/pull/216) Fixed meta.id that resulted in all SEQFU_STATS processes with the same tag name
+
 ### `Changed`
 
 - [#191](https://github.com/nf-core/seqinspector/pull/191) Back to dev
@@ -27,8 +29,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#192](https://github.com/nf-core/seqinspector/pull/192) Removed `seqtk_sample` from the list of tools as it can be inferred from `params.sample_size`
 - [#205](https://github.com/nf-core/seqinspector/pull/205) document how to add a tool to tool selection and how to use tool selection
 - [#215](https://github.com/nf-core/seqinspector/pull/215) Update all modules
+- [#216](https://github.com/nf-core/seqinspector/pull/216) Split out and simplify tests
 
 ### `Dependencies`
+
+| Dependency | Old version | New version |
+| ---------- | ----------- | ----------- |
+| checkQC    |             | 4.1.0       |
+| fastp      |             | 1.1.0       |
+| fastqe     |             | 0.5.2       |
+| fq/lint    |             | 0.12.0      |
+| htslib     | 1.22.1      | 1.23.1      |
+| kraken2    |             | 2.1.6       |
+| krona      |             | 2.8.1       |
+| multiqcsav |             | 0.2.0       |
+| samtools   | 1.22.1      | 1.23.1      |
+| toulligqc  |             | 2.8.4       |
+| tar        |             | 1.34        |
 
 ### `Deprecated`
 
