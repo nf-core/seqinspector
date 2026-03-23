@@ -14,8 +14,6 @@ workflow FASTQ_QC_PHYLOGENETIC {
     kraken2_save_readclassifications
 
     main:
-    def krona_ktupdatetaxonomy_db = channel.empty()
-
     //
     // MODULE: Perform kraken2
     //
@@ -25,8 +23,6 @@ workflow FASTQ_QC_PHYLOGENETIC {
     // MODULE: krona plot the kraken2 reports
     //
     KRONA_KTUPDATETAXONOMY()
-    krona_ktupdatetaxonomy_db = KRONA_KTUPDATETAXONOMY.out.db
-
     KRONA_KTIMPORTTAXONOMY(KRAKEN2_KRAKEN2.out.report, krona_ktupdatetaxonomy_db)
 
     emit:
