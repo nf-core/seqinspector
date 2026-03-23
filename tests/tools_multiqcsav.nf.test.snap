@@ -120,11 +120,9 @@
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
             ],
             "No BAM files",
-            [
-                "WARN: More than one rundir, or sample(s) missing rundir, skipping skipping MULTIQC_SAV"
-            ]
+            "No warnings"
         ],
-        "timestamp": "2026-03-20T13:27:47.123570446",
+        "timestamp": "2026-03-20T14:49:44.505393756",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

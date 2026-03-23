@@ -8,17 +8,26 @@ nextflow_pipeline {
 
     def test_scenario = [
         [
-            name: "NovaSeq6000 data test - checkqc",
+            name: "NovaSeq6000 data test sample size",
             params: [
-                tools: 'checkqc',
+                sample_size: 90,
+                tools: 'seqfu_stats',
                 tools_bundle: null,
             ],
         ],
         [
-            name: "NovaSeq6000 data test - checkqc with config",
+            name: "NovaSeq6000 data test relative sample size",
             params: [
-                checkqc_config: "$projectDir/assets/checkqc_config.yml",
-                tools: 'checkqc',
+                sample_size: 0.9,
+                tools: 'seqfu_stats',
+                tools_bundle: null,
+            ],
+        ],
+        [
+            name: "NovaSeq6000 data test sample size exceeds available reads",
+            params: [
+                sample_size: 120,
+                tools: 'seqfu_stats',
                 tools_bundle: null,
             ],
         ],

@@ -10,39 +10,7 @@ nextflow_pipeline {
         [
             name: "NovaSeq6000 data test",
             params: [],
-            snapshot: 'stderr,stdout'
-        ],
-        [
-            name: "NovaSeq6000 data test sample size",
-            params: [
-                sample_size: 90
-            ]
-        ],
-        [
-            name: "NovaSeq6000 data test relative sample size",
-            params: [
-                sample_size: 0.9
-            ]
-        ],
-        [
-            name: "NovaSeq6000 data test sample size exceeds available reads",
-            params: [
-                sample_size: 120
-            ]
-        ],
-        [
-            name: "NovaSeq6000 data test - No rundirs",
-            params: [
-                input: pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/samplesheet_no_rundirs.csv'
-            ]
-        ],
-        [
-            name: "NovaSeq6000 data test - tag collision",
-            params: [
-                input: pipelines_testdata_base_path + 'seqinspector/testdata/NovaSeq6000/samplesheet_tag_collision.csv',
-                tools_bundle: null,
-                tools: 'fastqc',
-            ]
+            snapshot: 'stderr,stdout',
         ],
     ]
 

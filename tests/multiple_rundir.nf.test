@@ -7,9 +7,10 @@ nextflow_pipeline {
 
     def test_scenario = [
         [
-            name: "NovaSeq6000 data test - fastqe",
+            name: "MiSeq data test - fastqc,multiqcsav - multiple rundir",
             params: [
-                tools: 'fastqe',
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/miseq.csv',
+                tools: 'fastqc,multiqcsav',
                 tools_bundle: null,
             ],
         ],

@@ -7,35 +7,12 @@ nextflow_pipeline {
 
     def test_scenario = [
         [
-            name: "MiSeq data test (single end reads)",
+            name: "MiSeq data test",
             params: [
-                input: pipelines_testdata_base_path + 'seqinspector/testdata/MiSeq/samplesheet.csv',
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/miseq.csv',
                 tools_bundle: 'minimal',
-            ]
+            ],
         ],
-        [
-            name: "Miseq data test (no fastqc)",
-            params: [
-                input: pipelines_testdata_base_path + 'seqinspector/testdata/MiSeq/samplesheet.csv',
-                skip_tools: 'fastqc',
-                tools_bundle: 'minimal',
-            ]
-        ],
-        [
-            name: "Miseq data test (skip all tools)",
-            params: [
-                input: pipelines_testdata_base_path + 'seqinspector/testdata/MiSeq/samplesheet.csv',
-                skip_tools: 'fastqc,fastqscreen,fq_lint,picard_collectmultiplemetrics,seqfu_stats',
-                tools_bundle: 'minimal',
-            ]
-        ],
-        [
-            name: "MiSeq data test (paired end reads)",
-            params: [
-                input: pipelines_testdata_base_path + 'seqinspector/testdata/Miseq_PairedEnd/samplesheet.csv',
-                tools_bundle: 'minimal',
-            ]
-        ]
     ]
 
     // Generate tests for each scenario

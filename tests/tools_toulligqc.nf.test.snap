@@ -1,5 +1,5 @@
 {
-    "MiSeq data test (single end reads), toulligqc fail": {
+    "PromethION data test - toulligqc fail": {
         "content": [
             [
                 "pipeline_info"
@@ -10,7 +10,7 @@
                 "ToulligQC is not compatible with the 'emulate_amd64' profile. Please remove ToulligQC from the list of tools if you wish to run seqinspector on this architecture."
             ]
         ],
-        "timestamp": "2026-03-12T15:35:32.199984",
+        "timestamp": "2026-03-21T12:55:29.14579256",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

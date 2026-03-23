@@ -1,10 +1,10 @@
 nextflow_workflow {
 
-    name "Test Workflow QC_BAM"
-    script "subworkflows/local/qc_bam/main.nf"
-    workflow "QC_BAM"
+    name "Test Workflow BAM_QC"
+    script "subworkflows/local/bam_qc/main.nf"
+    workflow "BAM_QC"
     tag 'subworkflows'
-    tag 'qc_bam'
+    tag 'bam_qc'
 
     test("Test with picard_collectmultiplemetrics") {
 
@@ -16,12 +16,12 @@ nextflow_workflow {
                 input[0]  = channel.of(
                     [
                         [id:'earlycasualcaiman', sample:'earlycasualcaiman', single_end:false, num_lanes:1, read_group: "'@RG\\\\tID:earlycasualcaiman\\\\tPL:illumina\\\\tSM:earlycasualcaiman'", lane:1, sex:1, phenotype:1, paternal:0, maternal:0, case_id:'justhusky'],
-                        [file(params.pipelines_testdata_base_path + '/raredisease/testdata/earlycasualcaiman_sorted_md.bam', checkIfExists: true)],
-                        [file(params.pipelines_testdata_base_path + '/raredisease/testdata/earlycasualcaiman_sorted_md.bam.bai', checkIfExists: true)]
+                        [file(params.pipelines_testdata_base_path + 'raredisease/testdata/earlycasualcaiman_sorted_md.bam', checkIfExists: true)],
+                        [file(params.pipelines_testdata_base_path + 'raredisease/testdata/earlycasualcaiman_sorted_md.bam.bai', checkIfExists: true)]
                     ]
                 )
-                input[1]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/raredisease/reference/reference.fasta', checkIfExists: true)).collect()
-                input[2]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/raredisease/reference/reference.fasta.fai', checkIfExists: true)).collect()
+                input[1]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + 'raredisease/reference/reference.fasta', checkIfExists: true)).collect()
+                input[2]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + 'raredisease/reference/reference.fasta.fai', checkIfExists: true)).collect()
                 input[3]  = null
                 input[4]  = null
                 input[5]  = null
@@ -58,15 +58,15 @@ nextflow_workflow {
                 input[0]  = channel.of(
                     [
                         [id:'earlycasualcaiman', sample:'earlycasualcaiman', single_end:false, num_lanes:1, read_group: "'@RG\\\\tID:earlycasualcaiman\\\\tPL:illumina\\\\tSM:earlycasualcaiman'", lane:1, sex:1, phenotype:1, paternal:0, maternal:0, case_id:'justhusky'],
-                        [file(params.pipelines_testdata_base_path + '/raredisease/testdata/earlycasualcaiman_sorted_md.bam', checkIfExists: true)],
-                        [file(params.pipelines_testdata_base_path + '/raredisease/testdata/earlycasualcaiman_sorted_md.bam.bai', checkIfExists: true)]
+                        [file(params.pipelines_testdata_base_path + 'raredisease/testdata/earlycasualcaiman_sorted_md.bam', checkIfExists: true)],
+                        [file(params.pipelines_testdata_base_path + 'raredisease/testdata/earlycasualcaiman_sorted_md.bam.bai', checkIfExists: true)]
                     ]
                 )
-                input[1]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/raredisease/reference/reference.fasta', checkIfExists: true)).collect()
-                input[2]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/raredisease/reference/reference.fasta.fai', checkIfExists: true)).collect()
-                input[3]  = channel.fromPath(params.pipelines_testdata_base_path + '/raredisease/reference/target.bed', checkIfExists: true).collect()
-                input[4]  = channel.fromPath(params.pipelines_testdata_base_path + '/raredisease/reference/target.bed', checkIfExists: true).collect()
-                input[5]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + '/raredisease/reference/reference.dict', checkIfExists: true)).collect()
+                input[1]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + 'raredisease/reference/reference.fasta', checkIfExists: true)).collect()
+                input[2]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + 'raredisease/reference/reference.fasta.fai', checkIfExists: true)).collect()
+                input[3]  = channel.fromPath(params.pipelines_testdata_base_path + 'raredisease/reference/target.bed', checkIfExists: true).collect()
+                input[4]  = channel.fromPath(params.pipelines_testdata_base_path + 'raredisease/reference/target.bed', checkIfExists: true).collect()
+                input[5]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + 'raredisease/reference/reference.dict', checkIfExists: true)).collect()
                 input[6]  = ['picard_collecthsmetrics', 'picard_collectmultiplemetrics']
                 """
             }

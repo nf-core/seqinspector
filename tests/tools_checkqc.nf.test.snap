@@ -144,11 +144,9 @@
                 "multiqc_citations.txt:md5,2f5fc28069c07e52fdef3d6d25464b18"
             ],
             "No BAM files",
-            [
-                "WARN: Rundir: 200624_A00834_0183_BHMTFYDRXX is a tar.gz"
-            ]
+            "No warnings"
         ],
-        "timestamp": "2026-03-20T12:56:08.500997592",
+        "timestamp": "2026-03-20T14:13:35.830332918",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -299,11 +297,9 @@
                 "multiqc_citations.txt:md5,2f5fc28069c07e52fdef3d6d25464b18"
             ],
             "No BAM files",
-            [
-                "WARN: Rundir: 200624_A00834_0183_BHMTFYDRXX is a tar.gz"
-            ]
+            "No warnings"
         ],
-        "timestamp": "2026-03-20T12:56:52.696226285",
+        "timestamp": "2026-03-20T14:14:19.492375716",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
