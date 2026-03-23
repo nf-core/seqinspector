@@ -6,26 +6,31 @@ include { KRAKEN2_KRAKEN2        } from '../../../modules/nf-core/kraken2/kraken
 include { KRONA_KTIMPORTTAXONOMY } from '../../../modules/nf-core/krona/ktimporttaxonomy'
 include { KRONA_KTUPDATETAXONOMY } from '../../../modules/nf-core/krona/ktupdatetaxonomy'
 
-workflow BAM_QC_PHYLOGENETIC {
+workflow FASTQ_QC_PHYLOGENETIC {
     take:
     reads
     kraken2_db
     kraken2_save_reads
     kraken2_save_readclassifications
+    run_kraken2_krona
 
     main:
-    ch_reads = reads
+    def krona_ktupdatetaxonomy_db = channel.empty()
 
     //
     // MODULE: Perform kraken2
     //
-    KRAKEN2_KRAKEN2(ch_reads, kraken2_db, kraken2_save_reads, kraken2_save_readclassifications)
+    KRAKEN2_KRAKEN2(reads.filter { run_kraken2_krona }, kraken2_db, kraken2_save_reads, kraken2_save_readclassifications)
 
     //
     // MODULE: krona plot the kraken2 reports
     //
-    KRONA_KTUPDATETAXONOMY()
-    KRONA_KTIMPORTTAXONOMY(KRAKEN2_KRAKEN2.out.report, KRONA_KTUPDATETAXONOMY.out.db)
+    if (run_kraken2_krona) {
+        KRONA_KTUPDATETAXONOMY()
+        krona_ktupdatetaxonomy_db = KRONA_KTUPDATETAXONOMY.out.db
+    }
+
+    KRONA_KTIMPORTTAXONOMY(KRAKEN2_KRAKEN2.out.report, krona_ktupdatetaxonomy_db)
 
     emit:
     mqc         = KRAKEN2_KRAKEN2.out.report
