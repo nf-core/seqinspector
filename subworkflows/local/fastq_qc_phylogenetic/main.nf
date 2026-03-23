@@ -12,7 +12,6 @@ workflow FASTQ_QC_PHYLOGENETIC {
     kraken2_db
     kraken2_save_reads
     kraken2_save_readclassifications
-    run_kraken2_krona
 
     main:
     def krona_ktupdatetaxonomy_db = channel.empty()
@@ -20,15 +19,13 @@ workflow FASTQ_QC_PHYLOGENETIC {
     //
     // MODULE: Perform kraken2
     //
-    KRAKEN2_KRAKEN2(reads.filter { run_kraken2_krona }, kraken2_db, kraken2_save_reads, kraken2_save_readclassifications)
+    KRAKEN2_KRAKEN2(reads, kraken2_db, kraken2_save_reads, kraken2_save_readclassifications)
 
     //
     // MODULE: krona plot the kraken2 reports
     //
-    if (run_kraken2_krona) {
-        KRONA_KTUPDATETAXONOMY()
-        krona_ktupdatetaxonomy_db = KRONA_KTUPDATETAXONOMY.out.db
-    }
+    KRONA_KTUPDATETAXONOMY()
+    krona_ktupdatetaxonomy_db = KRONA_KTUPDATETAXONOMY.out.db
 
     KRONA_KTIMPORTTAXONOMY(KRAKEN2_KRAKEN2.out.report, krona_ktupdatetaxonomy_db)
 

@@ -266,15 +266,16 @@ workflow SEQINSPECTOR {
     // SUBWORKFLOW: FASTQ_QC_PHYLOGENETIC
     //   Run KRAKEN2 and produce KRONA plots
 
-    FASTQ_QC_PHYLOGENETIC(
-        ch_sample,
-        kraken2_db,
-        kraken2_save_reads,
-        kraken2_save_readclassifications,
-        ('kraken2' in tools),
-    )
+    if ('kraken2' in tools) {
+        FASTQ_QC_PHYLOGENETIC(
+            ch_sample,
+            kraken2_db,
+            kraken2_save_reads,
+            kraken2_save_readclassifications,
+        )
 
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQ_QC_PHYLOGENETIC.out.mqc)
+        ch_multiqc_files = ch_multiqc_files.mix(FASTQ_QC_PHYLOGENETIC.out.mqc)
+    }
 
     // STEP 07: fastq AND QC ON BAM FILES
 
