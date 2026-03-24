@@ -241,7 +241,7 @@ workflow SEQINSPECTOR {
     ch_multiqc_files = ch_multiqc_files.mix(FASTP.out.json)
 
     //
-    // MODULE: Run Sequali
+    // MODULE: SEQUALI
     //
     if ("sequali" in tools) {
         SEQUALI (
