@@ -77,7 +77,7 @@ workflow {
     if ('kraken2' in tools) {
         UNTAR_KRAKEN2DB(channel.fromPath(params.kraken2_db, checkIfExists: true).map { file -> [[id: 'kraken2_db'], file] }.filter { (params.kraken2_db.endsWith('.gz')) })
         ch_kraken2_db = params.kraken2_db.endsWith('.gz')
-            ? UNTAR_KRAKEN2DB.out.untar.map { _meta, archive -> [archive] }
+            ? UNTAR_KRAKEN2DB.out.untar.map { _meta, archive -> [archive] }.collect()
             : channel.fromPath(params.kraken2_db, checkIfExists: true).collect()
     }
 

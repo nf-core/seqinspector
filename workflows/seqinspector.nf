@@ -23,7 +23,7 @@ include { TOULLIGQC                    } from '../modules/nf-core/toulligqc'
 
 // subworkflow
 include { BAM_QC                       } from '../subworkflows/local/bam_qc'
-include { BAM_QC_PHYLOGENETIC          } from '../subworkflows/local/bam_qc_phylogenetic'
+include { FASTQ_QC_PHYLOGENETIC        } from '../subworkflows/local/fastq_qc_phylogenetic'
 
 // functions
 include { methodsDescriptionText       } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
@@ -271,8 +271,24 @@ workflow SEQINSPECTOR {
 
     ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
 
+    // STEP 06: METAGENOMIC QC
 
-    // STEP 06: ALIGN AND QC ON BAM FILES
+    //
+    // SUBWORKFLOW: FASTQ_QC_PHYLOGENETIC
+    //   Run KRAKEN2 and produce KRONA plots
+
+    if ('kraken2' in tools) {
+        FASTQ_QC_PHYLOGENETIC(
+            ch_sample,
+            kraken2_db,
+            kraken2_save_reads,
+            kraken2_save_readclassifications,
+        )
+
+        ch_multiqc_files = ch_multiqc_files.mix(FASTQ_QC_PHYLOGENETIC.out.mqc)
+    }
+
+    // STEP 07: fastq AND QC ON BAM FILES
 
     //
     // MODULE: BWAMEM2_MEM to align reads
@@ -308,22 +324,6 @@ workflow SEQINSPECTOR {
     )
 
     ch_multiqc_files = ch_multiqc_files.mix(BAM_QC.out.multiple_metrics, BAM_QC.out.hs_metrics)
-
-    // STEP 07: METAGENOMIC QC
-
-    //
-    // SUBWORKFLOW: BAM_QC_PHYLOGENETIC
-    //   Run KRAKEN2 and produce KRONA plots
-
-    if ('kraken2' in tools) {
-        BAM_QC_PHYLOGENETIC(
-            ch_samplesheet,
-            kraken2_db,
-            kraken2_save_reads,
-            kraken2_save_readclassifications,
-        )
-        ch_multiqc_files = ch_multiqc_files.mix(BAM_QC_PHYLOGENETIC.out.mqc)
-    }
 
     // Collate and save software versions
     def collated_versions = softwareVersionsToYAML(
