@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#205](https://github.com/nf-core/seqinspector/pull/205) document how to add a tool to tool selection and how to use tool selection
 - [#215](https://github.com/nf-core/seqinspector/pull/215) Update all modules
 - [#216](https://github.com/nf-core/seqinspector/pull/216) Split out and simplify tests
+- [#220](https://github.com/nf-core/seqinspector/pull/220) Workflow output for MultiQC
 
 ### `Dependencies`
 
