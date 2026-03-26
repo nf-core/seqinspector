@@ -42,6 +42,7 @@ params.fasta   = getGenomeAttribute('fasta')
 
 workflow {
 
+    main:
     def tools = defineToolsList(params.tools_bundle, params.tools, params.skip_tools)
 
     //
@@ -105,8 +106,35 @@ workflow {
         params.plaintext_email,
         params.outdir,
         params.monochrome_logs,
-        NFCORE_SEQINSPECTOR.out.global_report,
+        NFCORE_SEQINSPECTOR.out.report_global.map { _meta, report -> [report] }.toList(),
     )
+
+    publish:
+    multiqc_global         = NFCORE_SEQINSPECTOR.out.data_global.mix(NFCORE_SEQINSPECTOR.out.plots_global, NFCORE_SEQINSPECTOR.out.report_global)
+    multiqc_grouped_data   = NFCORE_SEQINSPECTOR.out.data_groups
+    multiqc_grouped_plots  = NFCORE_SEQINSPECTOR.out.plots_groups
+    multiqc_grouped_report = NFCORE_SEQINSPECTOR.out.report_groups
+}
+
+output {
+    multiqc_global {
+        path "multiqc/global_report"
+    }
+    multiqc_grouped_data {
+        path { meta, file ->
+            file >> "multiqc/group_reports/${meta.id}/multiqc_data"
+        }
+    }
+    multiqc_grouped_plots {
+        path { meta, file ->
+            file >> "multiqc/group_reports/${meta.id}/multiqc_plots"
+        }
+    }
+    multiqc_grouped_report {
+        path { meta, file ->
+            file >> "multiqc/group_reports/${meta.id}/multiqc_report.html"
+        }
+    }
 }
 
 /*
@@ -156,6 +184,10 @@ workflow NFCORE_SEQINSPECTOR {
     )
 
     emit:
-    global_report   = SEQINSPECTOR.out.global_report // channel: /path/to/multiqc_report.html
-    grouped_reports = SEQINSPECTOR.out.grouped_reports // channel: /path/to/multiqc_report.html
+    data_global   = SEQINSPECTOR.out.data_global // channel: /path/to/multiqc_report.html
+    data_groups   = SEQINSPECTOR.out.data_groups // channel: /path/to/multiqc_report.html
+    plots_global  = SEQINSPECTOR.out.plots_global // channel: /path/to/multiqc_report.html
+    plots_groups  = SEQINSPECTOR.out.plots_groups // channel: /path/to/multiqc_report.html
+    report_global = SEQINSPECTOR.out.report_global // channel: /path/to/multiqc_report.html
+    report_groups = SEQINSPECTOR.out.report_groups // channel: /path/to/multiqc_report.html
 }

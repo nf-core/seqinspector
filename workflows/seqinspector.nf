@@ -417,17 +417,16 @@ workflow SEQINSPECTOR {
         .groupTuple()
         .tap { mqc_by_tag }
         .collectFile { sample_tag, _samples ->
-            def prefix_tag = "[TAG:${sample_tag}]"
             [
-                "${prefix_tag}_multiqc_extra_config.yml",
+                "${sample_tag}_multiqc_extra_config.yml",
                 """
-                    |output_fn_name: \"${prefix_tag}_multiqc_report.html\"
-                    |data_dir_name:  \"${prefix_tag}_multiqc_data\"
-                    |plots_dir_name: \"${prefix_tag}_multiqc_plots\"
+                    |output_fn_name: \"${sample_tag}_multiqc_report.html\"
+                    |data_dir_name:  \"${sample_tag}_multiqc_data\"
+                    |plots_dir_name: \"${sample_tag}_multiqc_plots\"
                 """.stripMargin(),
             ]
         }
-        .map { file -> [(file =~ /\[TAG:(.+)\]/)[0][1], file] }
+        .map { file -> [(file.getName() =~ /(.+?)_multiqc/)[0][1], file] }
         .join(mqc_by_tag)
 
     //
@@ -453,6 +452,10 @@ workflow SEQINSPECTOR {
     )
 
     emit:
-    global_report   = MULTIQC_GLOBAL.out.report.map { _meta, report -> [report] }.toList() // channel: [ /path/to/multiqc_report.html ]
-    grouped_reports = MULTIQC_PER_TAG.out.report.map { _meta, report -> [report] }.toList() // channel: [ /path/to/multiqc_report.html ]
+    data_global   = MULTIQC_GLOBAL.out.data // channel: [ /path/to/multiqc_data/ ]
+    data_groups   = MULTIQC_PER_TAG.out.data // channel: [ /path/to/multiqc_data/ ]
+    plots_global  = MULTIQC_GLOBAL.out.plots // channel: [ /path/to/multiqc_plots/ ]
+    plots_groups  = MULTIQC_PER_TAG.out.plots // channel: [ /path/to/multiqc_plots/ ]
+    report_global = MULTIQC_GLOBAL.out.report // channel: [ /path/to/multiqc_report.html ]
+    report_groups = MULTIQC_PER_TAG.out.report // channel: [ /path/to/multiqc_report.html ]
 }
