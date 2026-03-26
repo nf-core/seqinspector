@@ -15,8 +15,6 @@
                 }
             },
             [
-                "checkqc",
-                "checkqc/checkqc_report.json",
                 "multiqc",
                 "multiqc/global_report",
                 "multiqc/global_report/multiqc_data",
@@ -397,6 +395,9 @@
                 "pipeline_info",
                 "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
                 "reports",
+                "reports/checkqc",
+                "reports/checkqc/200624_A00834_0183_BHMTFYDRXX",
+                "reports/checkqc/200624_A00834_0183_BHMTFYDRXX/checkqc_report.json",
                 "reports/fastqc",
                 "reports/fastqc/Sample1_01",
                 "reports/fastqc/Sample1_01/Sample1_01_fastqc.html",
@@ -417,7 +418,6 @@
                 "rundirparser/200624_A00834_0183_BHMTFYDRXX_illumina_mqc.yml"
             ],
             [
-                "checkqc_report.json:md5,8245b6a8b8e0e2d247cb7a151d53612f",
                 "checkqc_reads-per-sample-plot.txt:md5,32ac72d463abb6df384d43041965b167",
                 "fastqc-status-check-heatmap.txt:md5,7a64380ec42aac56949a2d9a4176d4d9",
                 "fastqc_overrepresented_sequences_plot.txt:md5,c7908980f1dba22b45cf6de14a66a686",
@@ -493,6 +493,7 @@
                 "multiqc_citations.txt:md5,2f5fc28069c07e52fdef3d6d25464b18",
                 "multiqc_fastqc.txt:md5,95c8ffb23baafec625aeb600047515ae",
                 "multiqc_mqc_seq_metadata.txt:md5,5c5f63f044bdcb1ab74a66b896f0b6e7",
+                "checkqc_report.json:md5,8245b6a8b8e0e2d247cb7a151d53612f",
                 "200624_A00834_0183_BHMTFYDRXX_illumina_mqc.yml:md5,29e05fed18bca0e9a857c992b6d59a40"
             ],
             "No BAM files",
@@ -501,7 +502,7 @@
                 "WARN: No rundir for sample(s): SampleA_02, sampletest_04"
             ]
         ],
-        "timestamp": "2026-03-26T13:42:52.172009823",
+        "timestamp": "2026-03-26T14:24:27.458253966",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.0"

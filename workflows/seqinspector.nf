@@ -156,8 +156,6 @@ workflow SEQINSPECTOR {
             : [],
     )
 
-    ch_multiqc_files = ch_multiqc_files.mix(CHECKQC.out.report)
-
     //
     // MODULE: RUNDIRPARSER
     //
