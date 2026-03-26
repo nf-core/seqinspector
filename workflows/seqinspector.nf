@@ -97,15 +97,15 @@ workflow SEQINSPECTOR {
         .map { rundir, meta, _rundir_number ->
             // Return for all the rundir specific processes and to mix with ch_multiqc_files
             //   - meta: (map)
-            //     - dirname: Simple name of the rundir, used for setting unique output names in publishDir
-            //     - id: List all sample of the rundir
+            //     - id: Simple name of the rundir, used for setting unique output names in publishDir
+            //     - samples: List all sample of the rundir
             //     - rundir_number: number of total rundir, no rundir counts as one
             //     - tags: List of merged tags, used for grouping MultiQC reports
             //   - rundir: path to rundir or null when no rundir
             [
                 [
-                    dirname: rundir ? rundir.simpleName : 'no_rundir',
-                    id: rundir ? false : meta.collect { meta_ -> meta_.id }.flatten().unique().sort(),
+                    id: rundir ? rundir.simpleName : 'no_rundir',
+                    samples: rundir ? false : meta.collect { meta_ -> meta_.id }.flatten().unique().sort(),
                     rundir_number: _rundir_number,
                     tags: meta.collect { meta_ -> meta_.tags }.flatten().unique(),
                 ],
@@ -117,7 +117,7 @@ workflow SEQINSPECTOR {
     if (('checkqc' in tools) || ('multiqcsav' in tools) || ('rundirparser' in tools)) {
         ch_rundir.map { meta, rundir ->
             if (!rundir) {
-                log.warn("No rundir for sample(s): ${meta.id.join(', ')}")
+                log.warn("No rundir for sample(s): ${meta.samples.join(', ')}")
             }
         }
 
@@ -163,7 +163,7 @@ workflow SEQINSPECTOR {
     //
 
     RUNDIRPARSER(ch_rundir.filter { _meta, rundir -> (rundir && 'rundirparser' in tools) })
-    ch_multiqc_files = ch_multiqc_files.mix(RUNDIRPARSER.out.multiqc)
+    ch_multiqc_files = ch_multiqc_files.mix(RUNDIRPARSER.out.multiqc.map { meta, _process, _tool, reports -> [meta, reports] })
 
     // STEP 01: LONGREADS
 
@@ -213,14 +213,12 @@ workflow SEQINSPECTOR {
     //
 
     FASTQC(ch_sample.filter { 'fastqc' in tools })
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
 
     //
     // MODULE: FASTQE
     //
 
     FASTQE(ch_sample.filter { 'fastqe' in tools })
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQE.out.tsv)
 
     //
     // MODULE: FASTP for adapter trimming and quality filtering
@@ -325,12 +323,16 @@ workflow SEQINSPECTOR {
         newLine: true,
     )
 
+    def collated_reports = channel.topic("multiqc_files")
+        .map { meta, _process, _tool, reports -> [meta, reports] }
+
     // STEP 08: MULTIQC (GLOBAL USING SAV AND PER TAG)
 
     //
     // MODULE: MultiQC
     //
 
+    ch_multiqc_files = ch_multiqc_files.mix(collated_reports)
     ch_multiqc_extra_files = ch_multiqc_extra_files.mix(collated_versions)
 
     summary_params = paramsSummaryMap(workflow, parameters_schema: "nextflow_schema.json")
@@ -375,7 +377,7 @@ workflow SEQINSPECTOR {
                     log.warn("More than one rundir, or sample(s) missing rundir, skipping skipping MULTIQC_SAV")
                 }
                 else if (rundir.toString().endsWith('tar.gz')) {
-                    log.warn("Rundir: ${meta.dirname} is a tar.gz")
+                    log.warn("Rundir: ${meta.id} is a tar.gz")
                 }
                 else {
                     interop = files(file(rundir).resolve("InterOp/*.bin"), checkIfExists: true)

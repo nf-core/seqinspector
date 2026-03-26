@@ -8,12 +8,6 @@
                 }
             },
             [
-                "fastqe",
-                "fastqe/Sample1_01.tsv",
-                "fastqe/Sample23_03.tsv",
-                "fastqe/SampleA_02.tsv",
-                "fastqe/Undetermined_05.tsv",
-                "fastqe/sampletest_04.tsv",
                 "multiqc",
                 "multiqc/global_report",
                 "multiqc/global_report/multiqc_data",
@@ -67,27 +61,39 @@
                 "multiqc/group_reports/test/multiqc_data/multiqc_sources.txt",
                 "multiqc/group_reports/test/multiqc_report.html",
                 "pipeline_info",
-                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
+                "reports",
+                "reports/fastqe",
+                "reports/fastqe/Sample1_01",
+                "reports/fastqe/Sample1_01/Sample1_01.tsv",
+                "reports/fastqe/Sample23_03",
+                "reports/fastqe/Sample23_03/Sample23_03.tsv",
+                "reports/fastqe/SampleA_02",
+                "reports/fastqe/SampleA_02/SampleA_02.tsv",
+                "reports/fastqe/Undetermined_05",
+                "reports/fastqe/Undetermined_05/Undetermined_05.tsv",
+                "reports/fastqe/sampletest_04",
+                "reports/fastqe/sampletest_04/sampletest_04.tsv"
             ],
             [
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
                 "Sample1_01.tsv:md5,ef7c34c84ce94cfc5010ac720629eb22",
                 "Sample23_03.tsv:md5,5a7f11be59de743508346ad0b2cfd079",
                 "SampleA_02.tsv:md5,20497be1d84e80c7265cfe3567e3df9a",
                 "Undetermined_05.tsv:md5,42b93f4317d2f8ecef87d449cf711760",
-                "sampletest_04.tsv:md5,c242014dfe030603db9fc014161f3112",
-                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
+                "sampletest_04.tsv:md5,c242014dfe030603db9fc014161f3112"
             ],
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-03-12T15:47:37.915524247",
+        "timestamp": "2026-03-26T13:44:36.237222045",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.0"
         }
     }
 }

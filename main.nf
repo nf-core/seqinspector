@@ -114,7 +114,9 @@ workflow {
     multiqc_grouped_data   = NFCORE_SEQINSPECTOR.out.data_groups
     multiqc_grouped_plots  = NFCORE_SEQINSPECTOR.out.plots_groups
     multiqc_grouped_report = NFCORE_SEQINSPECTOR.out.report_groups
+    reports                = channel.topic("multiqc_files")
 }
+
 
 output {
     multiqc_global {
@@ -133,6 +135,11 @@ output {
     multiqc_grouped_report {
         path { meta, file ->
             file >> "multiqc/group_reports/${meta.id}/multiqc_report.html"
+        }
+    }
+    reports {
+        path { meta, _process, tool, file ->
+            file >> "reports/${tool}/${meta.id}/"
         }
     }
 }
