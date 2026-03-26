@@ -1,7 +1,6 @@
 .DS_Store
 bwamem2_mem/*.bam
 bwamem2_mem/*.bam.bai
-fastqscreen/*_screen.html
 fq/*fq_lint.txt
 kraken2/*.kraken2.report.txt
 kraken2/krona/*.html
@@ -25,4 +24,5 @@ picard_collectmultiplemetrics/quality_distribution_metrics
 pipeline_info/*.{html,json,txt,yml}
 reports/fastp/*/*fastp.*
 reports/fastqc/*/*_fastqc.{html,zip}
+reports/fastqscreen/*/*_screen.html
 toulligqc/**

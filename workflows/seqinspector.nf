@@ -254,8 +254,6 @@ workflow SEQINSPECTOR {
         ).toList().transpose().toList(),
     )
 
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
-
     // STEP 06: METAGENOMIC QC
 
     //
