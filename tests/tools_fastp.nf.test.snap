@@ -8,22 +8,6 @@
                 }
             },
             [
-                "fastp",
-                "fastp/Sample1_01.fastp.html",
-                "fastp/Sample1_01.fastp.json",
-                "fastp/Sample1_01.fastp.log",
-                "fastp/Sample23_03.fastp.html",
-                "fastp/Sample23_03.fastp.json",
-                "fastp/Sample23_03.fastp.log",
-                "fastp/SampleA_02.fastp.html",
-                "fastp/SampleA_02.fastp.json",
-                "fastp/SampleA_02.fastp.log",
-                "fastp/Undetermined_05.fastp.html",
-                "fastp/Undetermined_05.fastp.json",
-                "fastp/Undetermined_05.fastp.log",
-                "fastp/sampletest_04.fastp.html",
-                "fastp/sampletest_04.fastp.json",
-                "fastp/sampletest_04.fastp.log",
                 "multiqc",
                 "multiqc/global_report",
                 "multiqc/global_report/multiqc_data",
@@ -262,7 +246,29 @@
                 "multiqc/group_reports/test/multiqc_plots/svg/fastp_filtered_reads_plot-pct.svg",
                 "multiqc/group_reports/test/multiqc_report.html",
                 "pipeline_info",
-                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
+                "reports",
+                "reports/fastp",
+                "reports/fastp/Sample1_01",
+                "reports/fastp/Sample1_01/Sample1_01.fastp.html",
+                "reports/fastp/Sample1_01/Sample1_01.fastp.json",
+                "reports/fastp/Sample1_01/Sample1_01.fastp.log",
+                "reports/fastp/Sample23_03",
+                "reports/fastp/Sample23_03/Sample23_03.fastp.html",
+                "reports/fastp/Sample23_03/Sample23_03.fastp.json",
+                "reports/fastp/Sample23_03/Sample23_03.fastp.log",
+                "reports/fastp/SampleA_02",
+                "reports/fastp/SampleA_02/SampleA_02.fastp.html",
+                "reports/fastp/SampleA_02/SampleA_02.fastp.json",
+                "reports/fastp/SampleA_02/SampleA_02.fastp.log",
+                "reports/fastp/Undetermined_05",
+                "reports/fastp/Undetermined_05/Undetermined_05.fastp.html",
+                "reports/fastp/Undetermined_05/Undetermined_05.fastp.json",
+                "reports/fastp/Undetermined_05/Undetermined_05.fastp.log",
+                "reports/fastp/sampletest_04",
+                "reports/fastp/sampletest_04/sampletest_04.fastp.html",
+                "reports/fastp/sampletest_04/sampletest_04.fastp.json",
+                "reports/fastp/sampletest_04/sampletest_04.fastp.log"
             ],
             [
                 "fastp-seq-content-gc-plot_Read_1_After_filtering.txt:md5,abdf85cb2f0503e810af139950588f70",
@@ -314,10 +320,10 @@
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-03-12T15:47:00.392943008",
+        "timestamp": "2026-03-26T13:57:58.429733596",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.0"
         }
     }
 }

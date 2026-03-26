@@ -235,8 +235,6 @@ workflow SEQINSPECTOR {
         save_merged,
     )
 
-    ch_multiqc_files = ch_multiqc_files.mix(FASTP.out.json)
-
     // ch_trimmed = 'fastp' in tools ? FASTP.out.reads : ch_sample
 
     // STEP 05: FASTQSCREEN
