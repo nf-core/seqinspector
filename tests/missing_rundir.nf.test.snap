@@ -498,14 +498,14 @@
             ],
             "No BAM files",
             [
-                "WARN: More than one rundir, or sample(s) missing rundir, skipping skipping MULTIQC_SAV",
+                "WARN: More than one rundir, or sample(s) missing rundir, skipping MULTIQC_SAV",
                 "WARN: No rundir for sample(s): SampleA_02, sampletest_04"
             ]
         ],
-        "timestamp": "2026-03-26T14:24:27.458253966",
+        "timestamp": "2026-03-30T17:27:13.577800914",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.0"
+            "nextflow": "25.10.2"
         }
     },
     "NovaSeq6000 data test - checkqc,fastqc,multiqcsav,rundirparser - no rundir": {
