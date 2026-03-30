@@ -42,16 +42,16 @@ workflow SEQINSPECTOR {
     take:
     ch_samplesheet // channel: samplesheet read in from --input
     bait_intervals
-    bwamem2_index
+    bwamem2
     checkqc_config
-    fasta_reference
+    reference
     fastq_screen_references
     multiqc_config
     multiqc_logo
     multiqc_methods_description
     outdir
-    ref_dict
-    ref_fai
+    dict
+    fai
     sample_size
     tools
     target_intervals
@@ -170,7 +170,6 @@ workflow SEQINSPECTOR {
     // This provides useful stats of long reads
 
     TOULLIGQC(ch_samplesheet.filter { 'toulligqc' in tools })
-
     ch_multiqc_files.mix(TOULLIGQC.out.report_data)
 
     // STEP 02: BASIC QC ON FASTQ FILES
@@ -192,8 +191,6 @@ workflow SEQINSPECTOR {
             }
         }
 
-    ch_multiqc_files = ch_multiqc_files.mix(SEQFU_STATS.out.multiqc)
-
     // STEP 03: SUBSAMPLE
 
     //
@@ -206,15 +203,7 @@ workflow SEQINSPECTOR {
 
     // STEP 04: MORE QC ON FASTQ FILES (CAN BE SUMSAMPLED)
 
-    //
-    // MODULE: FASTQC
-    //
-
     FASTQC(ch_sample.filter { 'fastqc' in tools })
-
-    //
-    // MODULE: FASTQE
-    //
 
     FASTQE(ch_sample.filter { 'fastqe' in tools })
 
@@ -279,8 +268,8 @@ workflow SEQINSPECTOR {
 
     BWAMEM2_MEM(
         ch_sample.filter { ('picard_collecthsmetrics' in tools) || ('picard_collectmultiplemetrics' in tools) },
-        bwamem2_index,
-        fasta_reference,
+        bwamem2,
+        reference,
         sort_bam,
     )
 
@@ -296,15 +285,13 @@ workflow SEQINSPECTOR {
 
     BAM_QC(
         BWAMEM2_MEM.out.bam.join(SAMTOOLS_INDEX.out.index, failOnDuplicate: true, failOnMismatch: true),
-        fasta_reference,
-        ref_fai,
+        reference,
+        fai,
         bait_intervals ? channel.fromPath(bait_intervals).collect() : channel.empty(),
         target_intervals ? channel.fromPath(target_intervals).collect() : channel.empty(),
-        ref_dict,
+        dict,
         tools,
     )
-
-    ch_multiqc_files = ch_multiqc_files.mix(BAM_QC.out.multiple_metrics, BAM_QC.out.hs_metrics)
 
     // Collate and save software versions
     def collated_versions = softwareVersionsToYAML(
@@ -368,7 +355,7 @@ workflow SEQINSPECTOR {
 
             if ((rundir) && ('multiqcsav' in tools)) {
                 if (meta.rundir_number > 1) {
-                    log.warn("More than one rundir, or sample(s) missing rundir, skipping skipping MULTIQC_SAV")
+                    log.warn("More than one rundir, or sample(s) missing rundir, skipping MULTIQC_SAV")
                 }
                 else if (rundir.toString().endsWith('tar.gz')) {
                     log.warn("Rundir: ${meta.id} is a tar.gz")

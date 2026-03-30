@@ -138,8 +138,16 @@ output {
         }
     }
     reports {
-        path { meta, _process, tool, file ->
-            file >> "reports/${tool}/${meta.id}/"
+        path { meta, process, tool, file ->
+            if (tool == 'picard') {
+                file >> "reports/${process.tokenize(':').last().toLowerCase()}/${meta.id}/"
+            }
+            else if (tool == 'seqfu') {
+                file >> "reports/${tool}/${meta.id}/${meta.id}_${file.fileName}"
+            }
+            else {
+                file >> "reports/${tool}/${meta.id}/"
+            }
         }
     }
 }

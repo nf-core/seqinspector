@@ -8,8 +8,6 @@
                 }
             },
             [
-                "checkqc",
-                "checkqc/checkqc_report.json",
                 "multiqc",
                 "multiqc/global_report",
                 "multiqc/global_report/multiqc_data",
@@ -123,10 +121,13 @@
                 "multiqc/group_reports/test/multiqc_plots/svg/checkqc_reads-per-sample-plot-pct.svg",
                 "multiqc/group_reports/test/multiqc_report.html",
                 "pipeline_info",
-                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
+                "reports",
+                "reports/checkqc",
+                "reports/checkqc/200624_A00834_0183_BHMTFYDRXX",
+                "reports/checkqc/200624_A00834_0183_BHMTFYDRXX/checkqc_report.json"
             ],
             [
-                "checkqc_report.json:md5,8245b6a8b8e0e2d247cb7a151d53612f",
                 "checkqc_reads-per-sample-plot.txt:md5,32ac72d463abb6df384d43041965b167",
                 "multiqc_checkqc.txt:md5,f2690f77b441c21eeea435c6f8630902",
                 "multiqc_citations.txt:md5,2f5fc28069c07e52fdef3d6d25464b18",
@@ -141,15 +142,16 @@
                 "multiqc_citations.txt:md5,2f5fc28069c07e52fdef3d6d25464b18",
                 "checkqc_reads-per-sample-plot.txt:md5,32ac72d463abb6df384d43041965b167",
                 "multiqc_checkqc.txt:md5,f2690f77b441c21eeea435c6f8630902",
-                "multiqc_citations.txt:md5,2f5fc28069c07e52fdef3d6d25464b18"
+                "multiqc_citations.txt:md5,2f5fc28069c07e52fdef3d6d25464b18",
+                "checkqc_report.json:md5,8245b6a8b8e0e2d247cb7a151d53612f"
             ],
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-03-20T14:13:35.830332918",
+        "timestamp": "2026-03-30T16:45:58.758106719",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.2"
         }
     },
     "NovaSeq6000 data test - checkqc with config": {
@@ -161,8 +163,6 @@
                 }
             },
             [
-                "checkqc",
-                "checkqc/checkqc_report.json",
                 "multiqc",
                 "multiqc/global_report",
                 "multiqc/global_report/multiqc_data",
@@ -276,10 +276,13 @@
                 "multiqc/group_reports/test/multiqc_plots/svg/checkqc_reads-per-sample-plot-pct.svg",
                 "multiqc/group_reports/test/multiqc_report.html",
                 "pipeline_info",
-                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
+                "reports",
+                "reports/checkqc",
+                "reports/checkqc/200624_A00834_0183_BHMTFYDRXX",
+                "reports/checkqc/200624_A00834_0183_BHMTFYDRXX/checkqc_report.json"
             ],
             [
-                "checkqc_report.json:md5,8245b6a8b8e0e2d247cb7a151d53612f",
                 "checkqc_reads-per-sample-plot.txt:md5,32ac72d463abb6df384d43041965b167",
                 "multiqc_checkqc.txt:md5,f2690f77b441c21eeea435c6f8630902",
                 "multiqc_citations.txt:md5,2f5fc28069c07e52fdef3d6d25464b18",
@@ -294,15 +297,16 @@
                 "multiqc_citations.txt:md5,2f5fc28069c07e52fdef3d6d25464b18",
                 "checkqc_reads-per-sample-plot.txt:md5,32ac72d463abb6df384d43041965b167",
                 "multiqc_checkqc.txt:md5,f2690f77b441c21eeea435c6f8630902",
-                "multiqc_citations.txt:md5,2f5fc28069c07e52fdef3d6d25464b18"
+                "multiqc_citations.txt:md5,2f5fc28069c07e52fdef3d6d25464b18",
+                "checkqc_report.json:md5,8245b6a8b8e0e2d247cb7a151d53612f"
             ],
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-03-20T14:14:19.492375716",
+        "timestamp": "2026-03-30T16:37:21.628828506",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.2"
         }
     }
 }
