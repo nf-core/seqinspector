@@ -18,22 +18,26 @@
                     "checkqc": {
                         "branch": "master",
                         "git_sha": "389ed64090aa4594276fb3d53923432c7728c5b4",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/checkqc/checkqc.diff"
                     },
                     "fastp": {
                         "branch": "master",
                         "git_sha": "1fb5a73bce8e4ac7079b0a9461b23d11e877ad14",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/fastp/fastp.diff"
                     },
                     "fastqc": {
                         "branch": "master",
-                        "git_sha": "4f6c351f7bbc62173b30f5a430e21ec907720676",
-                        "installed_by": ["modules"]
+                        "git_sha": "79b36b51048048374b642289bfe9e591ef56fe05",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/fastqc/fastqc.diff"
                     },
                     "fastqe": {
                         "branch": "master",
                         "git_sha": "c7b8a51247112b76b89dd87b9dbe081085113590",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/fastqe/fastqe.diff"
                     },
                     "fastqscreen/fastqscreen": {
                         "branch": "master",
@@ -63,7 +67,7 @@
                     },
                     "multiqc": {
                         "branch": "master",
-                        "git_sha": "cb9f4bec379866ca560f7f79d9a9a06bea8c9b51",
+                        "git_sha": "79b36b51048048374b642289bfe9e591ef56fe05",
                         "installed_by": ["modules"]
                     },
                     "multiqcsav": {
@@ -74,12 +78,14 @@
                     "picard/collecthsmetrics": {
                         "branch": "master",
                         "git_sha": "a631e12055f6c23ba2c942d3902b3ed1b9eed859",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/picard/collecthsmetrics/picard-collecthsmetrics.diff"
                     },
                     "picard/collectmultiplemetrics": {
                         "branch": "master",
                         "git_sha": "a631e12055f6c23ba2c942d3902b3ed1b9eed859",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/picard/collectmultiplemetrics/picard-collectmultiplemetrics.diff"
                     },
                     "picard/createsequencedictionary": {
                         "branch": "master",
@@ -99,7 +105,8 @@
                     "seqfu/stats": {
                         "branch": "master",
                         "git_sha": "6b81c03dc4465ac9351b293dc6caada2a5e7556c",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/seqfu/stats/seqfu-stats.diff"
                     },
                     "seqtk/sample": {
                         "branch": "master",
