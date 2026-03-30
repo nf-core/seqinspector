@@ -944,6 +944,9 @@
                 "reports/picard_collectmultiplemetrics/sampletest_04/sampletest_04.CollectMultipleMetrics.base_distribution_by_cycle_metrics",
                 "reports/picard_collectmultiplemetrics/sampletest_04/sampletest_04.CollectMultipleMetrics.quality_by_cycle_metrics",
                 "reports/picard_collectmultiplemetrics/sampletest_04/sampletest_04.CollectMultipleMetrics.quality_distribution_metrics",
+                "reports/rundirparser",
+                "reports/rundirparser/200624_A00834_0183_BHMTFYDRXX",
+                "reports/rundirparser/200624_A00834_0183_BHMTFYDRXX/200624_A00834_0183_BHMTFYDRXX_illumina_mqc.yml",
                 "reports/seqfu",
                 "reports/seqfu/Sample1_01",
                 "reports/seqfu/Sample1_01/Sample1_01_seqfu.tsv",
@@ -960,8 +963,6 @@
                 "reports/seqfu/sampletest_04",
                 "reports/seqfu/sampletest_04/sampletest_04_seqfu.tsv",
                 "reports/seqfu/sampletest_04/sampletest_04_seqfu_mqc.txt",
-                "rundirparser",
-                "rundirparser/200624_A00834_0183_BHMTFYDRXX_illumina_mqc.yml",
                 "samtools_faidx",
                 "samtools_faidx/genome.fa.fai"
             ],
@@ -1196,6 +1197,7 @@
                 "Undetermined_05_screen.txt:md5,3b184ef10eeb99043a85826534a4ee28",
                 "sampletest_04_screen.png:md5,1fb60070e8f4b70de0c1b3786b54f27e",
                 "sampletest_04_screen.txt:md5,3b184ef10eeb99043a85826534a4ee28",
+                "200624_A00834_0183_BHMTFYDRXX_illumina_mqc.yml:md5,29e05fed18bca0e9a857c992b6d59a40",
                 "Sample1_01_seqfu.tsv:md5,ac174f48d928c6ddfd43c88af0caa8b6",
                 "Sample1_01_seqfu_mqc.txt:md5,24d99524ccd0e6c6255a69d68a871c7a",
                 "Sample23_03_seqfu.tsv:md5,6fac5d3dbce3f3bee72341fe99a399dc",
@@ -1206,7 +1208,6 @@
                 "Undetermined_05_seqfu_mqc.txt:md5,bd8be908362c5cb08a72f8ae7ab41b0d",
                 "sampletest_04_seqfu.tsv:md5,a5bea0b9c6015dd1a201ffd433e9b377",
                 "sampletest_04_seqfu_mqc.txt:md5,2180961655bbc8a12f0152d6a4b803a2",
-                "200624_A00834_0183_BHMTFYDRXX_illumina_mqc.yml:md5,29e05fed18bca0e9a857c992b6d59a40",
                 "genome.fa.fai:md5,6f4c0ce5258e6948135ad006e1f9ee1b"
             ],
             [
@@ -1303,7 +1304,7 @@
                 "[NXF_HASH] Submitted process > PREPARE_GENOME:SAMTOOLS_FAIDX (genome.fa)"
             ]
         ],
-        "timestamp": "2026-03-30T17:26:04.251096913",
+        "timestamp": "2026-03-30T17:53:23.625837881",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.2"

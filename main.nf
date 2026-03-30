@@ -142,6 +142,9 @@ output {
             if (tool == 'picard') {
                 file >> "reports/${process.tokenize(':').last().toLowerCase()}/${meta.id}/"
             }
+            else if (tool == 'rundirparser') {
+                file >> "reports/${tool}/${meta.id}/${meta.id}_${file.fileName}"
+            }
             else if (tool == 'seqfu') {
                 file >> "reports/${tool}/${meta.id}/${meta.id}_${file.fileName}"
             }

@@ -414,8 +414,9 @@
                 "reports/fastqc/sampletest_04",
                 "reports/fastqc/sampletest_04/sampletest_04_fastqc.html",
                 "reports/fastqc/sampletest_04/sampletest_04_fastqc.zip",
-                "rundirparser",
-                "rundirparser/200624_A00834_0183_BHMTFYDRXX_illumina_mqc.yml"
+                "reports/rundirparser",
+                "reports/rundirparser/200624_A00834_0183_BHMTFYDRXX",
+                "reports/rundirparser/200624_A00834_0183_BHMTFYDRXX/200624_A00834_0183_BHMTFYDRXX_illumina_mqc.yml"
             ],
             [
                 "checkqc_reads-per-sample-plot.txt:md5,32ac72d463abb6df384d43041965b167",
@@ -502,7 +503,7 @@
                 "WARN: No rundir for sample(s): SampleA_02, sampletest_04"
             ]
         ],
-        "timestamp": "2026-03-30T17:27:13.577800914",
+        "timestamp": "2026-03-30T17:48:33.503881186",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.2"

@@ -161,7 +161,6 @@ workflow SEQINSPECTOR {
     //
 
     RUNDIRPARSER(ch_rundir.filter { _meta, rundir -> (rundir && 'rundirparser' in tools) })
-    ch_multiqc_files = ch_multiqc_files.mix(RUNDIRPARSER.out.multiqc.map { meta, _process, _tool, reports -> [meta, reports] })
 
     // STEP 01: LONGREADS
 

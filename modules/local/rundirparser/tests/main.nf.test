@@ -20,7 +20,7 @@ nextflow_process {
         then {
             assert process.success
             assert snapshot(
-                process.out.multiqc,
+                topics.multiqc_files,
                 topics.versions
             ).match()
         }
@@ -42,7 +42,7 @@ nextflow_process {
         then {
             assert process.success
             assert snapshot(
-                process.out.multiqc,
+                topics.multiqc_files,
                 topics.versions
             ).match()
         }
