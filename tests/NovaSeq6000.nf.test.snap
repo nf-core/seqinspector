@@ -37,17 +37,22 @@
                 }
             },
             [
-                "bwamem2_mem",
-                "bwamem2_mem/Sample1_01.bam",
-                "bwamem2_mem/Sample1_01.bam.bai",
-                "bwamem2_mem/Sample23_03.bam",
-                "bwamem2_mem/Sample23_03.bam.bai",
-                "bwamem2_mem/SampleA_02.bam",
-                "bwamem2_mem/SampleA_02.bam.bai",
-                "bwamem2_mem/Undetermined_05.bam",
-                "bwamem2_mem/Undetermined_05.bam.bai",
-                "bwamem2_mem/sampletest_04.bam",
-                "bwamem2_mem/sampletest_04.bam.bai",
+                "mapped",
+                "mapped/Sample1_01",
+                "mapped/Sample1_01/Sample1_01.bam",
+                "mapped/Sample1_01/Sample1_01.bam.bai",
+                "mapped/Sample23_03",
+                "mapped/Sample23_03/Sample23_03.bam",
+                "mapped/Sample23_03/Sample23_03.bam.bai",
+                "mapped/SampleA_02",
+                "mapped/SampleA_02/SampleA_02.bam",
+                "mapped/SampleA_02/SampleA_02.bam.bai",
+                "mapped/Undetermined_05",
+                "mapped/Undetermined_05/Undetermined_05.bam",
+                "mapped/Undetermined_05/Undetermined_05.bam.bai",
+                "mapped/sampletest_04",
+                "mapped/sampletest_04/sampletest_04.bam",
+                "mapped/sampletest_04/sampletest_04.bam.bai",
                 "multiqc",
                 "multiqc/global_report",
                 "multiqc/global_report/multiqc_data",
@@ -1308,7 +1313,7 @@
                 "[NXF_HASH] Submitted process > PREPARE_GENOME:SAMTOOLS_FAIDX (genome.fa)"
             ]
         ],
-        "timestamp": "2026-03-31T13:55:08.833778201",
+        "timestamp": "2026-03-31T15:07:42.240332798",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.2"

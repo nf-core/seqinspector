@@ -44,7 +44,7 @@ workflow SEQINSPECTOR {
     bait_intervals
     bwamem2
     checkqc_config
-    reference
+    fasta
     fastq_screen_references
     multiqc_config
     multiqc_logo
@@ -265,7 +265,7 @@ workflow SEQINSPECTOR {
     BWAMEM2_MEM(
         ch_sample.filter { ('picard_collecthsmetrics' in tools) || ('picard_collectmultiplemetrics' in tools) },
         bwamem2,
-        reference,
+        fasta,
         sort_bam,
     )
 
@@ -275,13 +275,15 @@ workflow SEQINSPECTOR {
 
     SAMTOOLS_INDEX(BWAMEM2_MEM.out.bam)
 
+    bam_bai = BWAMEM2_MEM.out.bam.join(SAMTOOLS_INDEX.out.index, failOnDuplicate: true, failOnMismatch: true)
+
     //
     // SUBWORKFLOW: BAM_QC
     //   Run picard_collecthsmetrics and/or picard_collectmultiplemetrics
 
     BAM_QC(
-        BWAMEM2_MEM.out.bam.join(SAMTOOLS_INDEX.out.index, failOnDuplicate: true, failOnMismatch: true),
-        reference,
+        bam_bai,
+        fasta,
         fai,
         bait_intervals ? channel.fromPath(bait_intervals).collect() : channel.empty(),
         target_intervals ? channel.fromPath(target_intervals).collect() : channel.empty(),
@@ -431,6 +433,7 @@ workflow SEQINSPECTOR {
     )
 
     emit:
+    bam_bai       = bam_bai
     data_global   = MULTIQC_GLOBAL.out.data // channel: [ /path/to/multiqc_data/ ]
     data_groups   = MULTIQC_PER_TAG.out.data // channel: [ /path/to/multiqc_data/ ]
     plots_global  = MULTIQC_GLOBAL.out.plots // channel: [ /path/to/multiqc_plots/ ]

@@ -30,13 +30,16 @@
                 }
             },
             [
-                "bwamem2_mem",
-                "bwamem2_mem/SAMPLE_PAIRED_END_1_01.bam",
-                "bwamem2_mem/SAMPLE_PAIRED_END_1_01.bam.bai",
-                "bwamem2_mem/SAMPLE_PAIRED_END_2_02.bam",
-                "bwamem2_mem/SAMPLE_PAIRED_END_2_02.bam.bai",
-                "bwamem2_mem/SAMPLE_SINGLE_END_03.bam",
-                "bwamem2_mem/SAMPLE_SINGLE_END_03.bam.bai",
+                "mapped",
+                "mapped/SAMPLE_PAIRED_END_1_01",
+                "mapped/SAMPLE_PAIRED_END_1_01/SAMPLE_PAIRED_END_1_01.bam",
+                "mapped/SAMPLE_PAIRED_END_1_01/SAMPLE_PAIRED_END_1_01.bam.bai",
+                "mapped/SAMPLE_PAIRED_END_2_02",
+                "mapped/SAMPLE_PAIRED_END_2_02/SAMPLE_PAIRED_END_2_02.bam",
+                "mapped/SAMPLE_PAIRED_END_2_02/SAMPLE_PAIRED_END_2_02.bam.bai",
+                "mapped/SAMPLE_SINGLE_END_03",
+                "mapped/SAMPLE_SINGLE_END_03/SAMPLE_SINGLE_END_03.bam",
+                "mapped/SAMPLE_SINGLE_END_03/SAMPLE_SINGLE_END_03.bam.bai",
                 "multiqc",
                 "multiqc/global_report",
                 "multiqc/global_report/multiqc_data",
@@ -676,7 +679,7 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-03-31T13:57:11.532072798",
+        "timestamp": "2026-03-31T15:04:03.978430435",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.2"
