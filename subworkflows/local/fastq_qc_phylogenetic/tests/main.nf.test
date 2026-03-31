@@ -45,9 +45,11 @@ nextflow_workflow {
         }
         then {
             assert workflow.success
-            assert snapshot(topics.multiqc_files.collect { meta, process, tool, file_ ->
-                [ meta, process, tool, (tool == 'krona') ? file(file_).name : file_]
-            }).match()
+            assert {
+                snapshot(topics.multiqc_files.collect { meta, process, tool, file_ ->
+                    [ meta, process, tool, (tool == 'krona') ? file(file_).name : file_]
+                }).match()
+            }
         }
     }
 }
