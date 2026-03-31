@@ -312,12 +312,12 @@
                 "reports/seqfu/sampletest_04",
                 "reports/seqfu/sampletest_04/sampletest_04_seqfu.tsv",
                 "reports/seqfu/sampletest_04/sampletest_04_seqfu_mqc.txt",
-                "seqtk",
-                "seqtk/Sample1_01_Sample1_S1_L001_R1_001.fastq.gz",
-                "seqtk/Sample23_03_Sample23_S3_L001_R1_001.fastq.gz",
-                "seqtk/SampleA_02_SampleA_S2_L001_R1_001.fastq.gz",
-                "seqtk/Undetermined_05_Undetermined_S0_L001_R1_001.fastq.gz",
-                "seqtk/sampletest_04_sampletest_S4_L001_R1_001.fastq.gz"
+                "subsampled",
+                "subsampled/Sample1_01_Sample1_S1_L001_R1_001.fastq.gz",
+                "subsampled/Sample23_03_Sample23_S3_L001_R1_001.fastq.gz",
+                "subsampled/SampleA_02_SampleA_S2_L001_R1_001.fastq.gz",
+                "subsampled/Undetermined_05_Undetermined_S0_L001_R1_001.fastq.gz",
+                "subsampled/sampletest_04_sampletest_S4_L001_R1_001.fastq.gz"
             ],
             [
                 "multiqc_citations.txt:md5,e4a42c4f3985275e3201fdbb4441af3e",
@@ -399,7 +399,7 @@
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-03-30T17:29:33.023566004",
+        "timestamp": "2026-03-31T15:11:40.571550542",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.2"
@@ -718,12 +718,12 @@
                 "reports/seqfu/sampletest_04",
                 "reports/seqfu/sampletest_04/sampletest_04_seqfu.tsv",
                 "reports/seqfu/sampletest_04/sampletest_04_seqfu_mqc.txt",
-                "seqtk",
-                "seqtk/Sample1_01_Sample1_S1_L001_R1_001.fastq.gz",
-                "seqtk/Sample23_03_Sample23_S3_L001_R1_001.fastq.gz",
-                "seqtk/SampleA_02_SampleA_S2_L001_R1_001.fastq.gz",
-                "seqtk/Undetermined_05_Undetermined_S0_L001_R1_001.fastq.gz",
-                "seqtk/sampletest_04_sampletest_S4_L001_R1_001.fastq.gz"
+                "subsampled",
+                "subsampled/Sample1_01_Sample1_S1_L001_R1_001.fastq.gz",
+                "subsampled/Sample23_03_Sample23_S3_L001_R1_001.fastq.gz",
+                "subsampled/SampleA_02_SampleA_S2_L001_R1_001.fastq.gz",
+                "subsampled/Undetermined_05_Undetermined_S0_L001_R1_001.fastq.gz",
+                "subsampled/sampletest_04_sampletest_S4_L001_R1_001.fastq.gz"
             ],
             [
                 "multiqc_citations.txt:md5,e4a42c4f3985275e3201fdbb4441af3e",
@@ -805,7 +805,7 @@
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-03-30T17:30:08.897680347",
+        "timestamp": "2026-03-31T15:12:25.011897089",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.2"
@@ -1124,12 +1124,12 @@
                 "reports/seqfu/sampletest_04",
                 "reports/seqfu/sampletest_04/sampletest_04_seqfu.tsv",
                 "reports/seqfu/sampletest_04/sampletest_04_seqfu_mqc.txt",
-                "seqtk",
-                "seqtk/Sample1_01_Sample1_S1_L001_R1_001.fastq.gz",
-                "seqtk/Sample23_03_Sample23_S3_L001_R1_001.fastq.gz",
-                "seqtk/SampleA_02_SampleA_S2_L001_R1_001.fastq.gz",
-                "seqtk/Undetermined_05_Undetermined_S0_L001_R1_001.fastq.gz",
-                "seqtk/sampletest_04_sampletest_S4_L001_R1_001.fastq.gz"
+                "subsampled",
+                "subsampled/Sample1_01_Sample1_S1_L001_R1_001.fastq.gz",
+                "subsampled/Sample23_03_Sample23_S3_L001_R1_001.fastq.gz",
+                "subsampled/SampleA_02_SampleA_S2_L001_R1_001.fastq.gz",
+                "subsampled/Undetermined_05_Undetermined_S0_L001_R1_001.fastq.gz",
+                "subsampled/sampletest_04_sampletest_S4_L001_R1_001.fastq.gz"
             ],
             [
                 "multiqc_citations.txt:md5,e4a42c4f3985275e3201fdbb4441af3e",
@@ -1217,7 +1217,7 @@
                 "WARN: sampletest_04: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads."
             ]
         ],
-        "timestamp": "2026-03-30T17:30:45.285458213",
+        "timestamp": "2026-03-31T15:13:06.081522819",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.2"

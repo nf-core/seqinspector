@@ -1,6 +1,5 @@
 .DS_Store
-bwamem2_mem/*.bam
-bwamem2_mem/*.bam.bai
+mapped/*/*.bam{,.bai}
 multiqc/{global_report,group_reports/*}/multiqc_data/fastqc_top_overrepresented_sequences_table.txt
 multiqc/{global_report,group_reports/*}/multiqc_data/llms-full.txt
 multiqc/{global_report,group_reports/*}/multiqc_data/multiqc.log
