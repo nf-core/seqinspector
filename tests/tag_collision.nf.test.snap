@@ -8,17 +8,6 @@
                 }
             },
             [
-                "fastqc",
-                "fastqc/Sample1_01_fastqc.html",
-                "fastqc/Sample1_01_fastqc.zip",
-                "fastqc/Sample23_03_fastqc.html",
-                "fastqc/Sample23_03_fastqc.zip",
-                "fastqc/SampleA_02_fastqc.html",
-                "fastqc/SampleA_02_fastqc.zip",
-                "fastqc/Undetermined_05_fastqc.html",
-                "fastqc/Undetermined_05_fastqc.zip",
-                "fastqc/sampletest_04_fastqc.html",
-                "fastqc/sampletest_04_fastqc.zip",
                 "multiqc",
                 "multiqc/global_report",
                 "multiqc/global_report/multiqc_data",
@@ -652,7 +641,24 @@
                 "multiqc/group_reports/test/multiqc_plots/svg/fastqc_top_overrepresented_sequences_table.svg",
                 "multiqc/group_reports/test/multiqc_report.html",
                 "pipeline_info",
-                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
+                "reports",
+                "reports/fastqc",
+                "reports/fastqc/Sample1_01",
+                "reports/fastqc/Sample1_01/Sample1_01_fastqc.html",
+                "reports/fastqc/Sample1_01/Sample1_01_fastqc.zip",
+                "reports/fastqc/Sample23_03",
+                "reports/fastqc/Sample23_03/Sample23_03_fastqc.html",
+                "reports/fastqc/Sample23_03/Sample23_03_fastqc.zip",
+                "reports/fastqc/SampleA_02",
+                "reports/fastqc/SampleA_02/SampleA_02_fastqc.html",
+                "reports/fastqc/SampleA_02/SampleA_02_fastqc.zip",
+                "reports/fastqc/Undetermined_05",
+                "reports/fastqc/Undetermined_05/Undetermined_05_fastqc.html",
+                "reports/fastqc/Undetermined_05/Undetermined_05_fastqc.zip",
+                "reports/fastqc/sampletest_04",
+                "reports/fastqc/sampletest_04/sampletest_04_fastqc.html",
+                "reports/fastqc/sampletest_04/sampletest_04_fastqc.zip"
             ],
             [
                 "fastqc-status-check-heatmap.txt:md5,7a64380ec42aac56949a2d9a4176d4d9",
@@ -784,10 +790,10 @@
                 "WARN: Tag name collision: [test, Test, TEST]"
             ]
         ],
-        "timestamp": "2026-03-20T10:57:16.18252383",
+        "timestamp": "2026-03-30T16:34:10.501468881",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.2"
         }
     }
 }

@@ -16,36 +16,20 @@ workflow BAM_QC {
     tools
 
     main:
-    ch_hs_metrics = channel.empty()
-    ch_multiple_metrics = channel.empty()
 
-    if ("picard_collecthsmetrics" in tools) {
+    ch_hsmetrics_in = ch_bam_bai.combine(ch_bait_intervals).combine(ch_target_intervals)
 
-        ch_hsmetrics_in = ch_bam_bai.combine(ch_bait_intervals).combine(ch_target_intervals)
+    PICARD_COLLECTHSMETRICS(
+        ch_hsmetrics_in.filter { ("picard_collecthsmetrics" in tools) },
+        ch_reference_fasta,
+        ch_reference_fai,
+        ch_ref_dict,
+        [[:], []],
+    )
 
-        PICARD_COLLECTHSMETRICS(
-            ch_hsmetrics_in,
-            ch_reference_fasta,
-            ch_reference_fai,
-            ch_ref_dict,
-            [[], []],
-        )
-
-        ch_hs_metrics = PICARD_COLLECTHSMETRICS.out.metrics
-    }
-
-    if ("picard_collectmultiplemetrics" in tools) {
-
-        PICARD_COLLECTMULTIPLEMETRICS(
-            ch_bam_bai,
-            ch_reference_fasta,
-            ch_reference_fai,
-        )
-
-        ch_multiple_metrics = PICARD_COLLECTMULTIPLEMETRICS.out.metrics
-    }
-
-    emit:
-    hs_metrics       = ch_hs_metrics
-    multiple_metrics = ch_multiple_metrics
+    PICARD_COLLECTMULTIPLEMETRICS(
+        ch_bam_bai.filter { ("picard_collectmultiplemetrics" in tools) },
+        ch_reference_fasta,
+        ch_reference_fai,
+    )
 }

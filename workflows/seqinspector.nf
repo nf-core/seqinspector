@@ -42,16 +42,16 @@ workflow SEQINSPECTOR {
     take:
     ch_samplesheet // channel: samplesheet read in from --input
     bait_intervals
-    bwamem2_index
+    bwamem2
     checkqc_config
-    fasta_reference
+    reference
     fastq_screen_references
     multiqc_config
     multiqc_logo
     multiqc_methods_description
     outdir
-    ref_dict
-    ref_fai
+    dict
+    fai
     sample_size
     tools
     target_intervals
@@ -97,15 +97,15 @@ workflow SEQINSPECTOR {
         .map { rundir, meta, _rundir_number ->
             // Return for all the rundir specific processes and to mix with ch_multiqc_files
             //   - meta: (map)
-            //     - dirname: Simple name of the rundir, used for setting unique output names in publishDir
-            //     - id: List all sample of the rundir
+            //     - id: Simple name of the rundir, used for setting unique output names in publishDir
+            //     - samples: List all sample of the rundir
             //     - rundir_number: number of total rundir, no rundir counts as one
             //     - tags: List of merged tags, used for grouping MultiQC reports
             //   - rundir: path to rundir or null when no rundir
             [
                 [
-                    dirname: rundir ? rundir.simpleName : 'no_rundir',
-                    id: rundir ? false : meta.collect { meta_ -> meta_.id }.flatten().unique().sort(),
+                    id: rundir ? rundir.simpleName : 'no_rundir',
+                    samples: rundir ? false : meta.collect { meta_ -> meta_.id }.flatten().unique().sort(),
                     rundir_number: _rundir_number,
                     tags: meta.collect { meta_ -> meta_.tags }.flatten().unique(),
                 ],
@@ -117,7 +117,7 @@ workflow SEQINSPECTOR {
     if (('checkqc' in tools) || ('multiqcsav' in tools) || ('rundirparser' in tools)) {
         ch_rundir.map { meta, rundir ->
             if (!rundir) {
-                log.warn("No rundir for sample(s): ${meta.id.join(', ')}")
+                log.warn("No rundir for sample(s): ${meta.samples.join(', ')}")
             }
         }
 
@@ -156,14 +156,11 @@ workflow SEQINSPECTOR {
             : [],
     )
 
-    ch_multiqc_files = ch_multiqc_files.mix(CHECKQC.out.report)
-
     //
     // MODULE: RUNDIRPARSER
     //
 
     RUNDIRPARSER(ch_rundir.filter { _meta, rundir -> (rundir && 'rundirparser' in tools) })
-    ch_multiqc_files = ch_multiqc_files.mix(RUNDIRPARSER.out.multiqc)
 
     // STEP 01: LONGREADS
 
@@ -172,7 +169,6 @@ workflow SEQINSPECTOR {
     // This provides useful stats of long reads
 
     TOULLIGQC(ch_samplesheet.filter { 'toulligqc' in tools })
-
     ch_multiqc_files.mix(TOULLIGQC.out.report_data)
 
     // STEP 02: BASIC QC ON FASTQ FILES
@@ -194,8 +190,6 @@ workflow SEQINSPECTOR {
             }
         }
 
-    ch_multiqc_files = ch_multiqc_files.mix(SEQFU_STATS.out.multiqc)
-
     // STEP 03: SUBSAMPLE
 
     //
@@ -208,19 +202,9 @@ workflow SEQINSPECTOR {
 
     // STEP 04: MORE QC ON FASTQ FILES (CAN BE SUMSAMPLED)
 
-    //
-    // MODULE: FASTQC
-    //
-
     FASTQC(ch_sample.filter { 'fastqc' in tools })
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
-
-    //
-    // MODULE: FASTQE
-    //
 
     FASTQE(ch_sample.filter { 'fastqe' in tools })
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQE.out.tsv)
 
     //
     // MODULE: FASTP for adapter trimming and quality filtering
@@ -236,8 +220,6 @@ workflow SEQINSPECTOR {
         save_trimmed_fail,
         save_merged,
     )
-
-    ch_multiqc_files = ch_multiqc_files.mix(FASTP.out.json)
 
     // ch_trimmed = 'fastp' in tools ? FASTP.out.reads : ch_sample
 
@@ -257,8 +239,6 @@ workflow SEQINSPECTOR {
             )
         ).toList().transpose().toList(),
     )
-
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
 
     // STEP 06: METAGENOMIC QC
 
@@ -287,8 +267,8 @@ workflow SEQINSPECTOR {
 
     BWAMEM2_MEM(
         ch_sample.filter { ('picard_collecthsmetrics' in tools) || ('picard_collectmultiplemetrics' in tools) },
-        bwamem2_index,
-        fasta_reference,
+        bwamem2,
+        reference,
         sort_bam,
     )
 
@@ -304,15 +284,13 @@ workflow SEQINSPECTOR {
 
     BAM_QC(
         BWAMEM2_MEM.out.bam.join(SAMTOOLS_INDEX.out.index, failOnDuplicate: true, failOnMismatch: true),
-        fasta_reference,
-        ref_fai,
+        reference,
+        fai,
         bait_intervals ? channel.fromPath(bait_intervals).collect() : channel.empty(),
         target_intervals ? channel.fromPath(target_intervals).collect() : channel.empty(),
-        ref_dict,
+        dict,
         tools,
     )
-
-    ch_multiqc_files = ch_multiqc_files.mix(BAM_QC.out.multiple_metrics, BAM_QC.out.hs_metrics)
 
     // Collate and save software versions
     def collated_versions = softwareVersionsToYAML(
@@ -325,12 +303,16 @@ workflow SEQINSPECTOR {
         newLine: true,
     )
 
+    def collated_reports = channel.topic("multiqc_files")
+        .map { meta, _process, _tool, reports -> [meta, reports] }
+
     // STEP 08: MULTIQC (GLOBAL USING SAV AND PER TAG)
 
     //
     // MODULE: MultiQC
     //
 
+    ch_multiqc_files = ch_multiqc_files.mix(collated_reports)
     ch_multiqc_extra_files = ch_multiqc_extra_files.mix(collated_versions)
 
     summary_params = paramsSummaryMap(workflow, parameters_schema: "nextflow_schema.json")
@@ -372,10 +354,10 @@ workflow SEQINSPECTOR {
 
             if ((rundir) && ('multiqcsav' in tools)) {
                 if (meta.rundir_number > 1) {
-                    log.warn("More than one rundir, or sample(s) missing rundir, skipping skipping MULTIQC_SAV")
+                    log.warn("More than one rundir, or sample(s) missing rundir, skipping MULTIQC_SAV")
                 }
                 else if (rundir.toString().endsWith('tar.gz')) {
-                    log.warn("Rundir: ${meta.dirname} is a tar.gz")
+                    log.warn("Rundir: ${meta.id} is a tar.gz")
                 }
                 else {
                     interop = files(file(rundir).resolve("InterOp/*.bin"), checkIfExists: true)

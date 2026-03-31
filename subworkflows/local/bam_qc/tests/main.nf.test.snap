@@ -1,45 +1,55 @@
 {
+    "Test with picard_collecthsmetrics": {
+        "content": [
+            [
+                [
+                    "earlycasualcaiman.CollectHsMetrics.coverage_metrics"
+                ]
+            ]
+        ],
+        "timestamp": "2026-03-30T16:09:32.192049122",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.2"
+        }
+    },
     "Test with picard_collectmultiplemetrics": {
         "content": [
-            {
-                "multiple_metrics": [
-                    [
-                        "earlycasualcaiman.CollectMultipleMetrics.alignment_summary_metrics",
-                        "earlycasualcaiman.CollectMultipleMetrics.base_distribution_by_cycle_metrics",
-                        "earlycasualcaiman.CollectMultipleMetrics.insert_size_metrics",
-                        "earlycasualcaiman.CollectMultipleMetrics.quality_by_cycle_metrics",
-                        "earlycasualcaiman.CollectMultipleMetrics.quality_distribution_metrics"
-                    ]
+            [
+                [
+                    "earlycasualcaiman.CollectMultipleMetrics.alignment_summary_metrics",
+                    "earlycasualcaiman.CollectMultipleMetrics.base_distribution_by_cycle_metrics",
+                    "earlycasualcaiman.CollectMultipleMetrics.insert_size_metrics",
+                    "earlycasualcaiman.CollectMultipleMetrics.quality_by_cycle_metrics",
+                    "earlycasualcaiman.CollectMultipleMetrics.quality_distribution_metrics"
                 ]
-            }
+            ]
         ],
-        "timestamp": "2026-03-05T17:42:58.270776324",
+        "timestamp": "2026-03-30T16:11:11.309734276",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.2"
         }
     },
     "Test with picard_collecthsmetrics and picard_collectmultiplemetrics": {
         "content": [
-            {
-                "hs_metrics": [
+            [
+                [
                     "earlycasualcaiman.CollectHsMetrics.coverage_metrics"
                 ],
-                "multiple_metrics": [
-                    [
-                        "earlycasualcaiman.CollectMultipleMetrics.alignment_summary_metrics",
-                        "earlycasualcaiman.CollectMultipleMetrics.base_distribution_by_cycle_metrics",
-                        "earlycasualcaiman.CollectMultipleMetrics.insert_size_metrics",
-                        "earlycasualcaiman.CollectMultipleMetrics.quality_by_cycle_metrics",
-                        "earlycasualcaiman.CollectMultipleMetrics.quality_distribution_metrics"
-                    ]
+                [
+                    "earlycasualcaiman.CollectMultipleMetrics.alignment_summary_metrics",
+                    "earlycasualcaiman.CollectMultipleMetrics.base_distribution_by_cycle_metrics",
+                    "earlycasualcaiman.CollectMultipleMetrics.insert_size_metrics",
+                    "earlycasualcaiman.CollectMultipleMetrics.quality_by_cycle_metrics",
+                    "earlycasualcaiman.CollectMultipleMetrics.quality_distribution_metrics"
                 ]
-            }
+            ]
         ],
-        "timestamp": "2026-03-05T17:55:24.968422001",
+        "timestamp": "2026-03-30T16:10:46.321973272",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.2"
         }
     }
 }

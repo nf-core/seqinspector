@@ -13,7 +13,7 @@ process PICARD_COLLECTMULTIPLEMETRICS {
     tuple val(meta3), path(fai)
 
     output:
-    tuple val(meta), path("*_metrics"), emit: metrics
+    tuple val(meta), val("${task.process}"), val('picard'), path("*_metrics"), emit: metrics, topic: multiqc_files
     tuple val(meta), path("*.pdf"), emit: pdf, optional: true
     tuple val("${task.process}"), val('picard'), eval("picard CollectMultipleMetrics --version 2>&1 | sed -n 's/.*Version://p'"), topic: versions, emit: versions_picard
 

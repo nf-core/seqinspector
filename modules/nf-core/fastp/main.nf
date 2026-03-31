@@ -15,9 +15,9 @@ process FASTP {
 
     output:
     tuple val(meta), path('*.fastp.fastq.gz') , optional:true, emit: reads
-    tuple val(meta), path('*.json')           , emit: json
-    tuple val(meta), path('*.html')           , emit: html
-    tuple val(meta), path('*.log')            , emit: log
+    tuple val(meta), val("${task.process}"), val('fastp'), path("*.json"), emit: json, topic: multiqc_files
+    tuple val(meta), val("${task.process}"), val('fastp'), path("*.html"), emit: html, topic: multiqc_files
+    tuple val(meta), val("${task.process}"), val('fastp'), path("*.log"), emit: log, topic: multiqc_files
     tuple val(meta), path('*.fail.fastq.gz')  , optional:true, emit: reads_fail
     tuple val(meta), path('*.merged.fastq.gz'), optional:true, emit: reads_merged
     tuple val("${task.process}"), val('fastp'), eval('fastp --version 2>&1 | sed -e "s/fastp //g"'), emit: versions_fastp, topic: versions

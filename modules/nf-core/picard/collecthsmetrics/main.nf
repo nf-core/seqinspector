@@ -15,7 +15,7 @@ process PICARD_COLLECTHSMETRICS {
     tuple val(meta5), path(ref_gzi)
 
     output:
-    tuple val(meta), path("*_metrics"), emit: metrics
+    tuple val(meta), val("${task.process}"), val('picard'), path("*_metrics"), emit: metrics, topic: multiqc_files
     tuple val("${task.process}"), val('picard'), eval("picard CollectHsMetrics --version 2>&1 | sed -n 's/.*Version://p'"), topic: versions, emit: versions_picard
 
     when:

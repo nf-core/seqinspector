@@ -114,7 +114,9 @@ workflow {
     multiqc_grouped_data   = NFCORE_SEQINSPECTOR.out.data_groups
     multiqc_grouped_plots  = NFCORE_SEQINSPECTOR.out.plots_groups
     multiqc_grouped_report = NFCORE_SEQINSPECTOR.out.report_groups
+    reports                = channel.topic("multiqc_files")
 }
+
 
 output {
     multiqc_global {
@@ -133,6 +135,22 @@ output {
     multiqc_grouped_report {
         path { meta, file ->
             file >> "multiqc/group_reports/${meta.id}/multiqc_report.html"
+        }
+    }
+    reports {
+        path { meta, process, tool, file ->
+            if (tool == 'picard') {
+                file >> "reports/${process.tokenize(':').last().toLowerCase()}/${meta.id}/"
+            }
+            else if (tool == 'rundirparser') {
+                file >> "reports/${tool}/${meta.id}/${meta.id}_${file.fileName}"
+            }
+            else if (tool == 'seqfu') {
+                file >> "reports/${tool}/${meta.id}/${meta.id}_${file.fileName}"
+            }
+            else {
+                file >> "reports/${tool}/${meta.id}/"
+            }
         }
     }
 }
