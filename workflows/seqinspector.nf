@@ -440,4 +440,5 @@ workflow SEQINSPECTOR {
     plots_groups  = MULTIQC_PER_TAG.out.plots // channel: [ /path/to/multiqc_plots/ ]
     report_global = MULTIQC_GLOBAL.out.report // channel: [ /path/to/multiqc_report.html ]
     report_groups = MULTIQC_PER_TAG.out.report // channel: [ /path/to/multiqc_report.html ]
+    subsampled    = SEQTK_SAMPLE.out.reads
 }

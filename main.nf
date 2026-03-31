@@ -122,6 +122,7 @@ workflow {
         PREPARE_GENOME.out.fai,
     )
     reports                = channel.topic("multiqc_files")
+    subsampled             = NFCORE_SEQINSPECTOR.out.subsampled
 }
 
 output {
@@ -176,6 +177,9 @@ output {
                 file >> "reports/${tool}/${meta.id}/"
             }
         }
+    }
+    subsampled {
+        path "subsampled"
     }
 }
 
@@ -233,4 +237,5 @@ workflow NFCORE_SEQINSPECTOR {
     plots_groups  = SEQINSPECTOR.out.plots_groups // channel: /path/to/multiqc_report.html
     report_global = SEQINSPECTOR.out.report_global // channel: /path/to/multiqc_report.html
     report_groups = SEQINSPECTOR.out.report_groups // channel: /path/to/multiqc_report.html
+    subsampled    = SEQINSPECTOR.out.subsampled
 }
