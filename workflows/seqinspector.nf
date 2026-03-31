@@ -252,8 +252,6 @@ workflow SEQINSPECTOR {
             kraken2_save_reads,
             kraken2_save_readclassifications,
         )
-
-        ch_multiqc_files = ch_multiqc_files.mix(FASTQ_QC_PHYLOGENETIC.out.mqc)
     }
 
     // STEP 07: fastq AND QC ON BAM FILES

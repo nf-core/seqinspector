@@ -23,9 +23,8 @@ workflow FASTQ_QC_PHYLOGENETIC {
     // MODULE: krona plot the kraken2 reports
     //
     KRONA_KTUPDATETAXONOMY()
-    KRONA_KTIMPORTTAXONOMY(KRAKEN2_KRAKEN2.out.report, KRONA_KTUPDATETAXONOMY.out.db)
-
-    emit:
-    krona_plots = KRONA_KTIMPORTTAXONOMY.out.html.collect()
-    mqc         = KRAKEN2_KRAKEN2.out.report
+    KRONA_KTIMPORTTAXONOMY(
+        KRAKEN2_KRAKEN2.out.report.map { meta, _process, _tool, reports -> [meta, reports] },
+        KRONA_KTUPDATETAXONOMY.out.db,
+    )
 }

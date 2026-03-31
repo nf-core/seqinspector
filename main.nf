@@ -139,7 +139,10 @@ output {
     }
     reports {
         path { meta, process, tool, file ->
-            if (tool == 'picard') {
+            if (tool == 'krona') {
+                file >> "reports/kraken2/${tool}/${meta.id}/"
+            }
+            else if (tool == 'picard') {
                 file >> "reports/${process.tokenize(':').last().toLowerCase()}/${meta.id}/"
             }
             else if (tool == 'rundirparser') {

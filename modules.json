@@ -53,12 +53,14 @@
                     "kraken2/kraken2": {
                         "branch": "master",
                         "git_sha": "71a39f3598935d64ffd65f0960e4d2d4a42ab778",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/kraken2/kraken2/kraken2-kraken2.diff"
                     },
                     "krona/ktimporttaxonomy": {
                         "branch": "master",
                         "git_sha": "939bb089705e5995ef8a158d48f6951314e95584",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/krona/ktimporttaxonomy/krona-ktimporttaxonomy.diff"
                     },
                     "krona/ktupdatetaxonomy": {
                         "branch": "master",
