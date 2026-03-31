@@ -43,7 +43,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 <details markdown="1">
 <summary>Output files</summary>
 
-- `fastqc/`
+- `reports/fastqc/[sample_id]/`
   - `*_fastqc.html`: FastQC report containing quality metrics.
   - `*_fastqc.zip`: Zip archive containing the FastQC report, tab-delimited data file and plot images.
 
@@ -51,12 +51,22 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 
 [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) gives general quality metrics about your sequenced reads. It provides information about the quality score distribution across your reads, per base sequence content (%A/T/G/C), adapter contamination and overrepresented sequences. For further reading and documentation see the [FastQC help pages](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/).
 
+### Rundirparser
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `reports/rundirparser/[rundir]/`
+  - `[rundir]_illumina_mqc.yml`: Reports sequencing metrics. This is done via a custom script that can be found in `bin/parse_illumina.py` that parses the `runParameters.xml` file. The resulting YAML file is formatted to be read by MultiQC. Results can be found in the output directory.
+
+</details>
+
 ### CheckQC
 
 <details markdown="1">
 <summary>Output files</summary>
 
-- `checkqc/`
+- `reports/checkqc/[rundir]/`
   - `checkqc_report.json`: Reports sequencing metrics that are not fulfilled. Note that the CheckQC module in MultiQC currently does not support BCL Convert data, so if the report if based on data from that demultiplexer it will not be visualized in the MutliQC report. Results can be found in the output directory.
 
 </details>
@@ -99,7 +109,7 @@ We only keep the reports for MultiQC and the pipeline report.
 <details markdown="1">
 <summary>Output files</summary>
 
-- `fastp/`
+- `reports/fastp/[sample_id]/`
   - `*.fastp.html`: FastP HTML report.
   - `*.fastp.json`: FastP report containing quality metrics in JSON format.
   - `*.fastp.log`: FastP log file containing quality metrics.
@@ -111,7 +121,7 @@ We only keep the reports for MultiQC and the pipeline report.
 <details markdown="1">
 <summary>Output files</summary>
 
-- `fastqe/`
+- `reports/fastqe/[sample_id]/`
   - `*.tsv`: FASTQE report containing quality metrics in emoji.
 
 </details>
@@ -123,7 +133,7 @@ We only keep the reports for MultiQC and the pipeline report.
 <details markdown="1">
 <summary>Output files</summary>
 
-- `seqfu_stats/`
+- `reports/seqfu/[sample_id]/`
   - `*.tsv`: Tab-separated file containing quality metrics.
   - `*_mqc.txt`: File containing the same quality metrics as the TSV file, ready to be read by MultiQC.
 
@@ -136,7 +146,7 @@ We only keep the reports for MultiQC and the pipeline report.
 <details markdown="1">
 <summary>Output files</summary>
 
-- `fastqscreen/`
+- `reports/fastqscreen/[sample_id]/`
   - `*_screen.html`: Interactive graphical report.
   - `*_screen.png`: Static graphical report.
   - `*_screen.txt` : Text-based report.
@@ -195,7 +205,7 @@ Generates the full set of bwamem2 indexes:
 <details markdown="1">
 <summary>Output files</summary>
 
-- `picard_collectmultiplemetrics`
+- `reports/picard_collectmultiplemetrics/[sample_id]/`
   - `*.CollectMultipleMetrics.alignment_summary_metrics`
   - `*.CollectMultipleMetrics.base_distribution_by_cycle_metrics`
   - `*.CollectMultipleMetrics.base_distribution_by_cycle.pdf`
@@ -209,7 +219,7 @@ Generates the full set of bwamem2 indexes:
 <details markdown="1">
 <summary>Output files</summary>
 
-- `picard_collecthsmetrics/`
+- `reports/picard_collecthsmetrics/[sample_id]/`
   - `*.coverage_metrics`: Tab-separated file containing quality metrics for hybrid-selection data.
 
 </details>

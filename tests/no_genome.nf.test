@@ -7,7 +7,7 @@ nextflow_pipeline {
 
     def test_scenario = [
         [
-            name: "MiSeq data test- no genome",
+            name: "MiSeq data test - no genome",
             params: [
                 input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/miseq.csv',
                 genome: null,
