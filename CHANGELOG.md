@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#216](https://github.com/nf-core/seqinspector/pull/216) Split out and simplify tests
 - [#220](https://github.com/nf-core/seqinspector/pull/220) Workflow output for MultiQC
 - [#221](https://github.com/nf-core/seqinspector/pull/221) Workflow output for checkQC, Fastp, fastp, fastqe, fastqscreen, picard_collecthsmetrics, picard_collectmultiplemetrics, rundirparser, seqfu
+- [#222](https://github.com/nf-core/seqinspector/pull/222) Workflow output for fq/lint, kraken2, krona, toulligqc
 
 ### `Dependencies`
 
