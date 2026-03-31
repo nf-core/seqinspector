@@ -13,7 +13,7 @@ process KRONA_KTIMPORTTAXONOMY {
     path taxonomy, stageAs: 'taxonomy.tab'
 
     output:
-    tuple val(meta), path('*.html'), emit: html
+    tuple val(meta), val("${task.process}"), val('krona'), path("*html"), emit: html, topic: multiqc_files
     tuple val("${task.process}"), val('krona'), eval("ktImportTaxonomy | grep -Po '(?<=KronaTools )[0-9.]+'"), topic: versions, emit: versions_krona
 
     when:

@@ -75,7 +75,7 @@ workflow SEQINSPECTOR {
     // If you use an error strategy that allows FQ_LINT to fail,
     // only valid FASTQ files will be passed to the next module
     ch_samplesheet = 'fq_lint' in tools
-        ? FQ_LINT.out.lint.join(ch_samplesheet).map { meta, _fq_lint, reads -> [meta, reads] }
+        ? FQ_LINT.out.lint.join(ch_samplesheet).map { meta, _process, _tool, _fq_lint, reads -> [meta, reads] }
         : ch_samplesheet
 
     // STEP 01: ILLUMINA RUNDIR INFORMATION
@@ -169,7 +169,6 @@ workflow SEQINSPECTOR {
     // This provides useful stats of long reads
 
     TOULLIGQC(ch_samplesheet.filter { 'toulligqc' in tools })
-    ch_multiqc_files.mix(TOULLIGQC.out.report_data)
 
     // STEP 02: BASIC QC ON FASTQ FILES
 
@@ -253,8 +252,6 @@ workflow SEQINSPECTOR {
             kraken2_save_reads,
             kraken2_save_readclassifications,
         )
-
-        ch_multiqc_files = ch_multiqc_files.mix(FASTQ_QC_PHYLOGENETIC.out.mqc)
     }
 
     // STEP 07: fastq AND QC ON BAM FILES

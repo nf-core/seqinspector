@@ -1,9 +1,6 @@
 .DS_Store
 bwamem2_mem/*.bam
 bwamem2_mem/*.bam.bai
-fq/*fq_lint.txt
-kraken2/*.kraken2.report.txt
-kraken2/krona/*.html
 multiqc/{global_report,group_reports/*}/multiqc_data/fastqc_top_overrepresented_sequences_table.txt
 multiqc/{global_report,group_reports/*}/multiqc_data/llms-full.txt
 multiqc/{global_report,group_reports/*}/multiqc_data/multiqc.log
@@ -18,6 +15,9 @@ pipeline_info/*.{html,json,txt,yml}
 reports/fastp/*/*fastp.*
 reports/fastqc/*/*_fastqc.{html,zip}
 reports/fastqscreen/*/*_screen.html
+reports/fq/*/*fq_lint.txt
+reports/kraken2/*/*.kraken2.report.txt
+reports/kraken2/krona/*/*.html
 reports/picard_collectmultiplemetrics/*/*.pdf
 reports/picard_collectmultiplemetrics/*/*_metrics
 reports/picard_collectmultiplemetrics/*/*_summary_metrics
@@ -25,4 +25,4 @@ reports/picard_collectmultiplemetrics/*/alignment_summary_metrics
 reports/picard_collectmultiplemetrics/*/base_distribution_by_cycle_metrics
 reports/picard_collectmultiplemetrics/*/quality_by_cycle_metrics
 reports/picard_collectmultiplemetrics/*/quality_distribution_metrics
-toulligqc/**
+reports/toulligqc/**

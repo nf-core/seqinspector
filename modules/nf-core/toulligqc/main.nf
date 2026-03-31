@@ -12,10 +12,9 @@ process TOULLIGQC {
     tuple val(meta), path(ontfile)
 
     output:
-    tuple val(meta), path("*/*.data"), emit: report_data
-    tuple val(meta), path("*/*.html"), emit: report_html, optional: true
-    tuple val(meta), path("*/images/*.html"), emit: plots_html
-    tuple val(meta), path("*/images/plotly.min.js"), emit: plotly_js
+    tuple val(meta), val("${task.process}"), val('toulligqc'), path("*/*.data"), emit: report_data, topic: multiqc_files
+    tuple val(meta), val("${task.process}"), val('toulligqc'), path("*/*.html"), emit: report_html, topic: multiqc_files, optional: true
+    tuple val(meta), val("${task.process}"), val('toulligqc'), path("*/images"), emit: images, topic: multiqc_files
     tuple val("${task.process}"), val('toulligqc'), eval('toulligqc --version'), emit: versions_toulligqc, topic: versions
 
     when:

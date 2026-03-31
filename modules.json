@@ -48,17 +48,20 @@
                     "fq/lint": {
                         "branch": "master",
                         "git_sha": "14b8e6cceb84242e16094fe979762e05bc8de526",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/fq/lint/fq-lint.diff"
                     },
                     "kraken2/kraken2": {
                         "branch": "master",
                         "git_sha": "71a39f3598935d64ffd65f0960e4d2d4a42ab778",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/kraken2/kraken2/kraken2-kraken2.diff"
                     },
                     "krona/ktimporttaxonomy": {
                         "branch": "master",
                         "git_sha": "939bb089705e5995ef8a158d48f6951314e95584",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/krona/ktimporttaxonomy/krona-ktimporttaxonomy.diff"
                     },
                     "krona/ktupdatetaxonomy": {
                         "branch": "master",
@@ -116,7 +119,8 @@
                     "toulligqc": {
                         "branch": "master",
                         "git_sha": "d9137377f4dd6246242829772eb1949b96de1ef0",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/toulligqc/toulligqc.diff"
                     },
                     "untar": {
                         "branch": "master",
