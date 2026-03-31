@@ -110,6 +110,7 @@ workflow {
     )
 
     publish:
+    kraken2_db             = ch_kraken2_db
     multiqc_global         = NFCORE_SEQINSPECTOR.out.data_global.mix(NFCORE_SEQINSPECTOR.out.plots_global, NFCORE_SEQINSPECTOR.out.report_global)
     multiqc_grouped_data   = NFCORE_SEQINSPECTOR.out.data_groups
     multiqc_grouped_plots  = NFCORE_SEQINSPECTOR.out.plots_groups
@@ -123,6 +124,9 @@ workflow {
 }
 
 output {
+    kraken2_db {
+        path "kraken2_db"
+    }
     multiqc_global {
         path "multiqc/global_report"
     }
