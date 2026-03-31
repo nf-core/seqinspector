@@ -75,7 +75,7 @@ workflow SEQINSPECTOR {
     // If you use an error strategy that allows FQ_LINT to fail,
     // only valid FASTQ files will be passed to the next module
     ch_samplesheet = 'fq_lint' in tools
-        ? FQ_LINT.out.lint.join(ch_samplesheet).map { meta, _fq_lint, reads -> [meta, reads] }
+        ? FQ_LINT.out.lint.join(ch_samplesheet).map { meta, _process, _tool, _fq_lint, reads -> [meta, reads] }
         : ch_samplesheet
 
     // STEP 01: ILLUMINA RUNDIR INFORMATION

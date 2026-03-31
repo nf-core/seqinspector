@@ -48,7 +48,8 @@
                     "fq/lint": {
                         "branch": "master",
                         "git_sha": "14b8e6cceb84242e16094fe979762e05bc8de526",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/fq/lint/fq-lint.diff"
                     },
                     "kraken2/kraken2": {
                         "branch": "master",
