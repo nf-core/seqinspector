@@ -13,6 +13,8 @@ nextflow_workflow {
     tag "kraken2"
     tag "seqtk"
 
+    topics "multiqc_files"
+
     setup {
         run("UNTAR") {
             script "../../../../modules/nf-core/untar/main.nf"
@@ -43,12 +45,9 @@ nextflow_workflow {
         }
         then {
             assert workflow.success
-            assertAll(
-                { assert snapshot(
-                    file(workflow.out.krona_plots[0][1]).name,
-                    workflow.out.mqc,
-                ).match() }
-            )
+            assert snapshot(topics.multiqc_files.collect { meta, process, tool, file_ ->
+                [ meta, process, tool, (tool == 'krona') ? file(file_).name : file_]
+            }).match()
         }
     }
 }

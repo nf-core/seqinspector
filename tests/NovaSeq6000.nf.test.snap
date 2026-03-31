@@ -55,12 +55,6 @@
                 "bwamem2_mem/Undetermined_05.bam.bai",
                 "bwamem2_mem/sampletest_04.bam",
                 "bwamem2_mem/sampletest_04.bam.bai",
-                "fq",
-                "fq/Sample1_01.fq_lint.txt",
-                "fq/Sample23_03.fq_lint.txt",
-                "fq/SampleA_02.fq_lint.txt",
-                "fq/Undetermined_05.fq_lint.txt",
-                "fq/sampletest_04.fq_lint.txt",
                 "multiqc",
                 "multiqc/global_report",
                 "multiqc/global_report/multiqc_data",
@@ -918,6 +912,17 @@
                 "reports/fastqscreen/sampletest_04/sampletest_04_screen.html",
                 "reports/fastqscreen/sampletest_04/sampletest_04_screen.png",
                 "reports/fastqscreen/sampletest_04/sampletest_04_screen.txt",
+                "reports/fq",
+                "reports/fq/Sample1_01",
+                "reports/fq/Sample1_01/Sample1_01.fq_lint.txt",
+                "reports/fq/Sample23_03",
+                "reports/fq/Sample23_03/Sample23_03.fq_lint.txt",
+                "reports/fq/SampleA_02",
+                "reports/fq/SampleA_02/SampleA_02.fq_lint.txt",
+                "reports/fq/Undetermined_05",
+                "reports/fq/Undetermined_05/Undetermined_05.fq_lint.txt",
+                "reports/fq/sampletest_04",
+                "reports/fq/sampletest_04/sampletest_04.fq_lint.txt",
                 "reports/picard_collectmultiplemetrics",
                 "reports/picard_collectmultiplemetrics/Sample1_01",
                 "reports/picard_collectmultiplemetrics/Sample1_01/Sample1_01.CollectMultipleMetrics.alignment_summary_metrics",
@@ -1304,10 +1309,10 @@
                 "[NXF_HASH] Submitted process > PREPARE_GENOME:SAMTOOLS_FAIDX (genome.fa)"
             ]
         ],
-        "timestamp": "2026-03-30T17:53:23.625837881",
+        "timestamp": "2026-03-31T13:09:16.534245976",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.4"
         }
     }
 }
