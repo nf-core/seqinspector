@@ -2,9 +2,11 @@
 
 ## Introduction
 
-This document describes the output produced by the pipeline. Most of the plots are taken from the MultiQC report, which summarises results at the end of the pipeline.
+This document describes the output produced by the pipeline.
+Most of the plots are taken from the MultiQC report, which summarises results at the end of the pipeline.
 
-The directories listed below will be created in the results directory after the pipeline has finished. All paths are relative to the top-level results directory.
+The directories listed below will be created in the results directory after the pipeline has finished.
+All paths are relative to the top-level results directory.
 
 ## Pipeline overview
 
@@ -18,11 +20,12 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 - [Seqtk](#seqtk) - Subsample a specific number of reads per sample
 - [FastQC](#fastqc) - Raw read QC
 - [FASTQE](#fastqe) - Raw read QC
-- [Fastp](#Fastp) - Trimming and filtering of raw reads
+- [FastP](#fastp) - Trimming and filtering of raw reads
 - [FastQ Screen](#fastq-screen) - Mapping against a set of references for basic contamination QC
-- [BWA-MEM2_INDEX](#bwamem2_index) - Create BWA-MEM2 index of a chosen reference genome OR use pre-built index
+- [BWA-MEM2_INDEX](#bwamem2_index) - Create BWA-MEM2 index of a given fasta file when no pre-built index
 - [BWA-MEM2_MEM](#bwamem2_mem) - Mapping reads against a chosen reference genome
-- [Samtools](#samtools) - Index BAM files with Samtools
+- [Samtools](#samtools) - Index reference genome fasta file with Samtools
+- [Picard](#picard) - Create a sequence dictionary for the reference genome
 - [Picard CollectHsMetrics](#picard-collecthsmetrics) - Collect alignment QC metrics of hybrid-selection data
 - [Picard CollectMultipleMetrics](#picard-collectmultiplemetrics) - Combine BAM and BAI outputs for Picard
 - [Kraken2](#kraken2) - Phylogenetic assignment of reads using k-mers
@@ -48,7 +51,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 <summary>Output files</summary>
 
 - `reports/checkqc/[rundir]/`
-  - `checkqc_report.json`: Reports sequencing metrics that are not fulfilled. Note that the CheckQC module in MultiQC currently does not support BCL Convert data, so if the report if based on data from that demultiplexer it will not be visualized in the MutliQC report. Results can be found in the output directory.
+  - `checkqc_report.json`: Reports sequencing metrics that are not fulfilled. Note that the CheckQC module in MultiQC currently does not support BCL Convert data, so if the report if based on data from that demultiplexer it will not be visualized in the MultiQC report. Results can be found in the output directory.
 
 </details>
 
@@ -68,10 +71,11 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 <summary>Output files</summary>
 
 - `toulligqc/`
-  - `*.data`: ToulligQC output text file containing log information and all analysis results
-  - `*.html`: ToulligQC html report file
+  - `*.data`: ToulligQC output text file containing log information and all analysis results.
+  - `*.html`: ToulligQC html report file.
 
-[ToulligQC](https://github.com/GenomiqueENS/toulligQC) is dedicated to the QC analyses of Oxford Nanopore runs. This software is written in Python and developped by the GenomiqueENS core facility of the Institute of Biology of the Ecole Normale Superieure (IBENS).
+[ToulligQC](https://github.com/GenomiqueENS/toulligQC) is dedicated to the QC analyses of Oxford Nanopore runs.
+This software is written in Python and developped by the GenomiqueENS core facility of the Institute of Biology of the Ecole Normale Superieure (IBENS).
 
 ### SeqFu
 
@@ -84,14 +88,16 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 
 </details>
 
-[SeqFu](https://telatin.github.io/seqfu2/) is general-purpose program to manipulate and parse information from FASTA/FASTQ files, supporting gzipped input files. Includes functions to interleave and de-interleave FASTQ files, to rename sequences and to count and print statistics on sequence lengths. In this pipeline, the `seqfu stats` module is used to produce general quality metrics statistics.
+[SeqFu](https://telatin.github.io/seqfu2/) is general-purpose program to manipulate and parse information from FASTA/FASTQ files, supporting gzipped input files.
+Includes functions to interleave and de-interleave FASTQ files, to rename sequences and to count and print statistics on sequence lengths.
+In this pipeline, the `seqfu stats` module is used to produce general quality metrics statistics.
 
 ### Seqtk
 
 <details markdown="1">
 <summary>Output files</summary>
 
-- `seqtk/`
+- `subsampled/[sample_id]/`
   - `*_fastq`: FastQ file after being subsampled to the sample_size value.
 
 </details>
@@ -109,7 +115,9 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 
 </details>
 
-[FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) gives general quality metrics about your sequenced reads. It provides information about the quality score distribution across your reads, per base sequence content (%A/T/G/C), adapter contamination and overrepresented sequences. For further reading and documentation see the [FastQC help pages](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/).
+[FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) gives general quality metrics about your sequenced reads.
+It provides information about the quality score distribution across your reads, per base sequence content (%A/T/G/C), adapter contamination and overrepresented sequences.
+For further reading and documentation see the [FastQC help pages](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/).
 
 ### FASTQE
 
@@ -151,7 +159,8 @@ We only keep the reports for MultiQC and the pipeline report.
 
 </details>
 
-[FastQ Screen](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/) allows you to set up a standard set of references against which all of your samples can be mapped. Your references might contain the genomes of all of the organisms you work on, along with PhiX, vectors or other contaminants commonly seen in sequencing experiments.
+[FastQ Screen](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/) allows you to set up a standard set of references against which all of your samples can be mapped.
+Your references might contain the genomes of all of the organisms you work on, along with PhiX, vectors or other contaminants commonly seen in sequencing experiments.
 
 To use FastQ Screen, this pipeline requires a `.csv` detailing:
 
@@ -171,32 +180,48 @@ The `.csv` is provided as a pipeline parameter `fastq_screen_references` and is 
 
 Generates the full set of bwamem2 indexes:
 
-- `bwamem2_index/`
+- `references/bwamem2/`
   - `*.fa`
   - `*.fa.amb`
   - `*.fa.ann`
   - `*.fa.bwt`
   - `*.fa.pac`
 
+</details>
+
 ### BWAMEM2_MEM
 
-[BWA-mem2](https://github.com/bwa-mem2/bwa-mem2) is a tool next version of bwa-mem for mapping sequencies with low divergence against a reference genome with increased processing speed (~1.3-3.1x). Aligned reads are then potentially filtered and coordinate-sorted using [samtools](#samtools-index).
+[BWA-mem2](https://github.com/bwa-mem2/bwa-mem2) is a tool next version of bwa-mem for mapping sequencies with low divergence against a reference genome with increased processing speed (~1.3-3.1x).
+Aligned reads are then sorted using [samtools](#samtools).
 
 <details markdown="1">
 <summary>Output files</summary>
 
-- `bwamem2/`
+- `mapped/[sample_id]/`
   - `*.bam`: The original BAM file containing read alignments to the reference genome.
-  - `*.bam.bai`: BAM index files
+  - `*.bam.bai`: BAM index files via samtools.
+
+</details>
 
 ### Samtools
 
 <details markdown="1">
 <summary>Output files</summary>
 
-- `samtools_faidex`
+- `references/`
   - `*.fa.fai`
-  - `*.fa.fai`
+
+</details>
+
+### Picard
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `references/`
+  - `*.dict`
+
+</details>
 
 ### Picard CollectHSmetrics
 
@@ -224,16 +249,21 @@ Generates the full set of bwamem2 indexes:
   - `*.CollectMultipleMetrics.quality_distribution.pdf`
   - `*.CollectMultipleMetrics.read_length_histogram.pdf`
 
+</details>
+
 ### Kraken2
 
 [Kraken](https://ccb.jhu.edu/software/kraken2/) is a taxonomic sequence classifier that assigns taxonomic labels to DNA sequences. Kraken examines the k-mers within a query sequence and uses the information within those k-mers to query a database. That database maps -mers to the lowest common ancestor (LCA) of all genomes known to contain a given k-mer.
 
-- `kraken2/`
+<details markdown="1">
+<summary>Output files</summary>
+
+- `reports/kraken2/[sample_id]/`
   - `<sample>.kraken2.report.txt`: A report containing information on the phylogenetic assignment of reads in a given sample.
   - `<db_name>/`
-    - `<sample_id>_<db_name>.classified.fastq.gz`: FASTQ file containing all reads that had a hit against a reference in the database for a given sample
-    - `<sample_id>_<db_name>.unclassified.fastq.gz`: FASTQ file containing all reads that did not have a hit in the database for a given sample
-    - `<sample_id>_<db_name>.classifiedreads.txt`: A list of read IDs and the hits each read had against each database for a given sample
+    - `<sample_id>_<db_name>.classified.fastq.gz`: FASTQ file containing all reads that had a hit against a reference in the database for a given sample.
+    - `<sample_id>_<db_name>.unclassified.fastq.gz`: FASTQ file containing all reads that did not have a hit in the database for a given sample.
+    - `<sample_id>_<db_name>.classifiedreads.txt`: A list of read IDs and the hits each read had against each database for a given sample.
 
 </details>
 
@@ -244,10 +274,13 @@ You will only receive the `.fastq` and `*classifiedreads.txt` file if you supply
 
 [Krona](https://github.com/marbl/Krona) allows the exploration of (metagenomic) hierarchical data with interactive zooming, multi-layered pie charts.
 
-Krona charts will be generated by the pipeline for supported tools (Kraken2, Centrifuge, Kaiju, and MALT)
+Krona charts will be generated by the pipeline for supported tools (Kraken2, Centrifuge, Kaiju, and MALT).
 
-- `krona/`
-  - `<tool_name>_<db_name>.html`: per-tool/per-database interactive HTML file containing hierarchical piecharts
+<details markdown="1">
+<summary>Output files</summary>
+
+- `reports/kraken2/krona/[sample_id]/`
+  - `<tool_name>_<db_name>.html`: per-tool/per-database interactive HTML file containing hierarchical pie charts.
 
 </details>
 
@@ -257,7 +290,7 @@ The resulting HTML files can be loaded into your web browser for exploration. Ea
 
 nf-core/seqinspector will generate the following MultiQC reports:
 
-- one global reports including all the samples listed in the samplesheet
+- one global reports including all the samples listed in the samplesheet.
 - one group report per unique tag. These reports compile samples that share the same tag.
 
 <details markdown="1">
@@ -281,9 +314,14 @@ nf-core/seqinspector will generate the following MultiQC reports:
 
 </details>
 
-[MultiQC](http://multiqc.info) is a visualization tool that generates a single HTML report summarising all samples in your project. Most of the pipeline QC results are visualised in the report and further statistics are available in the report data directory.
+[MultiQC](https://seqera.io/multiqc/) is a visualization tool that generates a single HTML report summarising all samples in your project.
+Most of the pipeline QC results are visualised in the report and further statistics are available in the report data directory.
 
-Results generated by MultiQC collate pipeline QC from supported tools e.g. FastQC. The pipeline has special steps which also allow the software versions to be reported in the MultiQC output for future traceability. For more information about how to use MultiQC reports, see <http://multiqc.info>.
+Results generated by MultiQC collate pipeline QC from supported tools e.g. FastQC.
+The pipeline has special steps which also allow the software versions to be reported in the MultiQC output for future traceability.
+For more information about how to use MultiQC reports, see <https://seqera.io/multiqc/>.
+
+The MultiQC global report might also contain metrics related to the rundir via the [MULTIQC_SAV](https://github.com/MultiQC/MultiQC_SAV) plugin.
 
 ### Pipeline information
 
@@ -293,9 +331,9 @@ Results generated by MultiQC collate pipeline QC from supported tools e.g. FastQ
 - `pipeline_info/`
   - Reports generated by Nextflow: `execution_report.html`, `execution_timeline.html`, `execution_trace.txt` and `pipeline_dag.dot`/`pipeline_dag.svg`.
   - Reports generated by the pipeline: `pipeline_report.html`, `pipeline_report.txt` and `software_versions.yml`. The `pipeline_report*` files will only be present if the `--email` / `--email_on_fail` parameter's are used when running the pipeline.
-  - Reformatted samplesheet files used as input to the pipeline: `samplesheet.valid.csv`.
   - Parameters used by the pipeline run: `params.json`.
 
 </details>
 
-[Nextflow](https://www.nextflow.io/docs/latest/tracing.html) provides excellent functionality for generating various reports relevant to the running and execution of the pipeline. This will allow you to troubleshoot errors with the running of the pipeline, and also provide you with other information such as launch commands, run times and resource usage.
+[Nextflow](https://www.nextflow.io/docs/latest/tracing.html) provides excellent functionality for generating various reports relevant to the running and execution of the pipeline.
+This will allow you to troubleshoot errors with the running of the pipeline, and also provide you with other information such as launch commands, run times and resource usage.
