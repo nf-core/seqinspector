@@ -114,9 +114,13 @@ workflow {
     multiqc_grouped_data   = NFCORE_SEQINSPECTOR.out.data_groups
     multiqc_grouped_plots  = NFCORE_SEQINSPECTOR.out.plots_groups
     multiqc_grouped_report = NFCORE_SEQINSPECTOR.out.report_groups
+    references             = channel.empty().mix(
+        PREPARE_GENOME.out.bwamem2,
+        PREPARE_GENOME.out.dict,
+        PREPARE_GENOME.out.fai,
+    )
     reports                = channel.topic("multiqc_files")
 }
-
 
 output {
     multiqc_global {
@@ -136,6 +140,9 @@ output {
         path { meta, file ->
             file >> "multiqc/group_reports/${meta.id}/multiqc_report.html"
         }
+    }
+    references {
+        path "references/"
     }
     reports {
         path { meta, process, tool, file ->

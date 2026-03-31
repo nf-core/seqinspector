@@ -30,13 +30,6 @@
                 }
             },
             [
-                "bwamem2_index",
-                "bwamem2_index/bwamem2",
-                "bwamem2_index/bwamem2/genome.fa.0123",
-                "bwamem2_index/bwamem2/genome.fa.amb",
-                "bwamem2_index/bwamem2/genome.fa.ann",
-                "bwamem2_index/bwamem2/genome.fa.bwt.2bit.64",
-                "bwamem2_index/bwamem2/genome.fa.pac",
                 "bwamem2_mem",
                 "bwamem2_mem/SAMPLE_PAIRED_END_1_01.bam",
                 "bwamem2_mem/SAMPLE_PAIRED_END_1_01.bam.bai",
@@ -471,6 +464,14 @@
                 "multiqc/group_reports/K9H97/multiqc_report.html",
                 "pipeline_info",
                 "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
+                "references",
+                "references/bwamem2",
+                "references/bwamem2/genome.fa.0123",
+                "references/bwamem2/genome.fa.amb",
+                "references/bwamem2/genome.fa.ann",
+                "references/bwamem2/genome.fa.bwt.2bit.64",
+                "references/bwamem2/genome.fa.pac",
+                "references/genome.fa.fai",
                 "reports",
                 "reports/fastqc",
                 "reports/fastqc/SAMPLE_PAIRED_END_1_01",
@@ -530,16 +531,9 @@
                 "reports/seqfu/SAMPLE_PAIRED_END_2_02/SAMPLE_PAIRED_END_2_02_seqfu_mqc.txt",
                 "reports/seqfu/SAMPLE_SINGLE_END_03",
                 "reports/seqfu/SAMPLE_SINGLE_END_03/SAMPLE_SINGLE_END_03_seqfu.tsv",
-                "reports/seqfu/SAMPLE_SINGLE_END_03/SAMPLE_SINGLE_END_03_seqfu_mqc.txt",
-                "samtools_faidx",
-                "samtools_faidx/genome.fa.fai"
+                "reports/seqfu/SAMPLE_SINGLE_END_03/SAMPLE_SINGLE_END_03_seqfu_mqc.txt"
             ],
             [
-                "genome.fa.0123:md5,8af61f4bc59cc2fe7b396db46a2173f3",
-                "genome.fa.amb:md5,657cfdf0628d140d645d8d01a24f0c5f",
-                "genome.fa.ann:md5,4439f90bdaaf2cdf9089c9f7f07b9d6b",
-                "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
-                "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
                 "fastq_screen_plot.txt:md5,a9272cadc87afe2c01ac99f2ddcf4349",
                 "fastqc-status-check-heatmap.txt:md5,e3a5fad758ee6a23842910c756f1c68b",
                 "fastqc_adapter_content_plot.txt:md5,4b7007431bd26127365b0f25120d48f2",
@@ -652,6 +646,12 @@
                 "picard_quality_score_distribution.txt:md5,d1fc20cff85d87c3feee3d3d77584dac",
                 "seqfu-stats-counts-barplot_Bases.txt:md5,8ec06fa131ea03d5e99fabcf142de166",
                 "seqfu-stats-counts-barplot_Sequences.txt:md5,45e1a02c9e1d02260988384e3ccdbb9b",
+                "genome.fa.0123:md5,8af61f4bc59cc2fe7b396db46a2173f3",
+                "genome.fa.amb:md5,657cfdf0628d140d645d8d01a24f0c5f",
+                "genome.fa.ann:md5,4439f90bdaaf2cdf9089c9f7f07b9d6b",
+                "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
+                "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
+                "genome.fa.fai:md5,6f4c0ce5258e6948135ad006e1f9ee1b",
                 "SAMPLE_PAIRED_END_1_01_1_screen.png:md5,f52ddd0e65f23f68dd8d58d5453417db",
                 "SAMPLE_PAIRED_END_1_01_1_screen.txt:md5,921b08eeb461a2aa1bd42bba53900f70",
                 "SAMPLE_PAIRED_END_1_01_2_screen.png:md5,908f4fceea8aa546106efdaa7ca78f7d",
@@ -667,8 +667,7 @@
                 "SAMPLE_PAIRED_END_2_02_seqfu.tsv:md5,44a5cb826e001d58208a5855938fa82b",
                 "SAMPLE_PAIRED_END_2_02_seqfu_mqc.txt:md5,ac1740de9ef142c99c993fa9824ead63",
                 "SAMPLE_SINGLE_END_03_seqfu.tsv:md5,33a9e44386f308d43881a58394b6b17c",
-                "SAMPLE_SINGLE_END_03_seqfu_mqc.txt:md5,e67e819605ab49182aacf1d676dc885d",
-                "genome.fa.fai:md5,6f4c0ce5258e6948135ad006e1f9ee1b"
+                "SAMPLE_SINGLE_END_03_seqfu_mqc.txt:md5,e67e819605ab49182aacf1d676dc885d"
             ],
             [
                 "SAMPLE_PAIRED_END_1_01.bam:md5,ac811b20d56132f5e039b3e8fd217405",
@@ -677,7 +676,7 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-03-30T16:55:41.29185125",
+        "timestamp": "2026-03-31T13:57:11.532072798",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.2"

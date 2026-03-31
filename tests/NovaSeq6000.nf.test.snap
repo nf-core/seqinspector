@@ -37,13 +37,6 @@
                 }
             },
             [
-                "bwamem2_index",
-                "bwamem2_index/bwamem2",
-                "bwamem2_index/bwamem2/genome.fa.0123",
-                "bwamem2_index/bwamem2/genome.fa.amb",
-                "bwamem2_index/bwamem2/genome.fa.ann",
-                "bwamem2_index/bwamem2/genome.fa.bwt.2bit.64",
-                "bwamem2_index/bwamem2/genome.fa.pac",
                 "bwamem2_mem",
                 "bwamem2_mem/Sample1_01.bam",
                 "bwamem2_mem/Sample1_01.bam.bai",
@@ -874,6 +867,14 @@
                 "multiqc/group_reports/test/multiqc_report.html",
                 "pipeline_info",
                 "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
+                "references",
+                "references/bwamem2",
+                "references/bwamem2/genome.fa.0123",
+                "references/bwamem2/genome.fa.amb",
+                "references/bwamem2/genome.fa.ann",
+                "references/bwamem2/genome.fa.bwt.2bit.64",
+                "references/bwamem2/genome.fa.pac",
+                "references/genome.fa.fai",
                 "reports",
                 "reports/fastqc",
                 "reports/fastqc/Sample1_01",
@@ -967,16 +968,9 @@
                 "reports/seqfu/Undetermined_05/Undetermined_05_seqfu_mqc.txt",
                 "reports/seqfu/sampletest_04",
                 "reports/seqfu/sampletest_04/sampletest_04_seqfu.tsv",
-                "reports/seqfu/sampletest_04/sampletest_04_seqfu_mqc.txt",
-                "samtools_faidx",
-                "samtools_faidx/genome.fa.fai"
+                "reports/seqfu/sampletest_04/sampletest_04_seqfu_mqc.txt"
             ],
             [
-                "genome.fa.0123:md5,8af61f4bc59cc2fe7b396db46a2173f3",
-                "genome.fa.amb:md5,657cfdf0628d140d645d8d01a24f0c5f",
-                "genome.fa.ann:md5,4439f90bdaaf2cdf9089c9f7f07b9d6b",
-                "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
-                "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
                 "fastq_screen_plot.txt:md5,990122d48fa4c1a170107a1ba034e4cf",
                 "fastqc-status-check-heatmap.txt:md5,7a64380ec42aac56949a2d9a4176d4d9",
                 "fastqc_overrepresented_sequences_plot.txt:md5,c7908980f1dba22b45cf6de14a66a686",
@@ -1192,6 +1186,12 @@
                 "seqfu-stats-lengths-barplot_N75.txt:md5,55c1b8608a922a72785b013f4dfeb34b",
                 "seqfu-stats-lengths-barplot_N90.txt:md5,8f4f2385133443908dfda60bea75a4f9",
                 "seqfu-stats-lengths-barplot_auN.txt:md5,6f4c5258eee85d51340ae3d0e0a78a54",
+                "genome.fa.0123:md5,8af61f4bc59cc2fe7b396db46a2173f3",
+                "genome.fa.amb:md5,657cfdf0628d140d645d8d01a24f0c5f",
+                "genome.fa.ann:md5,4439f90bdaaf2cdf9089c9f7f07b9d6b",
+                "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
+                "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
+                "genome.fa.fai:md5,6f4c0ce5258e6948135ad006e1f9ee1b",
                 "Sample1_01_screen.png:md5,562256290643b51e4374c2225a15f463",
                 "Sample1_01_screen.txt:md5,3b184ef10eeb99043a85826534a4ee28",
                 "Sample23_03_screen.png:md5,6bb2caf67b9b2ed25d3d5f32c343e9ab",
@@ -1212,8 +1212,7 @@
                 "Undetermined_05_seqfu.tsv:md5,3a42c5c66a0a118f1a6f6f6e560b0e7e",
                 "Undetermined_05_seqfu_mqc.txt:md5,bd8be908362c5cb08a72f8ae7ab41b0d",
                 "sampletest_04_seqfu.tsv:md5,a5bea0b9c6015dd1a201ffd433e9b377",
-                "sampletest_04_seqfu_mqc.txt:md5,2180961655bbc8a12f0152d6a4b803a2",
-                "genome.fa.fai:md5,6f4c0ce5258e6948135ad006e1f9ee1b"
+                "sampletest_04_seqfu_mqc.txt:md5,2180961655bbc8a12f0152d6a4b803a2"
             ],
             [
                 "Sample1_01.bam:md5,d06ccfde49cc474faebcab2ebf71b324",
@@ -1309,10 +1308,10 @@
                 "[NXF_HASH] Submitted process > PREPARE_GENOME:SAMTOOLS_FAIDX (genome.fa)"
             ]
         ],
-        "timestamp": "2026-03-31T13:09:16.534245976",
+        "timestamp": "2026-03-31T13:55:08.833778201",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "25.10.4"
+            "nextflow": "25.10.2"
         }
     }
 }
