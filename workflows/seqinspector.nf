@@ -169,7 +169,6 @@ workflow SEQINSPECTOR {
     // This provides useful stats of long reads
 
     TOULLIGQC(ch_samplesheet.filter { 'toulligqc' in tools })
-    ch_multiqc_files.mix(TOULLIGQC.out.report_data)
 
     // STEP 02: BASIC QC ON FASTQ FILES
 

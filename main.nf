@@ -148,6 +148,9 @@ output {
             else if (tool == 'seqfu') {
                 file >> "reports/${tool}/${meta.id}/${meta.id}_${file.fileName}"
             }
+            else if (tool == 'toulligqc') {
+                file >> "reports/${tool}/${meta.id}/${file.fileName}"
+            }
             else {
                 file >> "reports/${tool}/${meta.id}/"
             }

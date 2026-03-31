@@ -150,17 +150,17 @@
                 "reports/seqfu/hg001_01",
                 "reports/seqfu/hg001_01/hg001_01_seqfu.tsv",
                 "reports/seqfu/hg001_01/hg001_01_seqfu_mqc.txt",
-                "toulligqc",
-                "toulligqc/hg001_01",
-                "toulligqc/hg001_01/images",
-                "toulligqc/hg001_01/images/Correlation_between_read_length_and_PHRED_score.html",
-                "toulligqc/hg001_01/images/Distribution_of_read_lengths.html",
-                "toulligqc/hg001_01/images/PHRED_score_density_distribution.html",
-                "toulligqc/hg001_01/images/PHRED_score_distribution.html",
-                "toulligqc/hg001_01/images/Read_count_histogram.html",
-                "toulligqc/hg001_01/images/plotly.min.js",
-                "toulligqc/hg001_01/report.data",
-                "toulligqc/hg001_01/report.html"
+                "reports/toulligqc",
+                "reports/toulligqc/hg001_01",
+                "reports/toulligqc/hg001_01/images",
+                "reports/toulligqc/hg001_01/images/Correlation_between_read_length_and_PHRED_score.html",
+                "reports/toulligqc/hg001_01/images/Distribution_of_read_lengths.html",
+                "reports/toulligqc/hg001_01/images/PHRED_score_density_distribution.html",
+                "reports/toulligqc/hg001_01/images/PHRED_score_distribution.html",
+                "reports/toulligqc/hg001_01/images/Read_count_histogram.html",
+                "reports/toulligqc/hg001_01/images/plotly.min.js",
+                "reports/toulligqc/hg001_01/report.data",
+                "reports/toulligqc/hg001_01/report.html"
             ],
             [
                 "fastq_screen_plot.txt:md5,f6883339d43a090e86e02fdf3feacbbd",
@@ -197,10 +197,10 @@
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-03-30T17:26:40.637571623",
+        "timestamp": "2026-03-31T12:01:12.037324223",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.4"
         }
     }
 }
