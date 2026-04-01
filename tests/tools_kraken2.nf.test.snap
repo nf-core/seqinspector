@@ -466,11 +466,16 @@
                 "reports/kraken2/sampletest_04",
                 "reports/kraken2/sampletest_04/sampletest_04.kraken2.report.txt",
                 "subsampled",
-                "subsampled/Sample1_01_Sample1_S1_L001_R1_001.fastq.gz",
-                "subsampled/Sample23_03_Sample23_S3_L001_R1_001.fastq.gz",
-                "subsampled/SampleA_02_SampleA_S2_L001_R1_001.fastq.gz",
-                "subsampled/Undetermined_05_Undetermined_S0_L001_R1_001.fastq.gz",
-                "subsampled/sampletest_04_sampletest_S4_L001_R1_001.fastq.gz"
+                "subsampled/Sample1_01",
+                "subsampled/Sample1_01/Sample1_01_Sample1_S1_L001_R1_001.fastq.gz",
+                "subsampled/Sample23_03",
+                "subsampled/Sample23_03/Sample23_03_Sample23_S3_L001_R1_001.fastq.gz",
+                "subsampled/SampleA_02",
+                "subsampled/SampleA_02/SampleA_02_SampleA_S2_L001_R1_001.fastq.gz",
+                "subsampled/Undetermined_05",
+                "subsampled/Undetermined_05/Undetermined_05_Undetermined_S0_L001_R1_001.fastq.gz",
+                "subsampled/sampletest_04",
+                "subsampled/sampletest_04/sampletest_04_sampletest_S4_L001_R1_001.fastq.gz"
             ],
             [
                 "hash.k2d:md5,8b8598468f54a7087c203ad0190555d9",
@@ -540,7 +545,7 @@
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-03-31T15:50:21.098334453",
+        "timestamp": "2026-04-01T11:33:03.228247863",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.2"

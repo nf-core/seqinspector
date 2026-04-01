@@ -12,7 +12,8 @@ All paths are relative to the top-level results directory.
 
 The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generate output files from the following steps:
 
-- [fq](#fq) - Linting of FASTQ files to check for formatting issues
+- [References](#references) - Create missing indexes for a given fasta file
+- [FQ](#fq) - Linting of FASTQ files to check for formatting issues
 - [CheckQC](#checkqc) - QC of an Illumina run
 - [Rundirparser](#rundirparser) - Parse rundir metadata from Illumina runs
 - [ToulligQC](#toulligqc) - Raw read QC for Oxford Nanopore runs
@@ -22,16 +23,41 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 - [FASTQE](#fastqe) - Raw read QC
 - [FastP](#fastp) - Trimming and filtering of raw reads
 - [FastQ Screen](#fastq-screen) - Mapping against a set of references for basic contamination QC
-- [BWA-MEM2_INDEX](#bwamem2_index) - Create BWA-MEM2 index of a given fasta file when no pre-built index
 - [BWA-MEM2_MEM](#bwamem2_mem) - Mapping reads against a chosen reference genome
-- [Samtools](#samtools) - Index reference genome fasta file with Samtools
-- [Picard](#picard) - Create a sequence dictionary for the reference genome
 - [Picard CollectHsMetrics](#picard-collecthsmetrics) - Collect alignment QC metrics of hybrid-selection data
 - [Picard CollectMultipleMetrics](#picard-collectmultiplemetrics) - Combine BAM and BAI outputs for Picard
 - [Kraken2](#kraken2) - Phylogenetic assignment of reads using k-mers
 - [Krona](#krona) - Interactive visualization of Kraken2 results
 - [MultiQC](#multiqc) - Aggregate report describing results and QC from the whole pipeline
 - [Pipeline information](#pipeline-information) - Report metrics generated during the workflow execution
+
+### References
+
+<details markdown="1">
+<summary>Output files</summary>
+
+For a given reference fasta file, the pipeline will generate the following (if not provided):
+
+bwa-mem2 indexes with `bwa-mem2 index`.
+
+- `references/bwamem2/`
+  - `*.fa`
+  - `*.fa.amb`
+  - `*.fa.ann`
+  - `*.fa.bwt`
+  - `*.fa.pac`
+
+Fasta dictionary with `picard CreateSequenceDictionary`
+
+- `references/`
+  - `*.dict`
+
+Fasta index with `samtools faidx`
+
+- `references/`
+  - `*.fa.fai`
+
+</details>
 
 ### FQ
 
@@ -70,7 +96,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 <details markdown="1">
 <summary>Output files</summary>
 
-- `toulligqc/`
+- `reports/toulligqc/[sample_id]/`
   - `*.data`: ToulligQC output text file containing log information and all analysis results.
   - `*.html`: ToulligQC html report file.
 
@@ -98,7 +124,7 @@ In this pipeline, the `seqfu stats` module is used to produce general quality me
 <summary>Output files</summary>
 
 - `subsampled/[sample_id]/`
-  - `*_fastq`: FastQ file after being subsampled to the sample_size value.
+  - `*.fastq.gz`: FastQ files after being subsampled to the sample_size value.
 
 </details>
 
@@ -173,26 +199,10 @@ See `assets/example_fastq_screen_references.csv` for example.
 
 The `.csv` is provided as a pipeline parameter `fastq_screen_references` and is used to construct a `FastQ Screen` configuration file within the context of the process work directory in order to properly mount the references.
 
-### BWAMEM2_INDEX
-
-<details markdown="1">
-<summary>Output files</summary>
-
-Generates the full set of bwamem2 indexes:
-
-- `references/bwamem2/`
-  - `*.fa`
-  - `*.fa.amb`
-  - `*.fa.ann`
-  - `*.fa.bwt`
-  - `*.fa.pac`
-
-</details>
-
 ### BWAMEM2_MEM
 
-[BWA-mem2](https://github.com/bwa-mem2/bwa-mem2) is a tool next version of bwa-mem for mapping sequencies with low divergence against a reference genome with increased processing speed (~1.3-3.1x).
-Aligned reads are then sorted using [samtools](#samtools).
+[BWA-mem2](https://github.com/bwa-mem2/bwa-mem2) is an improved version of BWA-mem for mapping sequencies with low divergence against a reference genome with increased processing speed (~1.3-3.1x).
+Aligned reads are then sorted using [samtools](#samtools) in the same process, and the resulting BAM files are then indexed with `samtools index`.
 
 <details markdown="1">
 <summary>Output files</summary>
@@ -200,26 +210,6 @@ Aligned reads are then sorted using [samtools](#samtools).
 - `mapped/[sample_id]/`
   - `*.bam`: The original BAM file containing read alignments to the reference genome.
   - `*.bam.bai`: BAM index files via samtools.
-
-</details>
-
-### Samtools
-
-<details markdown="1">
-<summary>Output files</summary>
-
-- `references/`
-  - `*.fa.fai`
-
-</details>
-
-### Picard
-
-<details markdown="1">
-<summary>Output files</summary>
-
-- `references/`
-  - `*.dict`
 
 </details>
 
