@@ -158,28 +158,19 @@ output {
     }
     reports {
         path { meta, process, tool, file ->
-            if (tool == 'krona') {
-                file >> "reports/kraken2/${tool}/${meta.id}/"
-            }
-            else if (tool == 'picard') {
-                file >> "reports/${process.tokenize(':').last().toLowerCase()}/${meta.id}/"
-            }
-            else if (tool == 'rundirparser') {
-                file >> "reports/${tool}/${meta.id}/${meta.id}_${file.fileName}"
-            }
-            else if (tool == 'seqfu') {
-                file >> "reports/${tool}/${meta.id}/${meta.id}_${file.fileName}"
-            }
-            else if (tool == 'toulligqc') {
-                file >> "reports/${tool}/${meta.id}/${file.fileName}"
-            }
-            else {
-                file >> "reports/${tool}/${meta.id}/"
-            }
+            file >> (tool == 'krona'
+                ? "reports/kraken2/${tool}/${meta.id}/"
+                : tool == 'picard'
+                    ? "reports/${process.tokenize(':').last().toLowerCase()}/${meta.id}/"
+                    : tool == 'rundirparser' || tool == 'seqfu'
+                        ? "reports/${tool}/${meta.id}/${meta.id}_${file.name}"
+                        : "reports/${tool}/${meta.id}/")
         }
     }
     subsampled {
-        path "subsampled"
+        path { meta, _fastq ->
+            "subsampled/${meta.id}/"
+        }
     }
 }
 
