@@ -10,7 +10,6 @@ nextflow_pipeline {
         [
             name: "NovaSeq6000 data test",
             params: [],
-            snapshot: 'stderr,stdout',
         ],
     ]
 

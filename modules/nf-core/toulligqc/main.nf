@@ -12,10 +12,9 @@ process TOULLIGQC {
     tuple val(meta), path(ontfile)
 
     output:
-    tuple val(meta), path("*/*.data"), emit: report_data
-    tuple val(meta), path("*/*.html"), emit: report_html, optional: true
-    tuple val(meta), path("*/images/*.html"), emit: plots_html
-    tuple val(meta), path("*/images/plotly.min.js"), emit: plotly_js
+    tuple val(meta), val("${task.process}"), val('toulligqc'), path("report.data"), emit: report_data, topic: multiqc_files
+    tuple val(meta), val("${task.process}"), val('toulligqc'), path("report.html"), emit: report_html, topic: multiqc_files, optional: true
+    tuple val(meta), val("${task.process}"), val('toulligqc'), path("images"), emit: images, topic: multiqc_files
     tuple val("${task.process}"), val('toulligqc'), eval('toulligqc --version'), emit: versions_toulligqc, topic: versions
 
     when:
@@ -34,20 +33,30 @@ process TOULLIGQC {
     """
     toulligqc \\
         ${input_file} \\
+        --report-name toulligqc \\
         --output-directory ${prefix} \\
         ${args}
+
+    # Remove empty folder
+    rmdir ${prefix}
+
+    # Move files
+    mv ${prefix}toulligqc/images .
+    mv ${prefix}toulligqc/report.* .
+
+    # Remove now empty folder
+    rmdir ${prefix}toulligqc
     """
 
     stub:
-    def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    mkdir ${prefix}
-    mkdir ${prefix}/images
-    touch ${prefix}/report.data
-    touch ${prefix}/images/Correlation_between_read_length_and_PHRED_score.html
-    touch ${prefix}/images/Distribution_of_read_lengths.html
-    touch ${prefix}/images/PHRED_score_density_distribution.html
-    touch ${prefix}/images/Read_count_histogram.html
-    touch ${prefix}/images/plotly.min.js
+    mkdir images
+    touch images/Correlation_between_read_length_and_PHRED_score.html
+    touch images/Distribution_of_read_lengths.html
+    touch images/PHRED_score_density_distribution.html
+    touch images/Read_count_histogram.html
+    touch images/plotly.min.js
+    touch report.data
+    touch report.html
     """
 }

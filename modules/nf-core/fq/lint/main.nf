@@ -11,7 +11,7 @@ process FQ_LINT {
     tuple val(meta), path(fastq)
 
     output:
-    tuple val(meta), path("*.fq_lint.txt"), emit: lint
+    tuple val(meta), val("${task.process}"), val('fq'), path("*.fq_lint.txt"), emit: lint, topic: multiqc_files
     tuple val("${task.process}"), val('fq'), eval("fq lint --version | sed 's/fq-lint //; s/ .*//'"), emit: versions_fq, topic: versions
 
     when:

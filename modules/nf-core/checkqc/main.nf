@@ -11,7 +11,7 @@ process CHECKQC {
     path(checkqc_config)
 
     output:
-    tuple val(meta), path("*checkqc_report.json"), emit: report
+    tuple val(meta), val("${task.process}"), val('checkqc'), path("*checkqc_report.json"), emit: report, topic: multiqc_files
     tuple val("${task.process}"), val('checkqc'), eval('checkqc --version | sed -e "s/checkqc, version //g"'), emit: versions_checkqc, topic: versions
 
     when:

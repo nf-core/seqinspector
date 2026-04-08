@@ -13,7 +13,8 @@ process SEQFU_STATS {
 
     output:
     tuple val(meta), path("*.tsv"), emit: stats
-    tuple val(meta), path("*_mqc.txt"), emit: multiqc
+    tuple val(meta), val("${task.process}"), val('seqfu'), path("*.tsv"), emit: tsv, topic: multiqc_files
+    tuple val(meta), val("${task.process}"), val('seqfu'), path("*_mqc.txt"), emit: multiqc, topic: multiqc_files
     tuple val("${task.process}"), val('seqfu'), eval('seqfu version'), emit: versions_seqfu, topic: versions
 
     when:

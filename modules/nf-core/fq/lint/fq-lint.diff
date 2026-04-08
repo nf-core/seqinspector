@@ -1,0 +1,19 @@
+Changes in component 'nf-core/fq/lint'
+'modules/nf-core/fq/lint/meta.yml' is unchanged
+'modules/nf-core/fq/lint/environment.yml' is unchanged
+Changes in 'fq/lint/main.nf':
+--- modules/nf-core/fq/lint/main.nf
++++ modules/nf-core/fq/lint/main.nf
+@@ -11,7 +11,7 @@
+     tuple val(meta), path(fastq)
+ 
+     output:
+-    tuple val(meta), path("*.fq_lint.txt"), emit: lint
++    tuple val(meta), val("${task.process}"), val('fq'), path("*.fq_lint.txt"), emit: lint, topic: multiqc_files
+     tuple val("${task.process}"), val('fq'), eval("fq lint --version | sed 's/fq-lint //; s/ .*//'"), emit: versions_fq, topic: versions
+ 
+     when:
+
+'modules/nf-core/fq/lint/tests/main.nf.test' is unchanged
+'modules/nf-core/fq/lint/tests/main.nf.test.snap' is unchanged
+************************************************************

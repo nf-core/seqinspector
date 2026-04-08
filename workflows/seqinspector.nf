@@ -43,16 +43,16 @@ workflow SEQINSPECTOR {
     take:
     ch_samplesheet // channel: samplesheet read in from --input
     bait_intervals
-    bwamem2_index
+    bwamem2
     checkqc_config
-    fasta_reference
+    fasta
     fastq_screen_references
     multiqc_config
     multiqc_logo
     multiqc_methods_description
     outdir
-    ref_dict
-    ref_fai
+    dict
+    fai
     sample_size
     tools
     target_intervals
@@ -76,7 +76,7 @@ workflow SEQINSPECTOR {
     // If you use an error strategy that allows FQ_LINT to fail,
     // only valid FASTQ files will be passed to the next module
     ch_samplesheet = 'fq_lint' in tools
-        ? FQ_LINT.out.lint.join(ch_samplesheet).map { meta, _fq_lint, reads -> [meta, reads] }
+        ? FQ_LINT.out.lint.join(ch_samplesheet).map { meta, _process, _tool, _fq_lint, reads -> [meta, reads] }
         : ch_samplesheet
 
     // STEP 01: ILLUMINA RUNDIR INFORMATION
@@ -98,15 +98,15 @@ workflow SEQINSPECTOR {
         .map { rundir, meta, _rundir_number ->
             // Return for all the rundir specific processes and to mix with ch_multiqc_files
             //   - meta: (map)
-            //     - dirname: Simple name of the rundir, used for setting unique output names in publishDir
-            //     - id: List all sample of the rundir
+            //     - id: Simple name of the rundir, used for setting unique output names in publishDir
+            //     - samples: List all sample of the rundir
             //     - rundir_number: number of total rundir, no rundir counts as one
             //     - tags: List of merged tags, used for grouping MultiQC reports
             //   - rundir: path to rundir or null when no rundir
             [
                 [
-                    dirname: rundir ? rundir.simpleName : 'no_rundir',
-                    id: rundir ? false : meta.collect { meta_ -> meta_.id }.flatten().unique().sort(),
+                    id: rundir ? rundir.simpleName : 'no_rundir',
+                    samples: rundir ? false : meta.collect { meta_ -> meta_.id }.flatten().unique().sort(),
                     rundir_number: _rundir_number,
                     tags: meta.collect { meta_ -> meta_.tags }.flatten().unique(),
                 ],
@@ -118,7 +118,7 @@ workflow SEQINSPECTOR {
     if (('checkqc' in tools) || ('multiqcsav' in tools) || ('rundirparser' in tools)) {
         ch_rundir.map { meta, rundir ->
             if (!rundir) {
-                log.warn("No rundir for sample(s): ${meta.id.join(', ')}")
+                log.warn("No rundir for sample(s): ${meta.samples.join(', ')}")
             }
         }
 
@@ -157,14 +157,11 @@ workflow SEQINSPECTOR {
             : [],
     )
 
-    ch_multiqc_files = ch_multiqc_files.mix(CHECKQC.out.report)
-
     //
     // MODULE: RUNDIRPARSER
     //
 
     RUNDIRPARSER(ch_rundir.filter { _meta, rundir -> (rundir && 'rundirparser' in tools) })
-    ch_multiqc_files = ch_multiqc_files.mix(RUNDIRPARSER.out.multiqc)
 
     // STEP 01: LONGREADS
 
@@ -173,8 +170,6 @@ workflow SEQINSPECTOR {
     // This provides useful stats of long reads
 
     TOULLIGQC(ch_samplesheet.filter { 'toulligqc' in tools })
-
-    ch_multiqc_files.mix(TOULLIGQC.out.report_data)
 
     // STEP 02: BASIC QC ON FASTQ FILES
 
@@ -195,8 +190,6 @@ workflow SEQINSPECTOR {
             }
         }
 
-    ch_multiqc_files = ch_multiqc_files.mix(SEQFU_STATS.out.multiqc)
-
     // STEP 03: SUBSAMPLE
 
     //
@@ -209,19 +202,9 @@ workflow SEQINSPECTOR {
 
     // STEP 04: MORE QC ON FASTQ FILES (CAN BE SUMSAMPLED)
 
-    //
-    // MODULE: FASTQC
-    //
-
     FASTQC(ch_sample.filter { 'fastqc' in tools })
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip)
-
-    //
-    // MODULE: FASTQE
-    //
 
     FASTQE(ch_sample.filter { 'fastqe' in tools })
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQE.out.tsv)
 
     //
     // MODULE: FASTP for adapter trimming and quality filtering
@@ -269,8 +252,6 @@ workflow SEQINSPECTOR {
         ).toList().transpose().toList(),
     )
 
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQSCREEN_FASTQSCREEN.out.txt)
-
     // STEP 06: METAGENOMIC QC
 
     //
@@ -284,8 +265,6 @@ workflow SEQINSPECTOR {
             kraken2_save_reads,
             kraken2_save_readclassifications,
         )
-
-        ch_multiqc_files = ch_multiqc_files.mix(FASTQ_QC_PHYLOGENETIC.out.mqc)
     }
 
     // STEP 07: fastq AND QC ON BAM FILES
@@ -298,8 +277,8 @@ workflow SEQINSPECTOR {
 
     BWAMEM2_MEM(
         ch_sample.filter { ('picard_collecthsmetrics' in tools) || ('picard_collectmultiplemetrics' in tools) },
-        bwamem2_index,
-        fasta_reference,
+        bwamem2,
+        fasta,
         sort_bam,
     )
 
@@ -309,21 +288,21 @@ workflow SEQINSPECTOR {
 
     SAMTOOLS_INDEX(BWAMEM2_MEM.out.bam)
 
+    bam_bai = BWAMEM2_MEM.out.bam.join(SAMTOOLS_INDEX.out.index, failOnDuplicate: true, failOnMismatch: true)
+
     //
     // SUBWORKFLOW: BAM_QC
     //   Run picard_collecthsmetrics and/or picard_collectmultiplemetrics
 
     BAM_QC(
-        BWAMEM2_MEM.out.bam.join(SAMTOOLS_INDEX.out.index, failOnDuplicate: true, failOnMismatch: true),
-        fasta_reference,
-        ref_fai,
+        bam_bai,
+        fasta,
+        fai,
         bait_intervals ? channel.fromPath(bait_intervals).collect() : channel.empty(),
         target_intervals ? channel.fromPath(target_intervals).collect() : channel.empty(),
-        ref_dict,
+        dict,
         tools,
     )
-
-    ch_multiqc_files = ch_multiqc_files.mix(BAM_QC.out.multiple_metrics, BAM_QC.out.hs_metrics)
 
     // Collate and save software versions
     def collated_versions = softwareVersionsToYAML(
@@ -336,12 +315,16 @@ workflow SEQINSPECTOR {
         newLine: true,
     )
 
+    def collated_reports = channel.topic("multiqc_files")
+        .map { meta, _process, _tool, reports -> [meta, reports] }
+
     // STEP 08: MULTIQC (GLOBAL USING SAV AND PER TAG)
 
     //
     // MODULE: MultiQC
     //
 
+    ch_multiqc_files = ch_multiqc_files.mix(collated_reports)
     ch_multiqc_extra_files = ch_multiqc_extra_files.mix(collated_versions)
 
     summary_params = paramsSummaryMap(workflow, parameters_schema: "nextflow_schema.json")
@@ -383,10 +366,10 @@ workflow SEQINSPECTOR {
 
             if ((rundir) && ('multiqcsav' in tools)) {
                 if (meta.rundir_number > 1) {
-                    log.warn("More than one rundir, or sample(s) missing rundir, skipping skipping MULTIQC_SAV")
+                    log.warn("More than one rundir, or sample(s) missing rundir, skipping MULTIQC_SAV")
                 }
                 else if (rundir.toString().endsWith('tar.gz')) {
-                    log.warn("Rundir: ${meta.dirname} is a tar.gz")
+                    log.warn("Rundir: ${meta.id} is a tar.gz")
                 }
                 else {
                     interop = files(file(rundir).resolve("InterOp/*.bin"), checkIfExists: true)
@@ -428,17 +411,16 @@ workflow SEQINSPECTOR {
         .groupTuple()
         .tap { mqc_by_tag }
         .collectFile { sample_tag, _samples ->
-            def prefix_tag = "[TAG:${sample_tag}]"
             [
-                "${prefix_tag}_multiqc_extra_config.yml",
+                "${sample_tag}_multiqc_extra_config.yml",
                 """
-                    |output_fn_name: \"${prefix_tag}_multiqc_report.html\"
-                    |data_dir_name:  \"${prefix_tag}_multiqc_data\"
-                    |plots_dir_name: \"${prefix_tag}_multiqc_plots\"
+                    |output_fn_name: \"${sample_tag}_multiqc_report.html\"
+                    |data_dir_name:  \"${sample_tag}_multiqc_data\"
+                    |plots_dir_name: \"${sample_tag}_multiqc_plots\"
                 """.stripMargin(),
             ]
         }
-        .map { file -> [(file =~ /\[TAG:(.+)\]/)[0][1], file] }
+        .map { file -> [(file.getName() =~ /(.+?)_multiqc/)[0][1], file] }
         .join(mqc_by_tag)
 
     //
@@ -464,6 +446,12 @@ workflow SEQINSPECTOR {
     )
 
     emit:
-    global_report   = MULTIQC_GLOBAL.out.report.map { _meta, report -> [report] }.toList() // channel: [ /path/to/multiqc_report.html ]
-    grouped_reports = MULTIQC_PER_TAG.out.report.map { _meta, report -> [report] }.toList() // channel: [ /path/to/multiqc_report.html ]
+    bam_bai       = bam_bai
+    data_global   = MULTIQC_GLOBAL.out.data // channel: [ /path/to/multiqc_data/ ]
+    data_groups   = MULTIQC_PER_TAG.out.data // channel: [ /path/to/multiqc_data/ ]
+    plots_global  = MULTIQC_GLOBAL.out.plots // channel: [ /path/to/multiqc_plots/ ]
+    plots_groups  = MULTIQC_PER_TAG.out.plots // channel: [ /path/to/multiqc_plots/ ]
+    report_global = MULTIQC_GLOBAL.out.report // channel: [ /path/to/multiqc_report.html ]
+    report_groups = MULTIQC_PER_TAG.out.report // channel: [ /path/to/multiqc_report.html ]
+    subsampled    = SEQTK_SAMPLE.out.reads
 }

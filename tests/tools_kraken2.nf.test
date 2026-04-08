@@ -10,6 +10,7 @@ nextflow_pipeline {
             name: "NovaSeq6000 data test - kraken2",
             params: [
                 kraken2_db: pipelines_testdata_base_path + 'modules/data/genomics/sarscov2/genome/db/kraken2.tar.gz',
+                kraken_save_uncompressed_db: true,
                 sample_size: 90,
                 tools: 'kraken2',
                 tools_bundle: null,

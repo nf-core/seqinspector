@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Fixed`
 
 - [#216](https://github.com/nf-core/seqinspector/pull/216) Fixed meta.id that resulted in all SEQFU_STATS processes with the same tag name
+- [#224](https://github.com/nf-core/seqinspector/pull/224) Fix workflow output syntax for future Nextflow releases
 
 ### `Changed`
 
@@ -32,6 +33,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#205](https://github.com/nf-core/seqinspector/pull/205) document how to add a tool to tool selection and how to use tool selection
 - [#215](https://github.com/nf-core/seqinspector/pull/215) Update all modules
 - [#216](https://github.com/nf-core/seqinspector/pull/216) Split out and simplify tests
+- [#220](https://github.com/nf-core/seqinspector/pull/220) Workflow output for MultiQC
+- [#221](https://github.com/nf-core/seqinspector/pull/221) Workflow output for checkQC, Fastp, fastp, fastqe, fastqscreen, picard_collecthsmetrics, picard_collectmultiplemetrics, rundirparser, seqfu
+- [#222](https://github.com/nf-core/seqinspector/pull/222) Workflow output for fq/lint, kraken2, krona, toulligqc
+- [#223](https://github.com/nf-core/seqinspector/pull/223) Workflow output for the rest of the pipeline
 
 ### `Dependencies`
 

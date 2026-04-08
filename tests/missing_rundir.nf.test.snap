@@ -15,19 +15,6 @@
                 }
             },
             [
-                "checkqc",
-                "checkqc/checkqc_report.json",
-                "fastqc",
-                "fastqc/Sample1_01_fastqc.html",
-                "fastqc/Sample1_01_fastqc.zip",
-                "fastqc/Sample23_03_fastqc.html",
-                "fastqc/Sample23_03_fastqc.zip",
-                "fastqc/SampleA_02_fastqc.html",
-                "fastqc/SampleA_02_fastqc.zip",
-                "fastqc/Undetermined_05_fastqc.html",
-                "fastqc/Undetermined_05_fastqc.zip",
-                "fastqc/sampletest_04_fastqc.html",
-                "fastqc/sampletest_04_fastqc.zip",
                 "multiqc",
                 "multiqc/global_report",
                 "multiqc/global_report/multiqc_data",
@@ -407,11 +394,31 @@
                 "multiqc/group_reports/test/multiqc_report.html",
                 "pipeline_info",
                 "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
-                "rundirparser",
-                "rundirparser/200624_A00834_0183_BHMTFYDRXX_illumina_mqc.yml"
+                "reports",
+                "reports/checkqc",
+                "reports/checkqc/200624_A00834_0183_BHMTFYDRXX",
+                "reports/checkqc/200624_A00834_0183_BHMTFYDRXX/checkqc_report.json",
+                "reports/fastqc",
+                "reports/fastqc/Sample1_01",
+                "reports/fastqc/Sample1_01/Sample1_01_fastqc.html",
+                "reports/fastqc/Sample1_01/Sample1_01_fastqc.zip",
+                "reports/fastqc/Sample23_03",
+                "reports/fastqc/Sample23_03/Sample23_03_fastqc.html",
+                "reports/fastqc/Sample23_03/Sample23_03_fastqc.zip",
+                "reports/fastqc/SampleA_02",
+                "reports/fastqc/SampleA_02/SampleA_02_fastqc.html",
+                "reports/fastqc/SampleA_02/SampleA_02_fastqc.zip",
+                "reports/fastqc/Undetermined_05",
+                "reports/fastqc/Undetermined_05/Undetermined_05_fastqc.html",
+                "reports/fastqc/Undetermined_05/Undetermined_05_fastqc.zip",
+                "reports/fastqc/sampletest_04",
+                "reports/fastqc/sampletest_04/sampletest_04_fastqc.html",
+                "reports/fastqc/sampletest_04/sampletest_04_fastqc.zip",
+                "reports/rundirparser",
+                "reports/rundirparser/200624_A00834_0183_BHMTFYDRXX",
+                "reports/rundirparser/200624_A00834_0183_BHMTFYDRXX/200624_A00834_0183_BHMTFYDRXX_illumina_mqc.yml"
             ],
             [
-                "checkqc_report.json:md5,8245b6a8b8e0e2d247cb7a151d53612f",
                 "checkqc_reads-per-sample-plot.txt:md5,32ac72d463abb6df384d43041965b167",
                 "fastqc-status-check-heatmap.txt:md5,7a64380ec42aac56949a2d9a4176d4d9",
                 "fastqc_overrepresented_sequences_plot.txt:md5,c7908980f1dba22b45cf6de14a66a686",
@@ -487,18 +494,19 @@
                 "multiqc_citations.txt:md5,2f5fc28069c07e52fdef3d6d25464b18",
                 "multiqc_fastqc.txt:md5,95c8ffb23baafec625aeb600047515ae",
                 "multiqc_mqc_seq_metadata.txt:md5,5c5f63f044bdcb1ab74a66b896f0b6e7",
+                "checkqc_report.json:md5,8245b6a8b8e0e2d247cb7a151d53612f",
                 "200624_A00834_0183_BHMTFYDRXX_illumina_mqc.yml:md5,29e05fed18bca0e9a857c992b6d59a40"
             ],
             "No BAM files",
             [
-                "WARN: More than one rundir, or sample(s) missing rundir, skipping skipping MULTIQC_SAV",
+                "WARN: More than one rundir, or sample(s) missing rundir, skipping MULTIQC_SAV",
                 "WARN: No rundir for sample(s): SampleA_02, sampletest_04"
             ]
         ],
-        "timestamp": "2026-03-20T10:51:28.066112656",
+        "timestamp": "2026-03-30T17:48:33.503881186",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.2"
         }
     },
     "NovaSeq6000 data test - checkqc,fastqc,multiqcsav,rundirparser - no rundir": {
@@ -510,17 +518,6 @@
                 }
             },
             [
-                "fastqc",
-                "fastqc/Sample1_01_fastqc.html",
-                "fastqc/Sample1_01_fastqc.zip",
-                "fastqc/Sample23_03_fastqc.html",
-                "fastqc/Sample23_03_fastqc.zip",
-                "fastqc/SampleA_02_fastqc.html",
-                "fastqc/SampleA_02_fastqc.zip",
-                "fastqc/Undetermined_05_fastqc.html",
-                "fastqc/Undetermined_05_fastqc.zip",
-                "fastqc/sampletest_04_fastqc.html",
-                "fastqc/sampletest_04_fastqc.zip",
                 "multiqc",
                 "multiqc/global_report",
                 "multiqc/global_report/multiqc_data",
@@ -839,7 +836,24 @@
                 "multiqc/group_reports/test/multiqc_plots/svg/fastqc_top_overrepresented_sequences_table.svg",
                 "multiqc/group_reports/test/multiqc_report.html",
                 "pipeline_info",
-                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
+                "reports",
+                "reports/fastqc",
+                "reports/fastqc/Sample1_01",
+                "reports/fastqc/Sample1_01/Sample1_01_fastqc.html",
+                "reports/fastqc/Sample1_01/Sample1_01_fastqc.zip",
+                "reports/fastqc/Sample23_03",
+                "reports/fastqc/Sample23_03/Sample23_03_fastqc.html",
+                "reports/fastqc/Sample23_03/Sample23_03_fastqc.zip",
+                "reports/fastqc/SampleA_02",
+                "reports/fastqc/SampleA_02/SampleA_02_fastqc.html",
+                "reports/fastqc/SampleA_02/SampleA_02_fastqc.zip",
+                "reports/fastqc/Undetermined_05",
+                "reports/fastqc/Undetermined_05/Undetermined_05_fastqc.html",
+                "reports/fastqc/Undetermined_05/Undetermined_05_fastqc.zip",
+                "reports/fastqc/sampletest_04",
+                "reports/fastqc/sampletest_04/sampletest_04_fastqc.html",
+                "reports/fastqc/sampletest_04/sampletest_04_fastqc.zip"
             ],
             [
                 "fastqc-status-check-heatmap.txt:md5,7a64380ec42aac56949a2d9a4176d4d9",
@@ -911,10 +925,10 @@
                 "WARN: No samples with rundir found, skipping RUNDIRPARSER"
             ]
         ],
-        "timestamp": "2026-03-20T10:51:58.772482975",
+        "timestamp": "2026-03-26T13:43:29.02773947",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.0"
         }
     }
 }
