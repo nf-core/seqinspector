@@ -1,7 +1,7 @@
 {
     "PromethION data test": {
         "content": [
-            5,
+            6,
             {
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -13,7 +13,7 @@
                     "seqfu": "1.22.3"
                 },
                 "SEQUALI": {
-                    "sequali": "0.12.0"
+                    "sequali": "1.0.2"
                 },
                 "TOULLIGQC": {
                     "toulligqc": "2.8.4"
@@ -46,6 +46,7 @@
                 "multiqc/global_report/multiqc_data/multiqc_general_stats.txt",
                 "multiqc/global_report/multiqc_data/multiqc_seqfu_mqc.txt",
                 "multiqc/global_report/multiqc_data/multiqc_seqfu_stats.txt",
+                "multiqc/global_report/multiqc_data/multiqc_sequali.txt",
                 "multiqc/global_report/multiqc_data/multiqc_software_versions.txt",
                 "multiqc/global_report/multiqc_data/multiqc_sources.txt",
                 "multiqc/global_report/multiqc_data/seqfu-stats-counts-barplot_Bases.txt",
@@ -57,6 +58,14 @@
                 "multiqc/global_report/multiqc_data/seqfu-stats-lengths-barplot_N75.txt",
                 "multiqc/global_report/multiqc_data/seqfu-stats-lengths-barplot_N90.txt",
                 "multiqc/global_report/multiqc_data/seqfu-stats-lengths-barplot_auN.txt",
+                "multiqc/global_report/multiqc_data/sequali_adapter_content_plot.txt",
+                "multiqc/global_report/multiqc_data/sequali_per_position_gc_content_plot.txt",
+                "multiqc/global_report/multiqc_data/sequali_per_position_quality_plot.txt",
+                "multiqc/global_report/multiqc_data/sequali_per_sequence_gc_content_plot.txt",
+                "multiqc/global_report/multiqc_data/sequali_per_sequence_quality_scores_plot.txt",
+                "multiqc/global_report/multiqc_data/sequali_sequence_counts_plot.txt",
+                "multiqc/global_report/multiqc_data/sequali_sequence_duplication_levels_plot.txt",
+                "multiqc/global_report/multiqc_data/sequali_sequence_length_distribution_plot.txt",
                 "multiqc/global_report/multiqc_plots",
                 "multiqc/global_report/multiqc_plots/pdf",
                 "multiqc/global_report/multiqc_plots/pdf/fastq_screen_plot-cnt.pdf",
@@ -84,6 +93,15 @@
                 "multiqc/global_report/multiqc_plots/pdf/seqfu-stats-lengths-barplot_N90.pdf",
                 "multiqc/global_report/multiqc_plots/pdf/seqfu-stats-lengths-barplot_auN.pdf",
                 "multiqc/global_report/multiqc_plots/pdf/seqfu_mqc.pdf",
+                "multiqc/global_report/multiqc_plots/pdf/sequali_adapter_content_plot.pdf",
+                "multiqc/global_report/multiqc_plots/pdf/sequali_per_position_gc_content_plot.pdf",
+                "multiqc/global_report/multiqc_plots/pdf/sequali_per_position_quality_plot.pdf",
+                "multiqc/global_report/multiqc_plots/pdf/sequali_per_sequence_gc_content_plot.pdf",
+                "multiqc/global_report/multiqc_plots/pdf/sequali_per_sequence_quality_scores_plot.pdf",
+                "multiqc/global_report/multiqc_plots/pdf/sequali_sequence_counts_plot-cnt.pdf",
+                "multiqc/global_report/multiqc_plots/pdf/sequali_sequence_counts_plot-pct.pdf",
+                "multiqc/global_report/multiqc_plots/pdf/sequali_sequence_duplication_levels_plot.pdf",
+                "multiqc/global_report/multiqc_plots/pdf/sequali_sequence_length_distribution_plot.pdf",
                 "multiqc/global_report/multiqc_plots/png",
                 "multiqc/global_report/multiqc_plots/png/fastq_screen_plot-cnt.png",
                 "multiqc/global_report/multiqc_plots/png/fastq_screen_plot-pct.png",
@@ -145,6 +163,15 @@
                 "multiqc/global_report/multiqc_plots/svg/seqfu-stats-lengths-barplot_N90.svg",
                 "multiqc/global_report/multiqc_plots/svg/seqfu-stats-lengths-barplot_auN.svg",
                 "multiqc/global_report/multiqc_plots/svg/seqfu_mqc.svg",
+                "multiqc/global_report/multiqc_plots/svg/sequali_adapter_content_plot.svg",
+                "multiqc/global_report/multiqc_plots/svg/sequali_per_position_gc_content_plot.svg",
+                "multiqc/global_report/multiqc_plots/svg/sequali_per_position_quality_plot.svg",
+                "multiqc/global_report/multiqc_plots/svg/sequali_per_sequence_gc_content_plot.svg",
+                "multiqc/global_report/multiqc_plots/svg/sequali_per_sequence_quality_scores_plot.svg",
+                "multiqc/global_report/multiqc_plots/svg/sequali_sequence_counts_plot-cnt.svg",
+                "multiqc/global_report/multiqc_plots/svg/sequali_sequence_counts_plot-pct.svg",
+                "multiqc/global_report/multiqc_plots/svg/sequali_sequence_duplication_levels_plot.svg",
+                "multiqc/global_report/multiqc_plots/svg/sequali_sequence_length_distribution_plot.svg",
                 "multiqc/global_report/multiqc_report.html",
                 "pipeline_info",
                 "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
@@ -187,11 +214,12 @@
                 "fastqc_sequence_counts_plot.txt:md5,cc83b291e21249f3c4e25d34cc898f0f",
                 "fastqc_sequence_duplication_levels_plot.txt:md5,7b7665c78ca66d3e13b1850701b198dc",
                 "fastqc_sequence_length_distribution_plot.txt:md5,d7bac93b11316846778b9d550f323371",
-                "multiqc_citations.txt:md5,fe17a641bafc0b112bf30f596f1b122e",
+                "multiqc_citations.txt:md5,8d2205650535c2ae6eab60dd0958e4ba",
                 "multiqc_fastq_screen.txt:md5,0ab0d1c4c3e3393afdb50ad0e116e394",
                 "multiqc_fastqc.txt:md5,b71aaffef9767dfe9d83fde0d31a3a1b",
                 "multiqc_seqfu_mqc.txt:md5,9595d608ff5709f2bdec8cb1016416c0",
                 "multiqc_seqfu_stats.txt:md5,9e3d6c5891b544814dbf1ff88b10dc77",
+                "multiqc_sequali.txt:md5,2ba17e93e3d3ba1b98a85e69bd6d60e6",
                 "seqfu-stats-counts-barplot_Bases.txt:md5,229716858b300595574d064555a285ce",
                 "seqfu-stats-counts-barplot_Sequences.txt:md5,0de06efdbb08206fcb824f1c6fc23167",
                 "seqfu-stats-lengths-barplot_Max.txt:md5,36adfb89d74cb301213452a568b0955c",
@@ -201,6 +229,14 @@
                 "seqfu-stats-lengths-barplot_N75.txt:md5,74ce7135a2ccc5146c87940db5d2283d",
                 "seqfu-stats-lengths-barplot_N90.txt:md5,3ec364cd06212d9d7fb74fa437402336",
                 "seqfu-stats-lengths-barplot_auN.txt:md5,1ae8fd20b76179764a5b0868597f367b",
+                "sequali_adapter_content_plot.txt:md5,c0d779325477586932586fee17c97b9e",
+                "sequali_per_position_gc_content_plot.txt:md5,b67abdb5ac496a09ea95a3df109723e0",
+                "sequali_per_position_quality_plot.txt:md5,239a9fe44aac60d777ebd1570eb010b2",
+                "sequali_per_sequence_gc_content_plot.txt:md5,553b277aa6b93b12595d4b348d5939fa",
+                "sequali_per_sequence_quality_scores_plot.txt:md5,9dc9ebb3ecbfdd06190f2e00f08d3f96",
+                "sequali_sequence_counts_plot.txt:md5,cc83b291e21249f3c4e25d34cc898f0f",
+                "sequali_sequence_duplication_levels_plot.txt:md5,901d2b9e714e9da7d8e0aa424e62c950",
+                "sequali_sequence_length_distribution_plot.txt:md5,2fee022380c46ff04fd6050bfb9eab71",
                 "hg001_01_screen.png:md5,b9c58e388f18ad11f4c2e29e9b573a5e",
                 "hg001_01_screen.txt:md5,8e53ea043d658a130f4b8ca455e2ba9b",
                 "hg001_01_seqfu.tsv:md5,b133752c897afbb4d8721b911fa117d4",
@@ -209,7 +245,7 @@
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-03-31T12:01:12.037324223",
+        "timestamp": "2026-04-08T16:29:21.54528294",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"
