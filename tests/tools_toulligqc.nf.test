@@ -17,6 +17,17 @@ nextflow_pipeline {
             snapshot_include: 'ToulligQC',
             snapshot: 'stdout,stderr',
         ],
+        [
+            name: "PromethION data test - toulligqc fail - stub",
+            params: [
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/promethion.csv',
+                tools: "toulligqc"
+            ],
+            failure: true,
+            snapshot_include: 'ToulligQC',
+            snapshot: 'stdout,stderr',
+            stub: true,
+        ],
     ]
 
     // Generate tests for each scenario

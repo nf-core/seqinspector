@@ -34,6 +34,25 @@ nextflow_pipeline {
                 tools_bundle: null,
             ],
         ],
+        [
+            name: "NovaSeq6000 data test - fq_lint force success - stub",
+            params: [
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/novaseq6000_wrongpair.csv',
+                continue_with_lint_fail: true,
+                tools: 'fq_lint',
+                tools_bundle: null,
+            ],
+            stub: true,
+        ],
+        [
+            name: "NovaSeq6000 data test - args for fq/lint - stub",
+            params: [
+                fq_lint_args: '--disable-validator P001',
+                tools: 'fq_lint',
+                tools_bundle: null,
+            ],
+            stub: true,
+        ],
     ]
 
     // Generate tests for each scenario

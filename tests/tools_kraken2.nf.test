@@ -26,6 +26,28 @@ nextflow_pipeline {
             snapshot_include: 'Kraken2',
             snapshot: 'stdout,stderr',
         ],
+        [
+            name: "NovaSeq6000 data test - kraken2 - stub",
+            params: [
+                kraken2_db: pipelines_testdata_base_path + 'modules/data/genomics/sarscov2/genome/db/kraken2.tar.gz',
+                kraken_save_uncompressed_db: true,
+                sample_size: 90,
+                tools: 'kraken2',
+                tools_bundle: null,
+            ],
+            stub: true,
+        ],
+        [
+            name: "NovaSeq6000 data test - kraken2 - no_db - stub",
+            params: [
+                tools: 'kraken2',
+                tools_bundle: null,
+            ],
+            failure:true,
+            snapshot_include: 'Kraken2',
+            snapshot: 'stdout,stderr',
+            stub: true,
+        ],
     ]
 
     // Generate tests for each scenario
