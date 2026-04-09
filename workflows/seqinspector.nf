@@ -224,7 +224,7 @@ workflow SEQINSPECTOR {
     //
     // MODULE: SEQUALI
     //
-    
+
     SEQUALI (
         ch_sample.map {
             meta, reads -> [meta, reads]

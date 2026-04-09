@@ -151,7 +151,7 @@ For further reading and documentation see the [FastQC help pages](http://www.bio
 <details markdown="1">
 <summary>Output files</summary>
 
-- `sequali/`
+- `reports/sequali/[sample_id]/`
   - `*.html`: Sequali report containing quality metrics.
   - `*.json`: JSON containing the Sequali data, used for generating MultiQC report.
 
