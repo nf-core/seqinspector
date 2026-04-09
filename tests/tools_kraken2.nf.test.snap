@@ -6,14 +6,15 @@
             ],
             "No stable content",
             "No BAM files",
+            "No warnings",
             [
                 "No kraken2_db was provided, but Kraken2 was requested"
             ]
         ],
-        "timestamp": "2026-03-23T13:36:27.214583547",
+        "timestamp": "2026-04-09T15:07:02.581862652",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.03.0"
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
         }
     },
     "NovaSeq6000 data test - kraken2": {

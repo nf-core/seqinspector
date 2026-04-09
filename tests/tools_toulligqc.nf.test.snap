@@ -24,13 +24,14 @@
             ],
             "No stable content",
             "No BAM files",
+            "No warnings",
             [
                 "ToulligQC is not compatible with the 'emulate_amd64' profile. Please remove ToulligQC from the list of tools if you wish to run seqinspector on this architecture."
             ]
         ],
-        "timestamp": "2026-03-21T12:55:29.14579256",
+        "timestamp": "2026-04-09T15:08:38.085512222",
         "meta": {
-            "nf-test": "0.9.4",
+            "nf-test": "0.9.5",
             "nextflow": "25.10.4"
         }
     }
