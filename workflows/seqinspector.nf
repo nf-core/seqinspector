@@ -224,14 +224,12 @@ workflow SEQINSPECTOR {
     //
     // MODULE: SEQUALI
     //
-    if ("sequali" in tools) {
-        SEQUALI (
-            ch_sample.map {
-                meta, reads -> [meta, reads]
-            }
-        )
-        ch_multiqc_files = ch_multiqc_files.mix(SEQUALI.out.json)
-    }
+    
+    SEQUALI (
+        ch_sample.map {
+            meta, reads -> [meta, reads]
+        }.filter { 'sequali' in tools }
+    )
 
     // STEP 05: FASTQSCREEN
 

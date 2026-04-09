@@ -162,7 +162,7 @@ output {
                 ? "reports/kraken2/${tool}/${meta.id}/"
                 : tool == 'picard'
                     ? "reports/${process.tokenize(':').last().toLowerCase()}/${meta.id}/"
-                    : tool == 'rundirparser' || tool == 'seqfu'
+                    : tool == 'rundirparser' || tool == 'seqfu' | tool == "sequali"
                         ? "reports/${tool}/${meta.id}/${meta.id}_${file.name}"
                         : "reports/${tool}/${meta.id}/")
         }

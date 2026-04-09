@@ -13,8 +13,8 @@ process SEQUALI {
 
     output:
 
-    tuple val(meta), path("*.html"), emit: html
-    tuple val(meta), path("*.json"), emit: json
+    tuple val(meta), val("${task.process}"), val('sequali'), path("*.html"), emit: html, topic: multiqc_files
+    tuple val(meta), val("${task.process}"), val('sequali'), path("*.json"), emit: json, topic: multiqc_files
     tuple val("${task.process}"), val('sequali'), eval('sequali --version |& sed \'1!d ; s/sequali //\''), emit: versions_sequali, topic: versions
 
     when:
