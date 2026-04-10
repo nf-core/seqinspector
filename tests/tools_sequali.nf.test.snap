@@ -246,7 +246,24 @@
                 "multiqc/group_reports/test/multiqc_plots/svg/sequali_sequence_length_distribution_plot.svg",
                 "multiqc/group_reports/test/multiqc_report.html",
                 "pipeline_info",
-                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
+                "reports",
+                "reports/sequali",
+                "reports/sequali/Sample1_01",
+                "reports/sequali/Sample1_01/Sample1_01.html",
+                "reports/sequali/Sample1_01/Sample1_01.json",
+                "reports/sequali/Sample23_03",
+                "reports/sequali/Sample23_03/Sample23_03.html",
+                "reports/sequali/Sample23_03/Sample23_03.json",
+                "reports/sequali/SampleA_02",
+                "reports/sequali/SampleA_02/SampleA_02.html",
+                "reports/sequali/SampleA_02/SampleA_02.json",
+                "reports/sequali/Undetermined_05",
+                "reports/sequali/Undetermined_05/Undetermined_05.html",
+                "reports/sequali/Undetermined_05/Undetermined_05.json",
+                "reports/sequali/sampletest_04",
+                "reports/sequali/sampletest_04/sampletest_04.html",
+                "reports/sequali/sampletest_04/sampletest_04.json"
             ],
             [
                 "multiqc_citations.txt:md5,5b5a3757376e57d536919d48a40631c1",
@@ -298,7 +315,7 @@
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-04-09T09:25:11.585245835",
+        "timestamp": "2026-04-09T15:50:04.572519072",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"

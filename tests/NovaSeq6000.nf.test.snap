@@ -1136,7 +1136,23 @@
                 "reports/seqfu/Undetermined_05/Undetermined_05_seqfu_mqc.txt",
                 "reports/seqfu/sampletest_04",
                 "reports/seqfu/sampletest_04/sampletest_04_seqfu.tsv",
-                "reports/seqfu/sampletest_04/sampletest_04_seqfu_mqc.txt"
+                "reports/seqfu/sampletest_04/sampletest_04_seqfu_mqc.txt",
+                "reports/sequali",
+                "reports/sequali/Sample1_01",
+                "reports/sequali/Sample1_01/Sample1_01.html",
+                "reports/sequali/Sample1_01/Sample1_01.json",
+                "reports/sequali/Sample23_03",
+                "reports/sequali/Sample23_03/Sample23_03.html",
+                "reports/sequali/Sample23_03/Sample23_03.json",
+                "reports/sequali/SampleA_02",
+                "reports/sequali/SampleA_02/SampleA_02.html",
+                "reports/sequali/SampleA_02/SampleA_02.json",
+                "reports/sequali/Undetermined_05",
+                "reports/sequali/Undetermined_05/Undetermined_05.html",
+                "reports/sequali/Undetermined_05/Undetermined_05.json",
+                "reports/sequali/sampletest_04",
+                "reports/sequali/sampletest_04/sampletest_04.html",
+                "reports/sequali/sampletest_04/sampletest_04.json"
             ],
             [
                 "fastq_screen_plot.txt:md5,990122d48fa4c1a170107a1ba034e4cf",
@@ -1431,7 +1447,7 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-04-09T09:17:45.953236564",
+        "timestamp": "2026-04-09T15:46:36.203676523",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"

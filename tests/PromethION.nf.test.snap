@@ -189,6 +189,10 @@
                 "reports/seqfu/hg001_01",
                 "reports/seqfu/hg001_01/hg001_01_seqfu.tsv",
                 "reports/seqfu/hg001_01/hg001_01_seqfu_mqc.txt",
+                "reports/sequali",
+                "reports/sequali/hg001_01",
+                "reports/sequali/hg001_01/hg001_01.html",
+                "reports/sequali/hg001_01/hg001_01.json",
                 "reports/toulligqc",
                 "reports/toulligqc/hg001_01",
                 "reports/toulligqc/hg001_01/images",
@@ -245,7 +249,7 @@
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-04-08T16:29:21.54528294",
+        "timestamp": "2026-04-09T15:48:10.887017189",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"
