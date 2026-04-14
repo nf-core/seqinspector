@@ -18,6 +18,7 @@ include { RUNDIRPARSER                 } from '../modules/local/rundirparser'
 include { SAMTOOLS_INDEX               } from '../modules/nf-core/samtools/index'
 include { SEQFU_STATS                  } from '../modules/nf-core/seqfu/stats'
 include { SEQTK_SAMPLE                 } from '../modules/nf-core/seqtk/sample'
+include { SEQUALI                      } from '../modules/nf-core/sequali'
 include { TOULLIGQC                    } from '../modules/nf-core/toulligqc'
 
 // subworkflow
@@ -220,7 +221,11 @@ workflow SEQINSPECTOR {
         save_merged,
     )
 
-    // ch_trimmed = 'fastp' in tools ? FASTP.out.reads : ch_sample
+    //
+    // MODULE: SEQUALI
+    //
+
+    SEQUALI(ch_sample.filter { 'sequali' in tools })
 
     // STEP 05: FASTQSCREEN
 

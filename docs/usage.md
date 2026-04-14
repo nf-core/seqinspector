@@ -138,6 +138,7 @@ Currently, the following tools are run as default:
 - picard_collectmultiplemetrics
 - rundirparser
 - seqfu_stats
+- sequali
 
 #### Choose specific tools
 

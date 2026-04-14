@@ -58,6 +58,10 @@
 
 - [Seqtk](https://github.com/lh3/seqtk)
 
+- [Sequali](https://sequali.readthedocs.io/en/latest/)
+
+  > Vorderman R. Sequali: efficient and comprehensive quality control of short- and long-read sequencing data. Bioinformatics Advances, 2025. doi: 10.1093/bioadv/vbaf010
+
 - [ToulligQC](https://github.com/GenomiqueENS/toulligQ)
 
 ## Software packaging/containerisation tools
