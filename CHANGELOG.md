@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Added`
 
 - [#109](https://github.com/nf-core/seqinspector/pull/109) Adds ToulligQC module for long read QC
+- [#134](https://github.com/nf-core/seqinspector/pull/134) Added sequali module.
 - [#202](https://github.com/nf-core/seqinspector/pull/202) Added support for fasta fai file as input (via params or igenomes) for the pipeline
 - [#204](https://github.com/nf-core/seqinspector/pull/204) Added Fastp module
 - [#206](https://github.com/nf-core/seqinspector/pull/206) Added FASTQE for more comprehensive QC of FASTQ files
@@ -15,7 +16,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#209](https://github.com/nf-core/seqinspector/pull/209) Add MULTIQC SAV support
 - [#210](https://github.com/nf-core/seqinspector/pull/210) Added kraken2 subworkflow
 - [#212](https://github.com/nf-core/seqinspector/pull/212) Add CheckQC module
-- [#134](https://github.com/nf-core/seqinspector/pull/134) Added sequali module.
 - [#218](https://github.com/nf-core/seqinspector/pull/218) kraken2 is run on subsampled data if available
 
 ### `Fixed`
