@@ -51,20 +51,20 @@
                 "tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to run",
-                    "pattern": "^((checkqc|fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|multiqcsav|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats|toulligqc)?,?)*(?<!,)$",
+                    "pattern": "^((checkqc|fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|multiqcsav|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats|sequali|toulligqc)?,?)*(?<!,)$",
                     "fa_icon": "fas fa-sort-amount-asc"
                 },
                 "tools_bundle": {
                     "type": "string",
                     "description": "Select some default setup for the tools to be run, tools can still be used to add tools",
-                    "pattern": "^((all|bam|fastq|default|illumina|minimal|ont)?,?)*(?<!,)$",
+                    "pattern": "^((all|bam|fastq|default|illumina|minimal|ont|null)?,?)*(?<!,)$",
                     "fa_icon": "fas fa-window-restore",
                     "default": "default"
                 },
                 "skip_tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to skip - overrides any other means of tools selection",
-                    "pattern": "^((checkqc|fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|multiqcsav|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats|toulligqc)?,?)*(?<!,)$",
+                    "pattern": "^((checkqc|fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|multiqcsav|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats|sequali|toulligqc)?,?)*(?<!,)$",
                     "fa_icon": "fas fa-window-close "
                 }
             }

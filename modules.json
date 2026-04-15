@@ -116,6 +116,12 @@
                         "git_sha": "a46713779030a5f508117080cbf4b693dd4c6e33",
                         "installed_by": ["modules"]
                     },
+                    "sequali": {
+                        "branch": "master",
+                        "git_sha": "f37e31e7af4c75dc51c5def63afa521caa941cd6",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/sequali/sequali.diff"
+                    },
                     "toulligqc": {
                         "branch": "master",
                         "git_sha": "d9137377f4dd6246242829772eb1949b96de1ef0",
