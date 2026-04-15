@@ -1,4 +1,75 @@
 {
+    "NovaSeq6000 data test - sequali - stub": {
+        "content": [
+            10,
+            {
+                "SEQUALI": {
+                    "sequali": "1.0.2"
+                }
+            },
+            [
+                "multiqc",
+                "multiqc/global_report",
+                "multiqc/global_report/multiqc_data",
+                "multiqc/global_report/multiqc_data/.stub",
+                "multiqc/global_report/multiqc_plots",
+                "multiqc/global_report/multiqc_plots/.stub",
+                "multiqc/global_report/multiqc_report.html",
+                "multiqc/group_reports",
+                "multiqc/group_reports/group1",
+                "multiqc/group_reports/group1/multiqc_data",
+                "multiqc/group_reports/group1/multiqc_data/.stub",
+                "multiqc/group_reports/group1/multiqc_plots",
+                "multiqc/group_reports/group1/multiqc_plots/.stub",
+                "multiqc/group_reports/group1/multiqc_report.html",
+                "multiqc/group_reports/group2",
+                "multiqc/group_reports/group2/multiqc_data",
+                "multiqc/group_reports/group2/multiqc_data/.stub",
+                "multiqc/group_reports/group2/multiqc_plots",
+                "multiqc/group_reports/group2/multiqc_plots/.stub",
+                "multiqc/group_reports/group2/multiqc_report.html",
+                "multiqc/group_reports/lane1",
+                "multiqc/group_reports/lane1/multiqc_data",
+                "multiqc/group_reports/lane1/multiqc_data/.stub",
+                "multiqc/group_reports/lane1/multiqc_plots",
+                "multiqc/group_reports/lane1/multiqc_plots/.stub",
+                "multiqc/group_reports/lane1/multiqc_report.html",
+                "multiqc/group_reports/test",
+                "multiqc/group_reports/test/multiqc_data",
+                "multiqc/group_reports/test/multiqc_data/.stub",
+                "multiqc/group_reports/test/multiqc_plots",
+                "multiqc/group_reports/test/multiqc_plots/.stub",
+                "multiqc/group_reports/test/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
+                "reports",
+                "reports/sequali",
+                "reports/sequali/Sample1_01",
+                "reports/sequali/Sample1_01/Sample1_01.html",
+                "reports/sequali/Sample1_01/Sample1_01.json",
+                "reports/sequali/Sample23_03",
+                "reports/sequali/Sample23_03/Sample23_03.html",
+                "reports/sequali/Sample23_03/Sample23_03.json",
+                "reports/sequali/SampleA_02",
+                "reports/sequali/SampleA_02/SampleA_02.html",
+                "reports/sequali/SampleA_02/SampleA_02.json",
+                "reports/sequali/Undetermined_05",
+                "reports/sequali/Undetermined_05/Undetermined_05.html",
+                "reports/sequali/Undetermined_05/Undetermined_05.json",
+                "reports/sequali/sampletest_04",
+                "reports/sequali/sampletest_04/sampletest_04.html",
+                "reports/sequali/sampletest_04/sampletest_04.json"
+            ],
+            [
+                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
+            ]
+        ],
+        "timestamp": "2026-04-15T18:18:01.020240586",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.2"
+        }
+    },
     "NovaSeq6000 data test - sequali": {
         "content": [
             10,
