@@ -1,4 +1,165 @@
 {
+    "NovaSeq6000 data test - checkqc,fastqc,multiqcsav,rundirparser - missing rundir - stub": {
+        "content": [
+            12,
+            {
+                "CHECKQC": {
+                    "checkqc": "4.1.0"
+                },
+                "FASTQC": {
+                    "fastqc": "0.12.1"
+                },
+                "RUNDIRPARSER": {
+                    "PyYAML": "6.0.2",
+                    "Python": "3.13.2"
+                }
+            },
+            [
+                "multiqc",
+                "multiqc/global_report",
+                "multiqc/global_report/multiqc_data",
+                "multiqc/global_report/multiqc_data/.stub",
+                "multiqc/global_report/multiqc_plots",
+                "multiqc/global_report/multiqc_plots/.stub",
+                "multiqc/global_report/multiqc_report.html",
+                "multiqc/group_reports",
+                "multiqc/group_reports/group1",
+                "multiqc/group_reports/group1/multiqc_data",
+                "multiqc/group_reports/group1/multiqc_data/.stub",
+                "multiqc/group_reports/group1/multiqc_plots",
+                "multiqc/group_reports/group1/multiqc_plots/.stub",
+                "multiqc/group_reports/group1/multiqc_report.html",
+                "multiqc/group_reports/group2",
+                "multiqc/group_reports/group2/multiqc_data",
+                "multiqc/group_reports/group2/multiqc_data/.stub",
+                "multiqc/group_reports/group2/multiqc_plots",
+                "multiqc/group_reports/group2/multiqc_plots/.stub",
+                "multiqc/group_reports/group2/multiqc_report.html",
+                "multiqc/group_reports/lane1",
+                "multiqc/group_reports/lane1/multiqc_data",
+                "multiqc/group_reports/lane1/multiqc_data/.stub",
+                "multiqc/group_reports/lane1/multiqc_plots",
+                "multiqc/group_reports/lane1/multiqc_plots/.stub",
+                "multiqc/group_reports/lane1/multiqc_report.html",
+                "multiqc/group_reports/test",
+                "multiqc/group_reports/test/multiqc_data",
+                "multiqc/group_reports/test/multiqc_data/.stub",
+                "multiqc/group_reports/test/multiqc_plots",
+                "multiqc/group_reports/test/multiqc_plots/.stub",
+                "multiqc/group_reports/test/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
+                "reports",
+                "reports/checkqc",
+                "reports/checkqc/200624_A00834_0183_BHMTFYDRXX",
+                "reports/checkqc/200624_A00834_0183_BHMTFYDRXX/checkqc_report.json",
+                "reports/fastqc",
+                "reports/fastqc/Sample1_01",
+                "reports/fastqc/Sample1_01/Sample1_01.html",
+                "reports/fastqc/Sample1_01/Sample1_01.zip",
+                "reports/fastqc/Sample23_03",
+                "reports/fastqc/Sample23_03/Sample23_03.html",
+                "reports/fastqc/Sample23_03/Sample23_03.zip",
+                "reports/fastqc/SampleA_02",
+                "reports/fastqc/SampleA_02/SampleA_02.html",
+                "reports/fastqc/SampleA_02/SampleA_02.zip",
+                "reports/fastqc/Undetermined_05",
+                "reports/fastqc/Undetermined_05/Undetermined_05.html",
+                "reports/fastqc/Undetermined_05/Undetermined_05.zip",
+                "reports/fastqc/sampletest_04",
+                "reports/fastqc/sampletest_04/sampletest_04.html",
+                "reports/fastqc/sampletest_04/sampletest_04.zip",
+                "reports/rundirparser",
+                "reports/rundirparser/200624_A00834_0183_BHMTFYDRXX",
+                "reports/rundirparser/200624_A00834_0183_BHMTFYDRXX/200624_A00834_0183_BHMTFYDRXX_illumina_mqc.yml"
+            ],
+            [
+                "WARN: More than one rundir, or sample(s) missing rundir, skipping MULTIQC_SAV",
+                "WARN: No rundir for sample(s): SampleA_02, sampletest_04",
+                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
+            ]
+        ],
+        "timestamp": "2026-04-09T14:02:10.8295216",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
+        }
+    },
+    "NovaSeq6000 data test - checkqc,fastqc,multiqcsav,rundirparser - no rundir - stub": {
+        "content": [
+            10,
+            {
+                "FASTQC": {
+                    "fastqc": "0.12.1"
+                }
+            },
+            [
+                "multiqc",
+                "multiqc/global_report",
+                "multiqc/global_report/multiqc_data",
+                "multiqc/global_report/multiqc_data/.stub",
+                "multiqc/global_report/multiqc_plots",
+                "multiqc/global_report/multiqc_plots/.stub",
+                "multiqc/global_report/multiqc_report.html",
+                "multiqc/group_reports",
+                "multiqc/group_reports/group1",
+                "multiqc/group_reports/group1/multiqc_data",
+                "multiqc/group_reports/group1/multiqc_data/.stub",
+                "multiqc/group_reports/group1/multiqc_plots",
+                "multiqc/group_reports/group1/multiqc_plots/.stub",
+                "multiqc/group_reports/group1/multiqc_report.html",
+                "multiqc/group_reports/group2",
+                "multiqc/group_reports/group2/multiqc_data",
+                "multiqc/group_reports/group2/multiqc_data/.stub",
+                "multiqc/group_reports/group2/multiqc_plots",
+                "multiqc/group_reports/group2/multiqc_plots/.stub",
+                "multiqc/group_reports/group2/multiqc_report.html",
+                "multiqc/group_reports/lane1",
+                "multiqc/group_reports/lane1/multiqc_data",
+                "multiqc/group_reports/lane1/multiqc_data/.stub",
+                "multiqc/group_reports/lane1/multiqc_plots",
+                "multiqc/group_reports/lane1/multiqc_plots/.stub",
+                "multiqc/group_reports/lane1/multiqc_report.html",
+                "multiqc/group_reports/test",
+                "multiqc/group_reports/test/multiqc_data",
+                "multiqc/group_reports/test/multiqc_data/.stub",
+                "multiqc/group_reports/test/multiqc_plots",
+                "multiqc/group_reports/test/multiqc_plots/.stub",
+                "multiqc/group_reports/test/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
+                "reports",
+                "reports/fastqc",
+                "reports/fastqc/Sample1_01",
+                "reports/fastqc/Sample1_01/Sample1_01.html",
+                "reports/fastqc/Sample1_01/Sample1_01.zip",
+                "reports/fastqc/Sample23_03",
+                "reports/fastqc/Sample23_03/Sample23_03.html",
+                "reports/fastqc/Sample23_03/Sample23_03.zip",
+                "reports/fastqc/SampleA_02",
+                "reports/fastqc/SampleA_02/SampleA_02.html",
+                "reports/fastqc/SampleA_02/SampleA_02.zip",
+                "reports/fastqc/Undetermined_05",
+                "reports/fastqc/Undetermined_05/Undetermined_05.html",
+                "reports/fastqc/Undetermined_05/Undetermined_05.zip",
+                "reports/fastqc/sampletest_04",
+                "reports/fastqc/sampletest_04/sampletest_04.html",
+                "reports/fastqc/sampletest_04/sampletest_04.zip"
+            ],
+            [
+                "WARN: No rundir for sample(s): Sample1_01, Sample23_03, SampleA_02, Undetermined_05, sampletest_04",
+                "WARN: No samples with rundir found, skipping CHECKQC",
+                "WARN: No samples with rundir found, skipping MULTIQC_SAV",
+                "WARN: No samples with rundir found, skipping RUNDIRPARSER",
+                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
+            ]
+        ],
+        "timestamp": "2026-04-09T14:02:31.345913418",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
+        }
+    },
     "NovaSeq6000 data test - checkqc,fastqc,multiqcsav,rundirparser - missing rundir": {
         "content": [
             12,

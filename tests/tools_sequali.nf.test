@@ -11,8 +11,16 @@ nextflow_pipeline {
             params: [
                 tools: 'sequali',
                 tools_bundle: null,
-            ]
-        ]
+            ],
+        ],
+        [
+            name: "NovaSeq6000 data test - sequali - stub",
+            params: [
+                tools: 'sequali',
+                tools_bundle: null,
+            ],
+            stub: true,
+        ],
     ]
 
     // Generate tests for each scenario

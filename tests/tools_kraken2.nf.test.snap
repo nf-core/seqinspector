@@ -6,14 +6,15 @@
             ],
             "No stable content",
             "No BAM files",
+            "No warnings",
             [
                 "No kraken2_db was provided, but Kraken2 was requested"
             ]
         ],
-        "timestamp": "2026-03-23T13:36:27.214583547",
+        "timestamp": "2026-04-09T15:07:02.581862652",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.03.0"
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
         }
     },
     "NovaSeq6000 data test - kraken2": {
@@ -549,6 +550,127 @@
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.2"
+        }
+    },
+    "NovaSeq6000 data test - kraken2 - stub": {
+        "content": [
+            22,
+            {
+                "KRAKEN2_KRAKEN2": {
+                    "kraken2": "2.1.6",
+                    "pigz": "2.8"
+                },
+                "KRONA_KTIMPORTTAXONOMY": {
+                    "krona": "2.8.1"
+                },
+                "KRONA_KTUPDATETAXONOMY": {
+                    "krona": "2.8.1"
+                },
+                "SEQTK_SAMPLE": {
+                    "seqtk": "1.4-r122"
+                },
+                "UNTAR_KRAKEN2DB": {
+                    "untar": "1.34"
+                }
+            },
+            [
+                "kraken2_db",
+                "kraken2_db/kraken2_db",
+                "multiqc",
+                "multiqc/global_report",
+                "multiqc/global_report/multiqc_data",
+                "multiqc/global_report/multiqc_data/.stub",
+                "multiqc/global_report/multiqc_plots",
+                "multiqc/global_report/multiqc_plots/.stub",
+                "multiqc/global_report/multiqc_report.html",
+                "multiqc/group_reports",
+                "multiqc/group_reports/group1",
+                "multiqc/group_reports/group1/multiqc_data",
+                "multiqc/group_reports/group1/multiqc_data/.stub",
+                "multiqc/group_reports/group1/multiqc_plots",
+                "multiqc/group_reports/group1/multiqc_plots/.stub",
+                "multiqc/group_reports/group1/multiqc_report.html",
+                "multiqc/group_reports/group2",
+                "multiqc/group_reports/group2/multiqc_data",
+                "multiqc/group_reports/group2/multiqc_data/.stub",
+                "multiqc/group_reports/group2/multiqc_plots",
+                "multiqc/group_reports/group2/multiqc_plots/.stub",
+                "multiqc/group_reports/group2/multiqc_report.html",
+                "multiqc/group_reports/lane1",
+                "multiqc/group_reports/lane1/multiqc_data",
+                "multiqc/group_reports/lane1/multiqc_data/.stub",
+                "multiqc/group_reports/lane1/multiqc_plots",
+                "multiqc/group_reports/lane1/multiqc_plots/.stub",
+                "multiqc/group_reports/lane1/multiqc_report.html",
+                "multiqc/group_reports/test",
+                "multiqc/group_reports/test/multiqc_data",
+                "multiqc/group_reports/test/multiqc_data/.stub",
+                "multiqc/group_reports/test/multiqc_plots",
+                "multiqc/group_reports/test/multiqc_plots/.stub",
+                "multiqc/group_reports/test/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
+                "reports",
+                "reports/kraken2",
+                "reports/kraken2/Sample1_01",
+                "reports/kraken2/Sample1_01/Sample1_01.kraken2.report.txt",
+                "reports/kraken2/Sample23_03",
+                "reports/kraken2/Sample23_03/Sample23_03.kraken2.report.txt",
+                "reports/kraken2/SampleA_02",
+                "reports/kraken2/SampleA_02/SampleA_02.kraken2.report.txt",
+                "reports/kraken2/Undetermined_05",
+                "reports/kraken2/Undetermined_05/Undetermined_05.kraken2.report.txt",
+                "reports/kraken2/krona",
+                "reports/kraken2/krona/Sample1_01",
+                "reports/kraken2/krona/Sample1_01/Sample1_01.html",
+                "reports/kraken2/krona/Sample23_03",
+                "reports/kraken2/krona/Sample23_03/Sample23_03.html",
+                "reports/kraken2/krona/SampleA_02",
+                "reports/kraken2/krona/SampleA_02/SampleA_02.html",
+                "reports/kraken2/krona/Undetermined_05",
+                "reports/kraken2/krona/Undetermined_05/Undetermined_05.html",
+                "reports/kraken2/krona/sampletest_04",
+                "reports/kraken2/krona/sampletest_04/sampletest_04.html",
+                "reports/kraken2/sampletest_04",
+                "reports/kraken2/sampletest_04/sampletest_04.kraken2.report.txt",
+                "subsampled",
+                "subsampled/Sample1_01",
+                "subsampled/Sample1_01/Sample1_01.fastq.gz",
+                "subsampled/Sample23_03",
+                "subsampled/Sample23_03/Sample23_03.fastq.gz",
+                "subsampled/SampleA_02",
+                "subsampled/SampleA_02/SampleA_02.fastq.gz",
+                "subsampled/Undetermined_05",
+                "subsampled/Undetermined_05/Undetermined_05.fastq.gz",
+                "subsampled/sampletest_04",
+                "subsampled/sampletest_04/sampletest_04.fastq.gz"
+            ],
+            [
+                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
+            ]
+        ],
+        "timestamp": "2026-04-09T14:09:00.853191657",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
+        }
+    },
+    "NovaSeq6000 data test - kraken2 - no_db - stub": {
+        "content": [
+            [
+                "pipeline_info"
+            ],
+            [
+                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
+            ],
+            [
+                "No kraken2_db was provided, but Kraken2 was requested"
+            ]
+        ],
+        "timestamp": "2026-04-09T14:09:27.312230993",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
         }
     }
 }

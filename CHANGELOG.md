@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#210](https://github.com/nf-core/seqinspector/pull/210) Added kraken2 subworkflow
 - [#212](https://github.com/nf-core/seqinspector/pull/212) Add CheckQC module
 - [#218](https://github.com/nf-core/seqinspector/pull/218) kraken2 is run on subsampled data if available
+- [#226](https://github.com/nf-core/seqinspector/pull/226) Add pipeline level stub tests
 
 ### `Fixed`
 
