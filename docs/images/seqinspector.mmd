@@ -38,6 +38,7 @@ graph LR
         kraken2[Kraken2]
         krona[Krona]
         picard[Picard]
+        sequali[Sequali]
         seqfu[SeqFu Stats]
         seqtk[SeqTK]
         toulligqc[ToulligQC]
@@ -52,6 +53,7 @@ graph LR
         seqtk -->|fastq_files| fastqscreen
         seqtk -->|fastq_files| kraken2
         seqtk -->|fastq_files| seqfu
+        seqtk -->|fastq_files| sequali
         seqtk -->|fastq_files| toulligqc
 
         bwamem2 -->|fastq_files| picard
@@ -71,6 +73,7 @@ graph LR
         picard -->|fastq_files| multiqc
         rundirparser -->|run_folder| multiqc
         seqfu -->|fastq_files| multiqc
+        sequali -->|fastq_files| multiqc
         toulligqc -->|fastq_files| multiqc
         multiqc -->|fastq_files| report_per_tag
         multiqc -->|fastq_files,run_folder| report_global
