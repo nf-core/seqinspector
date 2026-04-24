@@ -7,130 +7,130 @@
                 "nf-core": {
                     "bwamem2/index": {
                         "branch": "master",
-                        "git_sha": "5dd46a36fca68d6ad1a6b22ec47adc8c6863717d",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"]
                     },
                     "bwamem2/mem": {
                         "branch": "master",
-                        "git_sha": "8325a8155a77a336a613a504b8e4d6cea7a2344a",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"]
                     },
                     "checkqc": {
                         "branch": "master",
-                        "git_sha": "389ed64090aa4594276fb3d53923432c7728c5b4",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/checkqc/checkqc.diff"
                     },
                     "fastp": {
                         "branch": "master",
-                        "git_sha": "1fb5a73bce8e4ac7079b0a9461b23d11e877ad14",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/fastp/fastp.diff"
                     },
                     "fastqc": {
                         "branch": "master",
-                        "git_sha": "79b36b51048048374b642289bfe9e591ef56fe05",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/fastqc/fastqc.diff"
                     },
                     "fastqe": {
                         "branch": "master",
-                        "git_sha": "c7b8a51247112b76b89dd87b9dbe081085113590",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/fastqe/fastqe.diff"
                     },
                     "fastqscreen/fastqscreen": {
                         "branch": "master",
-                        "git_sha": "ab2e7b785ee4fa6d108472862edbf983cea7db49",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/fastqscreen/fastqscreen/fastqscreen-fastqscreen.diff"
                     },
                     "fq/lint": {
                         "branch": "master",
-                        "git_sha": "14b8e6cceb84242e16094fe979762e05bc8de526",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/fq/lint/fq-lint.diff"
                     },
                     "kraken2/kraken2": {
                         "branch": "master",
-                        "git_sha": "71a39f3598935d64ffd65f0960e4d2d4a42ab778",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/kraken2/kraken2/kraken2-kraken2.diff"
                     },
                     "krona/ktimporttaxonomy": {
                         "branch": "master",
-                        "git_sha": "939bb089705e5995ef8a158d48f6951314e95584",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/krona/ktimporttaxonomy/krona-ktimporttaxonomy.diff"
                     },
                     "krona/ktupdatetaxonomy": {
                         "branch": "master",
-                        "git_sha": "939bb089705e5995ef8a158d48f6951314e95584",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"]
                     },
                     "multiqc": {
                         "branch": "master",
-                        "git_sha": "79b36b51048048374b642289bfe9e591ef56fe05",
+                        "git_sha": "008f9d3e61209bf995edac3ba531f54e269e1215",
                         "installed_by": ["modules"]
                     },
                     "multiqcsav": {
                         "branch": "master",
-                        "git_sha": "121bbc727ecf39b014b0055850dc2ce914e1d1e5",
+                        "git_sha": "008f9d3e61209bf995edac3ba531f54e269e1215",
                         "installed_by": ["modules"]
                     },
                     "picard/collecthsmetrics": {
                         "branch": "master",
-                        "git_sha": "a631e12055f6c23ba2c942d3902b3ed1b9eed859",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/picard/collecthsmetrics/picard-collecthsmetrics.diff"
                     },
                     "picard/collectmultiplemetrics": {
                         "branch": "master",
-                        "git_sha": "a631e12055f6c23ba2c942d3902b3ed1b9eed859",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/picard/collectmultiplemetrics/picard-collectmultiplemetrics.diff"
                     },
                     "picard/createsequencedictionary": {
                         "branch": "master",
-                        "git_sha": "a631e12055f6c23ba2c942d3902b3ed1b9eed859",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"]
                     },
                     "samtools/faidx": {
                         "branch": "master",
-                        "git_sha": "156feda0cb6589cd29c04902004fa3b53bc00205",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"]
                     },
                     "samtools/index": {
                         "branch": "master",
-                        "git_sha": "156feda0cb6589cd29c04902004fa3b53bc00205",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"]
                     },
                     "seqfu/stats": {
                         "branch": "master",
-                        "git_sha": "6b81c03dc4465ac9351b293dc6caada2a5e7556c",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/seqfu/stats/seqfu-stats.diff"
                     },
                     "seqtk/sample": {
                         "branch": "master",
-                        "git_sha": "a46713779030a5f508117080cbf4b693dd4c6e33",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"]
                     },
                     "sequali": {
                         "branch": "master",
-                        "git_sha": "f37e31e7af4c75dc51c5def63afa521caa941cd6",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/sequali/sequali.diff"
                     },
                     "toulligqc": {
                         "branch": "master",
-                        "git_sha": "d9137377f4dd6246242829772eb1949b96de1ef0",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/toulligqc/toulligqc.diff"
                     },
                     "untar": {
                         "branch": "master",
-                        "git_sha": "447f7bc0fa41dfc2400c8cad4c0291880dc060cf",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"]
                     }
                 }
@@ -144,7 +144,7 @@
                     },
                     "utils_nfcore_pipeline": {
                         "branch": "master",
-                        "git_sha": "f0b535b3ae20080f8db03dd5388876ad1ec29d70",
+                        "git_sha": "a3fb7351b1fdb2b1de282b765816bbea190e86a8",
                         "installed_by": ["subworkflows"]
                     },
                     "utils_nfschema_plugin": {
