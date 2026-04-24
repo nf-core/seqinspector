@@ -1,4 +1,6 @@
 Changes in component 'nf-core/sequali'
+'modules/nf-core/sequali/meta.yml' is unchanged
+'modules/nf-core/sequali/environment.yml' is unchanged
 Changes in 'sequali/main.nf':
 --- modules/nf-core/sequali/main.nf
 +++ modules/nf-core/sequali/main.nf
@@ -14,8 +16,6 @@ Changes in 'sequali/main.nf':
  
      when:
 
-'modules/nf-core/sequali/meta.yml' is unchanged
-'modules/nf-core/sequali/environment.yml' is unchanged
-'modules/nf-core/sequali/tests/main.nf.test.snap' is unchanged
 'modules/nf-core/sequali/tests/main.nf.test' is unchanged
+'modules/nf-core/sequali/tests/main.nf.test.snap' is unchanged
 ************************************************************
