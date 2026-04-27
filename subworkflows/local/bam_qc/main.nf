@@ -17,7 +17,20 @@ workflow BAM_QC {
 
     main:
 
-    ch_hsmetrics_in = ch_bam_bai.combine(ch_bait_intervals).combine(ch_target_intervals)
+    // Fork ch_bam_bai into two named branches so both downstream consumers
+    // receive every emission. Without this, the queue channel is
+    // distributed (rather than broadcast) between the .combine() operator
+    // feeding CollectHsMetrics and the direct process input feeding
+    // CollectMultipleMetrics, causing some samples to be silently dropped
+    // from one of the two paths.
+    ch_bam_bai_branched = ch_bam_bai.multiMap { meta, bam, bai ->
+        for_hsmetrics:    tuple(meta, bam, bai)
+        for_multimetrics: tuple(meta, bam, bai)
+    }
+
+    ch_hsmetrics_in = ch_bam_bai_branched.for_hsmetrics
+        .combine(ch_bait_intervals)
+        .combine(ch_target_intervals)
 
     PICARD_COLLECTHSMETRICS(
         ch_hsmetrics_in.filter { ("picard_collecthsmetrics" in tools) },
@@ -28,7 +41,7 @@ workflow BAM_QC {
     )
 
     PICARD_COLLECTMULTIPLEMETRICS(
-        ch_bam_bai.filter { ("picard_collectmultiplemetrics" in tools) },
+        ch_bam_bai_branched.for_multimetrics.filter { ("picard_collectmultiplemetrics" in tools) },
         ch_reference_fasta,
         ch_reference_fai,
     )

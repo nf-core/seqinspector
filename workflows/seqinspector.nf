@@ -290,8 +290,8 @@ workflow SEQINSPECTOR {
         bam_bai,
         fasta,
         fai,
-        bait_intervals ? channel.fromPath(bait_intervals).collect() : channel.empty(),
-        target_intervals ? channel.fromPath(target_intervals).collect() : channel.empty(),
+        bait_intervals ? channel.fromPath(bait_intervals).first() : channel.empty(),
+        target_intervals ? channel.fromPath(target_intervals).first() : channel.empty(),
         dict,
         tools,
     )
