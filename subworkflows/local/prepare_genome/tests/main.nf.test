@@ -1,0 +1,104 @@
+nextflow_workflow {
+
+    name "Test Workflow PREPARE_GENOME"
+    script "subworkflows/local/prepare_genome/main.nf"
+    workflow "PREPARE_GENOME"
+    tag 'subworkflows'
+    tag 'prepare_genome'
+
+    test("[fasta, [], [], []] - no picard") {
+        when {
+            workflow {
+                """
+                input[0] = file(params.pipelines_testdata_base_path + 'raredisease/reference/reference.fasta', checkIfExists: true)
+                input[1] = null
+                input[2] = null
+                input[3] = null
+                input[4] = 'genome'
+                input[5] = ''
+                """
+            }
+        }
+
+        then {
+            assert workflow.success
+            assert snapshot(sanitizeOutput(workflow.out).collectEntries { key, val ->
+                if (!val) {
+                    return null
+                }
+                else if (key == "bwamem2") {
+                    return [key, val.collect { [path(it[1]).list().collect { it }] }]
+                }
+                else if (key == "dict" || key == "fasta") {
+                    return [key, val.collect { file(it[1]).name }]
+                }
+                return [key, val.collect { path(it[1]) }]
+            }).match()
+        }
+    }
+
+    test("[fasta, [], dict, []] - picard") {
+        when {
+            workflow {
+                """
+                input[0] = file(params.pipelines_testdata_base_path + 'raredisease/reference/reference.fasta', checkIfExists: true)
+                input[1] = null
+                input[2] = file(params.pipelines_testdata_base_path + 'raredisease/reference/reference.dict', checkIfExists: true)
+                input[3] = null
+                input[4] = 'genome'
+                input[5] = 'picard_collecthsmetrics'
+                """
+            }
+        }
+
+        then {
+            assert workflow.success
+            assert snapshot(sanitizeOutput(workflow.out).collectEntries { key, val ->
+                if (!val) {
+                    return null
+                }
+                else if (key == "bwamem2") {
+                    return [key, val.collect { [path(it[1]).list().collect { it }] }]
+                }
+                else if (key == "dict") {
+                    return null
+                }
+                else if (key == "fasta") {
+                    return [key, val.collect { file(it[1]).name }]
+                }
+                return [key, val.collect { path(it[1]) }]
+            }).match()
+        }
+    }
+
+    test("[fasta, [], [], []] - picard") {
+        when {
+            workflow {
+                """
+                input[0] = file(params.pipelines_testdata_base_path + 'raredisease/reference/reference.fasta', checkIfExists: true)
+                input[1] = null
+                input[2] = null
+                input[3] = null
+                input[4] = 'genome'
+                input[5] = 'picard_collecthsmetrics'
+                """
+            }
+        }
+
+        then {
+            assert workflow.success
+            assert snapshot(sanitizeOutput(workflow.out).collectEntries { key, val ->
+                if (!val) {
+                    return null
+                }
+                else if (key == "bwamem2") {
+                    return [key, val.collect { [path(it[1]).list().collect { it }] }]
+                }
+                else if (key == "dict" || key == "fasta") {
+                    return [key, val.collect { file(it[1]).name }]
+                }
+                return [key, val.collect { path(it[1]) }]
+            }).match()
+        }
+    }
+}

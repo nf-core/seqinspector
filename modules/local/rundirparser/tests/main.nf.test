@@ -1,0 +1,50 @@
+nextflow_process {
+
+    name "Test Process RUNDIRPARSER"
+    script "../main.nf"
+    process "RUNDIRPARSER"
+    topics "multiqc_files"
+    topics "versions"
+
+    test("NovaSeq6000") {
+
+        when {
+            process {
+                """
+                input[0] = [[id:'200624_A00834_0183_BHMTFYDRXX'],
+                    file(params.pipelines_testdata_base_path + 'seqinspector/data/rundir/200624_A00834_0183_BHMTFYDRXX.tar.gz', checkIfExists: true)
+                ]
+                """
+            }
+        }
+        then {
+            assert process.success
+            assert snapshot(
+                topics.multiqc_files,
+                topics.versions
+            ).match()
+        }
+    }
+
+    test("NovaSeq6000 - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [[id:'200624_A00834_0183_BHMTFYDRXX'],
+                    file(params.pipelines_testdata_base_path + 'seqinspector/data/rundir/200624_A00834_0183_BHMTFYDRXX.tar.gz', checkIfExists: true)
+                ]
+                """
+            }
+        }
+        then {
+            assert process.success
+            assert snapshot(
+                topics.multiqc_files,
+                topics.versions
+            ).match()
+        }
+    }
+}

@@ -1,0 +1,64 @@
+{
+    "NovaSeq6000": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "200624_A00834_0183_BHMTFYDRXX"
+                    },
+                    "RUNDIRPARSER",
+                    "rundirparser",
+                    "illumina_mqc.yml:md5,29e05fed18bca0e9a857c992b6d59a40"
+                ]
+            ],
+            [
+                [
+                    "RUNDIRPARSER",
+                    "PyYAML",
+                    "6.0.2"
+                ],
+                [
+                    "RUNDIRPARSER",
+                    "Python",
+                    "3.13.2"
+                ]
+            ]
+        ],
+        "timestamp": "2026-03-26T11:02:20.21808142",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.0"
+        }
+    },
+    "NovaSeq6000 - stub": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "200624_A00834_0183_BHMTFYDRXX"
+                    },
+                    "RUNDIRPARSER",
+                    "rundirparser",
+                    "illumina_mqc.yml:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ]
+            ],
+            [
+                [
+                    "RUNDIRPARSER",
+                    "PyYAML",
+                    "6.0.2"
+                ],
+                [
+                    "RUNDIRPARSER",
+                    "Python",
+                    "3.13.2"
+                ]
+            ]
+        ],
+        "timestamp": "2026-03-26T11:02:30.879406874",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.0"
+        }
+    }
+}
