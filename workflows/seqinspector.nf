@@ -61,8 +61,8 @@ workflow SEQINSPECTOR {
     kraken2_save_readclassifications
 
     main:
-    ch_multiqc_files = channel.empty()
-    ch_multiqc_extra_files = channel.empty()
+    def ch_multiqc_files = channel.empty()
+    def ch_multiqc_extra_files = channel.empty()
 
     // STEP 00: EARLY SKIP FAILING MALFORMED FASTQ FILES
 

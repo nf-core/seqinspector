@@ -1,5 +1,4 @@
 lint:
-  multiqc_config: false
   files_exist:
     - tests/default.nf.test
   files_unchanged:
@@ -7,11 +6,12 @@ lint:
     - assets/nf-core-seqinspector_logo_light.png
     - docs/images/nf-core-seqinspector_logo_dark.png
     - docs/images/nf-core-seqinspector_logo_light.png
+  multiqc_config: false
   nextflow_config:
     - config_defaults:
         - params.fastq_screen_references
   nf_test_content: false
-nf_core_version: 3.5.2
+nf_core_version: 4.0.1
 repository_type: pipeline
 template:
   author: Adrien Coulier
