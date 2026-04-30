@@ -1,0 +1,80 @@
+%%metro title: nf-core/seqinspector
+%%metro style: dark
+%%metro logo: docs/images/nf-core-seqinspector_logo_dark.png
+
+%%metro line: run_folder | Run Folder | #1f77b4
+%%metro line: fastq_files | FASTQ Files | #ff7f0e
+
+%%metro file: rundir_in | RUNDIR
+%%metro file: fastq_in | FASTQ
+%%metro file: report_global | HTML
+%%metro file: report_per_tag | HTML
+%%metro direction: LR
+%%metro entry: left | run_folder
+%%metro entry: left | fastq_files
+%%metro exit: left | fastq_files
+%%metro exit: left | run_folder
+%%metro legend: bl
+
+graph LR
+    subgraph run_folder [Run Folder]
+        rundir_in[ ]
+
+        checkqc[CheckQC]
+        rundirparser[Rundirparser]
+
+        rundir_in -->|run_folder| checkqc
+        checkqc -->|run_folder| rundirparser
+    end
+
+    subgraph fastq_files [FASTQ Files]
+        fastq_in[ ]
+        bwamem2[BWAmem2]
+        fastp[FastP]
+        fastqc[FASTQC]
+        fastqe[FASTQE]
+        fastqscreen[FastQ Screen]
+        fq_lint[FQ Lint]
+        kraken2[Kraken2]
+        krona[Krona]
+        picard[Picard]
+        sequali[Sequali]
+        seqfu[SeqFu Stats]
+        seqtk[SeqTK]
+        toulligqc[ToulligQC]
+
+        fastq_in -->|fastq_files| fq_lint
+        fq_lint -->|fastq_files| seqtk
+
+        seqtk -->|fastq_files| bwamem2
+        seqtk -->|fastq_files| fastp
+        seqtk -->|fastq_files| fastqc
+        seqtk -->|fastq_files| fastqe
+        seqtk -->|fastq_files| fastqscreen
+        seqtk -->|fastq_files| kraken2
+        seqtk -->|fastq_files| seqfu
+        seqtk -->|fastq_files| sequali
+        seqtk -->|fastq_files| toulligqc
+
+        bwamem2 -->|fastq_files| picard
+        kraken2 -->|fastq_files| krona
+    end
+
+    subgraph multiqc [MultiQC]
+        multiqc[MultiQC]
+        report_global[Global report]
+        report_per_tag[Reports per tags]
+
+        fastp -->|fastq_files| multiqc
+        fastqc -->|fastq_files| multiqc
+        fastqe -->|fastq_files| multiqc
+        fastqscreen -->|fastq_files| multiqc
+        krona -->|fastq_files| multiqc
+        picard -->|fastq_files| multiqc
+        rundirparser -->|run_folder| multiqc
+        seqfu -->|fastq_files| multiqc
+        sequali -->|fastq_files| multiqc
+        toulligqc -->|fastq_files| multiqc
+        multiqc -->|fastq_files| report_per_tag
+        multiqc -->|fastq_files,run_folder| report_global
+    end
