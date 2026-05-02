@@ -1,0 +1,51 @@
+def pipelines_testdata_base_path = 'https://raw.githubusercontent.com/nf-core/test-datasets/'
+
+nextflow_pipeline {
+
+    name "Test pipeline"
+    script "../main.nf"
+
+    def test_scenario = [
+        [
+            name: "NovaSeq6000 data test - checkqc,fastqc,multiqcsav,rundirparser - missing rundir",
+            params: [
+                tools: 'checkqc,fastqc,multiqcsav,rundirparser',
+                tools_bundle: null,
+            ],
+            rundir_folder: pipelines_testdata_base_path + 'seqinspector/data/rundir/200624_A00834_0183_BHMTFYDRXX.tar.gz',
+            rundir_samplesheet: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/novaseq6000_missing_rundir.csv',
+        ],
+        [
+            name: "NovaSeq6000 data test - checkqc,fastqc,multiqcsav,rundirparser - no rundir",
+            params: [
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/novaseq6000_no_rundirs.csv',
+                tools: 'checkqc,fastqc,multiqcsav,rundirparser',
+                tools_bundle: null,
+            ],
+        ],
+        [
+            name: "NovaSeq6000 data test - checkqc,fastqc,multiqcsav,rundirparser - missing rundir - stub",
+            params: [
+                tools: 'checkqc,fastqc,multiqcsav,rundirparser',
+                tools_bundle: null,
+            ],
+            rundir_folder: pipelines_testdata_base_path + 'seqinspector/data/rundir/200624_A00834_0183_BHMTFYDRXX.tar.gz',
+            rundir_samplesheet: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/novaseq6000_missing_rundir.csv',
+            stub: true,
+        ],
+        [
+            name: "NovaSeq6000 data test - checkqc,fastqc,multiqcsav,rundirparser - no rundir - stub",
+            params: [
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/novaseq6000_no_rundirs.csv',
+                tools: 'checkqc,fastqc,multiqcsav,rundirparser',
+                tools_bundle: null,
+            ],
+            stub: true,
+        ],
+    ]
+
+    // Generate tests for each scenario
+    test_scenario.each { scenario ->
+        test(scenario.name, UTILS.getTest(scenario))
+    }
+}
