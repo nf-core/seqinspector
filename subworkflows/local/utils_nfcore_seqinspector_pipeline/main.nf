@@ -183,12 +183,12 @@ workflow PIPELINE_INITIALISATION {
 
 workflow PIPELINE_COMPLETION {
     take:
-    email //  string: email address
-    email_on_fail //  string: email address sent on pipeline failure
+    email // string: email address
+    email_on_fail // string: email address sent on pipeline failure
     plaintext_email // boolean: Send plain-text email instead of HTML
-    outdir //    path: Path to output directory where results will be published
+    outdir // path: Path to output directory where results will be published
     monochrome_logs // boolean: Disable ANSI colour codes in log output
-    multiqc_report //  string: Path to MultiQC report
+    multiqc_report // string: Path to MultiQC report
 
     main:
     summary_params = paramsSummaryMap(workflow, parameters_schema: "nextflow_schema.json")
