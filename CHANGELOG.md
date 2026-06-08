@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#216](https://github.com/nf-core/seqinspector/pull/216) Fixed meta.id that resulted in all SEQFU_STATS processes with the same tag name
 - [#224](https://github.com/nf-core/seqinspector/pull/224) Fix workflow output syntax for future Nextflow releases
 - [#226](https://github.com/nf-core/seqinspector/pull/226) Fix parameter `tools_bundle` not accepting `null` for custom tool selection
-- [[XXX](https://github.com/nf-core/seqinspector/pull/XXX)] Collect all BAMs in BAM_QC before fanning out to downstream consumers, ensuring PICARD_COLLECTHSMETRICS and PICARD_COLLECTMULTIPLEMETRICS each receive every sample
+- [#234](https://github.com/nf-core/seqinspector/pull/234) Collect all BAMs in BAM_QC before fanning out to downstream consumers, ensuring PICARD_COLLECTHSMETRICS and PICARD_COLLECTMULTIPLEMETRICS each receive every sample
 
 ### `Changed`
 
