@@ -531,18 +531,12 @@
                 "picard_hsmetrics_table.txt:md5,ca20275e5a43182f0967ea65b2defa81",
                 "picard_quality_by_cycle.txt:md5,0aa028d69d8bb02f0a2bcd0ed08f4235",
                 "picard_quality_score_distribution.txt:md5,a2882ff59902dc95830ed4bdb955561a",
-                "R64-1-1.dict:md5,08a09a7fffa7c27404804f471087a7f4",
                 "genome.fa.0123:md5,8af61f4bc59cc2fe7b396db46a2173f3",
                 "genome.fa.amb:md5,657cfdf0628d140d645d8d01a24f0c5f",
                 "genome.fa.ann:md5,4439f90bdaaf2cdf9089c9f7f07b9d6b",
                 "genome.fa.bwt.2bit.64:md5,c9a1ea631cf4ad59f4c3549a030c6c5e",
                 "genome.fa.pac:md5,fd24ae5f67c642dfe9453e63350618cc",
-                "genome.fa.fai:md5,6f4c0ce5258e6948135ad006e1f9ee1b",
-                "Sample1_01.CollectHsMetrics.coverage_metrics:md5,e2fab0ba33b26822dcd1813539b0f639",
-                "Sample23_03.CollectHsMetrics.coverage_metrics:md5,b2ead0ae000a935f57883468fb9aa497",
-                "SampleA_02.CollectHsMetrics.coverage_metrics:md5,436c11002c85d762d6b60b0ce5850bb0",
-                "Undetermined_05.CollectHsMetrics.coverage_metrics:md5,8d9703b1d6599d3a9b7702f944d09c87",
-                "sampletest_04.CollectHsMetrics.coverage_metrics:md5,c471a89eac27511e2703bb8e3f4952c3"
+                "genome.fa.fai:md5,6f4c0ce5258e6948135ad006e1f9ee1b"
             ],
             [
                 "Sample1_01.bam:md5,d06ccfde49cc474faebcab2ebf71b324",
@@ -553,7 +547,7 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-06-08T14:25:06.241528057",
+        "timestamp": "2026-06-08T15:00:56.303201013",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.3"

@@ -11,12 +11,14 @@ multiqc/{global_report,group_reports/*}/multiqc_data/multiqc_sources.txt
 multiqc/{global_report,group_reports/*}/multiqc_plots/{svg,pdf,png}/*.{svg,pdf,png}
 multiqc/{global_report,group_reports/*}/multiqc_report.html
 pipeline_info/*.{html,json,txt,yml}
+references/R64-1-1.dict
 reports/fastp/*/*fastp.*
 reports/fastqc/*/*_fastqc.{html,zip}
 reports/fastqscreen/*/*_screen.html
 reports/fq/*/*fq_lint.txt
 reports/kraken2/*/*.kraken2.report.txt
 reports/kraken2/krona/*/*.html
+reports/picard_collecthsmetrics/*/*.CollectHsMetrics.coverage_metrics
 reports/picard_collectmultiplemetrics/*/*.pdf
 reports/picard_collectmultiplemetrics/*/*_metrics
 reports/picard_collectmultiplemetrics/*/*_summary_metrics
