@@ -17,10 +17,16 @@ workflow BAM_QC {
 
     main:
 
-    ch_hsmetrics_in = ch_bam_bai.combine(ch_bait_intervals).combine(ch_target_intervals)
+    ch_all_bams = ch_bam_bai.collect()
+
+    ch_hsmetrics_in = ch_all_bams
+        .flatten()
+        .combine(ch_bait_intervals)
+        .combine(ch_target_intervals)
+        .filter { ("picard_collecthsmetrics" in tools) }
 
     PICARD_COLLECTHSMETRICS(
-        ch_hsmetrics_in.filter { ("picard_collecthsmetrics" in tools) },
+        ch_hsmetrics_in,
         ch_reference_fasta,
         ch_reference_fai,
         ch_ref_dict,
@@ -28,7 +34,9 @@ workflow BAM_QC {
     )
 
     PICARD_COLLECTMULTIPLEMETRICS(
-        ch_bam_bai.filter { ("picard_collectmultiplemetrics" in tools) },
+        ch_all_bams
+            .flatten()
+            .filter { ("picard_collectmultiplemetrics" in tools) },
         ch_reference_fasta,
         ch_reference_fai,
     )

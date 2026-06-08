@@ -64,6 +64,44 @@ nextflow_workflow {
         }
     }
 
+    test("Test with picard_collecthsmetrics and picard_collectmultiplemetrics with 2 BAMs") {
+        when {
+            workflow {
+                """
+                input[0]  = channel.of(
+                    [
+                        [id:'earlycasualcaiman', sample:'earlycasualcaiman', single_end:false, num_lanes:1, read_group: "'@RG\\\\tID:earlycasualcaiman\\\\tPL:illumina\\\\tSM:earlycasualcaiman'", lane:1, sex:1, phenotype:1, paternal:0, maternal:0, case_id:'justhusky'],
+                        [file(params.pipelines_testdata_base_path + 'raredisease/testdata/earlycasualcaiman_sorted_md.bam', checkIfExists: true)],
+                        [file(params.pipelines_testdata_base_path + 'raredisease/testdata/earlycasualcaiman_sorted_md.bam.bai', checkIfExists: true)]
+                    ],
+                    [
+                        [id:'anothersample', sample:'anothersample', single_end:false, num_lanes:1, read_group: "'@RG\\\\tID:anothersample\\\\tPL:illumina\\\\tSM:anothersample'", lane:1, sex:1, phenotype:1, paternal:0, maternal:0, case_id:'justhusky'],
+                        [file(params.pipelines_testdata_base_path + 'raredisease/testdata/earlycasualcaiman_sorted_md.bam', checkIfExists: true)],
+                        [file(params.pipelines_testdata_base_path + 'raredisease/testdata/earlycasualcaiman_sorted_md.bam.bai', checkIfExists: true)]
+                    ]
+                )
+                input[1]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + 'raredisease/reference/reference.fasta', checkIfExists: true)).collect()
+                input[2]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + 'raredisease/reference/reference.fasta.fai', checkIfExists: true)).collect()
+                input[3]  = channel.fromPath(params.pipelines_testdata_base_path + 'raredisease/reference/target.bed', checkIfExists: true).collect()
+                input[4]  = channel.fromPath(params.pipelines_testdata_base_path + 'raredisease/reference/target.bed', checkIfExists: true).collect()
+                input[5]  = channel.of([id:'genome'], file(params.pipelines_testdata_base_path + 'raredisease/reference/reference.dict', checkIfExists: true)).collect()
+                input[6]  = ['picard_collecthsmetrics', 'picard_collectmultiplemetrics']
+                """
+            }
+        }
+
+        then {
+            assert workflow.success
+            def multiqc_files = topics.multiqc_files.collect { _meta, _process, _tool, file_ ->
+                [tool: _tool, files: ( file_ instanceof List ? file_ : [file_] ).collect { file(it.toString()).name }]
+            }
+            def hsmetrics_count = multiqc_files.count { it.tool == 'picard' && it.files.any { f -> f.contains('CollectHsMetrics') } }
+            def multiplemetrics_count = multiqc_files.count { it.tool == 'picard' && it.files.any { f -> f.contains('CollectMultipleMetrics') } }
+            assert hsmetrics_count == 2
+            assert multiplemetrics_count == 2
+        }
+    }
+
     test("Test with picard_collectmultiplemetrics") {
         when {
             workflow {
