@@ -269,6 +269,7 @@ def toolCitationText() {
         "SAMTOOLS (Danecek et al. 2021),",
         params.sample_size > 0 ? "Seqtk (Li 2021)," : "",
         "SeqFu (Telatin et al. 2021),",
+        "SeqKit (Shen et al. 2024),",
         "Sequali (Vorderman 2025),",
         ".",
     ].join(' ').trim()
@@ -286,6 +287,7 @@ def toolBibliographyText() {
         "<li>Danecek P., Bonfield JK., Liddle J., & al. (2021). Twelve years of SAMtools and BCFtools.</li>",
         params.sample_size > 0 ? "<li>Li, H. SeqTk. Available online: https://github.com/lh3/seqtk (accessed on 6 May 2021)</li>" : "",
         "<li>Telatin, A.; Fariselli, P.; Birolo, G. SeqFu: A Suite of Utilities for the Robust and Reproducible Manipulation of Sequence Files. Bioengineering 2021, 8, 59. https://doi.org/10.3390/bioengineering8050059</li>",
+        "<li>Shen, W., Sipos, B., & Zhao, L. (2024). SeqKit2: A Swiss Army Knife for Sequence and Alignment Processing. iMeta e191. doi: 10.1002/imt2.191</li>",
         "<li>Vorderman, R. Sequali: efficient and comprehensive quality control of short- and long-read sequencing data. Bioinformatics Advances, 2025. doi: 10.1093/bioadv/vbaf010</li>",
     ].join(' ').trim()
 
