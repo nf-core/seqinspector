@@ -294,7 +294,7 @@ def toolBibliographyMap() {
         'multiqcsav': '<li>MultiQC SAV: MultiQC plugin for Illumina Sequencing Analysis Viewer. URL: https://multiqc.info/.</li>',
         'picard_collecthsmetrics': '<li>Broad Institute, (2019) Picard Tools, URL: https://broadinstitute.github.io/picard/.</li>',
         'picard_collectmultiplemetrics': '<li>Broad Institute, (2019) Picard Tools, URL: https://broadinstitute.github.io/picard/.</li>',
-        'rundirparser': '',
+        'rundirparser': '<li>Rundirparser: Parse Illumina run directory metadata for MultiQC. URL: https://github.com/nf-core/seqinspector.</li>',
         'seqfu_stats': '<li>Telatin, A.; Fariselli, P.; Birolo, G. SeqFu: A Suite of Utilities for the Robust and Reproducible Manipulation of Sequence Files. Bioengineering 2021, 8, 59. https://doi.org/10.3390/bioengineering8050059</li>',
         'seqtk_sample': '<li>Li, H. SeqTk. Available online: https://github.com/lh3/seqtk (accessed on 6 May 2021)</li>',
         'sequali': '<li>Vorderman, R. Sequali: efficient and comprehensive quality control of short- and long-read sequencing data. Bioinformatics Advances, 2025. doi: 10.1093/bioadv/vbaf010</li>',
