@@ -10,9 +10,9 @@
 
 ## Pipeline tools
 
-- [BWAMEM2](https://doi.org/10.1016/j.jbi.2019.103289)
+- [BWAMEM2](https://ieeexplore.ieee.org/abstract/document/8820962)
 
-  > Vasimuddin Md, Misra S, Li H, Aluru S. Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems. J Biomed Inform. 2019;99:103289. doi: 10.1016/j.jbi.2019.103289
+  > Vasimuddin Md, Misra S, Li H, Aluru S. Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems. In: 2019 IEEE International Parallel and Distributed Processing Symposium (IPDPS). IEEE; 2019:314-324. doi:10.1109/IPDPS.2019.00041
 
 - [checkQC](https://doi.org/10.21105/joss.00556)
 
