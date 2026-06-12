@@ -54,6 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | htslib     | 1.22.1      | 1.23.1      |
 | kraken2    |             | 2.1.6       |
 | krona      |             | 2.8.1       |
+| multiqc    | 1.34        | 1.35        |
 | multiqcsav |             | 0.2.0       |
 | samtools   | 1.22.1      | 1.23.1      |
 | seqkit     |             | 2.9.0       |
