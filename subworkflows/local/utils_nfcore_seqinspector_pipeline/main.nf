@@ -391,6 +391,7 @@ def defineToolsList(input_bundle, input_tools, input_skip) {
     if ('ont' in bundle_list) {
         tools_list << 'fastqc'
         tools_list << 'fastqscreen'
+        tools_list << 'seqkit_stats'
         tools_list << 'seqfu_stats'
         tools_list << 'sequali'
         tools_list << 'toulligqc'
