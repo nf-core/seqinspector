@@ -11,7 +11,7 @@ process SEQKIT_STATS {
     tuple val(meta), path(reads)
 
     output:
-    tuple val(meta), val("${task.process}"), val('seqfu'), path("*.tsv"), emit: tsv, topic: multiqc_files
+    tuple val(meta), val("${task.process}"), val('seqkit'), path("*.tsv"), emit: tsv, topic: multiqc_files
     tuple val("${task.process}"), val('seqkit'), eval("seqkit version | sed 's/^.*v//'"), emit: versions_seqkit, topic: versions
 
     when:
