@@ -261,7 +261,7 @@ def genomeExistsError() {
 
 // Tools that are always cited regardless of tools parameter (infrastructure tools)
 def alwaysCitedTools() {
-    return ['bwamem2', 'multiqc', 'samtools']
+    return ['multiqc']
 }
 
 def toolCitationText(tools) {
@@ -288,10 +288,15 @@ def toolCitationText(tools) {
     // Always include infrastructure tool citations
     def citations = [
         'Tools used in the workflow included:',
-        'BWAMEM2 (Vasimuddin et al. 2019),',
         'MultiQC (Ewels et al. 2016),',
-        'SAMTOOLS (Danecek et al. 2021),',
     ]
+
+    // Add bwamem2 and samtools if picard tools are used
+    def picard_tools = ['picard_collecthsmetrics', 'picard_collectmultiplemetrics']
+    if (tools.any { it in picard_tools }) {
+        citations << 'BWAMEM2 (Vasimuddin et al. 2019),'
+        citations << 'SAMTOOLS (Danecek et al. 2021),'
+    }
 
     // Add citations for tools that are in the tools list
     tools.each { tool ->
@@ -328,10 +333,15 @@ def toolBibliographyText(tools) {
 
     // Always include infrastructure tool references
     def references = [
-        '<li>Vasimuddin Md., Misra S., Li H, & Aluru S. (2019). Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems.</li>',
         '<li>Ewels, P., Magnusson, M., Lundin, S., & Käller, M. (2016). MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics, 32(19), 3047–3048. doi: /10.1093/bioinformatics/btw354</li>',
-        '<li>Danecek P., Bonfield JK., Liddle J., & al. (2021). Twelve years of SAMtools and BCFtools.</li>',
     ]
+
+    // Add bwamem2 and samtools references if picard tools are used
+    def picard_tools = ['picard_collecthsmetrics', 'picard_collectmultiplemetrics']
+    if (tools.any { it in picard_tools }) {
+        references << '<li>Vasimuddin Md., Misra S., Li H, & Aluru S. (2019). Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems.</li>'
+        references << '<li>Danecek P., Bonfield JK., Liddle J., & al. (2021). Twelve years of SAMtools and BCFtools.</li>'
+    }
 
     // Add references for tools that are in the tools list
     tools.each { tool ->
