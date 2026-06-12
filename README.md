@@ -143,6 +143,7 @@ We thank the following people for their extensive assistance in the development 
 - [@pontushojer](https://github.com/pontushojer)
 - [@ramprasadn](https://github.com/ramprasadn)
 - [@rannick](https://github.com/rannick)
+- [@sarajeeeze](https://github.com/sarajeeeze)
 - [@TMAdams](https://github.com/TMAdams)
 - [@torigiffin](https://github.com/torigiffin)
 
