@@ -41,6 +41,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#221](https://github.com/nf-core/seqinspector/pull/221) Workflow output for checkQC, Fastp, fastp, fastqe, fastqscreen, picard_collecthsmetrics, picard_collectmultiplemetrics, rundirparser, seqfu
 - [#222](https://github.com/nf-core/seqinspector/pull/222) Workflow output for fq/lint, kraken2, krona, toulligqc
 - [#223](https://github.com/nf-core/seqinspector/pull/223) Workflow output for the rest of the pipeline
+- [#235](https://github.com/nf-core/seqinspector/pull/235) Update MultiQC and other dependencies
 
 ### `Dependencies`
 
@@ -53,6 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | htslib     | 1.22.1      | 1.23.1      |
 | kraken2    |             | 2.1.6       |
 | krona      |             | 2.8.1       |
+| multiqc    |             | 1.35        |
 | multiqcsav |             | 0.2.0       |
 | samtools   | 1.22.1      | 1.23.1      |
 | toulligqc  |             | 2.8.4       |
