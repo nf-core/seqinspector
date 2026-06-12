@@ -1,7 +1,17 @@
-bump_version: null
-lint: null
-nf_core_version: 3.0.2
-org_path: null
+lint:
+  files_exist:
+    - tests/default.nf.test
+  files_unchanged:
+    - .github/CONTRIBUTING.md
+    - assets/nf-core-seqinspector_logo_light.png
+    - docs/images/nf-core-seqinspector_logo_dark.png
+    - docs/images/nf-core-seqinspector_logo_light.png
+  multiqc_config: false
+  nextflow_config:
+    - config_defaults:
+        - params.fastq_screen_references
+  nf_test_content: false
+nf_core_version: 4.0.2
 repository_type: pipeline
 template:
   author: Adrien Coulier
@@ -11,6 +21,4 @@ template:
   name: seqinspector
   org: nf-core
   outdir: .
-  skip_features: null
-  version: 1.0dev
-update: null
+  version: 1.1.0dev

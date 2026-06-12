@@ -1,0 +1,20 @@
+Changes in component 'nf-core/seqfu/stats'
+'modules/nf-core/seqfu/stats/meta.yml' is unchanged
+'modules/nf-core/seqfu/stats/environment.yml' is unchanged
+Changes in 'seqfu/stats/main.nf':
+--- modules/nf-core/seqfu/stats/main.nf
++++ modules/nf-core/seqfu/stats/main.nf
+@@ -13,7 +13,8 @@
+ 
+     output:
+     tuple val(meta), path("*.tsv"), emit: stats
+-    tuple val(meta), path("*_mqc.txt"), emit: multiqc
++    tuple val(meta), val("${task.process}"), val('seqfu'), path("*.tsv"), emit: tsv, topic: multiqc_files
++    tuple val(meta), val("${task.process}"), val('seqfu'), path("*_mqc.txt"), emit: multiqc, topic: multiqc_files
+     tuple val("${task.process}"), val('seqfu'), eval('seqfu version'), emit: versions_seqfu, topic: versions
+ 
+     when:
+
+'modules/nf-core/seqfu/stats/tests/main.nf.test' is unchanged
+'modules/nf-core/seqfu/stats/tests/main.nf.test.snap' is unchanged
+************************************************************
