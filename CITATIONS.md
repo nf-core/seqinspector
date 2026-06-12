@@ -10,11 +10,15 @@
 
 ## Pipeline tools
 
-- [BWAMEM2](https://ieeexplore.ieee.org/abstract/document/8820962)
+- [BBMap](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/)
 
-  > Vasimuddin Md, Misra S, Li H, Aluru S. Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems. In: 2019 IEEE International Parallel and Distributed Processing Symposium (IPDPS). IEEE; 2019:314-324. doi:10.1109/IPDPS.2019.00041
+  > Bushnell B. BBTools: a collection of bioinformatics tools for processing short sequencing reads.
 
-- [checkQC](https://github.com/Molmed/checkQC)
+- [BWAMEM2](https://doi.org/10.1016/j.jbi.2019.103289)
+
+  > Vasimuddin Md, Misra S, Li H, Aluru S. Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems. J Biomed Inform. 2019;99:103289. doi: 10.1016/j.jbi.2019.103289
+
+- [checkQC](https://doi.org/10.21105/joss.00556)
 
   > Åslin et al., (2018). CheckQC: Quick quality control of Illumina sequencing runs. Journal of Open Source Software, 3(22), 556, https://doi.org/10.21105/joss.00556
 
@@ -38,17 +42,31 @@
 
   > Wingett SW and Andrews S. FastQ Screen: A tool for multi-genome mapping and quality control [version 2; referees: 4 approved]. F1000Research 2018, 7:1338 (https://doi.org/10.12688/f1000research.15931.2)
 
+- [FASTQE](https://github.com/fastqe/fastqe)
+
+  > FastQE: A tool for quality control of Illumina sequencing data using emoji.
+
 - [FQ](https://github.com/stjude-rust-labs/fq)
+
+  > FQ: A library to generate and validate FASTQ file pairs.
 
 - [MultiQC](https://pubmed.ncbi.nlm.nih.gov/27312411/)
 
   > Ewels P, Magnusson M, Lundin S, Käller M. MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics. 2016 Oct 1;32(19):3047-8. doi: 10.1093/bioinformatics/btw354. Epub 2016 Jun 16. PubMed PMID: 27312411; PubMed Central PMCID: PMC5039924.
 
+- [MultiQC SAV](https://github.com/MultiQC/MultiQC_SAV/)
+
+  > MultiQC SAV: MultiQC plugin for Illumina Sequencing Analysis Viewer.
+
 - [Picard Tools](https://broadinstitute.github.io/picard/)
 
   > Broad Institute, “Picard Toolkit.” 2019. GitHub Repository. https://broadinstitute.github.io/picard/
 
-- [SAMTOOLS](https://academic.oup.com/bioinformatics/article/25/16/2078/204688)
+- [Rundirparser](https://github.com/nf-core/seqinspector)
+
+  > Rundirparser: Parse Illumina run directory metadata for MultiQC.
+
+- [SAMTOOLS](https://doi.org/10.1093/gigascience/giab008)
 
   > Danecek P, Bonfield JK, Liddle J, et al. Twelve years of SAMtools and BCFtools. GigaScience. 2021;10(2):giab008. doi:10.1093/gigascience/giab008
 
@@ -58,11 +76,15 @@
 
 - [Seqtk](https://github.com/lh3/seqtk)
 
+  > Li, H. SeqTk: A toolkit for processing sequences in FASTA/Q formats.
+
 - [Sequali](https://sequali.readthedocs.io/en/latest/)
 
   > Vorderman R. Sequali: efficient and comprehensive quality control of short- and long-read sequencing data. Bioinformatics Advances, 2025. doi: 10.1093/bioadv/vbaf010
 
-- [ToulligQC](https://github.com/GenomiqueENS/toulligQ)
+- [ToulligQC](https://github.com/GenomiqueENS/toulligQC)
+
+  > ToulligQC: A post sequencing QC tool for Oxford Nanopore sequencers.
 
 ## Software packaging/containerisation tools
 
