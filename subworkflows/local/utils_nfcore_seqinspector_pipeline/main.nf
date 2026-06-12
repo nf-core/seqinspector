@@ -299,7 +299,7 @@ def toolCitationMap() {
 
 def toolBibliographyMap() {
     return [
-        'bwamem2': '<li>Vasimuddin Md., Misra S., Li H, & Aluru S. (2019). Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems. doi: <a href="https://doi.org/10.1016/j.jbi.2019.103289">10.1016/j.jbi.2019.103289</a></li>',
+        'bwamem2': '<li>Vasimuddin Md., Misra S., Li H, & Aluru S. (2019). Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems. doi: <a href="https://doi.org/10.1109/IPDPS.2019.00041">10.1109/IPDPS.2019.00041</a>. URL: <a href="https://github.com/bwa-mem2/bwa-mem2">https://github.com/bwa-mem2/bwa-mem2</a>.</li>',
         'checkqc': '<li>Åslin et al., (2018). CheckQC: Quick quality control of Illumina sequencing runs. Journal of Open Source Software, 3(22), 556. doi: <a href="https://doi.org/10.21105/joss.00556">10.21105/joss.00556</a></li>',
         'fastp': '<li>Chen S., Zhou Y., Chen Y., & Gu J. (2018). fastp: an ultra-fast all-in-one FASTQ preprocessor. Bioinformatics, 34(17), i884-i890. doi: <a href="https://doi.org/10.1093/bioinformatics/bty560">10.1093/bioinformatics/bty560</a></li>',
         'fastqc': '<li>Andrews S, (2010) FastQC, URL: <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">https://www.bioinformatics.babraham.ac.uk/projects/fastqc/</a>.</li>',
