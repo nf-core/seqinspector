@@ -31,19 +31,19 @@
                 "pipeline_info",
                 "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
                 "reports",
-                "reports/seqfu",
-                "reports/seqfu/SAMPLE_PAIRED_END_1_01",
-                "reports/seqfu/SAMPLE_PAIRED_END_1_01/SAMPLE_PAIRED_END_1_01_SAMPLE_PAIRED_END_1_01.tsv",
-                "reports/seqfu/SAMPLE_PAIRED_END_2_02",
-                "reports/seqfu/SAMPLE_PAIRED_END_2_02/SAMPLE_PAIRED_END_2_02_SAMPLE_PAIRED_END_2_02.tsv",
-                "reports/seqfu/SAMPLE_SINGLE_END_03",
-                "reports/seqfu/SAMPLE_SINGLE_END_03/SAMPLE_SINGLE_END_03_SAMPLE_SINGLE_END_03.tsv"
+                "reports/seqkit",
+                "reports/seqkit/SAMPLE_PAIRED_END_1_01",
+                "reports/seqkit/SAMPLE_PAIRED_END_1_01/SAMPLE_PAIRED_END_1_01.tsv",
+                "reports/seqkit/SAMPLE_PAIRED_END_2_02",
+                "reports/seqkit/SAMPLE_PAIRED_END_2_02/SAMPLE_PAIRED_END_2_02.tsv",
+                "reports/seqkit/SAMPLE_SINGLE_END_03",
+                "reports/seqkit/SAMPLE_SINGLE_END_03/SAMPLE_SINGLE_END_03.tsv"
             ],
             [
                 "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
             ]
         ],
-        "timestamp": "2026-06-12T11:00:18.519882857",
+        "timestamp": "2026-06-12T11:22:16.671360861",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.3"
@@ -135,13 +135,13 @@
                 "pipeline_info",
                 "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
                 "reports",
-                "reports/seqfu",
-                "reports/seqfu/SAMPLE_PAIRED_END_1_01",
-                "reports/seqfu/SAMPLE_PAIRED_END_1_01/SAMPLE_PAIRED_END_1_01_SAMPLE_PAIRED_END_1_01.tsv",
-                "reports/seqfu/SAMPLE_PAIRED_END_2_02",
-                "reports/seqfu/SAMPLE_PAIRED_END_2_02/SAMPLE_PAIRED_END_2_02_SAMPLE_PAIRED_END_2_02.tsv",
-                "reports/seqfu/SAMPLE_SINGLE_END_03",
-                "reports/seqfu/SAMPLE_SINGLE_END_03/SAMPLE_SINGLE_END_03_SAMPLE_SINGLE_END_03.tsv"
+                "reports/seqkit",
+                "reports/seqkit/SAMPLE_PAIRED_END_1_01",
+                "reports/seqkit/SAMPLE_PAIRED_END_1_01/SAMPLE_PAIRED_END_1_01.tsv",
+                "reports/seqkit/SAMPLE_PAIRED_END_2_02",
+                "reports/seqkit/SAMPLE_PAIRED_END_2_02/SAMPLE_PAIRED_END_2_02.tsv",
+                "reports/seqkit/SAMPLE_SINGLE_END_03",
+                "reports/seqkit/SAMPLE_SINGLE_END_03/SAMPLE_SINGLE_END_03.tsv"
             ],
             [
                 "multiqc_citations.txt:md5,c94ed9029091505edb952645737b035b",
@@ -156,14 +156,14 @@
                 "multiqc_seqkit_stats.txt:md5,bba9d58cb4af4ea22434d6071e1dcf4d",
                 "seqkit-stats-seqcounts-plot.txt:md5,25308361bc9fac0b2706a459418b2a31",
                 "seqkit-stats-table.txt:md5,066330bb0c1da33494e29c1ae1d6f7d3",
-                "SAMPLE_PAIRED_END_1_01_SAMPLE_PAIRED_END_1_01.tsv:md5,7fda22d70437d6fe7ce44f99e9c4947a",
-                "SAMPLE_PAIRED_END_2_02_SAMPLE_PAIRED_END_2_02.tsv:md5,1fe3365f4b10ab35695fdef7726e73d3",
-                "SAMPLE_SINGLE_END_03_SAMPLE_SINGLE_END_03.tsv:md5,0baa3ccc3ce26a1bc50e102f200a5e01"
+                "SAMPLE_PAIRED_END_1_01.tsv:md5,7fda22d70437d6fe7ce44f99e9c4947a",
+                "SAMPLE_PAIRED_END_2_02.tsv:md5,1fe3365f4b10ab35695fdef7726e73d3",
+                "SAMPLE_SINGLE_END_03.tsv:md5,0baa3ccc3ce26a1bc50e102f200a5e01"
             ],
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-06-12T10:59:57.167912656",
+        "timestamp": "2026-06-12T11:21:46.936092122",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.3"
