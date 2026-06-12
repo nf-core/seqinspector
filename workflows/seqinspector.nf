@@ -197,7 +197,7 @@ workflow SEQINSPECTOR {
     // Any downstream tool will be run on subsampled reads if seqtk is run
     //
 
-    SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] }.filter { sample_size })
+    SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] }.filter { 'seqtk_sample' in tools })
     ch_sample = sample_size ? SEQTK_SAMPLE.out.reads : ch_samplesheet
 
     // STEP 04: MORE QC ON FASTQ FILES (CAN BE SUMSAMPLED)
@@ -329,7 +329,7 @@ workflow SEQINSPECTOR {
         ? file(multiqc_methods_description, checkIfExists: true)
         : file("${projectDir}/assets/methods_description_template.yml", checkIfExists: true)
 
-    ch_methods_description = channel.value(methodsDescriptionText(ch_multiqc_custom_methods_description))
+    ch_methods_description = channel.value(methodsDescriptionText(ch_multiqc_custom_methods_description, tools))
 
     ch_multiqc_extra_files = ch_multiqc_extra_files.mix(ch_methods_description.collectFile(name: 'methods_description_mqc.yaml', sort: true))
 

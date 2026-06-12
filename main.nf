@@ -43,7 +43,7 @@ params.fasta   = getGenomeAttribute('fasta')
 workflow {
 
     main:
-    def tools = defineToolsList(params.tools_bundle, params.tools, params.skip_tools)
+    def tools = defineToolsList(params.tools_bundle, params.tools, params.skip_tools, params.sample_size)
 
     //
     // SUBWORKFLOW: Run initialisation tasks
