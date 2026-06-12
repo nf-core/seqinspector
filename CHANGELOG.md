@@ -29,7 +29,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Changed`
 
-- [#237](https://github.com/nf-core/seqinspector/pull/237) Improved citation system to dynamically build tool citations based on selected tools
 - [#191](https://github.com/nf-core/seqinspector/pull/191) Back to dev
 - [#192](https://github.com/nf-core/seqinspector/pull/192) Refactor the tools selection logic
 - [#192](https://github.com/nf-core/seqinspector/pull/192) Removed `bwamem2_index`, `bwamem2_mem`, `samtools_faidx` and `samtools_index` from the list of tools as they can be inferred from downstream tools
@@ -43,6 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#222](https://github.com/nf-core/seqinspector/pull/222) Workflow output for fq/lint, kraken2, krona, toulligqc
 - [#223](https://github.com/nf-core/seqinspector/pull/223) Workflow output for the rest of the pipeline
 - [#235](https://github.com/nf-core/seqinspector/pull/235) Update MultiQC and other dependencies
+- [#237](https://github.com/nf-core/seqinspector/pull/237) Improved citation system to dynamically build tool citations based on selected tools
 
 ### `Dependencies`
 
