@@ -10,6 +10,10 @@
 
 ## Pipeline tools
 
+- [BBMap](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/clumpify-guide/)
+
+  > Bushnell B. BBTools: a collection of bioinformatics tools for processing short sequencing reads. https://jgi.doe.gov/data-and-tools/software-tools/bbtools/
+
 - [BWAMEM2](https://ieeexplore.ieee.org/abstract/document/8820962)
 
   > Vasimuddin Md, Misra S, Li H, Aluru S. Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems. In: 2019 IEEE International Parallel and Distributed Processing Symposium (IPDPS). IEEE; 2019:314-324. doi:10.1109/IPDPS.2019.00041

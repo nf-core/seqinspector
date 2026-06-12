@@ -154,7 +154,7 @@ Be aware that the default tools will still be run. In order to ONLY run the sele
 --tools fastqscreen,rundirparser --tools_bundle null
 ```
 
-Currently the `tools` param can have the following values: fastqc, fastqscreen, picard_collecthsmetrics, picard_collectmultiplemetrics, rundirparser and seqfu_stats.
+Currently the `tools` param can have the following values: bbmap_clumpify, fastqc, fastqscreen, picard_collecthsmetrics, picard_collectmultiplemetrics, rundirparser and seqfu_stats.
 
 #### Skip specific tools
 
@@ -197,6 +197,7 @@ Requirements:
 
 Tools:
 
+- bbmap_clumpify
 - checkQC
 - fastqc
 - fastqscreen
@@ -204,6 +205,7 @@ Tools:
 - picard_collectmultiplemetrics
 - rundirparser
 - seqfu_stats
+- sequali
 - toulligqc
 
 </details>

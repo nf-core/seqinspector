@@ -261,6 +261,7 @@ def genomeExistsError() {
 def toolCitationText() {
     def citation_text = [
         "Tools used in the workflow included:",
+        "BBMap (Bushnell 2014),",
         "BWAMEM2 (Vasimuddin et al. 2019)",
         "FastQC (Andrews 2010),",
         "FastQ Screen (Wingett & Andrews 2018)",
@@ -278,6 +279,7 @@ def toolCitationText() {
 
 def toolBibliographyText() {
     def reference_text = [
+        "<li>Bushnell B. BBTools: a collection of bioinformatics tools for processing short sequencing reads. https://jgi.doe.gov/data-and-tools/software-tools/bbtools/.</li>",
         "<li>Vasimuddin Md., Misra S., Li H, & Aluru S. (2019). Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems.</li>",
         "<li>Andrews S, (2010) FastQC, URL: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/.</li>",
         "<li>Wingett SW., & Andrews S. FastQ Screen: A tool for multi-genome mapping and quality control. F1000Res. 2018 Aug 24 [revised 2018 Jan 1];7:1338. doi: 10.12688/f1000research.15931.2. eCollection</li>",
@@ -343,6 +345,7 @@ def defineToolsList(input_bundle, input_tools, input_skip) {
     // please update the docs/usage.md section about tools selection when adding new tools here!
 
     if ('all' in bundle_list) {
+        tools_list << 'bbmap_clumpify'
         tools_list << 'checkqc'
         tools_list << 'fastqc'
         tools_list << 'fastqe'

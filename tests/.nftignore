@@ -12,6 +12,7 @@ multiqc/{global_report,group_reports/*}/multiqc_plots/{svg,pdf,png}/*.{svg,pdf,p
 multiqc/{global_report,group_reports/*}/multiqc_report.html
 pipeline_info/*.{html,json,txt,yml}
 references/R64-1-1.dict
+reports/bbmap/*/*.clumpify.log
 reports/fastp/*/*fastp.*
 reports/fastqc/*/*_fastqc.{html,zip}
 reports/fastqscreen/*/*_screen.html

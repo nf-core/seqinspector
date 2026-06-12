@@ -18,6 +18,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 - [Rundirparser](#rundirparser) - Parse rundir metadata from Illumina runs
 - [ToulligQC](#toulligqc) - Raw read QC for Oxford Nanopore runs
 - [SeqFu](#seqfu) - Statistics for FASTA or FASTQ files
+- [BBMap Clumpify](#bbmap-clumpify) - Deduplication and compression of FASTQ files
 - [Seqtk](#seqtk) - Subsample a specific number of reads per sample
 - [FastQC](#fastqc) - Raw read QC
 - [Sequali](#sequali) - Sequence quality metrics for short and long reads
@@ -118,6 +119,18 @@ This software is written in Python and developped by the GenomiqueENS core facil
 [SeqFu](https://telatin.github.io/seqfu2/) is general-purpose program to manipulate and parse information from FASTA/FASTQ files, supporting gzipped input files.
 Includes functions to interleave and de-interleave FASTQ files, to rename sequences and to count and print statistics on sequence lengths.
 In this pipeline, the `seqfu stats` module is used to produce general quality metrics statistics.
+
+### BBMap Clumpify
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `clumped/[sample_id]/`
+  - `*.clumped.fastq.gz`: Deduplicated and compressed FASTQ files.
+
+</details>
+
+[BBMap Clumpify](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/clumpify-guide/) removes duplicates from sequencing data and creates smaller, faster gzipped FASTQ files. This is particularly useful for reducing file sizes while maintaining data quality.
 
 ### Seqtk
 

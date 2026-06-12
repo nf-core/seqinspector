@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#226](https://github.com/nf-core/seqinspector/pull/226) Add pipeline level stub tests
 - [#228](https://github.com/nf-core/seqinspector/pull/228) Update all modules/subworkflows
 - [#234](https://github.com/nf-core/seqinspector/pull/234) Add pipeline level PICARD tests
+- [#236](https://github.com/nf-core/seqinspector/pull/236) Added bbmap/clumpify module for FASTQ deduplication and compression
 
 ### `Fixed`
 
@@ -58,6 +59,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | multiqcsav |             | 0.2.0       |
 | samtools   | 1.22.1      | 1.23.1      |
 | toulligqc  |             | 2.8.4       |
+| bbmap      |             | 39.18       |
 | tar        |             | 1.34        |
 
 ### `Deprecated`

@@ -175,6 +175,12 @@ workflow SEQINSPECTOR {
     // STEP 02: BASIC QC ON FASTQ FILES
 
     //
+    // MODULE: Run BBMAP_CLUMPIFY
+    //
+
+    BBMAP_CLUMPIFY(ch_samplesheet.filter { 'bbmap_clumpify' in tools })
+
+    //
     // MODULE: SEQFU_STATS
     //
 
@@ -201,10 +207,6 @@ workflow SEQINSPECTOR {
     SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] }.filter { sample_size })
     ch_sample = sample_size ? SEQTK_SAMPLE.out.reads : ch_samplesheet
 
-    //
-    // MODULE: Run BBMAP_CLUMPIFY
-    //
-    BBMAP_CLUMPIFY(ch_samplesheet.filter { 'bbmap_clumpify' in tools })
 
     // STEP 04: MORE QC ON FASTQ FILES (CAN BE SUMSAMPLED)
 
