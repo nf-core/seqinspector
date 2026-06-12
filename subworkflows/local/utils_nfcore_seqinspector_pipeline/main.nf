@@ -255,103 +255,82 @@ def genomeExistsError() {
         error(error_string)
     }
 }
+
 //
 // Generate methods description for MultiQC
 //
 
-// Tools that are always cited regardless of tools parameter (infrastructure tools)
-def alwaysCitedTools() {
-    return ['multiqc']
+// Build complete tools list with dependencies
+def toolListComplete(tools) {
+    def final_tools_list = tools.clone()
+    final_tools_list << 'multiqc'
+
+    if ('picard_collecthsmetrics' in tools || 'picard_collectmultiplemetrics' in tools) {
+        final_tools_list << 'bwamem2'
+        final_tools_list << 'picard'
+        final_tools_list << 'samtools'
+    }
+
+    return final_tools_list.unique()
 }
 
-def toolCitationText(tools) {
-    def citation_map = [
-        'bbmap_clumpify':                'BBMap (Bushnell 2014)',
-        'checkqc':                       'checkQC (Åslin et al. 2018)',
-        'fastp':                         'Fastp (Chen et al. 2018)',
-        'fastqc':                        'FastQC (Andrews 2010)',
-        'fastqe':                        'FASTQE',
-        'fastqscreen':                   'FastQ Screen (Wingett & Andrews 2018)',
-        'fq_lint':                       'FQ',
-        'kraken2':                       'Kraken2 (Wood et al. 2019)',
-        'multiqcsav':                    'MultiQC SAV',
-        'picard_collecthsmetrics':       'Picard CollectHsMetrics (Broad Institute 2019)',
-        'picard_collectmultiplemetrics': 'Picard CollectMultipleMetrics (Broad Institute 2019)',
-        'rundirparser':                  'Rundirparser',
-        'seqfu_stats':                   'SeqFu (Telatin et al. 2021)',
-        'seqtk_sample':                  'Seqtk (Li 2021)',
-        'sequali':                       'Sequali (Vorderman 2025)',
-        'toulligqc':                     'ToulligQC',
+def toolCitationMap() {
+    return [
+        'bbmap_clumpify': 'BBMap (Bushnell 2014)',
+        'bwamem2': 'BWAMEM2 (Vasimuddin 2019)',
+        'checkqc': 'checkQC (Åslin 2018)',
+        'fastp': 'Fastp (Chen 2018)',
+        'fastqc': 'FastQC (Andrews 2010)',
+        'fastqe': 'FASTQE',
+        'fastqscreen': 'FastQ Screen (Wingett 2018)',
+        'fq_lint': 'FQ',
+        'kraken2': 'Kraken2 (Wood 2019)',
+        'multiqc': 'MultiQC (Ewels 2016)',
+        'multiqcsav': 'MultiQC SAV',
+        'picard': 'Picard (Broad Institute 2019)',
+        'rundirparser': 'Rundirparser',
+        'samtools': 'SAMTOOLS (Danecek 2021)',
+        'seqfu_stats': 'SeqFu (Telatin 2021)',
+        'seqtk_sample': 'Seqtk (Li 2021)',
+        'sequali': 'Sequali (Vorderman 2025)',
+        'toulligqc': 'ToulligQC',
     ]
-    def always_cited = alwaysCitedTools()
-
-    // Always include infrastructure tool citations
-    def citations = [
-        'Tools used in the workflow included:',
-        'MultiQC (Ewels et al. 2016),',
-    ]
-
-    // Add bwamem2 and samtools if picard tools are used
-    def picard_tools = ['picard_collecthsmetrics', 'picard_collectmultiplemetrics']
-    if (tools.any { it in picard_tools }) {
-        citations << 'BWAMEM2 (Vasimuddin et al. 2019),'
-        citations << 'SAMTOOLS (Danecek et al. 2021),'
-    }
-
-    // Add citations for tools that are in the tools list
-    tools.each { tool ->
-        if (tool in citation_map && !always_cited.contains(tool)) {
-            citations << "${citation_map[tool]},"
-        }
-    }
-
-    citations << '.'
-
-    return citations.join(' ').trim()
 }
 
-def toolBibliographyText(tools) {
-    def bibliography_map = [
-        'bbmap_clumpify':                '<li>Bushnell B. BBTools: a collection of bioinformatics tools for processing short sequencing reads. URL: https://jgi.doe.gov/data-and-tools/software-tools/bbtools/.</li>',
-        'checkqc':                       '<li>Åslin et al., (2018). CheckQC: Quick quality control of Illumina sequencing runs. Journal of Open Source Software, 3(22), 556. doi: 10.21105/joss.00556</li>',
-        'fastp':                         '<li>Chen S., Zhou Y., Chen Y., & Gu J. (2018). fastp: an ultra-fast all-in-one FASTQ preprocessor. Bioinformatics, 34(17), i884-i890. doi: 10.1093/bioinformatics/bty560</li>',
-        'fastqc':                        '<li>Andrews S, (2010) FastQC, URL: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/.</li>',
-        'fastqe':                        '<li>FastQE, URL: https://github.com/fastqe/fastqe.</li>',
-        'fastqscreen':                   '<li>Wingett SW., & Andrews S. FastQ Screen: A tool for multi-genome mapping and quality control. F1000Res. 2018 Aug 24 [revised 2018 Jan 1];7:1338. doi: 10.12688/f1000research.15931.2. eCollection</li>',
-        'fq_lint':                       '<li>FQ: A library to generate and validate FASTQ file pairs. URL: https://github.com/stjude-rust-labs/fq.</li>',
-        'kraken2':                       '<li>Wood D.E., Lu J., & Langmead B. (2019). Improved metagenomic analysis with Kraken 2. Genome Biology, 20(1), 257. doi: 10.1186/s13059-019-1891-0</li>',
-        'multiqcsav':                    '<li>MultiQC SAV: MultiQC plugin for Illumina Sequencing Analysis Viewer. URL: https://multiqc.info/.</li>',
-        'picard_collecthsmetrics':       '<li>Broad Institute, (2019) Picard Tools, URL: https://broadinstitute.github.io/picard/.</li>',
-        'picard_collectmultiplemetrics': '<li>Broad Institute, (2019) Picard Tools, URL: https://broadinstitute.github.io/picard/.</li>',
-        'rundirparser':                  '<li>Rundirparser: Parse Illumina run directory metadata for MultiQC. URL: https://github.com/nf-core/seqinspector.</li>',
-        'seqfu_stats':                   '<li>Telatin, A.; Fariselli, P.; Birolo, G. SeqFu: A Suite of Utilities for the Robust and Reproducible Manipulation of Sequence Files. Bioengineering 2021, 8, 59. https://doi.org/10.3390/bioengineering8050059</li>',
-        'seqtk_sample':                  '<li>Li, H. SeqTk. Available online: https://github.com/lh3/seqtk (accessed on 6 May 2021)</li>',
-        'sequali':                       '<li>Vorderman, R. Sequali: efficient and comprehensive quality control of short- and long-read sequencing data. Bioinformatics Advances, 2025. doi: 10.1093/bioadv/vbaf010</li>',
-        'toulligqc':                     '<li>ToulligQC: A post sequencing QC tool for Oxford Nanopore sequencers. URL: https://github.com/GenomiqueENS/toulligQC.</li>',
+def toolBibliographyMap() {
+    return [
+        'bbmap_clumpify': '<li>Bushnell B. BBTools: a collection of bioinformatics tools for processing short sequencing reads. URL: https://jgi.doe.gov/data-and-tools/software-tools/bbtools/.</li>',
+        'bwamem2': '<li>Vasimuddin Md., Misra S., Li H, & Aluru S. (2019). Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems.</li>',
+        'checkqc': '<li>Åslin et al., (2018). CheckQC: Quick quality control of Illumina sequencing runs. Journal of Open Source Software, 3(22), 556. doi: 10.21105/joss.00556</li>',
+        'fastp': '<li>Chen S., Zhou Y., Chen Y., & Gu J. (2018). fastp: an ultra-fast all-in-one FASTQ preprocessor. Bioinformatics, 34(17), i884-i890. doi: 10.1093/bioinformatics/bty560</li>',
+        'fastqc': '<li>Andrews S, (2010) FastQC, URL: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/.</li>',
+        'fastqe': '<li>FastQE, URL: https://github.com/fastqe/fastqe.</li>',
+        'fastqscreen': '<li>Wingett SW., & Andrews S. FastQ Screen: A tool for multi-genome mapping and quality control. F1000Res. 2018 Aug 24 [revised 2018 Jan 1];7:1338. doi: 10.12688/f1000research.15931.2. eCollection</li>',
+        'fq_lint': '<li>FQ: A library to generate and validate FASTQ file pairs. URL: https://github.com/stjude-rust-labs/fq.</li>',
+        'kraken2': '<li>Wood D.E., Lu J., & Langmead B. (2019). Improved metagenomic analysis with Kraken 2. Genome Biology, 20(1), 257. doi: 10.1186/s13059-019-1891-0</li>',
+        'multiqc': '<li>Ewels, P., Magnusson, M., Lundin, S., & Käller, M. (2016). MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics, 32(19), 3047–3048. doi: /10.1093/bioinformatics/btw354</li>',
+        'multiqcsav': '<li>MultiQC SAV: MultiQC plugin for Illumina Sequencing Analysis Viewer. URL: https://github.com/MultiQC/MultiQC_SAV/.</li>',
+        'picard': '<li>Broad Institute, (2019) Picard Tools, URL: https://broadinstitute.github.io/picard/.</li>',
+        'rundirparser': '<li>Rundirparser: Parse Illumina run directory metadata for MultiQC. URL: https://github.com/nf-core/seqinspector.</li>',
+        'samtools': '<li>Danecek P., Bonfield JK., Liddle J., & al. (2021). Twelve years of SAMtools and BCFtools.</li>',
+        'seqfu_stats': '<li>Telatin, A.; Fariselli, P.; Birolo, G. SeqFu: A Suite of Utilities for the Robust and Reproducible Manipulation of Sequence Files. Bioengineering 2021, 8, 59. https://doi.org/10.3390/bioengineering8050059</li>',
+        'seqtk_sample': '<li>Li, H. SeqTk. Available online: https://github.com/lh3/seqtk (accessed on 6 May 2021)</li>',
+        'sequali': '<li>Vorderman, R. Sequali: efficient and comprehensive quality control of short- and long-read sequencing data. Bioinformatics Advances, 2025. doi: 10.1093/bioadv/vbaf010</li>',
+        'toulligqc': '<li>ToulligQC: A post sequencing QC tool for Oxford Nanopore sequencers. URL: https://github.com/GenomiqueENS/toulligQC.</li>',
     ]
-    def always_cited = alwaysCitedTools()
+}
 
-    // Always include infrastructure tool references
-    def references = [
-        '<li>Ewels, P., Magnusson, M., Lundin, S., & Käller, M. (2016). MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics, 32(19), 3047–3048. doi: /10.1093/bioinformatics/btw354</li>',
-    ]
-
-    // Add bwamem2 and samtools references if picard tools are used
-    def picard_tools = ['picard_collecthsmetrics', 'picard_collectmultiplemetrics']
-    if (tools.any { it in picard_tools }) {
-        references << '<li>Vasimuddin Md., Misra S., Li H, & Aluru S. (2019). Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems.</li>'
-        references << '<li>Danecek P., Bonfield JK., Liddle J., & al. (2021). Twelve years of SAMtools and BCFtools.</li>'
-    }
+def toolReferencesText(map, tools) {
+    def references = []
 
     // Add references for tools that are in the tools list
     tools.each { tool ->
-        if (tool in bibliography_map && !always_cited.contains(tool)) {
-            def ref = bibliography_map[tool]
-            if (ref) {
-                references << ref
-            }
+        if (tool in map) {
+            references << "${map[tool]},"
         }
     }
+
+    references << '.'
 
     return references.join(' ').trim()
 }
@@ -380,8 +359,9 @@ def methodsDescriptionText(mqc_methods_yaml, tools) {
     meta["nodoi_text"] = meta.manifest_map.doi ? "" : "<li>If available, make sure to update the text to include the Zenodo DOI of version of the pipeline used. </li>"
 
     // Tool references - dynamically built from tools list
-    meta["tool_citations"] = toolCitationText(tools).replaceAll(", \\.", ".").replaceAll("\\. \\.", ".").replaceAll(", \\.", ".")
-    meta["tool_bibliography"] = toolBibliographyText(tools)
+    meta["tool_citations"] = ['Tools used in the workflow included:']
+    meta["tool_citations"] << toolReferencesText(toolCitationMap(), toolListComplete(tools)).replaceAll(", \\.", ".").replaceAll("\\. \\.", ".").replaceAll(", \\.", ".")
+    meta["tool_bibliography"] = toolReferencesText(toolBibliographyMap(), toolListComplete(tools))
 
     def methods_text = mqc_methods_yaml.text
 
