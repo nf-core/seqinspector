@@ -7,8 +7,9 @@
                 "nf-core": {
                     "bbmap/clumpify": {
                         "branch": "master",
-                        "git_sha": "a1abf90966a2a4016d3c3e41e228bfcbd4811ccc",
-                        "installed_by": ["modules"]
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/bbmap/clumpify/bbmap-clumpify.diff"
                     },
                     "bwamem2/index": {
                         "branch": "master",
