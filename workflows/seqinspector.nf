@@ -198,8 +198,8 @@ workflow SEQINSPECTOR {
     // Any downstream tool will be run on subsampled reads if seqtk is run
     //
 
-    SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] }.filter { sample_size })
-    ch_sample = sample_size ? SEQTK_SAMPLE.out.reads : ch_samplesheet
+    SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] }.filter { 'seqtk_sample' in tools })
+    ch_sample = 'seqtk_sample' in tools ? SEQTK_SAMPLE.out.reads : ch_samplesheet
 
     // STEP 04: MORE QC ON FASTQ FILES (CAN BE SUMSAMPLED)
 
