@@ -70,7 +70,7 @@
 
   > Telatin A, Fariselli P, Birolo G. SeqFu: A Suite of Utilities for the Robust and Reproducible Manipulation of Sequence Files. Bioengineering 2021, 8, 59. doi.org/10.3390/bioengineering8050059
 
-- [Seqkit](https://doi.org/10.1371/journal.pone.0163962)
+- [Seqkit](https://doi.org/10.1002/imt2.191)
 
 > Wei Shen, Botond Sipos, and Liuyang Zhao. 2024. SeqKit2: A Swiss Army Knife for Sequence and Alignment Processing. iMeta e191. [doi:10.1002/imt2.191](https://doi.org/10.1002/imt2.191).
 
@@ -85,6 +85,22 @@
 - [ToulligQC](https://github.com/GenomiqueENS/toulligQC)
 
   > ToulligQC: A post sequencing QC tool for Oxford Nanopore sequencers.
+
+- [pigz](https://zlib.net/pigz/)
+
+  > Adler, M. pigz: A parallel implementation of gzip.
+
+- [Python](https://www.python.org/)
+
+  > Python Software Foundation. Python programming language.
+
+- [PyYAML](https://pyyaml.org/)
+
+  > PyYAML: YAML parser and emitter for Python.
+
+- [GNU tar](https://www.gnu.org/software/tar/)
+
+  > GNU tar: Archive utility.
 
 ## Software packaging/containerisation tools
 
