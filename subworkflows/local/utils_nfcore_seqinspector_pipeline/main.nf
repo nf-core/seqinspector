@@ -262,144 +262,29 @@ def genomeExistsError() {
 
 def toolReferencesMap() {
     return [
-        'bwamem2': [
-            'name': 'BWAMEM2',
-            'authors': 'Vasimuddin Md., Misra S., Li H, & Aluru S. (2019).',
-            'description': 'Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems.',
-            'link': '<a href="https://doi.org/10.1109/IPDPS.2019.00041">DOI:10.1109/IPDPS.2019.00041</a>'
-        ],
-        'checkqc': [
-            'name': 'checkQC',
-            'authors': 'Åslin et al., (2018).',
-            'description': 'CheckQC: Quick quality control of Illumina sequencing runs. Journal of Open Source Software, 3(22), 556.',
-            'link': '<a href="https://doi.org/10.21105/joss.00556">DOI:10.21105/joss.00556</a>'
-        ],
-        'fastp': [
-            'name': 'Fastp',
-            'authors': 'Chen S., Zhou Y., Chen Y., & Gu J. (2018).',
-            'description': 'fastp: an ultra-fast all-in-one FASTQ preprocessor. Bioinformatics, 34(17), i884-i890.',
-            'link': '<a href="https://doi.org/10.1093/bioinformatics/bty560">DOI:10.1093/bioinformatics/bty560</a>'
-        ],
-        'fastqc': [
-            'name': 'FastQC',
-            'authors': '',
-            'description': 'Quality control application for high throughput sequence data.',
-            'link': '<a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">https://www.bioinformatics.babraham.ac.uk/projects/fastqc/</a>'
-        ],
-        'fastqe': [
-            'name': 'FASTQE',
-            'authors': '',
-            'description': 'FASTQ sequence quality visualisation with Emoji.',
-            'link': '<a href="https://github.com/fastqe/fastqe">https://github.com/fastqe/fastqe</a>'
-        ],
-        'fastqscreen': [
-            'name': 'FastQ Screen',
-            'authors': 'Wingett SW., & Andrews S. (2018).',
-            'description': 'FastQ Screen: A tool for multi-genome mapping and quality control. F1000Res. 2018 Aug 24 [revised 2018 Jan 1];7:1338.',
-            'link': '<a href="https://doi.org/10.12688/f1000research.15931.2">DOI:10.12688/f1000research.15931.2</a>'
-        ],
-        'fq': [
-            'name': 'FQ',
-            'authors': '',
-            'description': 'A library to generate and validate FASTQ file pairs.',
-            'link': '<a href="https://github.com/stjude-rust-labs/fq">https://github.com/stjude-rust-labs/fq</a>'
-        ],
-        'kraken2': [
-            'name': 'Kraken2',
-            'authors': 'Wood D.E., Lu J., & Langmead B. (2019).',
-            'description': 'Improved metagenomic analysis with Kraken 2. Genome Biology, 20(1), 257.',
-            'link': '<a href="https://doi.org/10.1186/s13059-019-1891-0">DOI:10.1186/s13059-019-1891-0</a>'
-        ],
-        'krona': [
-            'name': 'Krona',
-            'authors': 'Ondov BD, Bergman NH, & Phillippy AM. (2011).',
-            'description': 'Interactive metagenomic visualization in a Web browser. BMC Bioinformatics, 12, 385.',
-            'link': '<a href="https://doi.org/10.1186/1471-2105-12-385">DOI:10.1186/1471-2105-12-385</a>'
-        ],
-        'multiqc': [
-            'name': 'MultiQC',
-            'authors': 'Ewels P., Magnusson M., Lundin S., & Käller M. (2016).',
-            'description': 'MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics, 32(19), 3047–3048.',
-            'link': '<a href="https://doi.org/10.1093/bioinformatics/btw354">DOI:10.1093/bioinformatics/btw354</a>'
-        ],
-        'multiqcsav': [
-            'name': 'MultiQC SAV',
-            'authors': '',
-            'description': 'MultiQC plugin for Illumina Sequencing Analysis Viewer.',
-            'link': '<a href="https://github.com/MultiQC/MultiQC_SAV/">https://github.com/MultiQC/MultiQC_SAV/</a>'
-        ],
-        'picard': [
-            'name': 'Picard',
-            'authors': '',
-            'description': 'Command line tools for manipulating high-throughput sequencing (HTS) data.',
-            'link': '<a href="https://broadinstitute.github.io/picard/">https://broadinstitute.github.io/picard/</a>'
-        ],
-        'pigz': [
-            'name': 'pigz',
-            'authors': '',
-            'description': 'Parallel implementation of gzip.',
-            'link': '<a href="https://zlib.net/pigz/">https://zlib.net/pigz/</a>'
-        ],
-        'python': [
-            'name': 'Python',
-            'authors': '',
-            'description': 'Programming language.',
-            'link': '<a href="https://www.python.org/">https://www.python.org/</a>'
-        ],
-        'pyyaml': [
-            'name': 'PyYAML',
-            'authors': '',
-            'description': 'YAML parser and emitter for Python.',
-            'link': '<a href="https://pyyaml.org/">https://pyyaml.org/</a>'
-        ],
-        'rundirparser': [
-            'name': 'Rundirparser',
-            'authors': '',
-            'description': 'Parse Illumina run directory metadata for MultiQC.',
-            'link': '<a href="https://github.com/nf-core/seqinspector">https://github.com/nf-core/seqinspector</a>'
-        ],
-        'samtools': [
-            'name': 'SAMTOOLS',
-            'authors': 'Danecek P., Bonfield JK., Liddle J., & al. (2021).',
-            'description': 'Twelve years of SAMtools and BCFtools.',
-            'link': '<a href="https://doi.org/10.1093/gigascience/giab008">DOI:10.1093/gigascience/giab008</a>'
-        ],
-        'seqfu': [
-            'name': 'SeqFu',
-            'authors': 'Telatin A., Fariselli P., & Birolo G. (2021).',
-            'description': 'SeqFu: A Suite of Utilities for the Robust and Reproducible Manipulation of Sequence Files. Bioengineering, 8, 59.',
-            'link': '<a href="https://doi.org/10.3390/bioengineering8050059">DOI:10.3390/bioengineering8050059</a>'
-        ],
-        'seqkit': [
-            'name': 'SeqKit',
-            'authors': 'Shen W., Sipos B., & Zhao L. (2024).',
-            'description': 'SeqKit2: A Swiss Army Knife for Sequence and Alignment Processing. iMeta, e191.',
-            'link': '<a href="https://doi.org/10.1002/imt2.191">DOI:10.1002/imt2.191</a>'
-        ],
-        'seqtk': [
-            'name': 'Seqtk',
-            'authors': '',
-            'description': 'Toolkit for processing FASTA and FASTQ files.',
-            'link': '<a href="https://github.com/lh3/seqtk">https://github.com/lh3/seqtk</a>'
-        ],
-        'sequali': [
-            'name': 'Sequali',
-            'authors': 'Vorderman R. (2025).',
-            'description': 'Sequali: efficient and comprehensive quality control of short- and long-read sequencing data. Bioinformatics Advances.',
-            'link': '<a href="https://doi.org/10.1093/bioadv/vbaf010">DOI:10.1093/bioadv/vbaf010</a>'
-        ],
-        'toulligqc': [
-            'name': 'ToulligQC',
-            'authors': '',
-            'description': 'Post sequencing QC tool for Oxford Nanopore sequencers.',
-            'link': '<a href="https://github.com/GenomiqueENS/toulligQC">https://github.com/GenomiqueENS/toulligQC</a>'
-        ],
-        'untar': [
-            'name': 'untar',
-            'authors': '',
-            'description': 'GNU tar archive utility.',
-            'link': '<a href="https://www.gnu.org/software/tar/">https://www.gnu.org/software/tar/</a>'
-        ],
+        'bwamem2': ['name': 'BWAMEM2', 'authors': 'Vasimuddin Md., Misra S., Li H, & Aluru S. (2019).', 'description': 'Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems.', 'doi': '10.1109/IPDPS.2019.00041'],
+        'checkqc': ['name': 'checkQC', 'authors': 'Åslin et al., (2018).', 'description': 'CheckQC: Quick quality control of Illumina sequencing runs. Journal of Open Source Software, 3(22), 556.', 'doi': '10.21105/joss.00556'],
+        'fastp': ['name': 'Fastp', 'authors': 'Chen S., Zhou Y., Chen Y., & Gu J. (2018).', 'description': 'fastp: an ultra-fast all-in-one FASTQ preprocessor. Bioinformatics, 34(17), i884-i890.', 'doi': '10.1093/bioinformatics/bty560'],
+        'fastqc': ['name': 'FastQC', 'authors': '', 'description': 'Quality control application for high throughput sequence data.', 'url': 'https://www.bioinformatics.babraham.ac.uk/projects/fastqc/'],
+        'fastqe': ['name': 'FASTQE', 'authors': '', 'description': 'FASTQ sequence quality visualisation with Emoji.', 'url': 'https://github.com/fastqe/fastqe'],
+        'fastqscreen': ['name': 'FastQ Screen', 'authors': 'Wingett SW., & Andrews S. (2018).', 'description': 'FastQ Screen: A tool for multi-genome mapping and quality control. F1000Res. 2018 Aug 24 [revised 2018 Jan 1];7:1338.', 'doi': '10.12688/f1000research.15931.2'],
+        'fq': ['name': 'FQ', 'authors': '', 'description': 'A library to generate and validate FASTQ file pairs.', 'url': 'https://github.com/stjude-rust-labs/fq'],
+        'kraken2': ['name': 'Kraken2', 'authors': 'Wood D.E., Lu J., & Langmead B. (2019).', 'description': 'Improved metagenomic analysis with Kraken 2. Genome Biology, 20(1), 257.', 'doi': '10.1186/s13059-019-1891-0'],
+        'krona': ['name': 'Krona', 'authors': 'Ondov BD, Bergman NH, & Phillippy AM. (2011).', 'description': 'Interactive metagenomic visualization in a Web browser. BMC Bioinformatics, 12, 385.', 'doi': '10.1186/1471-2105-12-385'],
+        'multiqc': ['name': 'MultiQC', 'authors': 'Ewels P., Magnusson M., Lundin S., & Käller M. (2016).', 'description': 'MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics, 32(19), 3047–3048.', 'doi': '10.1093/bioinformatics/btw354'],
+        'multiqcsav': ['name': 'MultiQC SAV', 'authors': '', 'description': 'MultiQC plugin for Illumina Sequencing Analysis Viewer.', 'url': 'https://github.com/MultiQC/MultiQC_SAV/'],
+        'picard': ['name': 'Picard', 'authors': '', 'description': 'Command line tools for manipulating high-throughput sequencing (HTS) data.', 'url': 'https://broadinstitute.github.io/picard/'],
+        'pigz': ['name': 'pigz', 'authors': '', 'description': 'Parallel implementation of gzip.', 'url': 'https://zlib.net/pigz/'],
+        'python': ['name': 'Python', 'authors': '', 'description': 'Programming language.', 'url': 'https://www.python.org/'],
+        'pyyaml': ['name': 'PyYAML', 'authors': '', 'description': 'YAML parser and emitter for Python.', 'url': 'https://pyyaml.org/'],
+        'rundirparser': ['name': 'Rundirparser', 'authors': '', 'description': 'Parse Illumina run directory metadata for MultiQC.', 'url': 'https://github.com/nf-core/seqinspector'],
+        'samtools': ['name': 'SAMTOOLS', 'authors': 'Danecek P., Bonfield JK., Liddle J., & al. (2021).', 'description': 'Twelve years of SAMtools and BCFtools.', 'doi': '10.1093/gigascience/giab008'],
+        'seqfu': ['name': 'SeqFu', 'authors': 'Telatin A., Fariselli P., & Birolo G. (2021).', 'description': 'SeqFu: A Suite of Utilities for the Robust and Reproducible Manipulation of Sequence Files. Bioengineering, 8, 59.', 'doi': '10.3390/bioengineering8050059'],
+        'seqkit': ['name': 'SeqKit', 'authors': 'Shen W., Sipos B., & Zhao L. (2024).', 'description': 'SeqKit2: A Swiss Army Knife for Sequence and Alignment Processing. iMeta, e191.', 'doi': '10.1002/imt2.191'],
+        'seqtk': ['name': 'Seqtk', 'authors': '', 'description': 'Toolkit for processing FASTA and FASTQ files.', 'url': 'https://github.com/lh3/seqtk'],
+        'sequali': ['name': 'Sequali', 'authors': 'Vorderman R. (2025).', 'description': 'Sequali: efficient and comprehensive quality control of short- and long-read sequencing data. Bioinformatics Advances.', 'doi': '10.1093/bioadv/vbaf010'],
+        'toulligqc': ['name': 'ToulligQC', 'authors': '', 'description': 'Post sequencing QC tool for Oxford Nanopore sequencers.', 'url': 'https://github.com/GenomiqueENS/toulligQC'],
+        'untar': ['name': 'untar', 'authors': '', 'description': 'GNU tar archive utility.', 'url': 'https://www.gnu.org/software/tar/'],
     ]
 }
 
@@ -410,11 +295,12 @@ def toolReferencesText(type, tools) {
     tools.each { tool ->
         if (tool in map) {
             def entry = map[tool]
+            def link = entry.doi ? "doi: <a href='https://doi.org/${entry.doi}'>${entry.doi}</a>" : "url: <a href='${entry.url}'>${entry.url}</a>"
             if (type == 'citation') {
-                references << "${entry.name} (${entry.link})"
-            } else {
-                def bib = entry.authors ? "${entry.authors} ${entry.description} ${entry.link}" : "${entry.description} ${entry.link}"
-                references << bib.trim()
+                references << "${entry.name} (${link})"
+            }
+            else {
+                references << "${entry.authors ? entry.authors + ' ' : ''}${entry.description} ${link}".trim()
             }
         }
     }
@@ -436,7 +322,7 @@ def methodsDescriptionText(mqc_methods_yaml, tool_list) {
         def temp_doi_ref = ""
         def manifest_doi = meta.manifest_map.doi.tokenize(",")
         manifest_doi.each { doi_ref ->
-            temp_doi_ref += "(doi: <a href=\'https://doi.org/${doi_ref.replace("https://doi.org/", "").replace(" ", "")}\'>${doi_ref.replace("https://doi.org/", "").replace(" ", "")}</a>), "
+            temp_doi_ref += "( <a href=\'https://doi.org/${doi_ref.replace("https://doi.org/", "").replace(" ", "")}\'>${doi_ref.replace("https://doi.org/", "").replace(" ", "")}</a>), "
         }
         meta["doi_text"] = temp_doi_ref.substring(0, temp_doi_ref.length() - 2)
     }
@@ -447,7 +333,7 @@ def methodsDescriptionText(mqc_methods_yaml, tool_list) {
 
     // Tool references - dynamically built from tools list
     meta["tool_citations"] = 'Tools used in the workflow included: ' + toolReferencesText('citation', tool_list).join(', ') + '.'
-    meta["tool_bibliography"] = toolReferencesText('long', tool_list).collect { "<li>${it}</li>" }.join('\n    ')
+    meta["tool_bibliography"] = toolReferencesText('bibliography', tool_list).collect { bibliography -> "<li>${bibliography}</li>" }.join('\n    ')
 
     def methods_text = mqc_methods_yaml.text
 
