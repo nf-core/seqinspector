@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#59](https://github.com/nf-core/seqinspector/pull/59) Seqkit Stats TSV output.
 - [#109](https://github.com/nf-core/seqinspector/pull/109) Adds ToulligQC module for long read QC
 - [#134](https://github.com/nf-core/seqinspector/pull/134) Added sequali module.
 - [#202](https://github.com/nf-core/seqinspector/pull/202) Added support for fasta fai file as input (via params or igenomes) for the pipeline
@@ -55,9 +56,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | htslib     | 1.22.1      | 1.23.1      |
 | kraken2    |             | 2.1.6       |
 | krona      |             | 2.8.1       |
-| multiqc    |             | 1.35        |
+| multiqc    | 1.34        | 1.35        |
 | multiqcsav |             | 0.2.0       |
 | samtools   | 1.22.1      | 1.23.1      |
+| seqkit     |             | 2.9.0       |
 | toulligqc  |             | 2.8.4       |
 | tar        |             | 1.34        |
 

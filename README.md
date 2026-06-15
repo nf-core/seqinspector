@@ -42,6 +42,7 @@ If provided, nf-core/seqinspector can also parse statistics from an Illumina run
 | `QC`                       | [`FASTQE`](https://fastqe.com/)                                                                                     | Read QC                                                                                       | [RNA, DNA]              | [N/A]                                                                                   | yes          |
 | `QC`                       | [`FastqScreen`](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/)                                   | Basic contamination detection                                                                 | [RNA, DNA]              | [N/A]                                                                                   | yes          |
 | `QC`                       | [`SeqFu Stats`](https://github.com/telatin/seqfu2)                                                                  | Sequence statistics                                                                           | [RNA, DNA]              | [N/A]                                                                                   | yes          |
+| `QC`                       | [`Seqkit Stats`](https://bioinf.shenwei.me/seqkit/usage/#stats)                                                     | Simple statistics of FASTA/Q files                                                            | [RNA, DNA]              | [N/A]                                                                                   | no           |
 | `QC`                       | [`Sequali`](https://sequali.readthedocs.io/en/latest/)                                                              | Read QC for long and short reads.                                                             | [RNA, DNA]              | [N/A]                                                                                   | yes          |
 | `Taxonomic Classification` | [`Kraken2`](https://ccb.jhu.edu/software/kraken2/)                                                                  | Performs taxonomic classification and/or profiling                                            | [RNA, DNA]              | [N/A]                                                                                   | no           |
 | `QC`                       | [`Picard collect multiple metrics`](https://broadinstitute.github.io/picard/picard-metric-definitions.html)         | Collect multiple QC metrics                                                                   | [RNA, DNA]              | [Bwamem2, SAMtools, `--genome`]                                                         | yes          |
@@ -75,6 +76,7 @@ If provided, nf-core/seqinspector can also parse statistics from an Illumina run
 | picard      | 3.4.0   |
 | samtools    | 1.23    |
 | seqfu       | 1.22.3  |
+| seqkit      | 2.9.0   |
 | seqtk       | 1.4     |
 | sequali     | 1.0.2   |
 
@@ -141,6 +143,7 @@ We thank the following people for their extensive assistance in the development 
 - [@pontushojer](https://github.com/pontushojer)
 - [@ramprasadn](https://github.com/ramprasadn)
 - [@rannick](https://github.com/rannick)
+- [@sarajeeeze](https://github.com/sarajeeeze)
 - [@TMAdams](https://github.com/TMAdams)
 - [@torigiffin](https://github.com/torigiffin)
 

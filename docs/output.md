@@ -30,6 +30,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 - [Kraken2](#kraken2) - Phylogenetic assignment of reads using k-mers
 - [Krona](#krona) - Interactive visualization of Kraken2 results
 - [MultiQC](#multiqc) - Aggregate report describing results and QC from the whole pipeline
+- [SeqkitStats](#seqkitstats) - Per sample TSV file with summary statistics
 - [Pipeline information](#pipeline-information) - Report metrics generated during the workflow execution
 
 ### References
@@ -326,6 +327,18 @@ The pipeline has special steps which also allow the software versions to be repo
 For more information about how to use MultiQC reports, see <https://seqera.io/multiqc/>.
 
 The MultiQC global report might also contain metrics related to the rundir via the [MULTIQC_SAV](https://github.com/MultiQC/MultiQC_SAV) plugin.
+
+### SeqkitStats
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `seqkit/`
+  - `*.tsv`: Per sample TSV file with summary statistics.
+
+</details>
+
+[SeqkitStats](https://bioinf.shenwei.me/seqkit/usage/#stats) it gives simple statistics such as number of sequences, min/max_len, N50, Q20%, Q30% and GC%. For further reading and documentation see the [Seqkit help pages]([Seqkit help](https://bioinf.shenwei.me/seqkit/)).
 
 ### Pipeline information
 

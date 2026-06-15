@@ -274,7 +274,6 @@ def toolListComplete(tools) {
     return final_tools_list.unique()
 }
 
-
 def toolCitationMap() {
     return [
         'bwamem2': 'BWAMEM2 (Vasimuddin 2019)',
@@ -290,6 +289,7 @@ def toolCitationMap() {
         'picard': 'Picard (Broad Institute 2019)',
         'rundirparser': 'Rundirparser',
         'samtools': 'SAMTOOLS (Danecek 2021)',
+        'seqkit_stats': 'SeqKit (Shen 2016)',
         'seqfu_stats': 'SeqFu (Telatin 2021)',
         'seqtk_sample': 'Seqtk (Li 2021)',
         'sequali': 'Sequali (Vorderman 2025)',
@@ -312,6 +312,7 @@ def toolBibliographyMap() {
         'picard': '<li>Broad Institute, (2019) Picard Tools, URL: <a href="https://broadinstitute.github.io/picard/">https://broadinstitute.github.io/picard/</a>.</li>',
         'rundirparser': '<li>Rundirparser: Parse Illumina run directory metadata for MultiQC. URL: <a href="https://github.com/nf-core/seqinspector">https://github.com/nf-core/seqinspector</a>.</li>',
         'samtools': '<li>Danecek P., Bonfield JK., Liddle J., & al. (2021). Twelve years of SAMtools and BCFtools. doi: <a href="https://doi.org/10.1093/gigascience/giab008">10.1093/gigascience/giab008</a></li>',
+        'seqkit_stats': '<li>Shen W., Xie Z., Liu Z., Zhang H., Zhang X., & Li R. (2016). SeqKit: A Cross-Platform and Ultrafast Toolkit for FASTA/Q File Manipulation. PLoS ONE 11(10): e0163962. doi: <a href="https://doi.org/10.1371/journal.pone.0163962">10.1371/journal.pone.0163962</a></li>',
         'seqfu_stats': '<li>Telatin, A.; Fariselli, P.; Birolo, G. SeqFu: A Suite of Utilities for the Robust and Reproducible Manipulation of Sequence Files. Bioengineering 2021, 8, 59. <a href="https://doi.org/10.3390/bioengineering8050059">https://doi.org/10.3390/bioengineering8050059</a></li>',
         'seqtk_sample': '<li>Li, H. SeqTk. Available online: <a href="https://github.com/lh3/seqtk">https://github.com/lh3/seqtk</a> (accessed on 6 May 2021)</li>',
         'sequali': '<li>Vorderman, R. Sequali: efficient and comprehensive quality control of short- and long-read sequencing data. Bioinformatics Advances, 2025. doi: <a href="https://doi.org/10.1093/bioadv/vbaf010">10.1093/bioadv/vbaf010</a></li>',
@@ -395,6 +396,7 @@ def defineToolsList(input_bundle, input_tools, input_skip, sample_size) {
         tools_list << 'picard_collecthsmetrics'
         tools_list << 'picard_collectmultiplemetrics'
         tools_list << 'rundirparser'
+        tools_list << 'seqkit_stats'
         tools_list << 'seqfu_stats'
         tools_list << 'sequali'
         tools_list << 'toulligqc'
@@ -407,6 +409,7 @@ def defineToolsList(input_bundle, input_tools, input_skip, sample_size) {
         tools_list << 'fastqc'
         tools_list << 'fastqscreen'
         tools_list << 'fq_lint'
+        tools_list << 'seqkit_stats'
     }
     if ('default' in bundle_list) {
         tools_list << 'fastqc'
@@ -432,7 +435,7 @@ def defineToolsList(input_bundle, input_tools, input_skip, sample_size) {
     if ('ont' in bundle_list) {
         tools_list << 'fastqc'
         tools_list << 'fastqscreen'
-        tools_list << 'seqfu_stats'
+        tools_list << 'seqkit_stats'
         tools_list << 'sequali'
         tools_list << 'toulligqc'
     }

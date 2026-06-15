@@ -17,6 +17,7 @@ include { MULTIQCSAV as MULTIQC_GLOBAL } from '../modules/nf-core/multiqcsav'
 include { RUNDIRPARSER                 } from '../modules/local/rundirparser'
 include { SAMTOOLS_INDEX               } from '../modules/nf-core/samtools/index'
 include { SEQFU_STATS                  } from '../modules/nf-core/seqfu/stats'
+include { SEQKIT_STATS                 } from '../modules/nf-core/seqkit/stats'
 include { SEQTK_SAMPLE                 } from '../modules/nf-core/seqtk/sample'
 include { SEQUALI                      } from '../modules/nf-core/sequali'
 include { TOULLIGQC                    } from '../modules/nf-core/toulligqc'
@@ -205,6 +206,8 @@ workflow SEQINSPECTOR {
     FASTQC(ch_sample.filter { 'fastqc' in tools })
 
     FASTQE(ch_sample.filter { 'fastqe' in tools })
+
+    SEQKIT_STATS(ch_sample.filter { 'seqkit_stats' in tools })
 
     //
     // MODULE: FASTP for adapter trimming and quality filtering
