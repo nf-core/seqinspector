@@ -10,7 +10,7 @@
                     "fastqscreen": "0.16.0"
                 },
                 "SEQKIT_STATS": {
-                    "seqkit": "2.9.0"
+                    "seqkit": "2.13.0"
                 },
                 "SEQUALI": {
                     "sequali": "1.0.2"
@@ -196,10 +196,10 @@
                 "multiqc_citations.txt:md5,cee7f1da386728e030a9ff7be571d071",
                 "multiqc_fastq_screen.txt:md5,0ab0d1c4c3e3393afdb50ad0e116e394",
                 "multiqc_fastqc.txt:md5,b71aaffef9767dfe9d83fde0d31a3a1b",
-                "multiqc_seqkit_stats.txt:md5,91e532c8227666ecd2cb6cdb6c5ce733",
+                "multiqc_seqkit_stats.txt:md5,80aac11bd582915e2f681038abe4edda",
                 "multiqc_sequali.txt:md5,2ba17e93e3d3ba1b98a85e69bd6d60e6",
                 "seqkit-stats-seqcounts-plot.txt:md5,a6fa62003602bc5818b3ccc45469394a",
-                "seqkit-stats-table.txt:md5,ce347a476709d9f62e29c802b1dca713",
+                "seqkit-stats-table.txt:md5,456c7182c4579852bb9ab8df56afe517",
                 "sequali_adapter_content_plot.txt:md5,c0d779325477586932586fee17c97b9e",
                 "sequali_per_position_gc_content_plot.txt:md5,b67abdb5ac496a09ea95a3df109723e0",
                 "sequali_per_position_quality_plot.txt:md5,239a9fe44aac60d777ebd1570eb010b2",
@@ -212,12 +212,12 @@
                 "sequali_sequence_length_distribution_plot_Sequences.txt:md5,2fee022380c46ff04fd6050bfb9eab71",
                 "hg001_01_screen.png:md5,b9c58e388f18ad11f4c2e29e9b573a5e",
                 "hg001_01_screen.txt:md5,8e53ea043d658a130f4b8ca455e2ba9b",
-                "hg001_01.tsv:md5,98ffaa6f89b74f9242f7df6d27de2574"
+                "hg001_01.tsv:md5,01e83eb39ad41a7d23cf58f4aa17af59"
             ],
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-06-12T17:22:44.452019685",
+        "timestamp": "2026-06-15T12:08:20.475317568",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.3"

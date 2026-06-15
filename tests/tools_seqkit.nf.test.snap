@@ -4,7 +4,7 @@
             6,
             {
                 "SEQKIT_STATS": {
-                    "seqkit": "2.9.0"
+                    "seqkit": "2.13.0"
                 }
             },
             [
@@ -43,7 +43,7 @@
                 "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
             ]
         ],
-        "timestamp": "2026-06-12T11:22:16.671360861",
+        "timestamp": "2026-06-15T12:07:18.701682984",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.3"
@@ -54,7 +54,7 @@
             6,
             {
                 "SEQKIT_STATS": {
-                    "seqkit": "2.9.0"
+                    "seqkit": "2.13.0"
                 }
             },
             [
@@ -145,25 +145,25 @@
             ],
             [
                 "multiqc_citations.txt:md5,c94ed9029091505edb952645737b035b",
-                "multiqc_seqkit_stats.txt:md5,beca7cde6b5a119e7ab686642f8556e7",
+                "multiqc_seqkit_stats.txt:md5,b55085231948693137fa80d2caab38fc",
                 "seqkit-stats-seqcounts-plot.txt:md5,781f6c43e2f86c487e240c16c611b7d2",
-                "seqkit-stats-table.txt:md5,c882d0331f7c8df645ddc9d542b5d541",
+                "seqkit-stats-table.txt:md5,e824face820a16e923af32aba7607a98",
                 "multiqc_citations.txt:md5,c94ed9029091505edb952645737b035b",
-                "multiqc_seqkit_stats.txt:md5,e31271a4940f4fbb1428da7d1c19bb76",
+                "multiqc_seqkit_stats.txt:md5,1907fa3e557e8a0c4784b5bfc5333e44",
                 "seqkit-stats-seqcounts-plot.txt:md5,28a3c703f94d98b88d3fe9532d740bfa",
-                "seqkit-stats-table.txt:md5,8f536e446844f1ceb18cdc0cb8e31215",
+                "seqkit-stats-table.txt:md5,e8c07da66c010cba534642c067357e42",
                 "multiqc_citations.txt:md5,c94ed9029091505edb952645737b035b",
-                "multiqc_seqkit_stats.txt:md5,bba9d58cb4af4ea22434d6071e1dcf4d",
+                "multiqc_seqkit_stats.txt:md5,2e94053198b5e7449d816d9abfcce579",
                 "seqkit-stats-seqcounts-plot.txt:md5,25308361bc9fac0b2706a459418b2a31",
-                "seqkit-stats-table.txt:md5,066330bb0c1da33494e29c1ae1d6f7d3",
-                "SAMPLE_PAIRED_END_1_01.tsv:md5,7fda22d70437d6fe7ce44f99e9c4947a",
-                "SAMPLE_PAIRED_END_2_02.tsv:md5,1fe3365f4b10ab35695fdef7726e73d3",
-                "SAMPLE_SINGLE_END_03.tsv:md5,0baa3ccc3ce26a1bc50e102f200a5e01"
+                "seqkit-stats-table.txt:md5,acd8f3d54f00be281230decf6930031a",
+                "SAMPLE_PAIRED_END_1_01.tsv:md5,b587a6cf793b48bf39e5db7c557a007a",
+                "SAMPLE_PAIRED_END_2_02.tsv:md5,74bef09cb01ce39e98abc234454224bc",
+                "SAMPLE_SINGLE_END_03.tsv:md5,9d12f7e8332f70dd23d49bca6a915299"
             ],
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-06-12T11:21:46.936092122",
+        "timestamp": "2026-06-15T12:06:58.237515959",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.3"
