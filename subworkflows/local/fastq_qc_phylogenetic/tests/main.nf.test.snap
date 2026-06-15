@@ -3,29 +3,17 @@
         "content": [
             [
                 [
-                    {
-                        "id": "test",
-                        "single_end": true
-                    },
-                    "FASTQ_QC_PHYLOGENETIC:KRAKEN2_KRAKEN2",
-                    "kraken2",
                     "test.kraken2.report.txt:md5,4227755fe40478b8d7dc8634b489761e"
                 ],
                 [
-                    {
-                        "id": "test",
-                        "single_end": true
-                    },
-                    "FASTQ_QC_PHYLOGENETIC:KRONA_KTIMPORTTAXONOMY",
-                    "krona",
                     "test.html"
                 ]
             ]
         ],
-        "timestamp": "2026-03-31T13:27:27.856939872",
+        "timestamp": "2026-06-15T13:30:48.324218441",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "25.10.4"
+            "nextflow": "26.04.3"
         }
     }
 }

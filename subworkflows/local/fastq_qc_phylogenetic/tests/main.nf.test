@@ -45,7 +45,13 @@ nextflow_workflow {
         }
         then {
             assert workflow.success
-            assert snapshot(topics.multiqc_files.collect { _meta, _process, _tool, file_ -> ( file_ instanceof List ? file_ : [file_] ).collect { file(it.toString()).name } }).match()
+            assert snapshot(topics.multiqc_files.collect { _meta, _process, tool, file_ ->
+                if (tool == 'kraken2') {
+                    ( file_ instanceof List ? file_ : [file_] ).collect { it }
+                } else{
+                    ( file_ instanceof List ? file_ : [file_] ).collect { file(it.toString()).name } }
+                }
+            ).match()
         }
     }
 }
