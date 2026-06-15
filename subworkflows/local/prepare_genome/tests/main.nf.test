@@ -22,18 +22,7 @@ nextflow_workflow {
 
         then {
             assert workflow.success
-            assert snapshot(sanitizeOutput(workflow.out).collectEntries { key, val ->
-                if (!val) {
-                    return null
-                }
-                else if (key == "bwamem2") {
-                    return [key, val.collect { [path(it[1]).list().collect { it }] }]
-                }
-                else if (key == "dict" || key == "fasta") {
-                    return [key, val.collect { file(it[1]).name }]
-                }
-                return [key, val.collect { path(it[1]) }]
-            }).match()
+            assert snapshot(sanitizeOutput(workflow.out, unstableKeys:['dict', 'fasta'])).match()
         }
     }
 
@@ -53,21 +42,7 @@ nextflow_workflow {
 
         then {
             assert workflow.success
-            assert snapshot(sanitizeOutput(workflow.out).collectEntries { key, val ->
-                if (!val) {
-                    return null
-                }
-                else if (key == "bwamem2") {
-                    return [key, val.collect { [path(it[1]).list().collect { it }] }]
-                }
-                else if (key == "dict") {
-                    return null
-                }
-                else if (key == "fasta") {
-                    return [key, val.collect { file(it[1]).name }]
-                }
-                return [key, val.collect { path(it[1]) }]
-            }).match()
+            assert snapshot(sanitizeOutput(workflow.out, unstableKeys:['dict', 'fasta'])).match()
         }
     }
 
@@ -87,18 +62,7 @@ nextflow_workflow {
 
         then {
             assert workflow.success
-            assert snapshot(sanitizeOutput(workflow.out).collectEntries { key, val ->
-                if (!val) {
-                    return null
-                }
-                else if (key == "bwamem2") {
-                    return [key, val.collect { [path(it[1]).list().collect { it }] }]
-                }
-                else if (key == "dict" || key == "fasta") {
-                    return [key, val.collect { file(it[1]).name }]
-                }
-                return [key, val.collect { path(it[1]) }]
-            }).match()
+            assert snapshot(sanitizeOutput(workflow.out, unstableKeys:['dict', 'fasta'])).match()
         }
     }
 }
