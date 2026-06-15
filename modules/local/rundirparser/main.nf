@@ -12,6 +12,7 @@ process RUNDIRPARSER {
 
     output:
     tuple val(meta), val("${task.process}"), val('rundirparser'), path("*_mqc.yml"), emit: multiqc, topic: multiqc_files
+    tuple val("${task.process}"), val('rundirparser'), eval("1.0.1"), emit: versions_rundirparser, topic: versions
     tuple val("${task.process}"), val('Python'), eval("python --version |& sed '1!d ; s/Python //'"), emit: versions_python, topic: versions
     tuple val("${task.process}"), val('PyYAML'), eval("python -c 'import yaml; print(yaml.__version__)'"), emit: versions_pyyaml, topic: versions
 

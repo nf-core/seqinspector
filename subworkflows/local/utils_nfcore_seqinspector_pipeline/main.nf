@@ -260,20 +260,6 @@ def genomeExistsError() {
 // Generate methods description for MultiQC
 //
 
-// Build complete tools list with dependencies
-def toolListComplete(tools) {
-    def final_tools_list = tools.clone()
-    final_tools_list << 'multiqc'
-
-    if ('picard_collecthsmetrics' in tools || 'picard_collectmultiplemetrics' in tools) {
-        final_tools_list << 'bwamem2'
-        final_tools_list << 'picard'
-        final_tools_list << 'samtools'
-    }
-
-    return final_tools_list.unique()
-}
-
 def toolCitationMap() {
     return [
         'bwamem2': 'BWAMEM2 (Vasimuddin 2019)',
@@ -282,18 +268,23 @@ def toolCitationMap() {
         'fastqc': 'FastQC (Andrews 2010)',
         'fastqe': 'FASTQE',
         'fastqscreen': 'FastQ Screen (Wingett 2018)',
-        'fq_lint': 'FQ',
+        'fq': 'FQ',
         'kraken2': 'Kraken2 (Wood 2019)',
+        'krona': 'Krona (Ondov 2011)',
         'multiqc': 'MultiQC (Ewels 2016)',
         'multiqcsav': 'MultiQC SAV',
         'picard': 'Picard (Broad Institute 2019)',
+        'pigz': 'pigz (Adler)',
+        'python': 'Python (Python Software Foundation)',
+        'pyyaml': 'PyYAML',
         'rundirparser': 'Rundirparser',
         'samtools': 'SAMTOOLS (Danecek 2021)',
-        'seqkit_stats': 'SeqKit (Shen 2016)',
-        'seqfu_stats': 'SeqFu (Telatin 2021)',
-        'seqtk_sample': 'Seqtk (Li 2021)',
+        'seqkit': 'SeqKit (Shen 2016)',
+        'seqfu': 'SeqFu (Telatin 2021)',
+        'seqtk': 'Seqtk (Li 2021)',
         'sequali': 'Sequali (Vorderman 2025)',
         'toulligqc': 'ToulligQC',
+        'untar': 'untar',
     ]
 }
 
@@ -305,18 +296,23 @@ def toolBibliographyMap() {
         'fastqc': '<li>Andrews S, (2010) FastQC, URL: <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">https://www.bioinformatics.babraham.ac.uk/projects/fastqc/</a>.</li>',
         'fastqe': '<li>FastQE, URL: <a href="https://github.com/fastqe/fastqe">https://github.com/fastqe/fastqe</a>.</li>',
         'fastqscreen': '<li>Wingett SW., & Andrews S. FastQ Screen: A tool for multi-genome mapping and quality control. F1000Res. 2018 Aug 24 [revised 2018 Jan 1];7:1338. doi: <a href="https://doi.org/10.12688/f1000research.15931.2">10.12688/f1000research.15931.2</a></li>',
-        'fq_lint': '<li>FQ: A library to generate and validate FASTQ file pairs. URL: <a href="https://github.com/stjude-rust-labs/fq">https://github.com/stjude-rust-labs/fq</a>.</li>',
+        'fq': '<li>FQ: A library to generate and validate FASTQ file pairs. URL: <a href="https://github.com/stjude-rust-labs/fq">https://github.com/stjude-rust-labs/fq</a>.</li>',
         'kraken2': '<li>Wood D.E., Lu J., & Langmead B. (2019). Improved metagenomic analysis with Kraken 2. Genome Biology, 20(1), 257. doi: <a href="https://doi.org/10.1186/s13059-019-1891-0">10.1186/s13059-019-1891-0</a></li>',
+        'krona': '<li>Ondov BD, Bergman NH, & Phillippy AM. (2011). Interactive metagenomic visualization in a Web browser. BMC Bioinformatics, 12, 385. doi: <a href="https://doi.org/10.1186/1471-2105-12-385">10.1186/1471-2105-12-385</a></li>',
         'multiqc': '<li>Ewels, P., Magnusson, M., Lundin, S., & Käller, M. (2016). MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics, 32(19), 3047–3048. doi: <a href="https://doi.org/10.1093/bioinformatics/btw354">10.1093/bioinformatics/btw354</a></li>',
         'multiqcsav': '<li>MultiQC SAV: MultiQC plugin for Illumina Sequencing Analysis Viewer. URL: <a href="https://github.com/MultiQC/MultiQC_SAV/">https://github.com/MultiQC/MultiQC_SAV/</a>.</li>',
         'picard': '<li>Broad Institute, (2019) Picard Tools, URL: <a href="https://broadinstitute.github.io/picard/">https://broadinstitute.github.io/picard/</a>.</li>',
+        'pigz': '<li>Adler M. pigz: A parallel implementation of gzip. URL: <a href="https://zlib.net/pigz/">https://zlib.net/pigz/</a>.</li>',
+        'python': '<li>Python Software Foundation. Python. URL: <a href="https://www.python.org/">https://www.python.org/</a>.</li>',
+        'pyyaml': '<li>PyYAML. URL: <a href="https://pyyaml.org/">https://pyyaml.org/</a>.</li>',
         'rundirparser': '<li>Rundirparser: Parse Illumina run directory metadata for MultiQC. URL: <a href="https://github.com/nf-core/seqinspector">https://github.com/nf-core/seqinspector</a>.</li>',
         'samtools': '<li>Danecek P., Bonfield JK., Liddle J., & al. (2021). Twelve years of SAMtools and BCFtools. doi: <a href="https://doi.org/10.1093/gigascience/giab008">10.1093/gigascience/giab008</a></li>',
-        'seqkit_stats': '<li>Shen W., Xie Z., Liu Z., Zhang H., Zhang X., & Li R. (2016). SeqKit: A Cross-Platform and Ultrafast Toolkit for FASTA/Q File Manipulation. PLoS ONE 11(10): e0163962. doi: <a href="https://doi.org/10.1371/journal.pone.0163962">10.1371/journal.pone.0163962</a></li>',
-        'seqfu_stats': '<li>Telatin, A.; Fariselli, P.; Birolo, G. SeqFu: A Suite of Utilities for the Robust and Reproducible Manipulation of Sequence Files. Bioengineering 2021, 8, 59. <a href="https://doi.org/10.3390/bioengineering8050059">https://doi.org/10.3390/bioengineering8050059</a></li>',
-        'seqtk_sample': '<li>Li, H. SeqTk. Available online: <a href="https://github.com/lh3/seqtk">https://github.com/lh3/seqtk</a> (accessed on 6 May 2021)</li>',
+        'seqkit': '<li>Shen W., Xie Z., Liu Z., Zhang H., Zhang X., & Li R. (2016). SeqKit: A Cross-Platform and Ultrafast Toolkit for FASTA/Q File Manipulation. PLoS ONE 11(10): e0163962. doi: <a href="https://doi.org/10.1371/journal.pone.0163962">10.1371/journal.pone.0163962</a></li>',
+        'seqfu': '<li>Telatin, A.; Fariselli, P.; Birolo, G. SeqFu: A Suite of Utilities for the Robust and Reproducible Manipulation of Sequence Files. Bioengineering 2021, 8, 59. <a href="https://doi.org/10.3390/bioengineering8050059">https://doi.org/10.3390/bioengineering8050059</a></li>',
+        'seqtk': '<li>Li, H. SeqTk. Available online: <a href="https://github.com/lh3/seqtk">https://github.com/lh3/seqtk</a> (accessed on 6 May 2021)</li>',
         'sequali': '<li>Vorderman, R. Sequali: efficient and comprehensive quality control of short- and long-read sequencing data. Bioinformatics Advances, 2025. doi: <a href="https://doi.org/10.1093/bioadv/vbaf010">10.1093/bioadv/vbaf010</a></li>',
         'toulligqc': '<li>ToulligQC: A post sequencing QC tool for Oxford Nanopore sequencers. URL: <a href="https://github.com/GenomiqueENS/toulligQC">https://github.com/GenomiqueENS/toulligQC</a>.</li>',
+        'untar': '<li>GNU tar. URL: <a href="https://www.gnu.org/software/tar/">https://www.gnu.org/software/tar/</a>.</li>',
     ]
 }
 
@@ -333,7 +329,7 @@ def toolReferencesText(map, tools) {
     return references.sort()
 }
 
-def methodsDescriptionText(mqc_methods_yaml, tools) {
+def methodsDescriptionText(mqc_methods_yaml, tool_list) {
     // Convert  to a named map so can be used as with familiar NXF ${workflow} variable syntax in the MultiQC YML file
     def meta = [:]
     meta.workflow = workflow.toMap()
@@ -357,8 +353,8 @@ def methodsDescriptionText(mqc_methods_yaml, tools) {
     meta["nodoi_text"] = meta.manifest_map.doi ? "" : "<li>If available, make sure to update the text to include the Zenodo DOI of version of the pipeline used. </li>"
 
     // Tool references - dynamically built from tools list
-    meta["tool_citations"] = 'Tools used in the workflow included:' + toolReferencesText(toolCitationMap(), toolListComplete(tools)).join(', ') + '.'
-    meta["tool_bibliography"] = toolReferencesText(toolBibliographyMap(), toolListComplete(tools)).join('\n    ')
+    meta["tool_citations"] = 'Tools used in the workflow included:' + toolReferencesText(toolCitationMap(), tool_list).join(', ') + '.'
+    meta["tool_bibliography"] = toolReferencesText(toolBibliographyMap(), tool_list).join('\n    ')
 
     def methods_text = mqc_methods_yaml.text
 

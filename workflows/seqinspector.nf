@@ -332,7 +332,12 @@ workflow SEQINSPECTOR {
         ? file(multiqc_methods_description, checkIfExists: true)
         : file("${projectDir}/assets/methods_description_template.yml", checkIfExists: true)
 
-    ch_methods_description = channel.value(methodsDescriptionText(ch_multiqc_custom_methods_description, tools))
+    ch_methods_description = channel.topic("versions")
+        .map { _process, tool, _version -> tool }
+        .unique()
+        .collect()
+        .map { tool_list -> ('multiqcsav' in tools ? tool_list + ['multiqcsav'] : tool_list).unique() }
+        .map { tool_list -> methodsDescriptionText(ch_multiqc_custom_methods_description, tool_list) }
 
     ch_multiqc_extra_files = ch_multiqc_extra_files.mix(ch_methods_description.collectFile(name: 'methods_description_mqc.yaml', sort: true))
 
