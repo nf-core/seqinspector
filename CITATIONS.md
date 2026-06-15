@@ -56,6 +56,10 @@
 
   > Telatin A, Fariselli P, Birolo G. SeqFu: A Suite of Utilities for the Robust and Reproducible Manipulation of Sequence Files. Bioengineering 2021, 8, 59. doi.org/10.3390/bioengineering8050059
 
+- [Seqkit](https://doi.org/10.1371/journal.pone.0163962)
+
+> Wei Shen, Botond Sipos, and Liuyang Zhao. 2024. SeqKit2: A Swiss Army Knife for Sequence and Alignment Processing. iMeta e191. [doi:10.1002/imt2.191](https://doi.org/10.1002/imt2.191).
+
 - [Seqtk](https://github.com/lh3/seqtk)
 
 - [Sequali](https://sequali.readthedocs.io/en/latest/)
