@@ -22,7 +22,13 @@ nextflow_workflow {
 
         then {
             assert workflow.success
-            assert snapshot(sanitizeOutput(workflow.out, unstableKeys:['dict', 'fasta'])).match()
+            assert snapshot(sanitizeOutput(workflow.out, unstableKeys:['fasta']).collectEntries { key, val ->
+                if (!val) {
+                    return null
+                } else {
+                    [key, val[0][1]]
+                }
+            }).match()
         }
     }
 
@@ -42,7 +48,13 @@ nextflow_workflow {
 
         then {
             assert workflow.success
-            assert snapshot(sanitizeOutput(workflow.out, unstableKeys:['dict', 'fasta'])).match()
+            assert snapshot(sanitizeOutput(workflow.out, unstableKeys:['dict', 'fasta']).collectEntries { key, val ->
+                if (!val) {
+                    return null
+                } else {
+                    [key, val[0][1]]
+                }
+            }).match()
         }
     }
 
@@ -62,7 +74,13 @@ nextflow_workflow {
 
         then {
             assert workflow.success
-            assert snapshot(sanitizeOutput(workflow.out, unstableKeys:['dict', 'fasta'])).match()
+            assert snapshot(sanitizeOutput(workflow.out, unstableKeys:['fasta']).collectEntries { key, val ->
+                if (!val) {
+                    return null
+                } else {
+                    [key, val[0][1]]
+                }
+            }).match()
         }
     }
 }

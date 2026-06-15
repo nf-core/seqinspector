@@ -3,46 +3,18 @@
         "content": [
             {
                 "bwamem2": [
-                    [
-                        {
-                            "id": "genome"
-                        },
-                        [
-                            "reference.fasta.0123:md5,0f0ff4414949e6787a25a563f19e2a3b",
-                            "reference.fasta.amb:md5,0a85644af00f9a856d874381d24e7803",
-                            "reference.fasta.ann:md5,8fdb46970ca95a4ef54f5f1a02d233cd",
-                            "reference.fasta.bwt.2bit.64:md5,3c0df9450afc5cb0ad5e85870829d9d0",
-                            "reference.fasta.pac:md5,96b449e1316067fdfba91b1399687bc2"
-                        ]
-                    ]
+                    "reference.fasta.0123:md5,0f0ff4414949e6787a25a563f19e2a3b",
+                    "reference.fasta.amb:md5,0a85644af00f9a856d874381d24e7803",
+                    "reference.fasta.ann:md5,8fdb46970ca95a4ef54f5f1a02d233cd",
+                    "reference.fasta.bwt.2bit.64:md5,3c0df9450afc5cb0ad5e85870829d9d0",
+                    "reference.fasta.pac:md5,96b449e1316067fdfba91b1399687bc2"
                 ],
-                "dict": [
-                    [
-                        {
-                            "id": "genome"
-                        },
-                        "/nf-core/test-datasets/raredisease/reference/reference.dict"
-                    ]
-                ],
-                "fai": [
-                    [
-                        {
-                            "id": "genome"
-                        },
-                        "reference.fasta.fai:md5,bf4047e05f95deb372eb8ffd601cbc29"
-                    ]
-                ],
-                "fasta": [
-                    [
-                        {
-                            "id": "genome"
-                        },
-                        "/nf-core/test-datasets/raredisease/reference/reference.fasta"
-                    ]
-                ]
+                "dict": "/nf-core/test-datasets/raredisease/reference/reference.dict",
+                "fai": "reference.fasta.fai:md5,bf4047e05f95deb372eb8ffd601cbc29",
+                "fasta": "/nf-core/test-datasets/raredisease/reference/reference.fasta"
             }
         ],
-        "timestamp": "2026-06-15T13:58:59.05695331",
+        "timestamp": "2026-06-15T14:08:58.394380567",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.3"
@@ -52,46 +24,18 @@
         "content": [
             {
                 "bwamem2": [
-                    [
-                        {
-                            "id": "genome"
-                        },
-                        [
-                            "reference.fasta.0123:md5,0f0ff4414949e6787a25a563f19e2a3b",
-                            "reference.fasta.amb:md5,0a85644af00f9a856d874381d24e7803",
-                            "reference.fasta.ann:md5,8fdb46970ca95a4ef54f5f1a02d233cd",
-                            "reference.fasta.bwt.2bit.64:md5,3c0df9450afc5cb0ad5e85870829d9d0",
-                            "reference.fasta.pac:md5,96b449e1316067fdfba91b1399687bc2"
-                        ]
-                    ]
+                    "reference.fasta.0123:md5,0f0ff4414949e6787a25a563f19e2a3b",
+                    "reference.fasta.amb:md5,0a85644af00f9a856d874381d24e7803",
+                    "reference.fasta.ann:md5,8fdb46970ca95a4ef54f5f1a02d233cd",
+                    "reference.fasta.bwt.2bit.64:md5,3c0df9450afc5cb0ad5e85870829d9d0",
+                    "reference.fasta.pac:md5,96b449e1316067fdfba91b1399687bc2"
                 ],
-                "dict": [
-                    [
-                        {
-                            "id": "genome"
-                        },
-                        "genome.dict"
-                    ]
-                ],
-                "fai": [
-                    [
-                        {
-                            "id": "genome"
-                        },
-                        "reference.fasta.fai:md5,bf4047e05f95deb372eb8ffd601cbc29"
-                    ]
-                ],
-                "fasta": [
-                    [
-                        {
-                            "id": "genome"
-                        },
-                        "/nf-core/test-datasets/raredisease/reference/reference.fasta"
-                    ]
-                ]
+                "dict": "genome.dict:md5,4d46e2b9b765e9c8122865d1d1f94e3b",
+                "fai": "reference.fasta.fai:md5,bf4047e05f95deb372eb8ffd601cbc29",
+                "fasta": "/nf-core/test-datasets/raredisease/reference/reference.fasta"
             }
         ],
-        "timestamp": "2026-06-15T13:59:42.105914429",
+        "timestamp": "2026-06-15T14:12:57.667997007",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.3"
@@ -100,26 +44,10 @@
     "[fasta, [], [], []] - no picard": {
         "content": [
             {
-                "bwamem2": [
-                    
-                ],
-                "dict": [
-                    
-                ],
-                "fai": [
-                    
-                ],
-                "fasta": [
-                    [
-                        {
-                            "id": "genome"
-                        },
-                        "/nf-core/test-datasets/raredisease/reference/reference.fasta"
-                    ]
-                ]
+                "fasta": "/nf-core/test-datasets/raredisease/reference/reference.fasta"
             }
         ],
-        "timestamp": "2026-06-15T13:58:16.977977597",
+        "timestamp": "2026-06-15T14:08:16.67185275",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.3"
