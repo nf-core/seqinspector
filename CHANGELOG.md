@@ -51,6 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Dependency | Old version | New version |
 | ---------- | ----------- | ----------- |
+| bbmap      |             | 39.18       |
 | checkQC    |             | 4.1.0       |
 | fastp      |             | 1.1.0       |
 | fastqe     |             | 0.5.2       |
@@ -63,7 +64,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | samtools   | 1.22.1      | 1.23.1      |
 | seqkit     |             | 2.9.0       |
 | toulligqc  |             | 2.8.4       |
-| bbmap      |             | 39.18       |
 | tar        |             | 1.34        |
 
 ### `Deprecated`
