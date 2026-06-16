@@ -11,7 +11,8 @@
                 },
                 "RUNDIRPARSER": {
                     "PyYAML": "6.0.2",
-                    "Python": "3.13.2"
+                    "Python": "3.13.2",
+                    "rundirparser": "1.0.1"
                 }
             },
             [
@@ -79,10 +80,10 @@
                 "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
             ]
         ],
-        "timestamp": "2026-04-09T14:02:10.8295216",
+        "timestamp": "2026-06-15T13:12:44.660216538",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "25.10.4"
+            "nextflow": "26.04.3"
         }
     },
     "NovaSeq6000 data test - checkqc,fastqc,multiqcsav,rundirparser - no rundir - stub": {
@@ -172,7 +173,8 @@
                 },
                 "RUNDIRPARSER": {
                     "PyYAML": "6.0.2",
-                    "Python": "3.13.2"
+                    "Python": "3.13.2",
+                    "rundirparser": "1.0.1"
                 }
             },
             [
@@ -664,10 +666,10 @@
                 "WARN: No rundir for sample(s): SampleA_02, sampletest_04"
             ]
         ],
-        "timestamp": "2026-03-30T17:48:33.503881186",
+        "timestamp": "2026-06-15T13:11:40.254224373",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "25.10.2"
+            "nextflow": "26.04.3"
         }
     },
     "NovaSeq6000 data test - checkqc,fastqc,multiqcsav,rundirparser - no rundir": {
