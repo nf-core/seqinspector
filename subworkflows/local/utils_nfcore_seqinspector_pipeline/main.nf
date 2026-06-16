@@ -295,11 +295,10 @@ def toolReferencesText(type, tools) {
     tools.each { tool ->
         if (tool in map) {
             def entry = map[tool]
-            def link = entry.doi ? "doi: <a href='https://doi.org/${entry.doi}'>${entry.doi}</a>" : "url: <a href='${entry.url}'>${entry.url}</a>"
             if (type == 'citation') {
-                references << "${entry.name} (${entry.doi ? "<a href='https://doi.org/${entry.doi}'>${entry.authors_short}</a>" : link})"
-            }
-            else {
+                references << "${entry.name} (${entry.doi ? "<a href='https://doi.org/${entry.doi}'>${entry.authors_short}</a>" : "<a href='${entry.url}'>${entry.url}</a>"})"
+            } else {
+                def link = entry.doi ? "doi: <a href='https://doi.org/${entry.doi}'>${entry.doi}</a>" : "url: <a href='${entry.url}'>${entry.url}</a>"
                 references << "${entry.authors ?: entry.name + ':'} ${entry.description} ${link}".trim()
             }
         }
