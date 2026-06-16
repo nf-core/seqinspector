@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#59](https://github.com/nf-core/seqinspector/pull/59) Seqkit Stats TSV output.
 - [#109](https://github.com/nf-core/seqinspector/pull/109) Adds ToulligQC module for long read QC
 - [#134](https://github.com/nf-core/seqinspector/pull/134) Added sequali module.
 - [#202](https://github.com/nf-core/seqinspector/pull/202) Added support for fasta fai file as input (via params or igenomes) for the pipeline
@@ -21,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#228](https://github.com/nf-core/seqinspector/pull/228) Update all modules/subworkflows
 - [#234](https://github.com/nf-core/seqinspector/pull/234) Add pipeline level PICARD tests
 - [#236](https://github.com/nf-core/seqinspector/pull/236) Added bbmap/clumpify module for FASTQ deduplication and compression
+- [#237](https://github.com/nf-core/seqinspector/pull/237) Add meta.yml for rundirparser module
 
 ### `Fixed`
 
@@ -43,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#222](https://github.com/nf-core/seqinspector/pull/222) Workflow output for fq/lint, kraken2, krona, toulligqc
 - [#223](https://github.com/nf-core/seqinspector/pull/223) Workflow output for the rest of the pipeline
 - [#235](https://github.com/nf-core/seqinspector/pull/235) Update MultiQC and other dependencies
+- [#237](https://github.com/nf-core/seqinspector/pull/237) Improved citation system to dynamically build tool citations based on selected tools
 
 ### `Dependencies`
 
@@ -55,9 +58,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | htslib     | 1.22.1      | 1.23.1      |
 | kraken2    |             | 2.1.6       |
 | krona      |             | 2.8.1       |
-| multiqc    |             | 1.35        |
+| multiqc    | 1.34        | 1.35        |
 | multiqcsav |             | 0.2.0       |
 | samtools   | 1.22.1      | 1.23.1      |
+| seqkit     |             | 2.9.0       |
 | toulligqc  |             | 2.8.4       |
 | bbmap      |             | 39.18       |
 | tar        |             | 1.34        |

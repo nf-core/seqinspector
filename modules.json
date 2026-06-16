@@ -117,6 +117,12 @@
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/seqfu/stats/seqfu-stats.diff"
                     },
+                    "seqkit/stats": {
+                        "branch": "master",
+                        "git_sha": "d07a945f421a4a91ce4e5a22db63e0e7f8741607",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/seqkit/stats/seqkit-stats.diff"
+                    },
                     "seqtk/sample": {
                         "branch": "master",
                         "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",

@@ -18,6 +18,7 @@ include { MULTIQCSAV as MULTIQC_GLOBAL } from '../modules/nf-core/multiqcsav'
 include { RUNDIRPARSER                 } from '../modules/local/rundirparser'
 include { SAMTOOLS_INDEX               } from '../modules/nf-core/samtools/index'
 include { SEQFU_STATS                  } from '../modules/nf-core/seqfu/stats'
+include { SEQKIT_STATS                 } from '../modules/nf-core/seqkit/stats'
 include { SEQTK_SAMPLE                 } from '../modules/nf-core/seqtk/sample'
 include { SEQUALI                      } from '../modules/nf-core/sequali'
 include { TOULLIGQC                    } from '../modules/nf-core/toulligqc'
@@ -204,8 +205,8 @@ workflow SEQINSPECTOR {
     // Any downstream tool will be run on subsampled reads if seqtk is run
     //
 
-    SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] }.filter { sample_size })
-    ch_sample = sample_size ? SEQTK_SAMPLE.out.reads : ch_samplesheet
+    SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] }.filter { 'seqtk_sample' in tools })
+    ch_sample = 'seqtk_sample' in tools ? SEQTK_SAMPLE.out.reads : ch_samplesheet
 
 
     // STEP 04: MORE QC ON FASTQ FILES (CAN BE SUMSAMPLED)
@@ -213,6 +214,8 @@ workflow SEQINSPECTOR {
     FASTQC(ch_sample.filter { 'fastqc' in tools })
 
     FASTQE(ch_sample.filter { 'fastqe' in tools })
+
+    SEQKIT_STATS(ch_sample.filter { 'seqkit_stats' in tools })
 
     //
     // MODULE: FASTP for adapter trimming and quality filtering
@@ -337,7 +340,12 @@ workflow SEQINSPECTOR {
         ? file(multiqc_methods_description, checkIfExists: true)
         : file("${projectDir}/assets/methods_description_template.yml", checkIfExists: true)
 
-    ch_methods_description = channel.value(methodsDescriptionText(ch_multiqc_custom_methods_description))
+    ch_methods_description = channel.topic("versions")
+        .map { _process, tool, _version -> tool }
+        .unique()
+        .collect()
+        .map { tool_list -> ('multiqcsav' in tools ? tool_list + ['multiqcsav'] : tool_list).unique() }
+        .map { tool_list -> methodsDescriptionText(ch_multiqc_custom_methods_description, tool_list) }
 
     ch_multiqc_extra_files = ch_multiqc_extra_files.mix(ch_methods_description.collectFile(name: 'methods_description_mqc.yaml', sort: true))
 
