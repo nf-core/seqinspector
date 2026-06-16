@@ -297,7 +297,8 @@ def toolReferencesText(type, tools) {
             def entry = map[tool]
             if (type == 'citation') {
                 references << "${entry.name} (${entry.doi ? "<a href='https://doi.org/${entry.doi}'>${entry.authors_short}</a>" : "<a href='${entry.url}'>${entry.url}</a>"})"
-            } else {
+            }
+            else {
                 def link = entry.doi ? "doi: <a href='https://doi.org/${entry.doi}'>${entry.doi}</a>" : "url: <a href='${entry.url}'>${entry.url}</a>"
                 references << "${entry.authors ?: entry.name + ':'} ${entry.description} ${link}".trim()
             }
