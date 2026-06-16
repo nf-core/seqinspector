@@ -10,8 +10,8 @@
                     "fastqc": "0.12.1"
                 },
                 "RUNDIRPARSER": {
-                    "PyYAML": "6.0.2",
-                    "Python": "3.13.2",
+                    "python": "3.13.2",
+                    "pyyaml": "6.0.2",
                     "rundirparser": "1.0.1"
                 }
             },
@@ -80,7 +80,7 @@
                 "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
             ]
         ],
-        "timestamp": "2026-06-15T13:12:44.660216538",
+        "timestamp": "2026-06-16T16:36:43.640701391",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.3"
@@ -172,8 +172,8 @@
                     "fastqc": "0.12.1"
                 },
                 "RUNDIRPARSER": {
-                    "PyYAML": "6.0.2",
-                    "Python": "3.13.2",
+                    "python": "3.13.2",
+                    "pyyaml": "6.0.2",
                     "rundirparser": "1.0.1"
                 }
             },
@@ -666,7 +666,7 @@
                 "WARN: No rundir for sample(s): SampleA_02, sampletest_04"
             ]
         ],
-        "timestamp": "2026-06-15T13:11:40.254224373",
+        "timestamp": "2026-06-16T16:35:40.437220565",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.3"

@@ -14,13 +14,13 @@
             [
                 [
                     "RUNDIRPARSER",
-                    "PyYAML",
-                    "6.0.2"
+                    "python",
+                    "3.13.2"
                 ],
                 [
                     "RUNDIRPARSER",
-                    "Python",
-                    "3.13.2"
+                    "pyyaml",
+                    "6.0.2"
                 ],
                 [
                     "RUNDIRPARSER",
@@ -29,7 +29,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-06-15T13:07:57.646729989",
+        "timestamp": "2026-06-16T16:34:39.967986788",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.3"
@@ -50,13 +50,13 @@
             [
                 [
                     "RUNDIRPARSER",
-                    "PyYAML",
-                    "6.0.2"
+                    "python",
+                    "3.13.2"
                 ],
                 [
                     "RUNDIRPARSER",
-                    "Python",
-                    "3.13.2"
+                    "pyyaml",
+                    "6.0.2"
                 ],
                 [
                     "RUNDIRPARSER",
@@ -65,7 +65,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-06-15T13:08:08.679341972",
+        "timestamp": "2026-06-16T16:34:50.171365737",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.3"
