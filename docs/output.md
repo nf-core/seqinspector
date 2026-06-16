@@ -18,7 +18,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 - [Rundirparser](#rundirparser) - Parse rundir metadata from Illumina runs
 - [ToulligQC](#toulligqc) - Raw read QC for Oxford Nanopore runs
 - [SeqFu](#seqfu) - Statistics for FASTA or FASTQ files
-- [BBMap Clumpify](#bbmap-clumpify) - Deduplication and compression of FASTQ files
+- [BBMap Clumpify](#bbmap-clumpify) - Deduplication assessment
 - [Seqtk](#seqtk) - Subsample a specific number of reads per sample
 - [FastQC](#fastqc) - Raw read QC
 - [Sequali](#sequali) - Sequence quality metrics for short and long reads
@@ -72,7 +72,7 @@ Fasta index with `samtools faidx`
 
 </details>
 
-[Seqtk](https://github.com/lh3/seqtk) samples sequences by number.
+[Seqtk](https://github.com/lh3/seqtk) samples sequences randomly using reservoir sampling with a fixed seed (`-s100`) for reproducibility.
 
 ### CheckQC
 
@@ -126,12 +126,12 @@ In this pipeline, the `seqfu stats` module is used to produce general quality me
 <details markdown="1">
 <summary>Output files</summary>
 
-- `clumped/[sample_id]/`
-  - `*.clumped.fastq.gz`: Deduplicated and compressed FASTQ files.
+- `reports/bbmap/[sample_id]/`
+  - `*.clumpify.log`: Log file with duplication statistics.
 
 </details>
 
-[BBMap Clumpify](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/clumpify-guide/) removes duplicates from sequencing data and creates smaller, faster gzipped FASTQ files. This is particularly useful for reducing file sizes while maintaining data quality.
+[BBMap Clumpify](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/clumpify-guide/) reorders reads for better compression and marks duplicates by appending `duplicate` to read names. The log reports duplication statistics for QC purposes.
 
 ### Seqtk
 
@@ -143,7 +143,7 @@ In this pipeline, the `seqfu stats` module is used to produce general quality me
 
 </details>
 
-[Seqtk](https://github.com/lh3/seqtk) samples sequences by number.
+[Seqtk](https://github.com/lh3/seqtk) samples sequences randomly using reservoir sampling with a fixed seed (`-s100`) for reproducibility.
 
 ### FastQC
 

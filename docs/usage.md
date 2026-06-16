@@ -122,6 +122,14 @@ You can also generate such `YAML`/`JSON` files via [nf-core/launch](https://nf-c
 
 Optionally, the `sample_size` parameter allows you to subset a random number of reads to be analysed.
 Both absolute numbers (e.g 100) and relative numbers (e.g 0.25) can be specified.
+Reads are sampled randomly using reservoir sampling with a fixed seed (`-s100`) for reproducibility.
+To use a different seed, override it via `ext.args` in `conf/modules.config`:
+
+```groovy
+withName: SEQTK_SAMPLE {
+    ext.args = '-s200'
+}
+```
 
 ```bash
 nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 -profile docker
