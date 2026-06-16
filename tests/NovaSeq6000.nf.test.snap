@@ -23,8 +23,8 @@
                     "picard": "3.4.0"
                 },
                 "RUNDIRPARSER": {
-                    "PyYAML": "6.0.2",
-                    "Python": "3.13.2",
+                    "python": "3.13.2",
+                    "pyyaml": "6.0.2",
                     "rundirparser": "1.0.1"
                 },
                 "SAMTOOLS_FAIDX": {
@@ -1498,7 +1498,7 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-06-15T13:14:55.481330865",
+        "timestamp": "2026-06-16T16:49:30.181322928",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.3"
