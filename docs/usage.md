@@ -154,7 +154,7 @@ Be aware that the default tools will still be run. In order to ONLY run the sele
 --tools fastqscreen,rundirparser --tools_bundle null
 ```
 
-Currently the `tools` param can have the following values: fastqc, fastqscreen, picard_collecthsmetrics, picard_collectmultiplemetrics, rundirparser and seqfu_stats.
+Currently the `tools` param can have the following values: bbmap_clumpify, checkqc, fastp, fastqc, fastqe, fastqscreen, fq_lint, kraken2, multiqcsav, picard_collecthsmetrics, picard_collectmultiplemetrics, rundirparser, seqkit_stats, seqfu_stats, sequali and toulligqc.
 
 #### Skip specific tools
 
@@ -181,9 +181,11 @@ Tools:
 
 - fastqc
 - fastqscreen
+- fq_lint
 - picard_collectmultiplemetrics
 - rundirparser
 - seqfu_stats
+- sequali
 
 </details>
 
@@ -197,13 +199,19 @@ Requirements:
 
 Tools:
 
-- checkQC
+- bbmap_clumpify
+- checkqc
 - fastqc
+- fastqe
 - fastqscreen
+- fq_lint
+- multiqcsav
 - picard_collecthsmetrics
 - picard_collectmultiplemetrics
 - rundirparser
+- seqkit_stats
 - seqfu_stats
+- sequali
 - toulligqc
 
 </details>
@@ -244,6 +252,8 @@ Tools:
 
 - fastqc
 - fastqscreen
+- fq_lint
+- seqkit_stats
 
 </details>
 
@@ -256,7 +266,8 @@ Requirements:
 
 Tools:
 
-- checkQC
+- checkqc
+- multiqcsav
 - rundirparser
 - seqfu_stats
 </details>
@@ -268,7 +279,8 @@ Tools:
 
 - fastqc
 - fastqscreen
-- seqfu_stats
+- seqkit_stats
+- sequali
 - toulligqc
 
 </details>
