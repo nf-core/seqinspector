@@ -262,6 +262,7 @@ def genomeExistsError() {
 
 def toolReferencesMap() {
     return [
+        'bbmap': ['name': 'BBMap', 'authors': 'Bushnell B. (2014).', 'authors_short': 'Bushnell 2014', 'description': 'BBMap: A Fast, Accurate, Splice-Aware Aligner.', 'url': 'https://github.com/bbushnell/BBTools'],
         'bwamem2': ['name': 'BWAMEM2', 'authors': 'Vasimuddin Md., Misra S., Li H, & Aluru S. (2019).', 'authors_short': 'Vasimuddin et al. 2019', 'description': 'Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems.', 'doi': '10.1109/IPDPS.2019.00041'],
         'checkqc': ['name': 'checkQC', 'authors': 'Åslin et al., (2018).', 'authors_short': 'Åslin et al. 2018', 'description': 'CheckQC: Quick quality control of Illumina sequencing runs. Journal of Open Source Software, 3(22), 556.', 'doi': '10.21105/joss.00556'],
         'fastp': ['name': 'Fastp', 'authors': 'Chen S., Zhou Y., Chen Y., & Gu J. (2018).', 'authors_short': 'Chen et al. 2018', 'description': 'fastp: an ultra-fast all-in-one FASTQ preprocessor. Bioinformatics, 34(17), i884-i890.', 'doi': '10.1093/bioinformatics/bty560'],
