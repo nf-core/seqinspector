@@ -209,7 +209,7 @@ workflow SEQINSPECTOR {
     ch_sample = 'seqtk_sample' in tools ? SEQTK_SAMPLE.out.reads : ch_samplesheet
 
 
-    // STEP 04: MORE QC ON FASTQ FILES (CAN BE SUMSAMPLED)
+    // STEP 04: MORE QC ON FASTQ FILES (CAN BE SUBSAMPLED)
 
     FASTQC(ch_sample.filter { 'fastqc' in tools })
 
