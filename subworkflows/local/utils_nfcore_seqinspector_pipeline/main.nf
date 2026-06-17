@@ -8,14 +8,19 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { UTILS_NFSCHEMA_PLUGIN   } from '../../nf-core/utils_nfschema_plugin'
+include { checkCondaChannels      } from 'plugin/nf-core-utils'
+include { checkConfigProvided     } from 'plugin/nf-core-utils'
+include { checkProfileProvided    } from 'plugin/nf-core-utils'
+include { completionEmail         } from 'plugin/nf-core-utils'
+include { completionSummary       } from 'plugin/nf-core-utils'
+include { dumpParametersToJSON    } from 'plugin/nf-core-utils'
+include { getWorkflowVersion      } from 'plugin/nf-core-utils'
+include { softwareVersionsToYAML  } from 'plugin/nf-core-utils'
+include { paramsHelp              } from 'plugin/nf-schema'
+include { paramsSummaryLog        } from 'plugin/nf-schema'
 include { paramsSummaryMap        } from 'plugin/nf-schema'
 include { samplesheetToList       } from 'plugin/nf-schema'
-include { paramsHelp              } from 'plugin/nf-schema'
-include { completionEmail         } from '../../nf-core/utils_nfcore_pipeline'
-include { completionSummary       } from '../../nf-core/utils_nfcore_pipeline'
-include { UTILS_NFCORE_PIPELINE   } from '../../nf-core/utils_nfcore_pipeline'
-include { UTILS_NEXTFLOW_PIPELINE } from '../../nf-core/utils_nextflow_pipeline'
+include { validateParameters      } from 'plugin/nf-schema'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -45,12 +50,15 @@ workflow PIPELINE_INITIALISATION {
     //
     // Print version and exit if required and dump pipeline parameters to JSON file
     //
-    UTILS_NEXTFLOW_PIPELINE(
-        version,
-        true,
-        outdir,
-        workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1,
-    )
+    if (version) {
+        log.info("${workflow.manifest.name} ${getWorkflowVersion()}")
+        System.exit(0)
+    }
+    def timestamp = new java.util.Date().format('yyyy-MM-dd_HH-mm-ss')
+    dumpParametersToJSON(params, "${outdir}/pipeline_info/params_${timestamp}.json")
+    if (workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1) {
+        checkCondaChannels()
+    }
 
     //
     // Validate parameters and generate parameter summary to stdout
@@ -80,20 +88,29 @@ workflow PIPELINE_INITIALISATION {
         before_text = before_text.replaceAll(/\033\[[0-9;]*m/, '')
     }
 
-    command = "nextflow run ${workflow.manifest.name} -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>"
+    def command = "nextflow run ${workflow.manifest.name} -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>"
 
-    UTILS_NFSCHEMA_PLUGIN(
-        workflow,
-        validate_params,
-        null,
-        help,
-        help_full,
-        show_hidden,
-        before_text,
-        after_text,
-        command,
-        null,
-    )
+    if (help || help_full) {
+        log.info paramsHelp(
+            [
+                beforeText: before_text,
+                afterText: after_text,
+                command: command,
+                showHidden: show_hidden,
+                fullHelp: help_full,
+            ],
+            (help instanceof String && help != "true") ? help : "",
+        )
+        System.exit(0)
+    }
+
+    log.info before_text
+    log.info paramsSummaryLog(workflow, parameters_schema: "nextflow_schema.json")
+    log.info after_text
+
+    if (validate_params) {
+        validateParameters(parameters_schema: "nextflow_schema.json")
+    }
 
     extra_text = """
 \033[1;37mExtra informations\033[0m
@@ -110,7 +127,8 @@ workflow PIPELINE_INITIALISATION {
     //
     // Check config provided to the pipeline
     //
-    UTILS_NFCORE_PIPELINE(nextflow_cli_args)
+    checkConfigProvided()
+    checkProfileProvided(nextflow_cli_args)
 
     //
     // Custom validation for pipeline parameters
@@ -229,6 +247,39 @@ workflow PIPELINE_COMPLETION {
 //
 def validateInputParameters() {
     genomeExistsError()
+}
+
+//
+// Get workflow summary for MultiQC
+//
+def paramsSummaryMultiqc(summary_params) {
+    def summary_section = ''
+    summary_params
+        .keySet()
+        .each { group ->
+            def group_params = summary_params.get(group)
+            if (group_params) {
+                summary_section += "    <p style=\"font-size:110%\"><b>${group}</b></p>\n"
+                summary_section += "    <dl class=\"dl-horizontal\">\n"
+                group_params
+                    .keySet()
+                    .sort()
+                    .each { param ->
+                        summary_section += "        <dt>${param}</dt><dd><samp>${group_params.get(param) ?: '<span style=\"color:#999999;\">N/A</a>'}</samp></dd>\n"
+                    }
+                summary_section += "    </dl>\n"
+            }
+        }
+
+    def yaml_file_text = "id: '${workflow.manifest.name.replace('/', '-')}-summary'\n" as String
+    yaml_file_text     += "description: ' - this information is collected when the pipeline is started.'\n"
+    yaml_file_text     += "section_name: '${workflow.manifest.name} Workflow Summary'\n"
+    yaml_file_text     += "section_href: 'https://github.com/${workflow.manifest.name}'\n"
+    yaml_file_text     += "plot_type: 'html'\n"
+    yaml_file_text     += "data: |\n"
+    yaml_file_text     += "${summary_section}"
+
+    return yaml_file_text
 }
 
 //

@@ -29,7 +29,7 @@ include { FASTQ_QC_PHYLOGENETIC        } from '../subworkflows/local/fastq_qc_ph
 // functions
 include { methodsDescriptionText       } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
 include { paramsSummaryMap             } from 'plugin/nf-schema'
-include { paramsSummaryMultiqc         } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { paramsSummaryMultiqc         } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
 include { reportIndexMultiqc           } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
 include { samplesheetToList            } from 'plugin/nf-schema'
 include { softwareVersionsToYAML       } from 'plugin/nf-core-utils'
