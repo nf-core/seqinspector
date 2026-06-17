@@ -181,6 +181,7 @@ workflow SEQINSPECTOR {
     //
 
     BBMAP_CLUMPIFY(ch_samplesheet.filter { 'bbmap_clumpify' in tools })
+    bbmap_clumpify_reads = save_bbmap_clumpify_reads ? BBMAP_CLUMPIFY.out.reads : channel.empty()
 
     //
     // MODULE: SEQFU_STATS
@@ -454,13 +455,13 @@ workflow SEQINSPECTOR {
     )
 
     emit:
-    bam_bai               = bam_bai
-    bbmap_clumpify_reads  = save_bbmap_clumpify_reads ? BBMAP_CLUMPIFY.out.reads : Channel.empty()
-    data_global           = MULTIQC_GLOBAL.out.data // channel: [ /path/to/multiqc_data/ ]
-    data_groups   = MULTIQC_PER_TAG.out.data // channel: [ /path/to/multiqc_data/ ]
-    plots_global  = MULTIQC_GLOBAL.out.plots // channel: [ /path/to/multiqc_plots/ ]
-    plots_groups  = MULTIQC_PER_TAG.out.plots // channel: [ /path/to/multiqc_plots/ ]
-    report_global = MULTIQC_GLOBAL.out.report // channel: [ /path/to/multiqc_report.html ]
-    report_groups = MULTIQC_PER_TAG.out.report // channel: [ /path/to/multiqc_report.html ]
-    subsampled    = SEQTK_SAMPLE.out.reads
+    bam_bai        = bam_bai
+    clumpify_reads = bbmap_clumpify_reads
+    data_global    = MULTIQC_GLOBAL.out.data // channel: [ /path/to/multiqc_data/ ]
+    data_groups    = MULTIQC_PER_TAG.out.data // channel: [ /path/to/multiqc_data/ ]
+    plots_global   = MULTIQC_GLOBAL.out.plots // channel: [ /path/to/multiqc_plots/ ]
+    plots_groups   = MULTIQC_PER_TAG.out.plots // channel: [ /path/to/multiqc_plots/ ]
+    report_global  = MULTIQC_GLOBAL.out.report // channel: [ /path/to/multiqc_report.html ]
+    report_groups  = MULTIQC_PER_TAG.out.report // channel: [ /path/to/multiqc_report.html ]
+    subsampled     = SEQTK_SAMPLE.out.reads
 }

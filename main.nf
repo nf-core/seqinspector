@@ -124,7 +124,7 @@ workflow {
     )
     reports                = channel.topic("multiqc_files")
     subsampled             = NFCORE_SEQINSPECTOR.out.subsampled
-    bbmap_clumpify_reads   = NFCORE_SEQINSPECTOR.out.bbmap_clumpify_reads
+    clumpify_reads         = NFCORE_SEQINSPECTOR.out.clumpify_reads
 }
 
 output {
@@ -132,6 +132,11 @@ output {
         path { meta, bam, index ->
             bam >> "mapped/${meta.id}/"
             index >> "mapped/${meta.id}/"
+        }
+    }
+    clumpify_reads {
+        path { meta, _fastq ->
+            "bbmap/${meta.id}/"
         }
     }
     kraken2_db {
@@ -172,11 +177,6 @@ output {
     subsampled {
         path { meta, _fastq ->
             "subsampled/${meta.id}/"
-        }
-    }
-    bbmap_clumpify_reads {
-        path { meta, _fastq ->
-            "bbmap/${meta.id}/"
         }
     }
 }
@@ -230,13 +230,13 @@ workflow NFCORE_SEQINSPECTOR {
     )
 
     emit:
-    bam_bai               = SEQINSPECTOR.out.bam_bai
-    bbmap_clumpify_reads  = SEQINSPECTOR.out.bbmap_clumpify_reads
-    data_global           = SEQINSPECTOR.out.data_global // channel: /path/to/multiqc_report.html
-    data_groups   = SEQINSPECTOR.out.data_groups // channel: /path/to/multiqc_report.html
-    plots_global  = SEQINSPECTOR.out.plots_global // channel: /path/to/multiqc_report.html
-    plots_groups  = SEQINSPECTOR.out.plots_groups // channel: /path/to/multiqc_report.html
-    report_global = SEQINSPECTOR.out.report_global // channel: /path/to/multiqc_report.html
-    report_groups = SEQINSPECTOR.out.report_groups // channel: /path/to/multiqc_report.html
-    subsampled    = SEQINSPECTOR.out.subsampled
+    bam_bai        = SEQINSPECTOR.out.bam_bai
+    clumpify_reads = SEQINSPECTOR.out.bbmap_clumpify_reads
+    data_global    = SEQINSPECTOR.out.data_global // channel: /path/to/multiqc_report.html
+    data_groups    = SEQINSPECTOR.out.data_groups // channel: /path/to/multiqc_report.html
+    plots_global   = SEQINSPECTOR.out.plots_global // channel: /path/to/multiqc_report.html
+    plots_groups   = SEQINSPECTOR.out.plots_groups // channel: /path/to/multiqc_report.html
+    report_global  = SEQINSPECTOR.out.report_global // channel: /path/to/multiqc_report.html
+    report_groups  = SEQINSPECTOR.out.report_groups // channel: /path/to/multiqc_report.html
+    subsampled     = SEQINSPECTOR.out.subsampled
 }
