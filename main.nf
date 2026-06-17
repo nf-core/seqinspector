@@ -231,7 +231,7 @@ workflow NFCORE_SEQINSPECTOR {
 
     emit:
     bam_bai        = SEQINSPECTOR.out.bam_bai
-    clumpify_reads = SEQINSPECTOR.out.bbmap_clumpify_reads
+    clumpify_reads = SEQINSPECTOR.out.clumpify_reads
     data_global    = SEQINSPECTOR.out.data_global // channel: /path/to/multiqc_report.html
     data_groups    = SEQINSPECTOR.out.data_groups // channel: /path/to/multiqc_report.html
     plots_global   = SEQINSPECTOR.out.plots_global // channel: /path/to/multiqc_report.html
