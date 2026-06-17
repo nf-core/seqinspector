@@ -684,11 +684,9 @@
                 "reports/picard_collectmultiplemetrics/sampletest_04/sampletest_04.CollectMultipleMetrics.quality_by_cycle_metrics",
                 "reports/picard_collectmultiplemetrics/sampletest_04/sampletest_04.CollectMultipleMetrics.quality_distribution_metrics"
             ],
-            [
-                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
-            ]
+            "No warnings"
         ],
-        "timestamp": "2026-06-08T14:21:24.291339228",
+        "timestamp": "2026-06-17T11:02:51.951677937",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.3"

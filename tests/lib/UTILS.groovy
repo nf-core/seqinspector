@@ -24,13 +24,15 @@ class UTILS {
         ]
 
         // stable_name: All files + folders in ${outdir}/ with a stable name
-        def stable_name = getAllFilesFromDir(outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
+        def stable_name = getAllFilesFromPath(outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
         // stable_content: All files in ${outdir}/ with stable content
-        def stable_content = getAllFilesFromDir(outdir, ignoreFile: 'tests/.nftignore', ignore: [scenario.ignoreFiles ])
+        def stable_content = getAllFilesFromPath(outdir, ignoreFile: 'tests/.nftignore', ignore: [scenario.ignoreFiles])
         // bam_files: All bam files
-        def bam_files = getAllFilesFromDir(outdir, include: ['**/*.bam'], ignore: [scenario.ignoreFiles ])
+        def bam_files = getAllFilesFromPath(outdir, include: ['**/*.bam'], ignore: [scenario.ignoreFiles])
 
         def assertion = []
+        // getAllFilesFromPath returns relative paths (strings), so this resolves to an absolute path
+        def absolutePath = { file -> file.toString().startsWith('/') ? file.toString() : "${outdir}/${file}" }
 
         if (!scenario.failure) {
             assertion.add(workflow.trace.succeeded().size())
@@ -41,8 +43,8 @@ class UTILS {
         assertion.add(stable_name)
 
         if (!scenario.stub) {
-            assertion.add(stable_content.isEmpty() ? 'No stable content' : stable_content)
-            assertion.add(bam_files.isEmpty() ? 'No BAM files' : bam_files.collect { file -> file.getName() + ":md5," + bam(file.toString()).readsMD5 })
+            assertion.add(stable_content.isEmpty() ? 'No stable content' : stable_content.collect { file -> path(absolutePath(file)) })
+            assertion.add(bam_files.isEmpty() ? 'No BAM files' : bam_files.collect { file -> file.tokenize('/').last() + ":md5," + bam(absolutePath(file)).readsMD5 })
         }
 
         // If we have a snapshot options in scenario then we allow to capture either stderr, stdout or both
@@ -113,6 +115,10 @@ class UTILS {
             // If a tag is provided, add it to the test
             if (scenario.tag) {
                 tag scenario.tag
+            }
+
+            if (scenario.failure) {
+                tag "failure"
             }
 
             if (scenario.rundir_folder && scenario.rundir_samplesheet) {

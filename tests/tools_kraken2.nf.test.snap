@@ -645,14 +645,12 @@
                 "subsampled/sampletest_04",
                 "subsampled/sampletest_04/sampletest_04.fastq.gz"
             ],
-            [
-                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
-            ]
+            "No warnings"
         ],
-        "timestamp": "2026-04-09T14:09:00.853191657",
+        "timestamp": "2026-06-17T11:01:25.548385547",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "25.10.4"
+            "nextflow": "26.04.3"
         }
     },
     "NovaSeq6000 data test - kraken2 - no_db - stub": {
@@ -660,17 +658,15 @@
             [
                 "pipeline_info"
             ],
-            [
-                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
-            ],
+            "No warnings",
             [
                 "No kraken2_db was provided, but Kraken2 was requested"
             ]
         ],
-        "timestamp": "2026-04-09T14:09:27.312230993",
+        "timestamp": "2026-06-17T11:01:45.01126395",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "25.10.4"
+            "nextflow": "26.04.3"
         }
     }
 }
