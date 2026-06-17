@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#226](https://github.com/nf-core/seqinspector/pull/226) Add pipeline level stub tests
 - [#228](https://github.com/nf-core/seqinspector/pull/228) Update all modules/subworkflows
 - [#234](https://github.com/nf-core/seqinspector/pull/234) Add pipeline level PICARD tests
+- [#236](https://github.com/nf-core/seqinspector/pull/236) Added bbmap/clumpify module for FASTQ deduplication and compression
 - [#237](https://github.com/nf-core/seqinspector/pull/237) Add meta.yml for rundirparser module
 
 ### `Fixed`
@@ -53,6 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Dependency | Old version | New version |
 | ---------- | ----------- | ----------- |
+| bbmap      |             | 39.18       |
 | checkQC    |             | 4.1.0       |
 | fastp      |             | 1.1.0       |
 | fastqe     |             | 0.5.2       |
