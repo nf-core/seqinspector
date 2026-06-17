@@ -140,8 +140,7 @@
                         "installed_by": ["modules"]
                     }
                 }
-            },
-            "subworkflows": {}
+            }
         }
     }
 }
