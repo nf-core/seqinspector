@@ -15,6 +15,16 @@ nextflow_pipeline {
             ],
         ],
         [
+            name: "MiSeq data test - bbmap_clumpify - save reads",
+            params: [
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/miseq.csv',
+                tools: 'bbmap_clumpify',
+                tools_bundle: null,
+                save_bbmap_clumpify_reads: true,
+                bbmap_clumpify_args: 'markduplicates=true dedupe=true',
+            ],
+        ],
+        [
             name: "MiSeq data test - bbmap_clumpify - stub",
             params: [
                 input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/miseq.csv',

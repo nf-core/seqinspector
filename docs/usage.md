@@ -171,6 +171,15 @@ Some tools might not be compatible with your data or you do not require all tool
 The nextflow configuration file can also be use to customise tool arguments.
 See official [nexflow](https://www.nextflow.io/docs/latest/config.html) and [nf-core](https://nf-co.re/docs/usage/configuration#customising-tool-arguments) documentation for further details.
 
+#### Custom tool arguments
+
+Some tools accept additional arguments that can be customised via command-line parameters. The following tool arguments are available:
+
+| Parameter               | Default                 | Description                                                                                              |
+| ----------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------- |
+| `--bbmap_clumpify_args` | `"markduplicates=true"` | Arguments passed to BBMap Clumpify. Use `dedupe=true` to remove duplicates instead of just marking them. |
+| `--fq_lint_args`        | `""`                    | Arguments passed to fq-lint.                                                                             |
+
 #### Choose pre-defined bundles of tools
 
 It is possible to also chose bundles of pre-specified tools using the `tools_bundle` parameter. It is still possible to remove tools using the `skip_tools` parameters or add additional tools with the `tools` parameter when chosing a predefined setup with `tools_bundle`.

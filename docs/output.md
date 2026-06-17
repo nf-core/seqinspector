@@ -126,12 +126,22 @@ In this pipeline, the `seqfu stats` module is used to produce general quality me
 <details markdown="1">
 <summary>Output files</summary>
 
+- `bbmap/[sample_id]/`
+  - `*.clumped.fastq.gz`: Clumped (and optionally deduplicated) FASTQ files.
 - `reports/bbmap/[sample_id]/`
   - `*.clumpify.log`: Log file with duplication statistics.
 
 </details>
 
 [BBMap Clumpify](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/clumpify-guide/) reorders reads for better compression and marks duplicates by appending `duplicate` to read names. The log reports duplication statistics for QC purposes.
+
+When `--save_bbmap_clumpify_reads` is enabled, the clumped FASTQ files are published to `bbmap/[sample_id]/`.
+
+The tool arguments can be customised via `--bbmap_clumpify_args`. By default, `markduplicates=true` is used to mark duplicates. To remove duplicates entirely, add `dedupe=true`:
+
+```bash
+--bbmap_clumpify_args 'markduplicates=true dedupe=true'
+```
 
 ### Seqtk
 
