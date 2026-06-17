@@ -8,19 +8,18 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { checkCondaChannels      } from 'plugin/nf-core-utils'
-include { checkConfigProvided     } from 'plugin/nf-core-utils'
-include { checkProfileProvided    } from 'plugin/nf-core-utils'
-include { completionEmail         } from 'plugin/nf-core-utils'
-include { completionSummary       } from 'plugin/nf-core-utils'
-include { dumpParametersToJSON    } from 'plugin/nf-core-utils'
-include { getWorkflowVersion      } from 'plugin/nf-core-utils'
-include { softwareVersionsToYAML  } from 'plugin/nf-core-utils'
-include { paramsHelp              } from 'plugin/nf-schema'
-include { paramsSummaryLog        } from 'plugin/nf-schema'
-include { paramsSummaryMap        } from 'plugin/nf-schema'
-include { samplesheetToList       } from 'plugin/nf-schema'
-include { validateParameters      } from 'plugin/nf-schema'
+include { checkCondaChannels   } from 'plugin/nf-core-utils'
+include { checkConfigProvided  } from 'plugin/nf-core-utils'
+include { checkProfileProvided } from 'plugin/nf-core-utils'
+include { completionEmail      } from 'plugin/nf-core-utils'
+include { completionSummary    } from 'plugin/nf-core-utils'
+include { dumpParametersToJSON } from 'plugin/nf-core-utils'
+include { getWorkflowVersion   } from 'plugin/nf-core-utils'
+include { paramsHelp           } from 'plugin/nf-schema'
+include { paramsSummaryLog     } from 'plugin/nf-schema'
+include { paramsSummaryMap     } from 'plugin/nf-schema'
+include { samplesheetToList    } from 'plugin/nf-schema'
+include { validateParameters   } from 'plugin/nf-schema'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -54,8 +53,9 @@ workflow PIPELINE_INITIALISATION {
         log.info("${workflow.manifest.name} ${getWorkflowVersion()}")
         System.exit(0)
     }
-    def timestamp = new java.util.Date().format('yyyy-MM-dd_HH-mm-ss')
-    dumpParametersToJSON(params, "${outdir}/pipeline_info/params_${timestamp}.json")
+    if (outdir) {
+        dumpParametersToJSON(outdir, params)
+    }
     if (workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1) {
         checkCondaChannels()
     }
@@ -91,22 +91,24 @@ workflow PIPELINE_INITIALISATION {
     def command = "nextflow run ${workflow.manifest.name} -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>"
 
     if (help || help_full) {
-        log.info paramsHelp(
-            [
-                beforeText: before_text,
-                afterText: after_text,
-                command: command,
-                showHidden: show_hidden,
-                fullHelp: help_full,
-            ],
-            (help instanceof String && help != "true") ? help : "",
+        log.info(
+            paramsHelp(
+                [
+                    beforeText: before_text,
+                    afterText: after_text,
+                    command: command,
+                    showHidden: show_hidden,
+                    fullHelp: help_full,
+                ],
+                (help instanceof String && help != "true") ? help : "",
+            )
         )
         System.exit(0)
     }
 
-    log.info before_text
-    log.info paramsSummaryLog(workflow, parameters_schema: "nextflow_schema.json")
-    log.info after_text
+    log.info(before_text)
+    log.info(paramsSummaryLog(workflow, parameters_schema: "nextflow_schema.json"))
+    log.info(after_text)
 
     if (validate_params) {
         validateParameters(parameters_schema: "nextflow_schema.json")
@@ -272,12 +274,12 @@ def paramsSummaryMultiqc(summary_params) {
         }
 
     def yaml_file_text = "id: '${workflow.manifest.name.replace('/', '-')}-summary'\n" as String
-    yaml_file_text     += "description: ' - this information is collected when the pipeline is started.'\n"
-    yaml_file_text     += "section_name: '${workflow.manifest.name} Workflow Summary'\n"
-    yaml_file_text     += "section_href: 'https://github.com/${workflow.manifest.name}'\n"
-    yaml_file_text     += "plot_type: 'html'\n"
-    yaml_file_text     += "data: |\n"
-    yaml_file_text     += "${summary_section}"
+    yaml_file_text += "description: ' - this information is collected when the pipeline is started.'\n"
+    yaml_file_text += "section_name: '${workflow.manifest.name} Workflow Summary'\n"
+    yaml_file_text += "section_href: 'https://github.com/${workflow.manifest.name}'\n"
+    yaml_file_text += "plot_type: 'html'\n"
+    yaml_file_text += "data: |\n"
+    yaml_file_text += "${summary_section}"
 
     return yaml_file_text
 }
