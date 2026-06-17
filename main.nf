@@ -95,6 +95,7 @@ workflow {
         ch_kraken2_db,
         params.kraken2_save_reads,
         params.kraken2_save_readclassifications,
+        params.save_bbmap_clumpify_reads,
     )
 
     //
@@ -123,6 +124,7 @@ workflow {
     )
     reports                = channel.topic("multiqc_files")
     subsampled             = NFCORE_SEQINSPECTOR.out.subsampled
+    bbmap_clumpify_reads   = NFCORE_SEQINSPECTOR.out.bbmap_clumpify_reads
 }
 
 output {
@@ -172,6 +174,11 @@ output {
             "subsampled/${meta.id}/"
         }
     }
+    bbmap_clumpify_reads {
+        path { meta, _fastq ->
+            "bbmap/${meta.id}/"
+        }
+    }
 }
 
 /*
@@ -194,6 +201,7 @@ workflow NFCORE_SEQINSPECTOR {
     kraken2_db
     kraken2_save_reads
     kraken2_save_readclassifications
+    save_bbmap_clumpify_reads
 
     main:
     //
@@ -218,11 +226,13 @@ workflow NFCORE_SEQINSPECTOR {
         kraken2_db,
         kraken2_save_reads,
         kraken2_save_readclassifications,
+        save_bbmap_clumpify_reads,
     )
 
     emit:
-    bam_bai       = SEQINSPECTOR.out.bam_bai
-    data_global   = SEQINSPECTOR.out.data_global // channel: /path/to/multiqc_report.html
+    bam_bai               = SEQINSPECTOR.out.bam_bai
+    bbmap_clumpify_reads  = SEQINSPECTOR.out.bbmap_clumpify_reads
+    data_global           = SEQINSPECTOR.out.data_global // channel: /path/to/multiqc_report.html
     data_groups   = SEQINSPECTOR.out.data_groups // channel: /path/to/multiqc_report.html
     plots_global  = SEQINSPECTOR.out.plots_global // channel: /path/to/multiqc_report.html
     plots_groups  = SEQINSPECTOR.out.plots_groups // channel: /path/to/multiqc_report.html

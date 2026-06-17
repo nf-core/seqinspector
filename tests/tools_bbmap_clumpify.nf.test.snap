@@ -114,5 +114,85 @@
             "nf-test": "0.9.5",
             "nextflow": "26.04.3"
         }
+    },
+    "MiSeq data test - bbmap_clumpify - save reads": {
+        "content": [
+            6,
+            {
+                "BBMAP_CLUMPIFY": {
+                    "bbmap": "39.18"
+                }
+            },
+            [
+                "bbmap",
+                "bbmap/SAMPLE_PAIRED_END_1_01",
+                "bbmap/SAMPLE_PAIRED_END_1_01/SAMPLE_PAIRED_END_1_01_1.clumped.fastq.gz",
+                "bbmap/SAMPLE_PAIRED_END_1_01/SAMPLE_PAIRED_END_1_01_2.clumped.fastq.gz",
+                "bbmap/SAMPLE_PAIRED_END_2_02",
+                "bbmap/SAMPLE_PAIRED_END_2_02/SAMPLE_PAIRED_END_2_02_1.clumped.fastq.gz",
+                "bbmap/SAMPLE_PAIRED_END_2_02/SAMPLE_PAIRED_END_2_02_2.clumped.fastq.gz",
+                "bbmap/SAMPLE_SINGLE_END_03",
+                "bbmap/SAMPLE_SINGLE_END_03/SAMPLE_SINGLE_END_03.clumped.fastq.gz",
+                "multiqc",
+                "multiqc/global_report",
+                "multiqc/global_report/multiqc_data",
+                "multiqc/global_report/multiqc_data/llms-full.txt",
+                "multiqc/global_report/multiqc_data/multiqc.log",
+                "multiqc/global_report/multiqc_data/multiqc.parquet",
+                "multiqc/global_report/multiqc_data/multiqc_citations.txt",
+                "multiqc/global_report/multiqc_data/multiqc_data.json",
+                "multiqc/global_report/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/global_report/multiqc_data/multiqc_sources.txt",
+                "multiqc/global_report/multiqc_report.html",
+                "multiqc/group_reports",
+                "multiqc/group_reports/Bpacificus",
+                "multiqc/group_reports/Bpacificus/multiqc_data",
+                "multiqc/group_reports/Bpacificus/multiqc_data/llms-full.txt",
+                "multiqc/group_reports/Bpacificus/multiqc_data/multiqc.log",
+                "multiqc/group_reports/Bpacificus/multiqc_data/multiqc.parquet",
+                "multiqc/group_reports/Bpacificus/multiqc_data/multiqc_citations.txt",
+                "multiqc/group_reports/Bpacificus/multiqc_data/multiqc_data.json",
+                "multiqc/group_reports/Bpacificus/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/group_reports/Bpacificus/multiqc_data/multiqc_sources.txt",
+                "multiqc/group_reports/Bpacificus/multiqc_report.html",
+                "multiqc/group_reports/K9H97",
+                "multiqc/group_reports/K9H97/multiqc_data",
+                "multiqc/group_reports/K9H97/multiqc_data/llms-full.txt",
+                "multiqc/group_reports/K9H97/multiqc_data/multiqc.log",
+                "multiqc/group_reports/K9H97/multiqc_data/multiqc.parquet",
+                "multiqc/group_reports/K9H97/multiqc_data/multiqc_citations.txt",
+                "multiqc/group_reports/K9H97/multiqc_data/multiqc_data.json",
+                "multiqc/group_reports/K9H97/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/group_reports/K9H97/multiqc_data/multiqc_sources.txt",
+                "multiqc/group_reports/K9H97/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
+                "reports",
+                "reports/bbmap",
+                "reports/bbmap/SAMPLE_PAIRED_END_1_01",
+                "reports/bbmap/SAMPLE_PAIRED_END_1_01/SAMPLE_PAIRED_END_1_01.clumpify.log",
+                "reports/bbmap/SAMPLE_PAIRED_END_2_02",
+                "reports/bbmap/SAMPLE_PAIRED_END_2_02/SAMPLE_PAIRED_END_2_02.clumpify.log",
+                "reports/bbmap/SAMPLE_SINGLE_END_03",
+                "reports/bbmap/SAMPLE_SINGLE_END_03/SAMPLE_SINGLE_END_03.clumpify.log"
+            ],
+            [
+                "SAMPLE_PAIRED_END_1_01_1.clumped.fastq.gz:md5,7e373dce32e0202bcda16a81275d5ca4",
+                "SAMPLE_PAIRED_END_1_01_2.clumped.fastq.gz:md5,a12a96f4a7edb2f150c7e459f1681df0",
+                "SAMPLE_PAIRED_END_2_02_1.clumped.fastq.gz:md5,1c40f43ea22d9538ea86505846a4e946",
+                "SAMPLE_PAIRED_END_2_02_2.clumped.fastq.gz:md5,89f2cb698b867ba35ee2d86a8f8269e2",
+                "SAMPLE_SINGLE_END_03.clumped.fastq.gz:md5,a49364b8e041940a48f865b8cc1049eb",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
+            ],
+            "No BAM files",
+            "No warnings"
+        ],
+        "timestamp": "2026-06-17T12:15:30.627413385",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.3"
+        }
     }
 }

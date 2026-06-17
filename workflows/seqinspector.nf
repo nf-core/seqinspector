@@ -61,6 +61,7 @@ workflow SEQINSPECTOR {
     kraken2_db
     kraken2_save_reads
     kraken2_save_readclassifications
+    save_bbmap_clumpify_reads
 
     main:
     def ch_multiqc_files = channel.empty()
@@ -453,8 +454,9 @@ workflow SEQINSPECTOR {
     )
 
     emit:
-    bam_bai       = bam_bai
-    data_global   = MULTIQC_GLOBAL.out.data // channel: [ /path/to/multiqc_data/ ]
+    bam_bai               = bam_bai
+    bbmap_clumpify_reads  = save_bbmap_clumpify_reads ? BBMAP_CLUMPIFY.out.reads : Channel.empty()
+    data_global           = MULTIQC_GLOBAL.out.data // channel: [ /path/to/multiqc_data/ ]
     data_groups   = MULTIQC_PER_TAG.out.data // channel: [ /path/to/multiqc_data/ ]
     plots_global  = MULTIQC_GLOBAL.out.plots // channel: [ /path/to/multiqc_plots/ ]
     plots_groups  = MULTIQC_PER_TAG.out.plots // channel: [ /path/to/multiqc_plots/ ]
