@@ -18,7 +18,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 - [Rundirparser](#rundirparser) - Parse rundir metadata from Illumina runs
 - [ToulligQC](#toulligqc) - Raw read QC for Oxford Nanopore runs
 - [SeqFu](#seqfu) - Statistics for FASTA or FASTQ files
-- [BBMap Clumpify](#bbmap-clumpify) - Deduplication assessment
+- [BBMap Clumpify](#bbmap-clumpify) - FASTQ deduplication, compression and deduplication assessment
 - [Seqtk](#seqtk) - Subsample a specific number of reads per sample
 - [FastQC](#fastqc) - Raw read QC
 - [Sequali](#sequali) - Sequence quality metrics for short and long reads
