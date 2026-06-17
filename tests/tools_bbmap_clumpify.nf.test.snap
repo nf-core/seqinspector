@@ -177,11 +177,6 @@
                 "reports/bbmap/SAMPLE_SINGLE_END_03/SAMPLE_SINGLE_END_03.clumpify.log"
             ],
             [
-                "SAMPLE_PAIRED_END_1_01_1.clumped.fastq.gz:md5,7e373dce32e0202bcda16a81275d5ca4",
-                "SAMPLE_PAIRED_END_1_01_2.clumped.fastq.gz:md5,a12a96f4a7edb2f150c7e459f1681df0",
-                "SAMPLE_PAIRED_END_2_02_1.clumped.fastq.gz:md5,1c40f43ea22d9538ea86505846a4e946",
-                "SAMPLE_PAIRED_END_2_02_2.clumped.fastq.gz:md5,89f2cb698b867ba35ee2d86a8f8269e2",
-                "SAMPLE_SINGLE_END_03.clumped.fastq.gz:md5,a49364b8e041940a48f865b8cc1049eb",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
