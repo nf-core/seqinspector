@@ -130,7 +130,7 @@ workflow PIPELINE_INITIALISATION {
     // Check config provided to the pipeline
     //
     checkConfigProvided()
-    checkProfileProvided(nextflow_cli_args)
+    checkProfileProvided(nextflow_cli_args, monochrome_logs)
 
     //
     // Custom validation for pipeline parameters
