@@ -18,6 +18,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 - [Rundirparser](#rundirparser) - Parse rundir metadata from Illumina runs
 - [ToulligQC](#toulligqc) - Raw read QC for Oxford Nanopore runs
 - [SeqFu](#seqfu) - Statistics for FASTA or FASTQ files
+- [BBMap Clumpify](#bbmap-clumpify) - FASTQ deduplication, compression and deduplication assessment
 - [Seqtk](#seqtk) - Subsample a specific number of reads per sample
 - [FastQC](#fastqc) - Raw read QC
 - [Sequali](#sequali) - Sequence quality metrics for short and long reads
@@ -71,7 +72,7 @@ Fasta index with `samtools faidx`
 
 </details>
 
-[Seqtk](https://github.com/lh3/seqtk) samples sequences by number.
+[Seqtk](https://github.com/lh3/seqtk) samples sequences randomly using reservoir sampling with a fixed seed (`-s100`) for reproducibility.
 
 ### CheckQC
 
@@ -120,6 +121,28 @@ This software is written in Python and developped by the GenomiqueENS core facil
 Includes functions to interleave and de-interleave FASTQ files, to rename sequences and to count and print statistics on sequence lengths.
 In this pipeline, the `seqfu stats` module is used to produce general quality metrics statistics.
 
+### BBMap Clumpify
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `bbmap/[sample_id]/`
+  - `*.clumped.fastq.gz`: Clumped (and optionally deduplicated) FASTQ files.
+- `reports/bbmap/[sample_id]/`
+  - `*.clumpify.log`: Log file with duplication statistics.
+
+</details>
+
+[BBMap Clumpify](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/clumpify-guide/) reorders reads for better compression and marks duplicates by appending `duplicate` to read names. The log reports duplication statistics for QC purposes.
+
+When `--save_bbmap_clumpify_reads` is enabled, the clumped FASTQ files are published to `bbmap/[sample_id]/`.
+
+The tool arguments can be customised via `--bbmap_clumpify_args`. By default, `markduplicates=true` is used to mark duplicates. To remove duplicates entirely, add `dedupe=true`:
+
+```bash
+--bbmap_clumpify_args 'markduplicates=true dedupe=true'
+```
+
 ### Seqtk
 
 <details markdown="1">
@@ -130,7 +153,7 @@ In this pipeline, the `seqfu stats` module is used to produce general quality me
 
 </details>
 
-[Seqtk](https://github.com/lh3/seqtk) samples sequences by number.
+[Seqtk](https://github.com/lh3/seqtk) samples sequences randomly using reservoir sampling with a fixed seed (`-s100`) for reproducibility.
 
 ### FastQC
 

@@ -5,6 +5,7 @@
 */
 
 // modules
+include { BBMAP_CLUMPIFY               } from '../modules/nf-core/bbmap/clumpify'
 include { BWAMEM2_MEM                  } from '../modules/nf-core/bwamem2/mem'
 include { CHECKQC                      } from '../modules/nf-core/checkqc'
 include { FASTP                        } from '../modules/nf-core/fastp'
@@ -60,6 +61,7 @@ workflow SEQINSPECTOR {
     kraken2_db
     kraken2_save_reads
     kraken2_save_readclassifications
+    save_bbmap_clumpify_reads
 
     main:
     def ch_multiqc_files = channel.empty()
@@ -175,6 +177,13 @@ workflow SEQINSPECTOR {
     // STEP 02: BASIC QC ON FASTQ FILES
 
     //
+    // MODULE: Run BBMAP_CLUMPIFY
+    //
+
+    BBMAP_CLUMPIFY(ch_samplesheet.filter { 'bbmap_clumpify' in tools })
+    bbmap_clumpify_reads = save_bbmap_clumpify_reads ? BBMAP_CLUMPIFY.out.reads : channel.empty()
+
+    //
     // MODULE: SEQFU_STATS
     //
 
@@ -201,7 +210,7 @@ workflow SEQINSPECTOR {
     SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] }.filter { 'seqtk_sample' in tools })
     ch_sample = 'seqtk_sample' in tools ? SEQTK_SAMPLE.out.reads : ch_samplesheet
 
-    // STEP 04: MORE QC ON FASTQ FILES (CAN BE SUMSAMPLED)
+    // STEP 04: MORE QC ON FASTQ FILES (CAN BE SUBSAMPLED)
 
     FASTQC(ch_sample.filter { 'fastqc' in tools })
 
@@ -446,12 +455,13 @@ workflow SEQINSPECTOR {
     )
 
     emit:
-    bam_bai       = bam_bai
-    data_global   = MULTIQC_GLOBAL.out.data // channel: [ /path/to/multiqc_data/ ]
-    data_groups   = MULTIQC_PER_TAG.out.data // channel: [ /path/to/multiqc_data/ ]
-    plots_global  = MULTIQC_GLOBAL.out.plots // channel: [ /path/to/multiqc_plots/ ]
-    plots_groups  = MULTIQC_PER_TAG.out.plots // channel: [ /path/to/multiqc_plots/ ]
-    report_global = MULTIQC_GLOBAL.out.report // channel: [ /path/to/multiqc_report.html ]
-    report_groups = MULTIQC_PER_TAG.out.report // channel: [ /path/to/multiqc_report.html ]
-    subsampled    = SEQTK_SAMPLE.out.reads
+    bam_bai        = bam_bai
+    clumpify_reads = bbmap_clumpify_reads
+    data_global    = MULTIQC_GLOBAL.out.data // channel: [ /path/to/multiqc_data/ ]
+    data_groups    = MULTIQC_PER_TAG.out.data // channel: [ /path/to/multiqc_data/ ]
+    plots_global   = MULTIQC_GLOBAL.out.plots // channel: [ /path/to/multiqc_plots/ ]
+    plots_groups   = MULTIQC_PER_TAG.out.plots // channel: [ /path/to/multiqc_plots/ ]
+    report_global  = MULTIQC_GLOBAL.out.report // channel: [ /path/to/multiqc_report.html ]
+    report_groups  = MULTIQC_PER_TAG.out.report // channel: [ /path/to/multiqc_report.html ]
+    subsampled     = SEQTK_SAMPLE.out.reads
 }

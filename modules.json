@@ -5,6 +5,12 @@
         "https://github.com/nf-core/modules.git": {
             "modules": {
                 "nf-core": {
+                    "bbmap/clumpify": {
+                        "branch": "master",
+                        "git_sha": "f946047c97ed78d3cdcecdc64169c7f9faef99df",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/bbmap/clumpify/bbmap-clumpify.diff"
+                    },
                     "bwamem2/index": {
                         "branch": "master",
                         "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",

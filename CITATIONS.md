@@ -10,6 +10,10 @@
 
 ## Pipeline tools
 
+- [BBMap](https://bbmap.org/)
+
+  > Bushnell, B. (2014) BBMap: A Fast, Accurate, Splice-Aware Aligner. 9th Annual Genomics of Energy & Environment Meeting, Walnut Creek, CA. https://github.com/bbushnell/BBTools
+
 - [BWAMEM2](https://github.com/bwa-mem2/bwa-mem2)
 
   > Vasimuddin Md, Misra S, Li H, Aluru S. Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems. In: 2019 IEEE International Parallel and Distributed Processing Symposium (IPDPS). IEEE; 2019:314-324. doi:10.1109/IPDPS.2019.00041
