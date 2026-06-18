@@ -28,12 +28,15 @@ include { BAM_QC                       } from '../subworkflows/local/bam_qc'
 include { FASTQ_QC_PHYLOGENETIC        } from '../subworkflows/local/fastq_qc_phylogenetic'
 
 // functions
-include { methodsDescriptionText       } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { citationsOnTheFly            } from 'plugin/nf-core-utils'
+include { methodsDescriptionText       } from 'plugin/nf-core-utils'
 include { paramsSummaryMap             } from 'plugin/nf-schema'
-include { paramsSummaryMultiqc         } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
-include { reportIndexMultiqc           } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { paramsSummaryMultiqc         } from 'plugin/nf-core-utils'
 include { samplesheetToList            } from 'plugin/nf-schema'
 include { softwareVersionsToYAML       } from 'plugin/nf-core-utils'
+
+// custom functions
+include { reportIndexMultiqc           } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -341,12 +344,11 @@ workflow SEQINSPECTOR {
         ? file(multiqc_methods_description, checkIfExists: true)
         : file("${projectDir}/assets/methods_description_template.yml", checkIfExists: true)
 
-    ch_methods_description = channel.topic("versions")
-        .map { _process, tool, _version -> tool }
-        .unique()
-        .collect()
-        .map { tool_list -> ('multiqcsav' in tools ? tool_list + ['multiqcsav'] : tool_list).unique() }
-        .map { tool_list -> methodsDescriptionText(ch_multiqc_custom_methods_description, tool_list) }
+    // Build citations on the fly from versions topic + meta.yml files
+    ch_methods_description = channel.topic('versions')
+        .collect(flat: false)
+        .map { versions -> citationsOnTheFly(versions, files("${projectDir}/modules/**/meta.yml").collect { path -> path.toString() }, ['multiqcsav']) }
+        .map { versions -> methodsDescriptionText(ch_multiqc_custom_methods_description.toString(), versions) }
 
     ch_multiqc_extra_files = ch_multiqc_extra_files.mix(ch_methods_description.collectFile(name: 'methods_description_mqc.yaml', sort: true))
 
