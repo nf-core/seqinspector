@@ -105,9 +105,7 @@
                 "reports/bbmap/SAMPLE_SINGLE_END_03",
                 "reports/bbmap/SAMPLE_SINGLE_END_03/SAMPLE_SINGLE_END_03.clumpify.log"
             ],
-            [
-                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
-            ]
+            "No warnings"
         ],
         "timestamp": "2026-06-12T13:32:08.528487804",
         "meta": {
