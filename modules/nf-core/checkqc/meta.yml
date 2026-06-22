@@ -12,6 +12,11 @@ tools:
       homepage: "https://github.com/Molmed/checkQC"
       documentation: "http://checkqc.readthedocs.io/en/latest/"
       doi: "10.21105/joss.00556"
+      publication:
+        author: "Åslin Matilda, Brandt Monika & Dahlberg Johan"
+        title: "CheckQC: Quick quality control of Illumina sequencing runs"
+        year: 2018
+        source: "Journal of Open Source Software"
       licence:
         - "GPL v3"
       identifier: ""

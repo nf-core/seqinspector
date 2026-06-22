@@ -10,6 +10,11 @@ tools:
         A tool designed to provide fast all-in-one preprocessing for FastQ files. This tool is developed in C++ with multithreading supported to afford high performance.
       documentation: https://github.com/OpenGene/fastp
       doi: 10.1093/bioinformatics/bty560
+      publication:
+        author: "Chen Shifu, Zhou Yanqing, Chen Yaru & Gu Jia"
+        title: "fastp: an ultra-fast all-in-one FASTQ preprocessor"
+        year: 2018
+        source: "Bioinformatics"
       licence: ["MIT"]
       identifier: biotools:fastp
 input:
