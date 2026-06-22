@@ -15,6 +15,7 @@ tools:
       publication:
         author: "Ondov Brian D, Bergman Nicholas H & Phillippy Adam M"
         year: 2011
+        source: "BMC Bioinformatics"
         title: "Interactive metagenomic visualization in a Web browser"
       identifier: biotools:krona
       # There is no input. This module downloads a pre-built taxonomy database for use with Krona Tools.

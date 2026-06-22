@@ -16,6 +16,7 @@ tools:
       publication:
         author: "Vasimuddin Md, Misra Sanchit, Li Heng & Aluru Srinivas"
         year: 2018
+        source: "IEEE International Parallel and Distributed Processing Symposium (IPDPS)"
         title: "Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems"
       licence:
         - "MIT"
