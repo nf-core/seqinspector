@@ -11,7 +11,7 @@ tools:
         BWA-mem2 is a software package for mapping DNA sequences against
         a large reference genome, such as the human genome.
       homepage: https://github.com/bwa-mem2/bwa-mem2
-      documentation: http://www.htslib.org/doc/samtools.html
+      documentation: https://github.com/bwa-mem2/bwa-mem2#usage
       doi: "10.1109/IPDPS.2019.00041"
       publication:
         author: "Vasimuddin Md, Misra Sanchit, Li Heng & Aluru Srinivas"

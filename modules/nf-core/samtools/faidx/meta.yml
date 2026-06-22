@@ -18,6 +18,7 @@ tools:
       publication:
         author: "Li Heng, Handsaker Bob, Wysoker Alec, Fennell Tim, Ruan Jue, Homer Nils, Marth Gabor, Abecasis Goncalo, Durbin Richard, 1000 Genome Project Data Processing Subgroup"
         year: 2009
+        source: "Bioinformatics"
         title: "The Sequence Alignment/Map format and SAMtools"
       licence:
         - "MIT"

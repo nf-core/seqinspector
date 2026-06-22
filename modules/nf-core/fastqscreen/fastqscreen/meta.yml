@@ -16,9 +16,6 @@ tools:
       documentation: "https://stevenwingett.github.io/FastQ-Screen/"
       tool_dev_url: "https://github.com/StevenWingett/FastQ-Screen/archive/refs/tags/v0.15.3.zip"
       doi: "10.5281/zenodo.5838377"
-      publication:
-        author: "Wingett SW, Andrews S"
-        year: 2018
       licence: ["GPL-3.0-or-later"]
       identifier: ""
 input:
