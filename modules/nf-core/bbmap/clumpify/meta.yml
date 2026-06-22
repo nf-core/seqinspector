@@ -12,10 +12,6 @@ tools:
         bioinformatic tools.
       homepage: https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/clumpify-guide/
       documentation: https://www.biostars.org/p/225338/
-      publication:
-        author: "Bushnell B"
-        title: "BBMap: A Fast, Accurate, Splice-Aware Aligner."
-        year: 2014
       licence:
         - "UC-LBL license (see package)"
       identifier: biotools:bbmap
