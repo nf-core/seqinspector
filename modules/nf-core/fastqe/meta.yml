@@ -14,7 +14,7 @@ tools:
       tool_dev_url: "https://github.com/fastqe/fastqe"
       doi: "10.25334/Q4D172"
       publication:
-        author: "StJacques Rachael, Maza Max, Robertson Sabrina, Lu Guoqing, Lonsdale Andrew & Enke Ray A"
+        author: "StJacques R., Maza M., Robertson S., Lu G., Lonsdale A. & Enke R.A."
         year: 2019
         source: "Journal of Open Source Education"
         title: "A Fun Introductory Command Line Exercise: Next Generation Sequencing Quality Analysis with Emoji!"

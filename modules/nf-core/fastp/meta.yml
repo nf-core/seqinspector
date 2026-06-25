@@ -11,7 +11,7 @@ tools:
       documentation: https://github.com/OpenGene/fastp
       doi: 10.1093/bioinformatics/bty560
       publication:
-        author: "Chen Shifu, Zhou Yanqing, Chen Yaru & Gu Jia"
+        author: "Chen S., Zhou Y., Chen Y. & Gu J."
         title: "fastp: an ultra-fast all-in-one FASTQ preprocessor"
         year: 2018
         source: "Bioinformatics"

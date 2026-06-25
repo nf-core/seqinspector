@@ -14,7 +14,7 @@ tools:
       documentation: https://docs.seqera.io/multiqc/
       doi: "10.1093/bioinformatics/btw354"
       publication:
-        author: "Ewels Philip, Magnusson Måns, Lundin Sverker & Käller Max"
+        author: "Ewels P., Magnusson M., Lundin S. & Käller M."
         year: 2016
         source: "Bioinformatics"
         title: "MultiQC: summarize analysis results for multiple tools and samples in a single report"
