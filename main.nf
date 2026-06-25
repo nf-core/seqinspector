@@ -22,6 +22,7 @@ include { PREPARE_GENOME           } from './subworkflows/local/prepare_genome'
 include { UNTAR as UNTAR_KRAKEN2DB } from './modules/nf-core/untar'
 include { getGenomeAttribute       } from 'plugin/nf-core-utils'
 include { defineToolsList          } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { defineSubsampleToolsList } from './subworkflows/local/utils_nfcore_seqinspector_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -44,6 +45,7 @@ workflow {
 
     main:
     def tools = defineToolsList(params.tools_bundle, params.tools, params.skip_tools, params.sample_size)
+    def subsample_tools = defineSubsampleToolsList(params.subsample_tools, tools)
 
     //
     // SUBWORKFLOW: Run initialisation tasks
@@ -60,6 +62,7 @@ workflow {
         params.help_full,
         params.show_hidden,
         tools,
+        subsample_tools,
         params.fasta,
         params.kraken2_db,
     )
@@ -92,6 +95,7 @@ workflow {
         PREPARE_GENOME.out.dict,
         PREPARE_GENOME.out.fai,
         tools,
+        subsample_tools,
         ch_kraken2_db,
         params.kraken2_save_reads,
         params.kraken2_save_readclassifications,
@@ -198,6 +202,7 @@ workflow NFCORE_SEQINSPECTOR {
     dict
     fai
     tools
+    subsample_tools
     kraken2_db
     kraken2_save_reads
     kraken2_save_readclassifications
@@ -222,6 +227,7 @@ workflow NFCORE_SEQINSPECTOR {
         fai,
         params.sample_size,
         tools,
+        subsample_tools,
         params.target_intervals,
         kraken2_db,
         kraken2_save_reads,

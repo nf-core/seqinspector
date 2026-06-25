@@ -35,6 +35,7 @@ workflow PIPELINE_INITIALISATION {
     help_full // boolean: Show the full help message
     show_hidden // boolean: Show hidden parameters in the help message
     tools
+    subsample_tools
     fasta
     kraken2_db
 
@@ -95,10 +96,16 @@ workflow PIPELINE_INITIALISATION {
         null,
     )
 
-    extra_text = """
-\033[1;37mExtra informations\033[0m
+    def subsampled_info = ""
+    if ('seqtk' in tools && subsample_tools) {
+        if (subsample_tools.intersect(tools).sort()) {
+            subsampled_info = "\033[0;34m  Tools on subsampled data  :\033[0;32m ${subsample_tools.intersect(tools).sort().join(",")} \033[0m\n"
+        }
+    }
+
+    extra_text = """\033[1;37mExtra informations\033[0m
 \033[0;34m  Tools selected to be run  :\033[0;32m ${tools.join(",")} \033[0m
--\033[2m----------------------------------------------------\033[0m-
+${subsampled_info}-\033[2m----------------------------------------------------\033[0m-
 """
 
     if (monochrome_logs) {
@@ -309,7 +316,7 @@ def toolReferencesText(type, tools) {
     return references.sort()
 }
 
-def methodsDescriptionText(mqc_methods_yaml, tool_list) {
+def methodsDescriptionText(mqc_methods_yaml, tool_list, subsample_tools = []) {
     // Convert  to a named map so can be used as with familiar NXF ${workflow} variable syntax in the MultiQC YML file
     def meta = [:]
     meta.workflow = workflow.toMap()
@@ -336,6 +343,20 @@ def methodsDescriptionText(mqc_methods_yaml, tool_list) {
     meta["tool_citations"] = 'Tools used in the workflow included: ' + toolReferencesText('citation', tool_list).join(', ') + '.'
     meta["tool_bibliography"] = toolReferencesText('bibliography', tool_list).collect { bibliography -> "<li>${bibliography}</li>" }.join('\n    ')
 
+    // Subsampled tools info
+    if ('seqtk' in tool_list && subsample_tools) {
+        def active_subsampled = subsample_tools.intersect(tool_list).sort()
+        if (active_subsampled) {
+            meta["subsampled_text"] = "The following tools were run on subsampled reads (via Seqtk): ${active_subsampled.join(', ')}."
+        }
+        else {
+            meta["subsampled_text"] = ""
+        }
+    }
+    else {
+        meta["subsampled_text"] = ""
+    }
+
     def methods_text = mqc_methods_yaml.text
 
     def engine = new groovy.text.SimpleTemplateEngine()
@@ -354,7 +375,7 @@ def defineToolsList(input_bundle, input_tools, input_skip, sample_size) {
 
     // SEQTK_SAMPLE is run by default if params.sample_size > 0, and can therefore not be chose on it's own
     if (sample_size > 0) {
-        tools_list << 'seqtk_sample'
+        tools_list << 'seqtk'
     }
 
     // Current list actually used are default, minimal and promethion, we should probably always have a list `all`
@@ -366,9 +387,11 @@ def defineToolsList(input_bundle, input_tools, input_skip, sample_size) {
         tools_list << 'bbmap_clumpify'
         tools_list << 'checkqc'
         tools_list << 'fastqc'
+        tools_list << 'fastp'
         tools_list << 'fastqe'
         tools_list << 'fastqscreen'
         tools_list << 'fq_lint'
+        tools_list << 'kraken2'
         tools_list << 'multiqcsav'
         tools_list << 'picard_collecthsmetrics'
         tools_list << 'picard_collectmultiplemetrics'
@@ -420,6 +443,16 @@ def defineToolsList(input_bundle, input_tools, input_skip, sample_size) {
     tools_list = tools_list.sort().unique() - skip_list
 
     return tools_list
+}
+
+def defineSubsampleToolsList(input_subsample_tools, all_tools) {
+
+    def subsample_list = input_subsample_tools ? input_subsample_tools.tokenize(',').sort().unique() : []
+
+    // Only keep tools that are both in subsample_tools AND in the active tools list
+    subsample_list = subsample_list.intersect(all_tools)
+
+    return subsample_list
 }
 
 //
