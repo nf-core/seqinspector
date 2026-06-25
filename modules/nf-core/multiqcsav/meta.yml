@@ -13,8 +13,8 @@ tools:
       description: |
         MultiQC searches a given directory for analysis logs and compiles a HTML report.
         It's a general use tool, perfect for summarising the output from numerous bioinformatics tools.
-      homepage: https://multiqc.info/
-      documentation: https://multiqc.info/docs/
+      homepage: https://github.com/MultiQC/MultiQC_SAV
+      documentation: https://docs.seqera.io/multiqc/
       licence:
         - "GPL-3.0-or-later"
       identifier: biotools:multiqc

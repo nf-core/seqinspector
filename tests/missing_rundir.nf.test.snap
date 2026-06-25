@@ -76,11 +76,10 @@
             ],
             [
                 "WARN: More than one rundir, or sample(s) missing rundir, skipping MULTIQC_SAV",
-                "WARN: No rundir for sample(s): SampleA_02, sampletest_04",
-                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
+                "WARN: No rundir for sample(s): SampleA_02, sampletest_04"
             ]
         ],
-        "timestamp": "2026-06-16T16:36:43.640701391",
+        "timestamp": "2026-06-17T10:52:03.137264827",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.3"
@@ -151,14 +150,13 @@
                 "WARN: No rundir for sample(s): Sample1_01, Sample23_03, SampleA_02, Undetermined_05, sampletest_04",
                 "WARN: No samples with rundir found, skipping CHECKQC",
                 "WARN: No samples with rundir found, skipping MULTIQC_SAV",
-                "WARN: No samples with rundir found, skipping RUNDIRPARSER",
-                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
+                "WARN: No samples with rundir found, skipping RUNDIRPARSER"
             ]
         ],
-        "timestamp": "2026-04-09T14:02:31.345913418",
+        "timestamp": "2026-06-17T10:52:26.499349564",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "25.10.4"
+            "nextflow": "26.04.3"
         }
     },
     "NovaSeq6000 data test - checkqc,fastqc,multiqcsav,rundirparser - missing rundir": {
