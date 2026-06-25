@@ -5,7 +5,7 @@ Changes in 'fq/lint/main.nf':
 --- modules/nf-core/fq/lint/main.nf
 +++ modules/nf-core/fq/lint/main.nf
 @@ -11,7 +11,7 @@
-     tuple val(meta), path(fastq)
+     tuple val(meta), path(fastq, arity: '1..2')
  
      output:
 -    tuple val(meta), path("*.fq_lint.txt"), emit: lint

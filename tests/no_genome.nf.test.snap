@@ -131,5 +131,63 @@
             "nf-test": "0.9.5",
             "nextflow": "25.10.2"
         }
+    },
+    "MiSeq data test - no genome - stub": {
+        "content": [
+            6,
+            {
+                "FASTQSCREEN_FASTQSCREEN": {
+                    "fastqscreen": "0.16.0"
+                }
+            },
+            [
+                "multiqc",
+                "multiqc/global_report",
+                "multiqc/global_report/multiqc_data",
+                "multiqc/global_report/multiqc_data/.stub",
+                "multiqc/global_report/multiqc_plots",
+                "multiqc/global_report/multiqc_plots/.stub",
+                "multiqc/global_report/multiqc_report.html",
+                "multiqc/group_reports",
+                "multiqc/group_reports/Bpacificus",
+                "multiqc/group_reports/Bpacificus/multiqc_data",
+                "multiqc/group_reports/Bpacificus/multiqc_data/.stub",
+                "multiqc/group_reports/Bpacificus/multiqc_plots",
+                "multiqc/group_reports/Bpacificus/multiqc_plots/.stub",
+                "multiqc/group_reports/Bpacificus/multiqc_report.html",
+                "multiqc/group_reports/K9H97",
+                "multiqc/group_reports/K9H97/multiqc_data",
+                "multiqc/group_reports/K9H97/multiqc_data/.stub",
+                "multiqc/group_reports/K9H97/multiqc_plots",
+                "multiqc/group_reports/K9H97/multiqc_plots/.stub",
+                "multiqc/group_reports/K9H97/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
+                "reports",
+                "reports/fastqscreen",
+                "reports/fastqscreen/SAMPLE_PAIRED_END_1_01",
+                "reports/fastqscreen/SAMPLE_PAIRED_END_1_01/SAMPLE_PAIRED_END_1_01_screen.html",
+                "reports/fastqscreen/SAMPLE_PAIRED_END_1_01/SAMPLE_PAIRED_END_1_01_screen.png",
+                "reports/fastqscreen/SAMPLE_PAIRED_END_1_01/SAMPLE_PAIRED_END_1_01_screen.txt",
+                "reports/fastqscreen/SAMPLE_PAIRED_END_2_02",
+                "reports/fastqscreen/SAMPLE_PAIRED_END_2_02/SAMPLE_PAIRED_END_2_02_screen.html",
+                "reports/fastqscreen/SAMPLE_PAIRED_END_2_02/SAMPLE_PAIRED_END_2_02_screen.png",
+                "reports/fastqscreen/SAMPLE_PAIRED_END_2_02/SAMPLE_PAIRED_END_2_02_screen.txt",
+                "reports/fastqscreen/SAMPLE_SINGLE_END_03",
+                "reports/fastqscreen/SAMPLE_SINGLE_END_03/SAMPLE_SINGLE_END_03_screen.html",
+                "reports/fastqscreen/SAMPLE_SINGLE_END_03/SAMPLE_SINGLE_END_03_screen.png",
+                "reports/fastqscreen/SAMPLE_SINGLE_END_03/SAMPLE_SINGLE_END_03_screen.txt"
+            ],
+            [
+                "WARN: BWAMEM2, SAMTOOLS and PICARD processes, will be skipped",
+                "WARN: No fasta was provided, but picard was requested",
+                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
+            ]
+        ],
+        "timestamp": "2026-04-09T14:03:26.270832747",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
+        }
     }
 }

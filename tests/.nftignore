@@ -1,4 +1,5 @@
 .DS_Store
+bbmap/*/*.clumped.fastq.gz
 mapped/*/*.bam{,.bai}
 multiqc/{global_report,group_reports/*}/multiqc_data/fastqc_top_overrepresented_sequences_table.txt
 multiqc/{global_report,group_reports/*}/multiqc_data/llms-full.txt
@@ -11,12 +12,15 @@ multiqc/{global_report,group_reports/*}/multiqc_data/multiqc_sources.txt
 multiqc/{global_report,group_reports/*}/multiqc_plots/{svg,pdf,png}/*.{svg,pdf,png}
 multiqc/{global_report,group_reports/*}/multiqc_report.html
 pipeline_info/*.{html,json,txt,yml}
+references/R64-1-1.dict
+reports/bbmap/*/*.clumpify.log
 reports/fastp/*/*fastp.*
 reports/fastqc/*/*_fastqc.{html,zip}
 reports/fastqscreen/*/*_screen.html
 reports/fq/*/*fq_lint.txt
 reports/kraken2/*/*.kraken2.report.txt
 reports/kraken2/krona/*/*.html
+reports/picard_collecthsmetrics/*/*.CollectHsMetrics.coverage_metrics
 reports/picard_collectmultiplemetrics/*/*.pdf
 reports/picard_collectmultiplemetrics/*/*_metrics
 reports/picard_collectmultiplemetrics/*/*_summary_metrics
@@ -24,4 +28,5 @@ reports/picard_collectmultiplemetrics/*/alignment_summary_metrics
 reports/picard_collectmultiplemetrics/*/base_distribution_by_cycle_metrics
 reports/picard_collectmultiplemetrics/*/quality_by_cycle_metrics
 reports/picard_collectmultiplemetrics/*/quality_distribution_metrics
+reports/sequali/**
 reports/toulligqc/**

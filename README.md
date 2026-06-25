@@ -10,8 +10,8 @@
 [![GitHub Actions Linting Status](https://github.com/nf-core/seqinspector/actions/workflows/linting.yml/badge.svg)](https://github.com/nf-core/seqinspector/actions/workflows/linting.yml)[![AWS CI](https://img.shields.io/badge/CI%20tests-full%20size-FF9900?labelColor=000000&logo=Amazon%20AWS)](https://nf-co.re/seqinspector/results)[![Cite with Zenodo](http://img.shields.io/badge/DOI-10.5281/zenodo.18757486-1073c8?labelColor=000000)](https://doi.org/10.5281/zenodo.18757486)
 [![nf-test](https://img.shields.io/badge/unit_tests-nf--test-337ab7.svg)](https://www.nf-test.com)
 
-[![Nextflow](https://img.shields.io/badge/version-%E2%89%A525.10.2-green?style=flat&logo=nextflow&logoColor=white&color=%230DC09D&link=https%3A%2F%2Fnextflow.io)](https://www.nextflow.io/)
-[![nf-core template version](https://img.shields.io/badge/nf--core_template-3.5.1-green?style=flat&logo=nfcore&logoColor=white&color=%2324B064&link=https%3A%2F%2Fnf-co.re)](https://github.com/nf-core/tools/releases/tag/3.5.1)
+[![Nextflow](https://img.shields.io/badge/version-%E2%89%A525.10.4-green?style=flat&logo=nextflow&logoColor=white&color=%230DC09D&link=https%3A%2F%2Fnextflow.io)](https://www.nextflow.io/)
+[![nf-core template version](https://img.shields.io/badge/nf--core_template-4.0.2-green?style=flat&logo=nfcore&logoColor=white&color=%2324B064&link=https%3A%2F%2Fnf-co.re)](https://github.com/nf-core/tools/releases/tag/4.0.2)
 [![run with conda](http://img.shields.io/badge/run%20with-conda-3EB049?labelColor=000000&logo=anaconda)](https://docs.conda.io/en/latest/)
 [![run with docker](https://img.shields.io/badge/run%20with-docker-0db7ed?labelColor=000000&logo=docker)](https://www.docker.com/)
 [![run with singularity](https://img.shields.io/badge/run%20with-singularity-1d355c.svg?labelColor=000000)](https://sylabs.io/docs/)
@@ -35,14 +35,17 @@ If provided, nf-core/seqinspector can also parse statistics from an Illumina run
 | `Subsampling`              | [`Seqtk`](https://github.com/lh3/seqtk)                                                                             | Global subsampling of reads. Only performs subsampling if `--sample_size` parameter is given. | [RNA, DNA]              | [N/A]                                                                                   | no           |
 | `Lint FASTQs`              | [`fq`](https://github.com/stjude-rust-labs/fq)                                                                      | fq filters, generates, subsamples, and validates FASTQ files. [RNA, DNA, synthetic]           | [N/A]                   | yes                                                                                     |
 | `Trimming`                 | [`Fastp`](https://github.com/OpenGene/fastp)                                                                        | Trimming of reads. Only performs trimming if `--tools` parameter is given.                    | [RNA, DNA, synthetic]   | [N/A]                                                                                   | no           |
+| `Deduplication assessment` | [`BBMap Clumpify`](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/clumpify-guide/)   | Deduplicate and compress FASTQ files. Only performs clumpify if `--tools` parameter is given. | [RNA, DNA]              | [N/A]                                                                                   | no           |
 | `Indexing, Mapping`        | [`Bwamem2`](https://github.com/bwa-mem2/bwa-mem2)                                                                   | Align reads to reference                                                                      | [RNA, DNA]              | [N/A]                                                                                   | yes          |
 | `Indexing`                 | [`SAMtools`](http://github.com/samtools)                                                                            | Index aligned BAM files, create FASTA index                                                   | [DNA]                   | [N/A]                                                                                   | yes          |
 | `QC`                       | [`checkQC`](https://github.com/Molmed/checkQC)                                                                      | Read QC                                                                                       | [RNA, DNA]              | Illumina rundir                                                                         | no           |
 | `QC`                       | [`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)                                              | Read QC                                                                                       | [RNA, DNA]              | [N/A]                                                                                   | yes          |
-| `QC`                       | [`FASTQE`](https://fastqe.com/)                                                                                     | Read QC                                                                                       | [RNA, DNA]              | [N/A]                                                                                   | yes          |
+| `QC`                       | [`FASTQE`](https://fastqe.com/)                                                                                     | Read QC                                                                                       | [RNA, DNA]              | [N/A]                                                                                   | no           |
 | `QC`                       | [`FastqScreen`](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/)                                   | Basic contamination detection                                                                 | [RNA, DNA]              | [N/A]                                                                                   | yes          |
 | `QC`                       | [`SeqFu Stats`](https://github.com/telatin/seqfu2)                                                                  | Sequence statistics                                                                           | [RNA, DNA]              | [N/A]                                                                                   | yes          |
-| `Taxonomic Classification` | [`Kraken2`](https://ccb.jhu.edu/software/kraken2/)                                                                  | Performs taxonomic classification and/or profiling                                            | [RNA, DNA]              | No                                                                                      |
+| `QC`                       | [`Seqkit Stats`](https://bioinf.shenwei.me/seqkit/usage/#stats)                                                     | Simple statistics of FASTA/Q files                                                            | [RNA, DNA]              | [N/A]                                                                                   | no           |
+| `QC`                       | [`Sequali`](https://sequali.readthedocs.io/en/latest/)                                                              | Read QC for long and short reads.                                                             | [RNA, DNA]              | [N/A]                                                                                   | yes          |
+| `Taxonomic Classification` | [`Kraken2`](https://ccb.jhu.edu/software/kraken2/)                                                                  | Performs taxonomic classification and/or profiling                                            | [RNA, DNA]              | [N/A]                                                                                   | no           |
 | `QC`                       | [`Picard collect multiple metrics`](https://broadinstitute.github.io/picard/picard-metric-definitions.html)         | Collect multiple QC metrics                                                                   | [RNA, DNA]              | [Bwamem2, SAMtools, `--genome`]                                                         | yes          |
 | `QC`                       | [`Picard_collecthsmetrics`](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard) | Collect alignment QC metrics of hybrid-selection data.                                        | [RNA, DNA]              | [Bwamem2, SAMtools, `--fasta`, `--bait_intervals`, `--target_intervals` (`--ref_dict`)] | no           |
 | `Reporting`                | [`MultiQC`](http://multiqc.info/)                                                                                   | Present QC for raw reads                                                                      | [RNA, DNA, synthetic]   | [N/A]                                                                                   | yes          |
@@ -67,6 +70,7 @@ If provided, nf-core/seqinspector can also parse statistics from an Illumina run
 | Tool        | Version |
 | ----------- | ------- |
 | bwamem2     | 2.3     |
+| bbmap       | 39.18   |
 | checkQC     | 4.1.0   |
 | fq/lint     | 0.12.0  |
 | fastp       | 1.1.0   |
@@ -75,17 +79,19 @@ If provided, nf-core/seqinspector can also parse statistics from an Illumina run
 | fastqscreen | 0.16.0  |
 | kraken2     | 2.1.6   |
 | krona       | 2.8.1   |
-| multiqc     | 1.33    |
+| multiqc     | 1.35    |
 | multiqcsav  | 0.2.0   |
 | picard      | 3.4.0   |
 | samtools    | 1.23    |
 | seqfu       | 1.22.3  |
+| seqkit      | 2.9.0   |
 | seqtk       | 1.4     |
+| sequali     | 1.0.2   |
 
 ## Usage
 
 > [!NOTE]
-> If you are new to Nextflow and nf-core, please refer to [this page](https://nf-co.re/docs/usage/installation) on how to set-up Nextflow. Make sure to [test your setup](https://nf-co.re/docs/usage/introduction#how-to-run-a-pipeline) with `-profile test` before running the workflow on actual data.
+> If you are new to Nextflow and nf-core, please refer to [this page](https://nf-co.re/docs/get_started/environment_setup/overview) on how to set-up Nextflow. Make sure to [test your setup](https://nf-co.re/docs/get_started/run-your-first-pipeline) with `-profile test` before running the workflow on actual data.
 
 First, prepare a samplesheet with your input data that looks as follows:
 
@@ -110,7 +116,7 @@ nextflow run nf-core/seqinspector \
 ```
 
 > [!WARNING]
-> Please provide pipeline parameters via the CLI or Nextflow `-params-file` option. Custom config files including those provided by the `-c` Nextflow option can be used to provide any configuration _**except for parameters**_; see [docs](https://nf-co.re/docs/usage/getting_started/configuration#custom-configuration-files).
+> Please provide pipeline parameters via the CLI or Nextflow `-params-file` option. Custom config files including those provided by the `-c` Nextflow option can be used to provide any configuration _**except for parameters**_; see [docs](https://nf-co.re/docs/running/run-pipelines#using-parameter-files).
 
 For more details and further functionality, please refer to the [usage documentation](https://nf-co.re/seqinspector/usage) and the [parameter documentation](https://nf-co.re/seqinspector/parameters).
 
@@ -134,6 +140,7 @@ We thank the following people for their extensive assistance in the development 
 - [@ctuni](https://github.com/ctuni)
 - [@edmundmiller](https://github.com/edmundmiller)
 - [@EliottBo](https://github.com/EliottBo)
+- [@erkutilaslan](https://github.com/erkutilaslan)
 - [@KarNair](https://github.com/KarNair)
 - [@kjellinjonas](https://github.com/kjellinjonas)
 - [@mahesh-panchal](https://github.com/mahesh-panchal)
@@ -145,12 +152,13 @@ We thank the following people for their extensive assistance in the development 
 - [@pontushojer](https://github.com/pontushojer)
 - [@ramprasadn](https://github.com/ramprasadn)
 - [@rannick](https://github.com/rannick)
+- [@sarajeeeze](https://github.com/sarajeeeze)
 - [@TMAdams](https://github.com/TMAdams)
 - [@torigiffin](https://github.com/torigiffin)
 
 ## Contributions and Support
 
-If you would like to contribute to this pipeline, please see the [contributing guidelines](.github/CONTRIBUTING.md).
+If you would like to contribute to this pipeline, please see the [contributing guidelines](docs/CONTRIBUTING.md).
 
 For further information or help, don't hesitate to get in touch on the [Slack `#seqinspector` channel](https://nfcore.slack.com/channels/seqinspector) (you can join with [this invite](https://nf-co.re/join/slack)).
 

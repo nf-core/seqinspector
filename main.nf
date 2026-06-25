@@ -43,7 +43,7 @@ params.fasta   = getGenomeAttribute('fasta')
 workflow {
 
     main:
-    def tools = defineToolsList(params.tools_bundle, params.tools, params.skip_tools)
+    def tools = defineToolsList(params.tools_bundle, params.tools, params.skip_tools, params.sample_size)
 
     //
     // SUBWORKFLOW: Run initialisation tasks
@@ -95,6 +95,7 @@ workflow {
         ch_kraken2_db,
         params.kraken2_save_reads,
         params.kraken2_save_readclassifications,
+        params.save_bbmap_clumpify_reads,
     )
 
     //
@@ -123,6 +124,7 @@ workflow {
     )
     reports                = channel.topic("multiqc_files")
     subsampled             = NFCORE_SEQINSPECTOR.out.subsampled
+    clumpify_reads         = NFCORE_SEQINSPECTOR.out.clumpify_reads
 }
 
 output {
@@ -130,6 +132,11 @@ output {
         path { meta, bam, index ->
             bam >> "mapped/${meta.id}/"
             index >> "mapped/${meta.id}/"
+        }
+    }
+    clumpify_reads {
+        path { meta, _fastq ->
+            "bbmap/${meta.id}/"
         }
     }
     kraken2_db {
@@ -194,6 +201,7 @@ workflow NFCORE_SEQINSPECTOR {
     kraken2_db
     kraken2_save_reads
     kraken2_save_readclassifications
+    save_bbmap_clumpify_reads
 
     main:
     //
@@ -218,15 +226,17 @@ workflow NFCORE_SEQINSPECTOR {
         kraken2_db,
         kraken2_save_reads,
         kraken2_save_readclassifications,
+        save_bbmap_clumpify_reads,
     )
 
     emit:
-    bam_bai       = SEQINSPECTOR.out.bam_bai
-    data_global   = SEQINSPECTOR.out.data_global // channel: /path/to/multiqc_report.html
-    data_groups   = SEQINSPECTOR.out.data_groups // channel: /path/to/multiqc_report.html
-    plots_global  = SEQINSPECTOR.out.plots_global // channel: /path/to/multiqc_report.html
-    plots_groups  = SEQINSPECTOR.out.plots_groups // channel: /path/to/multiqc_report.html
-    report_global = SEQINSPECTOR.out.report_global // channel: /path/to/multiqc_report.html
-    report_groups = SEQINSPECTOR.out.report_groups // channel: /path/to/multiqc_report.html
-    subsampled    = SEQINSPECTOR.out.subsampled
+    bam_bai        = SEQINSPECTOR.out.bam_bai
+    clumpify_reads = SEQINSPECTOR.out.clumpify_reads
+    data_global    = SEQINSPECTOR.out.data_global // channel: /path/to/multiqc_report.html
+    data_groups    = SEQINSPECTOR.out.data_groups // channel: /path/to/multiqc_report.html
+    plots_global   = SEQINSPECTOR.out.plots_global // channel: /path/to/multiqc_report.html
+    plots_groups   = SEQINSPECTOR.out.plots_groups // channel: /path/to/multiqc_report.html
+    report_global  = SEQINSPECTOR.out.report_global // channel: /path/to/multiqc_report.html
+    report_groups  = SEQINSPECTOR.out.report_groups // channel: /path/to/multiqc_report.html
+    subsampled     = SEQINSPECTOR.out.subsampled
 }

@@ -15,6 +15,16 @@ nextflow_pipeline {
             rundir_folder: pipelines_testdata_base_path + 'seqinspector/data/rundir/200624_A00834_0183_BHMTFYDRXX.tar.gz',
             rundir_samplesheet: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/novaseq6000.csv',
         ],
+        [
+            name: "NovaSeq6000 data test - multiqcsav - stub",
+            params: [
+                tools: 'multiqcsav',
+                tools_bundle: null,
+            ],
+            rundir_folder: pipelines_testdata_base_path + 'seqinspector/data/rundir/200624_A00834_0183_BHMTFYDRXX.tar.gz',
+            rundir_samplesheet: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/novaseq6000.csv',
+            stub: true,
+        ],
     ]
 
     // Generate tests for each scenario

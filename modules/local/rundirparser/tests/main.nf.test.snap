@@ -14,20 +14,25 @@
             [
                 [
                     "RUNDIRPARSER",
-                    "PyYAML",
+                    "python",
+                    "3.13.2"
+                ],
+                [
+                    "RUNDIRPARSER",
+                    "pyyaml",
                     "6.0.2"
                 ],
                 [
                     "RUNDIRPARSER",
-                    "Python",
-                    "3.13.2"
+                    "rundirparser",
+                    "1.0.1"
                 ]
             ]
         ],
-        "timestamp": "2026-03-26T11:02:20.21808142",
+        "timestamp": "2026-06-16T16:34:39.967986788",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.0"
+            "nextflow": "26.04.3"
         }
     },
     "NovaSeq6000 - stub": {
@@ -45,20 +50,25 @@
             [
                 [
                     "RUNDIRPARSER",
-                    "PyYAML",
+                    "python",
+                    "3.13.2"
+                ],
+                [
+                    "RUNDIRPARSER",
+                    "pyyaml",
                     "6.0.2"
                 ],
                 [
                     "RUNDIRPARSER",
-                    "Python",
-                    "3.13.2"
+                    "rundirparser",
+                    "1.0.1"
                 ]
             ]
         ],
-        "timestamp": "2026-03-26T11:02:30.879406874",
+        "timestamp": "2026-06-16T16:34:50.171365737",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.0"
+            "nextflow": "26.04.3"
         }
     }
 }

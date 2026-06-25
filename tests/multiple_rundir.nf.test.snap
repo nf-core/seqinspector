@@ -1,4 +1,58 @@
 {
+    "MiSeq data test - fastqc,multiqcsav - multiple rundir - stub": {
+        "content": [
+            6,
+            {
+                "FASTQC": {
+                    "fastqc": "0.12.1"
+                }
+            },
+            [
+                "multiqc",
+                "multiqc/global_report",
+                "multiqc/global_report/multiqc_data",
+                "multiqc/global_report/multiqc_data/.stub",
+                "multiqc/global_report/multiqc_plots",
+                "multiqc/global_report/multiqc_plots/.stub",
+                "multiqc/global_report/multiqc_report.html",
+                "multiqc/group_reports",
+                "multiqc/group_reports/Bpacificus",
+                "multiqc/group_reports/Bpacificus/multiqc_data",
+                "multiqc/group_reports/Bpacificus/multiqc_data/.stub",
+                "multiqc/group_reports/Bpacificus/multiqc_plots",
+                "multiqc/group_reports/Bpacificus/multiqc_plots/.stub",
+                "multiqc/group_reports/Bpacificus/multiqc_report.html",
+                "multiqc/group_reports/K9H97",
+                "multiqc/group_reports/K9H97/multiqc_data",
+                "multiqc/group_reports/K9H97/multiqc_data/.stub",
+                "multiqc/group_reports/K9H97/multiqc_plots",
+                "multiqc/group_reports/K9H97/multiqc_plots/.stub",
+                "multiqc/group_reports/K9H97/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
+                "reports",
+                "reports/fastqc",
+                "reports/fastqc/SAMPLE_PAIRED_END_1_01",
+                "reports/fastqc/SAMPLE_PAIRED_END_1_01/SAMPLE_PAIRED_END_1_01.html",
+                "reports/fastqc/SAMPLE_PAIRED_END_1_01/SAMPLE_PAIRED_END_1_01.zip",
+                "reports/fastqc/SAMPLE_PAIRED_END_2_02",
+                "reports/fastqc/SAMPLE_PAIRED_END_2_02/SAMPLE_PAIRED_END_2_02.html",
+                "reports/fastqc/SAMPLE_PAIRED_END_2_02/SAMPLE_PAIRED_END_2_02.zip",
+                "reports/fastqc/SAMPLE_SINGLE_END_03",
+                "reports/fastqc/SAMPLE_SINGLE_END_03/SAMPLE_SINGLE_END_03.html",
+                "reports/fastqc/SAMPLE_SINGLE_END_03/SAMPLE_SINGLE_END_03.zip"
+            ],
+            [
+                "WARN: More than one rundir, or sample(s) missing rundir, skipping MULTIQC_SAV",
+                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
+            ]
+        ],
+        "timestamp": "2026-04-09T14:02:55.413630663",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
+        }
+    },
     "MiSeq data test - fastqc,multiqcsav - multiple rundir": {
         "content": [
             6,

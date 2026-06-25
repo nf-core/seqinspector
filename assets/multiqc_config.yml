@@ -19,6 +19,7 @@ disable_version_detection: true
 
 fn_clean_trim:
   - "_screen" # Added by FastqScreen
+  - ".json"
 
 # Make sample name with indexes a bit prettier
 # for SE: "SampleName_01" -> "SampleName #01"
@@ -35,3 +36,6 @@ table_sample_merge:
   "Read2":
     - type: regex
       pattern: "_2$"
+
+use_filename_as_sample_name:
+  - "sequali"

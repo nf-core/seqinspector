@@ -51,20 +51,20 @@
                 "tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to run",
-                    "pattern": "^((checkqc|fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|multiqcsav|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats|toulligqc)?,?)*(?<!,)$",
+                    "pattern": "^((bbmap_clumpify|checkqc|fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|multiqcsav|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqkit_stats|seqfu_stats|sequali|toulligqc)?,?)*(?<!,)$",
                     "fa_icon": "fas fa-sort-amount-asc"
                 },
                 "tools_bundle": {
                     "type": "string",
                     "description": "Select some default setup for the tools to be run, tools can still be used to add tools",
-                    "pattern": "^((all|bam|fastq|default|illumina|minimal|ont)?,?)*(?<!,)$",
+                    "pattern": "^((all|bam|fastq|default|illumina|minimal|ont|null)?,?)*(?<!,)$",
                     "fa_icon": "fas fa-window-restore",
                     "default": "default"
                 },
                 "skip_tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to skip - overrides any other means of tools selection",
-                    "pattern": "^((checkqc|fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|multiqcsav|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqfu_stats|toulligqc)?,?)*(?<!,)$",
+                    "pattern": "^((bbmap_clumpify|checkqc|fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|multiqcsav|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqkit_stats|seqfu_stats|sequali|toulligqc)?,?)*(?<!,)$",
                     "fa_icon": "fas fa-window-close "
                 }
             }
@@ -92,6 +92,27 @@
                     "format": "file-path",
                     "description": "Path to custom CheckQC config",
                     "fa_icon": "fas fa-cog"
+                }
+            }
+        },
+        "bbmap_options": {
+            "title": "BBMap options",
+            "type": "object",
+            "description": "Options for BBMap tools",
+            "default": "",
+            "properties": {
+                "save_bbmap_clumpify_reads": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-save",
+                    "description": "Turn on saving of BBMap Clumpify deduplicated reads",
+                    "help_text": "Save the deduplicated FASTQ files produced by BBMap Clumpify to the output directory."
+                },
+                "bbmap_clumpify_args": {
+                    "type": "string",
+                    "default": "markduplicates=true",
+                    "fa_icon": "fas fa-cog",
+                    "description": "Arguments to pass to BBMap Clumpify",
+                    "help_text": "Arguments to pass to BBMap Clumpify. Defaults to `markduplicates=true`."
                 }
             }
         },
@@ -148,7 +169,6 @@
                 },
                 "igenomes_base": {
                     "type": "string",
-                    "format": "directory-path",
                     "description": "The base path to the igenomes reference files",
                     "fa_icon": "fas fa-ban",
                     "hidden": true,
@@ -381,6 +401,9 @@
         },
         {
             "$ref": "#/$defs/validation_options"
+        },
+        {
+            "$ref": "#/$defs/bbmap_options"
         },
         {
             "$ref": "#/$defs/kraken2_options"

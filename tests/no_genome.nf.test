@@ -15,6 +15,16 @@ nextflow_pipeline {
                 tools_bundle: null,
             ],
         ],
+        [
+            name: "MiSeq data test - no genome - stub",
+            params: [
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/miseq.csv',
+                genome: null,
+                tools: 'fastqscreen,picard_collecthsmetrics',
+                tools_bundle: null,
+            ],
+            stub: true,
+        ],
     ]
 
     // Generate tests for each scenario

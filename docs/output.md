@@ -18,8 +18,10 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 - [Rundirparser](#rundirparser) - Parse rundir metadata from Illumina runs
 - [ToulligQC](#toulligqc) - Raw read QC for Oxford Nanopore runs
 - [SeqFu](#seqfu) - Statistics for FASTA or FASTQ files
+- [BBMap Clumpify](#bbmap-clumpify) - FASTQ deduplication, compression and deduplication assessment
 - [Seqtk](#seqtk) - Subsample a specific number of reads per sample
 - [FastQC](#fastqc) - Raw read QC
+- [Sequali](#sequali) - Sequence quality metrics for short and long reads
 - [FASTQE](#fastqe) - Raw read QC
 - [FastP](#fastp) - Trimming and filtering of raw reads
 - [FastQ Screen](#fastq-screen) - Mapping against a set of references for basic contamination QC
@@ -29,6 +31,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 - [Kraken2](#kraken2) - Phylogenetic assignment of reads using k-mers
 - [Krona](#krona) - Interactive visualization of Kraken2 results
 - [MultiQC](#multiqc) - Aggregate report describing results and QC from the whole pipeline
+- [SeqkitStats](#seqkitstats) - Per sample TSV file with summary statistics
 - [Pipeline information](#pipeline-information) - Report metrics generated during the workflow execution
 
 ### References
@@ -69,7 +72,7 @@ Fasta index with `samtools faidx`
 
 </details>
 
-[Seqtk](https://github.com/lh3/seqtk) samples sequences by number.
+[Seqtk](https://github.com/lh3/seqtk) samples sequences randomly using reservoir sampling with a fixed seed (`-s100`) for reproducibility.
 
 ### CheckQC
 
@@ -118,6 +121,28 @@ This software is written in Python and developped by the GenomiqueENS core facil
 Includes functions to interleave and de-interleave FASTQ files, to rename sequences and to count and print statistics on sequence lengths.
 In this pipeline, the `seqfu stats` module is used to produce general quality metrics statistics.
 
+### BBMap Clumpify
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `bbmap/[sample_id]/`
+  - `*.clumped.fastq.gz`: Clumped (and optionally deduplicated) FASTQ files.
+- `reports/bbmap/[sample_id]/`
+  - `*.clumpify.log`: Log file with duplication statistics.
+
+</details>
+
+[BBMap Clumpify](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/clumpify-guide/) reorders reads for better compression and marks duplicates by appending `duplicate` to read names. The log reports duplication statistics for QC purposes.
+
+When `--save_bbmap_clumpify_reads` is enabled, the clumped FASTQ files are published to `bbmap/[sample_id]/`.
+
+The tool arguments can be customised via `--bbmap_clumpify_args`. By default, `markduplicates=true` is used to mark duplicates. To remove duplicates entirely, add `dedupe=true`:
+
+```bash
+--bbmap_clumpify_args 'markduplicates=true dedupe=true'
+```
+
 ### Seqtk
 
 <details markdown="1">
@@ -128,7 +153,7 @@ In this pipeline, the `seqfu stats` module is used to produce general quality me
 
 </details>
 
-[Seqtk](https://github.com/lh3/seqtk) samples sequences by number.
+[Seqtk](https://github.com/lh3/seqtk) samples sequences randomly using reservoir sampling with a fixed seed (`-s100`) for reproducibility.
 
 ### FastQC
 
@@ -144,6 +169,19 @@ In this pipeline, the `seqfu stats` module is used to produce general quality me
 [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) gives general quality metrics about your sequenced reads.
 It provides information about the quality score distribution across your reads, per base sequence content (%A/T/G/C), adapter contamination and overrepresented sequences.
 For further reading and documentation see the [FastQC help pages](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/).
+
+### Sequali
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `reports/sequali/[sample_id]/`
+  - `*.html`: Sequali report containing quality metrics.
+  - `*.json`: JSON containing the Sequali data, used for generating MultiQC report.
+
+</details>
+
+[Sequali](https://sequali.readthedocs.io/en/latest/) gives general quality metrics for short and long sequenced reads. It provides information about the quality score distribution across your reads, GC content, duplication levels, length distribution, adapter contamination (Illumina and Oxford Nanopore) and overrepresented sequences.
 
 ### FASTQE
 
@@ -312,6 +350,18 @@ The pipeline has special steps which also allow the software versions to be repo
 For more information about how to use MultiQC reports, see <https://seqera.io/multiqc/>.
 
 The MultiQC global report might also contain metrics related to the rundir via the [MULTIQC_SAV](https://github.com/MultiQC/MultiQC_SAV) plugin.
+
+### SeqkitStats
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `seqkit/`
+  - `*.tsv`: Per sample TSV file with summary statistics.
+
+</details>
+
+[SeqkitStats](https://bioinf.shenwei.me/seqkit/usage/#stats) it gives simple statistics such as number of sequences, min/max_len, N50, Q20%, Q30% and GC%. For further reading and documentation see the [Seqkit help pages]([Seqkit help](https://bioinf.shenwei.me/seqkit/)).
 
 ### Pipeline information
 

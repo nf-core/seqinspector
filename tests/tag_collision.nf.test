@@ -15,6 +15,15 @@ nextflow_pipeline {
                 tools: 'fastqc',
             ],
         ],
+        [
+            name: "NovaSeq6000 data test - tag collision - stub",
+            params: [
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/novaseq6000_tag_collision.csv',
+                tools_bundle: null,
+                tools: 'fastqc',
+            ],
+            stub: true,
+        ],
     ]
 
     // Generate tests for each scenario

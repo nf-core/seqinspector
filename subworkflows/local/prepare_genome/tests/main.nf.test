@@ -22,17 +22,12 @@ nextflow_workflow {
 
         then {
             assert workflow.success
-            assert snapshot(sanitizeOutput(workflow.out).collectEntries { key, val ->
+            assert snapshot(sanitizeOutput(workflow.out, unstableKeys:['fasta']).collectEntries { key, val ->
                 if (!val) {
                     return null
+                } else {
+                    [key, val[0][1]]
                 }
-                else if (key == "bwamem2") {
-                    return [key, val.collect { [path(it[1]).list().collect { it }] }]
-                }
-                else if (key == "dict" || key == "fasta") {
-                    return [key, val.collect { file(it[1]).name }]
-                }
-                return [key, val.collect { path(it[1]) }]
             }).match()
         }
     }
@@ -53,20 +48,12 @@ nextflow_workflow {
 
         then {
             assert workflow.success
-            assert snapshot(sanitizeOutput(workflow.out).collectEntries { key, val ->
+            assert snapshot(sanitizeOutput(workflow.out, unstableKeys:['dict', 'fasta']).collectEntries { key, val ->
                 if (!val) {
                     return null
+                } else {
+                    [key, val[0][1]]
                 }
-                else if (key == "bwamem2") {
-                    return [key, val.collect { [path(it[1]).list().collect { it }] }]
-                }
-                else if (key == "dict") {
-                    return null
-                }
-                else if (key == "fasta") {
-                    return [key, val.collect { file(it[1]).name }]
-                }
-                return [key, val.collect { path(it[1]) }]
             }).match()
         }
     }
@@ -87,17 +74,12 @@ nextflow_workflow {
 
         then {
             assert workflow.success
-            assert snapshot(sanitizeOutput(workflow.out).collectEntries { key, val ->
+            assert snapshot(sanitizeOutput(workflow.out, unstableKeys:['dict', 'fasta']).collectEntries { key, val ->
                 if (!val) {
                     return null
+                } else {
+                    [key, val[0][1]]
                 }
-                else if (key == "bwamem2") {
-                    return [key, val.collect { [path(it[1]).list().collect { it }] }]
-                }
-                else if (key == "dict" || key == "fasta") {
-                    return [key, val.collect { file(it[1]).name }]
-                }
-                return [key, val.collect { path(it[1]) }]
             }).match()
         }
     }

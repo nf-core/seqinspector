@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#59](https://github.com/nf-core/seqinspector/pull/59) Seqkit Stats TSV output.
 - [#109](https://github.com/nf-core/seqinspector/pull/109) Adds ToulligQC module for long read QC
+- [#134](https://github.com/nf-core/seqinspector/pull/134) Added sequali module.
 - [#202](https://github.com/nf-core/seqinspector/pull/202) Added support for fasta fai file as input (via params or igenomes) for the pipeline
 - [#204](https://github.com/nf-core/seqinspector/pull/204) Added Fastp module
 - [#206](https://github.com/nf-core/seqinspector/pull/206) Added FASTQE for more comprehensive QC of FASTQ files
@@ -16,11 +18,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#210](https://github.com/nf-core/seqinspector/pull/210) Added kraken2 subworkflow
 - [#212](https://github.com/nf-core/seqinspector/pull/212) Add CheckQC module
 - [#218](https://github.com/nf-core/seqinspector/pull/218) kraken2 is run on subsampled data if available
+- [#226](https://github.com/nf-core/seqinspector/pull/226) Add pipeline level stub tests
+- [#228](https://github.com/nf-core/seqinspector/pull/228) Update all modules/subworkflows
+- [#234](https://github.com/nf-core/seqinspector/pull/234) Add pipeline level PICARD tests
+- [#236](https://github.com/nf-core/seqinspector/pull/236) Added bbmap/clumpify module for FASTQ deduplication and compression
+- [#237](https://github.com/nf-core/seqinspector/pull/237) Add meta.yml for rundirparser module
 
 ### `Fixed`
 
 - [#216](https://github.com/nf-core/seqinspector/pull/216) Fixed meta.id that resulted in all SEQFU_STATS processes with the same tag name
 - [#224](https://github.com/nf-core/seqinspector/pull/224) Fix workflow output syntax for future Nextflow releases
+- [#226](https://github.com/nf-core/seqinspector/pull/226) Fix parameter `tools_bundle` not accepting `null` for custom tool selection
+- [#238](https://github.com/nf-core/seqinspector/pull/238) Fix Python/PyYAML tool name case mismatch in rundirparser module
+- [#239](https://github.com/nf-core/seqinspector/pull/239) Fix tool bundles documentation to match code
+- [#240](https://github.com/nf-core/seqinspector/pull/240) Fix FASTQE default tool marking in README
 
 ### `Changed`
 
@@ -36,11 +47,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#221](https://github.com/nf-core/seqinspector/pull/221) Workflow output for checkQC, Fastp, fastp, fastqe, fastqscreen, picard_collecthsmetrics, picard_collectmultiplemetrics, rundirparser, seqfu
 - [#222](https://github.com/nf-core/seqinspector/pull/222) Workflow output for fq/lint, kraken2, krona, toulligqc
 - [#223](https://github.com/nf-core/seqinspector/pull/223) Workflow output for the rest of the pipeline
+- [#235](https://github.com/nf-core/seqinspector/pull/235) Update MultiQC and other dependencies
+- [#237](https://github.com/nf-core/seqinspector/pull/237) Improved citation system to dynamically build tool citations based on selected tools
 
 ### `Dependencies`
 
 | Dependency | Old version | New version |
 | ---------- | ----------- | ----------- |
+| bbmap      |             | 39.18       |
 | checkQC    |             | 4.1.0       |
 | fastp      |             | 1.1.0       |
 | fastqe     |             | 0.5.2       |
@@ -48,8 +62,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | htslib     | 1.22.1      | 1.23.1      |
 | kraken2    |             | 2.1.6       |
 | krona      |             | 2.8.1       |
+| multiqc    | 1.34        | 1.35        |
 | multiqcsav |             | 0.2.0       |
 | samtools   | 1.22.1      | 1.23.1      |
+| seqkit     |             | 2.9.0       |
 | toulligqc  |             | 2.8.4       |
 | tar        |             | 1.34        |
 

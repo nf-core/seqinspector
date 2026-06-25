@@ -5,6 +5,7 @@
 */
 
 // modules
+include { BBMAP_CLUMPIFY               } from '../modules/nf-core/bbmap/clumpify'
 include { BWAMEM2_MEM                  } from '../modules/nf-core/bwamem2/mem'
 include { CHECKQC                      } from '../modules/nf-core/checkqc'
 include { FASTP                        } from '../modules/nf-core/fastp'
@@ -17,7 +18,9 @@ include { MULTIQCSAV as MULTIQC_GLOBAL } from '../modules/nf-core/multiqcsav'
 include { RUNDIRPARSER                 } from '../modules/local/rundirparser'
 include { SAMTOOLS_INDEX               } from '../modules/nf-core/samtools/index'
 include { SEQFU_STATS                  } from '../modules/nf-core/seqfu/stats'
+include { SEQKIT_STATS                 } from '../modules/nf-core/seqkit/stats'
 include { SEQTK_SAMPLE                 } from '../modules/nf-core/seqtk/sample'
+include { SEQUALI                      } from '../modules/nf-core/sequali'
 include { TOULLIGQC                    } from '../modules/nf-core/toulligqc'
 
 // subworkflow
@@ -58,10 +61,11 @@ workflow SEQINSPECTOR {
     kraken2_db
     kraken2_save_reads
     kraken2_save_readclassifications
+    save_bbmap_clumpify_reads
 
     main:
-    ch_multiqc_files = channel.empty()
-    ch_multiqc_extra_files = channel.empty()
+    def ch_multiqc_files = channel.empty()
+    def ch_multiqc_extra_files = channel.empty()
 
     // STEP 00: EARLY SKIP FAILING MALFORMED FASTQ FILES
 
@@ -173,6 +177,13 @@ workflow SEQINSPECTOR {
     // STEP 02: BASIC QC ON FASTQ FILES
 
     //
+    // MODULE: Run BBMAP_CLUMPIFY
+    //
+
+    BBMAP_CLUMPIFY(ch_samplesheet.filter { 'bbmap_clumpify' in tools })
+    bbmap_clumpify_reads = save_bbmap_clumpify_reads ? BBMAP_CLUMPIFY.out.reads : channel.empty()
+
+    //
     // MODULE: SEQFU_STATS
     //
 
@@ -196,14 +207,16 @@ workflow SEQINSPECTOR {
     // Any downstream tool will be run on subsampled reads if seqtk is run
     //
 
-    SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] }.filter { sample_size })
-    ch_sample = sample_size ? SEQTK_SAMPLE.out.reads : ch_samplesheet
+    SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] }.filter { 'seqtk_sample' in tools })
+    ch_sample = 'seqtk_sample' in tools ? SEQTK_SAMPLE.out.reads : ch_samplesheet
 
-    // STEP 04: MORE QC ON FASTQ FILES (CAN BE SUMSAMPLED)
+    // STEP 04: MORE QC ON FASTQ FILES (CAN BE SUBSAMPLED)
 
     FASTQC(ch_sample.filter { 'fastqc' in tools })
 
     FASTQE(ch_sample.filter { 'fastqe' in tools })
+
+    SEQKIT_STATS(ch_sample.filter { 'seqkit_stats' in tools })
 
     //
     // MODULE: FASTP for adapter trimming and quality filtering
@@ -220,7 +233,11 @@ workflow SEQINSPECTOR {
         save_merged,
     )
 
-    // ch_trimmed = 'fastp' in tools ? FASTP.out.reads : ch_sample
+    //
+    // MODULE: SEQUALI
+    //
+
+    SEQUALI(ch_sample.filter { 'sequali' in tools })
 
     // STEP 05: FASTQSCREEN
 
@@ -324,7 +341,12 @@ workflow SEQINSPECTOR {
         ? file(multiqc_methods_description, checkIfExists: true)
         : file("${projectDir}/assets/methods_description_template.yml", checkIfExists: true)
 
-    ch_methods_description = channel.value(methodsDescriptionText(ch_multiqc_custom_methods_description))
+    ch_methods_description = channel.topic("versions")
+        .map { _process, tool, _version -> tool }
+        .unique()
+        .collect()
+        .map { tool_list -> ('multiqcsav' in tools ? tool_list + ['multiqcsav'] : tool_list).unique() }
+        .map { tool_list -> methodsDescriptionText(ch_multiqc_custom_methods_description, tool_list) }
 
     ch_multiqc_extra_files = ch_multiqc_extra_files.mix(ch_methods_description.collectFile(name: 'methods_description_mqc.yaml', sort: true))
 
@@ -433,12 +455,13 @@ workflow SEQINSPECTOR {
     )
 
     emit:
-    bam_bai       = bam_bai
-    data_global   = MULTIQC_GLOBAL.out.data // channel: [ /path/to/multiqc_data/ ]
-    data_groups   = MULTIQC_PER_TAG.out.data // channel: [ /path/to/multiqc_data/ ]
-    plots_global  = MULTIQC_GLOBAL.out.plots // channel: [ /path/to/multiqc_plots/ ]
-    plots_groups  = MULTIQC_PER_TAG.out.plots // channel: [ /path/to/multiqc_plots/ ]
-    report_global = MULTIQC_GLOBAL.out.report // channel: [ /path/to/multiqc_report.html ]
-    report_groups = MULTIQC_PER_TAG.out.report // channel: [ /path/to/multiqc_report.html ]
-    subsampled    = SEQTK_SAMPLE.out.reads
+    bam_bai        = bam_bai
+    clumpify_reads = bbmap_clumpify_reads
+    data_global    = MULTIQC_GLOBAL.out.data // channel: [ /path/to/multiqc_data/ ]
+    data_groups    = MULTIQC_PER_TAG.out.data // channel: [ /path/to/multiqc_data/ ]
+    plots_global   = MULTIQC_GLOBAL.out.plots // channel: [ /path/to/multiqc_plots/ ]
+    plots_groups   = MULTIQC_PER_TAG.out.plots // channel: [ /path/to/multiqc_plots/ ]
+    report_global  = MULTIQC_GLOBAL.out.report // channel: [ /path/to/multiqc_report.html ]
+    report_groups  = MULTIQC_PER_TAG.out.report // channel: [ /path/to/multiqc_report.html ]
+    subsampled     = SEQTK_SAMPLE.out.reads
 }

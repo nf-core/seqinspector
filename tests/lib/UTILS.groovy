@@ -16,9 +16,11 @@ class UTILS {
         def snapshot_ignore_list = [
             "Creating env using",
             "Downloading plugin",
+            "Got an interrupted  exception while taking agent result",
             "Pulling Singularity image",
             "Staging foreign file",
-            "unable to stage foreign file"
+            "Unable to resume cached task",
+            "Unable to stage foreign file",
         ]
 
         // stable_name: All files + folders in ${outdir}/ with a stable name
@@ -50,19 +52,25 @@ class UTILS {
         // Both have additional possibilities to ignore some strings
         def filter_args = [ignore: snapshot_ignore_list + (scenario.snapshot_ignore ?: [])]
 
+        workflow_std = workflow.stderr + workflow.stdout
+        filter_args.include = ["WARN"]
+
+        assertion.add(filterNextflowOutput(workflow_std, filter_args) ?: "No warnings")
+
         if (scenario.snapshot) {
             workflow_std = scenario.snapshot.split(',')
                 .findAll { it in ['stderr', 'stdout'] }
                 .collect { workflow."$it" }
                 .flatten()
 
-            if (scenario.snapshot_include) { filter_args.include = [scenario.snapshot_include] }
-        } else {
-            workflow_std = workflow.stderr + workflow.stdout
-            filter_args.include = ["WARN"]
-        }
+            filter_args.remove('include')
 
-        assertion.add(filterNextflowOutput(workflow_std, filter_args) ?: "No warnings")
+            if (scenario.snapshot_include) {
+                filter_args.include = [scenario.snapshot_include]
+            }
+
+            assertion.add(filterNextflowOutput(workflow_std, filter_args) ?: "No content")
+        }
 
         return assertion
     }
@@ -92,11 +100,7 @@ class UTILS {
             tag "pipeline"
             tag "pipeline_seqinspector"
 
-            if (scenario.stub) {
-                options "-stub"
-            }
-
-            options "-output-dir $outputDir"
+            options "-output-dir ${outputDir}${scenario.stub ? ' -stub' : ''}"
 
             if (scenario.gpu) {
                 tag "gpu${!scenario.no_conda ? '_conda' : ''}${scenario.stub ? '_stub' : ''}"
