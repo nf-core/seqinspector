@@ -155,6 +155,9 @@ The tool arguments can be customised via `--bbmap_clumpify_args`. By default, `m
 
 [Seqtk](https://github.com/lh3/seqtk) samples sequences randomly using reservoir sampling with a fixed seed (`-s100`) for reproducibility.
 
+By default, only specific tools run on the subsampled data.
+Use `--subsample_tools` to control which tools receive subsampled reads (see [Usage](usage.md#subsampling-control)).
+
 ### FastQC
 
 <details markdown="1">

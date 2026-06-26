@@ -135,6 +135,30 @@ withName: SEQTK_SAMPLE {
 nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 -profile docker
 ```
 
+#### Subsampling control
+
+By default, only a subset of tools run on the subsampled data. The `--subsample_tools` parameter controls which tools receive subsampled reads (via Seqtk) versus original data. Tools not in this list run on the original (non-subsampled) data.
+
+The default value is:
+
+```
+--subsample_tools fastqscreen,kraken2,picard_collecthsmetrics,picard_collectmultiplemetrics
+```
+
+For example, to also run FastQC on subsampled data:
+
+```bash
+nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 --subsample_tools fastqscreen,kraken2,picard_collecthsmetrics,picard_collectmultiplemetrics,fastqc -profile docker
+```
+
+Or to disable subsampling for all tools (run everything on original data):
+
+```bash
+nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 --subsample_tools null -profile docker
+```
+
+Note: The `--subsample_tools` parameter only takes effect when `sample_size > 0`.
+
 ### Tools selection
 
 Tools selection is an integral part of sequinspector and, as the pipeline grows, it will become more and more important to select tools of interest.
