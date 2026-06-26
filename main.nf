@@ -44,7 +44,7 @@ params.fasta   = getGenomeAttribute('fasta')
 workflow {
 
     main:
-    def tools = defineToolsList(params.tools_bundle, params.tools, params.skip_tools, params.sample_size.toInteger())
+    def tools = defineToolsList(params.tools_bundle, params.tools, params.skip_tools, params.sample_size.toFloat())
     def subsample_tools = defineSubsampleToolsList(params.subsample_tools, tools)
 
     //
@@ -225,7 +225,7 @@ workflow NFCORE_SEQINSPECTOR {
         params.outdir,
         dict,
         fai,
-        params.sample_size.toInteger(),
+        params.sample_size.toFloat(),
         tools,
         subsample_tools,
         params.target_intervals,
