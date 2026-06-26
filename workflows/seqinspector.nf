@@ -34,7 +34,7 @@ include { paramsSummaryMultiqc         } from '../subworkflows/nf-core/utils_nfc
 include { reportIndexMultiqc           } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
 include { samplesheetToList            } from 'plugin/nf-schema'
 include { softwareVersionsToYAML       } from 'plugin/nf-core-utils'
-include { subsamplingWarningYaml       } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { subsamplingNoticeYaml        } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -360,7 +360,7 @@ workflow SEQINSPECTOR {
             .map { _process, tool, _version -> tool }
             .unique()
             .collect()
-            .map { ran_tools -> subsamplingWarningYaml(subsample_tools, ran_tools) }
+            .map { ran_tools -> subsamplingNoticeYaml(subsample_tools, ran_tools) }
 
         ch_multiqc_extra_files = ch_multiqc_extra_files.mix(ch_subsampling_warning.collectFile(name: 'subsampling_warning_mqc.yaml', sort: true))
     }

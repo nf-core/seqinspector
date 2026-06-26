@@ -141,7 +141,7 @@ By default, only a subset of tools run on the subsampled data. The `--subsample_
 
 The default value is:
 
-```
+```bash
 --subsample_tools fastqscreen,kraken2,picard_collecthsmetrics,picard_collectmultiplemetrics
 ```
 
@@ -176,13 +176,13 @@ Currently, the following tools are run as default:
 
 It is possible to choose individual tools to run using the `--tools` parameter and add all desired tools in a comma separated string. For example:
 
-```showLineNumbers
+```bash
 --tools fastqscreen,rundirparser
 ```
 
 Be aware that the default tools will still be run. In order to ONLY run the selection, one has to specify `--tools_bundle null` as well:
 
-```showLineNumbers
+```bash
 --tools fastqscreen,rundirparser --tools_bundle null
 ```
 

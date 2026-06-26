@@ -103,7 +103,7 @@ workflow PIPELINE_INITIALISATION {
         }
     }
 
-    extra_text = """\033[1;37mExtra informations\033[0m
+    extra_text = """\033[1;37mExtra information\033[0m
 \033[0;34m  Tools selected to be run  :\033[0;32m ${tools.join(",")} \033[0m
 ${subsampled_info}-\033[2m----------------------------------------------------\033[0m-
 """
@@ -449,6 +449,12 @@ def defineSubsampleToolsList(input_subsample_tools, all_tools) {
 
     def subsample_list = input_subsample_tools ? input_subsample_tools.tokenize(',').sort().unique() : []
 
+    // "all" means all active tools run on subsampled data (excluding tools that can't use subsampled data)
+    if ('all' in subsample_list) {
+        def excluded = ['seqtk', 'checkqc', 'multiqcsav', 'rundirparser']
+        return all_tools.findAll { it !in excluded }.sort()
+    }
+
     // Only keep tools that are both in subsample_tools AND in the active tools list
     subsample_list = subsample_list.intersect(all_tools)
 
@@ -489,30 +495,28 @@ def reportIndexMultiqc(tags, global = true) {
 //
 // Generate MultiQC warning section for subsampled tools
 //
-def subsamplingWarningYaml(subsample_tools, ran_tools) {
+def subsamplingNoticeYaml(subsample_tools, ran_tools) {
     def active_subsampled = subsample_tools.intersect(ran_tools).sort()
 
-    def yaml_file_text = "id: 'subsampling-warning'\n" as String
-    yaml_file_text += "section_name: 'Subsampling Warning'\n"
+    def yaml_file_text = "id: 'subsampling-notice'\n" as String
+    yaml_file_text += "section_name: 'Subsampling notice'\n"
     yaml_file_text += "section_href: 'https://github.com/${workflow.manifest.name}'\n"
-    yaml_file_text += "description: 'Warning about tools run on subsampled data.'\n"
+    yaml_file_text += "description: 'Notice about tools run on subsampled data.'\n"
     yaml_file_text += "plot_type: 'html'\n"
-    yaml_file_text += "order: -9999\n"
     yaml_file_text += "data: |\n"
 
     if (active_subsampled) {
         yaml_file_text += "  <div class=\"alert alert-warning\">\n"
-        yaml_file_text += "    <h4>Subsampled Data Warning</h4>\n"
         yaml_file_text += "    <p>The following tools were run on subsampled reads (via Seqtk) instead of the full dataset:</p>\n"
         yaml_file_text += "    <table class=\"table table-sm\">\n"
-        yaml_file_text += "      <thead><tr><th>Tool</th><th>Status</th></tr></thead>\n"
+        yaml_file_text += "      <thead><tr><th>Tool</th></tr></thead>\n"
         yaml_file_text += "      <tbody>\n"
         active_subsampled.each { tool ->
-            yaml_file_text += "        <tr><td><b>${tool}</b></td><td>subsampled</td></tr>\n"
+            yaml_file_text += "        <tr><td><b>${tool}</b></td></tr>\n"
         }
         yaml_file_text += "      </tbody>\n"
         yaml_file_text += "    </table>\n"
-        yaml_file_text += "    <p><small>Results may differ from a full-data analysis. Use <code>--subsample_tools</code> to change this behaviour.</small></p>\n"
+        yaml_file_text += "    <p><small>Results may differ from a full-data analysis. Check <a href='https://nf-co.re/seqinspector/docs/usage/#subsampling-control'>nf-co.re/seqinspector/docs/usage/#subsampling-control</a> for more information.</small></p>\n"
         yaml_file_text += "  </div>\n"
     }
     else {
