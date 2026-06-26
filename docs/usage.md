@@ -132,7 +132,7 @@ withName: SEQTK_SAMPLE {
 ```
 
 ```bash
-nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 -profile docker
+nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000
 ```
 
 #### Subsampling control
@@ -148,13 +148,13 @@ The default value is:
 For example, to also run FastQC on subsampled data:
 
 ```bash
-nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 --subsample_tools fastqscreen,kraken2,picard_collecthsmetrics,picard_collectmultiplemetrics,fastqc -profile docker
+nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 --subsample_tools fastqscreen,kraken2,picard_collecthsmetrics,picard_collectmultiplemetrics,fastqc
 ```
 
 Or to disable subsampling for all tools (run everything on original data):
 
 ```bash
-nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 --subsample_tools null -profile docker
+nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 --subsample_tools null
 ```
 
 Note: The `--subsample_tools` parameter only takes effect when `sample_size > 0`.
