@@ -354,15 +354,15 @@ workflow SEQINSPECTOR {
 
     ch_multiqc_extra_files = ch_multiqc_extra_files.mix(ch_methods_description.collectFile(name: 'methods_description_mqc.yaml', sort: true))
 
-    // Subsampling warning section for MultiQC (only when subsampling is active)
-    if (sample_size > 0) {
-        ch_subsampling_warning = channel.topic("versions")
+    // Optional subsampling notice section for MultiQC
+    if ('seqtk' in tools) {
+        ch_subsampling_notice = channel.topic("versions")
             .map { _process, tool, _version -> tool }
             .unique()
             .collect()
             .map { ran_tools -> subsamplingNoticeYaml(subsample_tools, ran_tools) }
 
-        ch_multiqc_extra_files = ch_multiqc_extra_files.mix(ch_subsampling_warning.collectFile(name: 'subsampling_warning_mqc.yaml', sort: true))
+        ch_multiqc_extra_files = ch_multiqc_extra_files.mix(ch_subsampling_notice.collectFile(name: 'subsampling_notice_mqc.yaml', sort: true))
     }
 
     // Add index to other MultiQC reports
