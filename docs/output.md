@@ -104,6 +104,8 @@ Fasta index with `samtools faidx`
 [ToulligQC](https://github.com/GenomiqueENS/toulligQC) is dedicated to the QC analyses of Oxford Nanopore runs.
 This software is written in Python and developed by the GenomiqueENS core facility of the Institute of Biology of the Ecole Normale Superieure (IBENS).
 
+</details>
+
 ### SeqFu
 
 <details markdown="1">
