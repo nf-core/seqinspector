@@ -452,7 +452,7 @@ def defineSubsampleToolsList(input_subsample_tools, all_tools) {
     // "all" means all active tools run on subsampled data (excluding tools that can't use subsampled data)
     if ('all' in subsample_list) {
         def excluded = ['seqtk', 'checkqc', 'multiqcsav', 'rundirparser']
-        return all_tools.findAll { it !in excluded }.sort()
+        return [all_tools - excluded].sort()
     }
 
     // Only keep tools that are both in subsample_tools AND in the active tools list
