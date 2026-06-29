@@ -25,6 +25,7 @@
                 },
                 "sample_size": {
                     "type": "number",
+                    "minimum": 0,
                     "description": "Take a subset of reads for analysis.",
                     "help_text": "Subset can be used as a fraction of reads (ex/ 0.20) or an absolute number of reads per sample (integer). Pipeline will still run if a sample has less reads than selected subset value.",
                     "default": 0,

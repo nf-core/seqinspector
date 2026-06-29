@@ -369,6 +369,10 @@ def defineToolsList(input_bundle, input_tools, input_skip, sample_size) {
 
     // Any tools in skip_tools will override any selection made via tools or tools_bundle
 
+    if (sample_size < 0) {
+        error "params.sample_size must be >= 0, got: ${sample_size}"
+    }
+
     def bundle_list = input_bundle ? input_bundle.tokenize(',').sort().unique() : ['no_setup']
     def tools_list = input_tools ? input_tools.tokenize(',').sort().unique() : []
     def skip_list = input_skip ? input_skip.tokenize(',').sort().unique() : []
