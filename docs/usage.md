@@ -151,6 +151,14 @@ For example, to also run FastQC on subsampled data:
 nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 --subsample_tools fastqscreen,kraken2,picard_collecthsmetrics,picard_collectmultiplemetrics,fastqc
 ```
 
+Or to run all active tools on subsampled data:
+
+```bash
+nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 --subsample_tools all
+```
+
+Note: `all` excludes tools that cannot use subsampled data (`seqtk`, `checkqc`, `multiqcsav`, `rundirparser`).
+
 Or to disable subsampling for all tools (run everything on original data):
 
 ```bash
