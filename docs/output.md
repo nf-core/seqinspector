@@ -72,8 +72,6 @@ Fasta index with `samtools faidx`
 
 </details>
 
-[Seqtk](https://github.com/lh3/seqtk) samples sequences randomly using reservoir sampling with a fixed seed (`-s100`) for reproducibility.
-
 ### CheckQC
 
 <details markdown="1">
@@ -104,7 +102,9 @@ Fasta index with `samtools faidx`
   - `*.html`: ToulligQC html report file.
 
 [ToulligQC](https://github.com/GenomiqueENS/toulligQC) is dedicated to the QC analyses of Oxford Nanopore runs.
-This software is written in Python and developped by the GenomiqueENS core facility of the Institute of Biology of the Ecole Normale Superieure (IBENS).
+This software is written in Python and developed by the GenomiqueENS core facility of the Institute of Biology of the Ecole Normale Superieure (IBENS).
+
+</details>
 
 ### SeqFu
 
@@ -154,6 +154,9 @@ The tool arguments can be customised via `--bbmap_clumpify_args`. By default, `m
 </details>
 
 [Seqtk](https://github.com/lh3/seqtk) samples sequences randomly using reservoir sampling with a fixed seed (`-s100`) for reproducibility.
+
+By default, only specific tools run on the subsampled data.
+Use `--subsample_tools` to control which tools receive subsampled reads (see [Usage](usage.md#subsampling-control)).
 
 ### FastQC
 
@@ -219,7 +222,7 @@ We only keep the reports for MultiQC and the pipeline report.
 - `reports/fastqscreen/[sample_id]/`
   - `*_screen.html`: Interactive graphical report.
   - `*_screen.png`: Static graphical report.
-  - `*_screen.txt` : Text-based report.
+  - `*_screen.txt`: Text-based report.
 
 </details>
 
@@ -239,7 +242,7 @@ The `.csv` is provided as a pipeline parameter `fastq_screen_references` and is 
 
 ### BWAMEM2_MEM
 
-[BWA-mem2](https://github.com/bwa-mem2/bwa-mem2) is an improved version of BWA-mem for mapping sequencies with low divergence against a reference genome with increased processing speed (~1.3-3.1x).
+[BWA-mem2](https://github.com/bwa-mem2/bwa-mem2) is an improved version of BWA-mem for mapping sequences with low divergence against a reference genome with increased processing speed (~1.3-3.1x).
 Aligned reads are then sorted using [samtools](#samtools) in the same process, and the resulting BAM files are then indexed with `samtools index`.
 
 <details markdown="1">
@@ -261,7 +264,7 @@ Aligned reads are then sorted using [samtools](#samtools) in the same process, a
 
 </details>
 
-[Picard_collecthsmetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard) is a tool to collect metrics on the aligment SAM/BAM files that are specific for sequence datasets generated through hybrid-selection (mostly used to capture exon-specific sequences for targeted sequencing).
+[Picard_collecthsmetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard) is a tool to collect metrics on the alignment SAM/BAM files that are specific for sequence datasets generated through hybrid-selection (mostly used to capture exon-specific sequences for targeted sequencing).
 
 ### Picard CollectMultipleMetrics
 
@@ -318,7 +321,7 @@ The resulting HTML files can be loaded into your web browser for exploration. Ea
 
 nf-core/seqinspector will generate the following MultiQC reports:
 
-- one global reports including all the samples listed in the samplesheet.
+- one global report including all the samples listed in the samplesheet.
 - one group report per unique tag. These reports compile samples that share the same tag.
 
 <details markdown="1">
@@ -361,7 +364,7 @@ The MultiQC global report might also contain metrics related to the rundir via t
 
 </details>
 
-[SeqkitStats](https://bioinf.shenwei.me/seqkit/usage/#stats) it gives simple statistics such as number of sequences, min/max_len, N50, Q20%, Q30% and GC%. For further reading and documentation see the [Seqkit help pages]([Seqkit help](https://bioinf.shenwei.me/seqkit/)).
+[SeqkitStats](https://bioinf.shenwei.me/seqkit/usage/#stats) it gives simple statistics such as number of sequences, min/max_len, N50, Q20%, Q30% and GC%. For further reading and documentation see the [Seqkit help pages](https://bioinf.shenwei.me/seqkit/).
 
 ### Pipeline information
 

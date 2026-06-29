@@ -132,8 +132,42 @@ withName: SEQTK_SAMPLE {
 ```
 
 ```bash
-nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 -profile docker
+nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000
 ```
+
+#### Subsampling control
+
+By default, only a subset of tools run on the subsampled data. The `--subsample_tools` parameter controls which tools receive subsampled reads (via Seqtk) versus original data. Tools not in this list run on the original (non-subsampled) data.
+
+The default value is:
+
+```bash
+--subsample_tools fastqscreen,kraken2,picard_collecthsmetrics,picard_collectmultiplemetrics
+```
+
+For example, to also run FastQC on subsampled data:
+
+```bash
+nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 --subsample_tools fastqscreen,kraken2,picard_collecthsmetrics,picard_collectmultiplemetrics,fastqc
+```
+
+Or to run all active tools on subsampled data:
+
+```bash
+nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 --subsample_tools all
+```
+
+Note: `all` excludes tools that cannot use subsampled data (`seqtk`, `checkqc`, `multiqcsav`, `rundirparser`).
+
+Or to disable subsampling for all tools (run everything on original data):
+
+```bash
+nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 --subsample_tools null
+```
+
+Note: `picard_collecthsmetrics` and `picard_collectmultiplemetrics` share the same alignment step. Selecting one for subsampling will automatically subsample the other as well.
+
+Note: The `--subsample_tools` parameter only takes effect when `sample_size > 0`.
 
 ### Tools selection
 
@@ -152,13 +186,13 @@ Currently, the following tools are run as default:
 
 It is possible to choose individual tools to run using the `--tools` parameter and add all desired tools in a comma separated string. For example:
 
-```showLineNumbers
+```bash
 --tools fastqscreen,rundirparser
 ```
 
 Be aware that the default tools will still be run. In order to ONLY run the selection, one has to specify `--tools_bundle null` as well:
 
-```showLineNumbers
+```bash
 --tools fastqscreen,rundirparser --tools_bundle null
 ```
 

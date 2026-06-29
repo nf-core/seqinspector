@@ -34,6 +34,7 @@ include { paramsSummaryMultiqc         } from '../subworkflows/nf-core/utils_nfc
 include { reportIndexMultiqc           } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
 include { samplesheetToList            } from 'plugin/nf-schema'
 include { softwareVersionsToYAML       } from 'plugin/nf-core-utils'
+include { subsamplingNoticeYaml        } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -57,6 +58,7 @@ workflow SEQINSPECTOR {
     fai
     sample_size
     tools
+    subsample_tools
     target_intervals
     kraken2_db
     kraken2_save_reads
@@ -67,13 +69,23 @@ workflow SEQINSPECTOR {
     def ch_multiqc_files = channel.empty()
     def ch_multiqc_extra_files = channel.empty()
 
-    // STEP 00: EARLY SKIP FAILING MALFORMED FASTQ FILES
+    // STEP 00: SUBSAMPLE
+
+    //
+    // MODULE: SEQTK_SAMPLE
+    // Any downstream tool will be run on subsampled reads if seqtk is run
+    //
+
+    SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] }.filter { 'seqtk' in tools })
+    ch_sample = 'seqtk' in tools ? SEQTK_SAMPLE.out.reads : ch_samplesheet
+
+    // STEP 01: EARLY SKIP FAILING MALFORMED FASTQ FILES
 
     //
     // MODULE: Run FQ_LINT to catch early errors
     //
 
-    FQ_LINT(ch_samplesheet.filter { ('fq_lint' in tools) })
+    FQ_LINT(('fq_lint' in subsample_tools ? ch_sample : ch_samplesheet).filter { 'fq_lint' in tools })
 
     // This catches all FASTQs that pass linting
     // If you use an error strategy that allows FQ_LINT to fail,
@@ -172,7 +184,7 @@ workflow SEQINSPECTOR {
     // MODULE: TOULLIGQC
     // This provides useful stats of long reads
 
-    TOULLIGQC(ch_samplesheet.filter { 'toulligqc' in tools })
+    TOULLIGQC(('toulligqc' in subsample_tools ? ch_sample : ch_samplesheet).filter { 'toulligqc' in tools })
 
     // STEP 02: BASIC QC ON FASTQ FILES
 
@@ -180,14 +192,14 @@ workflow SEQINSPECTOR {
     // MODULE: Run BBMAP_CLUMPIFY
     //
 
-    BBMAP_CLUMPIFY(ch_samplesheet.filter { 'bbmap_clumpify' in tools })
+    BBMAP_CLUMPIFY(('bbmap_clumpify' in subsample_tools ? ch_sample : ch_samplesheet).filter { 'bbmap_clumpify' in tools })
     bbmap_clumpify_reads = save_bbmap_clumpify_reads ? BBMAP_CLUMPIFY.out.reads : channel.empty()
 
     //
     // MODULE: SEQFU_STATS
     //
 
-    SEQFU_STATS(ch_samplesheet.filter { 'seqfu_stats' in tools })
+    SEQFU_STATS(('seqfu_stats' in subsample_tools ? ch_sample : ch_samplesheet).filter { 'seqfu_stats' in tools })
 
     // Parse the stats TSV file
     SEQFU_STATS.out.stats
@@ -200,23 +212,13 @@ workflow SEQINSPECTOR {
             }
         }
 
-    // STEP 03: SUBSAMPLE
-
-    //
-    // MODULE: SEQTK_SAMPLE
-    // Any downstream tool will be run on subsampled reads if seqtk is run
-    //
-
-    SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] }.filter { 'seqtk_sample' in tools })
-    ch_sample = 'seqtk_sample' in tools ? SEQTK_SAMPLE.out.reads : ch_samplesheet
-
     // STEP 04: MORE QC ON FASTQ FILES (CAN BE SUBSAMPLED)
 
-    FASTQC(ch_sample.filter { 'fastqc' in tools })
+    FASTQC(('fastqc' in subsample_tools ? ch_sample : ch_samplesheet).filter { 'fastqc' in tools })
 
-    FASTQE(ch_sample.filter { 'fastqe' in tools })
+    FASTQE(('fastqe' in subsample_tools ? ch_sample : ch_samplesheet).filter { 'fastqe' in tools })
 
-    SEQKIT_STATS(ch_sample.filter { 'seqkit_stats' in tools })
+    SEQKIT_STATS(('seqkit_stats' in subsample_tools ? ch_sample : ch_samplesheet).filter { 'seqkit_stats' in tools })
 
     //
     // MODULE: FASTP for adapter trimming and quality filtering
@@ -227,7 +229,7 @@ workflow SEQINSPECTOR {
     def save_merged = false
 
     FASTP(
-        ch_sample.map { meta, reads -> [meta, reads, []] }.filter { 'fastp' in tools },
+        ('fastp' in subsample_tools ? ch_sample : ch_samplesheet).map { meta, reads -> [meta, reads, []] }.filter { 'fastp' in tools },
         discard_trimmed_pass,
         save_trimmed_fail,
         save_merged,
@@ -237,7 +239,7 @@ workflow SEQINSPECTOR {
     // MODULE: SEQUALI
     //
 
-    SEQUALI(ch_sample.filter { 'sequali' in tools })
+    SEQUALI(('sequali' in subsample_tools ? ch_sample : ch_samplesheet).filter { 'sequali' in tools })
 
     // STEP 05: FASTQSCREEN
 
@@ -247,7 +249,7 @@ workflow SEQINSPECTOR {
     //   and transpose it into a tuple containing lists for each property
 
     FASTQSCREEN_FASTQSCREEN(
-        ch_sample.filter { 'fastqscreen' in tools },
+        ('fastqscreen' in subsample_tools ? ch_sample : ch_samplesheet).filter { 'fastqscreen' in tools },
         channel.fromList(
             samplesheetToList(
                 fastq_screen_references,
@@ -264,7 +266,7 @@ workflow SEQINSPECTOR {
 
     if ('kraken2' in tools) {
         FASTQ_QC_PHYLOGENETIC(
-            ch_sample,
+            'kraken2' in subsample_tools ? ch_sample : ch_samplesheet,
             kraken2_db,
             kraken2_save_reads,
             kraken2_save_readclassifications,
@@ -280,7 +282,9 @@ workflow SEQINSPECTOR {
     def sort_bam = true
 
     BWAMEM2_MEM(
-        ch_sample.filter { ('picard_collecthsmetrics' in tools) || ('picard_collectmultiplemetrics' in tools) },
+        (('picard_collecthsmetrics' in subsample_tools) || ('picard_collectmultiplemetrics' in subsample_tools)
+            ? ch_sample
+            : ch_samplesheet).filter { ('picard_collecthsmetrics' in tools) || ('picard_collectmultiplemetrics' in tools) },
         bwamem2,
         fasta,
         sort_bam,
@@ -346,9 +350,20 @@ workflow SEQINSPECTOR {
         .unique()
         .collect()
         .map { tool_list -> ('multiqcsav' in tools ? tool_list + ['multiqcsav'] : tool_list).unique() }
-        .map { tool_list -> methodsDescriptionText(ch_multiqc_custom_methods_description, tool_list) }
+        .map { tool_list -> methodsDescriptionText(ch_multiqc_custom_methods_description, tool_list, subsample_tools) }
 
     ch_multiqc_extra_files = ch_multiqc_extra_files.mix(ch_methods_description.collectFile(name: 'methods_description_mqc.yaml', sort: true))
+
+    // Optional subsampling notice section for MultiQC
+    if ('seqtk' in tools) {
+        ch_subsampling_notice = channel.topic("versions")
+            .map { _process, tool, _version -> tool }
+            .unique()
+            .collect()
+            .map { ran_tools -> subsamplingNoticeYaml(subsample_tools, ran_tools) }
+
+        ch_multiqc_extra_files = ch_multiqc_extra_files.mix(ch_subsampling_notice.collectFile(name: 'subsampling_notice_mqc.yaml', sort: true))
+    }
 
     // Add index to other MultiQC reports
     ch_tags = ch_multiqc_files.map { meta, _files -> meta.tags }.flatten().unique()
