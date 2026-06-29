@@ -342,7 +342,7 @@ Tools:
 
 If no genome or fasta file is provided, either with `--genome` or `--fasta`,
 the pipeline will not be able to run the alignment step with BWAMEM2,
-and will skip all tools that depend on the alignment file (eg. `picard CollectHsMetrics` and `picard CollectHsMetrics`).
+and will skip all tools that depend on the alignment file (e.g. `picard CollectHsMetrics` and `picard CollectMultipleMetrics`).
 
 #### Hybrid-selection QC metrics
 
