@@ -1225,11 +1225,11 @@
             ],
             "No BAM files",
             [
-                "WARN: Sample1_01: Requested sample_size (120.0) is larger than available reads (100). Pipeline will continue with 100 reads.",
-                "WARN: Sample23_03: Requested sample_size (120.0) is larger than available reads (100). Pipeline will continue with 100 reads.",
-                "WARN: SampleA_02: Requested sample_size (120.0) is larger than available reads (100). Pipeline will continue with 100 reads.",
-                "WARN: Undetermined_05: Requested sample_size (120.0) is larger than available reads (100). Pipeline will continue with 100 reads.",
-                "WARN: sampletest_04: Requested sample_size (120.0) is larger than available reads (100). Pipeline will continue with 100 reads."
+                "WARN: Sample1_01: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
+                "WARN: Sample23_03: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
+                "WARN: SampleA_02: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
+                "WARN: Undetermined_05: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
+                "WARN: sampletest_04: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads."
             ]
         ],
         "timestamp": "2026-04-01T15:52:26.65842346",

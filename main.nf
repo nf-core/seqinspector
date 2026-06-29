@@ -225,7 +225,7 @@ workflow NFCORE_SEQINSPECTOR {
         params.outdir,
         dict,
         fai,
-        params.sample_size.toFloat(),
+        params.sample_size.toFloat() > 0 && params.sample_size.toFloat() < 1 ? params.sample_size.toFloat() : params.sample_size.toInteger(),
         tools,
         subsample_tools,
         params.target_intervals,
