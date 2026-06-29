@@ -32,7 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#238](https://github.com/nf-core/seqinspector/pull/238) Fix Python/PyYAML tool name case mismatch in rundirparser module
 - [#239](https://github.com/nf-core/seqinspector/pull/239) Fix tool bundles documentation to match code
 - [#240](https://github.com/nf-core/seqinspector/pull/240) Fix FASTQE default tool marking in README
-- [#245](https://github.com/nf-core/seqinspector/pull/245) Fix repeated listing of CollectHsMetrics 
+- [#245](https://github.com/nf-core/seqinspector/pull/245) Fix repeated listing of CollectHsMetrics
 
 ### `Changed`
 
