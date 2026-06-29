@@ -65,6 +65,7 @@ workflow {
         subsample_tools,
         params.fasta,
         params.kraken2_db,
+        params.riker_args,
     )
 
     PREPARE_GENOME(

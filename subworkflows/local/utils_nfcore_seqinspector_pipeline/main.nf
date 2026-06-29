@@ -38,6 +38,7 @@ workflow PIPELINE_INITIALISATION {
     subsample_tools
     fasta
     kraken2_db
+    riker_args
 
     main:
 
@@ -122,7 +123,7 @@ ${subsampled_info}-\033[2m----------------------------------------------------\0
     //
     // Custom validation for pipeline parameters
     //
-    validateInputParameters()
+    validateInputParameters(tools, riker_args)
     // Runs additional validation that is not done by $projectDir/nextflow_schema.json
 
     //
@@ -234,8 +235,9 @@ workflow PIPELINE_COMPLETION {
 //
 // Check and validate pipeline parameters
 //
-def validateInputParameters() {
+def validateInputParameters(tools, riker_args) {
     genomeExistsError()
+    rikerHybcapError(tools, riker_args)
 }
 
 //
@@ -260,6 +262,15 @@ def genomeExistsError() {
     if (params.genomes && params.genome && !params.genomes.containsKey(params.genome)) {
         def error_string = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" + "  Genome '${params.genome}' not found in any config files provided to the pipeline.\n" + "  Currently, the available genome keys are:\n" + "  ${params.genomes.keySet().join(", ")}\n" + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         error(error_string)
+    }
+}
+
+//
+// Exit pipeline if riker hybcap is requested without bait/target intervals
+//
+def rikerHybcapError(tools, riker_args) {
+    if ('riker' in tools && riker_args?.contains('hybcap') && (!params.bait_intervals || !params.target_intervals)) {
+        error("riker_args contains 'hybcap' but --bait_intervals and --target_intervals were not provided. Both are required for hybcap metrics.")
     }
 }
 

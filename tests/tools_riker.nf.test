@@ -42,6 +42,18 @@ nextflow_pipeline {
             ],
             stub: true,
         ],
+        [
+            name: "NovaSeq6000 data test - riker hybcap with only bait - should fail",
+            params: [
+                tools: 'riker',
+                tools_bundle: null,
+                riker_args: '--tools alignment basic hybcap isize',
+                bait_intervals: "${pipelines_testdata_base_path}/seqinspector/data/references/R64-1-1/Sequence/chrI.bed",
+            ],
+            failure: true,
+            snapshot_include: 'hybcap',
+            snapshot: 'stdout,stderr',
+        ],
     ]
 
     // Generate tests for each scenario
