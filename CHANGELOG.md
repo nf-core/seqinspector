@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- Added riker module for BAM-level QC metrics collection
 - [#59](https://github.com/nf-core/seqinspector/pull/59) Seqkit Stats TSV output.
 - [#109](https://github.com/nf-core/seqinspector/pull/109) Adds ToulligQC module for long read QC
 - [#134](https://github.com/nf-core/seqinspector/pull/134) Added sequali module.

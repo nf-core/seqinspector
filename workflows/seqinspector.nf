@@ -16,6 +16,7 @@ include { FQ_LINT                      } from '../modules/nf-core/fq/lint'
 include { MULTIQC as MULTIQC_PER_TAG   } from '../modules/nf-core/multiqc'
 include { MULTIQCSAV as MULTIQC_GLOBAL } from '../modules/nf-core/multiqcsav'
 include { RUNDIRPARSER                 } from '../modules/local/rundirparser'
+include { RIKER_MULTI                  } from '../modules/nf-core/riker/multi'
 include { SAMTOOLS_INDEX               } from '../modules/nf-core/samtools/index'
 include { SEQFU_STATS                  } from '../modules/nf-core/seqfu/stats'
 include { SEQKIT_STATS                 } from '../modules/nf-core/seqkit/stats'
@@ -281,10 +282,11 @@ workflow SEQINSPECTOR {
 
     def sort_bam = true
 
+    def needs_bam = ('picard_collecthsmetrics' in tools) || ('picard_collectmultiplemetrics' in tools) || ('riker' in tools)
+    def bam_subsampled = ('picard_collecthsmetrics' in subsample_tools) || ('picard_collectmultiplemetrics' in subsample_tools) || ('riker' in subsample_tools)
+
     BWAMEM2_MEM(
-        (('picard_collecthsmetrics' in subsample_tools) || ('picard_collectmultiplemetrics' in subsample_tools)
-            ? ch_sample
-            : ch_samplesheet).filter { ('picard_collecthsmetrics' in tools) || ('picard_collectmultiplemetrics' in tools) },
+        (bam_subsampled ? ch_sample : ch_samplesheet).filter { needs_bam },
         bwamem2,
         fasta,
         sort_bam,
@@ -310,6 +312,24 @@ workflow SEQINSPECTOR {
         target_intervals ? channel.fromPath(target_intervals).collect() : channel.empty(),
         dict,
         tools,
+    )
+
+    //
+    // MODULE: RIKER_MULTI
+    //   Run riker multi QC metrics on BAM files
+
+    if (bait_intervals && target_intervals) {
+        bam_bai_for_riker = bam_bai
+            .combine(channel.fromPath(bait_intervals).collect())
+            .combine(channel.fromPath(target_intervals).collect())
+    }
+    else {
+        bam_bai_for_riker = bam_bai.map { meta, bam, bai -> [meta, bam, bai, [], []] }
+    }
+
+    RIKER_MULTI(
+        bam_bai_for_riker.filter { 'riker' in tools },
+        fasta.join(fai).collect(),
     )
 
     // Collate and save software versions

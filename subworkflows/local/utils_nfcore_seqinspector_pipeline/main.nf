@@ -165,9 +165,9 @@ ${subsampled_info}-\033[2m----------------------------------------------------\0
             }
         }
 
-    if (!(fasta) && (("picard_collecthsmetrics" in tools) || ("picard_collectmultiplemetrics" in tools))) {
-        log.warn("No fasta was provided, but picard was requested")
-        log.warn("BWAMEM2, SAMTOOLS and PICARD processes, will be skipped")
+    if (!(fasta) && (("picard_collecthsmetrics" in tools) || ("picard_collectmultiplemetrics" in tools) || ("riker" in tools))) {
+        log.warn("No fasta was provided, but picard or riker was requested")
+        log.warn("BWAMEM2, SAMTOOLS, PICARD and RIKER processes will be skipped")
     }
 
     if ('toulligqc' in tools && 'emulate_amd64' in workflow.profile.tokenize(",")) {
@@ -390,6 +390,7 @@ def defineToolsList(input_bundle, input_tools, input_skip, sample_size) {
         tools_list << 'multiqcsav'
         tools_list << 'picard_collecthsmetrics'
         tools_list << 'picard_collectmultiplemetrics'
+        tools_list << 'riker'
         tools_list << 'rundirparser'
         tools_list << 'seqkit_stats'
         tools_list << 'seqfu_stats'
@@ -399,6 +400,7 @@ def defineToolsList(input_bundle, input_tools, input_skip, sample_size) {
     if ('bam' in bundle_list) {
         tools_list << 'picard_collecthsmetrics'
         tools_list << 'picard_collectmultiplemetrics'
+        tools_list << 'riker'
     }
     if ('fastq' in bundle_list) {
         tools_list << 'fastqc'
