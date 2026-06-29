@@ -71,7 +71,7 @@
                 "subsample_tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to run on subsampled data. Tools not in this list run on original data.",
-                    "help_text": "Controls which tools receive subsampled reads (via Seqtk) versus original data. Only effective when sample_size > 0. Use 'null' to disable subsampling for all tools.",
+                    "help_text": "Controls which tools receive subsampled reads (via Seqtk) versus original data. Only effective when sample_size > 0. Use 'all' to subsample all active tools, or 'null' to disable subsampling for all tools. Note: picard_collecthsmetrics and picard_collectmultiplemetrics share the same alignment step; selecting one automatically subsamples the other.",
                     "pattern": "^((all|null|bbmap_clumpify|fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|picard_collecthsmetrics|picard_collectmultiplemetrics|seqkit_stats|seqfu_stats|sequali|toulligqc)?,?)*(?<!,)$",
                     "default": "fastqscreen,kraken2,picard_collecthsmetrics,picard_collectmultiplemetrics",
                     "fa_icon": "fas fa-random"
