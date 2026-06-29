@@ -440,9 +440,9 @@ def defineToolsList(input_bundle, input_tools, input_skip, sample_size) {
     return tools_list
 }
 
-def defineSubsampleToolsList(input_subsample_tools, all_tools) {
+def defineSubsampleToolsList(subsample_tools, tools) {
 
-    def subsample_list = input_subsample_tools ? input_subsample_tools.tokenize(',').sort().unique() : []
+    def subsample_list = subsample_tools ? subsample_tools.tokenize(',').sort().unique() : []
 
     // "null" means no tools run on subsampled data
     if ('null' in subsample_list) {
@@ -452,13 +452,25 @@ def defineSubsampleToolsList(input_subsample_tools, all_tools) {
     // "all" means all active tools run on subsampled data (excluding tools that can't use subsampled data)
     if ('all' in subsample_list) {
         def excluded = ['seqtk', 'checkqc', 'multiqcsav', 'rundirparser']
-        return [all_tools - excluded].sort()
+        return [tools - excluded].sort()
+    }
+
+    // Picard tools share the same alignment step, so subsampling one implies the other
+    if ('picard_collecthsmetrics' in tools && 'picard_collectmultiplemetrics' in tools) {
+        if ('picard_collecthsmetrics' in subsample_tools || 'picard_collectmultiplemetrics' in subsample_tools) {
+            subsample_list += ['picard_collecthsmetrics', 'picard_collectmultiplemetrics']
+        }
+        def count = 'picard_collecthsmetrics' in subsample_tools ? 1 : 0
+        count += 'picard_collectmultiplemetrics' in subsample_tools ? 1 : 0
+        if (count == 1) {
+            log.warn("Only one of picard_collecthsmetrics or picard_collectmultiplemetrics was selected via subsample_tools. They share the same alignment step, so both will run on subsampled data.")
+        }
     }
 
     // Only keep tools that are both in subsample_tools AND in the active tools list
-    subsample_list = subsample_list.intersect(all_tools)
+    subsample_list = subsample_list.intersect(tools)
 
-    return subsample_list
+    return subsample_list.unique().sort()
 }
 
 //

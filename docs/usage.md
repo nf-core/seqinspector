@@ -165,6 +165,8 @@ Or to disable subsampling for all tools (run everything on original data):
 nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 --subsample_tools null
 ```
 
+Note: `picard_collecthsmetrics` and `picard_collectmultiplemetrics` share the same alignment step. Selecting one for subsampling will automatically subsample the other as well.
+
 Note: The `--subsample_tools` parameter only takes effect when `sample_size > 0`.
 
 ### Tools selection
