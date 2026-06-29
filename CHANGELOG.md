@@ -7,7 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
-- Added riker module for BAM-level QC metrics collection
 - [#59](https://github.com/nf-core/seqinspector/pull/59) Seqkit Stats TSV output.
 - [#109](https://github.com/nf-core/seqinspector/pull/109) Adds ToulligQC module for long read QC
 - [#134](https://github.com/nf-core/seqinspector/pull/134) Added sequali module.
@@ -25,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#236](https://github.com/nf-core/seqinspector/pull/236) Added bbmap/clumpify module for FASTQ deduplication and compression
 - [#237](https://github.com/nf-core/seqinspector/pull/237) Add meta.yml for rundirparser module
 - [#243](https://github.com/nf-core/seqinspector/pull/243) Add `--subsample_tools` parameter to control which tools run on subsampled data
+- [#246](https://github.com/nf-core/seqinspector/pull/246) Added riker module for BAM-level QC metrics collection
 
 ### `Fixed`
 
