@@ -344,18 +344,9 @@ def methodsDescriptionText(mqc_methods_yaml, tool_list, subsample_tools = []) {
     meta["tool_bibliography"] = toolReferencesText('bibliography', tool_list).collect { bibliography -> "<li>${bibliography}</li>" }.join('\n    ')
 
     // Subsampled tools info
-    if ('seqtk' in tool_list && subsample_tools) {
-        def active_subsampled = subsample_tools.intersect(tool_list).sort()
-        if (active_subsampled) {
-            meta["subsampled_text"] = "The following tools were run on subsampled reads (via Seqtk): ${active_subsampled.join(', ')}."
-        }
-        else {
-            meta["subsampled_text"] = ""
-        }
-    }
-    else {
-        meta["subsampled_text"] = ""
-    }
+    meta["subsampled_text"] = ('seqtk' in tool_list && subsample_tools) && subsample_tools.intersect(tool_list).sort()
+        ? "The following tools were run on subsampled reads (via Seqtk): ${subsample_tools.intersect(tool_list).sort().join(', ')}."
+        : ""
 
     def methods_text = mqc_methods_yaml.text
 
@@ -370,7 +361,7 @@ def defineToolsList(input_bundle, input_tools, input_skip, sample_size) {
     // Any tools in skip_tools will override any selection made via tools or tools_bundle
 
     if (sample_size < 0) {
-        error "params.sample_size must be >= 0, got: ${sample_size}"
+        error("params.sample_size must be >= 0, got: ${sample_size}")
     }
 
     def bundle_list = input_bundle ? input_bundle.tokenize(',').sort().unique() : ['no_setup']
