@@ -449,6 +449,11 @@ def defineSubsampleToolsList(input_subsample_tools, all_tools) {
 
     def subsample_list = input_subsample_tools ? input_subsample_tools.tokenize(',').sort().unique() : []
 
+    // "null" means no tools run on subsampled data
+    if ('null' in subsample_list) {
+        return []
+    }
+
     // "all" means all active tools run on subsampled data (excluding tools that can't use subsampled data)
     if ('all' in subsample_list) {
         def excluded = ['seqtk', 'checkqc', 'multiqcsav', 'rundirparser']
