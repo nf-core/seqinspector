@@ -51,6 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#223](https://github.com/nf-core/seqinspector/pull/223) Workflow output for the rest of the pipeline
 - [#235](https://github.com/nf-core/seqinspector/pull/235) Update MultiQC and other dependencies
 - [#237](https://github.com/nf-core/seqinspector/pull/237) Improved citation system to dynamically build tool citations based on selected tools
+- [#244](https://github.com/nf-core/seqinspector/pull/244) Corrected the pipeline introduction tool list for fq lint
 
 ### `Dependencies`
 
