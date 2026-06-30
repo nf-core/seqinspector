@@ -8,27 +8,27 @@ process RIKER_MULTI {
         'community.wave.seqera.io/library/riker:0.3.0--56fa17ae2be0828f' }"
 
     input:
-    tuple val(meta),  path(bam), path(bai), path(baits, stageAs: "baits/*"), path(targets, stageAs: 'targets/*')
+    tuple val(meta),  path(bam), path(bai), path(baits, stageAs: 'baits/*'), path(targets, stageAs: 'targets/*')
     tuple val(meta2), path(fasta), path(fai)
 
     output:
-    tuple val(meta), val("${task.process}"), val('riker'), path("*.alignment-metrics.txt")             , optional: true, emit: alignment_metrics, topic: multiqc_files
-    tuple val(meta), val("${task.process}"), val('riker'), path("*.base-distribution-by-cycle.txt")    , optional: true, emit: base_dist, topic: multiqc_files
-    tuple val(meta), val("${task.process}"), val('riker'), path("*.mean-quality-by-cycle.txt")         , optional: true, emit: mean_qual, topic: multiqc_files
-    tuple val(meta), val("${task.process}"), val('riker'), path("*.quality-score-distribution.txt")    , optional: true, emit: qual_dist, topic: multiqc_files
-    tuple val(meta), val("${task.process}"), val('riker'), path("*.error-mismatch.txt")                , optional: true, emit: error_mismatch, topic: multiqc_files
-    tuple val(meta), val("${task.process}"), val('riker'), path("*.error-overlap.txt")                 , optional: true, emit: error_overlap, topic: multiqc_files
-    tuple val(meta), val("${task.process}"), val('riker'), path("*.error-indel.txt")                   , optional: true, emit: error_indel, topic: multiqc_files
-    tuple val(meta), val("${task.process}"), val('riker'), path("*.gcbias-detail.txt")                 , optional: true, emit: gcbias_detail, topic: multiqc_files
-    tuple val(meta), val("${task.process}"), val('riker'), path("*.gcbias-summary.txt")                , optional: true, emit: gcbias_summary, topic: multiqc_files
-    tuple val(meta), val("${task.process}"), val('riker'), path("*.hybcap-metrics.txt")                , optional: true, emit: hybcap_metrics, topic: multiqc_files
-    tuple val(meta), val("${task.process}"), val('riker'), path("*.hybcap-per-target.txt")             , optional: true, emit: hybcap_per_target, topic: multiqc_files
-    tuple val(meta), val("${task.process}"), val('riker'), path("*.hybcap-per-base.txt*")              , optional: true, emit: hybcap_per_base, topic: multiqc_files
-    tuple val(meta), val("${task.process}"), val('riker'), path("*.isize-metrics.txt")                 , optional: true, emit: isize_metrics, topic: multiqc_files
-    tuple val(meta), val("${task.process}"), val('riker'), path("*.isize-histogram.txt")               , optional: true, emit: isize_histogram, topic: multiqc_files
-    tuple val(meta), val("${task.process}"), val('riker'), path("*.wgs-metrics.txt")                   , optional: true, emit: wgs_metrics, topic: multiqc_files
-    tuple val(meta), val("${task.process}"), val('riker'), path("*.wgs-coverage.txt")                  , optional: true, emit: wgs_coverage, topic: multiqc_files
-    tuple val(meta), path("*.pdf")                               , optional: true, emit: pdf
+    tuple val(meta), path("*.alignment-metrics.txt"),          emit: alignment_metrics, optional: true, topic: multiqc_files
+    tuple val(meta), path("*.base-distribution-by-cycle.txt"), emit: base_dist,         optional: true, topic: multiqc_files
+    tuple val(meta), path("*.mean-quality-by-cycle.txt"),      emit: mean_qual,         optional: true, topic: multiqc_files
+    tuple val(meta), path("*.quality-score-distribution.txt"), emit: qual_dist,         optional: true, topic: multiqc_files
+    tuple val(meta), path("*.error-mismatch.txt"),             emit: error_mismatch,    optional: true, topic: multiqc_files
+    tuple val(meta), path("*.error-overlap.txt"),              emit: error_overlap,     optional: true, topic: multiqc_files
+    tuple val(meta), path("*.error-indel.txt"),                emit: error_indel,       optional: true, topic: multiqc_files
+    tuple val(meta), path("*.gcbias-detail.txt"),              emit: gcbias_detail,     optional: true, topic: multiqc_files
+    tuple val(meta), path("*.gcbias-summary.txt"),             emit: gcbias_summary,    optional: true, topic: multiqc_files
+    tuple val(meta), path("*.hybcap-metrics.txt"),             emit: hybcap_metrics,    optional: true, topic: multiqc_files
+    tuple val(meta), path("*.hybcap-per-target.txt"),          emit: hybcap_per_target, optional: true, topic: multiqc_files
+    tuple val(meta), path("*.hybcap-per-base.txt*"),           emit: hybcap_per_base,   optional: true, topic: multiqc_files
+    tuple val(meta), path("*.isize-metrics.txt"),              emit: isize_metrics,     optional: true, topic: multiqc_files
+    tuple val(meta), path("*.isize-histogram.txt"),            emit: isize_histogram,   optional: true, topic: multiqc_files
+    tuple val(meta), path("*.wgs-metrics.txt"),                emit: wgs_metrics,       optional: true, topic: multiqc_files
+    tuple val(meta), path("*.wgs-coverage.txt"),               emit: wgs_coverage,      optional: true, topic: multiqc_files
+    tuple val(meta), path("*.pdf"),                            emit: pdf,               optional: true, topic: multiqc_files
     tuple val("${task.process}"), val('riker'), eval("riker --version 2>&1 | sed 's/riker //'") , topic: versions, emit: versions_riker
 
     when:
