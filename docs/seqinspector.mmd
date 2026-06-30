@@ -27,31 +27,35 @@ graph LR
         sequali[Sequali]
         toulligqc[ToulligQC]
 
+        subgraph metagenomics [Metagenomics]
+            kraken2[Kraken2]
+            krona[Krona]
+            kraken2 -->|fastq_files| krona
+        end
+
+        subgraph bam_qc [BAM QC]
+            picardhs[Picard collecthsmetrics]
+            picardmultiple[Picard collectmultiplemetrics]
+            riker[Riker multi]
+        end
+
         fastq_in -->|fastq_files| seqtk
 
         seqtk -->|fastq_files| bbmap
         seqtk -->|fastq_files| bwamem2
+        bwamem2 -->|fastq_files| picardhs
+        bwamem2 -->|fastq_files| picardmultiple
+        bwamem2 -->|fastq_files| riker
         seqtk -->|fastq_files| fastp
         seqtk -->|fastq_files| fastqc
         seqtk -->|fastq_files| fastqe
         seqtk -->|fastq_files| fastqscreen
         seqtk -->|fastq_files| fq_lint
+        seqtk -->|fastq_files| kraken2
         seqtk -->|fastq_files| seqfu
         seqtk -->|fastq_files| seqkit
         seqtk -->|fastq_files| sequali
         seqtk -->|fastq_files| toulligqc
-    end
-
-    subgraph bam_qc [BAM QC]
-        picardhs[Picard collecthsmetrics]
-        picardmultiple[Picard collectmultiplemetrics]
-        riker[Riker multi]
-    end
-
-    subgraph metagenomics [Metagenomics]
-        kraken2[Kraken2]
-        krona[Krona]
-        kraken2 -->|fastq_files| krona
     end
 
     subgraph run_folder [Run Folder]
@@ -84,8 +88,3 @@ graph LR
         sequali -->|fastq_files| multiqc
         toulligqc -->|fastq_files| multiqc
     end
-
-    bwamem2 -->|fastq_files| picardhs
-    bwamem2 -->|fastq_files| picardmultiple
-    bwamem2 -->|fastq_files| riker
-    seqtk -->|fastq_files| kraken2
