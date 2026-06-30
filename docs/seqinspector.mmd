@@ -11,20 +11,6 @@
 %%metro legend: bl
 
 graph LR
-    subgraph run_folder [Run Folder]
-        %%metro direction: LR
-        %%metro entry: left | run_folder
-        %%metro exit: left | run_folder
-
-        rundir_in[ ]
-
-        checkqc[CheckQC]
-        rundirparser[Rundirparser]
-
-        rundir_in -->|run_folder| checkqc
-        rundir_in -->|run_folder| rundirparser
-    end
-
     subgraph fastq_files [FASTQ Files]
         %%metro direction: LR
         %%metro entry: left | fastq_files
@@ -70,6 +56,20 @@ graph LR
         bwamem2 -->|fastq_files| samtools
         samtools -->|fastq_files| picard
         samtools -->|fastq_files| riker
+    end
+
+    subgraph run_folder [Run Folder]
+        %%metro direction: LR
+        %%metro entry: left | run_folder
+        %%metro exit: left | run_folder
+
+        rundir_in[ ]
+
+        checkqc[CheckQC]
+        rundirparser[Rundirparser]
+
+        rundir_in -->|run_folder| checkqc
+        rundir_in -->|run_folder| rundirparser
     end
 
     subgraph multiqc [MultiQC]
