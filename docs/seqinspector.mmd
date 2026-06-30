@@ -2,12 +2,15 @@
 %%metro style: dark
 %%metro logo: docs/images/nf-core-seqinspector_logo_dark.png
 
+%%metro line: bam_files | BAM Files | #24B064
 %%metro line: fastq_files | FASTQ Files | #ff7f0e
 %%metro line: run_folder | Run Folder | #1f77b4
 
-%%metro file: fastq_in | FASTQ
-%%metro file: rundir_in | RUNDIR
-%%metro file: multiqc | HTML
+%%metro file: fastq_in | FASTQ | | banner
+%%metro dir: rundir_in | RUNDIR
+%%metro file: multiqc | HTML | | banner
+%%metro center_ports: true
+%%metro compact_offsets: true
 %%metro legend: bl
 
 graph LR
@@ -15,35 +18,35 @@ graph LR
         fastq_in[ ]
 
         bbmap[BBMap Clumpify]
-        bwamem2[BWAmem2]
         fastp[FastP]
         fastqc[FASTQC]
         fastqe[FASTQE]
         fastqscreen[FastQ Screen]
         fq_lint[FQ Lint]
+        kraken2[Kraken2]
+        krona[Krona]
         seqfu[SeqFu Stats]
         seqkit[SeqKit Stats]
         seqtk[Seqtk sample]
         sequali[Sequali]
         toulligqc[ToulligQC]
 
-        subgraph metagenomics [Metagenomics]
-            seqtk -->|fastq_files| kraken2
-            kraken2[Kraken2]
-            krona[Krona]
-            kraken2 -->|fastq_files| krona
-        end
+        fastq_in -->|fastq_files| seqtk
 
-        subgraph bam_qc [BAM QC]
-            bwamem2 -->|fastq_files| picardhs
-            bwamem2 -->|fastq_files| picardmultiple
-            bwamem2 -->|fastq_files| riker
+        seqtk -->|fastq_files| kraken2
+        kraken2 -->|fastq_files| krona
+
+        subgraph bam_files [BAM Files]
+            bwamem2[BWAmem2]
+
             picardhs[Picard collecthsmetrics]
             picardmultiple[Picard collectmultiplemetrics]
             riker[Riker multi]
-        end
 
-        fastq_in -->|fastq_files| seqtk
+            bwamem2 -->|bam_files| picardhs
+            bwamem2 -->|bam_files| picardmultiple
+            bwamem2 -->|bam_files| riker
+        end
 
         seqtk -->|fastq_files| bbmap
         seqtk -->|fastq_files| bwamem2
@@ -79,9 +82,9 @@ graph LR
         fastqscreen -->|fastq_files| multiqc
         fq_lint -->|fastq_files| multiqc
         krona -->|fastq_files| multiqc
-        picardhs -->|fastq_files| multiqc
-        picardmultiple -->|fastq_files| multiqc
-        riker -->|fastq_files| multiqc
+        picardhs -->|bam_files| multiqc
+        picardmultiple -->|bam_files| multiqc
+        riker -->|bam_files| multiqc
         rundirparser -->|run_folder| multiqc
         seqfu -->|fastq_files| multiqc
         seqkit -->|fastq_files| multiqc
