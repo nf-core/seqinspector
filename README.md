@@ -54,11 +54,15 @@ If provided, nf-core/seqinspector can also parse statistics from an Illumina run
 
 ### Workflow diagram
 
+The subway map below is a graphical representation of the pipeline workflow, generated with [nf-metro](https://seqeralabs.github.io/nf-metro/).
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/images/seqinspector_tubemap_dark.png">
   <source media="(prefers-color-scheme: light)" srcset="docs/images/seqinspector_tubemap_light.png">
   <img alt="Fallback image description" src="docs/images/seqinspector_tubemap_light.png">
 </picture>
+
+The diagram below illustrates the MultiQC reporting logic for per-sample tags and global aggregation.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/images/seqinspector_multiqc_dark.png">
