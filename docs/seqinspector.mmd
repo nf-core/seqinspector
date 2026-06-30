@@ -21,9 +21,6 @@ graph LR
         fastqe[FASTQE]
         fastqscreen[FastQ Screen]
         fq_lint[FQ Lint]
-        picardhs[Picard collecthsmetrics]
-        picardmultiple[Picard collectmultiplemetrics]
-        riker[Riker multi]
         seqfu[SeqFu Stats]
         seqkit[SeqKit Stats]
         seqtk[Seqtk sample]
@@ -34,9 +31,6 @@ graph LR
 
         seqtk -->|fastq_files| bbmap
         seqtk -->|fastq_files| bwamem2
-        bwamem2 -->|fastq_files| picardhs
-        bwamem2 -->|fastq_files| picardmultiple
-        bwamem2 -->|fastq_files| riker
         seqtk -->|fastq_files| fastp
         seqtk -->|fastq_files| fastqc
         seqtk -->|fastq_files| fastqe
@@ -46,6 +40,12 @@ graph LR
         seqtk -->|fastq_files| seqkit
         seqtk -->|fastq_files| sequali
         seqtk -->|fastq_files| toulligqc
+    end
+
+    subgraph bam_qc [BAM QC]
+        picardhs[Picard collecthsmetrics]
+        picardmultiple[Picard collectmultiplemetrics]
+        riker[Riker multi]
     end
 
     subgraph metagenomics [Metagenomics]
@@ -85,4 +85,7 @@ graph LR
         toulligqc -->|fastq_files| multiqc
     end
 
+    bwamem2 -->|fastq_files| picardhs
+    bwamem2 -->|fastq_files| picardmultiple
+    bwamem2 -->|fastq_files| riker
     seqtk -->|fastq_files| kraken2
