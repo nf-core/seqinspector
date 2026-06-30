@@ -196,7 +196,7 @@ Be aware that the default tools will still be run. In order to ONLY run the sele
 --tools fastqscreen,rundirparser --tools_bundle null
 ```
 
-Currently the `tools` param can have the following values: bbmap_clumpify, checkqc, fastp, fastqc, fastqe, fastqscreen, fq_lint, kraken2, multiqcsav, picard_collecthsmetrics, picard_collectmultiplemetrics, rundirparser, seqkit_stats, seqfu_stats, sequali and toulligqc.
+Currently the `tools` param can have the following values: bbmap_clumpify, checkqc, fastp, fastqc, fastqe, fastqscreen, fq_lint, kraken2, multiqcsav, picard_collecthsmetrics, picard_collectmultiplemetrics, riker, rundirparser, seqkit_stats, seqfu_stats, sequali and toulligqc.
 
 #### Skip specific tools
 
@@ -209,10 +209,11 @@ See official [nexflow](https://www.nextflow.io/docs/latest/config.html) and [nf-
 
 Some tools accept additional arguments that can be customised via command-line parameters. The following tool arguments are available:
 
-| Parameter               | Default                 | Description                                                                                              |
-| ----------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------- |
-| `--bbmap_clumpify_args` | `"markduplicates=true"` | Arguments passed to BBMap Clumpify. Use `dedupe=true` to remove duplicates instead of just marking them. |
-| `--fq_lint_args`        | `""`                    | Arguments passed to fq-lint.                                                                             |
+| Parameter               | Default                           | Description                                                                                              |
+| ----------------------- | --------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `--bbmap_clumpify_args` | `"markduplicates=true"`           | Arguments passed to BBMap Clumpify. Use `dedupe=true` to remove duplicates instead of just marking them. |
+| `--fq_lint_args`        | `""`                              | Arguments passed to fq-lint.                                                                             |
+| `--riker_args`          | `"--tools alignment basic isize"` | Arguments passed to riker multi. Use `--tools` to select which collectors to run.                        |
 
 #### Choose pre-defined bundles of tools
 
@@ -259,6 +260,7 @@ Tools:
 - multiqcsav
 - picard_collecthsmetrics
 - picard_collectmultiplemetrics
+- riker
 - rundirparser
 - seqkit_stats
 - seqfu_stats
@@ -293,6 +295,7 @@ Tools:
 
 - picard_collecthsmetrics
 - picard_collectmultiplemetrics
+- riker
 
 </details>
 

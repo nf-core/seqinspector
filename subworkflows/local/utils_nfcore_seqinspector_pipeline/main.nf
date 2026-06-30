@@ -38,6 +38,7 @@ workflow PIPELINE_INITIALISATION {
     subsample_tools
     fasta
     kraken2_db
+    riker_args
 
     main:
 
@@ -122,7 +123,7 @@ ${subsampled_info}-\033[2m----------------------------------------------------\0
     //
     // Custom validation for pipeline parameters
     //
-    validateInputParameters()
+    validateInputParameters(tools, riker_args)
     // Runs additional validation that is not done by $projectDir/nextflow_schema.json
 
     //
@@ -165,9 +166,9 @@ ${subsampled_info}-\033[2m----------------------------------------------------\0
             }
         }
 
-    if (!(fasta) && (("picard_collecthsmetrics" in tools) || ("picard_collectmultiplemetrics" in tools))) {
-        log.warn("No fasta was provided, but picard was requested")
-        log.warn("BWAMEM2, SAMTOOLS and PICARD processes, will be skipped")
+    if (!(fasta) && (("picard_collecthsmetrics" in tools) || ("picard_collectmultiplemetrics" in tools) || ("riker" in tools))) {
+        log.warn("No fasta was provided, but picard or riker was requested")
+        log.warn("BWAMEM2, SAMTOOLS, PICARD and RIKER processes will be skipped")
     }
 
     if ('toulligqc' in tools && 'emulate_amd64' in workflow.profile.tokenize(",")) {
@@ -234,8 +235,9 @@ workflow PIPELINE_COMPLETION {
 //
 // Check and validate pipeline parameters
 //
-def validateInputParameters() {
+def validateInputParameters(tools, riker_args) {
     genomeExistsError()
+    rikerHybcapError(tools, riker_args)
 }
 
 //
@@ -260,6 +262,15 @@ def genomeExistsError() {
     if (params.genomes && params.genome && !params.genomes.containsKey(params.genome)) {
         def error_string = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" + "  Genome '${params.genome}' not found in any config files provided to the pipeline.\n" + "  Currently, the available genome keys are:\n" + "  ${params.genomes.keySet().join(", ")}\n" + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         error(error_string)
+    }
+}
+
+//
+// Exit pipeline if riker hybcap is requested without bait/target intervals
+//
+def rikerHybcapError(tools, riker_args) {
+    if ('riker' in tools && riker_args?.contains('hybcap') && (!params.bait_intervals || !params.target_intervals)) {
+        error("riker_args contains 'hybcap' but --bait_intervals and --target_intervals were not provided. Both are required for hybcap metrics.")
     }
 }
 
@@ -390,6 +401,7 @@ def defineToolsList(input_bundle, input_tools, input_skip, sample_size) {
         tools_list << 'multiqcsav'
         tools_list << 'picard_collecthsmetrics'
         tools_list << 'picard_collectmultiplemetrics'
+        tools_list << 'riker'
         tools_list << 'rundirparser'
         tools_list << 'seqkit_stats'
         tools_list << 'seqfu_stats'
@@ -399,6 +411,7 @@ def defineToolsList(input_bundle, input_tools, input_skip, sample_size) {
     if ('bam' in bundle_list) {
         tools_list << 'picard_collecthsmetrics'
         tools_list << 'picard_collectmultiplemetrics'
+        tools_list << 'riker'
     }
     if ('fastq' in bundle_list) {
         tools_list << 'fastqc'

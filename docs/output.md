@@ -28,6 +28,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 - [BWA-MEM2_MEM](#bwamem2_mem) - Mapping reads against a chosen reference genome
 - [Picard CollectHsMetrics](#picard-collecthsmetrics) - Collect alignment QC metrics of hybrid-selection data
 - [Picard CollectMultipleMetrics](#picard-collectmultiplemetrics) - Combine BAM and BAI outputs for Picard
+- [Riker](#riker) - BAM-level QC metrics collection
 - [Kraken2](#kraken2) - Phylogenetic assignment of reads using k-mers
 - [Krona](#krona) - Interactive visualization of Kraken2 results
 - [MultiQC](#multiqc) - Aggregate report describing results and QC from the whole pipeline
@@ -281,6 +282,30 @@ Aligned reads are then sorted using [samtools](#samtools) in the same process, a
   - `*.CollectMultipleMetrics.read_length_histogram.pdf`
 
 </details>
+
+### Riker
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `reports/riker/[sample_id]/`
+  - `*.alignment-metrics.txt`: Alignment summary metrics.
+  - `*.base-distribution-by-cycle.txt`: Base distribution by cycle.
+  - `*.mean-quality-by-cycle.txt`: Mean quality by cycle.
+  - `*.quality-score-distribution.txt`: Quality score distribution.
+  - `*.error-mismatch.txt`: Base mismatch error metrics.
+  - `*.error-overlap.txt`: Read overlap error metrics.
+  - `*.error-indel.txt`: Indel error metrics.
+  - `*.gcbias-detail.txt`: Per-GC-bin detail metrics.
+  - `*.gcbias-summary.txt`: GC bias summary metrics.
+  - `*.isize-metrics.txt`: Insert size summary metrics.
+  - `*.isize-histogram.txt`: Insert size histogram.
+  - `*.wgs-metrics.txt`: Whole-genome coverage summary metrics.
+  - `*.wgs-coverage.txt`: Per-depth coverage histogram.
+
+</details>
+
+[Riker](https://github.com/fulcrumgenomics/riker) is a fast Rust CLI toolkit for sequencing QC metrics. It ports key QC metrics tools from Picard with cleaner output and better performance. When `--bait_intervals` and `--target_intervals` are provided, Riker also generates hybrid capture (hybcap) metrics.
 
 ### Kraken2
 
