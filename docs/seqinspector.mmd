@@ -21,8 +21,6 @@ graph LR
         fastqe[FASTQE]
         fastqscreen[FastQ Screen]
         fq_lint[FQ Lint]
-        kraken2[Kraken2]
-        krona[Krona]
         picardhs[Picard collecthsmetrics]
         picardmultiple[Picard collectmultiplemetrics]
         riker[Riker multi]
@@ -44,12 +42,16 @@ graph LR
         seqtk -->|fastq_files| fastqe
         seqtk -->|fastq_files| fastqscreen
         seqtk -->|fastq_files| fq_lint
-        seqtk -->|fastq_files| kraken2
-        kraken2 -->|fastq_files| krona
         seqtk -->|fastq_files| seqfu
         seqtk -->|fastq_files| seqkit
         seqtk -->|fastq_files| sequali
         seqtk -->|fastq_files| toulligqc
+    end
+
+    subgraph metagenomics [Metagenomics]
+        kraken2[Kraken2]
+        krona[Krona]
+        kraken2 -->|fastq_files| krona
     end
 
     subgraph run_folder [Run Folder]
@@ -82,3 +84,5 @@ graph LR
         sequali -->|fastq_files| multiqc
         toulligqc -->|fastq_files| multiqc
     end
+
+    seqtk -->|fastq_files| kraken2
