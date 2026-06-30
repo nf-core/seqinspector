@@ -25,7 +25,6 @@ graph LR
         krona[Krona]
         picard[Picard]
         riker[Riker]
-        samtools[Samtools Index]
         seqfu[SeqFu Stats]
         seqkit[SeqKit Stats]
         seqtk[Seqtk sample]
@@ -36,9 +35,8 @@ graph LR
 
         seqtk -->|fastq_files| bbmap
         seqtk -->|fastq_files| bwamem2
-        bwamem2 -->|fastq_files| samtools
-        samtools -->|fastq_files| picard
-        samtools -->|fastq_files| riker
+        bwamem2 -->|fastq_files| picard
+        bwamem2 -->|fastq_files| riker
         seqtk -->|fastq_files| fastp
         seqtk -->|fastq_files| fastqc
         seqtk -->|fastq_files| fastqe
