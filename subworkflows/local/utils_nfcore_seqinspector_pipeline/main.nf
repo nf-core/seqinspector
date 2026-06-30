@@ -35,8 +35,10 @@ workflow PIPELINE_INITIALISATION {
     help_full // boolean: Show the full help message
     show_hidden // boolean: Show hidden parameters in the help message
     tools
+    subsample_tools
     fasta
     kraken2_db
+    riker_args
 
     main:
 
@@ -95,10 +97,16 @@ workflow PIPELINE_INITIALISATION {
         null,
     )
 
-    extra_text = """
-\033[1;37mExtra informations\033[0m
+    def subsampled_info = ""
+    if ('seqtk' in tools && subsample_tools) {
+        if (subsample_tools.intersect(tools).sort()) {
+            subsampled_info = "\033[0;34m  Tools on subsampled data  :\033[0;32m ${subsample_tools.intersect(tools).sort().join(",")} \033[0m\n"
+        }
+    }
+
+    extra_text = """\033[1;37mExtra information\033[0m
 \033[0;34m  Tools selected to be run  :\033[0;32m ${tools.join(",")} \033[0m
--\033[2m----------------------------------------------------\033[0m-
+${subsampled_info}-\033[2m----------------------------------------------------\033[0m-
 """
 
     if (monochrome_logs) {
@@ -115,7 +123,7 @@ workflow PIPELINE_INITIALISATION {
     //
     // Custom validation for pipeline parameters
     //
-    validateInputParameters()
+    validateInputParameters(tools, riker_args)
     // Runs additional validation that is not done by $projectDir/nextflow_schema.json
 
     //
@@ -158,9 +166,9 @@ workflow PIPELINE_INITIALISATION {
             }
         }
 
-    if (!(fasta) && (("picard_collecthsmetrics" in tools) || ("picard_collectmultiplemetrics" in tools))) {
-        log.warn("No fasta was provided, but picard was requested")
-        log.warn("BWAMEM2, SAMTOOLS and PICARD processes, will be skipped")
+    if (!(fasta) && (("picard_collecthsmetrics" in tools) || ("picard_collectmultiplemetrics" in tools) || ("riker" in tools))) {
+        log.warn("No fasta was provided, but picard or riker was requested")
+        log.warn("BWAMEM2, SAMTOOLS, PICARD and RIKER processes will be skipped")
     }
 
     if ('toulligqc' in tools && 'emulate_amd64' in workflow.profile.tokenize(",")) {
@@ -227,8 +235,9 @@ workflow PIPELINE_COMPLETION {
 //
 // Check and validate pipeline parameters
 //
-def validateInputParameters() {
+def validateInputParameters(tools, riker_args) {
     genomeExistsError()
+    rikerHybcapError(tools, riker_args)
 }
 
 //
@@ -253,6 +262,15 @@ def genomeExistsError() {
     if (params.genomes && params.genome && !params.genomes.containsKey(params.genome)) {
         def error_string = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" + "  Genome '${params.genome}' not found in any config files provided to the pipeline.\n" + "  Currently, the available genome keys are:\n" + "  ${params.genomes.keySet().join(", ")}\n" + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         error(error_string)
+    }
+}
+
+//
+// Exit pipeline if riker hybcap is requested without bait/target intervals
+//
+def rikerHybcapError(tools, riker_args) {
+    if ('riker' in tools && riker_args?.contains('hybcap') && (!params.bait_intervals || !params.target_intervals)) {
+        error("riker_args contains 'hybcap' but --bait_intervals and --target_intervals were not provided. Both are required for hybcap metrics.")
     }
 }
 
@@ -309,7 +327,7 @@ def toolReferencesText(type, tools) {
     return references.sort()
 }
 
-def methodsDescriptionText(mqc_methods_yaml, tool_list) {
+def methodsDescriptionText(mqc_methods_yaml, tool_list, subsample_tools = []) {
     // Convert  to a named map so can be used as with familiar NXF ${workflow} variable syntax in the MultiQC YML file
     def meta = [:]
     meta.workflow = workflow.toMap()
@@ -336,6 +354,11 @@ def methodsDescriptionText(mqc_methods_yaml, tool_list) {
     meta["tool_citations"] = 'Tools used in the workflow included: ' + toolReferencesText('citation', tool_list).join(', ') + '.'
     meta["tool_bibliography"] = toolReferencesText('bibliography', tool_list).collect { bibliography -> "<li>${bibliography}</li>" }.join('\n    ')
 
+    // Subsampled tools info
+    meta["subsampled_text"] = ('seqtk' in tool_list && subsample_tools) && subsample_tools.intersect(tool_list).sort()
+        ? "The following tools were run on subsampled reads (via Seqtk): ${subsample_tools.intersect(tool_list).sort().join(', ')}."
+        : ""
+
     def methods_text = mqc_methods_yaml.text
 
     def engine = new groovy.text.SimpleTemplateEngine()
@@ -348,13 +371,17 @@ def defineToolsList(input_bundle, input_tools, input_skip, sample_size) {
 
     // Any tools in skip_tools will override any selection made via tools or tools_bundle
 
+    if (sample_size < 0) {
+        error("params.sample_size must be >= 0, got: ${sample_size}")
+    }
+
     def bundle_list = input_bundle ? input_bundle.tokenize(',').sort().unique() : ['no_setup']
     def tools_list = input_tools ? input_tools.tokenize(',').sort().unique() : []
     def skip_list = input_skip ? input_skip.tokenize(',').sort().unique() : []
 
     // SEQTK_SAMPLE is run by default if params.sample_size > 0, and can therefore not be chose on it's own
     if (sample_size > 0) {
-        tools_list << 'seqtk_sample'
+        tools_list << 'seqtk'
     }
 
     // Current list actually used are default, minimal and promethion, we should probably always have a list `all`
@@ -366,12 +393,15 @@ def defineToolsList(input_bundle, input_tools, input_skip, sample_size) {
         tools_list << 'bbmap_clumpify'
         tools_list << 'checkqc'
         tools_list << 'fastqc'
+        tools_list << 'fastp'
         tools_list << 'fastqe'
         tools_list << 'fastqscreen'
         tools_list << 'fq_lint'
+        tools_list << 'kraken2'
         tools_list << 'multiqcsav'
         tools_list << 'picard_collecthsmetrics'
         tools_list << 'picard_collectmultiplemetrics'
+        tools_list << 'riker'
         tools_list << 'rundirparser'
         tools_list << 'seqkit_stats'
         tools_list << 'seqfu_stats'
@@ -381,6 +411,7 @@ def defineToolsList(input_bundle, input_tools, input_skip, sample_size) {
     if ('bam' in bundle_list) {
         tools_list << 'picard_collecthsmetrics'
         tools_list << 'picard_collectmultiplemetrics'
+        tools_list << 'riker'
     }
     if ('fastq' in bundle_list) {
         tools_list << 'fastqc'
@@ -422,6 +453,39 @@ def defineToolsList(input_bundle, input_tools, input_skip, sample_size) {
     return tools_list
 }
 
+def defineSubsampleToolsList(subsample_tools, tools) {
+
+    def subsample_list = subsample_tools ? subsample_tools.tokenize(',').sort().unique() : []
+
+    // "null" means no tools run on subsampled data
+    if ('null' in subsample_list) {
+        return []
+    }
+
+    // "all" means all active tools run on subsampled data (excluding tools that can't use subsampled data)
+    if ('all' in subsample_list) {
+        def excluded = ['seqtk', 'checkqc', 'multiqcsav', 'rundirparser']
+        return [tools - excluded].sort()
+    }
+
+    // Picard tools share the same alignment step, so subsampling one implies the other
+    if ('picard_collecthsmetrics' in tools && 'picard_collectmultiplemetrics' in tools) {
+        if ('picard_collecthsmetrics' in subsample_tools || 'picard_collectmultiplemetrics' in subsample_tools) {
+            subsample_list += ['picard_collecthsmetrics', 'picard_collectmultiplemetrics']
+        }
+        def count = 'picard_collecthsmetrics' in subsample_tools ? 1 : 0
+        count += 'picard_collectmultiplemetrics' in subsample_tools ? 1 : 0
+        if (count == 1) {
+            log.warn("Only one of picard_collecthsmetrics or picard_collectmultiplemetrics was selected via subsample_tools. They share the same alignment step, so both will run on subsampled data.")
+        }
+    }
+
+    // Only keep tools that are both in subsample_tools AND in the active tools list
+    subsample_list = subsample_list.intersect(tools)
+
+    return subsample_list.unique().sort()
+}
+
 //
 // Generate report index for MultiQC
 //
@@ -449,6 +513,43 @@ def reportIndexMultiqc(tags, global = true) {
     yaml_file_text += "  <div class=\"list-group\">\n"
     yaml_file_text += "${index_section}"
     yaml_file_text += "  </div>\n"
+
+    return yaml_file_text
+}
+
+//
+// Generate MultiQC warning section for subsampled tools
+//
+def subsamplingNoticeYaml(subsample_tools, ran_tools) {
+    def active_subsampled = subsample_tools.intersect(ran_tools).sort()
+
+    def yaml_file_text = "id: 'subsampling-notice'\n" as String
+    yaml_file_text += "section_name: 'Subsampling notice'\n"
+    yaml_file_text += "section_href: 'https://github.com/${workflow.manifest.name}'\n"
+    yaml_file_text += "description: 'Notice about tools run on subsampled data.'\n"
+    yaml_file_text += "plot_type: 'html'\n"
+    yaml_file_text += "data: |\n"
+
+    if (active_subsampled) {
+        yaml_file_text += "  <div class=\"alert alert-warning\">\n"
+        yaml_file_text += "    <p>The following tools were run on subsampled reads (via Seqtk) instead of the full dataset:</p>\n"
+        yaml_file_text += "    <table class=\"table table-sm\">\n"
+        yaml_file_text += "      <thead><tr><th>Tool</th></tr></thead>\n"
+        yaml_file_text += "      <tbody>\n"
+        active_subsampled.each { tool ->
+            yaml_file_text += "        <tr><td><b>${tool}</b></td></tr>\n"
+        }
+        yaml_file_text += "      </tbody>\n"
+        yaml_file_text += "    </table>\n"
+        yaml_file_text += "    <p><small>Results may differ from a full-data analysis. Check <a href='https://nf-co.re/seqinspector/docs/usage/#subsampling-control'>nf-co.re/seqinspector/docs/usage/#subsampling-control</a> for more information.</small></p>\n"
+        yaml_file_text += "  </div>\n"
+    }
+    else {
+        yaml_file_text += "  <div class=\"alert alert-info\">\n"
+        yaml_file_text += "    <h4>Subsampling Info</h4>\n"
+        yaml_file_text += "    <p>No tools were run on subsampled data. All tools processed the full dataset.</p>\n"
+        yaml_file_text += "  </div>\n"
+    }
 
     return yaml_file_text
 }

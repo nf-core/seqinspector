@@ -132,8 +132,42 @@ withName: SEQTK_SAMPLE {
 ```
 
 ```bash
-nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 -profile docker
+nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000
 ```
+
+#### Subsampling control
+
+By default, only a subset of tools run on the subsampled data. The `--subsample_tools` parameter controls which tools receive subsampled reads (via Seqtk) versus original data. Tools not in this list run on the original (non-subsampled) data.
+
+The default value is:
+
+```bash
+--subsample_tools fastqscreen,kraken2,picard_collecthsmetrics,picard_collectmultiplemetrics
+```
+
+For example, to also run FastQC on subsampled data:
+
+```bash
+nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 --subsample_tools fastqscreen,kraken2,picard_collecthsmetrics,picard_collectmultiplemetrics,fastqc
+```
+
+Or to run all active tools on subsampled data:
+
+```bash
+nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 --subsample_tools all
+```
+
+Note: `all` excludes tools that cannot use subsampled data (`seqtk`, `checkqc`, `multiqcsav`, `rundirparser`).
+
+Or to disable subsampling for all tools (run everything on original data):
+
+```bash
+nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 --subsample_tools null
+```
+
+Note: `picard_collecthsmetrics` and `picard_collectmultiplemetrics` share the same alignment step. Selecting one for subsampling will automatically subsample the other as well.
+
+Note: The `--subsample_tools` parameter only takes effect when `sample_size > 0`.
 
 ### Tools selection
 
@@ -152,17 +186,17 @@ Currently, the following tools are run as default:
 
 It is possible to choose individual tools to run using the `--tools` parameter and add all desired tools in a comma separated string. For example:
 
-```showLineNumbers
+```bash
 --tools fastqscreen,rundirparser
 ```
 
 Be aware that the default tools will still be run. In order to ONLY run the selection, one has to specify `--tools_bundle null` as well:
 
-```showLineNumbers
+```bash
 --tools fastqscreen,rundirparser --tools_bundle null
 ```
 
-Currently the `tools` param can have the following values: bbmap_clumpify, checkqc, fastp, fastqc, fastqe, fastqscreen, fq_lint, kraken2, multiqcsav, picard_collecthsmetrics, picard_collectmultiplemetrics, rundirparser, seqkit_stats, seqfu_stats, sequali and toulligqc.
+Currently the `tools` param can have the following values: bbmap_clumpify, checkqc, fastp, fastqc, fastqe, fastqscreen, fq_lint, kraken2, multiqcsav, picard_collecthsmetrics, picard_collectmultiplemetrics, riker, rundirparser, seqkit_stats, seqfu_stats, sequali and toulligqc.
 
 #### Skip specific tools
 
@@ -175,10 +209,11 @@ See official [nexflow](https://www.nextflow.io/docs/latest/config.html) and [nf-
 
 Some tools accept additional arguments that can be customised via command-line parameters. The following tool arguments are available:
 
-| Parameter               | Default                 | Description                                                                                              |
-| ----------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------- |
-| `--bbmap_clumpify_args` | `"markduplicates=true"` | Arguments passed to BBMap Clumpify. Use `dedupe=true` to remove duplicates instead of just marking them. |
-| `--fq_lint_args`        | `""`                    | Arguments passed to fq-lint.                                                                             |
+| Parameter               | Default                           | Description                                                                                              |
+| ----------------------- | --------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `--bbmap_clumpify_args` | `"markduplicates=true"`           | Arguments passed to BBMap Clumpify. Use `dedupe=true` to remove duplicates instead of just marking them. |
+| `--fq_lint_args`        | `""`                              | Arguments passed to fq-lint.                                                                             |
+| `--riker_args`          | `"--tools alignment basic isize"` | Arguments passed to riker multi. Use `--tools` to select which collectors to run.                        |
 
 #### Choose pre-defined bundles of tools
 
@@ -225,6 +260,7 @@ Tools:
 - multiqcsav
 - picard_collecthsmetrics
 - picard_collectmultiplemetrics
+- riker
 - rundirparser
 - seqkit_stats
 - seqfu_stats
@@ -259,6 +295,7 @@ Tools:
 
 - picard_collecthsmetrics
 - picard_collectmultiplemetrics
+- riker
 
 </details>
 
@@ -308,7 +345,7 @@ Tools:
 
 If no genome or fasta file is provided, either with `--genome` or `--fasta`,
 the pipeline will not be able to run the alignment step with BWAMEM2,
-and will skip all tools that depend on the alignment file (eg. `picard CollectHsMetrics` and `picard CollectHsMetrics`).
+and will skip all tools that depend on the alignment file (e.g. `picard CollectHsMetrics` and `picard CollectMultipleMetrics`).
 
 #### Hybrid-selection QC metrics
 
