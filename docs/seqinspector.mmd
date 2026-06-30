@@ -54,8 +54,8 @@ graph LR
 
         fq_lint -->|fastq_files| seqfu
         fq_lint -->|fastq_files| seqtk
-        fq_lint -->|fastq_files| toulligqc
 
+        seqtk -->|fastq_files| toulligqc
         seqtk -->|fastq_files| bbmap
         seqtk -->|fastq_files| fastp
         seqtk -->|fastq_files| fastqc
