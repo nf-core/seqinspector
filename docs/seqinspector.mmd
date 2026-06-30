@@ -14,39 +14,38 @@ graph LR
     subgraph fastq_files [FASTQ Files]
         fastq_in[ ]
 
-        fq_lint[FQ Lint]
-        seqfu[SeqFu Stats]
-        seqtk[Seqtk sample]
-        toulligqc[ToulligQC]
         bbmap[BBMap Clumpify]
+        bwamem2[BWAmem2]
         fastp[FastP]
         fastqc[FASTQC]
         fastqe[FASTQE]
-        seqkit[SeqKit Stats]
-        sequali[Sequali]
         fastqscreen[FastQ Screen]
+        fq_lint[FQ Lint]
         kraken2[Kraken2]
         krona[Krona]
-        bwamem2[BWAmem2]
-        samtools[Samtools Index]
         picard[Picard]
         riker[Riker]
+        samtools[Samtools Index]
+        seqfu[SeqFu Stats]
+        seqkit[SeqKit Stats]
+        seqtk[Seqtk sample]
+        sequali[Sequali]
+        toulligqc[ToulligQC]
 
-        fastq_in -->|fastq_files| fq_lint
+        fastq_in -->|fastq_files| seqtk
 
-        fq_lint -->|fastq_files| seqfu
-        fq_lint -->|fastq_files| seqtk
-
-        seqtk -->|fastq_files| toulligqc
         seqtk -->|fastq_files| bbmap
+        seqtk -->|fastq_files| bwamem2
         seqtk -->|fastq_files| fastp
         seqtk -->|fastq_files| fastqc
         seqtk -->|fastq_files| fastqe
+        seqtk -->|fastq_files| fastqscreen
+        seqtk -->|fastq_files| fq_lint
+        seqtk -->|fastq_files| kraken2
+        seqtk -->|fastq_files| seqfu
         seqtk -->|fastq_files| seqkit
         seqtk -->|fastq_files| sequali
-        seqtk -->|fastq_files| fastqscreen
-        seqtk -->|fastq_files| kraken2
-        seqtk -->|fastq_files| bwamem2
+        seqtk -->|fastq_files| toulligqc
 
         kraken2 -->|fastq_files| krona
         bwamem2 -->|fastq_files| samtools
@@ -67,19 +66,19 @@ graph LR
     subgraph multiqc [MultiQC]
         multiqc[MultiQC]
 
-        checkqc -->|run_folder| multiqc
-        fq_lint -->|fastq_files| multiqc
-        seqfu -->|fastq_files| multiqc
-        toulligqc -->|fastq_files| multiqc
         bbmap -->|fastq_files| multiqc
+        checkqc -->|run_folder| multiqc
         fastp -->|fastq_files| multiqc
         fastqc -->|fastq_files| multiqc
         fastqe -->|fastq_files| multiqc
-        seqkit -->|fastq_files| multiqc
-        sequali -->|fastq_files| multiqc
         fastqscreen -->|fastq_files| multiqc
+        fq_lint -->|fastq_files| multiqc
         krona -->|fastq_files| multiqc
         picard -->|fastq_files| multiqc
         riker -->|fastq_files| multiqc
         rundirparser -->|run_folder| multiqc
+        seqfu -->|fastq_files| multiqc
+        seqkit -->|fastq_files| multiqc
+        sequali -->|fastq_files| multiqc
+        toulligqc -->|fastq_files| multiqc
     end
