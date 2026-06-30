@@ -2,20 +2,16 @@
 %%metro style: dark
 %%metro logo: docs/images/nf-core-seqinspector_logo_dark.png
 
-%%metro line: run_folder | Run Folder | #1f77b4
 %%metro line: fastq_files | FASTQ Files | #ff7f0e
+%%metro line: run_folder | Run Folder | #1f77b4
 
-%%metro file: rundir_in | RUNDIR
 %%metro file: fastq_in | FASTQ
+%%metro file: rundir_in | RUNDIR
 %%metro file: multiqc | HTML
 %%metro legend: bl
 
 graph LR
     subgraph fastq_files [FASTQ Files]
-        %%metro direction: LR
-        %%metro entry: left | fastq_files
-        %%metro exit: left | fastq_files
-
         fastq_in[ ]
 
         fq_lint[FQ Lint]
@@ -59,10 +55,6 @@ graph LR
     end
 
     subgraph run_folder [Run Folder]
-        %%metro direction: LR
-        %%metro entry: left | run_folder
-        %%metro exit: left | run_folder
-
         rundir_in[ ]
 
         checkqc[CheckQC]
@@ -73,8 +65,6 @@ graph LR
     end
 
     subgraph multiqc [MultiQC]
-        %%metro direction: LR
-
         multiqc[MultiQC]
 
         checkqc -->|run_folder| multiqc
