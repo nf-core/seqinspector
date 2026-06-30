@@ -23,8 +23,9 @@ graph LR
         fq_lint[FQ Lint]
         kraken2[Kraken2]
         krona[Krona]
-        picard[Picard]
-        riker[Riker]
+        picardhs[Picard collecthsmetrics]
+        picardmultiple[Picard collectmultiplemetrics]
+        riker[Riker multi]
         seqfu[SeqFu Stats]
         seqkit[SeqKit Stats]
         seqtk[Seqtk sample]
@@ -35,7 +36,8 @@ graph LR
 
         seqtk -->|fastq_files| bbmap
         seqtk -->|fastq_files| bwamem2
-        bwamem2 -->|fastq_files| picard
+        bwamem2 -->|fastq_files| picardhs
+        bwamem2 -->|fastq_files| picardmultiple
         bwamem2 -->|fastq_files| riker
         seqtk -->|fastq_files| fastp
         seqtk -->|fastq_files| fastqc
@@ -71,7 +73,8 @@ graph LR
         fastqscreen -->|fastq_files| multiqc
         fq_lint -->|fastq_files| multiqc
         krona -->|fastq_files| multiqc
-        picard -->|fastq_files| multiqc
+        picardhs -->|fastq_files| multiqc
+        picardmultiple -->|fastq_files| multiqc
         riker -->|fastq_files| multiqc
         rundirparser -->|run_folder| multiqc
         seqfu -->|fastq_files| multiqc
