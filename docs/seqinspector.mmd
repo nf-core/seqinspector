@@ -2,19 +2,25 @@
 %%metro style: dark
 %%metro logo: docs/images/nf-core-seqinspector_logo_dark.png
 
-%%metro line: bam_files | BAM Files | #24B064
-%%metro line: fastq_files | FASTQ Files | #ff7f0e
-%%metro line: run_folder | Run Folder | #1f77b4
+%%metro line: runfolder_line | Run Folder | #1f77b4
+%%metro line: fastq_line | FASTQ | #ff7f0e
+%%metro line: bam_line | BAM | #24B064
 
 %%metro file: fastq_in | FASTQ | | banner
-%%metro dir: rundir_in | RUNDIR
+%%metro dir: runfolder_in | RUNDIR
 %%metro file: multiqc | HTML | | banner
+
 %%metro center_ports: true
 %%metro compact_offsets: true
 %%metro legend: bl
 
+%%metro grid: fastq_graph | 0,0,2
+%%metro grid: runfolder_graph | 1,0
+%%metro grid: bam_graph | 1,1
+%%metro grid: multiqc | 2,0,2
+
 graph LR
-    subgraph fastq_files [FASTQ Files]
+    subgraph fastq_graph [FASTQ]
         fastq_in[ ]
 
         bbmap[BBMap Clumpify]
@@ -31,63 +37,63 @@ graph LR
         sequali[Sequali]
         toulligqc[ToulligQC]
 
-        fastq_in -->|fastq_files| seqtk
+        fastq_in -->|fastq_line| seqtk
 
-        seqtk -->|fastq_files| kraken2
-        kraken2 -->|fastq_files| krona
+        seqtk -->|fastq_line| kraken2
+        kraken2 -->|fastq_line| krona
 
-        subgraph bam_files [BAM Files]
+        subgraph bam_graph [BAM]
             bwamem2[BWAmem2]
 
             picardhs[Picard collecthsmetrics]
             picardmultiple[Picard collectmultiplemetrics]
             riker[Riker multi]
 
-            bwamem2 -->|bam_files| picardhs
-            bwamem2 -->|bam_files| picardmultiple
-            bwamem2 -->|bam_files| riker
+            bwamem2 -->|bam_line| picardhs
+            bwamem2 -->|bam_line| picardmultiple
+            bwamem2 -->|bam_line| riker
         end
 
-        seqtk -->|fastq_files| bbmap
-        seqtk -->|fastq_files| bwamem2
-        seqtk -->|fastq_files| fastp
-        seqtk -->|fastq_files| fastqc
-        seqtk -->|fastq_files| fastqe
-        seqtk -->|fastq_files| fastqscreen
-        seqtk -->|fastq_files| fq_lint
-        seqtk -->|fastq_files| seqfu
-        seqtk -->|fastq_files| seqkit
-        seqtk -->|fastq_files| sequali
-        seqtk -->|fastq_files| toulligqc
+        seqtk -->|fastq_line| bbmap
+        seqtk -->|fastq_line| bwamem2
+        seqtk -->|fastq_line| fastp
+        seqtk -->|fastq_line| fastqc
+        seqtk -->|fastq_line| fastqe
+        seqtk -->|fastq_line| fastqscreen
+        seqtk -->|fastq_line| fq_lint
+        seqtk -->|fastq_line| seqfu
+        seqtk -->|fastq_line| seqkit
+        seqtk -->|fastq_line| sequali
+        seqtk -->|fastq_line| toulligqc
     end
 
-    subgraph run_folder [Run Folder]
-        rundir_in[ ]
+    subgraph runfolder_graph [Run Folder]
+        runfolder_in[ ]
 
         checkqc[CheckQC]
         rundirparser[Rundirparser]
 
-        rundir_in -->|run_folder| checkqc
-        rundir_in -->|run_folder| rundirparser
+        runfolder_in -->|runfolder_line| checkqc
+        runfolder_in -->|runfolder_line| rundirparser
     end
 
     subgraph multiqc [MultiQC]
         multiqc[MultiQC]
 
-        bbmap -->|fastq_files| multiqc
-        checkqc -->|run_folder| multiqc
-        fastp -->|fastq_files| multiqc
-        fastqc -->|fastq_files| multiqc
-        fastqe -->|fastq_files| multiqc
-        fastqscreen -->|fastq_files| multiqc
-        fq_lint -->|fastq_files| multiqc
-        krona -->|fastq_files| multiqc
-        picardhs -->|bam_files| multiqc
-        picardmultiple -->|bam_files| multiqc
-        riker -->|bam_files| multiqc
-        rundirparser -->|run_folder| multiqc
-        seqfu -->|fastq_files| multiqc
-        seqkit -->|fastq_files| multiqc
-        sequali -->|fastq_files| multiqc
-        toulligqc -->|fastq_files| multiqc
+        bbmap -->|fastq_line| multiqc
+        checkqc -->|runfolder_line| multiqc
+        fastp -->|fastq_line| multiqc
+        fastqc -->|fastq_line| multiqc
+        fastqe -->|fastq_line| multiqc
+        fastqscreen -->|fastq_line| multiqc
+        fq_lint -->|fastq_line| multiqc
+        krona -->|fastq_line| multiqc
+        picardhs -->|bam_line| multiqc
+        picardmultiple -->|bam_line| multiqc
+        riker -->|bam_line| multiqc
+        rundirparser -->|runfolder_line| multiqc
+        seqfu -->|fastq_line| multiqc
+        seqkit -->|fastq_line| multiqc
+        sequali -->|fastq_line| multiqc
+        toulligqc -->|fastq_line| multiqc
     end
