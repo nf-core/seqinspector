@@ -14,6 +14,7 @@ nextflow_pipeline {
             ],
             rundir_folder: pipelines_testdata_base_path + 'seqinspector/data/rundir/200624_A00834_0183_BHMTFYDRXX.tar.gz',
             rundir_samplesheet: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/novaseq6000_missing_rundir.csv',
+            no_conda: true,
         ],
         [
             name: "NovaSeq6000 data test - checkqc,fastqc,multiqcsav,rundirparser - no rundir",
@@ -31,6 +32,7 @@ nextflow_pipeline {
             ],
             rundir_folder: pipelines_testdata_base_path + 'seqinspector/data/rundir/200624_A00834_0183_BHMTFYDRXX.tar.gz',
             rundir_samplesheet: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/novaseq6000_missing_rundir.csv',
+            no_conda: true,
             stub: true,
         ],
         [
