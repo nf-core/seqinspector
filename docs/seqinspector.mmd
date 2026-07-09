@@ -20,7 +20,7 @@
 %%metro grid: reporting_graph | 2,1,2
 
 graph LR
-    subgraph fastq_graph [FASTQ QC]
+    subgraph fastq_graph [RAW sequence QC]
         fastq_icon[ ]
 
         bbmap[BBMap Clumpify]
@@ -42,7 +42,7 @@ graph LR
         seqtk -->|fastq_line| kraken2
         kraken2 -->|fastq_line| krona
 
-        subgraph bam_graph [BAM QC]
+        subgraph bam_graph [Reference mapped QC]
             bwamem2[BWAmem2]
 
             picardhs[Picard collecthsmetrics]
