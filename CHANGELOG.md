@@ -35,7 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#238](https://github.com/nf-core/seqinspector/pull/238) Fix Python/PyYAML tool name case mismatch in rundirparser module
 - [#239](https://github.com/nf-core/seqinspector/pull/239) Fix tool bundles documentation to match code
 - [#240](https://github.com/nf-core/seqinspector/pull/240) Fix FASTQE default tool marking in README
-- [#249](https://github.com/nf-core/seqinspector/pull/249) Fix typos, broken link, missing `</details>` tag, and stray content in output documentation
+- [#243](https://github.com/nf-core/seqinspector/pull/243) Fix typos, broken link, missing `</details>` tag, and stray content in output documentation
 - [#245](https://github.com/nf-core/seqinspector/pull/245) Fix repeated listing of CollectHsMetrics
 
 ### `Changed`
@@ -55,7 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#235](https://github.com/nf-core/seqinspector/pull/235) Update MultiQC and other dependencies
 - [#237](https://github.com/nf-core/seqinspector/pull/237) Improved citation system to dynamically build tool citations based on selected tools
 - [#244](https://github.com/nf-core/seqinspector/pull/244) Corrected the pipeline introduction tool list for fq lint
-- Update riker module from 0.3.0 to 0.4.0 with new input parameters (error VCF, GC bias exclude intervals, RNA gene model, RNA ribosomal intervals, WGS intervals)
+- [#249](https://github.com/nf-core/seqinspector/pull/249) Update riker module from 0.3.0 to 0.4.0 with new input parameters (error VCF, GC bias exclude intervals, RNA gene model, RNA ribosomal intervals, WGS intervals), add riker to toolReferencesMap, create meta.yml files for local subworkflows
 
 ### `Dependencies`
 
