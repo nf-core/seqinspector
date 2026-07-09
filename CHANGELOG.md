@@ -55,7 +55,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#235](https://github.com/nf-core/seqinspector/pull/235) Update MultiQC and other dependencies
 - [#237](https://github.com/nf-core/seqinspector/pull/237) Improved citation system to dynamically build tool citations based on selected tools
 - [#244](https://github.com/nf-core/seqinspector/pull/244) Corrected the pipeline introduction tool list for fq lint
-- [#249](https://github.com/nf-core/seqinspector/pull/249) Update riker module from 0.3.0 to 0.4.0 with new input parameters, add riker to toolReferencesMap, create meta.yml files for local subworkflows
 - [#250](https://github.com/nf-core/seqinspector/pull/250) Prepare release 1.2.0
 
 ### `Dependencies`
