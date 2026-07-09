@@ -296,6 +296,7 @@ def toolReferencesMap() {
         'pigz': ['name': 'pigz', 'authors': 'Adler M.', 'authors_short': 'Adler 2005', 'description': 'Parallel implementation of gzip.', 'url': 'https://zlib.net/pigz/'],
         'python': ['name': 'Python', 'authors': '', 'authors_short': '', 'description': 'Programming language.', 'url': 'https://www.python.org/'],
         'pyyaml': ['name': 'PyYAML', 'authors': '', 'authors_short': '', 'description': 'YAML parser and emitter for Python.', 'url': 'https://pyyaml.org/'],
+        'riker': ['name': 'Riker', 'authors': '', 'authors_short': '', 'description': 'Fast Rust CLI toolkit for sequencing QC metrics. Ports key QC metrics tools from Picard with cleaner output and better performance.', 'url': 'https://github.com/fulcrumgenomics/riker'],
         'rundirparser': ['name': 'Rundirparser', 'authors': '', 'authors_short': '', 'description': 'Parse Illumina run directory metadata for MultiQC.', 'url': 'https://github.com/nf-core/seqinspector'],
         'samtools': ['name': 'SAMTOOLS', 'authors': 'Danecek P., Bonfield JK., Liddle J., & al. (2021).', 'authors_short': 'Danecek et al. 2021', 'description': 'Twelve years of SAMtools and BCFtools.', 'doi': '10.1093/gigascience/giab008'],
         'seqfu': ['name': 'SeqFu', 'authors': 'Telatin A., Fariselli P., & Birolo G. (2021).', 'authors_short': 'Telatin et al. 2021', 'description': 'SeqFu: A Suite of Utilities for the Robust and Reproducible Manipulation of Sequence Files. Bioengineering, 8, 59.', 'doi': '10.3390/bioengineering8050059'],

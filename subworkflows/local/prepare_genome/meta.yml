@@ -1,0 +1,60 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "PREPARE_GENOME"
+description: Prepare reference genome files including indices for alignment and QC tools
+keywords:
+  - genome
+  - reference
+  - index
+  - bwamem2
+  - picard
+  - samtools
+components:
+  - bwamem2/index
+  - picard/createsequencedictionary
+  - samtools/faidx
+input:
+  - fasta:
+      type: string
+      description: |
+        Path to reference genome FASTA file
+  - bwamem2:
+      type: string
+      description: |
+        Path to pre-built bwamem2 index directory (optional)
+  - dict:
+      type: string
+      description: |
+        Path to pre-built sequence dictionary file (optional)
+  - fai:
+      type: string
+      description: |
+        Path to pre-built FASTA index file (optional)
+  - genome:
+      type: string
+      description: |
+        Genome name/ID
+  - tools:
+      type: list
+      description: |
+        List of tools to run, used to determine which indices to build
+output:
+  - bwamem2:
+      type: list
+      description: |
+        BWA-MEM2 index files
+  - dict:
+      type: list
+      description: |
+        Sequence dictionary file
+  - fai:
+      type: list
+      description: |
+        FASTA index file
+  - fasta:
+      type: list
+      description: |
+        Reference FASTA file
+authors:
+  - "@maxulysse"
+maintainers:
+  - "@maxulysse"
