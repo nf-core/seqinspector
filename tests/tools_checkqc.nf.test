@@ -13,6 +13,7 @@ nextflow_pipeline {
                 tools: 'checkqc',
                 tools_bundle: null,
             ],
+            no_conda: true,
         ],
         [
             name: "NovaSeq6000 data test - checkqc with config",
@@ -21,6 +22,7 @@ nextflow_pipeline {
                 tools: 'checkqc',
                 tools_bundle: null,
             ],
+            no_conda: true,
         ],
         [
             name: "NovaSeq6000 data test - checkqc - stub",
@@ -29,6 +31,7 @@ nextflow_pipeline {
                 tools_bundle: null,
             ],
             stub: true,
+            no_conda: true,
         ],
         [
             name: "NovaSeq6000 data test - checkqc with config - stub",
@@ -38,6 +41,7 @@ nextflow_pipeline {
                 tools_bundle: null,
             ],
             stub: true,
+            no_conda: true,
         ],
     ]
 
