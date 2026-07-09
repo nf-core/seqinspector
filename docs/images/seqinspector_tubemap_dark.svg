@@ -26,9 +26,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
-     inkscape:zoom="1.0973187"
-     inkscape:cx="594.63125"
-     inkscape:cy="311.21314"
+     inkscape:zoom="0.64190249"
+     inkscape:cx="451.00308"
+     inkscape:cy="299.88979"
      inkscape:window-width="1704"
      inkscape:window-height="993"
      inkscape:window-x="0"
@@ -694,36 +694,6 @@
   </g>
   <g
      class="nf-metro-station-group"
-     data-node-id="fastp"
-     data-node-cx="318.0"
-     data-node-cy="160.0"
-     data-node-r="5.0"
-     data-node-groups="fastq_line"
-     data-node-region="fastq_graph"
-     data-node-w="10.0"
-     data-node-h="10.0"
-     data-node-rx="5.0"
-     id="g157">
-    <rect
-       x="313.0"
-       y="154.99999999999997"
-       width="10.0"
-       height="10.0"
-       rx="5.0"
-       ry="5.0"
-       fill="#ffffff"
-       stroke="#333333"
-       stroke-width="1.5"
-       class="nf-metro-station"
-       data-station-id="fastp"
-       data-station-lines="fastq_line"
-       data-station-label="FastP"
-       data-section-id="fastq_graph"
-       data-section-name="RAW sequence QC"
-       id="rect155" />
-  </g>
-  <g
-     class="nf-metro-station-group"
      data-node-id="fastqc"
      data-node-cx="318.0"
      data-node-cy="200.0"
@@ -1327,211 +1297,214 @@
      data-station-id="bwamem2"
      class="nf-metro-station-label"
      id="text265">BWAmem2</text>
+  <rect
+     x="514"
+     y="70"
+     width="240"
+     height="180"
+     rx="8"
+     ry="8"
+     fill="#373737"
+     stroke="#595959"
+     stroke-width="1"
+     class="nf-metro-section-box"
+     data-section-id="runfolder_graph"
+     data-section-lines="runfolder_line"
+     id="rect25" />
+  <circle
+     cx="525"
+     cy="55"
+     r="11"
+     fill="#333333"
+     class="nf-metro-section-num-circle"
+     data-section-id="runfolder_graph"
+     id="circle27" />
+  <text
+     x="525"
+     y="55"
+     font-size="12px"
+     fill="#ffffff"
+     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+     font-weight="bold"
+     text-anchor="middle"
+     dy="3.6000001"
+     data-section-id="runfolder_graph"
+     id="text29">2</text>
+  <text
+     x="541"
+     y="55"
+     font-size="16px"
+     fill="#c8c8c8"
+     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+     font-weight="bold"
+     dy="3.6000001"
+     class="nf-metro-section-label"
+     data-section-id="runfolder_graph"
+     id="text31">Run Folder QC</text>
+  <path
+     d="m 572,160 h 28 q 10,0 16,-8 l 18,-24 q 6,-8 16,-8 h 24.5"
+     stroke="#1f77b4"
+     stroke-width="3"
+     fill="none"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     class="metro-line-runfolder_line"
+     data-line-id="runfolder_line"
+     id="path121" />
+  <path
+     d="m 572,160 h 28 q 10,0 16,8 l 18,24 q 6,8 16,8 h 24.5"
+     stroke="#1f77b4"
+     stroke-width="3"
+     fill="none"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     class="metro-line-runfolder_line"
+     data-line-id="runfolder_line"
+     id="path123" />
+  <path
+     d="M 674.5,120 H 699 q 10,0 16,8 l 18,24 q 6,8 16,8 h 5"
+     stroke="#1f77b4"
+     stroke-width="3"
+     fill="none"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     class="metro-line-runfolder_line"
+     data-line-id="runfolder_line"
+     id="path127" />
+  <path
+     d="M 674.5,200 H 699 q 10,0 16,-8 l 18,-24 q 6,-8 16,-8 h 5"
+     stroke="#1f77b4"
+     stroke-width="3"
+     fill="none"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     class="metro-line-runfolder_line"
+     data-line-id="runfolder_line"
+     id="path131" />
   <g
-     id="g985"
+     class="nf-metro-station-group"
+     data-node-id="runfolder_icon"
+     data-node-cx="564.0"
+     data-node-cy="160.0"
+     data-node-r="5.0"
+     data-node-groups="runfolder_line"
+     data-node-region="runfolder_graph"
+     data-node-w="10.0"
+     data-node-h="10.0"
+     data-node-rx="5.0"
+     id="g229"
      transform="translate(8)">
     <rect
-       x="506"
-       y="70"
-       width="240"
-       height="180"
-       rx="8"
-       ry="8"
-       fill="#373737"
-       stroke="#595959"
-       stroke-width="1"
-       class="nf-metro-section-box"
-       data-section-id="runfolder_graph"
-       data-section-lines="runfolder_line"
-       id="rect25" />
-    <circle
-       cx="517"
-       cy="55"
-       r="11"
-       fill="#333333"
-       class="nf-metro-section-num-circle"
-       data-section-id="runfolder_graph"
-       id="circle27" />
-    <text
-       x="517"
-       y="55"
-       font-size="12px"
+       x="559"
+       y="155"
+       width="10"
+       height="10"
        fill="#ffffff"
-       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-       font-weight="bold"
-       text-anchor="middle"
-       dy="0.30000001em"
+       stroke="#333333"
+       stroke-width="1.5"
+       class="nf-metro-station"
+       data-station-id="runfolder_icon"
+       data-station-lines="runfolder_line"
+       data-station-label="runfolder_icon"
        data-section-id="runfolder_graph"
-       id="text29">2</text>
-    <text
-       x="533"
-       y="55"
-       font-size="16px"
-       fill="#c8c8c8"
-       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-       font-weight="bold"
-       dy="0.30000001em"
-       class="nf-metro-section-label"
+       data-section-name="Run Folder QC"
+       id="rect219" />
+    <g
+       data-station-id="runfolder_icon"
+       id="g227">
+      <path
+         d="m 527,144 h 7.2 q 2,0 2,2 v 4.4 H 525 V 146 q 0,-2 2,-2 z"
+         fill="#ffffff"
+         stroke="#333333"
+         stroke-width="1.5"
+         stroke-linejoin="round"
+         id="path221" />
+      <path
+         d="m 525,150.4 h 26 q 2,0 2,2 V 174 q 0,2 -2,2 h -24 q -2,0 -2,-2 z"
+         fill="#ffffff"
+         stroke="#333333"
+         stroke-width="1.5"
+         stroke-linejoin="round"
+         id="path223" />
+      <text
+         x="539"
+         y="163.2"
+         font-size="6.38889px"
+         fill="#000000"
+         font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+         font-weight="bold"
+         text-anchor="middle"
+         dy="0.30000001em"
+         id="text225">RUNDIR</text>
+    </g>
+  </g>
+  <g
+     class="nf-metro-station-group"
+     data-node-id="checkqc"
+     data-node-cx="666.5"
+     data-node-cy="120.0"
+     data-node-r="5.0"
+     data-node-groups="runfolder_line"
+     data-node-region="runfolder_graph"
+     data-node-w="10.0"
+     data-node-h="10.0"
+     data-node-rx="5.0"
+     id="g233"
+     transform="translate(8)">
+    <rect
+       x="661.5"
+       y="115"
+       width="10"
+       height="10"
+       rx="5"
+       ry="5"
+       fill="#ffffff"
+       stroke="#333333"
+       stroke-width="1.5"
+       class="nf-metro-station"
+       data-station-id="checkqc"
+       data-station-lines="runfolder_line"
+       data-station-label="CheckQC"
        data-section-id="runfolder_graph"
-       id="text31">Run Folder QC</text>
-    <path
-       d="m 564,160 h 28 q 10,0 16,-8 l 18,-24 q 6,-8 16,-8 h 24.5"
-       stroke="#1f77b4"
-       stroke-width="3"
-       fill="none"
-       stroke-linecap="round"
-       stroke-linejoin="round"
-       class="metro-line-runfolder_line"
-       data-line-id="runfolder_line"
-       id="path121" />
-    <path
-       d="m 564,160 h 28 q 10,0 16,8 l 18,24 q 6,8 16,8 h 24.5"
-       stroke="#1f77b4"
-       stroke-width="3"
-       fill="none"
-       stroke-linecap="round"
-       stroke-linejoin="round"
-       class="metro-line-runfolder_line"
-       data-line-id="runfolder_line"
-       id="path123" />
-    <path
-       d="M 666.5,120 H 691 q 10,0 16,8 l 18,24 q 6,8 16,8 h 5"
-       stroke="#1f77b4"
-       stroke-width="3"
-       fill="none"
-       stroke-linecap="round"
-       stroke-linejoin="round"
-       class="metro-line-runfolder_line"
-       data-line-id="runfolder_line"
-       id="path127" />
-    <path
-       d="M 666.5,200 H 691 q 10,0 16,-8 l 18,-24 q 6,-8 16,-8 h 5"
-       stroke="#1f77b4"
-       stroke-width="3"
-       fill="none"
-       stroke-linecap="round"
-       stroke-linejoin="round"
-       class="metro-line-runfolder_line"
-       data-line-id="runfolder_line"
-       id="path131" />
-    <g
-       class="nf-metro-station-group"
-       data-node-id="runfolder_icon"
-       data-node-cx="564.0"
-       data-node-cy="160.0"
-       data-node-r="5.0"
-       data-node-groups="runfolder_line"
-       data-node-region="runfolder_graph"
-       data-node-w="10.0"
-       data-node-h="10.0"
-       data-node-rx="5.0"
-       id="g229">
-      <rect
-         x="559"
-         y="155"
-         width="10"
-         height="10"
-         fill="#ffffff"
-         stroke="#333333"
-         stroke-width="1.5"
-         class="nf-metro-station"
-         data-station-id="runfolder_icon"
-         data-station-lines="runfolder_line"
-         data-station-label="runfolder_icon"
-         data-section-id="runfolder_graph"
-         data-section-name="Run Folder QC"
-         id="rect219" />
-      <g
-         data-station-id="runfolder_icon"
-         id="g227">
-        <path
-           d="m 527,144 h 7.2 q 2,0 2,2 v 4.4 H 525 V 146 q 0,-2 2,-2 z"
-           fill="#ffffff"
-           stroke="#333333"
-           stroke-width="1.5"
-           stroke-linejoin="round"
-           id="path221" />
-        <path
-           d="m 525,150.4 h 26 q 2,0 2,2 V 174 q 0,2 -2,2 h -24 q -2,0 -2,-2 z"
-           fill="#ffffff"
-           stroke="#333333"
-           stroke-width="1.5"
-           stroke-linejoin="round"
-           id="path223" />
-        <text
-           x="539"
-           y="163.2"
-           font-size="6.38889px"
-           fill="#000000"
-           font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-           font-weight="bold"
-           text-anchor="middle"
-           dy="0.30000001em"
-           id="text225">RUNDIR</text>
-      </g>
-    </g>
-    <g
-       class="nf-metro-station-group"
-       data-node-id="checkqc"
-       data-node-cx="666.5"
-       data-node-cy="120.0"
-       data-node-r="5.0"
-       data-node-groups="runfolder_line"
-       data-node-region="runfolder_graph"
-       data-node-w="10.0"
-       data-node-h="10.0"
-       data-node-rx="5.0"
-       id="g233">
-      <rect
-         x="661.5"
-         y="115"
-         width="10"
-         height="10"
-         rx="5"
-         ry="5"
-         fill="#ffffff"
-         stroke="#333333"
-         stroke-width="1.5"
-         class="nf-metro-station"
-         data-station-id="checkqc"
-         data-station-lines="runfolder_line"
-         data-station-label="CheckQC"
-         data-section-id="runfolder_graph"
-         data-section-name="Run Folder QC"
-         id="rect231" />
-    </g>
-    <g
-       class="nf-metro-station-group"
-       data-node-id="rundirparser"
-       data-node-cx="666.5"
-       data-node-cy="200.0"
-       data-node-r="5.0"
-       data-node-groups="runfolder_line"
-       data-node-region="runfolder_graph"
-       data-node-w="10.0"
-       data-node-h="10.0"
-       data-node-rx="5.0"
-       id="g237">
-      <rect
-         x="661.5"
-         y="195"
-         width="10"
-         height="10"
-         rx="5"
-         ry="5"
-         fill="#ffffff"
-         stroke="#333333"
-         stroke-width="1.5"
-         class="nf-metro-station"
-         data-station-id="rundirparser"
-         data-station-lines="runfolder_line"
-         data-station-label="Rundirparser"
-         data-section-id="runfolder_graph"
-         data-section-name="Run Folder QC"
-         id="rect235" />
-    </g>
+       data-section-name="Run Folder QC"
+       id="rect231" />
+  </g>
+  <g
+     class="nf-metro-station-group"
+     data-node-id="rundirparser"
+     data-node-cx="666.5"
+     data-node-cy="200.0"
+     data-node-r="5.0"
+     data-node-groups="runfolder_line"
+     data-node-region="runfolder_graph"
+     data-node-w="10.0"
+     data-node-h="10.0"
+     data-node-rx="5.0"
+     id="g237"
+     transform="translate(8)">
+    <rect
+       x="661.5"
+       y="195"
+       width="10"
+       height="10"
+       rx="5"
+       ry="5"
+       fill="#ffffff"
+       stroke="#333333"
+       stroke-width="1.5"
+       class="nf-metro-station"
+       data-station-id="rundirparser"
+       data-station-lines="runfolder_line"
+       data-station-label="Rundirparser"
+       data-section-id="runfolder_graph"
+       data-section-name="Run Folder QC"
+       id="rect235" />
+  </g>
+  <g
+     id="g886"
+     transform="translate(0,32.137594)">
     <text
-       x="666.5"
+       x="674.5"
        y="106"
        font-size="13px"
        fill="#2b2b2b"
@@ -1546,7 +1519,7 @@
        dominant-baseline="auto"
        id="text267">CheckQC</text>
     <text
-       x="666.5"
+       x="674.5"
        y="106"
        font-size="13px"
        fill="#e0e0e0"
@@ -1557,9 +1530,40 @@
        data-station-id="checkqc"
        class="nf-metro-station-label"
        id="text269">CheckQC</text>
+  </g>
+  <text
+     x="674.5"
+     y="211"
+     font-size="13px"
+     fill="#2b2b2b"
+     stroke="#2b2b2b"
+     stroke-width="3"
+     stroke-linejoin="round"
+     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+     font-weight="bold"
+     aria-hidden="true"
+     class="nf-metro-label-halo"
+     text-anchor="middle"
+     dominant-baseline="hanging"
+     id="text271">Rundirparser</text>
+  <text
+     x="674.5"
+     y="211"
+     font-size="13px"
+     fill="#e0e0e0"
+     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+     font-weight="bold"
+     text-anchor="middle"
+     dominant-baseline="hanging"
+     data-station-id="rundirparser"
+     class="nf-metro-station-label"
+     id="text273">Rundirparser</text>
+  <g
+     id="g890"
+     transform="translate(0,31.981594)">
     <text
-       x="666.5"
-       y="211"
+       x="720"
+       y="426"
        font-size="13px"
        fill="#2b2b2b"
        stroke="#2b2b2b"
@@ -1570,102 +1574,83 @@
        aria-hidden="true"
        class="nf-metro-label-halo"
        text-anchor="middle"
-       dominant-baseline="hanging"
-       id="text271">Rundirparser</text>
+       dominant-baseline="auto"
+       id="text275">Picard collecthsmetrics</text>
     <text
-       x="666.5"
-       y="211"
+       x="720"
+       y="426"
        font-size="13px"
        fill="#e0e0e0"
        font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
        font-weight="bold"
        text-anchor="middle"
-       dominant-baseline="hanging"
-       data-station-id="rundirparser"
+       dominant-baseline="auto"
+       data-station-id="picardhs"
        class="nf-metro-station-label"
-       id="text273">Rundirparser</text>
+       id="text277">Picard collecthsmetrics</text>
   </g>
-  <text
-     x="720.0"
-     y="426.0"
-     font-size="13.0"
-     fill="#2b2b2b"
-     stroke="#2b2b2b"
-     stroke-width="3.0"
-     stroke-linejoin="round"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     aria-hidden="true"
-     class="nf-metro-label-halo"
-     text-anchor="middle"
-     dominant-baseline="auto"
-     id="text275">Picard collecthsmetrics</text>
-  <text
-     x="720.0"
-     y="426.0"
-     font-size="13.0"
-     fill="#e0e0e0"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     text-anchor="middle"
-     dominant-baseline="auto"
-     data-station-id="picardhs"
-     class="nf-metro-station-label"
-     id="text277">Picard collecthsmetrics</text>
-  <text
-     x="140.0"
-     y="306.0"
-     font-size="13.0"
-     fill="#2b2b2b"
-     stroke="#2b2b2b"
-     stroke-width="3.0"
-     stroke-linejoin="round"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     aria-hidden="true"
-     class="nf-metro-label-halo"
-     text-anchor="middle"
-     dominant-baseline="auto"
-     id="text279">Seqtk sample</text>
-  <text
-     x="140.0"
-     y="306.0"
-     font-size="13.0"
-     fill="#e0e0e0"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     text-anchor="middle"
-     dominant-baseline="auto"
-     data-station-id="seqtk"
-     class="nf-metro-station-label"
-     id="text281">Seqtk sample</text>
-  <text
-     x="720.0"
-     y="466.6"
-     font-size="13.0"
-     fill="#2b2b2b"
-     stroke="#2b2b2b"
-     stroke-width="3.0"
-     stroke-linejoin="round"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     aria-hidden="true"
-     class="nf-metro-label-halo"
-     text-anchor="middle"
-     dominant-baseline="auto"
-     id="text283">Picard collectmultiplemetrics</text>
-  <text
-     x="720.0"
-     y="466.6"
-     font-size="13.0"
-     fill="#e0e0e0"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     text-anchor="middle"
-     dominant-baseline="auto"
-     data-station-id="picardmultiple"
-     class="nf-metro-station-label"
-     id="text285">Picard collectmultiplemetrics</text>
+  <g
+     id="g833"
+     transform="translate(0,32.137594)">
+    <text
+       x="140"
+       y="306"
+       font-size="13px"
+       fill="#2b2b2b"
+       stroke="#2b2b2b"
+       stroke-width="3"
+       stroke-linejoin="round"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       aria-hidden="true"
+       class="nf-metro-label-halo"
+       text-anchor="middle"
+       dominant-baseline="auto"
+       id="text279">Seqtk sample</text>
+    <text
+       x="140"
+       y="306"
+       font-size="13px"
+       fill="#e0e0e0"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       text-anchor="middle"
+       dominant-baseline="auto"
+       data-station-id="seqtk"
+       class="nf-metro-station-label"
+       id="text281">Seqtk sample</text>
+  </g>
+  <g
+     id="g894"
+     transform="translate(0,31.381588)">
+    <text
+       x="720"
+       y="466.60001"
+       font-size="13px"
+       fill="#2b2b2b"
+       stroke="#2b2b2b"
+       stroke-width="3"
+       stroke-linejoin="round"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       aria-hidden="true"
+       class="nf-metro-label-halo"
+       text-anchor="middle"
+       dominant-baseline="auto"
+       id="text283">Picard collectmultiplemetrics</text>
+    <text
+       x="720"
+       y="466.60001"
+       font-size="13px"
+       fill="#e0e0e0"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       text-anchor="middle"
+       dominant-baseline="auto"
+       data-station-id="picardmultiple"
+       class="nf-metro-station-label"
+       id="text285">Picard collectmultiplemetrics</text>
+  </g>
   <text
      x="720.0"
      y="531.0"
@@ -1693,60 +1678,67 @@
      data-station-id="riker"
      class="nf-metro-station-label"
      id="text289">Riker multi</text>
-  <text
-     x="318.0"
-     y="105.99999999999997"
-     font-size="13.0"
-     fill="#2b2b2b"
-     stroke="#2b2b2b"
-     stroke-width="3.0"
-     stroke-linejoin="round"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     aria-hidden="true"
-     class="nf-metro-label-halo"
-     text-anchor="middle"
-     dominant-baseline="auto"
-     id="text291">BBMap Clumpify</text>
-  <text
-     x="318.0"
-     y="105.99999999999997"
-     font-size="13.0"
-     fill="#e0e0e0"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     text-anchor="middle"
-     dominant-baseline="auto"
-     data-station-id="bbmap"
-     class="nf-metro-station-label"
-     id="text293">BBMap Clumpify</text>
-  <text
-     x="318.0"
-     y="170.39999999999998"
-     font-size="13.0"
-     fill="#2b2b2b"
-     stroke="#2b2b2b"
-     stroke-width="3.0"
-     stroke-linejoin="round"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     aria-hidden="true"
-     class="nf-metro-label-halo"
-     text-anchor="middle"
-     dominant-baseline="hanging"
-     id="text295">FastP</text>
-  <text
-     x="318.0"
-     y="170.39999999999998"
-     font-size="13.0"
-     fill="#e0e0e0"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     text-anchor="middle"
-     dominant-baseline="hanging"
-     data-station-id="fastp"
-     class="nf-metro-station-label"
-     id="text297">FastP</text>
+  <g
+     id="g812"
+     transform="translate(0,1.2545985)">
+    <text
+       x="318"
+       y="136.883"
+       font-size="13px"
+       fill="#2b2b2b"
+       stroke="#2b2b2b"
+       stroke-width="3"
+       stroke-linejoin="round"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       aria-hidden="true"
+       class="nf-metro-label-halo"
+       text-anchor="middle"
+       dominant-baseline="auto"
+       id="text291">BBMap Clumpify</text>
+    <text
+       x="318"
+       y="136.63759"
+       font-size="13px"
+       fill="#e0e0e0"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       text-anchor="middle"
+       dominant-baseline="auto"
+       data-station-id="bbmap"
+       class="nf-metro-station-label"
+       id="text293">BBMap Clumpify</text>
+  </g>
+  <g
+     id="g777">
+    <text
+       x="318"
+       y="170.39999"
+       font-size="13px"
+       fill="#2b2b2b"
+       stroke="#2b2b2b"
+       stroke-width="3"
+       stroke-linejoin="round"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       aria-hidden="true"
+       class="nf-metro-label-halo"
+       text-anchor="middle"
+       dominant-baseline="hanging"
+       id="text295">FastP</text>
+    <text
+       x="318"
+       y="170.39999"
+       font-size="13px"
+       fill="#e0e0e0"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       text-anchor="middle"
+       dominant-baseline="hanging"
+       data-station-id="fastp"
+       class="nf-metro-station-label"
+       id="text297">FastP</text>
+  </g>
   <text
      x="318.0"
      y="210.39999999999998"
@@ -2082,4 +2074,34 @@
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      text-anchor="end"
      id="text355">created with nf-metro v1.0.0</text>
+  <g
+     class="nf-metro-station-group"
+     data-node-id="fastp"
+     data-node-cx="318.0"
+     data-node-cy="160.0"
+     data-node-r="5.0"
+     data-node-groups="fastq_line"
+     data-node-region="fastq_graph"
+     data-node-w="10.0"
+     data-node-h="10.0"
+     data-node-rx="5.0"
+     id="g157">
+    <rect
+       x="313"
+       y="155"
+       width="10"
+       height="10"
+       rx="5"
+       ry="5"
+       fill="#ffffff"
+       stroke="#333333"
+       stroke-width="1.5"
+       class="nf-metro-station"
+       data-station-id="fastp"
+       data-station-lines="fastq_line"
+       data-station-label="FastP"
+       data-section-id="fastq_graph"
+       data-section-name="RAW sequence QC"
+       id="rect155" />
+  </g>
 </svg>
