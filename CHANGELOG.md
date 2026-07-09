@@ -58,7 +58,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#249](https://github.com/nf-core/seqinspector/pull/249) Create meta.yml files for local subworkflows
 - [#249](https://github.com/nf-core/seqinspector/pull/249) Update modules
 - [#250](https://github.com/nf-core/seqinspector/pull/250) Prepare release 1.1.0
-- [#252](https://github.com/nf-core/seqinspector/pull/252) Skip conda tests for CheckQC and latest-everything Nextflow version on main/master
+- [#252](https://github.com/nf-core/seqinspector/pull/252) Skip conda tests for CheckQC
+- [#252](https://github.com/nf-core/seqinspector/pull/252) Skip latest-everything Nextflow version on main/master
 
 ### `Dependencies`
 
