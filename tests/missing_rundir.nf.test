@@ -23,7 +23,6 @@ nextflow_pipeline {
                 tools: 'checkqc,fastqc,multiqcsav,rundirparser',
                 tools_bundle: null,
             ],
-            no_conda: true,
         ],
         [
             name: "NovaSeq6000 data test - checkqc,fastqc,multiqcsav,rundirparser - missing rundir - stub",
@@ -44,7 +43,6 @@ nextflow_pipeline {
                 tools_bundle: null,
             ],
             stub: true,
-            no_conda: true,
         ],
     ]
 
