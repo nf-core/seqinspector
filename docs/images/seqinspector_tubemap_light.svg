@@ -25,9 +25,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
-     inkscape:zoom="0.7304833"
-     inkscape:cx="512.67428"
-     inkscape:cy="429.16792"
+     inkscape:zoom="0.83352215"
+     inkscape:cx="508.08488"
+     inkscape:cy="448.09847"
      inkscape:window-width="1704"
      inkscape:window-height="993"
      inkscape:window-x="0"
@@ -38,7 +38,7 @@
      id="defs534" />
   <metadata
      id="diagram-manifest"
-     data-schema-version="1.0"><![CDATA[{"groups":[{"color":"#1f77b4","id":"runfolder_line","label":"Run Folder"},{"color":"#ff7f0e","id":"fastq_line","label":"FASTQ"},{"color":"#24B064","id":"bam_line","label":"BAM"}],"height":720,"match":{"flags":"i","target":"fqProcessName","type":"regex"},"nodes":[{"groups":["fastq_line"],"h":12.0,"id":"fastq_icon","label":"fastq_icon","patterns":[],"r":6.0,"region":"fastq_graph","rx":6.0,"w":12.0,"x":80.0,"y":320.0},{"groups":["fastq_line"],"h":12.0,"id":"bbmap","label":"BBMap Clumpify","patterns":[],"r":6.0,"region":"fastq_graph","rx":6.0,"w":12.0,"x":318.0,"y":120.0},{"groups":["fastq_line"],"h":12.0,"id":"fastp","label":"FastP","patterns":[],"r":6.0,"region":"fastq_graph","rx":6.0,"w":12.0,"x":318.0,"y":160.0},{"groups":["fastq_line"],"h":12.0,"id":"fastqc","label":"FASTQC","patterns":[],"r":6.0,"region":"fastq_graph","rx":6.0,"w":12.0,"x":318.0,"y":200.0},{"groups":["fastq_line"],"h":12.0,"id":"fastqe","label":"FASTQE","patterns":[],"r":6.0,"region":"fastq_graph","rx":6.0,"w":12.0,"x":318.0,"y":240.0},{"groups":["fastq_line"],"h":12.0,"id":"fastqscreen","label":"FastQ Screen","patterns":[],"r":6.0,"region":"fastq_graph","rx":6.0,"w":12.0,"x":318.0,"y":280.0},{"groups":["fastq_line"],"h":12.0,"id":"fq_lint","label":"FQ Lint","patterns":[],"r":6.0,"region":"fastq_graph","rx":6.0,"w":12.0,"x":318.0,"y":320.0},{"groups":["fastq_line"],"h":12.0,"id":"kraken2","label":"Kraken2","patterns":[],"r":6.0,"region":"fastq_graph","rx":6.0,"w":12.0,"x":318.0,"y":360.0},{"groups":["fastq_line"],"h":12.0,"id":"krona","label":"Krona","patterns":[],"r":6.0,"region":"fastq_graph","rx":6.0,"w":12.0,"x":378.0,"y":360.0},{"groups":["fastq_line"],"h":12.0,"id":"seqfu","label":"SeqFu Stats","patterns":[],"r":6.0,"region":"fastq_graph","rx":6.0,"w":12.0,"x":318.0,"y":400.0},{"groups":["fastq_line"],"h":12.0,"id":"seqkit","label":"SeqKit Stats","patterns":[],"r":6.0,"region":"fastq_graph","rx":6.0,"w":12.0,"x":318.0,"y":440.0},{"groups":["fastq_line"],"h":12.0,"id":"seqtk","label":"Seqtk sample","patterns":[],"r":6.0,"region":"fastq_graph","rx":6.0,"w":12.0,"x":140.0,"y":320.0},{"groups":["fastq_line"],"h":12.0,"id":"sequali","label":"Sequali","patterns":[],"r":6.0,"region":"fastq_graph","rx":6.0,"w":12.0,"x":318.0,"y":480.0},{"groups":["fastq_line"],"h":12.0,"id":"toulligqc","label":"ToulligQC","patterns":[],"r":6.0,"region":"fastq_graph","rx":6.0,"w":12.0,"x":318.0,"y":520.0},{"groups":["bam_line","fastq_line"],"h":12.0,"id":"bwamem2","label":"BWAmem2","patterns":[],"r":6.0,"region":"bam_graph","rx":6.0,"w":12.0,"x":564.0,"y":480.0},{"groups":["bam_line"],"h":12.0,"id":"picardhs","label":"Picard collecthsmetrics","patterns":[],"r":6.0,"region":"bam_graph","rx":6.0,"w":12.0,"x":720.0,"y":440.0},{"groups":["bam_line"],"h":12.0,"id":"picardmultiple","label":"Picard collectmultiplemetrics","patterns":[],"r":6.0,"region":"bam_graph","rx":6.0,"w":12.0,"x":720.0,"y":480.0},{"groups":["bam_line"],"h":12.0,"id":"riker","label":"Riker multi","patterns":[],"r":6.0,"region":"bam_graph","rx":6.0,"w":12.0,"x":720.0,"y":520.0},{"groups":["runfolder_line"],"h":12.0,"id":"runfolder_icon","label":"runfolder_icon","patterns":[],"r":6.0,"region":"runfolder_graph","rx":6.0,"w":12.0,"x":564.0,"y":160.0},{"groups":["runfolder_line"],"h":12.0,"id":"checkqc","label":"CheckQC","patterns":[],"r":6.0,"region":"runfolder_graph","rx":6.0,"w":12.0,"x":666.5,"y":120.0},{"groups":["runfolder_line"],"h":12.0,"id":"rundirparser","label":"Rundirparser","patterns":[],"r":6.0,"region":"runfolder_graph","rx":6.0,"w":12.0,"x":666.5,"y":200.0},{"groups":["bam_line","fastq_line","runfolder_line"],"h":12.0,"id":"multiqc","label":"MultiQC","patterns":[],"r":6.0,"region":"reporting_graph","rx":6.0,"w":20.0,"x":983.5,"y":392.6},{"groups":["bam_line","fastq_line","runfolder_line"],"h":12.0,"id":"multiqc_icon","label":"multiqc_icon","patterns":[],"r":6.0,"region":"reporting_graph","rx":6.0,"w":20.0,"x":983.5,"y":432.6}],"regions":[{"id":"fastq_graph","label":"FASTQ QC"},{"id":"bam_graph","label":"BAM QC"},{"id":"runfolder_graph","label":"Run Folder QC"},{"id":"reporting_graph","label":"Reporting"}],"title":"nf-core/seqinspector","version":"1.0","width":1097}]]></metadata>
+     data-schema-version="1.0"><![CDATA[{"groups":[{"color":"#1f77b4","id":"runfolder_line","label":"Run Folder"},{"color":"#ff7f0e","id":"fastq_line","label":"RAW sequence"},{"color":"#24B064","id":"bam_line","label":"Reference mapped"}],"height":720,"match":{"flags":"i","target":"fqProcessName","type":"regex"},"nodes":[{"groups":["fastq_line"],"h":12.0,"id":"fastq_icon","label":"fastq_icon","patterns":[],"r":6.0,"region":"fastq_graph","rx":6.0,"w":12.0,"x":80.0,"y":320.0},{"groups":["fastq_line"],"h":12.0,"id":"bbmap","label":"BBMap Clumpify","patterns":[],"r":6.0,"region":"fastq_graph","rx":6.0,"w":12.0,"x":318.0,"y":120.0},{"groups":["fastq_line"],"h":12.0,"id":"fastp","label":"FastP","patterns":[],"r":6.0,"region":"fastq_graph","rx":6.0,"w":12.0,"x":318.0,"y":160.0},{"groups":["fastq_line"],"h":12.0,"id":"fastqc","label":"FASTQC","patterns":[],"r":6.0,"region":"fastq_graph","rx":6.0,"w":12.0,"x":318.0,"y":200.0},{"groups":["fastq_line"],"h":12.0,"id":"fastqe","label":"FASTQE","patterns":[],"r":6.0,"region":"fastq_graph","rx":6.0,"w":12.0,"x":318.0,"y":240.0},{"groups":["fastq_line"],"h":12.0,"id":"fastqscreen","label":"FastQ Screen","patterns":[],"r":6.0,"region":"fastq_graph","rx":6.0,"w":12.0,"x":318.0,"y":280.0},{"groups":["fastq_line"],"h":12.0,"id":"fq_lint","label":"FQ Lint","patterns":[],"r":6.0,"region":"fastq_graph","rx":6.0,"w":12.0,"x":318.0,"y":320.0},{"groups":["fastq_line"],"h":12.0,"id":"kraken2","label":"Kraken2","patterns":[],"r":6.0,"region":"fastq_graph","rx":6.0,"w":12.0,"x":318.0,"y":360.0},{"groups":["fastq_line"],"h":12.0,"id":"krona","label":"Krona","patterns":[],"r":6.0,"region":"fastq_graph","rx":6.0,"w":12.0,"x":378.0,"y":360.0},{"groups":["fastq_line"],"h":12.0,"id":"seqfu","label":"SeqFu Stats","patterns":[],"r":6.0,"region":"fastq_graph","rx":6.0,"w":12.0,"x":318.0,"y":400.0},{"groups":["fastq_line"],"h":12.0,"id":"seqkit","label":"SeqKit Stats","patterns":[],"r":6.0,"region":"fastq_graph","rx":6.0,"w":12.0,"x":318.0,"y":440.0},{"groups":["fastq_line"],"h":12.0,"id":"seqtk","label":"Seqtk sample","patterns":[],"r":6.0,"region":"fastq_graph","rx":6.0,"w":12.0,"x":140.0,"y":320.0},{"groups":["fastq_line"],"h":12.0,"id":"sequali","label":"Sequali","patterns":[],"r":6.0,"region":"fastq_graph","rx":6.0,"w":12.0,"x":318.0,"y":480.0},{"groups":["fastq_line"],"h":12.0,"id":"toulligqc","label":"ToulligQC","patterns":[],"r":6.0,"region":"fastq_graph","rx":6.0,"w":12.0,"x":318.0,"y":520.0},{"groups":["bam_line","fastq_line"],"h":12.0,"id":"bwamem2","label":"BWAmem2","patterns":[],"r":6.0,"region":"bam_graph","rx":6.0,"w":12.0,"x":564.0,"y":480.0},{"groups":["bam_line"],"h":12.0,"id":"picardhs","label":"Picard collecthsmetrics","patterns":[],"r":6.0,"region":"bam_graph","rx":6.0,"w":12.0,"x":720.0,"y":440.0},{"groups":["bam_line"],"h":12.0,"id":"picardmultiple","label":"Picard collectmultiplemetrics","patterns":[],"r":6.0,"region":"bam_graph","rx":6.0,"w":12.0,"x":720.0,"y":480.0},{"groups":["bam_line"],"h":12.0,"id":"riker","label":"Riker multi","patterns":[],"r":6.0,"region":"bam_graph","rx":6.0,"w":12.0,"x":720.0,"y":520.0},{"groups":["runfolder_line"],"h":12.0,"id":"runfolder_icon","label":"runfolder_icon","patterns":[],"r":6.0,"region":"runfolder_graph","rx":6.0,"w":12.0,"x":564.0,"y":160.0},{"groups":["runfolder_line"],"h":12.0,"id":"checkqc","label":"CheckQC","patterns":[],"r":6.0,"region":"runfolder_graph","rx":6.0,"w":12.0,"x":666.5,"y":120.0},{"groups":["runfolder_line"],"h":12.0,"id":"rundirparser","label":"Rundirparser","patterns":[],"r":6.0,"region":"runfolder_graph","rx":6.0,"w":12.0,"x":666.5,"y":200.0},{"groups":["bam_line","fastq_line","runfolder_line"],"h":12.0,"id":"multiqc","label":"MultiQC","patterns":[],"r":6.0,"region":"reporting_graph","rx":6.0,"w":20.0,"x":983.5,"y":392.6},{"groups":["bam_line","fastq_line","runfolder_line"],"h":12.0,"id":"multiqc_icon","label":"multiqc_icon","patterns":[],"r":6.0,"region":"reporting_graph","rx":6.0,"w":20.0,"x":983.5,"y":432.6}],"regions":[{"id":"fastq_graph","label":"RAW sequence QC"},{"id":"bam_graph","label":"Reference mapped QC"},{"id":"runfolder_graph","label":"Run Folder QC"},{"id":"reporting_graph","label":"Reporting"}],"title":"nf-core/seqinspector","version":"1.0","width":1097}]]></metadata>
   <style
      id="style537">@media (prefers-color-scheme: dark) {
     .nf-metro-section-label { fill: #d0d0d0; }
@@ -46,20 +46,12 @@
     .nf-metro-title { fill: #ffffff; }
 }
 </style>
-  <rect
-     x="22.0"
-     y="69.99999999999997"
-     width="442.0"
-     height="500.0"
-     rx="8"
-     ry="8"
-     fill="#ededed"
-     stroke="#e6e6e6"
-     stroke-width="1.0"
+  <path
+     id="rect539"
      class="nf-metro-section-box"
-     data-section-id="fastq_graph"
-     data-section-lines="fastq_line"
-     id="rect539" />
+     style="fill:#ededed;stroke:#e6e6e6"
+     d="m 30,70 h 426 c 4.432,0 8,3.568 8,8 v 484 c 0,4.432 -3.568,8 -8,8 H 30 c -4.432,0 -8,-3.568 -8,-8 V 78 c 0,-4.432 3.568,-8 8,-8 z"
+     sodipodi:nodetypes="sssssssss" />
   <circle
      cx="33.0"
      cy="54.99999999999997"
@@ -80,16 +72,16 @@
      data-section-id="fastq_graph"
      id="text543">1</text>
   <text
-     x="49"
-     y="60.099998"
-     font-size="17px"
+     x="49.0"
+     y="54.99999999999997"
+     font-size="17.0"
      fill="#666666"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      font-weight="bold"
+     dy="0.3em"
      class="nf-metro-section-label"
      data-section-id="fastq_graph"
-     id="text545"
-     dy="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0">RAW Sequence QC</text>
+     id="text545">RAW sequence QC</text>
   <rect
      x="514.0"
      y="390.0"
@@ -124,15 +116,16 @@
      data-section-id="bam_graph"
      id="text551">3</text>
   <text
-     x="541"
-     y="380.10001"
-     font-size="17px"
+     x="541.0"
+     y="375.0"
+     font-size="17.0"
      fill="#666666"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      font-weight="bold"
+     dy="0.3em"
      class="nf-metro-section-label"
      data-section-id="bam_graph"
-     id="text553">Reference Mapped QC</text>
+     id="text553">Reference mapped QC</text>
   <rect
      x="506.0"
      y="69.99999999999997"
@@ -179,7 +172,7 @@
      id="text561">Run Folder QC</text>
   <rect
      x="901.5"
-     y="306.00595"
+     y="306.00574"
      width="136"
      height="159.39999"
      rx="8"
@@ -193,7 +186,7 @@
      id="rect563" />
   <circle
      cx="912.5"
-     cy="291.00595"
+     cy="291.00574"
      r="11"
      fill="#333333"
      class="nf-metro-section-num-circle"
@@ -201,7 +194,7 @@
      id="circle565" />
   <text
      x="912.5"
-     y="291.00595"
+     y="291.00574"
      font-size="12px"
      fill="#ffffff"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
@@ -212,7 +205,7 @@
      id="text567">4</text>
   <text
      x="928.5"
-     y="291.00595"
+     y="291.00574"
      font-size="17px"
      fill="#666666"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
@@ -250,7 +243,7 @@
      data-line-id="bam_line"
      id="path575" />
   <path
-     d="m 979.5,356.00628 v 40"
+     d="m 979.5,356.00572 v 40"
      stroke="#24b064"
      stroke-width="3"
      stroke-linecap="round"
@@ -268,7 +261,7 @@
      data-line-id="bam_line"
      id="path579" />
   <path
-     d="m 904.5,324.00628 h 65 q 10,0 10,10 v 22"
+     d="m 904.5,324.00572 h 65 q 10,0 10,10 v 22"
      stroke="#24b064"
      stroke-width="3"
      fill="none"
@@ -296,7 +289,7 @@
      data-line-id="bam_line"
      id="path585" />
   <path
-     d="m 854.5,480 h 15 c 6.66667,0 10,-3.33333 10,-10 V 334.02829 c 0,-6.66666 3.33333,-10 10,-10 h 15"
+     d="m 854.5,480 h 15 c 6.66667,0 10,-3.33333 10,-10 V 334.00627 c 0,-6.66667 3.33333,-10 10,-10 h 15"
      stroke="#24b064"
      stroke-width="3"
      fill="none"
@@ -431,7 +424,7 @@
      data-line-id="fastq_line"
      id="path613" />
   <path
-     d="m 983.5,356.00628 v 40"
+     d="m 983.5,356.00572 v 40"
      stroke="#ff7f0e"
      stroke-width="3"
      stroke-linecap="round"
@@ -449,7 +442,7 @@
      data-line-id="fastq_line"
      id="path617" />
   <path
-     d="m 904.5,320.00628 h 65 q 14,0 14,14 v 22"
+     d="m 904.5,320.00572 h 65 q 14,0 14,14 v 22"
      stroke="#ff7f0e"
      stroke-width="3"
      fill="none"
@@ -581,6 +574,17 @@
      data-line-id="fastq_line"
      id="path645" />
   <path
+     d="M 474,320 H 904.5"
+     stroke="#ff7f0e"
+     stroke-width="3"
+     fill="none"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     class="metro-line-fastq_line"
+     data-line-id="fastq_line"
+     id="path647"
+     sodipodi:nodetypes="cc" />
+  <path
      d="M474.0,320.0 L474.0,320.0 Q484.0,320.0,484.0,330.0 L484.0,470.0 Q484.0,480.0,494.0,480.0 L514.0,480.0"
      stroke="#ff7f0e"
      stroke-width="3.0"
@@ -611,7 +615,7 @@
      data-line-id="runfolder_line"
      id="path653" />
   <path
-     d="m 987.5,356.00628 v 40"
+     d="m 987.5,356.00572 v 40"
      stroke="#1f77b4"
      stroke-width="3"
      stroke-linecap="round"
@@ -629,7 +633,7 @@
      data-line-id="runfolder_line"
      id="path657" />
   <path
-     d="m 904.5,316.00628 h 65 q 18,0 18,18 v 22"
+     d="m 904.5,316.00572 h 65 q 18,0 18,18 v 22"
      stroke="#1f77b4"
      stroke-width="3"
      fill="none"
@@ -649,7 +653,7 @@
      data-line-id="runfolder_line"
      id="path661" />
   <path
-     d="m 746,160 h 123.5 c 6.66667,0 10,3.33333 10,10 v 136.02829 c 0,6.66667 3.33333,10 10,10 h 15"
+     d="m 746,160 h 123.5 c 6.66667,0 10,3.33333 10,10 v 136.00627 c 0,6.66666 3.33333,10 10,10 h 15"
      stroke="#1f77b4"
      stroke-width="3"
      fill="none"
@@ -684,7 +688,7 @@
        data-station-lines="fastq_line"
        data-station-label="fastq_icon"
        data-section-id="fastq_graph"
-       data-section-name="FASTQ QC"
+       data-section-name="RAW sequence QC"
        id="rect665" />
     <g
        data-station-id="fastq_icon"
@@ -755,7 +759,7 @@
        data-station-lines="fastq_line"
        data-station-label="BBMap Clumpify"
        data-section-id="fastq_graph"
-       data-section-name="FASTQ QC"
+       data-section-name="RAW sequence QC"
        id="rect681" />
   </g>
   <g
@@ -785,7 +789,7 @@
        data-station-lines="fastq_line"
        data-station-label="FastP"
        data-section-id="fastq_graph"
-       data-section-name="FASTQ QC"
+       data-section-name="RAW sequence QC"
        id="rect685" />
   </g>
   <g
@@ -815,7 +819,7 @@
        data-station-lines="fastq_line"
        data-station-label="FASTQC"
        data-section-id="fastq_graph"
-       data-section-name="FASTQ QC"
+       data-section-name="RAW sequence QC"
        id="rect689" />
   </g>
   <g
@@ -845,7 +849,7 @@
        data-station-lines="fastq_line"
        data-station-label="FASTQE"
        data-section-id="fastq_graph"
-       data-section-name="FASTQ QC"
+       data-section-name="RAW sequence QC"
        id="rect693" />
   </g>
   <g
@@ -875,7 +879,7 @@
        data-station-lines="fastq_line"
        data-station-label="FastQ Screen"
        data-section-id="fastq_graph"
-       data-section-name="FASTQ QC"
+       data-section-name="RAW sequence QC"
        id="rect697" />
   </g>
   <g
@@ -905,7 +909,7 @@
        data-station-lines="fastq_line"
        data-station-label="FQ Lint"
        data-section-id="fastq_graph"
-       data-section-name="FASTQ QC"
+       data-section-name="RAW sequence QC"
        id="rect701" />
   </g>
   <g
@@ -935,7 +939,7 @@
        data-station-lines="fastq_line"
        data-station-label="Kraken2"
        data-section-id="fastq_graph"
-       data-section-name="FASTQ QC"
+       data-section-name="RAW sequence QC"
        id="rect705" />
   </g>
   <g
@@ -965,7 +969,7 @@
        data-station-lines="fastq_line"
        data-station-label="Krona"
        data-section-id="fastq_graph"
-       data-section-name="FASTQ QC"
+       data-section-name="RAW sequence QC"
        id="rect709" />
   </g>
   <g
@@ -995,7 +999,7 @@
        data-station-lines="fastq_line"
        data-station-label="SeqFu Stats"
        data-section-id="fastq_graph"
-       data-section-name="FASTQ QC"
+       data-section-name="RAW sequence QC"
        id="rect713" />
   </g>
   <g
@@ -1025,7 +1029,7 @@
        data-station-lines="fastq_line"
        data-station-label="SeqKit Stats"
        data-section-id="fastq_graph"
-       data-section-name="FASTQ QC"
+       data-section-name="RAW sequence QC"
        id="rect717" />
   </g>
   <g
@@ -1055,7 +1059,7 @@
        data-station-lines="fastq_line"
        data-station-label="Seqtk sample"
        data-section-id="fastq_graph"
-       data-section-name="FASTQ QC"
+       data-section-name="RAW sequence QC"
        id="rect721" />
   </g>
   <g
@@ -1085,7 +1089,7 @@
        data-station-lines="fastq_line"
        data-station-label="Sequali"
        data-section-id="fastq_graph"
-       data-section-name="FASTQ QC"
+       data-section-name="RAW sequence QC"
        id="rect725" />
   </g>
   <g
@@ -1115,7 +1119,7 @@
        data-station-lines="fastq_line"
        data-station-label="ToulligQC"
        data-section-id="fastq_graph"
-       data-section-name="FASTQ QC"
+       data-section-name="RAW sequence QC"
        id="rect729" />
   </g>
   <g
@@ -1145,7 +1149,7 @@
        data-station-lines="bam_line,fastq_line"
        data-station-label="BWAmem2"
        data-section-id="bam_graph"
-       data-section-name="BAM QC"
+       data-section-name="Reference mapped QC"
        id="rect733" />
   </g>
   <g
@@ -1175,7 +1179,7 @@
        data-station-lines="bam_line"
        data-station-label="Picard collecthsmetrics"
        data-section-id="bam_graph"
-       data-section-name="BAM QC"
+       data-section-name="Reference mapped QC"
        id="rect737" />
   </g>
   <g
@@ -1205,7 +1209,7 @@
        data-station-lines="bam_line"
        data-station-label="Picard collectmultiplemetrics"
        data-section-id="bam_graph"
-       data-section-name="BAM QC"
+       data-section-name="Reference mapped QC"
        id="rect741" />
   </g>
   <g
@@ -1235,7 +1239,7 @@
        data-station-lines="bam_line"
        data-station-label="Riker multi"
        data-section-id="bam_graph"
-       data-section-name="BAM QC"
+       data-section-name="Reference mapped QC"
        id="rect745" />
   </g>
   <g
@@ -1366,7 +1370,7 @@
      data-node-h="12.0"
      data-node-rx="6.0"
      id="g771"
-     transform="translate(0,-36.612774)">
+     transform="translate(0,-36.613307)">
     <rect
        x="973.5"
        y="386.61899"
@@ -1397,7 +1401,7 @@
      data-node-h="12.0"
      data-node-rx="6.0"
      id="g787"
-     transform="translate(0,-36.612774)">
+     transform="translate(0,-36.613307)">
     <rect
        x="973.5"
        y="426.61899"
@@ -1457,7 +1461,7 @@
   </g>
   <text
      x="968.5"
-     y="356.00595"
+     y="356.00574"
      font-size="14px"
      fill="#ffffff"
      stroke="#ffffff"
@@ -1472,7 +1476,7 @@
      id="text789">MultiQC</text>
   <text
      x="968.5"
-     y="356.00595"
+     y="356.00574"
      font-size="14px"
      fill="#333333"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
@@ -1995,16 +1999,12 @@
      data-station-id="krona"
      class="nf-metro-station-label"
      id="text867">Krona</text>
-  <rect
-     x="22.0"
-     y="600.0"
-     width="376.9188811188811"
-     height="96.0"
-     rx="6"
-     ry="6"
-     fill="#ededed"
+  <path
+     id="rect869"
      class="nf-metro-legend-bg"
-     id="rect869" />
+     style="fill:#ededed"
+     d="m 28,600 h 428 c 3.324,0 8,2.676 8,6 v 84 c 0,3.324 -4.676,6 -8,6 H 28 c -3.324,0 -6,-2.676 -6,-6 v -84 c 0,-3.324 2.676,-6 6,-6 z"
+     sodipodi:nodetypes="sssssssss" />
   <image
      x="34.0"
      y="613.8"
@@ -2041,7 +2041,7 @@
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      dy="0.3em"
      class="nf-metro-legend-text"
-     id="text879">FASTQ</text>
+     id="text879">RAW sequence</text>
   <path
      d="M262.9188811188811,672.0 L286.9188811188811,672.0"
      stroke="#24B064"
@@ -2056,7 +2056,7 @@
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      dy="0.3em"
      class="nf-metro-legend-text"
-     id="text883">BAM</text>
+     id="text883">Reference mapped</text>
   <text
      x="1067.0"
      y="712.0"
@@ -2065,15 +2065,4 @@
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      text-anchor="end"
      id="text885">created with nf-metro v1.0.0</text>
-  <path
-     d="M 474,320 H 904.5"
-     stroke="#ff7f0e"
-     stroke-width="3"
-     fill="none"
-     stroke-linecap="round"
-     stroke-linejoin="round"
-     class="metro-line-fastq_line"
-     data-line-id="fastq_line"
-     id="path1212"
-     sodipodi:nodetypes="cc" />
 </svg>
