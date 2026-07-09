@@ -320,11 +320,15 @@ workflow SEQINSPECTOR {
 
     if (bait_intervals && target_intervals) {
         bam_bai_for_riker = bam_bai
+            .map { meta, bam, bai -> [meta, bam, bai, [], [], [], []] }
             .combine(channel.fromPath(bait_intervals).collect())
             .combine(channel.fromPath(target_intervals).collect())
+            .map { meta, bam, bai, error_vcf, error_vcf_idx, error_intervals, gcbias_exclude_intervals, hybcap_baits, hybcap_targets ->
+                [meta, bam, bai, error_vcf, error_vcf_idx, error_intervals, gcbias_exclude_intervals, hybcap_baits, hybcap_targets, [], [], []]
+            }
     }
     else {
-        bam_bai_for_riker = bam_bai.map { meta, bam, bai -> [meta, bam, bai, [], []] }
+        bam_bai_for_riker = bam_bai.map { meta, bam, bai -> [meta, bam, bai, [], [], [], [], [], [], [], [], []] }
     }
 
     RIKER_MULTI(

@@ -29,13 +29,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Fixed`
 
-- [#XXX](https://github.com/nf-core/seqinspector/pull/XXX) Fix typos, broken link, missing `</details>` tag, and stray content in output documentation
 - [#216](https://github.com/nf-core/seqinspector/pull/216) Fixed meta.id that resulted in all SEQFU_STATS processes with the same tag name
 - [#224](https://github.com/nf-core/seqinspector/pull/224) Fix workflow output syntax for future Nextflow releases
 - [#226](https://github.com/nf-core/seqinspector/pull/226) Fix parameter `tools_bundle` not accepting `null` for custom tool selection
 - [#238](https://github.com/nf-core/seqinspector/pull/238) Fix Python/PyYAML tool name case mismatch in rundirparser module
 - [#239](https://github.com/nf-core/seqinspector/pull/239) Fix tool bundles documentation to match code
 - [#240](https://github.com/nf-core/seqinspector/pull/240) Fix FASTQE default tool marking in README
+- [#243](https://github.com/nf-core/seqinspector/pull/243) Fix typos, broken link, missing `</details>` tag, and stray content in output documentation
 - [#245](https://github.com/nf-core/seqinspector/pull/245) Fix repeated listing of CollectHsMetrics
 
 ### `Changed`
@@ -55,6 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#235](https://github.com/nf-core/seqinspector/pull/235) Update MultiQC and other dependencies
 - [#237](https://github.com/nf-core/seqinspector/pull/237) Improved citation system to dynamically build tool citations based on selected tools
 - [#244](https://github.com/nf-core/seqinspector/pull/244) Corrected the pipeline introduction tool list for fq lint
+- Update riker module from 0.3.0 to 0.4.0 with new input parameters (error VCF, GC bias exclude intervals, RNA gene model, RNA ribosomal intervals, WGS intervals)
 
 ### `Dependencies`
 
@@ -70,6 +71,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | krona      |             | 2.8.1       |
 | multiqc    | 1.34        | 1.35        |
 | multiqcsav |             | 0.2.0       |
+| riker      |             | 0.4.0       |
 | samtools   | 1.22.1      | 1.23.1      |
 | seqkit     |             | 2.9.0       |
 | toulligqc  |             | 2.8.4       |
