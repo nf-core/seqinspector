@@ -13,12 +13,12 @@
                     },
                     "bwamem2/index": {
                         "branch": "master",
-                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "git_sha": "62ce917fd775aaef732eb82019de069c765adfd3",
                         "installed_by": ["modules"]
                     },
                     "bwamem2/mem": {
                         "branch": "master",
-                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "git_sha": "62ce917fd775aaef732eb82019de069c765adfd3",
                         "installed_by": ["modules"]
                     },
                     "checkqc": {
@@ -59,19 +59,19 @@
                     },
                     "kraken2/kraken2": {
                         "branch": "master",
-                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "git_sha": "d67d33d5925fcec4691b499670fa2bd926fd2be5",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/kraken2/kraken2/kraken2-kraken2.diff"
                     },
                     "krona/ktimporttaxonomy": {
                         "branch": "master",
-                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "git_sha": "10d22ca9b72ecea28167f289df13a81ceb12d085",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/krona/ktimporttaxonomy/krona-ktimporttaxonomy.diff"
                     },
                     "krona/ktupdatetaxonomy": {
                         "branch": "master",
-                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "git_sha": "10d22ca9b72ecea28167f289df13a81ceb12d085",
                         "installed_by": ["modules"]
                     },
                     "multiqc": {
@@ -103,7 +103,7 @@
                     },
                     "riker/multi": {
                         "branch": "master",
-                        "git_sha": "89e570609a9c76e86861b8acd0bc7e0aafaccab0",
+                        "git_sha": "89b094a1b914b1e0844b4c0cc901cda5eddd569b",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/riker/multi/riker-multi.diff"
                     },
@@ -119,7 +119,7 @@
                     },
                     "seqfu/stats": {
                         "branch": "master",
-                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "git_sha": "e0c07e2169e7569da58d8d8c3ca71023fc6a217e",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/seqfu/stats/seqfu-stats.diff"
                     },
