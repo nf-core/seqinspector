@@ -58,6 +58,10 @@
 
   > MultiQC SAV: MultiQC plugin for Illumina Sequencing Analysis Viewer.
 
+- [Riker](https://github.com/fulcrumgenomics/riker)
+
+  > Fulcrum Genomics. Fast Rust CLI toolkit for sequencing QC metrics. Ports key QC metrics tools from Picard with cleaner output and better performance.
+
 - [Picard Tools](https://broadinstitute.github.io/picard/)
 
   > Broad Institute, “Picard Toolkit.” 2019. GitHub Repository. https://broadinstitute.github.io/picard/

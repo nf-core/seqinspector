@@ -83,6 +83,7 @@ If provided, nf-core/seqinspector can also parse statistics from an Illumina run
 | seqkit      | 2.9.0   |
 | seqtk       | 1.4     |
 | sequali     | 1.0.2   |
+| toulligqc   | 2.8.4   |
 
 ## Usage
 
