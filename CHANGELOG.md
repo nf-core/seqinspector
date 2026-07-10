@@ -37,16 +37,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#240](https://github.com/nf-core/seqinspector/pull/240) Fix FASTQE default tool marking in README
 - [#243](https://github.com/nf-core/seqinspector/pull/243) Fix typos, broken link, missing `</details>` tag, and stray content in output documentation
 - [#245](https://github.com/nf-core/seqinspector/pull/245) Fix repeated listing of CollectHsMetrics
-- [#253](https://github.com/nf-core/seqinspector/pull/253) Fix release notes: rename Deprecated to Removed, fix Fastp duplicate, add toulligqc to README, add Riker citation
+- [#253](https://github.com/nf-core/seqinspector/pull/253) Fix CHANGELOG, missing Update in README and CITATIONS
 
 ### `Changed`
 
 - [#191](https://github.com/nf-core/seqinspector/pull/191) Back to dev
 - [#192](https://github.com/nf-core/seqinspector/pull/192) Refactor the tools selection logic
-- [#192](https://github.com/nf-core/seqinspector/pull/192) Removed `bwamem2_index`, `bwamem2_mem`, `samtools_faidx` and `samtools_index` from the list of tools as they can be inferred from downstream tools
-- [#192](https://github.com/nf-core/seqinspector/pull/192) Removed `seqtk_sample` from the list of tools as it can be inferred from `params.sample_size`
-- [#192](https://github.com/nf-core/seqinspector/pull/192) Removed params `run_picard_collecthsmetrics` and add `picard_collecthsmetrics` to the list of tools
-- [#205](https://github.com/nf-core/seqinspector/pull/205) document how to add a tool to tool selection and how to use tool selection
+- [#205](https://github.com/nf-core/seqinspector/pull/205) Document how to add a tool to tool selection and how to use tool selection
 - [#215](https://github.com/nf-core/seqinspector/pull/215) Update all modules
 - [#216](https://github.com/nf-core/seqinspector/pull/216) Split out and simplify tests
 - [#220](https://github.com/nf-core/seqinspector/pull/220) Workflow output for MultiQC
@@ -84,7 +81,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Removed`
 
+- [#192](https://github.com/nf-core/seqinspector/pull/192) Removed `bwamem2_index`, `bwamem2_mem`, `samtools_faidx` and `samtools_index` from the list of tools as they can be inferred from downstream tools
 - [#192](https://github.com/nf-core/seqinspector/pull/192) Removed `run_picard_collecthsmetrics` param as `picard_collecthsmetrics` is now part of the list of tools
+- [#192](https://github.com/nf-core/seqinspector/pull/192) Removed `seqtk_sample` from the list of tools as it can be inferred from `params.sample_size`
 - [#213](https://github.com/nf-core/seqinspector/pull/213) Removed `sort_bam` params as we always need sorted BAM files for the QC_BAM subworkflow
 
 ## [1.0.1](https://github.com/nf-core/seqinspector/releases/tag/1.0.1) - Penelope Ruth "Penny" Gadget
