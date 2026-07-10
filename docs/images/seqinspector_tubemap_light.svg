@@ -25,9 +25,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
-     inkscape:zoom="1.0151664"
-     inkscape:cx="532.42502"
-     inkscape:cy="365.94985"
+     inkscape:zoom="0.81348628"
+     inkscape:cx="692.08297"
+     inkscape:cy="432.09087"
      inkscape:window-width="1704"
      inkscape:window-height="993"
      inkscape:window-x="0"
@@ -1287,12 +1287,12 @@
      class="nf-metro-station-label"
      id="text791">MultiQC</text>
   <text
-     x="564.0"
-     y="491.0"
-     font-size="14.0"
+     x="564"
+     y="461"
+     font-size="14px"
      fill="#ffffff"
      stroke="#ffffff"
-     stroke-width="3.0"
+     stroke-width="3"
      stroke-linejoin="round"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      font-weight="bold"
@@ -1302,9 +1302,9 @@
      dominant-baseline="hanging"
      id="text793">BWAmem2</text>
   <text
-     x="564.0"
-     y="491.0"
-     font-size="14.0"
+     x="564"
+     y="461"
+     font-size="14px"
      fill="#333333"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      font-weight="bold"
@@ -1518,7 +1518,7 @@
   </g>
   <g
      id="g1222"
-     transform="translate(0,32.732794)">
+     transform="translate(0,85.4608)">
     <text
        x="674.5"
        y="106"
@@ -1547,36 +1547,40 @@
        class="nf-metro-station-label"
        id="text799">CheckQC</text>
   </g>
-  <text
-     x="674.5"
-     y="211"
-     font-size="14px"
-     fill="#ffffff"
-     stroke="#ffffff"
-     stroke-width="3"
-     stroke-linejoin="round"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     aria-hidden="true"
-     class="nf-metro-label-halo"
-     text-anchor="middle"
-     dominant-baseline="hanging"
-     id="text801">Rundirparser</text>
-  <text
-     x="674.5"
-     y="211"
-     font-size="14px"
-     fill="#333333"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     text-anchor="middle"
-     dominant-baseline="hanging"
-     data-station-id="rundirparser"
-     class="nf-metro-station-label"
-     id="text803">Rundirparser</text>
+  <g
+     id="g772"
+     transform="translate(0,-80.600009)">
+    <text
+       x="674.5"
+       y="181"
+       font-size="14px"
+       fill="#ffffff"
+       stroke="#ffffff"
+       stroke-width="3"
+       stroke-linejoin="round"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       aria-hidden="true"
+       class="nf-metro-label-halo"
+       text-anchor="middle"
+       dominant-baseline="hanging"
+       id="text801">Rundirparser</text>
+    <text
+       x="674.5"
+       y="181"
+       font-size="14px"
+       fill="#333333"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       text-anchor="middle"
+       dominant-baseline="hanging"
+       data-station-id="rundirparser"
+       class="nf-metro-station-label"
+       id="text803">Rundirparser</text>
+  </g>
   <g
      id="g1242"
-     transform="translate(0,32.564794)">
+     transform="translate(0,2.564794)">
     <text
        x="720"
        y="426"
@@ -1607,7 +1611,7 @@
   </g>
   <g
      id="g1206"
-     transform="translate(0,32.732794)">
+     transform="translate(0,2.732794)">
     <text
        x="140"
        y="306"
@@ -1638,7 +1642,7 @@
   </g>
   <g
      id="g1238"
-     transform="translate(0,31.964787)">
+     transform="translate(0,1.964787)">
     <text
        x="720"
        y="466.60001"
@@ -1668,12 +1672,12 @@
        id="text815">Picard collectmultiplemetrics</text>
   </g>
   <text
-     x="720.0"
-     y="531.0"
-     font-size="14.0"
+     x="720"
+     y="501"
+     font-size="14px"
      fill="#ffffff"
      stroke="#ffffff"
-     stroke-width="3.0"
+     stroke-width="3"
      stroke-linejoin="round"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      font-weight="bold"
@@ -1683,9 +1687,9 @@
      dominant-baseline="hanging"
      id="text817">Riker multi</text>
   <text
-     x="720.0"
-     y="531.0"
-     font-size="14.0"
+     x="720"
+     y="501"
+     font-size="14px"
      fill="#333333"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      font-weight="bold"
@@ -1696,7 +1700,7 @@
      id="text819">Riker multi</text>
   <g
      id="g1218"
-     transform="translate(0,32.732794)">
+     transform="translate(0,2.732794)">
     <text
        x="318"
        y="106"
@@ -1726,12 +1730,12 @@
        id="text823">BBMap Clumpify</text>
   </g>
   <text
-     x="318.0"
-     y="170.39999999999998"
-     font-size="14.0"
+     x="318"
+     y="140.39999"
+     font-size="14px"
      fill="#ffffff"
      stroke="#ffffff"
-     stroke-width="3.0"
+     stroke-width="3"
      stroke-linejoin="round"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      font-weight="bold"
@@ -1741,9 +1745,9 @@
      dominant-baseline="hanging"
      id="text825">FastP</text>
   <text
-     x="318.0"
-     y="170.39999999999998"
-     font-size="14.0"
+     x="318"
+     y="140.39999"
+     font-size="14px"
      fill="#333333"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      font-weight="bold"
@@ -1753,12 +1757,12 @@
      class="nf-metro-station-label"
      id="text827">FastP</text>
   <text
-     x="318.0"
-     y="210.39999999999998"
-     font-size="14.0"
+     x="318"
+     y="180.39999"
+     font-size="14px"
      fill="#ffffff"
      stroke="#ffffff"
-     stroke-width="3.0"
+     stroke-width="3"
      stroke-linejoin="round"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      font-weight="bold"
@@ -1768,9 +1772,9 @@
      dominant-baseline="hanging"
      id="text829">FASTQC</text>
   <text
-     x="318.0"
-     y="210.39999999999998"
-     font-size="14.0"
+     x="318"
+     y="180.39999"
+     font-size="14px"
      fill="#333333"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      font-weight="bold"
@@ -1780,12 +1784,12 @@
      class="nf-metro-station-label"
      id="text831">FASTQC</text>
   <text
-     x="318.0"
-     y="250.39999999999998"
-     font-size="14.0"
+     x="318"
+     y="220.39999"
+     font-size="14px"
      fill="#ffffff"
      stroke="#ffffff"
-     stroke-width="3.0"
+     stroke-width="3"
      stroke-linejoin="round"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      font-weight="bold"
@@ -1795,9 +1799,9 @@
      dominant-baseline="hanging"
      id="text833">FASTQE</text>
   <text
-     x="318.0"
-     y="250.39999999999998"
-     font-size="14.0"
+     x="318"
+     y="220.39999"
+     font-size="14px"
      fill="#333333"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      font-weight="bold"
@@ -1807,12 +1811,12 @@
      class="nf-metro-station-label"
      id="text835">FASTQE</text>
   <text
-     x="318.0"
-     y="290.4"
-     font-size="14.0"
+     x="318"
+     y="260.39999"
+     font-size="14px"
      fill="#ffffff"
      stroke="#ffffff"
-     stroke-width="3.0"
+     stroke-width="3"
      stroke-linejoin="round"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      font-weight="bold"
@@ -1822,9 +1826,9 @@
      dominant-baseline="hanging"
      id="text837">FastQ Screen</text>
   <text
-     x="318.0"
-     y="290.4"
-     font-size="14.0"
+     x="318"
+     y="260.39999"
+     font-size="14px"
      fill="#333333"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      font-weight="bold"
@@ -1834,12 +1838,12 @@
      class="nf-metro-station-label"
      id="text839">FastQ Screen</text>
   <text
-     x="318.0"
-     y="330.4"
-     font-size="14.0"
+     x="318"
+     y="300.39999"
+     font-size="14px"
      fill="#ffffff"
      stroke="#ffffff"
-     stroke-width="3.0"
+     stroke-width="3"
      stroke-linejoin="round"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      font-weight="bold"
@@ -1849,9 +1853,9 @@
      dominant-baseline="hanging"
      id="text841">FQ Lint</text>
   <text
-     x="318.0"
-     y="330.4"
-     font-size="14.0"
+     x="318"
+     y="300.39999"
+     font-size="14px"
      fill="#333333"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      font-weight="bold"
@@ -1861,12 +1865,12 @@
      class="nf-metro-station-label"
      id="text843">FQ Lint</text>
   <text
-     x="318.0"
-     y="370.4"
-     font-size="14.0"
+     x="318"
+     y="340.39999"
+     font-size="14px"
      fill="#ffffff"
      stroke="#ffffff"
-     stroke-width="3.0"
+     stroke-width="3"
      stroke-linejoin="round"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      font-weight="bold"
@@ -1876,9 +1880,9 @@
      dominant-baseline="hanging"
      id="text845">Kraken2</text>
   <text
-     x="318.0"
-     y="370.4"
-     font-size="14.0"
+     x="318"
+     y="340.39999"
+     font-size="14px"
      fill="#333333"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      font-weight="bold"
@@ -1888,12 +1892,12 @@
      class="nf-metro-station-label"
      id="text847">Kraken2</text>
   <text
-     x="318.0"
-     y="410.4"
-     font-size="14.0"
+     x="318"
+     y="380.39999"
+     font-size="14px"
      fill="#ffffff"
      stroke="#ffffff"
-     stroke-width="3.0"
+     stroke-width="3"
      stroke-linejoin="round"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      font-weight="bold"
@@ -1903,9 +1907,9 @@
      dominant-baseline="hanging"
      id="text849">SeqFu Stats</text>
   <text
-     x="318.0"
-     y="410.4"
-     font-size="14.0"
+     x="318"
+     y="380.39999"
+     font-size="14px"
      fill="#333333"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      font-weight="bold"
@@ -1915,12 +1919,12 @@
      class="nf-metro-station-label"
      id="text851">SeqFu Stats</text>
   <text
-     x="318.0"
-     y="450.4"
-     font-size="14.0"
+     x="318"
+     y="420.39999"
+     font-size="14px"
      fill="#ffffff"
      stroke="#ffffff"
-     stroke-width="3.0"
+     stroke-width="3"
      stroke-linejoin="round"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      font-weight="bold"
@@ -1930,9 +1934,9 @@
      dominant-baseline="hanging"
      id="text853">SeqKit Stats</text>
   <text
-     x="318.0"
-     y="450.4"
-     font-size="14.0"
+     x="318"
+     y="420.39999"
+     font-size="14px"
      fill="#333333"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      font-weight="bold"
@@ -1942,12 +1946,12 @@
      class="nf-metro-station-label"
      id="text855">SeqKit Stats</text>
   <text
-     x="318.0"
-     y="490.4"
-     font-size="14.0"
+     x="318"
+     y="460.39999"
+     font-size="14px"
      fill="#ffffff"
      stroke="#ffffff"
-     stroke-width="3.0"
+     stroke-width="3"
      stroke-linejoin="round"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      font-weight="bold"
@@ -1957,9 +1961,9 @@
      dominant-baseline="hanging"
      id="text857">Sequali</text>
   <text
-     x="318.0"
-     y="490.4"
-     font-size="14.0"
+     x="318"
+     y="460.39999"
+     font-size="14px"
      fill="#333333"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      font-weight="bold"
@@ -1969,12 +1973,12 @@
      class="nf-metro-station-label"
      id="text859">Sequali</text>
   <text
-     x="318.0"
-     y="531.0"
-     font-size="14.0"
+     x="318"
+     y="501"
+     font-size="14px"
      fill="#ffffff"
      stroke="#ffffff"
-     stroke-width="3.0"
+     stroke-width="3"
      stroke-linejoin="round"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      font-weight="bold"
@@ -1984,9 +1988,9 @@
      dominant-baseline="hanging"
      id="text861">ToulligQC</text>
   <text
-     x="318.0"
-     y="531.0"
-     font-size="14.0"
+     x="318"
+     y="501"
+     font-size="14px"
      fill="#333333"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      font-weight="bold"
@@ -1996,12 +2000,12 @@
      class="nf-metro-station-label"
      id="text863">ToulligQC</text>
   <text
-     x="378.0"
-     y="371.0"
-     font-size="14.0"
+     x="378"
+     y="341"
+     font-size="14px"
      fill="#ffffff"
      stroke="#ffffff"
-     stroke-width="3.0"
+     stroke-width="3"
      stroke-linejoin="round"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      font-weight="bold"
@@ -2011,9 +2015,9 @@
      dominant-baseline="hanging"
      id="text865">Krona</text>
   <text
-     x="378.0"
-     y="371.0"
-     font-size="14.0"
+     x="378"
+     y="341"
+     font-size="14px"
      fill="#333333"
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      font-weight="bold"
