@@ -26,9 +26,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
-     inkscape:zoom="0.61198125"
-     inkscape:cx="859.50346"
-     inkscape:cy="293.30964"
+     inkscape:zoom="0.76330873"
+     inkscape:cx="548.27095"
+     inkscape:cy="233.85033"
      inkscape:window-width="1704"
      inkscape:window-height="993"
      inkscape:window-x="0"
@@ -1270,33 +1270,37 @@
      data-station-id="multiqc"
      class="nf-metro-station-label"
      id="text261">MultiQC</text>
-  <text
-     x="564"
-     y="461"
-     font-size="13px"
-     fill="#2b2b2b"
-     stroke="#2b2b2b"
-     stroke-width="3"
-     stroke-linejoin="round"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     aria-hidden="true"
-     class="nf-metro-label-halo"
-     text-anchor="middle"
-     dominant-baseline="hanging"
-     id="text263">BWAmem2</text>
-  <text
-     x="564"
-     y="461"
-     font-size="13px"
-     fill="#e0e0e0"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     text-anchor="middle"
-     dominant-baseline="hanging"
-     data-station-id="bwamem2"
-     class="nf-metro-station-label"
-     id="text265">BWAmem2</text>
+  <g
+     id="g2332"
+     transform="translate(0,0.1453999)">
+    <text
+       x="564"
+       y="461"
+       font-size="13px"
+       fill="#2b2b2b"
+       stroke="#2b2b2b"
+       stroke-width="3"
+       stroke-linejoin="round"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       aria-hidden="true"
+       class="nf-metro-label-halo"
+       text-anchor="middle"
+       dominant-baseline="hanging"
+       id="text263">BWAmem2</text>
+    <text
+       x="564"
+       y="461"
+       font-size="13px"
+       fill="#e0e0e0"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       text-anchor="middle"
+       dominant-baseline="hanging"
+       data-station-id="bwamem2"
+       class="nf-metro-station-label"
+       id="text265">BWAmem2</text>
+  </g>
   <rect
      x="514"
      y="70"
@@ -1502,7 +1506,7 @@
   </g>
   <g
      id="g886"
-     transform="translate(0,84.7136)">
+     transform="translate(0,82.883)">
     <text
        x="674.5"
        y="106"
@@ -1533,7 +1537,7 @@
   </g>
   <g
      id="g961"
-     transform="translate(0,-80.60001)">
+     transform="translate(0,-79.8546)">
     <text
        x="674.5"
        y="181"
@@ -1564,7 +1568,7 @@
   </g>
   <g
      id="g890"
-     transform="translate(0,1.981594)">
+     transform="translate(0,2.7270001)">
     <text
        x="720"
        y="426"
@@ -1595,7 +1599,7 @@
   </g>
   <g
      id="g833"
-     transform="translate(0,2.137594)">
+     transform="translate(0,2.8830001)">
     <text
        x="140"
        y="306"
@@ -1626,7 +1630,7 @@
   </g>
   <g
      id="g894"
-     transform="translate(0,1.381588)">
+     transform="translate(0,2.126994)">
     <text
        x="720"
        y="466.60001"
@@ -1655,36 +1659,40 @@
        class="nf-metro-station-label"
        id="text285">Picard collectmultiplemetrics</text>
   </g>
-  <text
-     x="720"
-     y="501"
-     font-size="13px"
-     fill="#2b2b2b"
-     stroke="#2b2b2b"
-     stroke-width="3"
-     stroke-linejoin="round"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     aria-hidden="true"
-     class="nf-metro-label-halo"
-     text-anchor="middle"
-     dominant-baseline="hanging"
-     id="text287">Riker multi</text>
-  <text
-     x="720"
-     y="501"
-     font-size="13px"
-     fill="#e0e0e0"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     text-anchor="middle"
-     dominant-baseline="hanging"
-     data-station-id="riker"
-     class="nf-metro-station-label"
-     id="text289">Riker multi</text>
+  <g
+     id="g2336"
+     transform="translate(0,0.1453999)">
+    <text
+       x="720"
+       y="501"
+       font-size="13px"
+       fill="#2b2b2b"
+       stroke="#2b2b2b"
+       stroke-width="3"
+       stroke-linejoin="round"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       aria-hidden="true"
+       class="nf-metro-label-halo"
+       text-anchor="middle"
+       dominant-baseline="hanging"
+       id="text287">Riker multi</text>
+    <text
+       x="720"
+       y="501"
+       font-size="13px"
+       fill="#e0e0e0"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       text-anchor="middle"
+       dominant-baseline="hanging"
+       data-station-id="riker"
+       class="nf-metro-station-label"
+       id="text289">Riker multi</text>
+  </g>
   <g
      id="g812"
-     transform="translate(0,-28.745401)">
+     transform="translate(0,-27.999996)">
     <text
        x="318"
        y="136.883"
@@ -1714,8 +1722,38 @@
        id="text293">BBMap Clumpify</text>
   </g>
   <g
+     class="nf-metro-station-group"
+     data-node-id="fastp"
+     data-node-cx="318.0"
+     data-node-cy="160.0"
+     data-node-r="5.0"
+     data-node-groups="fastq_line"
+     data-node-region="fastq_graph"
+     data-node-w="10.0"
+     data-node-h="10.0"
+     data-node-rx="5.0"
+     id="g157">
+    <rect
+       x="313"
+       y="155"
+       width="10"
+       height="10"
+       rx="5"
+       ry="5"
+       fill="#ffffff"
+       stroke="#333333"
+       stroke-width="1.5"
+       class="nf-metro-station"
+       data-station-id="fastp"
+       data-station-lines="fastq_line"
+       data-station-label="FastP"
+       data-section-id="fastq_graph"
+       data-section-name="RAW sequence QC"
+       id="rect155" />
+  </g>
+  <g
      id="g777"
-     transform="translate(0,-30)">
+     transform="translate(0,-29.254594)">
     <text
        x="318"
        y="170.39999"
@@ -1744,276 +1782,316 @@
        class="nf-metro-station-label"
        id="text297">FastP</text>
   </g>
-  <text
-     x="318"
-     y="180.39999"
-     font-size="13px"
-     fill="#2b2b2b"
-     stroke="#2b2b2b"
-     stroke-width="3"
-     stroke-linejoin="round"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     aria-hidden="true"
-     class="nf-metro-label-halo"
-     text-anchor="middle"
-     dominant-baseline="hanging"
-     id="text299">FASTQC</text>
-  <text
-     x="318"
-     y="180.39999"
-     font-size="13px"
-     fill="#e0e0e0"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     text-anchor="middle"
-     dominant-baseline="hanging"
-     data-station-id="fastqc"
-     class="nf-metro-station-label"
-     id="text301">FASTQC</text>
-  <text
-     x="318"
-     y="220.39999"
-     font-size="13px"
-     fill="#2b2b2b"
-     stroke="#2b2b2b"
-     stroke-width="3"
-     stroke-linejoin="round"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     aria-hidden="true"
-     class="nf-metro-label-halo"
-     text-anchor="middle"
-     dominant-baseline="hanging"
-     id="text303">FASTQE</text>
-  <text
-     x="318"
-     y="220.39999"
-     font-size="13px"
-     fill="#e0e0e0"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     text-anchor="middle"
-     dominant-baseline="hanging"
-     data-station-id="fastqe"
-     class="nf-metro-station-label"
-     id="text305">FASTQE</text>
-  <text
-     x="318"
-     y="260.39999"
-     font-size="13px"
-     fill="#2b2b2b"
-     stroke="#2b2b2b"
-     stroke-width="3"
-     stroke-linejoin="round"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     aria-hidden="true"
-     class="nf-metro-label-halo"
-     text-anchor="middle"
-     dominant-baseline="hanging"
-     id="text307">FastQ Screen</text>
-  <text
-     x="318"
-     y="260.39999"
-     font-size="13px"
-     fill="#e0e0e0"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     text-anchor="middle"
-     dominant-baseline="hanging"
-     data-station-id="fastqscreen"
-     class="nf-metro-station-label"
-     id="text309">FastQ Screen</text>
-  <text
-     x="318"
-     y="300.39999"
-     font-size="13px"
-     fill="#2b2b2b"
-     stroke="#2b2b2b"
-     stroke-width="3"
-     stroke-linejoin="round"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     aria-hidden="true"
-     class="nf-metro-label-halo"
-     text-anchor="middle"
-     dominant-baseline="hanging"
-     id="text311">FQ Lint</text>
-  <text
-     x="318"
-     y="300.39999"
-     font-size="13px"
-     fill="#e0e0e0"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     text-anchor="middle"
-     dominant-baseline="hanging"
-     data-station-id="fq_lint"
-     class="nf-metro-station-label"
-     id="text313">FQ Lint</text>
-  <text
-     x="318"
-     y="340.39999"
-     font-size="13px"
-     fill="#2b2b2b"
-     stroke="#2b2b2b"
-     stroke-width="3"
-     stroke-linejoin="round"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     aria-hidden="true"
-     class="nf-metro-label-halo"
-     text-anchor="middle"
-     dominant-baseline="hanging"
-     id="text315">Kraken2</text>
-  <text
-     x="318"
-     y="340.39999"
-     font-size="13px"
-     fill="#e0e0e0"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     text-anchor="middle"
-     dominant-baseline="hanging"
-     data-station-id="kraken2"
-     class="nf-metro-station-label"
-     id="text317">Kraken2</text>
-  <text
-     x="318"
-     y="380.39999"
-     font-size="13px"
-     fill="#2b2b2b"
-     stroke="#2b2b2b"
-     stroke-width="3"
-     stroke-linejoin="round"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     aria-hidden="true"
-     class="nf-metro-label-halo"
-     text-anchor="middle"
-     dominant-baseline="hanging"
-     id="text319">SeqFu Stats</text>
-  <text
-     x="318"
-     y="380.39999"
-     font-size="13px"
-     fill="#e0e0e0"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     text-anchor="middle"
-     dominant-baseline="hanging"
-     data-station-id="seqfu"
-     class="nf-metro-station-label"
-     id="text321">SeqFu Stats</text>
-  <text
-     x="318"
-     y="420.39999"
-     font-size="13px"
-     fill="#2b2b2b"
-     stroke="#2b2b2b"
-     stroke-width="3"
-     stroke-linejoin="round"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     aria-hidden="true"
-     class="nf-metro-label-halo"
-     text-anchor="middle"
-     dominant-baseline="hanging"
-     id="text323">SeqKit Stats</text>
-  <text
-     x="318"
-     y="420.39999"
-     font-size="13px"
-     fill="#e0e0e0"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     text-anchor="middle"
-     dominant-baseline="hanging"
-     data-station-id="seqkit"
-     class="nf-metro-station-label"
-     id="text325">SeqKit Stats</text>
-  <text
-     x="318"
-     y="460.39999"
-     font-size="13px"
-     fill="#2b2b2b"
-     stroke="#2b2b2b"
-     stroke-width="3"
-     stroke-linejoin="round"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     aria-hidden="true"
-     class="nf-metro-label-halo"
-     text-anchor="middle"
-     dominant-baseline="hanging"
-     id="text327">Sequali</text>
-  <text
-     x="318"
-     y="460.39999"
-     font-size="13px"
-     fill="#e0e0e0"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     text-anchor="middle"
-     dominant-baseline="hanging"
-     data-station-id="sequali"
-     class="nf-metro-station-label"
-     id="text329">Sequali</text>
-  <text
-     x="318"
-     y="501"
-     font-size="13px"
-     fill="#2b2b2b"
-     stroke="#2b2b2b"
-     stroke-width="3"
-     stroke-linejoin="round"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     aria-hidden="true"
-     class="nf-metro-label-halo"
-     text-anchor="middle"
-     dominant-baseline="hanging"
-     id="text331">ToulligQC</text>
-  <text
-     x="318"
-     y="501"
-     font-size="13px"
-     fill="#e0e0e0"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     text-anchor="middle"
-     dominant-baseline="hanging"
-     data-station-id="toulligqc"
-     class="nf-metro-station-label"
-     id="text333">ToulligQC</text>
-  <text
-     x="378"
-     y="341"
-     font-size="13px"
-     fill="#2b2b2b"
-     stroke="#2b2b2b"
-     stroke-width="3"
-     stroke-linejoin="round"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     aria-hidden="true"
-     class="nf-metro-label-halo"
-     text-anchor="middle"
-     dominant-baseline="hanging"
-     id="text335">Krona</text>
-  <text
-     x="378"
-     y="341"
-     font-size="13px"
-     fill="#e0e0e0"
-     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-     font-weight="bold"
-     text-anchor="middle"
-     dominant-baseline="hanging"
-     data-station-id="krona"
-     class="nf-metro-station-label"
-     id="text337">Krona</text>
+  <g
+     id="g1806"
+     transform="translate(0,0.901406)">
+    <text
+       x="318"
+       y="180.39999"
+       font-size="13px"
+       fill="#2b2b2b"
+       stroke="#2b2b2b"
+       stroke-width="3"
+       stroke-linejoin="round"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       aria-hidden="true"
+       class="nf-metro-label-halo"
+       text-anchor="middle"
+       dominant-baseline="hanging"
+       id="text299">FASTQC</text>
+    <text
+       x="318"
+       y="180.39999"
+       font-size="13px"
+       fill="#e0e0e0"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       text-anchor="middle"
+       dominant-baseline="hanging"
+       data-station-id="fastqc"
+       class="nf-metro-station-label"
+       id="text301">FASTQC</text>
+  </g>
+  <g
+     id="g2296"
+     transform="translate(0,0.901406)">
+    <text
+       x="318"
+       y="220.39999"
+       font-size="13px"
+       fill="#2b2b2b"
+       stroke="#2b2b2b"
+       stroke-width="3"
+       stroke-linejoin="round"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       aria-hidden="true"
+       class="nf-metro-label-halo"
+       text-anchor="middle"
+       dominant-baseline="hanging"
+       id="text303">FASTQE</text>
+    <text
+       x="318"
+       y="220.39999"
+       font-size="13px"
+       fill="#e0e0e0"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       text-anchor="middle"
+       dominant-baseline="hanging"
+       data-station-id="fastqe"
+       class="nf-metro-station-label"
+       id="text305">FASTQE</text>
+  </g>
+  <g
+     id="g2300"
+     transform="translate(0,0.901406)">
+    <text
+       x="318"
+       y="260.39999"
+       font-size="13px"
+       fill="#2b2b2b"
+       stroke="#2b2b2b"
+       stroke-width="3"
+       stroke-linejoin="round"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       aria-hidden="true"
+       class="nf-metro-label-halo"
+       text-anchor="middle"
+       dominant-baseline="hanging"
+       id="text307">FastQ Screen</text>
+    <text
+       x="318"
+       y="260.39999"
+       font-size="13px"
+       fill="#e0e0e0"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       text-anchor="middle"
+       dominant-baseline="hanging"
+       data-station-id="fastqscreen"
+       class="nf-metro-station-label"
+       id="text309">FastQ Screen</text>
+  </g>
+  <g
+     id="g2304"
+     transform="translate(0,0.901406)">
+    <text
+       x="318"
+       y="300.39999"
+       font-size="13px"
+       fill="#2b2b2b"
+       stroke="#2b2b2b"
+       stroke-width="3"
+       stroke-linejoin="round"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       aria-hidden="true"
+       class="nf-metro-label-halo"
+       text-anchor="middle"
+       dominant-baseline="hanging"
+       id="text311">FQ Lint</text>
+    <text
+       x="318"
+       y="300.39999"
+       font-size="13px"
+       fill="#e0e0e0"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       text-anchor="middle"
+       dominant-baseline="hanging"
+       data-station-id="fq_lint"
+       class="nf-metro-station-label"
+       id="text313">FQ Lint</text>
+  </g>
+  <g
+     id="g2312"
+     transform="translate(0,0.745406)">
+    <text
+       x="318"
+       y="340.39999"
+       font-size="13px"
+       fill="#2b2b2b"
+       stroke="#2b2b2b"
+       stroke-width="3"
+       stroke-linejoin="round"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       aria-hidden="true"
+       class="nf-metro-label-halo"
+       text-anchor="middle"
+       dominant-baseline="hanging"
+       id="text315">Kraken2</text>
+    <text
+       x="318"
+       y="340.39999"
+       font-size="13px"
+       fill="#e0e0e0"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       text-anchor="middle"
+       dominant-baseline="hanging"
+       data-station-id="kraken2"
+       class="nf-metro-station-label"
+       id="text317">Kraken2</text>
+  </g>
+  <g
+     id="g2316"
+     transform="translate(0,0.901406)">
+    <text
+       x="318"
+       y="380.39999"
+       font-size="13px"
+       fill="#2b2b2b"
+       stroke="#2b2b2b"
+       stroke-width="3"
+       stroke-linejoin="round"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       aria-hidden="true"
+       class="nf-metro-label-halo"
+       text-anchor="middle"
+       dominant-baseline="hanging"
+       id="text319">SeqFu Stats</text>
+    <text
+       x="318"
+       y="380.39999"
+       font-size="13px"
+       fill="#e0e0e0"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       text-anchor="middle"
+       dominant-baseline="hanging"
+       data-station-id="seqfu"
+       class="nf-metro-station-label"
+       id="text321">SeqFu Stats</text>
+  </g>
+  <g
+     id="g2320"
+     transform="translate(0,0.901406)">
+    <text
+       x="318"
+       y="420.39999"
+       font-size="13px"
+       fill="#2b2b2b"
+       stroke="#2b2b2b"
+       stroke-width="3"
+       stroke-linejoin="round"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       aria-hidden="true"
+       class="nf-metro-label-halo"
+       text-anchor="middle"
+       dominant-baseline="hanging"
+       id="text323">SeqKit Stats</text>
+    <text
+       x="318"
+       y="420.39999"
+       font-size="13px"
+       fill="#e0e0e0"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       text-anchor="middle"
+       dominant-baseline="hanging"
+       data-station-id="seqkit"
+       class="nf-metro-station-label"
+       id="text325">SeqKit Stats</text>
+  </g>
+  <g
+     id="g2324"
+     transform="translate(0,0.901406)">
+    <text
+       x="318"
+       y="460.39999"
+       font-size="13px"
+       fill="#2b2b2b"
+       stroke="#2b2b2b"
+       stroke-width="3"
+       stroke-linejoin="round"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       aria-hidden="true"
+       class="nf-metro-label-halo"
+       text-anchor="middle"
+       dominant-baseline="hanging"
+       id="text327">Sequali</text>
+    <text
+       x="318"
+       y="460.39999"
+       font-size="13px"
+       fill="#e0e0e0"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       text-anchor="middle"
+       dominant-baseline="hanging"
+       data-station-id="sequali"
+       class="nf-metro-station-label"
+       id="text329">Sequali</text>
+  </g>
+  <g
+     id="g2328"
+     transform="translate(0,0.3013999)">
+    <text
+       x="318"
+       y="501"
+       font-size="13px"
+       fill="#2b2b2b"
+       stroke="#2b2b2b"
+       stroke-width="3"
+       stroke-linejoin="round"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       aria-hidden="true"
+       class="nf-metro-label-halo"
+       text-anchor="middle"
+       dominant-baseline="hanging"
+       id="text331">ToulligQC</text>
+    <text
+       x="318"
+       y="501"
+       font-size="13px"
+       fill="#e0e0e0"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       text-anchor="middle"
+       dominant-baseline="hanging"
+       data-station-id="toulligqc"
+       class="nf-metro-station-label"
+       id="text333">ToulligQC</text>
+  </g>
+  <g
+     id="g2308"
+     transform="translate(0,0.1453999)">
+    <text
+       x="378"
+       y="341"
+       font-size="13px"
+       fill="#2b2b2b"
+       stroke="#2b2b2b"
+       stroke-width="3"
+       stroke-linejoin="round"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       aria-hidden="true"
+       class="nf-metro-label-halo"
+       text-anchor="middle"
+       dominant-baseline="hanging"
+       id="text335">Krona</text>
+    <text
+       x="378"
+       y="341"
+       font-size="13px"
+       fill="#e0e0e0"
+       font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+       font-weight="bold"
+       text-anchor="middle"
+       dominant-baseline="hanging"
+       data-station-id="krona"
+       class="nf-metro-station-label"
+       id="text337">Krona</text>
+  </g>
   <path
      id="rect339"
      class="nf-metro-legend-bg"
@@ -2079,34 +2157,4 @@
      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
      text-anchor="end"
      id="text355">created with nf-metro v1.0.0</text>
-  <g
-     class="nf-metro-station-group"
-     data-node-id="fastp"
-     data-node-cx="318.0"
-     data-node-cy="160.0"
-     data-node-r="5.0"
-     data-node-groups="fastq_line"
-     data-node-region="fastq_graph"
-     data-node-w="10.0"
-     data-node-h="10.0"
-     data-node-rx="5.0"
-     id="g157">
-    <rect
-       x="313"
-       y="155"
-       width="10"
-       height="10"
-       rx="5"
-       ry="5"
-       fill="#ffffff"
-       stroke="#333333"
-       stroke-width="1.5"
-       class="nf-metro-station"
-       data-station-id="fastp"
-       data-station-lines="fastq_line"
-       data-station-label="FastP"
-       data-section-id="fastq_graph"
-       data-section-name="RAW sequence QC"
-       id="rect155" />
-  </g>
 </svg>
