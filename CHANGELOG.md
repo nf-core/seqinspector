@@ -7,9 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
-- [#59](https://github.com/nf-core/seqinspector/pull/59) Seqkit Stats TSV output.
+- [#59](https://github.com/nf-core/seqinspector/pull/59) Seqkit Stats TSV output
 - [#109](https://github.com/nf-core/seqinspector/pull/109) Adds ToulligQC module for long read QC
-- [#134](https://github.com/nf-core/seqinspector/pull/134) Added sequali module.
+- [#134](https://github.com/nf-core/seqinspector/pull/134) Added sequali module
 - [#202](https://github.com/nf-core/seqinspector/pull/202) Added support for fasta fai file as input (via params or igenomes) for the pipeline
 - [#204](https://github.com/nf-core/seqinspector/pull/204) Added Fastp module
 - [#206](https://github.com/nf-core/seqinspector/pull/206) Added FASTQE for more comprehensive QC of FASTQ files
