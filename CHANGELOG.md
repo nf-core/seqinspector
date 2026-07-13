@@ -59,6 +59,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#250](https://github.com/nf-core/seqinspector/pull/250) Prepare release 1.1.0
 - [#252](https://github.com/nf-core/seqinspector/pull/252) Skip conda tests for CheckQC
 - [#252](https://github.com/nf-core/seqinspector/pull/252) Skip latest-everything Nextflow version on main/master
+- [#253](https://github.com/nf-core/seqinspector/pull/253) Update modules
 
 ### `Dependencies`
 
@@ -69,13 +70,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | fastp      |             | 1.1.0       |
 | fastqe     |             | 0.5.2       |
 | fq/lint    |             | 0.12.0      |
-| htslib     | 1.22.1      | 1.23.1      |
+| htslib     | 1.22.1      | 1.24        |
 | kraken2    |             | 2.1.6       |
 | krona      |             | 2.8.1       |
 | multiqc    | 1.34        | 1.35        |
 | multiqcsav |             | 0.2.0       |
 | riker      |             | 0.4.0       |
-| samtools   | 1.22.1      | 1.23.1      |
+| samtools   | 1.22.1      | 1.24        |
 | seqkit     |             | 2.9.0       |
 | toulligqc  |             | 2.8.4       |
 | tar        |             | 1.34        |
