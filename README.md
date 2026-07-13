@@ -88,11 +88,12 @@ The diagram below illustrates the MultiQC reporting logic for per-sample tags an
 | multiqcsav  | 0.2.0   |
 | picard      | 3.4.0   |
 | riker       | 0.4.0   |
-| samtools    | 1.23    |
+| samtools    | 1.24    |
 | seqfu       | 1.22.3  |
 | seqkit      | 2.9.0   |
 | seqtk       | 1.4     |
 | sequali     | 1.0.2   |
+| toulligqc   | 2.8.4   |
 
 ## Usage
 

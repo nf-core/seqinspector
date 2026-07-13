@@ -103,18 +103,18 @@
                     },
                     "riker/multi": {
                         "branch": "master",
-                        "git_sha": "89b094a1b914b1e0844b4c0cc901cda5eddd569b",
+                        "git_sha": "da4b4aa519d032c6689cb7d27c6dda496f657989",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/riker/multi/riker-multi.diff"
                     },
                     "samtools/faidx": {
                         "branch": "master",
-                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "git_sha": "9339809fcb90af8a8b7051e6cd914894d5c52002",
                         "installed_by": ["modules"]
                     },
                     "samtools/index": {
                         "branch": "master",
-                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "git_sha": "9339809fcb90af8a8b7051e6cd914894d5c52002",
                         "installed_by": ["modules"]
                     },
                     "seqfu/stats": {

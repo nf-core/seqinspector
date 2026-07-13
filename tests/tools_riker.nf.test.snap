@@ -14,10 +14,10 @@
                     "riker": "0.4.0"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.23.1"
+                    "samtools": "1.24"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.23.1"
+                    "samtools": "1.24"
                 }
             },
             [
@@ -504,7 +504,7 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-07-09T13:14:17.229784808",
+        "timestamp": "2026-07-13T16:53:39.835150351",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"
@@ -525,10 +525,10 @@
                     "riker": "0.4.0"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.23.1"
+                    "samtools": "1.24"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.23.1"
+                    "samtools": "1.24"
                 }
             },
             [
@@ -682,7 +682,7 @@
                 "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
             ]
         ],
-        "timestamp": "2026-07-09T13:14:46.477011446",
+        "timestamp": "2026-07-13T16:56:33.077465714",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"
@@ -703,10 +703,10 @@
                     "riker": "0.4.0"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.23.1"
+                    "samtools": "1.24"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.23.1"
+                    "samtools": "1.24"
                 }
             },
             [
@@ -1183,7 +1183,7 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-07-09T13:13:26.341287582",
+        "timestamp": "2026-07-13T16:52:39.781102538",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"
@@ -1223,10 +1223,10 @@
                     "riker": "0.4.0"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.23.1"
+                    "samtools": "1.24"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.23.1"
+                    "samtools": "1.24"
                 }
             },
             [
@@ -1380,7 +1380,7 @@
                 "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
             ]
         ],
-        "timestamp": "2026-07-09T13:15:15.156768361",
+        "timestamp": "2026-07-13T16:57:09.567680795",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"

@@ -28,10 +28,10 @@
                     "rundirparser": "1.0.1"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.23.1"
+                    "samtools": "1.24"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.23.1"
+                    "samtools": "1.24"
                 },
                 "SEQFU_STATS": {
                     "seqfu": "1.22.3"
@@ -1498,10 +1498,10 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-06-16T16:49:30.181322928",
+        "timestamp": "2026-07-13T16:46:52.748950767",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.3"
+            "nextflow": "26.04.4"
         }
     }
 }
