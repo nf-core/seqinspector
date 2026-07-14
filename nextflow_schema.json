@@ -58,6 +58,7 @@
                 "tools_bundle": {
                     "type": "string",
                     "description": "Select some default setup for the tools to be run, tools can still be used to add tools",
+                    "help_text": "Pre-defined bundles of tools. Available bundles:\n- `default`: fastqc, fastqscreen, fq_lint, picard_collectmultiplemetrics, rundirparser, seqfu_stats, sequali (requires `genome` and Illumina runfolder)\n- `all`: all available tools (requires `genome` and Illumina runfolder)\n- `minimal`: fastqc, fastqscreen, picard_collectmultiplemetrics, seqfu_stats (requires `genome`)\n- `bam`: picard_collecthsmetrics, picard_collectmultiplemetrics, riker (requires `genome`)\n- `fastq`: fastqc, fastqscreen, fq_lint, seqkit_stats\n- `illumina`: checkqc, multiqcsav, rundirparser, seqfu_stats (requires Illumina runfolder)\n- `ont`: fastqc, fastqscreen, seqkit_stats, sequali, toulligqc\n- `null`: disables all bundles, use with `--tools` to select individual tools",
                     "pattern": "^((all|bam|fastq|default|illumina|minimal|ont|null)?,?)*(?<!,)$",
                     "fa_icon": "fas fa-window-restore",
                     "default": "default"
