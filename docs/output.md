@@ -65,6 +65,8 @@ Fasta index with `samtools faidx`
 
 ### FQ
 
+[FQ/lint](https://github.com/stjude-rust-labs/fq) validates FASTQ files for common formatting issues such as invalid characters, inconsistent quality encodings and read name problems.
+
 <details markdown="1">
 <summary>Output files</summary>
 
@@ -75,6 +77,8 @@ Fasta index with `samtools faidx`
 
 ### CheckQC
 
+[CheckQC](https://github.com/clinical-genomics-uppsala/CheckQC) validates sequencing metrics against predefined thresholds for the given instrument and flowcell configuration.
+
 <details markdown="1">
 <summary>Output files</summary>
 
@@ -84,6 +88,8 @@ Fasta index with `samtools faidx`
 </details>
 
 ### Rundirparser
+
+[Rundirparser](https://github.com/nf-core/seqinspector) extracts run metadata from Illumina run directories by parsing the `runParameters.xml` file and generates a MultiQC-compatible YAML report.
 
 <details markdown="1">
 <summary>Output files</summary>
@@ -268,6 +274,8 @@ Aligned reads are then sorted using [samtools](#samtools) in the same process, a
 [Picard_collecthsmetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard) is a tool to collect metrics on the alignment SAM/BAM files that are specific for sequence datasets generated through hybrid-selection (mostly used to capture exon-specific sequences for targeted sequencing).
 
 ### Picard CollectMultipleMetrics
+
+[Picard CollectMultipleMetrics](https://broadinstitute.github.io/picard/) runs multiple Picard tools in a single pass to collect alignment, base distribution, quality and read length metrics from BAM files.
 
 <details markdown="1">
 <summary>Output files</summary>
