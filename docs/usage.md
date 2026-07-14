@@ -215,7 +215,7 @@ See official [nexflow](https://www.nextflow.io/docs/latest/config.html) and [nf-
 
 It is possible to also choose bundles of pre-specified tools using the `--tools_bundle` parameter. It is still possible to remove tools using the `--skip_tools` parameters or add additional tools with the `--tools` parameter when choosing a predefined setup with `--tools_bundle`.
 
-See the [parameters page](https://nf-co.re/seqinspector/dev/parameters/#tools_bundle) for the list of available bundles and their contents.
+See the [parameters page](https://nf-co.re/seqinspector/parameters/#tools_bundle) for the list of available bundles and their contents.
 
 ### Available functionality and tools
 

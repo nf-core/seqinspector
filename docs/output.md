@@ -104,6 +104,9 @@ Required by `picard_collecthsmetrics`, `picard_collectmultiplemetrics`, and `rik
 
 ### ToulligQC
 
+[ToulligQC](https://github.com/GenomiqueENS/toulligQC) is dedicated to the QC analyses of Oxford Nanopore runs.
+This software is written in Python and developed by the GenomiqueENS core facility of the Institute of Biology of the Ecole Normale Superieure (IBENS).
+
 <details markdown="1">
 <summary>Output files</summary>
 
@@ -111,12 +114,12 @@ Required by `picard_collecthsmetrics`, `picard_collectmultiplemetrics`, and `rik
   - `*.data`: ToulligQC output text file containing log information and all analysis results.
   - `*.html`: ToulligQC html report file.
 
-[ToulligQC](https://github.com/GenomiqueENS/toulligQC) is dedicated to the QC analyses of Oxford Nanopore runs.
-This software is written in Python and developed by the GenomiqueENS core facility of the Institute of Biology of the Ecole Normale Superieure (IBENS).
-
 </details>
 
 ### SeqFu
+
+[SeqFu](https://telatin.github.io/seqfu2/) is general-purpose program to manipulate and parse information from FASTA/FASTQ files, supporting gzipped input files.
+Includes functions to interleave and de-interleave FASTQ files, to rename sequences and to count and print statistics on sequence lengths.
 
 <details markdown="1">
 <summary>Output files</summary>
@@ -127,12 +130,13 @@ This software is written in Python and developed by the GenomiqueENS core facili
 
 </details>
 
-[SeqFu](https://telatin.github.io/seqfu2/) is general-purpose program to manipulate and parse information from FASTA/FASTQ files, supporting gzipped input files.
-Includes functions to interleave and de-interleave FASTQ files, to rename sequences and to count and print statistics on sequence lengths.
-
 In this pipeline, the `seqfu stats` module is used to produce general quality metrics statistics.
 
 ### BBMap Clumpify
+
+[BBMap Clumpify](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/clumpify-guide/) reorders reads for better compression and marks duplicates by appending `duplicate` to read names.
+The log reports duplication statistics for QC purposes.
+When `--save_bbmap_clumpify_reads` is enabled, the clumped FASTQ files are published to `bbmap/[sample_id]/`.
 
 <details markdown="1">
 <summary>Output files</summary>
@@ -144,11 +148,6 @@ In this pipeline, the `seqfu stats` module is used to produce general quality me
 
 </details>
 
-[BBMap Clumpify](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/clumpify-guide/) reorders reads for better compression and marks duplicates by appending `duplicate` to read names.
-The log reports duplication statistics for QC purposes.
-
-When `--save_bbmap_clumpify_reads` is enabled, the clumped FASTQ files are published to `bbmap/[sample_id]/`.
-
 The tool arguments can be customised via `--bbmap_clumpify_args`.
 By default, `markduplicates=true` is used to mark duplicates.
 To remove duplicates entirely, add `dedupe=true`:
@@ -159,6 +158,8 @@ To remove duplicates entirely, add `dedupe=true`:
 
 ### Seqtk
 
+[Seqtk](https://github.com/lh3/seqtk) samples sequences randomly using reservoir sampling with a fixed seed (`-s100`) for reproducibility.
+
 <details markdown="1">
 <summary>Output files</summary>
 
@@ -167,12 +168,13 @@ To remove duplicates entirely, add `dedupe=true`:
 
 </details>
 
-[Seqtk](https://github.com/lh3/seqtk) samples sequences randomly using reservoir sampling with a fixed seed (`-s100`) for reproducibility.
-
 By default, only specific tools run on the subsampled data.
-Use `--subsample_tools` to control which tools receive subsampled reads (see [Usage](usage.md#subsampling-control)).
+Use `--subsample_tools` to control which tools receive subsampled reads (see [Usage](https://nf-co.re/seqinspector/docs/usage#subsampling-control)).
 
 ### FastQC
+
+[FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) gives general quality metrics about your sequenced reads.
+It provides information about the quality score distribution across your reads, per base sequence content (%A/T/G/C), adapter contamination and overrepresented sequences.
 
 <details markdown="1">
 <summary>Output files</summary>
@@ -183,11 +185,12 @@ Use `--subsample_tools` to control which tools receive subsampled reads (see [Us
 
 </details>
 
-[FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) gives general quality metrics about your sequenced reads.
-It provides information about the quality score distribution across your reads, per base sequence content (%A/T/G/C), adapter contamination and overrepresented sequences.
 For further reading and documentation see the [FastQC help pages](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/).
 
 ### Sequali
+
+[Sequali](https://sequali.readthedocs.io/en/latest/) gives general quality metrics for short and long sequenced reads.
+It provides information about the quality score distribution across your reads, GC content, duplication levels, length distribution, adapter contamination (Illumina and Oxford Nanopore) and overrepresented sequences.
 
 <details markdown="1">
 <summary>Output files</summary>
@@ -198,10 +201,9 @@ For further reading and documentation see the [FastQC help pages](http://www.bio
 
 </details>
 
-[Sequali](https://sequali.readthedocs.io/en/latest/) gives general quality metrics for short and long sequenced reads.
-It provides information about the quality score distribution across your reads, GC content, duplication levels, length distribution, adapter contamination (Illumina and Oxford Nanopore) and overrepresented sequences.
-
 ### FASTQE
+
+[FASTQE](https://fastqe.com/) Compute quality stats for FASTQ files and print those stats as emoji... for some reason.
 
 <details markdown="1">
 <summary>Output files</summary>
@@ -210,8 +212,6 @@ It provides information about the quality score distribution across your reads, 
   - `*.tsv`: FASTQE report containing quality metrics in emoji.
 
 </details>
-
-[FASTQE](https://fastqe.com/) Compute quality stats for FASTQ files and print those stats as emoji... for some reason.
 
 ### FastP
 
@@ -231,6 +231,9 @@ We only keep the reports for MultiQC and the pipeline report.
 
 ### FastQ Screen
 
+[FastQ Screen](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/) allows you to set up a standard set of references against which all of your samples can be mapped.
+Your references might contain the genomes of all of the organisms you work on, along with PhiX, vectors or other contaminants commonly seen in sequencing experiments.
+
 <details markdown="1">
 <summary>Output files</summary>
 
@@ -240,9 +243,6 @@ We only keep the reports for MultiQC and the pipeline report.
   - `*_screen.txt`: Text-based report.
 
 </details>
-
-[FastQ Screen](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/) allows you to set up a standard set of references against which all of your samples can be mapped.
-Your references might contain the genomes of all of the organisms you work on, along with PhiX, vectors or other contaminants commonly seen in sequencing experiments.
 
 To use FastQ Screen, this pipeline requires a `.csv` detailing:
 
@@ -271,6 +271,8 @@ Aligned reads are then sorted using [samtools](#samtools) in the same process, a
 
 ### Picard CollectHSmetrics
 
+[Picard_collecthsmetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard) is a tool to collect metrics on the alignment SAM/BAM files that are specific for sequence datasets generated through hybrid-selection (mostly used to capture exon-specific sequences for targeted sequencing).
+
 <details markdown="1">
 <summary>Output files</summary>
 
@@ -278,8 +280,6 @@ Aligned reads are then sorted using [samtools](#samtools) in the same process, a
   - `*.coverage_metrics`: Tab-separated file containing quality metrics for hybrid-selection data.
 
 </details>
-
-[Picard_collecthsmetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard) is a tool to collect metrics on the alignment SAM/BAM files that are specific for sequence datasets generated through hybrid-selection (mostly used to capture exon-specific sequences for targeted sequencing).
 
 ### Picard CollectMultipleMetrics
 
@@ -301,6 +301,10 @@ Aligned reads are then sorted using [samtools](#samtools) in the same process, a
 
 ### Riker
 
+[Riker](https://github.com/fulcrumgenomics/riker) is a fast Rust CLI toolkit for sequencing QC metrics.
+It ports key QC metrics tools from Picard with cleaner output and better performance.
+When `--bait_intervals` and `--target_intervals` are provided, Riker also generates hybrid capture (hybcap) metrics.
+
 <details markdown="1">
 <summary>Output files</summary>
 
@@ -320,10 +324,6 @@ Aligned reads are then sorted using [samtools](#samtools) in the same process, a
   - `*.wgs-coverage.txt`: Per-depth coverage histogram.
 
 </details>
-
-[Riker](https://github.com/fulcrumgenomics/riker) is a fast Rust CLI toolkit for sequencing QC metrics.
-It ports key QC metrics tools from Picard with cleaner output and better performance.
-When `--bait_intervals` and `--target_intervals` are provided, Riker also generates hybrid capture (hybcap) metrics.
 
 ### Kraken2
 
@@ -403,6 +403,8 @@ The MultiQC global report might also contain metrics related to the rundir via t
 
 ### SeqkitStats
 
+[SeqkitStats](https://bioinf.shenwei.me/seqkit/usage/#stats) it gives simple statistics such as number of sequences, min/max_len, N50, Q20%, Q30% and GC%.
+
 <details markdown="1">
 <summary>Output files</summary>
 
@@ -411,7 +413,6 @@ The MultiQC global report might also contain metrics related to the rundir via t
 
 </details>
 
-[SeqkitStats](https://bioinf.shenwei.me/seqkit/usage/#stats) it gives simple statistics such as number of sequences, min/max_len, N50, Q20%, Q30% and GC%.
 For further reading and documentation see the [Seqkit help pages](https://bioinf.shenwei.me/seqkit/).
 
 ### Pipeline information
