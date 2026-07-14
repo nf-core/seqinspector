@@ -25,6 +25,7 @@
                 },
                 "sample_size": {
                     "type": "number",
+                    "minimum": 0,
                     "description": "Take a subset of reads for analysis.",
                     "help_text": "Subset can be used as a fraction of reads (ex/ 0.20) or an absolute number of reads per sample (integer). Pipeline will still run if a sample has less reads than selected subset value.",
                     "default": 0,
@@ -48,23 +49,127 @@
                     "description": "MultiQC report title. Printed as page header, used for filename if not otherwise specified.",
                     "fa_icon": "fas fa-file-signature"
                 },
-                "run_picard_collecthsmetrics": {
-                    "type": "boolean",
-                    "description": "Run picard_collecthsmetrics for QC of bam files.",
-                    "fa_icon": "fas fa-play"
+                "tools": {
+                    "type": "string",
+                    "description": "Comma-separated string of tools to run",
+                    "pattern": "^((bbmap_clumpify|checkqc|fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|multiqcsav|picard_collecthsmetrics|picard_collectmultiplemetrics|riker|rundirparser|seqkit_stats|seqfu_stats|sequali|toulligqc)?,?)*(?<!,)$",
+                    "fa_icon": "fas fa-sort-amount-asc"
+                },
+                "tools_bundle": {
+                    "type": "string",
+                    "description": "Select some default setup for the tools to be run, tools can still be used to add tools",
+                    "help_text": "Pre-defined bundles of tools. Available bundles:\n- `default`: fastqc, fastqscreen, fq_lint, picard_collectmultiplemetrics, rundirparser, seqfu_stats, sequali (requires `genome` and Illumina runfolder)\n- `all`: all available tools (requires `genome` and Illumina runfolder)\n- `minimal`: fastqc, fastqscreen, picard_collectmultiplemetrics, seqfu_stats (requires `genome`)\n- `bam`: picard_collecthsmetrics, picard_collectmultiplemetrics, riker (requires `genome`)\n- `fastq`: fastqc, fastqscreen, fq_lint, seqkit_stats\n- `illumina`: checkqc, multiqcsav, rundirparser, seqfu_stats (requires Illumina runfolder)\n- `ont`: fastqc, fastqscreen, seqkit_stats, sequali, toulligqc\n- `null`: disables all bundles, use with `--tools` to select individual tools",
+                    "pattern": "^((all|bam|fastq|default|illumina|minimal|ont|null)?,?)*(?<!,)$",
+                    "fa_icon": "fas fa-window-restore",
+                    "default": "default"
                 },
                 "skip_tools": {
                     "type": "string",
-                    "description": "Comma-separated string of tools to skip",
-                    "pattern": "^((bwamem2_index|bwamem2_mem|fastqc|fastqscreen|picard_collectmultiplemetrics|rundirparser|samtools_faidx|samtools_index|seqfu_stats|seqtk_sample)?,?)*(?<!,)$",
-                    "fa_icon": "fas fa-fast-forward"
+                    "description": "Comma-separated string of tools to skip - overrides any other means of tools selection",
+                    "pattern": "^((bbmap_clumpify|checkqc|fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|multiqcsav|picard_collecthsmetrics|picard_collectmultiplemetrics|riker|rundirparser|seqkit_stats|seqfu_stats|sequali|toulligqc)?,?)*(?<!,)$",
+                    "fa_icon": "fas fa-window-close "
                 },
-                "sort_bam": {
+                "subsample_tools": {
+                    "type": "string",
+                    "description": "Comma-separated string of tools to run on subsampled data. Tools not in this list run on original data.",
+                    "help_text": "Controls which tools receive subsampled reads (via Seqtk) versus original data. Only effective when sample_size > 0. Use 'all' to subsample all active tools, or 'null' to disable subsampling for all tools. Note: picard_collecthsmetrics and picard_collectmultiplemetrics share the same alignment step; selecting one automatically subsamples the other.",
+                    "pattern": "^((all|null|bbmap_clumpify|fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|picard_collecthsmetrics|picard_collectmultiplemetrics|riker|seqkit_stats|seqfu_stats|sequali|toulligqc)?,?)*(?<!,)$",
+                    "default": "fastqscreen,kraken2,picard_collecthsmetrics,picard_collectmultiplemetrics",
+                    "fa_icon": "fas fa-random"
+                }
+            }
+        },
+        "validation_options": {
+            "title": "Validation options",
+            "type": "object",
+            "description": "Options for validating and screening FASTQ files.",
+            "default": "",
+            "properties": {
+                "fq_lint_args": {
+                    "type": "string",
+                    "description": "Arguments to pass to FQ lint",
+                    "help_text": "Arguments to pass to FQ lint. This can be used to disable overly strict linting. See https://github.com/stjude-rust-labs/fq?tab=readme-ov-file#lint for more information."
+                },
+                "continue_with_lint_fail": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Sort BAM files after alignment",
-                    "help_text": "If true, BAM files produced by alignment will be sorted by genomic coordinates.",
-                    "fa_icon": "fas fa-sort-alpha-down"
+                    "description": "Whether to continue with the pipeline if linting fails for a single sample.",
+                    "help_text": "If set to true, the pipeline will continue with the remaining samples if linting fails for a single sample. If set to false, the pipeline will terminate if linting fails for a single sample.",
+                    "fa_icon": "fas fa-window-close "
+                },
+                "checkqc_config": {
+                    "type": "string",
+                    "format": "file-path",
+                    "description": "Path to custom CheckQC config",
+                    "fa_icon": "fas fa-cog"
+                }
+            }
+        },
+        "bbmap_options": {
+            "title": "BBMap options",
+            "type": "object",
+            "description": "Options for BBMap tools",
+            "default": "",
+            "properties": {
+                "save_bbmap_clumpify_reads": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-save",
+                    "description": "Turn on saving of BBMap Clumpify deduplicated reads",
+                    "help_text": "Save the deduplicated FASTQ files produced by BBMap Clumpify to the output directory."
+                },
+                "bbmap_clumpify_args": {
+                    "type": "string",
+                    "default": "markduplicates=true",
+                    "fa_icon": "fas fa-cog",
+                    "description": "Arguments to pass to BBMap Clumpify",
+                    "help_text": "Arguments to pass to BBMap Clumpify. Defaults to `markduplicates=true` to mark duplicates. Use `dedupe=true` to remove duplicates entirely instead of just marking them."
+                }
+            }
+        },
+        "riker_options": {
+            "title": "Riker options",
+            "type": "object",
+            "description": "Options for Riker",
+            "default": "",
+            "properties": {
+                "riker_args": {
+                    "type": "string",
+                    "default": "--tools alignment basic isize",
+                    "fa_icon": "fas fa-cog",
+                    "description": "Arguments to pass to riker multi",
+                    "help_text": "Arguments to pass to riker multi. Defaults to `--tools alignment basic isize`. Use `--tools` to select which collectors to run (e.g. alignment, basic, error, isize, wgs, gcbias, hybcap)."
+                }
+            }
+        },
+        "kraken2_options": {
+            "title": "Kraken2 options",
+            "type": "object",
+            "description": "Options for Kraken2",
+            "default": "",
+            "properties": {
+                "kraken2_db": {
+                    "type": "string",
+                    "exists": true,
+                    "mimetype": "text/plain",
+                    "description": "Path to Kraken2 database file, either a gzipped file or the path to the uncompressed database.",
+                    "fa_icon": "fas fa-database"
+                },
+                "kraken2_save_reads": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-save",
+                    "description": "Turn on saving of Kraken2-aligned reads",
+                    "help_text": "Save reads that do and do not have a taxonomic classification in your output results directory in FASTQ format.\n\n> Modifies tool parameter(s):\n> - kraken2: `--classified-out` and `--unclassified-out`"
+                },
+                "kraken2_save_readclassifications": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-save",
+                    "description": "Turn on saving of Kraken2 per-read taxonomic assignment file",
+                    "help_text": "Save a text file that contains a list of each read that had a taxonomic assignment, with information on specific taxonomic taxonomic assignment that that read recieved.\n\n> Modifies tool parameter(s):\n> - kraken2: `--output`"
+                },
+                "kraken_save_uncompressed_db": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-save",
+                    "description": "Turn on saving of uncompressed Kraken2 DB"
                 }
             }
         },
@@ -80,16 +185,6 @@
                     "fa_icon": "fas fa-book",
                     "help_text": "If using a reference genome configured in the pipeline using iGenomes, use this parameter to give the ID for the reference. This is then used to build the full paths for all required reference genome files e.g. `--genome GRCh38`. \n\nSee the [nf-core website docs](https://nf-co.re/usage/reference_genomes) for more details."
                 },
-                "fasta": {
-                    "type": "string",
-                    "format": "file-path",
-                    "exists": true,
-                    "mimetype": "text/plain",
-                    "pattern": "^\\S+\\.fn?a(sta)?(\\.gz)?$",
-                    "description": "Path to FASTA genome file.",
-                    "help_text": "This parameter is *mandatory* if `--genome` is not specified. If you don't have a BWA index available this will be generated for you automatically.",
-                    "fa_icon": "far fa-file-code"
-                },
                 "igenomes_ignore": {
                     "type": "boolean",
                     "description": "Do not load the iGenomes reference config.",
@@ -99,7 +194,6 @@
                 },
                 "igenomes_base": {
                     "type": "string",
-                    "format": "directory-path",
                     "description": "The base path to the igenomes reference files",
                     "fa_icon": "fas fa-ban",
                     "hidden": true,
@@ -110,6 +204,16 @@
                     "default": "${projectDir}/assets/example_fastq_screen_references.csv",
                     "fa_icon": "fas fa-search",
                     "description": "A .csv of reference genomes to be mapped against by FastQ Screen"
+                },
+                "fasta": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "mimetype": "text/plain",
+                    "pattern": "^\\S+\\.fn?a(sta)?(\\.gz)?$",
+                    "description": "Path to FASTA genome file.",
+                    "help_text": "This parameter is *mandatory* if `--genome` is not specified.",
+                    "fa_icon": "far fa-file-code"
                 },
                 "bwamem2": {
                     "type": "string",
@@ -122,8 +226,17 @@
                 "dict": {
                     "type": "string",
                     "description": "Sequence dictionary for the reference fasta file provided.",
-                    "help_text": "If you wish to recompute indices available on igenomes, set `--ic false`.\n\n> **NB** If none provided, will be generated automatically from the FASTA reference.\n\nIf you use AWS iGenomes, this has already been set for you appropriately.",
+                    "help_text": "If you wish to recompute indices available on igenomes, set `--dict false`.\n\n> **NB** If none provided, will be generated automatically from the FASTA reference.\n\nIf you use AWS iGenomes, this has already been set for you appropriately.",
                     "pattern": "^\\S+.dict$",
+                    "format": "file-path",
+                    "exists": true,
+                    "fa_icon": "fas fa-file"
+                },
+                "fai": {
+                    "type": "string",
+                    "description": "Fasta index for the reference fasta file provided.",
+                    "help_text": "If you wish to recompute indices available on igenomes, set `--fai false`.\n\n> **NB** If none provided, will be generated automatically from the FASTA reference.\n\nIf you use AWS iGenomes, this has already been set for you appropriately.",
+                    "pattern": "^\\S+.fai$",
                     "format": "file-path",
                     "exists": true,
                     "fa_icon": "fas fa-file"
@@ -310,6 +423,18 @@
     "allOf": [
         {
             "$ref": "#/$defs/input_output_options"
+        },
+        {
+            "$ref": "#/$defs/validation_options"
+        },
+        {
+            "$ref": "#/$defs/bbmap_options"
+        },
+        {
+            "$ref": "#/$defs/kraken2_options"
+        },
+        {
+            "$ref": "#/$defs/riker_options"
         },
         {
             "$ref": "#/$defs/reference_genome_options"

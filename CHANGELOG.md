@@ -3,6 +3,94 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0](https://github.com/nf-core/seqinspector/releases/tag/1.1.0) - Veronica Mars
+
+### `Added`
+
+- [#59](https://github.com/nf-core/seqinspector/pull/59) Seqkit Stats TSV output
+- [#109](https://github.com/nf-core/seqinspector/pull/109) Adds ToulligQC module for long read QC
+- [#134](https://github.com/nf-core/seqinspector/pull/134) Added sequali module
+- [#202](https://github.com/nf-core/seqinspector/pull/202) Added support for fasta fai file as input (via params or igenomes) for the pipeline
+- [#204](https://github.com/nf-core/seqinspector/pull/204) Added Fastp module
+- [#206](https://github.com/nf-core/seqinspector/pull/206) Added FASTQE for more comprehensive QC of FASTQ files
+- [#208](https://github.com/nf-core/seqinspector/pull/208) Add FASTQ linting for early validation with FQ/LINT
+- [#209](https://github.com/nf-core/seqinspector/pull/209) Add MULTIQC SAV support
+- [#210](https://github.com/nf-core/seqinspector/pull/210) Added kraken2 subworkflow
+- [#212](https://github.com/nf-core/seqinspector/pull/212) Add CheckQC module
+- [#218](https://github.com/nf-core/seqinspector/pull/218) kraken2 is run on subsampled data if available
+- [#226](https://github.com/nf-core/seqinspector/pull/226) Add pipeline level stub tests
+- [#228](https://github.com/nf-core/seqinspector/pull/228) Update all modules/subworkflows
+- [#234](https://github.com/nf-core/seqinspector/pull/234) Add pipeline level PICARD tests
+- [#236](https://github.com/nf-core/seqinspector/pull/236) Added bbmap/clumpify module for FASTQ deduplication and compression
+- [#237](https://github.com/nf-core/seqinspector/pull/237) Add meta.yml for rundirparser module
+- [#243](https://github.com/nf-core/seqinspector/pull/243) Add `--subsample_tools` parameter to control which tools run on subsampled data
+- [#246](https://github.com/nf-core/seqinspector/pull/246) Added riker module for BAM-level QC metrics collection
+- [#247](https://github.com/nf-core/seqinspector/pull/247) Add `AGENTS.md` file with nf-core agent instructions
+- [#256](https://github.com/nf-core/seqinspector/pull/256) Improve docs
+- [#258](https://github.com/nf-core/seqinspector/pull/258) Standardize output docs: descriptions above output files
+
+### `Fixed`
+
+- [#216](https://github.com/nf-core/seqinspector/pull/216) Fixed meta.id that resulted in all SEQFU_STATS processes with the same tag name
+- [#224](https://github.com/nf-core/seqinspector/pull/224) Fix workflow output syntax for future Nextflow releases
+- [#226](https://github.com/nf-core/seqinspector/pull/226) Fix parameter `tools_bundle` not accepting `null` for custom tool selection
+- [#238](https://github.com/nf-core/seqinspector/pull/238) Fix Python/PyYAML tool name case mismatch in rundirparser module
+- [#239](https://github.com/nf-core/seqinspector/pull/239) Fix tool bundles documentation to match code
+- [#240](https://github.com/nf-core/seqinspector/pull/240) Fix FASTQE default tool marking in README
+- [#243](https://github.com/nf-core/seqinspector/pull/243) Fix typos, broken link, missing `</details>` tag, and stray content in output documentation
+- [#245](https://github.com/nf-core/seqinspector/pull/245) Fix repeated listing of CollectHsMetrics
+- [#253](https://github.com/nf-core/seqinspector/pull/253) Fix CHANGELOG, missing Update in README and CITATIONS
+- [#255](https://github.com/nf-core/seqinspector/pull/255) Fix rundirparser test snapshots to use full topic object instead of individual channels
+
+### `Changed`
+
+- [#191](https://github.com/nf-core/seqinspector/pull/191) Back to dev
+- [#192](https://github.com/nf-core/seqinspector/pull/192) Refactor the tools selection logic
+- [#205](https://github.com/nf-core/seqinspector/pull/205) Document how to add a tool to tool selection and how to use tool selection
+- [#215](https://github.com/nf-core/seqinspector/pull/215) Update all modules
+- [#216](https://github.com/nf-core/seqinspector/pull/216) Split out and simplify tests
+- [#220](https://github.com/nf-core/seqinspector/pull/220) Workflow output for MultiQC
+- [#221](https://github.com/nf-core/seqinspector/pull/221) Workflow output for checkQC, Fastp, fastqe, fastqscreen, picard_collecthsmetrics, picard_collectmultiplemetrics, rundirparser, seqfu
+- [#222](https://github.com/nf-core/seqinspector/pull/222) Workflow output for fq/lint, kraken2, krona, toulligqc
+- [#223](https://github.com/nf-core/seqinspector/pull/223) Workflow output for the rest of the pipeline
+- [#225](https://github.com/nf-core/seqinspector/pull/225) Update subway map with nf-metro v1.0.0: add banner labels for file icons, folder icon for run directory, center ports, compact offsets, and reorder lines
+- [#235](https://github.com/nf-core/seqinspector/pull/235) Update MultiQC and other dependencies
+- [#237](https://github.com/nf-core/seqinspector/pull/237) Improved citation system to dynamically build tool citations based on selected tools
+- [#244](https://github.com/nf-core/seqinspector/pull/244) Corrected the pipeline introduction tool list for fq lint
+- [#249](https://github.com/nf-core/seqinspector/pull/249) Create meta.yml files for local subworkflows
+- [#249](https://github.com/nf-core/seqinspector/pull/249) Update modules
+- [#250](https://github.com/nf-core/seqinspector/pull/250) Prepare release 1.1.0
+- [#252](https://github.com/nf-core/seqinspector/pull/252) Skip conda tests for CheckQC
+- [#252](https://github.com/nf-core/seqinspector/pull/252) Skip latest-everything Nextflow version on main/master
+- [#253](https://github.com/nf-core/seqinspector/pull/253) Update modules
+
+### `Dependencies`
+
+| Dependency | Old version | New version |
+| ---------- | ----------- | ----------- |
+| bbmap      |             | 39.18       |
+| checkQC    |             | 4.1.0       |
+| fastp      |             | 1.1.0       |
+| fastqe     |             | 0.5.2       |
+| fq/lint    |             | 0.12.0      |
+| htslib     | 1.22.1      | 1.24        |
+| kraken2    |             | 2.1.6       |
+| krona      |             | 2.8.1       |
+| multiqc    | 1.34        | 1.35        |
+| multiqcsav |             | 0.2.0       |
+| riker      |             | 0.4.0       |
+| samtools   | 1.22.1      | 1.24        |
+| seqkit     |             | 2.9.0       |
+| toulligqc  |             | 2.8.4       |
+| tar        |             | 1.34        |
+
+### `Removed`
+
+- [#192](https://github.com/nf-core/seqinspector/pull/192) Removed `bwamem2_index`, `bwamem2_mem`, `samtools_faidx` and `samtools_index` from the list of tools as they can be inferred from downstream tools
+- [#192](https://github.com/nf-core/seqinspector/pull/192) Removed `run_picard_collecthsmetrics` param as `picard_collecthsmetrics` is now part of the list of tools
+- [#192](https://github.com/nf-core/seqinspector/pull/192) Removed `seqtk_sample` from the list of tools as it can be inferred from `params.sample_size`
+- [#213](https://github.com/nf-core/seqinspector/pull/213) Removed `sort_bam` params as we always need sorted BAM files for the QC_BAM subworkflow
+
 ## [1.0.1](https://github.com/nf-core/seqinspector/releases/tag/1.0.1) - Penelope Ruth "Penny" Gadget
 
 ### `Added`

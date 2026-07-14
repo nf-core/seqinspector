@@ -99,7 +99,7 @@ If you wish to repeatedly use the same parameters for multiple runs, rather than
 Pipeline settings can be provided in a `yaml` or `json` file via `-params-file <file>`.
 
 > [!WARNING]
-> Do not use `-c <file>` to specify parameters as this will result in errors. Custom config files specified with `-c` must only be used for [tuning process resource specifications](https://nf-co.re/docs/usage/configuration#tuning-workflow-resources), other infrastructural tweaks (such as output directories), or module arguments (args).
+> Do not use `-c <file>` to specify parameters as this will result in errors. Custom config files specified with `-c` must only be used for [tuning process resource specifications](https://nf-co.re/docs/running/run-pipelines#configuring-pipelines), other infrastructural tweaks (such as output directories), or module arguments (args).
 
 The above pipeline run specified with a params file in yaml format:
 
@@ -122,30 +122,113 @@ You can also generate such `YAML`/`JSON` files via [nf-core/launch](https://nf-c
 
 Optionally, the `sample_size` parameter allows you to subset a random number of reads to be analysed.
 Both absolute numbers (e.g 100) and relative numbers (e.g 0.25) can be specified.
+Reads are sampled randomly using reservoir sampling with a fixed seed (`-s100`) for reproducibility.
+To use a different seed, override it via `ext.args` in `conf/modules.config`:
 
-```bash
-nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 -profile docker
+```groovy
+withName: SEQTK_SAMPLE {
+    ext.args = '-s200'
+}
 ```
 
-### BWAMEM2 and alignment-based QC tools
+```bash
+nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000
+```
 
-If no genome or fasta file is provided, either with `--genome` or `--fasta`,
-the pipeline will not be able to run the alignment step with BWAMEM2,
-and will skip all tools that depend on the alignment file (eg. `picard CollectHsMetrics` and `picard CollectHsMetrics`).
+#### Subsampling control
 
-### Hybrid-selection QC metrics
+By default, only a subset of tools run on the subsampled data. The `--subsample_tools` parameter controls which tools receive subsampled reads (via Seqtk) versus original data. Tools not in this list run on the original (non-subsampled) data.
 
-The pipeline supports hybrid-selection (HS) QC metrics collection .
-Use `--run_picard_collecthsmetrics true` to run the QC tool [picard CollectHSmetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard).
-This tool is otherwise not run by default.
+The default value is:
 
-### Skipping tools
+```bash
+--subsample_tools fastqscreen,kraken2,picard_collecthsmetrics,picard_collectmultiplemetrics
+```
 
-Some tools might not be compatible with your data.
-In this case you can skip them by providing a comma-separated list of tools to be skipped with the `--skip_tools` parameter.
+For example, to also run FastQC on subsampled data:
+
+```bash
+nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 --subsample_tools fastqscreen,kraken2,picard_collecthsmetrics,picard_collectmultiplemetrics,fastqc
+```
+
+Or to run all active tools on subsampled data:
+
+```bash
+nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 --subsample_tools all
+```
+
+Note: `all` excludes tools that cannot use subsampled data (`checkqc`, `multiqcsav`, `rundirparser`).
+
+Or to disable subsampling for all tools (run everything on original data):
+
+```bash
+nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 --subsample_tools null
+```
+
+:::note
+`picard_collecthsmetrics` and `picard_collectmultiplemetrics` share the same alignment step. Selecting one for subsampling will automatically subsample the other as well.
+:::
+
+Note: The `--subsample_tools` parameter only takes effect when `sample_size > 0`.
+
+### Tools selection
+
+Tools selection is an integral part of sequinspector and, as the pipeline grows, it will become more and more important to select tools of interest.
+By **default**, the pipeline does run a subsection of tools as defined in the `utils_nfcore_seqinspector_pipeline` subworkflow.
+Currently, the following tools are run by default:
+
+- fastqc
+- fastqscreen
+- fq_lint
+- picard_collectmultiplemetrics
+- rundirparser
+- seqfu_stats
+- sequali
+
+#### Choose specific tools
+
+It is possible to choose individual tools to run using the `--tools` parameter and add all desired tools in a comma separated string. For example:
+
+```bash
+--tools fastqscreen,rundirparser
+```
+
+Be aware that the default tools will still be run. In order to ONLY run the selection, one has to specify `--tools_bundle null` as well:
+
+```bash
+--tools fastqscreen,rundirparser --tools_bundle null
+```
+
+Currently the `tools` param can have the following values: bbmap_clumpify, checkqc, fastp, fastqc, fastqe, fastqscreen, fq_lint, kraken2, multiqcsav, picard_collecthsmetrics, picard_collectmultiplemetrics, riker, rundirparser, seqkit_stats, seqfu_stats, sequali and toulligqc.
+
+#### Skip specific tools
+
+Some tools might not be compatible with your data or you do not require all tools that are going to be run. In this case you can skip them by providing a comma-separated list of tools to be skipped with the `--skip_tools` parameter, e.g.:
+
+```bash
+--skip_tools fastqe,kraken2,riker
+```
 
 The nextflow configuration file can also be use to customise tool arguments.
 See official [nexflow](https://www.nextflow.io/docs/latest/config.html) and [nf-core](https://nf-co.re/docs/usage/configuration#customising-tool-arguments) documentation for further details.
+
+#### Choose pre-defined bundles of tools
+
+It is possible to also choose bundles of pre-specified tools using the `--tools_bundle` parameter. It is still possible to remove tools using the `--skip_tools` parameters or add additional tools with the `--tools` parameter when choosing a predefined setup with `--tools_bundle`.
+
+See the [parameters page](https://nf-co.re/seqinspector/parameters/#tools_bundle) for the list of available bundles and their contents.
+
+### Available functionality and tools
+
+#### BWAMEM2 and alignment-based QC tools
+
+If no genome or fasta file is provided, either with `--genome` or `--fasta`,
+the pipeline will not be able to run the alignment step with `BWAMEM2`,
+and will skip all tools that depend on the alignment file (e.g. `picard CollectHsMetrics` and `picard CollectMultipleMetrics`).
+
+#### Hybrid-selection QC metrics
+
+The pipeline supports hybrid-selection (HS) QC metrics collection via [picard CollectHSmetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard).
 
 ### Updating the pipeline
 
@@ -225,19 +308,19 @@ Specify the path to a specific config file (this is a core Nextflow command). Se
 
 Whilst the default requirements set within the pipeline will hopefully work for most people and with most input data, you may find that you want to customise the compute resources that the pipeline requests. Each step in the pipeline has a default set of requirements for number of CPUs, memory and time. For most of the pipeline steps, if the job exits with any of the error codes specified [here](https://github.com/nf-core/rnaseq/blob/4c27ef5610c87db00c3c5a3eed10b1d161abf575/conf/base.config#L18) it will automatically be resubmitted with higher resources request (2 x original, then 3 x original). If it still fails after the third attempt then the pipeline execution is stopped.
 
-To change the resource requests, please see the [max resources](https://nf-co.re/docs/usage/configuration#max-resources) and [tuning workflow resources](https://nf-co.re/docs/usage/configuration#tuning-workflow-resources) section of the nf-core website.
+To change the resource requests, please see the [max resources](https://nf-co.re/docs/running/configuration/nextflow-for-your-system#set-max-resources) and [customise process resources](https://nf-co.re/docs/running/configuration/nextflow-for-your-system#customize-process-resources) section of the nf-core website.
 
 ### Custom Containers
 
 In some cases, you may wish to change the container or conda environment used by a pipeline steps for a particular tool. By default, nf-core pipelines use containers and software from the [biocontainers](https://biocontainers.pro/) or [bioconda](https://bioconda.github.io/) projects. However, in some cases the pipeline specified version maybe out of date.
 
-To use a different container from the default container or conda environment specified in a pipeline, please see the [updating tool versions](https://nf-co.re/docs/usage/configuration#updating-tool-versions) section of the nf-core website.
+To use a different container from the default container or conda environment specified in a pipeline, please see the [updating tool versions](https://nf-co.re/docs/running/configuration/nextflow-for-your-system#update-tool-versions) section of the nf-core website.
 
 ### Custom Tool Arguments
 
 A pipeline might not always support every possible argument or option of a particular tool used in pipeline. Fortunately, nf-core pipelines provide some freedom to users to insert additional parameters that the pipeline does not include by default.
 
-To learn how to provide additional arguments to a particular tool of the pipeline, please see the [customising tool arguments](https://nf-co.re/docs/usage/configuration#customising-tool-arguments) section of the nf-core website.
+To learn how to provide additional arguments to a particular tool of the pipeline, please see the [customising tool arguments](https://nf-co.re/docs/running/configuration/nextflow-for-your-system#modifying-tool-arguments) section of the nf-core website.
 
 ### nf-core/configs
 

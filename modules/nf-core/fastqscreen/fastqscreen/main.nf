@@ -3,7 +3,7 @@ process FASTQSCREEN_FASTQSCREEN {
     label 'process_medium'
 
     conda "${moduleDir}/environment.yml"
-    container "${workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container
+    container "${workflow.containerEngine in ['singularity', 'apptainer'] && !task.ext.singularity_pull_docker_container
         ? 'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/fc/fc53eee7ca23c32220a9662fbb63c67769756544b6d74a1ee85cf439ea79a7ee/data'
         : 'community.wave.seqera.io/library/fastq-screen_perl-gdgraph:5c1786a5d5bc1309'}"
 
@@ -12,9 +12,9 @@ process FASTQSCREEN_FASTQSCREEN {
     tuple val(ref_names), path(ref_dirs, name: "ref*"), val(ref_basenames), val(ref_aligners)
 
     output:
-    tuple val(meta), path("*.txt"), emit: txt
-    tuple val(meta), path("*.png"), emit: png, optional: true
-    tuple val(meta), path("*.html"), emit: html
+    tuple val(meta), val("${task.process}"), val('fastqscreen'), path("*.txt"), emit: txt, topic: multiqc_files
+    tuple val(meta), val("${task.process}"), val('fastqscreen'), path("*.png"), emit: png, topic: multiqc_files, optional: true
+    tuple val(meta), val("${task.process}"), val('fastqscreen'), path("*.html"), emit: html, topic: multiqc_files
     tuple val(meta), path("*.fastq.gz"), emit: fastq, optional: true
     tuple val("${task.process}"), val('fastqscreen'), eval('fastq_screen --version 2>&1 | sed "s/^.*FastQ Screen v//;"'), emit: versions_fastqscreen, topic: versions
 

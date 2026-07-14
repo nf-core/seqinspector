@@ -4,7 +4,7 @@ Changes in component 'nf-core/fastqscreen/fastqscreen'
 Changes in 'fastqscreen/fastqscreen/main.nf':
 --- modules/nf-core/fastqscreen/fastqscreen/main.nf
 +++ modules/nf-core/fastqscreen/fastqscreen/main.nf
-@@ -8,8 +8,8 @@
+@@ -8,13 +8,13 @@
          : 'community.wave.seqera.io/library/fastq-screen_perl-gdgraph:5c1786a5d5bc1309'}"
  
      input:
@@ -14,7 +14,15 @@ Changes in 'fastqscreen/fastqscreen/main.nf':
 +    tuple val(ref_names), path(ref_dirs, name: "ref*"), val(ref_basenames), val(ref_aligners)
  
      output:
-     tuple val(meta), path("*.txt"), emit: txt
+-    tuple val(meta), path("*.txt"), emit: txt
+-    tuple val(meta), path("*.png"), emit: png, optional: true
+-    tuple val(meta), path("*.html"), emit: html
++    tuple val(meta), val("${task.process}"), val('fastqscreen'), path("*.txt"), emit: txt, topic: multiqc_files
++    tuple val(meta), val("${task.process}"), val('fastqscreen'), path("*.png"), emit: png, topic: multiqc_files, optional: true
++    tuple val(meta), val("${task.process}"), val('fastqscreen'), path("*.html"), emit: html, topic: multiqc_files
+     tuple val(meta), path("*.fastq.gz"), emit: fastq, optional: true
+     tuple val("${task.process}"), val('fastqscreen'), eval('fastq_screen --version 2>&1 | sed "s/^.*FastQ Screen v//;"'), emit: versions_fastqscreen, topic: versions
+ 
 @@ -22,13 +22,33 @@
      task.ext.when == null || task.ext.when
  

@@ -3,7 +3,7 @@ process PICARD_COLLECTHSMETRICS {
     label 'process_single'
 
     conda "${moduleDir}/environment.yml"
-    container "${workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container
+    container "${workflow.containerEngine in ['singularity', 'apptainer'] && !task.ext.singularity_pull_docker_container
         ? 'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/08/0861295baa7c01fc593a9da94e82b44a729dcaf8da92be8e565da109aa549b25/data'
         : 'community.wave.seqera.io/library/picard:3.4.0--e9963040df0a9bf6'}"
 
@@ -15,7 +15,7 @@ process PICARD_COLLECTHSMETRICS {
     tuple val(meta5), path(ref_gzi)
 
     output:
-    tuple val(meta), path("*_metrics"), emit: metrics
+    tuple val(meta), val("${task.process}"), val('picard'), path("*_metrics"), emit: metrics, topic: multiqc_files
     tuple val("${task.process}"), val('picard'), eval("picard CollectHsMetrics --version 2>&1 | sed -n 's/.*Version://p'"), topic: versions, emit: versions_picard
 
     when:
