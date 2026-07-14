@@ -121,7 +121,7 @@
                     "default": "markduplicates=true",
                     "fa_icon": "fas fa-cog",
                     "description": "Arguments to pass to BBMap Clumpify",
-                    "help_text": "Arguments to pass to BBMap Clumpify. Defaults to `markduplicates=true`."
+                    "help_text": "Arguments to pass to BBMap Clumpify. Defaults to `markduplicates=true` to mark duplicates. Use `dedupe=true` to remove duplicates entirely instead of just marking them."
                 }
             }
         },

@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#243](https://github.com/nf-core/seqinspector/pull/243) Add `--subsample_tools` parameter to control which tools run on subsampled data
 - [#246](https://github.com/nf-core/seqinspector/pull/246) Added riker module for BAM-level QC metrics collection
 - [#247](https://github.com/nf-core/seqinspector/pull/247) Add `AGENTS.md` file with nf-core agent instructions
+- [#256](https://github.com/nf-core/seqinspector/pull/256) Improve docs
 
 ### `Fixed`
 
@@ -39,7 +40,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#245](https://github.com/nf-core/seqinspector/pull/245) Fix repeated listing of CollectHsMetrics
 - [#253](https://github.com/nf-core/seqinspector/pull/253) Fix CHANGELOG, missing Update in README and CITATIONS
 - [#255](https://github.com/nf-core/seqinspector/pull/255) Fix rundirparser test snapshots to use full topic object instead of individual channels
-- [#256](https://github.com/nf-core/seqinspector/pull/256) Address review comments from PR #251: improve docs, add tool descriptions to output.md, remove duplicated param tables from usage.md
 
 ### `Changed`
 
