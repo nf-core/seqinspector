@@ -39,7 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#245](https://github.com/nf-core/seqinspector/pull/245) Fix repeated listing of CollectHsMetrics
 - [#253](https://github.com/nf-core/seqinspector/pull/253) Fix CHANGELOG, missing Update in README and CITATIONS
 - [#255](https://github.com/nf-core/seqinspector/pull/255) Fix rundirparser test snapshots to use full topic object instead of individual channels
-- Address review comments from PR #251: improve docs, add tool descriptions to output.md, remove duplicated param tables from usage.md
+- [#256](https://github.com/nf-core/seqinspector/pull/256) Address review comments from PR #251: improve docs, add tool descriptions to output.md, remove duplicated param tables from usage.md
 
 ### `Changed`
 
