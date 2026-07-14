@@ -157,7 +157,7 @@ Or to run all active tools on subsampled data:
 nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 --subsample_tools all
 ```
 
-Note: `all` excludes tools that cannot use subsampled data (`seqtk`, `checkqc`, `multiqcsav`, `rundirparser`).
+Note: `all` excludes tools that cannot use subsampled data (`checkqc`, `multiqcsav`, `rundirparser`).
 
 Or to disable subsampling for all tools (run everything on original data):
 
@@ -179,6 +179,7 @@ Currently, the following tools are run by default:
 
 - fastqc
 - fastqscreen
+- fq_lint
 - picard_collectmultiplemetrics
 - rundirparser
 - seqfu_stats
