@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#246](https://github.com/nf-core/seqinspector/pull/246) Added riker module for BAM-level QC metrics collection
 - [#247](https://github.com/nf-core/seqinspector/pull/247) Add `AGENTS.md` file with nf-core agent instructions
 - [#256](https://github.com/nf-core/seqinspector/pull/256) Improve docs
+- [#258](https://github.com/nf-core/seqinspector/pull/258) Standardize output docs: descriptions above output files
 
 ### `Fixed`
 

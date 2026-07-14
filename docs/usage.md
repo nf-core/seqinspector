@@ -157,7 +157,7 @@ Or to run all active tools on subsampled data:
 nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 --subsample_tools all
 ```
 
-Note: `all` excludes tools that cannot use subsampled data (`seqtk`, `checkqc`, `multiqcsav`, `rundirparser`).
+Note: `all` excludes tools that cannot use subsampled data (`checkqc`, `multiqcsav`, `rundirparser`).
 
 Or to disable subsampling for all tools (run everything on original data):
 
@@ -179,6 +179,7 @@ Currently, the following tools are run by default:
 
 - fastqc
 - fastqscreen
+- fq_lint
 - picard_collectmultiplemetrics
 - rundirparser
 - seqfu_stats
@@ -215,7 +216,7 @@ See official [nexflow](https://www.nextflow.io/docs/latest/config.html) and [nf-
 
 It is possible to also choose bundles of pre-specified tools using the `--tools_bundle` parameter. It is still possible to remove tools using the `--skip_tools` parameters or add additional tools with the `--tools` parameter when choosing a predefined setup with `--tools_bundle`.
 
-See the [parameters page](https://nf-co.re/seqinspector/dev/parameters/#tools_bundle) for the list of available bundles and their contents.
+See the [parameters page](https://nf-co.re/seqinspector/parameters/#tools_bundle) for the list of available bundles and their contents.
 
 ### Available functionality and tools
 
