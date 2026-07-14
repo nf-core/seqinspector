@@ -165,7 +165,9 @@ Or to disable subsampling for all tools (run everything on original data):
 nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 --subsample_tools null
 ```
 
-Note: `picard_collecthsmetrics` and `picard_collectmultiplemetrics` share the same alignment step. Selecting one for subsampling will automatically subsample the other as well.
+:::note
+`picard_collecthsmetrics` and `picard_collectmultiplemetrics` share the same alignment step. Selecting one for subsampling will automatically subsample the other as well.
+:::
 
 Note: The `--subsample_tools` parameter only takes effect when `sample_size > 0`.
 
@@ -173,7 +175,7 @@ Note: The `--subsample_tools` parameter only takes effect when `sample_size > 0`
 
 Tools selection is an integral part of sequinspector and, as the pipeline grows, it will become more and more important to select tools of interest.
 By **default**, the pipeline does run a subsection of tools as defined in the `utils_nfcore_seqinspector_pipeline` subworkflow.
-Currently, the following tools are run as default:
+Currently, the following tools are run by default:
 
 - fastqc
 - fastqscreen
@@ -200,151 +202,27 @@ Currently the `tools` param can have the following values: bbmap_clumpify, check
 
 #### Skip specific tools
 
-Some tools might not be compatible with your data or you do not require all tools that are going to be run. In this case you can skip them by providing a comma-separated list of tools to be skipped with the `--skip_tools` parameter.
+Some tools might not be compatible with your data or you do not require all tools that are going to be run. In this case you can skip them by providing a comma-separated list of tools to be skipped with the `--skip_tools` parameter, e.g.:
+
+```bash
+--skip_tools fastqe,kraken2,riker
+```
 
 The nextflow configuration file can also be use to customise tool arguments.
 See official [nexflow](https://www.nextflow.io/docs/latest/config.html) and [nf-core](https://nf-co.re/docs/usage/configuration#customising-tool-arguments) documentation for further details.
 
-#### Custom tool arguments
-
-Some tools accept additional arguments that can be customised via command-line parameters. The following tool arguments are available:
-
-| Parameter               | Default                           | Description                                                                                              |
-| ----------------------- | --------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `--bbmap_clumpify_args` | `"markduplicates=true"`           | Arguments passed to BBMap Clumpify. Use `dedupe=true` to remove duplicates instead of just marking them. |
-| `--fq_lint_args`        | `""`                              | Arguments passed to fq-lint.                                                                             |
-| `--riker_args`          | `"--tools alignment basic isize"` | Arguments passed to riker multi. Use `--tools` to select which collectors to run.                        |
-
 #### Choose pre-defined bundles of tools
 
-It is possible to also chose bundles of pre-specified tools using the `tools_bundle` parameter. It is still possible to remove tools using the `skip_tools` parameters or add additional tools with the `tools` parameter when chosing a predefined setup with `tools_bundle`.
+It is possible to also choose bundles of pre-specified tools using the `--tools_bundle` parameter. It is still possible to remove tools using the `--skip_tools` parameters or add additional tools with the `--tools` parameter when choosing a predefined setup with `--tools_bundle`.
 
-Currently, the following bundles are available:
-
-<details>
-<summary>default</summary>
-
-Requirements:
-
-- specification of the `genome` parameter
-- specification of the Illumina runfolder
-
-Tools:
-
-- fastqc
-- fastqscreen
-- fq_lint
-- picard_collectmultiplemetrics
-- rundirparser
-- seqfu_stats
-- sequali
-
-</details>
-
-<details>
-<summary>all</summary>
-
-Requirements:
-
-- specification of the `genome` parameter
-- specification of the Illumina runfolder
-
-Tools:
-
-- bbmap_clumpify
-- checkqc
-- fastqc
-- fastqe
-- fastqscreen
-- fq_lint
-- multiqcsav
-- picard_collecthsmetrics
-- picard_collectmultiplemetrics
-- riker
-- rundirparser
-- seqkit_stats
-- seqfu_stats
-- sequali
-- toulligqc
-
-</details>
-
-<details>
-<summary>minimal</summary>
-
-Requirements:
-
-- specification of the `genome` parameter
-
-Tools:
-
-- fastqc
-- fastqscreen
-- picard_collectmultiplemetrics
-- seqfu_stats
-</details>
-
-<details>
-<summary>bam</summary>
-
-Requirements:
-
-- specification of the `genome` parameter
-
-Tools:
-
-- picard_collecthsmetrics
-- picard_collectmultiplemetrics
-- riker
-
-</details>
-
-<details>
-<summary>fastq</summary>
-
-Tools:
-
-- fastqc
-- fastqscreen
-- fq_lint
-- seqkit_stats
-
-</details>
-
-<details>
-<summary>illumina</summary>
-
-Requirements:
-
-- Specification of the Illumina runfolder
-
-Tools:
-
-- checkqc
-- multiqcsav
-- rundirparser
-- seqfu_stats
-</details>
-
-<details>
-<summary>ont</summary>
-
-Tools:
-
-- fastqc
-- fastqscreen
-- seqkit_stats
-- sequali
-- toulligqc
-
-</details>
+See the [parameters page](https://nf-co.re/seqinspector/dev/parameters/#tools_bundle) for the list of available bundles and their contents.
 
 ### Available functionality and tools
 
 #### BWAMEM2 and alignment-based QC tools
 
 If no genome or fasta file is provided, either with `--genome` or `--fasta`,
-the pipeline will not be able to run the alignment step with BWAMEM2,
+the pipeline will not be able to run the alignment step with `BWAMEM2`,
 and will skip all tools that depend on the alignment file (e.g. `picard CollectHsMetrics` and `picard CollectMultipleMetrics`).
 
 #### Hybrid-selection QC metrics
