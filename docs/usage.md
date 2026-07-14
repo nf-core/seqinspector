@@ -215,15 +215,7 @@ See official [nexflow](https://www.nextflow.io/docs/latest/config.html) and [nf-
 
 It is possible to also choose bundles of pre-specified tools using the `--tools_bundle` parameter. It is still possible to remove tools using the `--skip_tools` parameters or add additional tools with the `--tools` parameter when choosing a predefined setup with `--tools_bundle`.
 
-Currently, the following bundles are available:
-
-- **default**: fastqc, fastqscreen, fq_lint, picard_collectmultiplemetrics, rundirparser, seqfu_stats, sequali (requires `genome` and Illumina runfolder)
-- **all**: all available tools (requires `genome` and Illumina runfolder)
-- **minimal**: fastqc, fastqscreen, picard_collectmultiplemetrics, seqfu_stats (requires `genome`)
-- **bam**: picard_collecthsmetrics, picard_collectmultiplemetrics, riker (requires `genome`)
-- **fastq**: fastqc, fastqscreen, fq_lint, seqkit_stats
-- **illumina**: checkqc, multiqcsav, rundirparser, seqfu_stats (requires Illumina runfolder)
-- **ont**: fastqc, fastqscreen, seqkit_stats, sequali, toulligqc
+See the [parameters page](https://nf-co.re/seqinspector/dev/parameters/#tools) for the list of available bundles and their contents.
 
 ### Available functionality and tools
 
