@@ -199,7 +199,7 @@ Be aware that the default tools will still be run. In order to ONLY run the sele
 --tools fastqscreen,rundirparser --tools_bundle null
 ```
 
-Currently the `tools` param can have the following values: bbmap_clumpify, checkqc, chelae, fastp, fastqc, fastqe, fastqscreen, fq_lint, kraken2, multiqcsav, picard_collecthsmetrics, picard_collectmultiplemetrics, riker, rundirparser, seqkit_stats, seqfu_stats, sequali and toulligqc.
+See the [parameters page](https://nf-co.re/seqinspector/parameters/#tools) for the list of available tools and their values.
 
 #### Skip specific tools
 
