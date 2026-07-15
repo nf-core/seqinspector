@@ -143,6 +143,17 @@ Use the following naming schemes for channels to make the channel flow easier to
 - Initial process channel: `ch_output_from_<process>`
 - Intermediate and terminal channels: `ch_<previousprocess>_for_<nextprocess>`
 
+#### Alphabetical ordering
+
+Tool entries, includes, and references throughout the pipeline must follow alphabetical order, case-insensitive. For example, `checkqc` comes before `chelae`, and `CHECKQC` comes before `CHELAE_TRIM`. This applies to:
+
+- `include` statements in workflow files
+- Module invocations within workflows
+- Tool entries in `defineToolsList()` bundles
+- Entries in `toolReferencesMap()`
+- Regex patterns in `nextflow_schema.json`
+- Lists in `docs/usage.md`, `docs/output.md`, `README.md`, and `CITATIONS.md`
+
 #### Default parameter values
 
 Parameters should be initialised and defined with default values within the `params` scope in `nextflow.config`.
@@ -195,7 +206,7 @@ If you wish to add a new tool to the seqinspector pipeline, please use the follo
 3. Define the output channel if needed (see below).
 4. Add any new parameters to `nextflow.config` with a default (see below).
 5. Add any new parameters to `nextflow_schema.json` with help text (via the `nf-core pipelines schema build` tool).
-6. Make sure that relevant outputs of your tool are added to the Multiqc report by adding them to the `ch_multiqc_files` channel.
+6. Make sure that relevant outputs of your tool are added to the Multiqc report by adding them to the `ch_multiqc_files` channel. If the upstream nf-core module does not emit to the `multiqc_files` topic, patch the module with `nf-core modules patch` and flag that a PR will be needed to upstream the change.
 7. Add sanity checks and validation for all relevant parameters.
 8. Perform local tests to validate that the new code works as expected, both with internet access, but also offline.
 9. If applicable, add a new test in the `tests` directory.
@@ -211,6 +222,9 @@ If you wish to add a new tool to the seqinspector pipeline, please use the follo
 13. Add a description of the output files and if relevant any appropriate images from the MultiQC report to `docs/output.md`.
 14. Update the metromap (can be found in `assets`) to include your new step.
 15. Update the `CHANGELOG.md` file in the base directory of the pipeline.
+16. Add your tool to the `toolReferencesMap()` in `subworkflows/local/utils_nfcore_seqinspector_pipeline/main.nf` with name, authors, description, and DOI or URL.
+17. Add a citation entry in `CITATIONS.md` (alphabetical order).
+18. Add your tool to the tools version table in `README.md` (alphabetical order).
 
 ### Things to consider regarding displaying results for a new tool
 
