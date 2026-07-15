@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
-- Add chelae/trim as an alternate trimming tool to fastp
+- [#260](https://github.com/nf-core/seqinspector/pull/260) Add chelae/trim as an alternate trimming tool to fastp
 
 ### `Fixed`
 
@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#259](https://github.com/nf-core/seqinspector/pull/259) Back to dev
 
 ### `Dependencies`
+
+| Dependency | Old version | New version |
+| ---------- | ----------- | ----------- |
+| chelae     |             | 0.1.0       |
 
 ### `Removed`
 
