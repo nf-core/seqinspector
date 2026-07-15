@@ -34,6 +34,7 @@ If provided, nf-core/seqinspector can also parse statistics from an Illumina run
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ----------------------- | ---------------------------------------------------------------------------------------- | ------------ |
 | `Subsampling`              | [`Seqtk`](https://github.com/lh3/seqtk)                                                                             | Global subsampling of reads. Only performs subsampling if `--sample_size` parameter is given.          | [RNA, DNA]              | [N/A]                                                                                    | no           |
 | `Lint FASTQs`              | [`fq`](https://github.com/stjude-rust-labs/fq)                                                                      | fq filters, generates, subsamples, and validates FASTQ files.                                          | [RNA, DNA, synthetic]   | [N/A]                                                                                    | yes          |
+| `Trimming`                 | [`Chelae`](https://github.com/fulcrumgenomics/chelae)                                                               | Adapter and quality trimming of short-read FASTQ data.                                                 | [RNA, DNA, synthetic]   | [N/A]                                                                                    | no           |
 | `Trimming`                 | [`Fastp`](https://github.com/OpenGene/fastp)                                                                        | Trimming of reads. Only performs trimming if `--tools` parameter is given.                             | [RNA, DNA, synthetic]   | [N/A]                                                                                    | no           |
 | `Deduplication assessment` | [`BBMap Clumpify`](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/clumpify-guide/)   | Deduplicate and compress FASTQ files. Only performs clumpify if `--tools` parameter is given.          | [RNA, DNA]              | [N/A]                                                                                    | no           |
 | `Indexing, Mapping`        | [`BWA-MEM2`](https://github.com/bwa-mem2/bwa-mem2)                                                                  | Align reads to reference                                                                               | [RNA, DNA]              | [N/A]                                                                                    | yes          |
@@ -77,6 +78,7 @@ The diagram below illustrates the MultiQC reporting logic for per-sample tags an
 | bwamem2     | 2.3     |
 | bbmap       | 39.18   |
 | checkQC     | 4.1.0   |
+| chelae      | 0.1.0   |
 | fq/lint     | 0.12.0  |
 | fastp       | 1.1.0   |
 | fastqc      | 0.12.1  |

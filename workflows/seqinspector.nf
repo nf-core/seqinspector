@@ -8,6 +8,7 @@
 include { BBMAP_CLUMPIFY               } from '../modules/nf-core/bbmap/clumpify'
 include { BWAMEM2_MEM                  } from '../modules/nf-core/bwamem2/mem'
 include { CHECKQC                      } from '../modules/nf-core/checkqc'
+include { CHELAE_TRIM                  } from '../modules/nf-core/chelae/trim'
 include { FASTP                        } from '../modules/nf-core/fastp'
 include { FASTQC                       } from '../modules/nf-core/fastqc'
 include { FASTQE                       } from '../modules/nf-core/fastqe'
@@ -15,8 +16,8 @@ include { FASTQSCREEN_FASTQSCREEN      } from '../modules/nf-core/fastqscreen/fa
 include { FQ_LINT                      } from '../modules/nf-core/fq/lint'
 include { MULTIQC as MULTIQC_PER_TAG   } from '../modules/nf-core/multiqc'
 include { MULTIQCSAV as MULTIQC_GLOBAL } from '../modules/nf-core/multiqcsav'
-include { RUNDIRPARSER                 } from '../modules/local/rundirparser'
 include { RIKER_MULTI                  } from '../modules/nf-core/riker/multi'
+include { RUNDIRPARSER                 } from '../modules/local/rundirparser'
 include { SAMTOOLS_INDEX               } from '../modules/nf-core/samtools/index'
 include { SEQFU_STATS                  } from '../modules/nf-core/seqfu/stats'
 include { SEQKIT_STATS                 } from '../modules/nf-core/seqkit/stats'
@@ -234,6 +235,15 @@ workflow SEQINSPECTOR {
         discard_trimmed_pass,
         save_trimmed_fail,
         save_merged,
+    )
+
+    //
+    // MODULE: CHELAE_TRIM for adapter trimming and quality filtering
+    //
+
+    CHELAE_TRIM(
+        ('chelae' in subsample_tools ? ch_sample : ch_samplesheet).map { meta, reads -> [meta, reads] }.filter { 'chelae' in tools },
+        [],
     )
 
     //
@@ -495,6 +505,7 @@ workflow SEQINSPECTOR {
 
     emit:
     bam_bai        = bam_bai
+    chelae_reads   = CHELAE_TRIM.out.reads
     clumpify_reads = bbmap_clumpify_reads
     data_global    = MULTIQC_GLOBAL.out.data // channel: [ /path/to/multiqc_data/ ]
     data_groups    = MULTIQC_PER_TAG.out.data // channel: [ /path/to/multiqc_data/ ]

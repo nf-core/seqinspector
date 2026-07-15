@@ -24,6 +24,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 - [Sequali](#sequali) - Sequence quality metrics for short and long reads
 - [FASTQE](#fastqe) - Raw read QC
 - [FastP](#fastp) - Trimming and filtering of raw reads
+- [Chelae](#chelae) - Adapter and quality trimming of short-read FASTQ data
 - [FastQ Screen](#fastq-screen) - Mapping against a set of references for basic contamination QC
 - [BWA-MEM2_MEM](#bwamem2_mem) - Mapping reads against a chosen reference genome
 - [Picard CollectHsMetrics](#picard-collecthsmetrics) - Collect alignment QC metrics of hybrid-selection data
@@ -210,6 +211,22 @@ It provides information about the quality score distribution across your reads, 
 
 - `reports/fastqe/[sample_id]/`
   - `*.tsv`: FASTQE report containing quality metrics in emoji.
+
+</details>
+
+### Chelae
+
+[Chelae](https://github.com/fulcrumgenomics/chelae) is a fast, accurate, multi-threaded toolkit for trimming and filtering short-read FASTQ data.
+It produces a fastp-compatible JSON report suitable for MultiQC, as well as a TSV metrics summary.
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `chelae/[sample_id]/`
+  - `*.chelae.fastq.gz`: Trimmed FASTQ file(s).
+- `reports/chelae/[sample_id]/`
+  - `*.chelae.json`: Chelae JSON trimming report (fastp-compatible).
+  - `*.chelae.tsv`: Chelae trimming metrics summary.
 
 </details>
 

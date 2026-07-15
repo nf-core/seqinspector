@@ -283,6 +283,7 @@ def toolReferencesMap() {
         'bbmap': ['name': 'BBMap', 'authors': 'Bushnell B. (2014).', 'authors_short': 'Bushnell 2014', 'description': 'BBMap: A Fast, Accurate, Splice-Aware Aligner.', 'url': 'https://bbmap.org/'],
         'bwamem2': ['name': 'BWAMEM2', 'authors': 'Vasimuddin Md., Misra S., Li H, & Aluru S. (2019).', 'authors_short': 'Vasimuddin et al. 2019', 'description': 'Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems.', 'doi': '10.1109/IPDPS.2019.00041'],
         'checkqc': ['name': 'checkQC', 'authors': 'Åslin et al., (2018).', 'authors_short': 'Åslin et al. 2018', 'description': 'CheckQC: Quick quality control of Illumina sequencing runs. Journal of Open Source Software, 3(22), 556.', 'doi': '10.21105/joss.00556'],
+        'chelae': ['name': 'Chelae', 'authors': '', 'authors_short': '', 'description': 'A fast toolkit for trimming and filtering short-read FASTQ data.', 'url': 'https://github.com/fulcrumgenomics/chelae'],
         'fastp': ['name': 'Fastp', 'authors': 'Chen S., Zhou Y., Chen Y., & Gu J. (2018).', 'authors_short': 'Chen et al. 2018', 'description': 'fastp: an ultra-fast all-in-one FASTQ preprocessor. Bioinformatics, 34(17), i884-i890.', 'doi': '10.1093/bioinformatics/bty560'],
         'fastqc': ['name': 'FastQC', 'authors': '', 'authors_short': '', 'description': 'Quality control application for high throughput sequence data.', 'url': 'https://www.bioinformatics.babraham.ac.uk/projects/fastqc/'],
         'fastqe': ['name': 'FASTQE', 'authors': '', 'authors_short': '', 'description': 'FASTQ sequence quality visualisation with Emoji.', 'url': 'https://github.com/fastqe/fastqe'],
@@ -393,6 +394,7 @@ def defineToolsList(input_bundle, input_tools, input_skip, sample_size) {
     if ('all' in bundle_list) {
         tools_list << 'bbmap_clumpify'
         tools_list << 'checkqc'
+        tools_list << 'chelae'
         tools_list << 'fastqc'
         tools_list << 'fastp'
         tools_list << 'fastqe'

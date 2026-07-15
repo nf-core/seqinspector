@@ -238,9 +238,7 @@
                 "fastp-seq-quality-plot_Read_1_Before_filtering.txt:md5,be1eaec430c044973cc62cfc4dbc74a3",
                 "fastp-seq-quality-plot_Read_2_After_filtering.txt:md5,ef75e9e33f6ef64d42fdf3743e29c0ec",
                 "fastp-seq-quality-plot_Read_2_Before_filtering.txt:md5,85a7ba96d6f106e67f1857f5f98bb2ec",
-                "fastp_filtered_reads_plot.txt:md5,17f3f8356ca68b24f6ee3520a6223bd4",
                 "multiqc_citations.txt:md5,d35df50e9903a96a2b3bce3c1fbc8ad2",
-                "multiqc_fastp.txt:md5,349f29007e56b92bc1606da52a981b35",
                 "fastp-insert-size-plot.txt:md5,eac2dc6382529d55c9cc74b96daf6cda",
                 "fastp-seq-content-gc-plot_Read_1_After_filtering.txt:md5,209986817601624d24c85babed7bf3a7",
                 "fastp-seq-content-gc-plot_Read_1_Before_filtering.txt:md5,f30c5ced8379d95131c8505ad1abfdc0",
@@ -254,26 +252,22 @@
                 "fastp-seq-quality-plot_Read_1_Before_filtering.txt:md5,0f01beb4e8b2d4552c43c6b6dd69c57e",
                 "fastp-seq-quality-plot_Read_2_After_filtering.txt:md5,ef75e9e33f6ef64d42fdf3743e29c0ec",
                 "fastp-seq-quality-plot_Read_2_Before_filtering.txt:md5,85a7ba96d6f106e67f1857f5f98bb2ec",
-                "fastp_filtered_reads_plot.txt:md5,c42181e510655b5130ce7dd72135e9b7",
                 "multiqc_citations.txt:md5,d35df50e9903a96a2b3bce3c1fbc8ad2",
-                "multiqc_fastp.txt:md5,0c00076b3b1bd298f1be6118b0d2d3e7",
                 "fastp-seq-content-gc-plot_Read_1_After_filtering.txt:md5,0bbb7eb5248ccf432d8f40ac8c43b78c",
                 "fastp-seq-content-gc-plot_Read_1_Before_filtering.txt:md5,0bbb7eb5248ccf432d8f40ac8c43b78c",
                 "fastp-seq-content-n-plot_Read_1_After_filtering.txt:md5,449764d099cf8e5f0e10814d08713dee",
                 "fastp-seq-content-n-plot_Read_1_Before_filtering.txt:md5,449764d099cf8e5f0e10814d08713dee",
                 "fastp-seq-quality-plot_Read_1_After_filtering.txt:md5,a6f569929bbd0487ebcd109219389a30",
                 "fastp-seq-quality-plot_Read_1_Before_filtering.txt:md5,a6f569929bbd0487ebcd109219389a30",
-                "fastp_filtered_reads_plot.txt:md5,ee719910be4fceeb76219b7515b0aa95",
-                "multiqc_citations.txt:md5,d35df50e9903a96a2b3bce3c1fbc8ad2",
-                "multiqc_fastp.txt:md5,a04690a8323c961ae949b2f791db83d0"
+                "multiqc_citations.txt:md5,d35df50e9903a96a2b3bce3c1fbc8ad2"
             ],
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-03-30T16:47:06.218382612",
+        "timestamp": "2026-07-15T14:19:36.817541976",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "25.10.2"
+            "nextflow": "26.04.4"
         }
     },
     "MiSeq data test - fastp - stub": {
