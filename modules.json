@@ -29,7 +29,7 @@
                     },
                     "chelae/trim": {
                         "branch": "master",
-                        "git_sha": "22edd7ce9462025093b25e3b55006f7720ff0d8e",
+                        "git_sha": "0819fb5b80a4b86b31f35bf96e53a9d65e160520",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/chelae/trim/chelae-trim.diff"
                     },
