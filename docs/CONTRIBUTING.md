@@ -207,7 +207,6 @@ The nf-core/seqinspector pipeline has a strong emphasis on a broad spectrum of t
      - Add your tool to the `pattern` regex of the `tools` property.
      - Add your tool to the `pattern` regex of the `skip_tools` property.
      - If the tool should be part of any pre-defined bundle, update the `help_text` of the `tools_bundle` property to include it in the relevant bundle(s).
-   - Update the list of tools in the `Tools Selection` section in the `usage.md` file.
 4. Add your tool to the table `Compatibility between tools and data type` in `README.md`.
 5. Add your tool to the tools version table in `README.md` (alphabetical order).
 6. Add your tool to the `toolReferencesMap()` in `subworkflows/local/utils_nfcore_seqinspector_pipeline/main.nf` with name, authors, description, and DOI or URL.
