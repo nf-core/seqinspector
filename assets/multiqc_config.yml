@@ -14,6 +14,12 @@ report_section_order:
 
 export_plots: true
 
+# Set static output file names for the report, data and plots directories so these
+# are not changed when "--multiqc_title" is specified, required for index section to work properly
+output_fn_name: "multiqc_report.html"
+data_dir_name: "multiqc_data"
+plots_dir_name: "multiqc_plots"
+
 disable_version_detection: true
 
 fn_clean_trim:
