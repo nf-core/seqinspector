@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Added`
 
 - [#260](https://github.com/nf-core/seqinspector/pull/260) Add chelae/trim as an alternate trimming tool to fastp
+- [#266](https://github.com/nf-core/seqinspector/pull/266) Add documentation on custom MultiQC sections
 
 ### `Fixed`
 
