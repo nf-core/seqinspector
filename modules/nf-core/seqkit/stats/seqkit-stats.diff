@@ -1,6 +1,6 @@
 Changes in component 'nf-core/seqkit/stats'
-'modules/nf-core/seqkit/stats/meta.yml' is unchanged
 'modules/nf-core/seqkit/stats/environment.yml' is unchanged
+'modules/nf-core/seqkit/stats/meta.yml' is unchanged
 Changes in 'seqkit/stats/main.nf':
 --- modules/nf-core/seqkit/stats/main.nf
 +++ modules/nf-core/seqkit/stats/main.nf
@@ -14,6 +14,6 @@ Changes in 'seqkit/stats/main.nf':
  
      when:
 
-'modules/nf-core/seqkit/stats/tests/main.nf.test' is unchanged
 'modules/nf-core/seqkit/stats/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/seqkit/stats/tests/main.nf.test' is unchanged
 ************************************************************

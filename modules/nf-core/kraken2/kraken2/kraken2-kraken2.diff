@@ -1,6 +1,6 @@
 Changes in component 'nf-core/kraken2/kraken2'
-'modules/nf-core/kraken2/kraken2/meta.yml' is unchanged
 'modules/nf-core/kraken2/kraken2/environment.yml' is unchanged
+'modules/nf-core/kraken2/kraken2/meta.yml' is unchanged
 Changes in 'kraken2/kraken2/main.nf':
 --- modules/nf-core/kraken2/kraken2/main.nf
 +++ modules/nf-core/kraken2/kraken2/main.nf
@@ -14,6 +14,6 @@ Changes in 'kraken2/kraken2/main.nf':
      tuple val("${task.process}"), val('pigz'), eval('pigz --version 2>&1 | sed "s/pigz //g"'), topic: versions, emit: versions_pigz
  
 
-'modules/nf-core/kraken2/kraken2/tests/main.nf.test' is unchanged
 'modules/nf-core/kraken2/kraken2/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/kraken2/kraken2/tests/main.nf.test' is unchanged
 ************************************************************

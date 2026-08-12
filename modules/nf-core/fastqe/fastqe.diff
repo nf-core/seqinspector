@@ -1,6 +1,6 @@
 Changes in component 'nf-core/fastqe'
-'modules/nf-core/fastqe/meta.yml' is unchanged
 'modules/nf-core/fastqe/environment.yml' is unchanged
+'modules/nf-core/fastqe/meta.yml' is unchanged
 Changes in 'fastqe/main.nf':
 --- modules/nf-core/fastqe/main.nf
 +++ modules/nf-core/fastqe/main.nf
@@ -14,6 +14,6 @@ Changes in 'fastqe/main.nf':
      tuple val("${task.process}"), val('fastqe'), val("0.5.2"), emit: versions_fastqe, topic: versions
  
 
-'modules/nf-core/fastqe/tests/main.nf.test' is unchanged
 'modules/nf-core/fastqe/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/fastqe/tests/main.nf.test' is unchanged
 ************************************************************
