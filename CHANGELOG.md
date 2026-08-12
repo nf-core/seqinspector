@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Fixed`
 
 - [#264](https://github.com/nf-core/seqinspector/pull/264) Fix `--multiqc_title` modifying the output directory structure, breaking the report index section ([#261](https://github.com/nf-core/seqinspector/issues/261))
+- [#269](https://github.com/nf-core/seqinspector/pull/269) Revert to old setup-apptainer version for GHA
 
 ### `Changed`
 
