@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Changed`
 
 - [#259](https://github.com/nf-core/seqinspector/pull/259) Back to dev
-- [#268](https://github.com/nf-core/seqinspector/pull/268) prepare pipeline update v1.1.1 
+- [#268](https://github.com/nf-core/seqinspector/pull/268) prepare pipeline update v1.1.1
 
 ### `Dependencies`
 
