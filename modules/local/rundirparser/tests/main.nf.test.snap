@@ -1,0 +1,78 @@
+{
+    "NovaSeq6000": {
+        "content": [
+            {
+                "multiqc_files": [
+                    [
+                        {
+                            "id": "200624_A00834_0183_BHMTFYDRXX"
+                        },
+                        "RUNDIRPARSER",
+                        "rundirparser",
+                        "illumina_mqc.yml:md5,29e05fed18bca0e9a857c992b6d59a40"
+                    ]
+                ],
+                "versions": [
+                    [
+                        "RUNDIRPARSER",
+                        "python",
+                        "3.13.2"
+                    ],
+                    [
+                        "RUNDIRPARSER",
+                        "pyyaml",
+                        "6.0.2"
+                    ],
+                    [
+                        "RUNDIRPARSER",
+                        "rundirparser",
+                        "1.0.1"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-14T13:59:22.481197877",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.4"
+        }
+    },
+    "NovaSeq6000 - stub": {
+        "content": [
+            {
+                "multiqc_files": [
+                    [
+                        {
+                            "id": "200624_A00834_0183_BHMTFYDRXX"
+                        },
+                        "RUNDIRPARSER",
+                        "rundirparser",
+                        "illumina_mqc.yml:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    [
+                        "RUNDIRPARSER",
+                        "python",
+                        "3.13.2"
+                    ],
+                    [
+                        "RUNDIRPARSER",
+                        "pyyaml",
+                        "6.0.2"
+                    ],
+                    [
+                        "RUNDIRPARSER",
+                        "rundirparser",
+                        "1.0.1"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-14T13:59:33.97253431",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.4"
+        }
+    }
+}

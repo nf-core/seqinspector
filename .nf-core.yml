@@ -1,8 +1,11 @@
 lint:
   files_exist:
+    - .github/workflows/linting_comment.yml
     - tests/default.nf.test
   files_unchanged:
     - .github/CONTRIBUTING.md
+    - .github/workflows/branch.yml
+    - .github/workflows/linting.yml
     - assets/nf-core-seqinspector_logo_light.png
     - docs/images/nf-core-seqinspector_logo_dark.png
     - docs/images/nf-core-seqinspector_logo_light.png

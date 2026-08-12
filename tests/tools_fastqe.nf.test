@@ -1,0 +1,32 @@
+def pipelines_testdata_base_path = 'https://raw.githubusercontent.com/nf-core/test-datasets/'
+
+nextflow_pipeline {
+
+    name "Test pipeline"
+    script "../main.nf"
+
+    def test_scenario = [
+        [
+            name: "MiSeq data test - fastqe",
+            params: [
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/miseq.csv',
+                tools: 'fastqe',
+                tools_bundle: null,
+            ],
+        ],
+        [
+            name: "MiSeq data test - fastqe - stub",
+            params: [
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/miseq.csv',
+                tools: 'fastqe',
+                tools_bundle: null,
+            ],
+            stub: true,
+        ],
+    ]
+
+    // Generate tests for each scenario
+    test_scenario.each { scenario ->
+        test(scenario.name, UTILS.getTest(scenario))
+    }
+}
