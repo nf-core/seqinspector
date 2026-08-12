@@ -1,6 +1,6 @@
 Changes in component 'nf-core/seqfu/stats'
-'modules/nf-core/seqfu/stats/meta.yml' is unchanged
 'modules/nf-core/seqfu/stats/environment.yml' is unchanged
+'modules/nf-core/seqfu/stats/meta.yml' is unchanged
 Changes in 'seqfu/stats/main.nf':
 --- modules/nf-core/seqfu/stats/main.nf
 +++ modules/nf-core/seqfu/stats/main.nf
@@ -15,6 +15,6 @@ Changes in 'seqfu/stats/main.nf':
  
      when:
 
-'modules/nf-core/seqfu/stats/tests/main.nf.test' is unchanged
 'modules/nf-core/seqfu/stats/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/seqfu/stats/tests/main.nf.test' is unchanged
 ************************************************************

@@ -18,12 +18,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#259](https://github.com/nf-core/seqinspector/pull/259) Back to dev
 - [#268](https://github.com/nf-core/seqinspector/pull/268) prepare pipeline update v1.1.1
+- [#262](https://github.com/nf-core/seqinspector/pull/262) Template update for nf-core/tools v4.0.3
 
 ### `Dependencies`
 
 | Dependency | Old version | New version |
 | ---------- | ----------- | ----------- |
 | chelae     |             | 0.1.0       |
+| fastp      | 1.1.0       | 1.3.6       |
 
 ### `Removed`
 

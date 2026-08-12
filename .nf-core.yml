@@ -1,20 +1,20 @@
 lint:
   files_exist:
-    - tests/default.nf.test
     - .github/workflows/linting_comment.yml
+    - tests/default.nf.test
   files_unchanged:
     - .github/CONTRIBUTING.md
+    - .github/workflows/branch.yml
+    - .github/workflows/linting.yml
     - assets/nf-core-seqinspector_logo_light.png
     - docs/images/nf-core-seqinspector_logo_dark.png
     - docs/images/nf-core-seqinspector_logo_light.png
-    - .github/workflows/branch.yml
-    - .github/workflows/linting.yml
   multiqc_config: false
   nextflow_config:
     - config_defaults:
         - params.fastq_screen_references
   nf_test_content: false
-nf_core_version: 4.0.2
+nf_core_version: 4.0.3
 repository_type: pipeline
 template:
   author: Adrien Coulier
