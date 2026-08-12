@@ -1,11 +1,13 @@
 .DS_Store
 bbmap/*/*.clumped.fastq.gz
 mapped/*/*.bam{,.bai}
+multiqc/{global_report,group_reports/*}/multiqc_data/fastp_filtered_reads_plot.txt
 multiqc/{global_report,group_reports/*}/multiqc_data/fastqc_top_overrepresented_sequences_table.txt
 multiqc/{global_report,group_reports/*}/multiqc_data/llms-full.txt
 multiqc/{global_report,group_reports/*}/multiqc_data/multiqc.log
 multiqc/{global_report,group_reports/*}/multiqc_data/multiqc.parquet
 multiqc/{global_report,group_reports/*}/multiqc_data/multiqc_data.json
+multiqc/{global_report,group_reports/*}/multiqc_data/multiqc_fastp.txt
 multiqc/{global_report,group_reports/*}/multiqc_data/multiqc_general_stats.txt
 multiqc/{global_report,group_reports/*}/multiqc_data/multiqc_software_versions.txt
 multiqc/{global_report,group_reports/*}/multiqc_data/multiqc_sources.txt
@@ -14,6 +16,7 @@ multiqc/{global_report,group_reports/*}/multiqc_report.html
 pipeline_info/*.{html,json,txt,yml}
 references/R64-1-1.dict
 reports/bbmap/*/*.clumpify.log
+reports/chelae/*/*.chelae.json
 reports/fastp/*/*fastp.*
 reports/fastqc/*/*_fastqc.{html,zip}
 reports/fastqscreen/*/*_screen.html

@@ -11,7 +11,7 @@
 [![nf-test](https://img.shields.io/badge/unit_tests-nf--test-337ab7.svg)](https://www.nf-test.com)
 
 [![Nextflow](https://img.shields.io/badge/version-%E2%89%A525.10.4-green?style=flat&logo=nextflow&logoColor=white&color=%230DC09D&link=https%3A%2F%2Fnextflow.io)](https://www.nextflow.io/)
-[![nf-core template version](https://img.shields.io/badge/nf--core_template-4.0.2-green?style=flat&logo=nfcore&logoColor=white&color=%2324B064&link=https%3A%2F%2Fnf-co.re)](https://github.com/nf-core/tools/releases/tag/4.0.2)
+[![nf-core template version](https://img.shields.io/badge/nf--core_template-4.0.3-green?style=flat&logo=nfcore&logoColor=white&color=%2324B064&link=https%3A%2F%2Fnf-co.re)](https://github.com/nf-core/tools/releases/tag/4.0.3)
 [![run with conda](http://img.shields.io/badge/run%20with-conda-3EB049?labelColor=000000&logo=anaconda)](https://docs.conda.io/en/latest/)
 [![run with docker](https://img.shields.io/badge/run%20with-docker-0db7ed?labelColor=000000&logo=docker)](https://www.docker.com/)
 [![run with singularity](https://img.shields.io/badge/run%20with-singularity-1d355c.svg?labelColor=000000)](https://sylabs.io/docs/)
@@ -34,6 +34,7 @@ If provided, nf-core/seqinspector can also parse statistics from an Illumina run
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ----------------------- | ---------------------------------------------------------------------------------------- | ------------ |
 | `Subsampling`              | [`Seqtk`](https://github.com/lh3/seqtk)                                                                             | Global subsampling of reads. Only performs subsampling if `--sample_size` parameter is given.          | [RNA, DNA]              | [N/A]                                                                                    | no           |
 | `Lint FASTQs`              | [`fq`](https://github.com/stjude-rust-labs/fq)                                                                      | fq filters, generates, subsamples, and validates FASTQ files.                                          | [RNA, DNA, synthetic]   | [N/A]                                                                                    | yes          |
+| `Trimming`                 | [`Chelae`](https://github.com/fulcrumgenomics/chelae)                                                               | Adapter and quality trimming of short-read FASTQ data.                                                 | [RNA, DNA, synthetic]   | [N/A]                                                                                    | no           |
 | `Trimming`                 | [`Fastp`](https://github.com/OpenGene/fastp)                                                                        | Trimming of reads. Only performs trimming if `--tools` parameter is given.                             | [RNA, DNA, synthetic]   | [N/A]                                                                                    | no           |
 | `Deduplication assessment` | [`BBMap Clumpify`](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/clumpify-guide/)   | Deduplicate and compress FASTQ files. Only performs clumpify if `--tools` parameter is given.          | [RNA, DNA]              | [N/A]                                                                                    | no           |
 | `Indexing, Mapping`        | [`BWA-MEM2`](https://github.com/bwa-mem2/bwa-mem2)                                                                  | Align reads to reference                                                                               | [RNA, DNA]              | [N/A]                                                                                    | yes          |
@@ -77,8 +78,9 @@ The diagram below illustrates the MultiQC reporting logic for per-sample tags an
 | bwamem2     | 2.3     |
 | bbmap       | 39.18   |
 | checkQC     | 4.1.0   |
+| chelae      | 0.1.0   |
 | fq/lint     | 0.12.0  |
-| fastp       | 1.1.0   |
+| fastp       | 1.3.6   |
 | fastqc      | 0.12.1  |
 | fastqe      | 0.5.2   |
 | fastqscreen | 0.16.0  |

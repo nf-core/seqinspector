@@ -24,6 +24,7 @@ graph LR
         fastq_icon[ ]
 
         bbmap[BBMap Clumpify]
+        chelae[Chelae trim]
         fastp[FastP]
         fastqc[FASTQC]
         fastqe[FASTQE]
@@ -55,6 +56,7 @@ graph LR
         end
 
         seqtk -->|fastq_line| bbmap
+        seqtk -->|fastq_line| chelae
         seqtk -->|fastq_line| fastp
         seqtk -->|fastq_line| fastqc
         seqtk -->|fastq_line| fastqe
@@ -84,6 +86,7 @@ graph LR
     end
 
     bbmap -->|fastq_line| multiqc
+    chelae -->|fastq_line| multiqc
     checkqc -->|runfolder_line| multiqc
     fastp -->|fastq_line| multiqc
     fastqc -->|fastq_line| multiqc

@@ -117,6 +117,8 @@ workflow {
 
     publish:
     bam_bai                = NFCORE_SEQINSPECTOR.out.bam_bai
+    chelae_reads           = NFCORE_SEQINSPECTOR.out.chelae_reads
+    clumpify_reads         = NFCORE_SEQINSPECTOR.out.clumpify_reads
     kraken2_db             = ch_kraken2_db
     multiqc_global         = NFCORE_SEQINSPECTOR.out.data_global.mix(NFCORE_SEQINSPECTOR.out.plots_global, NFCORE_SEQINSPECTOR.out.report_global)
     multiqc_grouped_data   = NFCORE_SEQINSPECTOR.out.data_groups
@@ -129,7 +131,6 @@ workflow {
     )
     reports                = channel.topic("multiqc_files")
     subsampled             = NFCORE_SEQINSPECTOR.out.subsampled
-    clumpify_reads         = NFCORE_SEQINSPECTOR.out.clumpify_reads
 }
 
 output {
@@ -137,6 +138,11 @@ output {
         path { meta, bam, index ->
             bam >> "mapped/${meta.id}/"
             index >> "mapped/${meta.id}/"
+        }
+    }
+    chelae_reads {
+        path { meta, _fastq ->
+            "chelae/${meta.id}/"
         }
     }
     clumpify_reads {
@@ -238,6 +244,7 @@ workflow NFCORE_SEQINSPECTOR {
 
     emit:
     bam_bai        = SEQINSPECTOR.out.bam_bai
+    chelae_reads   = SEQINSPECTOR.out.chelae_reads
     clumpify_reads = SEQINSPECTOR.out.clumpify_reads
     data_global    = SEQINSPECTOR.out.data_global // channel: /path/to/multiqc_report.html
     data_groups    = SEQINSPECTOR.out.data_groups // channel: /path/to/multiqc_report.html

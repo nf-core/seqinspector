@@ -1,6 +1,6 @@
 Changes in component 'nf-core/bbmap/clumpify'
-'modules/nf-core/bbmap/clumpify/meta.yml' is unchanged
 'modules/nf-core/bbmap/clumpify/environment.yml' is unchanged
+'modules/nf-core/bbmap/clumpify/meta.yml' is unchanged
 Changes in 'bbmap/clumpify/main.nf':
 --- modules/nf-core/bbmap/clumpify/main.nf
 +++ modules/nf-core/bbmap/clumpify/main.nf
@@ -14,6 +14,6 @@ Changes in 'bbmap/clumpify/main.nf':
  
      when:
 
-'modules/nf-core/bbmap/clumpify/tests/main.nf.test' is unchanged
 'modules/nf-core/bbmap/clumpify/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/bbmap/clumpify/tests/main.nf.test' is unchanged
 ************************************************************

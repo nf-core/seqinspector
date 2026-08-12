@@ -184,33 +184,35 @@ If you update images or graphics, follow the nf-core [style guidelines](https://
 
 To make the `nf-core/seqinspector` code and processing logic more understandable for new contributors and to ensure quality, we semi-standardise the way the code and other contributions are written.
 
+### Alphabetical ordering
+
+Tool entries, includes, and references throughout the pipeline must follow alphabetical order, case-insensitive. For example, `checkqc` comes before `chelae`, and `CHECKQC` comes before `CHELAE_TRIM`. This applies to:
+
+- `include` statements in workflow files
+- Module invocations within workflows
+- Tool entries in `defineToolsList()` bundles
+- Entries in `toolReferencesMap()`
+- Regex patterns in `nextflow_schema.json`
+- Lists in `docs/usage.md`, `docs/output.md`, `README.md`, and `CITATIONS.md`
+
 ### Adding a new tool
 
-The nf-core/seqinspector pipeline has a strong emphasis on a broad spectrum of tools to select from. Therefore we made this list below to help everyone to identify the steps required to add a new tool to this pipeline to ensure the tool will be integrated smoothly.
+The nf-core/seqinspector pipeline has a strong emphasis on a broad spectrum of tools to select from. This checklist covers the seqinspector-specific steps on top of the [generic pipeline step](#add-a-new-pipeline-step) conventions.
 
-If you wish to add a new tool to the seqinspector pipeline, please use the following checklist:
-
-1. Define the corresponding input channel into your new process from the expected previous process channel.
-2. Write the process block (see below).
-3. Define the output channel if needed (see below).
-4. Add any new parameters to `nextflow.config` with a default (see below).
-5. Add any new parameters to `nextflow_schema.json` with help text (via the `nf-core pipelines schema build` tool).
-6. Make sure that relevant outputs of your tool are added to the Multiqc report by adding them to the `ch_multiqc_files` channel.
-7. Add sanity checks and validation for all relevant parameters.
-8. Perform local tests to validate that the new code works as expected, both with internet access, but also offline.
-9. If applicable, add a new test in the `tests` directory.
-10. Update MultiQC config `assets/multiqc_config.yml` so relevant suffixes, file name clean up and module plots are in the appropriate order. If applicable, add a [MultiQC](https://https://multiqc.info/) module.
-11. Add your tool to the tools selection:
-    - In the local subworkflow `utils_nfcore_seqinspector_pipeline` find the lists of tool lists in `main.nf` and add your tool to the list `all` and any other appropriate list.
-    - In `nextflow_schema.json`:
-      - Add your tool to the `pattern` regex of the `tools` property.
-      - Add your tool to the `pattern` regex of the `skip_tools` property.
-      - If the tool should be part of any pre-defined bundle, update the `help_text` of the `tools_bundle` property to include it in the relevant bundle(s).
-    - Update the list of tools in the `Tools Selection` section in the `usage.md` file.
-12. Add your tool to the table `Compatibility between tools and data type` on in the `README.md` file found in the base directory of seqinspector.
-13. Add a description of the output files and if relevant any appropriate images from the MultiQC report to `docs/output.md`.
-14. Update the metromap (can be found in `assets`) to include your new step.
-15. Update the `CHANGELOG.md` file in the base directory of the pipeline.
+1. Follow the [generic pipeline step](#add-a-new-pipeline-step) checklist for the standard steps (input/output channels, parameters, schema, tests, linting, etc.).
+2. If the upstream nf-core module does not emit to the `multiqc_files` topic, patch the module with `nf-core modules patch` and flag that a PR will be needed to upstream the change.
+3. Add your tool to the tools selection:
+   - In the local subworkflow `utils_nfcore_seqinspector_pipeline` find the lists of tool lists in `main.nf` and add your tool to the list `all` and any other appropriate list.
+   - In `nextflow_schema.json`:
+     - Add your tool to the `pattern` regex of the `tools` property.
+     - Add your tool to the `pattern` regex of the `skip_tools` property.
+     - If the tool should be part of any pre-defined bundle, update the `help_text` of the `tools_bundle` property to include it in the relevant bundle(s).
+4. Add your tool to the table `Compatibility between tools and data type` in `README.md`.
+5. Add your tool to the tools version table in `README.md` (alphabetical order).
+6. Add your tool to the `toolReferencesMap()` in `subworkflows/local/utils_nfcore_seqinspector_pipeline/main.nf` with name, authors, description, and DOI or URL.
+7. Add a citation entry in `CITATIONS.md` (alphabetical order).
+8. Update the metromap (can be found in `assets`) to include your new step.
+9. Update the `CHANGELOG.md` file in the base directory of the pipeline.
 
 ### Things to consider regarding displaying results for a new tool
 
