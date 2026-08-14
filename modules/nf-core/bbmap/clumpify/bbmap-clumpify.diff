@@ -1,0 +1,19 @@
+Changes in component 'nf-core/bbmap/clumpify'
+'modules/nf-core/bbmap/clumpify/environment.yml' is unchanged
+'modules/nf-core/bbmap/clumpify/meta.yml' is unchanged
+Changes in 'bbmap/clumpify/main.nf':
+--- modules/nf-core/bbmap/clumpify/main.nf
++++ modules/nf-core/bbmap/clumpify/main.nf
+@@ -13,7 +13,7 @@
+ 
+     output:
+     tuple val(meta), path('*.fastq.gz'), emit: reads
+-    tuple val(meta), path('*.log')     , emit: log
++    tuple val(meta), val("${task.process}"), val('bbmap'), path("*.log"), emit: log, topic: multiqc_files
+     tuple val("${task.process}"), val('bbmap'), eval('bbversion.sh | grep -v "Duplicate cpuset"'), emit: versions_bbmap, topic: versions
+ 
+     when:
+
+'modules/nf-core/bbmap/clumpify/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/bbmap/clumpify/tests/main.nf.test' is unchanged
+************************************************************

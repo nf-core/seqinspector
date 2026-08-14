@@ -182,4 +182,40 @@ If you update images or graphics, follow the nf-core [style guidelines](https://
 
 ## Pipeline specific contribution guidelines
 
-<!-- TODO nf-core: Add any pipeline specific contribution guidelines here, such as coding styles, procedures, checklists etc. -->
+To make the `nf-core/seqinspector` code and processing logic more understandable for new contributors and to ensure quality, we semi-standardise the way the code and other contributions are written.
+
+### Alphabetical ordering
+
+Tool entries, includes, and references throughout the pipeline must follow alphabetical order, case-insensitive. For example, `checkqc` comes before `chelae`, and `CHECKQC` comes before `CHELAE_TRIM`. This applies to:
+
+- `include` statements in workflow files
+- Module invocations within workflows
+- Tool entries in `defineToolsList()` bundles
+- Entries in `toolReferencesMap()`
+- Regex patterns in `nextflow_schema.json`
+- Lists in `docs/usage.md`, `docs/output.md`, `README.md`, and `CITATIONS.md`
+
+### Adding a new tool
+
+The nf-core/seqinspector pipeline has a strong emphasis on a broad spectrum of tools to select from. This checklist covers the seqinspector-specific steps on top of the [generic pipeline step](#add-a-new-pipeline-step) conventions.
+
+1. Follow the [generic pipeline step](#add-a-new-pipeline-step) checklist for the standard steps (input/output channels, parameters, schema, tests, linting, etc.).
+2. If the upstream nf-core module does not emit to the `multiqc_files` topic, patch the module with `nf-core modules patch` and flag that a PR will be needed to upstream the change.
+3. Add your tool to the tools selection:
+   - In the local subworkflow `utils_nfcore_seqinspector_pipeline` find the lists of tool lists in `main.nf` and add your tool to the list `all` and any other appropriate list.
+   - In `nextflow_schema.json`:
+     - Add your tool to the `pattern` regex of the `tools` property.
+     - Add your tool to the `pattern` regex of the `skip_tools` property.
+     - If the tool should be part of any pre-defined bundle, update the `help_text` of the `tools_bundle` property to include it in the relevant bundle(s).
+4. Add your tool to the table `Compatibility between tools and data type` in `README.md`.
+5. Add your tool to the tools version table in `README.md` (alphabetical order).
+6. Add your tool to the `toolReferencesMap()` in `subworkflows/local/utils_nfcore_seqinspector_pipeline/main.nf` with name, authors, description, and DOI or URL.
+7. Add a citation entry in `CITATIONS.md` (alphabetical order).
+8. Update the metromap (can be found in `assets`) to include your new step.
+9. Update the `CHANGELOG.md` file in the base directory of the pipeline.
+
+### Things to consider regarding displaying results for a new tool
+
+- If a MultiQC module exist for the tool, start by using the standard settings of the module.
+- If no Multiqc module exists, the results of the tool should be made available in the results directory.
+- If a tool doesn’t produce output files, the stdout should be channeled into a output file that can be accessible from the outdir of the pipeline.
