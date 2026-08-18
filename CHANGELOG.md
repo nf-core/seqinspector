@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Fixed`
 
 ### `Changed`
+- [#272](https://github.com/nf-core/seqinspector/pull/272) prepare pipeline update v1.1.2
 - [#271](https://github.com/nf-core/seqinspector/pull/271) Template update for nf-core/tools v4.1.0
 
 - [#270](https://github.com/nf-core/seqinspector/pull/270) Back to dev
