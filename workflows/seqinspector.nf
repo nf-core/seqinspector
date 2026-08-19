@@ -463,9 +463,9 @@ workflow SEQINSPECTOR {
         )
     )
 
+    // Exclude CheckQC reports from per-tag MultiQC
     ch_multiqc_per_tag_files = ch_tags
         .combine(ch_multiqc_files)
-        // Exclude CheckQC reports from per-tag MultiQC
         .filter { sample_tag, meta, _sample -> sample_tag in meta.tags && !meta.is_checkqc }
         .map { sample_tag, _meta, sample -> [sample_tag, sample] }
         .mix(multiqc_extra_files_per_tag)
