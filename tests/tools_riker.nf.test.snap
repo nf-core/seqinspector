@@ -1202,10 +1202,10 @@
                 "riker_args contains 'hybcap' but --bait_intervals and --target_intervals were not provided. Both are required for hybcap metrics."
             ]
         ],
-        "timestamp": "2026-06-29T17:36:08.610346369",
+        "timestamp": "2026-08-18T17:15:06.896364673",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.04.6"
         }
     },
     "NovaSeq6000 data test - riker with bait and target - stub": {
