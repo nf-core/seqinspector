@@ -1198,7 +1198,7 @@
             "No BAM files",
             "No warnings",
             [
-                "  riker_args               : --tools alignment basic hybcap isize",
+                "  riker_args              : --tools alignment basic hybcap isize",
                 "riker_args contains 'hybcap' but --bait_intervals and --target_intervals were not provided. Both are required for hybcap metrics."
             ]
         ],
