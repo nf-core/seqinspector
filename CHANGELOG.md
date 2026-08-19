@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Changed`
 
 - [#270](https://github.com/nf-core/seqinspector/pull/270) Back to dev (@FranBonath)
-- [#271](https://github.com/nf-core/seqinspector/pull/271) Template update for nf-core/tools v4.1.0 (@agrima2010, @mashehu)
+- [#271](https://github.com/nf-core/seqinspector/pull/271) Template update for nf-core/tools v4.1.0 (@agrima2010, @mashehu, @maxulysse)
 - [#272](https://github.com/nf-core/seqinspector/pull/272) prepare pipeline update v1.1.2 (@agrima2010, @maxulysse)
 - [#276](https://github.com/nf-core/seqinspector/pull/276) Address review comments for release v1.1.2 (@maxulysse)
 
