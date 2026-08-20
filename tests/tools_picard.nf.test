@@ -47,6 +47,29 @@ nextflow_pipeline {
             snapshot_include: 'bait_intervals',
             snapshot: 'stdout,stderr',
         ],
+        [
+            name: "NovaSeq6000 data test - picard missing fasta - should fail",
+            params: [
+                tools: 'picard_collecthsmetrics,picard_collectmultiplemetrics',
+                tools_bundle: null,
+                genome: null,
+            ],
+            failure: true,
+            snapshot_include: 'fasta',
+            snapshot: 'stdout,stderr',
+        ],
+        [
+            name: "NovaSeq6000 data test - picard missing fasta - stub",
+            params: [
+                tools: 'picard_collecthsmetrics,picard_collectmultiplemetrics',
+                tools_bundle: null,
+                genome: null,
+            ],
+            failure: true,
+            stub: true,
+            snapshot_include: 'fasta',
+            snapshot: 'stdout,stderr',
+        ],
     ]
 
     // Generate tests for each scenario

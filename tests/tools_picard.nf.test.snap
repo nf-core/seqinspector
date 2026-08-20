@@ -1,4 +1,22 @@
 {
+    "NovaSeq6000 data test - picard missing fasta - stub": {
+        "content": [
+            [
+                "pipeline_info"
+            ],
+            [
+                "[WARN] WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected. HINT: A common mistake is to provide multiple values separated by spaces e.g. `-profile test, [CONTAINER]`."
+            ],
+            [
+                "[ERROR] No fasta was provided, but picard or riker was requested. A reference FASTA is required for these tools."
+            ]
+        ],
+        "timestamp": "2026-08-20T13:42:47.524968852",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    },
     "NovaSeq6000 data test - picard_collecthsmetrics missing intervals - should fail": {
         "content": [
             [
@@ -710,6 +728,24 @@
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"
+        }
+    },
+    "NovaSeq6000 data test - picard missing fasta - should fail": {
+        "content": [
+            [
+                "pipeline_info"
+            ],
+            "No stable content",
+            "No BAM files",
+            "No warnings",
+            [
+                "[ERROR] No fasta was provided, but picard or riker was requested. A reference FASTA is required for these tools."
+            ]
+        ],
+        "timestamp": "2026-08-20T13:42:28.564703052",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
         }
     },
     "NovaSeq6000 data test - picard_collecthsmetrics missing intervals - stub": {

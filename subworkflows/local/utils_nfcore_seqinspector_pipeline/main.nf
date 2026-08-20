@@ -167,8 +167,7 @@ ${subsampled_info}-\033[2m----------------------------------------------------\0
         }
 
     if (!(fasta) && (("picard_collecthsmetrics" in tools) || ("picard_collectmultiplemetrics" in tools) || ("riker" in tools))) {
-        log.warn("No fasta was provided, but picard or riker was requested")
-        log.warn("BWAMEM2, SAMTOOLS, PICARD and RIKER processes will be skipped")
+        error("No fasta was provided, but picard or riker was requested. A reference FASTA is required for these tools.")
     }
 
     if ('picard_collecthsmetrics' in tools && (!params.bait_intervals || !params.target_intervals)) {
@@ -242,6 +241,7 @@ workflow PIPELINE_COMPLETION {
 def validateInputParameters(tools, riker_args) {
     genomeExistsError()
     rikerHybcapError(tools, riker_args)
+    rikerUnsupportedCollectorsError(tools, riker_args)
 }
 
 //
@@ -275,6 +275,23 @@ def genomeExistsError() {
 def rikerHybcapError(tools, riker_args) {
     if ('riker' in tools && riker_args?.contains('hybcap') && (!params.bait_intervals || !params.target_intervals)) {
         error("riker_args contains 'hybcap' but --bait_intervals and --target_intervals were not provided. Both are required for hybcap metrics.")
+    }
+}
+
+//
+// Exit pipeline if riker collectors requiring interval files are requested
+// but the pipeline does not yet support providing those files
+//
+def rikerUnsupportedCollectorsError(tools, riker_args) {
+    if ('riker' in tools && riker_args) {
+        def unsupported = []
+        if (riker_args.contains('wgs'))       unsupported << 'wgs (requires --wgs_intervals)'
+        if (riker_args.contains('gcbias'))    unsupported << 'gcbias (requires --gcbias_exclude_intervals)'
+        if (riker_args.contains('error'))     unsupported << 'error (requires --error_vcf and/or --error_intervals)'
+        if (riker_args.contains('rna'))       unsupported << 'rna (requires --rna_gene_model and/or --rna_ribosomal_intervals)'
+        if (unsupported) {
+            error("riker_args contains collectors that require interval files not yet supported as pipeline parameters: ${unsupported.join(', ')}.")
+        }
     }
 }
 
