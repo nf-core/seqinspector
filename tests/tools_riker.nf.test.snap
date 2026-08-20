@@ -688,6 +688,25 @@
             "nextflow": "26.04.4"
         }
     },
+    "NovaSeq6000 data test - riker with error collector - should fail": {
+        "content": [
+            [
+                "pipeline_info"
+            ],
+            "No stable content",
+            "No BAM files",
+            "No warnings",
+            [
+                "  riker_args                : --tools error",
+                "[ERROR] riker_args contains collectors that require interval files not yet supported as pipeline parameters: error (requires --error_vcf and/or --error_intervals)."
+            ]
+        ],
+        "timestamp": "2026-08-20T13:45:32.710635876",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    },
     "NovaSeq6000 data test - riker": {
         "content": [
             22,
@@ -1199,10 +1218,10 @@
             "No warnings",
             [
                 "  riker_args                : --tools alignment basic hybcap isize",
-                "riker_args contains 'hybcap' but --bait_intervals and --target_intervals were not provided. Both are required for hybcap metrics."
+                "[ERROR] riker_args contains 'hybcap' but --bait_intervals and --target_intervals were not provided. Both are required for hybcap metrics."
             ]
         ],
-        "timestamp": "2026-08-18T17:15:06.896364673",
+        "timestamp": "2026-08-20T13:44:58.086282217",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
@@ -1384,6 +1403,63 @@
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"
+        }
+    },
+    "NovaSeq6000 data test - riker with wgs collector - should fail": {
+        "content": [
+            [
+                "pipeline_info"
+            ],
+            "No stable content",
+            "No BAM files",
+            "No warnings",
+            [
+                "  riker_args                : --tools wgs",
+                "[ERROR] riker_args contains collectors that require interval files not yet supported as pipeline parameters: wgs (requires --wgs_intervals)."
+            ]
+        ],
+        "timestamp": "2026-08-20T13:45:09.799423304",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    },
+    "NovaSeq6000 data test - riker with rna collector - should fail": {
+        "content": [
+            [
+                "pipeline_info"
+            ],
+            "No stable content",
+            "No BAM files",
+            "No warnings",
+            [
+                "  riker_args                : --tools rna",
+                "[ERROR] riker_args contains collectors that require interval files not yet supported as pipeline parameters: rna (requires --rna_gene_model and/or --rna_ribosomal_intervals)."
+            ]
+        ],
+        "timestamp": "2026-08-20T13:45:46.820741616",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    },
+    "NovaSeq6000 data test - riker with gcbias collector - should fail": {
+        "content": [
+            [
+                "pipeline_info"
+            ],
+            "No stable content",
+            "No BAM files",
+            "No warnings",
+            [
+                "  riker_args                : --tools gcbias",
+                "[ERROR] riker_args contains collectors that require interval files not yet supported as pipeline parameters: gcbias (requires --gcbias_exclude_intervals)."
+            ]
+        ],
+        "timestamp": "2026-08-20T13:45:21.058527183",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
         }
     }
 }

@@ -54,6 +54,50 @@ nextflow_pipeline {
             snapshot_include: 'hybcap',
             snapshot: 'stdout,stderr',
         ],
+        [
+            name: "NovaSeq6000 data test - riker with wgs collector - should fail",
+            params: [
+                tools: 'riker',
+                tools_bundle: null,
+                riker_args: '--tools wgs',
+            ],
+            failure: true,
+            snapshot_include: 'wgs',
+            snapshot: 'stdout,stderr',
+        ],
+        [
+            name: "NovaSeq6000 data test - riker with gcbias collector - should fail",
+            params: [
+                tools: 'riker',
+                tools_bundle: null,
+                riker_args: '--tools gcbias',
+            ],
+            failure: true,
+            snapshot_include: 'gcbias',
+            snapshot: 'stdout,stderr',
+        ],
+        [
+            name: "NovaSeq6000 data test - riker with error collector - should fail",
+            params: [
+                tools: 'riker',
+                tools_bundle: null,
+                riker_args: '--tools error',
+            ],
+            failure: true,
+            snapshot_include: 'error',
+            snapshot: 'stdout,stderr',
+        ],
+        [
+            name: "NovaSeq6000 data test - riker with rna collector - should fail",
+            params: [
+                tools: 'riker',
+                tools_bundle: null,
+                riker_args: '--tools rna',
+            ],
+            failure: true,
+            snapshot_include: 'rna',
+            snapshot: 'stdout,stderr',
+        ],
     ]
 
     // Generate tests for each scenario

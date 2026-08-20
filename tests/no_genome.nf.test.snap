@@ -1,4 +1,22 @@
 {
+    "MiSeq data test - no genome with picard - should fail": {
+        "content": [
+            [
+                "pipeline_info"
+            ],
+            "No stable content",
+            "No BAM files",
+            "No warnings",
+            [
+                "[ERROR] No fasta was provided, but picard or riker was requested. A reference FASTA is required for these tools."
+            ]
+        ],
+        "timestamp": "2026-08-20T13:38:47.440297992",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    },
     "MiSeq data test - no genome": {
         "content": [
             6,
@@ -188,6 +206,24 @@
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"
+        }
+    },
+    "MiSeq data test - no genome with picard - stub": {
+        "content": [
+            [
+                "pipeline_info"
+            ],
+            [
+                "[WARN] WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected. HINT: A common mistake is to provide multiple values separated by spaces e.g. `-profile test, [CONTAINER]`."
+            ],
+            [
+                "[ERROR] No fasta was provided, but picard or riker was requested. A reference FASTA is required for these tools."
+            ]
+        ],
+        "timestamp": "2026-08-20T13:39:11.195831371",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
         }
     }
 }
