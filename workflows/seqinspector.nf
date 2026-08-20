@@ -357,8 +357,10 @@ workflow SEQINSPECTOR {
         newLine: true,
     )
 
+    // Tag CheckQC reports so they can be excluded from per-tag MultiQC reports.
+    // CheckQC results contain runfolder-level information that bleeds into other samples' reports.
     def collated_reports = channel.topic("multiqc_files")
-        .map { meta, _process, _tool, reports -> [meta, reports] }
+        .map { meta, _process, tool, reports -> [meta + [is_checkqc: tool == 'checkqc'], reports] }
 
     // STEP 08: MULTIQC (GLOBAL USING SAV AND PER TAG)
 
@@ -461,9 +463,10 @@ workflow SEQINSPECTOR {
         )
     )
 
+    // Exclude CheckQC reports from per-tag MultiQC
     ch_multiqc_per_tag_files = ch_tags
         .combine(ch_multiqc_files)
-        .filter { sample_tag, meta, _sample -> sample_tag in meta.tags }
+        .filter { sample_tag, meta, _sample -> sample_tag in meta.tags && !meta.is_checkqc }
         .map { sample_tag, _meta, sample -> [sample_tag, sample] }
         .mix(multiqc_extra_files_per_tag)
         .groupTuple()
