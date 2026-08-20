@@ -166,10 +166,12 @@ ${subsampled_info}-\033[2m----------------------------------------------------\0
             }
         }
 
+    // Picard and riker require a reference FASTA for alignment and metrics
     if (!(fasta) && (("picard_collecthsmetrics" in tools) || ("picard_collectmultiplemetrics" in tools) || ("riker" in tools))) {
         error("No fasta was provided, but picard or riker was requested. A reference FASTA is required for these tools.")
     }
 
+    // CollectHsMetrics requires bait and target interval lists
     if ('picard_collecthsmetrics' in tools && (!params.bait_intervals || !params.target_intervals)) {
         error("picard_collecthsmetrics was requested but --bait_intervals and --target_intervals were not provided. Both are required for CollectHsMetrics.")
     }
