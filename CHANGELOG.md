@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#280](https://github.com/nf-core/seqinspector/pull/280) Add validation for missing `--bait_intervals` and `--target_intervals` when `picard_collecthsmetrics` is requested (@maxulysse)
+
 ### `Fixed`
 
 ### `Changed`
