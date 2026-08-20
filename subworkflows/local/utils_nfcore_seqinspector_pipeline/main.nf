@@ -171,6 +171,10 @@ ${subsampled_info}-\033[2m----------------------------------------------------\0
         log.warn("BWAMEM2, SAMTOOLS, PICARD and RIKER processes will be skipped")
     }
 
+    if ('picard_collecthsmetrics' in tools && (!params.bait_intervals || !params.target_intervals)) {
+        error("picard_collecthsmetrics was requested but --bait_intervals and --target_intervals were not provided. Both are required for CollectHsMetrics.")
+    }
+
     if ('toulligqc' in tools && 'emulate_amd64' in workflow.profile.tokenize(",")) {
         error("ToulligQC is not compatible with the 'emulate_amd64' profile. Please remove ToulligQC from the list of tools if you wish to run seqinspector on this architecture.")
     }

@@ -26,6 +26,27 @@ nextflow_pipeline {
             ],
             stub: true,
         ],
+        [
+            name: "NovaSeq6000 data test - picard_collecthsmetrics missing intervals - should fail",
+            params: [
+                tools: 'picard_collecthsmetrics',
+                tools_bundle: null,
+            ],
+            failure: true,
+            snapshot_include: 'bait_intervals',
+            snapshot: 'stdout,stderr',
+        ],
+        [
+            name: "NovaSeq6000 data test - picard_collecthsmetrics missing intervals - stub",
+            params: [
+                tools: 'picard_collecthsmetrics',
+                tools_bundle: null,
+            ],
+            failure: true,
+            stub: true,
+            snapshot_include: 'bait_intervals',
+            snapshot: 'stdout,stderr',
+        ],
     ]
 
     // Generate tests for each scenario

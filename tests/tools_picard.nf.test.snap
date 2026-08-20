@@ -1,4 +1,22 @@
 {
+    "NovaSeq6000 data test - picard_collecthsmetrics missing intervals - should fail": {
+        "content": [
+            [
+                "pipeline_info"
+            ],
+            "No stable content",
+            "No BAM files",
+            "No warnings",
+            [
+                "[ERROR] picard_collecthsmetrics was requested but --bait_intervals and --target_intervals were not provided. Both are required for CollectHsMetrics."
+            ]
+        ],
+        "timestamp": "2026-08-20T11:25:23.275081727",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    },
     "NovaSeq6000 data test - picard_collecthsmetrics and picard_collectmultiplemetrics": {
         "content": [
             28,
@@ -692,6 +710,24 @@
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"
+        }
+    },
+    "NovaSeq6000 data test - picard_collecthsmetrics missing intervals - stub": {
+        "content": [
+            [
+                "pipeline_info"
+            ],
+            [
+                "[WARN] WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected. HINT: A common mistake is to provide multiple values separated by spaces e.g. `-profile test, [CONTAINER]`."
+            ],
+            [
+                "[ERROR] picard_collecthsmetrics was requested but --bait_intervals and --target_intervals were not provided. Both are required for CollectHsMetrics."
+            ]
+        ],
+        "timestamp": "2026-08-20T11:25:48.76823048",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
         }
     }
 }
