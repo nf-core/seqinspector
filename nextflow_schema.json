@@ -256,6 +256,22 @@
                     "format": "file-path",
                     "exists": true,
                     "fa_icon": "fas fa-file"
+                },
+                "rna_gene_model": {
+                    "type": "string",
+                    "description": "Path to a GTF/GFF gene model for riker RNA metrics. RNA metrics are only produced when `riker_args` includes `--tools rna`.",
+                    "pattern": "^\\S+\\.(gtf|gff|gff3)(\\.gz)?$",
+                    "format": "file-path",
+                    "exists": true,
+                    "fa_icon": "fas fa-file"
+                },
+                "rna_ribosomal_intervals": {
+                    "type": "string",
+                    "description": "Path to explicit ribosomal (rRNA) intervals (BED or Picard IntervalList) for riker RNA metrics, unioned with rRNA genes derived from the gene model by biotype.",
+                    "pattern": "^\\S+\\.(bed|bed\\.gz|interval_list)$",
+                    "format": "file-path",
+                    "exists": true,
+                    "fa_icon": "fas fa-file"
                 }
             }
         },

@@ -238,6 +238,7 @@ workflow PIPELINE_COMPLETION {
 def validateInputParameters(tools, riker_args) {
     genomeExistsError()
     rikerHybcapError(tools, riker_args)
+    rikerRnaCheck(tools, riker_args)
 }
 
 //
@@ -271,6 +272,22 @@ def genomeExistsError() {
 def rikerHybcapError(tools, riker_args) {
     if ('riker' in tools && riker_args?.contains('hybcap') && (!params.bait_intervals || !params.target_intervals)) {
         error("riker_args contains 'hybcap' but --bait_intervals and --target_intervals were not provided. Both are required for hybcap metrics.")
+    }
+}
+
+//
+// Validate riker RNA metrics configuration: the gene model and the `rna` tool must be requested together
+//
+def rikerRnaCheck(tools, riker_args) {
+    if (!('riker' in tools)) {
+        return
+    }
+    def rna_requested = riker_args?.contains('rna')
+    if (rna_requested && !params.rna_gene_model) {
+        error("riker_args contains 'rna' but --rna_gene_model was not provided. A gene model is required for RNA metrics.")
+    }
+    if (params.rna_gene_model && !rna_requested) {
+        log.warn("--rna_gene_model was provided but riker_args does not request 'rna'; no RNA metrics will be produced. Add 'rna' to --riker_args to enable them.")
     }
 }
 

@@ -42,6 +42,26 @@ nextflow_pipeline {
             ],
             stub: true,
         ],
+        // riker only emits RNA metrics when 'rna' is in --tools AND a gene model is supplied
+        [
+            name: "NovaSeq6000 data test - riker with rna metrics",
+            params: [
+                tools: 'riker',
+                tools_bundle: null,
+                riker_args: '--tools alignment basic isize rna',
+                rna_gene_model: "${pipelines_testdata_base_path}/modules/data/genomics/eukaryotes/saccharomyces_cerevisiae/genome_gfp.gtf",
+            ],
+        ],
+        [
+            name: "NovaSeq6000 data test - riker with rna metrics - stub",
+            params: [
+                tools: 'riker',
+                tools_bundle: null,
+                riker_args: '--tools alignment basic isize rna',
+                rna_gene_model: "${pipelines_testdata_base_path}/modules/data/genomics/eukaryotes/saccharomyces_cerevisiae/genome_gfp.gtf",
+            ],
+            stub: true,
+        ],
         [
             name: "NovaSeq6000 data test - riker hybcap with only bait - should fail",
             params: [
@@ -52,6 +72,17 @@ nextflow_pipeline {
             ],
             failure: true,
             snapshot_include: 'hybcap',
+            snapshot: 'stdout,stderr',
+        ],
+        [
+            name: "NovaSeq6000 data test - riker rna without gene model - should fail",
+            params: [
+                tools: 'riker',
+                tools_bundle: null,
+                riker_args: '--tools alignment basic isize rna',
+            ],
+            failure: true,
+            snapshot_include: 'rna_gene_model',
             snapshot: 'stdout,stderr',
         ],
     ]
