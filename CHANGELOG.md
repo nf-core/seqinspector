@@ -13,6 +13,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#278](https://github.com/nf-core/seqinspector/pull/278) Back to dev (@maxulysse)
 - [#279](https://github.com/nf-core/seqinspector/pull/279) Exclude CheckQC from individual MultiQC reports to prevent runfolder information from bleeding into other samples' reports (@maxulysse)
+- [#282](https://github.com/nf-core/seqinspector/pull/282) Template update for nf-core/tools v4.1.0 (@maxulysse)
+
+### `Dependencies`
+
+| Dependency | Old version | New version |
+| ---------- | ----------- | ----------- |
+| picard     | 3.4.0       | 3.5.0       |
 
 ## [1.1.2](https://github.com/nf-core/seqinspector/releases/tag/1.1.2) - Carrie Bishop
 
