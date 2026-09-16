@@ -1,0 +1,19 @@
+Changes in component 'nf-core/picard/collectmultiplemetrics'
+'modules/nf-core/picard/collectmultiplemetrics/meta.yml' is unchanged
+'modules/nf-core/picard/collectmultiplemetrics/environment.yml' is unchanged
+Changes in 'picard/collectmultiplemetrics/main.nf':
+--- modules/nf-core/picard/collectmultiplemetrics/main.nf
++++ modules/nf-core/picard/collectmultiplemetrics/main.nf
+@@ -13,7 +13,7 @@
+     tuple val(meta3), path(fai)
+ 
+     output:
+-    tuple val(meta), path("*_metrics"), emit: metrics
++    tuple val(meta), val("${task.process}"), val('picard'), path("*_metrics"), emit: metrics, topic: multiqc_files
+     tuple val(meta), path("*.pdf"), emit: pdf, optional: true
+     tuple val("${task.process}"), val('picard'), eval("picard CollectMultipleMetrics --version 2>&1 | sed -n 's/.*Version://p'"), topic: versions, emit: versions_picard
+ 
+
+'modules/nf-core/picard/collectmultiplemetrics/tests/main.nf.test' is unchanged
+'modules/nf-core/picard/collectmultiplemetrics/tests/main.nf.test.snap' is unchanged
+************************************************************

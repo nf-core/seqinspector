@@ -1,0 +1,19 @@
+Changes in component 'nf-core/krona/ktimporttaxonomy'
+'modules/nf-core/krona/ktimporttaxonomy/meta.yml' is unchanged
+'modules/nf-core/krona/ktimporttaxonomy/environment.yml' is unchanged
+Changes in 'krona/ktimporttaxonomy/main.nf':
+--- modules/nf-core/krona/ktimporttaxonomy/main.nf
++++ modules/nf-core/krona/ktimporttaxonomy/main.nf
+@@ -13,7 +13,7 @@
+     path taxonomy, stageAs: 'taxonomy.tab'
+ 
+     output:
+-    tuple val(meta), path('*.html'), emit: html
++    tuple val(meta), val("${task.process}"), val('krona'), path("*html"), emit: html, topic: multiqc_files
+     tuple val("${task.process}"), val('krona'), eval("ktImportTaxonomy | grep -Po '(?<=KronaTools )[0-9.]+'"), topic: versions, emit: versions_krona
+ 
+     when:
+
+'modules/nf-core/krona/ktimporttaxonomy/tests/main.nf.test' is unchanged
+'modules/nf-core/krona/ktimporttaxonomy/tests/main.nf.test.snap' is unchanged
+************************************************************

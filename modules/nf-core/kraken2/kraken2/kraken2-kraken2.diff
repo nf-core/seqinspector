@@ -1,0 +1,19 @@
+Changes in component 'nf-core/kraken2/kraken2'
+'modules/nf-core/kraken2/kraken2/meta.yml' is unchanged
+'modules/nf-core/kraken2/kraken2/environment.yml' is unchanged
+Changes in 'kraken2/kraken2/main.nf':
+--- modules/nf-core/kraken2/kraken2/main.nf
++++ modules/nf-core/kraken2/kraken2/main.nf
+@@ -17,7 +17,7 @@
+     tuple val(meta), path('*.classified{.,_}*')     , optional:true, emit: classified_reads_fastq
+     tuple val(meta), path('*.unclassified{.,_}*')   , optional:true, emit: unclassified_reads_fastq
+     tuple val(meta), path('*classifiedreads.txt')   , optional:true, emit: classified_reads_assignment
+-    tuple val(meta), path('*report.txt')                           , emit: report
++    tuple val(meta), val("${task.process}"), val('kraken2'), path("*report.txt"), emit: report, topic: multiqc_files
+     tuple val("${task.process}"), val('kraken2'), eval('kraken2 --version 2>&1 | head -1 | sed "s/^.*Kraken version //; s/ .*//"'), topic: versions, emit: versions_kraken2
+     tuple val("${task.process}"), val('pigz'), eval('pigz --version 2>&1 | sed "s/pigz //g"'), topic: versions, emit: versions_pigz
+ 
+
+'modules/nf-core/kraken2/kraken2/tests/main.nf.test' is unchanged
+'modules/nf-core/kraken2/kraken2/tests/main.nf.test.snap' is unchanged
+************************************************************

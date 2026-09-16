@@ -1,0 +1,105 @@
+%%metro title: nf-core/seqinspector
+%%metro style: dark
+%%metro logo: docs/images/nf-core-seqinspector_logo_dark.png
+
+%%metro line: runfolder_line | Run Folder | #1f77b4
+%%metro line: fastq_line | RAW sequence | #ff7f0e
+%%metro line: bam_line | Reference mapped | #24B064
+
+%%metro file: fastq_icon | FASTQ | | banner
+%%metro dir: runfolder_icon | RUNDIR
+%%metro file: multiqc_icon | HTML | | banner
+
+%%metro center_ports: true
+%%metro compact_offsets: true
+%%metro legend: bl
+
+%%metro grid: fastq_graph | 0,0,2
+%%metro grid: runfolder_graph | 1,0
+%%metro grid: bam_graph | 1,1
+%%metro grid: reporting_graph | 2,1,2
+
+graph LR
+    subgraph fastq_graph [RAW sequence QC]
+        fastq_icon[ ]
+
+        bbmap[BBMap Clumpify]
+        chelae[Chelae trim]
+        fastp[FastP]
+        fastqc[FASTQC]
+        fastqe[FASTQE]
+        fastqscreen[FastQ Screen]
+        fq_lint[FQ Lint]
+        kraken2[Kraken2]
+        krona[Krona]
+        seqfu[SeqFu Stats]
+        seqkit[SeqKit Stats]
+        seqtk[Seqtk sample]
+        sequali[Sequali]
+        toulligqc[ToulligQC]
+
+        fastq_icon -->|fastq_line| seqtk
+
+        seqtk -->|fastq_line| kraken2
+        kraken2 -->|fastq_line| krona
+
+        subgraph bam_graph [Reference mapped QC]
+            bwamem2[BWAmem2]
+
+            picardhs[Picard collecthsmetrics]
+            picardmultiple[Picard collectmultiplemetrics]
+            riker[Riker multi]
+
+            bwamem2 -->|bam_line| picardhs
+            bwamem2 -->|bam_line| picardmultiple
+            bwamem2 -->|bam_line| riker
+        end
+
+        seqtk -->|fastq_line| bbmap
+        seqtk -->|fastq_line| chelae
+        seqtk -->|fastq_line| fastp
+        seqtk -->|fastq_line| fastqc
+        seqtk -->|fastq_line| fastqe
+        seqtk -->|fastq_line| fastqscreen
+        seqtk -->|fastq_line| fq_lint
+        seqtk -->|fastq_line| seqfu
+        seqtk -->|fastq_line| seqkit
+        seqtk -->|fastq_line| sequali
+        seqtk -->|fastq_line| toulligqc
+    end
+
+    subgraph runfolder_graph [Run Folder QC]
+        runfolder_icon[ ]
+
+        checkqc[CheckQC]
+        rundirparser[Rundirparser]
+
+        runfolder_icon -->|runfolder_line| checkqc
+        runfolder_icon -->|runfolder_line| rundirparser
+    end
+
+    subgraph reporting_graph [Reporting]
+        %%metro direction: TB
+        multiqc[MultiQC]
+        multiqc -->|fastq_line,bam_line,runfolder_line| multiqc_icon
+        multiqc_icon[ ]
+    end
+
+    bbmap -->|fastq_line| multiqc
+    chelae -->|fastq_line| multiqc
+    checkqc -->|runfolder_line| multiqc
+    fastp -->|fastq_line| multiqc
+    fastqc -->|fastq_line| multiqc
+    fastqe -->|fastq_line| multiqc
+    fastqscreen -->|fastq_line| multiqc
+    fq_lint -->|fastq_line| multiqc
+    krona -->|fastq_line| multiqc
+    picardhs -->|bam_line| multiqc
+    picardmultiple -->|bam_line| multiqc
+    riker -->|bam_line| multiqc
+    rundirparser -->|runfolder_line| multiqc
+    seqfu -->|fastq_line| multiqc
+    seqkit -->|fastq_line| multiqc
+    seqtk -->|fastq_line| bwamem2
+    sequali -->|fastq_line| multiqc
+    toulligqc -->|fastq_line| multiqc

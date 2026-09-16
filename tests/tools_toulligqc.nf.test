@@ -1,0 +1,37 @@
+def pipelines_testdata_base_path = 'https://raw.githubusercontent.com/nf-core/test-datasets/'
+
+nextflow_pipeline {
+
+    name "Test pipeline"
+    script "../main.nf"
+    profile "emulate_amd64,test"
+
+    def test_scenario = [
+        [
+            name: "PromethION data test - toulligqc fail",
+            params: [
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/promethion.csv',
+                tools: "toulligqc"
+            ],
+            failure: true,
+            snapshot_include: 'ToulligQC',
+            snapshot: 'stdout,stderr',
+        ],
+        [
+            name: "PromethION data test - toulligqc fail - stub",
+            params: [
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/promethion.csv',
+                tools: "toulligqc"
+            ],
+            failure: true,
+            snapshot_include: 'ToulligQC',
+            snapshot: 'stdout,stderr',
+            stub: true,
+        ],
+    ]
+
+    // Generate tests for each scenario
+    test_scenario.each { scenario ->
+        test(scenario.name, UTILS.getTest(scenario))
+    }
+}

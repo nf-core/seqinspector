@@ -2,59 +2,82 @@
 
 ## :warning: Please read this documentation on the nf-core website: [https://nf-co.re/seqinspector/usage](https://nf-co.re/seqinspector/usage)
 
-> _Documentation of pipeline parameters is generated automatically from the pipeline schema and can no longer be found in markdown files._
-
 ## Introduction
 
-<!-- TODO nf-core: Add documentation about anything specific to running your pipeline. For general topics, please point to (and add to) the main nf-core website. -->
+### General points
+
+The nf-core/seqinspector pipeline is a general QC pipeline for sequencing data.
+The current version only supports data in fastq format.
+The pipeline is meant to include a large amount of possible QC tools to chose from, but not all of them may be relevant to your data.
+As such we highly recommend to familiarize yourself with the different QC tools available and to remove any QC tool you would like to exclude with the `--skip-tools` command line parameter.
+For repeated use we suggest to create a params file containing the `--skip-tools` parameters (for details see the "Running the pipeline" section).
+Be aware that some tools are skipped by default and will need to be included in the list of skipped tools when curating your own list.
+To identify defaults included or excluded please check out [the overview compatibility between tools and data type table](../#compatibility-between-tools-and-data-type).
+
+### What nf-core/seqinspector is not for
+
+The results of the nf-core/seqinspector pipeline are not meant to be used for any downstream analysis, but are exclusively for QC purposes.
+Even tools that may be used in other pipelines as a starting point for analysis are run in a QC perspective, most likely with a downsampled input.
 
 ## Samplesheet input
 
-You will need to create a samplesheet with information about the samples you would like to analyse before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row as shown in the examples below.
+You will need to create a samplesheet with information about the samples/fastq files you would like to analyse before running the pipeline. Use this parameter to specify its location.
 
 ```bash
 --input '[path to samplesheet file]'
 ```
 
-### Multiple runs of the same sample
-
-The `sample` identifiers have to be the same when you have re-sequenced the same sample more than once e.g. to increase sequencing depth. The pipeline will concatenate the raw reads before performing any downstream analysis. Below is an example for the same sample sequenced across 3 lanes:
-
-```csv title="samplesheet.csv"
-sample,fastq_1,fastq_2
-CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
-CONTROL_REP1,AEG588A1_S1_L003_R1_001.fastq.gz,AEG588A1_S1_L003_R2_001.fastq.gz
-CONTROL_REP1,AEG588A1_S1_L004_R1_001.fastq.gz,AEG588A1_S1_L004_R2_001.fastq.gz
-```
-
 ### Full samplesheet
 
-The pipeline will auto-detect whether a sample is single- or paired-end using the information provided in the samplesheet. The samplesheet can have as many columns as you desire, however, there is a strict requirement for the first 3 columns to match those defined in the table below.
+The following simple run dir structure...
 
-A final samplesheet file consisting of both single- and paired-end data may look something like the one below. This is for 6 samples, where `TREATMENT_REP3` has been sequenced twice.
+```bash
+run_dir
+├── sample1_lane1_group1_r1.fq.gz
+├── sample2_lane1_group1_r1.fq.gz
+├── sample3_lane2_group2_r1.fq.gz
+└── sample4_lane2_group3_r1.fq.gz
+```
+
+...would be represented in the following samplesheet (shown as .tsv for readability)
 
 ```csv title="samplesheet.csv"
-sample,fastq_1,fastq_2
-CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
-CONTROL_REP2,AEG588A2_S2_L002_R1_001.fastq.gz,AEG588A2_S2_L002_R2_001.fastq.gz
-CONTROL_REP3,AEG588A3_S3_L002_R1_001.fastq.gz,AEG588A3_S3_L002_R2_001.fastq.gz
-TREATMENT_REP1,AEG588A4_S4_L003_R1_001.fastq.gz,
-TREATMENT_REP2,AEG588A5_S5_L003_R1_001.fastq.gz,
-TREATMENT_REP3,AEG588A6_S6_L003_R1_001.fastq.gz,
-TREATMENT_REP3,AEG588A6_S6_L004_R1_001.fastq.gz,
+sample  fastq_1                                       fastq_2 rundir          tags
+sample1 path/to/run_dir/sample1_lane1_group1_r1.fq.gz         path/to/run_dir project1:group1
+sample2 path/to/run_dir/sample2_lane1_group1_r1.fq.gz         path/to/run_dir project1:group1
+sample3 path/to/run_dir/sample3_lane2_group2_r1.fq.gz         path/to/run_dir project1:group2
+sample4 path/to/run_dir/sample4_lane2_group3_r1.fq.gz         path/to/run_dir control
 ```
 
 | Column    | Description                                                                                                                                                                            |
 | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `sample`  | Custom sample name. This entry will be identical for multiple sequencing libraries/runs from the same sample. Spaces in sample names are automatically converted to underscores (`_`). |
 | `fastq_1` | Full path to FastQ file for Illumina short reads 1. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                             |
-| `fastq_2` | Full path to FastQ file for Illumina short reads 2. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                             |
+| `fastq_2` | Full path to FastQ file for Illumina short reads 2. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz" (optional).                                                  |
+| `rundir`  | Path to the runfolder containing extra information about the sequencing run (optional\*).                                                                                              |
+| `tags`    | Colon-separated list of tags to group samples in special reports.                                                                                                                      |
 
-An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
+\*If rundir is not provided, the RUNDIRPARSER module is skipped and the sequencing run metadata is not collected.
+
+Another [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
+
+### tags
+
+Tags can be used to group samples in special reports, for example in the MultiQC per tag report.
+They are optional and can be used for any purpose you like.
+For example, you could use them to group samples by experimental condition, or by sequencing run.
+Tags are meant to be case-sensitive and should be separated by a colon (`:`) if you want to use multiple tags for a sample.
+Some file systems are not case sensitive, e.g. on MacOS. We recommend precaution when using similar tags with different cases on such file systems.
+A warning will be displayed if you have multiple tags that only differ in case, but the pipeline will not stop and will run as normal.
+
+```bash
+WARN: Tag name collision: [lane1, Lane1, LANE1]
+WARN: On a MacOS system these tags will be considered as one
+```
 
 ## Running the pipeline
 
-The typical command for running the pipeline is as follows:
+A typical command for running the pipeline is as follows:
 
 ```bash
 nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --genome GRCh37 -profile docker
@@ -95,6 +118,118 @@ genome: 'GRCh37'
 
 You can also generate such `YAML`/`JSON` files via [nf-core/launch](https://nf-co.re/launch).
 
+### Sample size selection
+
+Optionally, the `sample_size` parameter allows you to subset a random number of reads to be analysed.
+Both absolute numbers (e.g 100) and relative numbers (e.g 0.25) can be specified.
+Reads are sampled randomly using reservoir sampling with a fixed seed (`-s100`) for reproducibility.
+To use a different seed, override it via `ext.args` in `conf/modules.config`:
+
+```groovy
+withName: SEQTK_SAMPLE {
+    ext.args = '-s200'
+}
+```
+
+```bash
+nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000
+```
+
+#### Subsampling control
+
+By default, only a subset of tools run on the subsampled data. The `--subsample_tools` parameter controls which tools receive subsampled reads (via Seqtk) versus original data. Tools not in this list run on the original (non-subsampled) data.
+
+The default value is:
+
+```bash
+--subsample_tools fastqscreen,kraken2,picard_collecthsmetrics,picard_collectmultiplemetrics
+```
+
+For example, to also run FastQC on subsampled data:
+
+```bash
+nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 --subsample_tools fastqscreen,kraken2,picard_collecthsmetrics,picard_collectmultiplemetrics,fastqc
+```
+
+Or to run all active tools on subsampled data:
+
+```bash
+nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 --subsample_tools all
+```
+
+Note: `all` excludes tools that cannot use subsampled data (`checkqc`, `multiqcsav`, `rundirparser`).
+
+Or to disable subsampling for all tools (run everything on original data):
+
+```bash
+nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 --subsample_tools null
+```
+
+:::note
+`picard_collecthsmetrics` and `picard_collectmultiplemetrics` share the same alignment step. Selecting one for subsampling will automatically subsample the other as well.
+:::
+
+Note: The `--subsample_tools` parameter only takes effect when `sample_size > 0`.
+
+### Tools selection
+
+Tools selection is an integral part of sequinspector and, as the pipeline grows, it will become more and more important to select tools of interest.
+By **default**, the pipeline does run a subsection of tools as defined in the `utils_nfcore_seqinspector_pipeline` subworkflow.
+Currently, the following tools are run by default:
+
+- fastqc
+- fastqscreen
+- fq_lint
+- picard_collectmultiplemetrics
+- rundirparser
+- seqfu_stats
+- sequali
+
+#### Choose specific tools
+
+It is possible to choose individual tools to run using the `--tools` parameter and add all desired tools in a comma separated string. For example:
+
+```bash
+--tools fastqscreen,rundirparser
+```
+
+Be aware that the default tools will still be run. In order to ONLY run the selection, one has to specify `--tools_bundle null` as well:
+
+```bash
+--tools fastqscreen,rundirparser --tools_bundle null
+```
+
+See the [parameters page](https://nf-co.re/seqinspector/parameters/#tools) for the list of available tools and their values.
+
+#### Skip specific tools
+
+Some tools might not be compatible with your data or you do not require all tools that are going to be run. In this case you can skip them by providing a comma-separated list of tools to be skipped with the `--skip_tools` parameter, e.g.:
+
+```bash
+--skip_tools fastqe,kraken2,riker
+```
+
+The nextflow configuration file can also be use to customise tool arguments.
+See official [nexflow](https://www.nextflow.io/docs/latest/config.html) and [nf-core](https://nf-co.re/docs/usage/configuration#customising-tool-arguments) documentation for further details.
+
+#### Choose pre-defined bundles of tools
+
+It is possible to also choose bundles of pre-specified tools using the `--tools_bundle` parameter. It is still possible to remove tools using the `--skip_tools` parameters or add additional tools with the `--tools` parameter when choosing a predefined setup with `--tools_bundle`.
+
+See the [parameters page](https://nf-co.re/seqinspector/parameters/#tools_bundle) for the list of available bundles and their contents.
+
+### Available functionality and tools
+
+#### BWAMEM2 and alignment-based QC tools
+
+If no genome or fasta file is provided, either with `--genome` or `--fasta`,
+the pipeline will not be able to run the alignment step with `BWAMEM2`,
+and will skip all tools that depend on the alignment file (e.g. `picard CollectHsMetrics` and `picard CollectMultipleMetrics`).
+
+#### Hybrid-selection QC metrics
+
+The pipeline supports hybrid-selection (HS) QC metrics collection via [picard CollectHSmetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard).
+
 ### Updating the pipeline
 
 When you run the above command, Nextflow automatically pulls the pipeline code from GitHub and stores it as a cached version. When running the pipeline after this, it will always use the cached version if available - even if the pipeline has been updated since. To make sure that you're running the latest version of the pipeline, make sure that you regularly update the cached version of the pipeline:
@@ -114,7 +249,7 @@ This version number will be logged in reports when you run the pipeline, so that
 To further assist in reproducibility, you can use share and reuse [parameter files](#running-the-pipeline) to repeat pipeline runs with the same settings without having to write out a command with every single parameter.
 
 > [!TIP]
-> If you wish to share such profile (such as upload as supplementary material for academic publications), make sure to NOT include cluster specific paths to files, nor institutional specific profiles.
+> If you wish to share such profiles (such as upload as supplementary material for academic publications), make sure to NOT include cluster specific paths to files, nor institutional specific profiles.
 
 ## Core Nextflow arguments
 

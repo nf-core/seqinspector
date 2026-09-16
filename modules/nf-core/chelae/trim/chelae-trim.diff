@@ -1,0 +1,22 @@
+Changes in component 'nf-core/chelae/trim'
+'modules/nf-core/chelae/trim/meta.yml' is unchanged
+'modules/nf-core/chelae/trim/environment.yml' is unchanged
+Changes in 'chelae/trim/main.nf':
+--- modules/nf-core/chelae/trim/main.nf
++++ modules/nf-core/chelae/trim/main.nf
+@@ -13,8 +13,8 @@
+ 
+     output:
+     tuple val(meta), path('*.chelae.fastq.gz'), emit: reads
+-    tuple val(meta), path('*.chelae.json'), emit: json
+-    tuple val(meta), path('*.chelae.tsv'), emit: metrics
++    tuple val(meta), val("${task.process}"), val('chelae'), path('*.chelae.json'), emit: json, topic: multiqc_files
++    tuple val(meta), val("${task.process}"), val('chelae'), path('*.chelae.tsv'), emit: metrics, topic: multiqc_files
+     tuple val("${task.process}"), val('chelae'), eval("chelae --version 2>&1 | sed 's/chelae //'"), emit: versions_chelae, topic: versions
+ 
+     when:
+
+'modules/nf-core/chelae/trim/tests/main.nf.test' is unchanged
+'modules/nf-core/chelae/trim/tests/nextflow.config' is unchanged
+'modules/nf-core/chelae/trim/tests/main.nf.test.snap' is unchanged
+************************************************************

@@ -11,7 +11,7 @@
                 "type": "string",
                 "pattern": "^\\S+$",
                 "errorMessage": "Sample name must be provided and cannot contain spaces",
-                "meta": ["id"]
+                "meta": ["sample"]
             },
             "fastq_1": {
                 "type": "string",
@@ -26,8 +26,34 @@
                 "exists": true,
                 "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
                 "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+            },
+            "rundir": {
+                "oneOf": [
+                    {
+                        "type": "string",
+                        "format": "file-path",
+                        "exists": true,
+                        "pattern": "\\.tar\\.gz$"
+                    },
+                    {
+                        "type": "string",
+                        "format": "directory-path",
+                        "exists": true
+                    }
+                ],
+                "errorMessage": "Run directory must be a path or tar directory",
+                "meta": ["rundir"]
+            },
+            "tags": {
+                "type": "string",
+                "pattern": "^([A-Za-z0-9_-]+:)*([A-Za-z0-9_-]+)$",
+                "errorMessage": "Tags must be separated by colons and only consist of lowercase letters, numbers, underscores and hyphens.",
+                "meta": ["tags"]
             }
         },
-        "required": ["sample", "fastq_1"]
+        "required": ["sample", "fastq_1"],
+        "dependentRequired": {
+            "fastq_2": ["fastq_1"]
+        }
     }
 }

@@ -1,0 +1,56 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "BAM_QC"
+description: Quality check subworkflow for processed BAM files using Picard tools
+keywords:
+  - bam
+  - qc
+  - picard
+  - metrics
+components:
+  - picard/collecthsmetrics
+  - picard/collectmultiplemetrics
+input:
+  - ch_bam_bai:
+      type: list
+      description: |
+        List containing: [ val(meta), path(bam), path(bai) ]
+        e.g. [ [ id:'test' ], bam, bai ]
+  - ch_reference_fasta:
+      type: list
+      description: |
+        List containing: [ val(meta), path(reference_fasta) ]
+        e.g. [ [ id:'genome' ], genome.fa ]
+  - ch_reference_fai:
+      type: list
+      description: |
+        List containing: [ val(meta), path(reference_fai) ]
+        e.g. [ [ id:'genome' ], genome.fa.fai ]
+  - ch_bait_intervals:
+      type: list
+      description: |
+        List containing: [ val(meta), path(bait_intervals) ]
+        e.g. [ [ id:'test' ], baits.interval_list ]
+  - ch_target_intervals:
+      type: list
+      description: |
+        List containing: [ val(meta), path(target_intervals) ]
+        e.g. [ [ id:'test' ], targets.interval_list ]
+  - ch_ref_dict:
+      type: list
+      description: |
+        List containing: [ val(meta), path(ref_dict) ]
+        e.g. [ [ id:'genome' ], genome.dict ]
+  - tools:
+      type: list
+      description: |
+        List of tools to run, e.g. ['picard_collecthsmetrics', picard_collectmultiplemetrics']
+output:
+  - bam:
+      type: list
+      description: |
+        List containing: [ val(meta), path(bam), path(bai) ]
+        Pass-through of input BAM files
+authors:
+  - "@maxulysse"
+maintainers:
+  - "@maxulysse"
