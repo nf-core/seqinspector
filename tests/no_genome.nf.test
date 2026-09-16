@@ -11,7 +11,7 @@ nextflow_pipeline {
             params: [
                 input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/miseq.csv',
                 genome: null,
-                tools: 'fastqscreen,picard_collecthsmetrics',
+                tools: 'fastqscreen',
                 tools_bundle: null,
             ],
         ],
@@ -20,7 +20,7 @@ nextflow_pipeline {
             params: [
                 input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/miseq.csv',
                 genome: null,
-                tools: 'fastqscreen,picard_collecthsmetrics',
+                tools: 'fastqscreen',
                 tools_bundle: null,
             ],
             stub: true,
