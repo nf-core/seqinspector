@@ -236,6 +236,8 @@ workflow NFCORE_SEQINSPECTOR {
         tools,
         subsample_tools,
         params.target_intervals,
+        params.rna_gene_model,
+        params.rna_ribosomal_intervals,
         kraken2_db,
         kraken2_save_reads,
         kraken2_save_readclassifications,

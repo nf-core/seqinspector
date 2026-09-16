@@ -62,6 +62,8 @@ workflow SEQINSPECTOR {
     tools
     subsample_tools
     target_intervals
+    rna_gene_model
+    rna_ribosomal_intervals
     kraken2_db
     kraken2_save_reads
     kraken2_save_readclassifications
@@ -328,17 +330,21 @@ workflow SEQINSPECTOR {
     // MODULE: RIKER_MULTI
     //   Run riker multi QC metrics on BAM files
 
+    // Optional single files staged directly; channel.combine would drop all records when the param is null
+    def rna_gene_model_file = rna_gene_model ? file(rna_gene_model) : []
+    def rna_ribosomal_intervals_file = rna_ribosomal_intervals ? file(rna_ribosomal_intervals) : []
+
     if (bait_intervals && target_intervals) {
         bam_bai_for_riker = bam_bai
             .map { meta, bam, bai -> [meta, bam, bai, [], [], [], []] }
             .combine(channel.fromPath(bait_intervals).collect())
             .combine(channel.fromPath(target_intervals).collect())
             .map { meta, bam, bai, error_vcf, error_vcf_idx, error_intervals, gcbias_exclude_intervals, hybcap_baits, hybcap_targets ->
-                [meta, bam, bai, error_vcf, error_vcf_idx, error_intervals, gcbias_exclude_intervals, hybcap_baits, hybcap_targets, [], [], []]
+                [meta, bam, bai, error_vcf, error_vcf_idx, error_intervals, gcbias_exclude_intervals, hybcap_baits, hybcap_targets, rna_gene_model_file, rna_ribosomal_intervals_file, []]
             }
     }
     else {
-        bam_bai_for_riker = bam_bai.map { meta, bam, bai -> [meta, bam, bai, [], [], [], [], [], [], [], [], []] }
+        bam_bai_for_riker = bam_bai.map { meta, bam, bai -> [meta, bam, bai, [], [], [], [], [], [], rna_gene_model_file, rna_ribosomal_intervals_file, []] }
     }
 
     RIKER_MULTI(

@@ -321,6 +321,9 @@ Aligned reads are then sorted using [samtools](#samtools) in the same process, a
 [Riker](https://github.com/fulcrumgenomics/riker) is a fast Rust CLI toolkit for sequencing QC metrics.
 It ports key QC metrics tools from Picard with cleaner output and better performance.
 When `--bait_intervals` and `--target_intervals` are provided, Riker also generates hybrid capture (hybcap) metrics.
+To generate RNA metrics (`rna-metrics`, `rna-biotype`, `rna-insert-size`), provide `--rna_gene_model` (a GTF/GFF)
+and add `rna` to `--riker_args` (e.g. `--riker_args "--tools alignment basic isize rna"`).
+Optionally supply `--rna_ribosomal_intervals` to union explicit rRNA intervals with those derived from the gene model.
 
 <details markdown="1">
 <summary>Output files</summary>
