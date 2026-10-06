@@ -81,7 +81,7 @@ The diagram below illustrates the MultiQC reporting logic for per-sample tags an
 | chelae      | 0.1.0   |
 | fq/lint     | 0.12.0  |
 | fastp       | 1.3.6   |
-| fastqc      | 0.12.1  |
+| fastqc      | 0.13.0  |
 | fastqe      | 0.5.2   |
 | fastqscreen | 0.16.0  |
 | kraken2     | 2.1.6   |

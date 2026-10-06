@@ -22,7 +22,7 @@
             27,
             {
                 "FASTQC": {
-                    "fastqc": "0.12.1"
+                    "fastqc": "0.13.0"
                 },
                 "KRAKEN2_KRAKEN2": {
                     "kraken2": "2.1.6",
@@ -761,7 +761,7 @@
                 "kraken-top-n-plot_Species.txt:md5,dd15a09f435343cc42bf1b900aeef184",
                 "kraken-top-n-plot_Unclassified.txt:md5,e23b7d6a8bd1ac9fbcd172eff86a0c83",
                 "multiqc_citations.txt:md5,6c7f11ec8908181ce5daed75ddb6dc32",
-                "multiqc_fastqc.txt:md5,23b698f1e957a26f49a9ad9bbdece908",
+                "multiqc_fastqc.txt:md5,c8b5e1a928d36a4c90dc3e581e6b5080",
                 "multiqc_kraken.txt:md5,c810daae080676aff993bbe59ebeb360",
                 "fastqc-status-check-heatmap.txt:md5,fc37eaf184877ac80b92001a7bf2fa81",
                 "fastqc_overrepresented_sequences_plot.txt:md5,0693849fc324ddf580e2c5a4d910bb4f",
@@ -783,7 +783,7 @@
                 "kraken-top-n-plot_Species.txt:md5,ef660d2474d80bd6f888ab99b9c5da4e",
                 "kraken-top-n-plot_Unclassified.txt:md5,b713189d6641a9370ddc2ce68cf7ecc4",
                 "multiqc_citations.txt:md5,6c7f11ec8908181ce5daed75ddb6dc32",
-                "multiqc_fastqc.txt:md5,3407d8f06117a65efce4c70f19e91dd1",
+                "multiqc_fastqc.txt:md5,f98a664b87b1b150f2d802c8178a3c8a",
                 "multiqc_kraken.txt:md5,61241e49d8ab7f49f215f0b21ec40985",
                 "fastqc-status-check-heatmap.txt:md5,61857d2c45cf0c080348047aa34e7525",
                 "fastqc_overrepresented_sequences_plot.txt:md5,7949c64cc6cef77f29349a188fc09656",
@@ -805,7 +805,7 @@
                 "kraken-top-n-plot_Species.txt:md5,a6df620f5ab3a064eb07e7b4cd79086d",
                 "kraken-top-n-plot_Unclassified.txt:md5,24ab8c0acb8dad031ee6a1866511d46b",
                 "multiqc_citations.txt:md5,6c7f11ec8908181ce5daed75ddb6dc32",
-                "multiqc_fastqc.txt:md5,98111f17d1899cad6379e4e56ed11c53",
+                "multiqc_fastqc.txt:md5,b1233994fb36f079a7fad8939181de00",
                 "multiqc_kraken.txt:md5,a02016038e3230a2adb5a98ec39a1850",
                 "fastqc-status-check-heatmap.txt:md5,323d6082b73ddb6ee33385f5ea4301c1",
                 "fastqc_overrepresented_sequences_plot.txt:md5,4e71d8913d40eb06db0f18d74ce6898f",
@@ -827,7 +827,7 @@
                 "kraken-top-n-plot_Species.txt:md5,b88293b4024679a326e0d295b86b8ddb",
                 "kraken-top-n-plot_Unclassified.txt:md5,4d33f35ebe3ab67165f0c0be32e68f70",
                 "multiqc_citations.txt:md5,6c7f11ec8908181ce5daed75ddb6dc32",
-                "multiqc_fastqc.txt:md5,396b4cc0466a6642ec8b954237c42263",
+                "multiqc_fastqc.txt:md5,e2f9c2908d0d111921d43339bb06b672",
                 "multiqc_kraken.txt:md5,ece628b10fcd563190212e518973c6f6",
                 "fastqc-status-check-heatmap.txt:md5,56b426cd5c030288639533fce7c95ab1",
                 "fastqc_overrepresented_sequences_plot.txt:md5,8e83abdbe7362e64d63339ee31ab3361",
@@ -849,7 +849,7 @@
                 "kraken-top-n-plot_Species.txt:md5,0c0106333fc8ee94f1a781361b1ccfb8",
                 "kraken-top-n-plot_Unclassified.txt:md5,9f6b23d912f783b3234d3169985db234",
                 "multiqc_citations.txt:md5,6c7f11ec8908181ce5daed75ddb6dc32",
-                "multiqc_fastqc.txt:md5,95c8ffb23baafec625aeb600047515ae",
+                "multiqc_fastqc.txt:md5,6f91452cb05797d96d26f2ce9dce337d",
                 "multiqc_kraken.txt:md5,fa8ba1a90777d79c0ab442fb4a262a13",
                 "Sample1_01_Sample1_S1_L001_R1_001.fastq.gz:md5,3ccd132ff32399706842b0f1d00f477e",
                 "Sample23_03_Sample23_S3_L001_R1_001.fastq.gz:md5,3802f03450693b42531fdf5b0b542c2f",
@@ -860,10 +860,10 @@
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-06-25T16:39:18.263346386",
+        "timestamp": "2026-10-06T11:05:36.065574928",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.09.1"
         }
     },
     "NovaSeq6000 data test - kraken2 - stub": {
@@ -974,7 +974,7 @@
             27,
             {
                 "FASTQC": {
-                    "fastqc": "0.12.1"
+                    "fastqc": "0.13.0"
                 },
                 "KRAKEN2_KRAKEN2": {
                     "kraken2": "2.1.6",
@@ -1694,7 +1694,7 @@
                 "opts.k2d:md5,a033d00cf6759407010b21700938f543",
                 "taxo.k2d:md5,094d5891cdccf2f1468088855c214b2c",
                 "fastqc-status-check-heatmap.txt:md5,2d47d1eefb8a17f6e9148e08e6764438",
-                "fastqc_overrepresented_sequences_plot.txt:md5,0319c932634ad92c3fcb695efc1e3842",
+                "fastqc_overrepresented_sequences_plot.txt:md5,7ab14fad3c117951f3f3d9dff83112d3",
                 "fastqc_per_base_n_content_plot.txt:md5,69d2d50e3947cac30beaef2b5f418631",
                 "fastqc_per_base_sequence_quality_plot.txt:md5,a2812a2ba7918fedbecca506fbbeb0ff",
                 "fastqc_per_sequence_gc_content_plot_Counts.txt:md5,040e1375843c2eeabd2818d605192a98",
@@ -1713,10 +1713,10 @@
                 "kraken-top-n-plot_Species.txt:md5,dd15a09f435343cc42bf1b900aeef184",
                 "kraken-top-n-plot_Unclassified.txt:md5,e23b7d6a8bd1ac9fbcd172eff86a0c83",
                 "multiqc_citations.txt:md5,6c7f11ec8908181ce5daed75ddb6dc32",
-                "multiqc_fastqc.txt:md5,a9a9fc06badaade2d09486d2adaac1ce",
+                "multiqc_fastqc.txt:md5,c78766646a98f7dde5a7857ead6b3ace",
                 "multiqc_kraken.txt:md5,c810daae080676aff993bbe59ebeb360",
                 "fastqc-status-check-heatmap.txt:md5,6ecc7673865cff5b867a6e07f922aab6",
-                "fastqc_overrepresented_sequences_plot.txt:md5,bf671607cdc601346f4ec01236aa096a",
+                "fastqc_overrepresented_sequences_plot.txt:md5,289ca9290b42d8d2a52756d9afe59935",
                 "fastqc_per_base_n_content_plot.txt:md5,fe0d8972d8a323138b36b310e22f2393",
                 "fastqc_per_base_sequence_quality_plot.txt:md5,f6e093207a1bb92a9ff224509988f42c",
                 "fastqc_per_sequence_gc_content_plot_Counts.txt:md5,c7d95253aa3046b55f345e4950537e30",
@@ -1735,10 +1735,10 @@
                 "kraken-top-n-plot_Species.txt:md5,ef660d2474d80bd6f888ab99b9c5da4e",
                 "kraken-top-n-plot_Unclassified.txt:md5,b713189d6641a9370ddc2ce68cf7ecc4",
                 "multiqc_citations.txt:md5,6c7f11ec8908181ce5daed75ddb6dc32",
-                "multiqc_fastqc.txt:md5,e87c99cac0c4956521d9c660183722bb",
+                "multiqc_fastqc.txt:md5,72c0a049b8f1aee95559688472910315",
                 "multiqc_kraken.txt:md5,61241e49d8ab7f49f215f0b21ec40985",
                 "fastqc-status-check-heatmap.txt:md5,61857d2c45cf0c080348047aa34e7525",
-                "fastqc_overrepresented_sequences_plot.txt:md5,0d0ed4af9d049d2d4d364c2e89666c49",
+                "fastqc_overrepresented_sequences_plot.txt:md5,0bc5de1db7da6817e0097e1448c84175",
                 "fastqc_per_base_n_content_plot.txt:md5,5c0c6304c88c1eab06fe6d0272887eeb",
                 "fastqc_per_base_sequence_quality_plot.txt:md5,962e2631be7459b8a4e6b94a76ca1ef9",
                 "fastqc_per_sequence_gc_content_plot_Counts.txt:md5,667e8260356e2a95e619f596ec923408",
@@ -1757,10 +1757,10 @@
                 "kraken-top-n-plot_Species.txt:md5,a6df620f5ab3a064eb07e7b4cd79086d",
                 "kraken-top-n-plot_Unclassified.txt:md5,24ab8c0acb8dad031ee6a1866511d46b",
                 "multiqc_citations.txt:md5,6c7f11ec8908181ce5daed75ddb6dc32",
-                "multiqc_fastqc.txt:md5,8b808265a3cfe52846f7d6a0c9624beb",
+                "multiqc_fastqc.txt:md5,e9744feb0e99557ade30d5f6fa18d8ec",
                 "multiqc_kraken.txt:md5,a02016038e3230a2adb5a98ec39a1850",
                 "fastqc-status-check-heatmap.txt:md5,c762f9c764ff99a610ff1d20f2ed6ac9",
-                "fastqc_overrepresented_sequences_plot.txt:md5,cb95847fcb901c48de55da399faf47d9",
+                "fastqc_overrepresented_sequences_plot.txt:md5,f32818904ff446063d4186ae33b34e04",
                 "fastqc_per_base_n_content_plot.txt:md5,ba96d6c813803230a4874a6f8baddcf6",
                 "fastqc_per_base_sequence_quality_plot.txt:md5,ac0b1eb2e406e6b5a5eb68918591c76d",
                 "fastqc_per_sequence_gc_content_plot_Counts.txt:md5,2012423964c65c0fefc8481b301609ed",
@@ -1779,10 +1779,10 @@
                 "kraken-top-n-plot_Species.txt:md5,b88293b4024679a326e0d295b86b8ddb",
                 "kraken-top-n-plot_Unclassified.txt:md5,4d33f35ebe3ab67165f0c0be32e68f70",
                 "multiqc_citations.txt:md5,6c7f11ec8908181ce5daed75ddb6dc32",
-                "multiqc_fastqc.txt:md5,b8f6f4ed32e60ff57c64bb0ba029adba",
+                "multiqc_fastqc.txt:md5,6c206d0d96bb14096af732d9ef5420af",
                 "multiqc_kraken.txt:md5,ece628b10fcd563190212e518973c6f6",
                 "fastqc-status-check-heatmap.txt:md5,56b426cd5c030288639533fce7c95ab1",
-                "fastqc_overrepresented_sequences_plot.txt:md5,a74b1c22b0b8c1c45592f6d3d92a7b00",
+                "fastqc_overrepresented_sequences_plot.txt:md5,8e8dbaf56953e6aacafb4cf31e2a740b",
                 "fastqc_per_base_n_content_plot.txt:md5,bf2631bc46bc290be329984785da6c3a",
                 "fastqc_per_base_sequence_quality_plot.txt:md5,05e5a46f9901e1a1aea089ac760d03bd",
                 "fastqc_per_sequence_gc_content_plot_Counts.txt:md5,ae01bdfe32a1adbde8bc90b5cfad3745",
@@ -1801,7 +1801,7 @@
                 "kraken-top-n-plot_Species.txt:md5,0c0106333fc8ee94f1a781361b1ccfb8",
                 "kraken-top-n-plot_Unclassified.txt:md5,9f6b23d912f783b3234d3169985db234",
                 "multiqc_citations.txt:md5,6c7f11ec8908181ce5daed75ddb6dc32",
-                "multiqc_fastqc.txt:md5,284597d876abc5a1242d8efb2d69f0d5",
+                "multiqc_fastqc.txt:md5,c34ad59d8366e35f99cc49f6c97627f2",
                 "multiqc_kraken.txt:md5,fa8ba1a90777d79c0ab442fb4a262a13",
                 "Sample1_01_Sample1_S1_L001_R1_001.fastq.gz:md5,3ccd132ff32399706842b0f1d00f477e",
                 "Sample23_03_Sample23_S3_L001_R1_001.fastq.gz:md5,3802f03450693b42531fdf5b0b542c2f",
@@ -1812,10 +1812,10 @@
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-06-25T16:27:18.738564766",
+        "timestamp": "2026-10-06T11:03:37.570726557",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.09.1"
         }
     },
     "NovaSeq6000 data test - kraken2 - no_db - stub": {
