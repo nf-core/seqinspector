@@ -11,7 +11,7 @@
                     "samtools": "1.22.1"
                 },
                 "FASTQC": {
-                    "fastqc": "0.12.1"
+                    "fastqc": "0.13.0"
                 },
                 "FASTQSCREEN_FASTQSCREEN": {
                     "fastqscreen": "0.16.0"
@@ -1209,7 +1209,7 @@
                 "fastqc_sequence_length_distribution_plot.txt:md5,9d4fd245e8e1d5baa473a8bdffcd3e38",
                 "multiqc_citations.txt:md5,8d2205650535c2ae6eab60dd0958e4ba",
                 "multiqc_fastq_screen.txt:md5,62240561100f78af37e7e2438cb58f90",
-                "multiqc_fastqc.txt:md5,23b698f1e957a26f49a9ad9bbdece908",
+                "multiqc_fastqc.txt:md5,c8b5e1a928d36a4c90dc3e581e6b5080",
                 "multiqc_mqc_seq_metadata.txt:md5,5c5f63f044bdcb1ab74a66b896f0b6e7",
                 "multiqc_picard_AlignmentSummaryMetrics.txt:md5,b113ea40790fa45fa739f224f2710556",
                 "multiqc_picard_baseContent.txt:md5,e06c0dea80cb5cef312436e005aa0095",
@@ -1262,7 +1262,7 @@
                 "fastqc_sequence_length_distribution_plot.txt:md5,98316a2607a889ae1e7e79a4f64cc740",
                 "multiqc_citations.txt:md5,8d2205650535c2ae6eab60dd0958e4ba",
                 "multiqc_fastq_screen.txt:md5,024e1e7f9db3b0906c7aa0904229e176",
-                "multiqc_fastqc.txt:md5,3407d8f06117a65efce4c70f19e91dd1",
+                "multiqc_fastqc.txt:md5,f98a664b87b1b150f2d802c8178a3c8a",
                 "multiqc_mqc_seq_metadata.txt:md5,5c5f63f044bdcb1ab74a66b896f0b6e7",
                 "multiqc_picard_AlignmentSummaryMetrics.txt:md5,1debd96f9f64c60a8ec742411da51a28",
                 "multiqc_picard_baseContent.txt:md5,afb4046944e302b40faea2233bca535c",
@@ -1315,7 +1315,7 @@
                 "fastqc_sequence_length_distribution_plot.txt:md5,4513e22583677a4d6167b9094242eb0b",
                 "multiqc_citations.txt:md5,8d2205650535c2ae6eab60dd0958e4ba",
                 "multiqc_fastq_screen.txt:md5,fd3074930c72b666f201ae71fa27744b",
-                "multiqc_fastqc.txt:md5,98111f17d1899cad6379e4e56ed11c53",
+                "multiqc_fastqc.txt:md5,b1233994fb36f079a7fad8939181de00",
                 "multiqc_mqc_seq_metadata.txt:md5,5c5f63f044bdcb1ab74a66b896f0b6e7",
                 "multiqc_picard_AlignmentSummaryMetrics.txt:md5,3b1929de09267fc1c1a15804cb5bf536",
                 "multiqc_picard_baseContent.txt:md5,ff36be9e2642089aa711c637d3cdba29",
@@ -1368,7 +1368,7 @@
                 "fastqc_sequence_length_distribution_plot.txt:md5,9fda632b92e3453f11cd0226484fce8e",
                 "multiqc_citations.txt:md5,8d2205650535c2ae6eab60dd0958e4ba",
                 "multiqc_fastq_screen.txt:md5,536c28d7fadc9a76944f93ac9d643272",
-                "multiqc_fastqc.txt:md5,396b4cc0466a6642ec8b954237c42263",
+                "multiqc_fastqc.txt:md5,e2f9c2908d0d111921d43339bb06b672",
                 "multiqc_mqc_seq_metadata.txt:md5,5c5f63f044bdcb1ab74a66b896f0b6e7",
                 "multiqc_picard_AlignmentSummaryMetrics.txt:md5,153c6e6a407ec128b1a02798ca2f1115",
                 "multiqc_picard_baseContent.txt:md5,6349e514552a0b5a0530fa6f311878a5",
@@ -1421,7 +1421,7 @@
                 "fastqc_sequence_length_distribution_plot.txt:md5,e77dc4ab73252c2e09c7452c3b8e8ab3",
                 "multiqc_citations.txt:md5,8d2205650535c2ae6eab60dd0958e4ba",
                 "multiqc_fastq_screen.txt:md5,4fc422d9cb06a1d0248cc578c1eebaa2",
-                "multiqc_fastqc.txt:md5,95c8ffb23baafec625aeb600047515ae",
+                "multiqc_fastqc.txt:md5,6f91452cb05797d96d26f2ce9dce337d",
                 "multiqc_mqc_seq_metadata.txt:md5,5c5f63f044bdcb1ab74a66b896f0b6e7",
                 "multiqc_picard_AlignmentSummaryMetrics.txt:md5,2d05e826f5152fd0143edf7270de1235",
                 "multiqc_picard_baseContent.txt:md5,f3f23899a30a96260d8b5b3020708703",
@@ -1498,10 +1498,10 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-09-16T10:50:50.714130087",
+        "timestamp": "2026-10-06T10:43:16.303455315",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.08.0"
+            "nextflow": "26.09.1"
         }
     }
 }

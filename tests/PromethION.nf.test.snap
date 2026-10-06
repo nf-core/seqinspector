@@ -4,7 +4,7 @@
             6,
             {
                 "FASTQC": {
-                    "fastqc": "0.12.1"
+                    "fastqc": "0.13.0"
                 },
                 "FASTQSCREEN_FASTQSCREEN": {
                     "fastqscreen": "0.16.0"
@@ -195,7 +195,7 @@
                 "fastqc_sequence_length_distribution_plot.txt:md5,d7bac93b11316846778b9d550f323371",
                 "multiqc_citations.txt:md5,cee7f1da386728e030a9ff7be571d071",
                 "multiqc_fastq_screen.txt:md5,0ab0d1c4c3e3393afdb50ad0e116e394",
-                "multiqc_fastqc.txt:md5,b71aaffef9767dfe9d83fde0d31a3a1b",
+                "multiqc_fastqc.txt:md5,e6196797c13e45d7c8563a2e9a4d7908",
                 "multiqc_seqkit_stats.txt:md5,80aac11bd582915e2f681038abe4edda",
                 "multiqc_sequali.txt:md5,2ba17e93e3d3ba1b98a85e69bd6d60e6",
                 "seqkit-stats-seqcounts-plot.txt:md5,a6fa62003602bc5818b3ccc45469394a",
@@ -217,10 +217,10 @@
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-06-15T12:08:20.475317568",
+        "timestamp": "2026-10-06T10:44:09.682957223",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.3"
+            "nextflow": "26.09.1"
         }
     }
 }

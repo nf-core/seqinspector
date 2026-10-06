@@ -4,7 +4,7 @@
             15,
             {
                 "FASTQC": {
-                    "fastqc": "0.12.1"
+                    "fastqc": "0.13.0"
                 }
             },
             [
@@ -98,10 +98,10 @@
                 "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
             ]
         ],
-        "timestamp": "2026-04-09T14:05:10.052392737",
+        "timestamp": "2026-10-06T10:52:11.947987262",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "25.10.4"
+            "nextflow": "26.09.1"
         }
     },
     "NovaSeq6000 data test - tag collision": {
@@ -109,7 +109,7 @@
             15,
             {
                 "FASTQC": {
-                    "fastqc": "0.12.1"
+                    "fastqc": "0.13.0"
                 }
             },
             [
@@ -777,7 +777,7 @@
                 "fastqc_sequence_duplication_levels_plot.txt:md5,f86012b3074d697c9a2b3bd67a074288",
                 "fastqc_sequence_length_distribution_plot.txt:md5,9d4fd245e8e1d5baa473a8bdffcd3e38",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-                "multiqc_fastqc.txt:md5,23b698f1e957a26f49a9ad9bbdece908",
+                "multiqc_fastqc.txt:md5,c8b5e1a928d36a4c90dc3e581e6b5080",
                 "fastqc-status-check-heatmap.txt:md5,65aae79a2d1391094528ecf92ba2fefc",
                 "fastqc_overrepresented_sequences_plot.txt:md5,5a363acb914115f26c9183608173cf41",
                 "fastqc_per_base_n_content_plot.txt:md5,3ceb47a869d7af119b0c1a4d7ca911bb",
@@ -789,7 +789,7 @@
                 "fastqc_sequence_duplication_levels_plot.txt:md5,69d5be0a61de31d233d18e48f118d801",
                 "fastqc_sequence_length_distribution_plot.txt:md5,997142ee52e346035f0369d939fe3c48",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-                "multiqc_fastqc.txt:md5,0ccf530e69eb3543dcc7b95bbf8c2d46",
+                "multiqc_fastqc.txt:md5,4cbba35df03f21e0fc1ee7827130a1d1",
                 "fastqc-status-check-heatmap.txt:md5,61857d2c45cf0c080348047aa34e7525",
                 "fastqc_overrepresented_sequences_plot.txt:md5,7949c64cc6cef77f29349a188fc09656",
                 "fastqc_per_base_n_content_plot.txt:md5,0f2fd628631d42ed5e6a1db22578daaa",
@@ -801,7 +801,7 @@
                 "fastqc_sequence_duplication_levels_plot.txt:md5,8fc995cb2192a2926eee242681bc3af6",
                 "fastqc_sequence_length_distribution_plot.txt:md5,4513e22583677a4d6167b9094242eb0b",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-                "multiqc_fastqc.txt:md5,98111f17d1899cad6379e4e56ed11c53",
+                "multiqc_fastqc.txt:md5,b1233994fb36f079a7fad8939181de00",
                 "fastqc-status-check-heatmap.txt:md5,65aae79a2d1391094528ecf92ba2fefc",
                 "fastqc_overrepresented_sequences_plot.txt:md5,5a363acb914115f26c9183608173cf41",
                 "fastqc_per_base_n_content_plot.txt:md5,3ceb47a869d7af119b0c1a4d7ca911bb",
@@ -813,7 +813,7 @@
                 "fastqc_sequence_duplication_levels_plot.txt:md5,69d5be0a61de31d233d18e48f118d801",
                 "fastqc_sequence_length_distribution_plot.txt:md5,997142ee52e346035f0369d939fe3c48",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-                "multiqc_fastqc.txt:md5,0ccf530e69eb3543dcc7b95bbf8c2d46",
+                "multiqc_fastqc.txt:md5,4cbba35df03f21e0fc1ee7827130a1d1",
                 "fastqc-status-check-heatmap.txt:md5,6ba426fb321aec5ce4d7ab62d177414a",
                 "fastqc_overrepresented_sequences_plot.txt:md5,d1b83b30282100d2264cba1735c9f95b",
                 "fastqc_per_base_n_content_plot.txt:md5,dfaaadd876f3a387eea5072f423b6924",
@@ -825,7 +825,7 @@
                 "fastqc_sequence_duplication_levels_plot.txt:md5,8fa7b59e2d348a4afe459619853766d3",
                 "fastqc_sequence_length_distribution_plot.txt:md5,9ca716fc696f23108157579fdab3d676",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-                "multiqc_fastqc.txt:md5,9713c687445affe62d053bd52fa7b757",
+                "multiqc_fastqc.txt:md5,297206b2b96f3ea9f8b615a8007016be",
                 "fastqc-status-check-heatmap.txt:md5,8e839f922dfe86d52a9a19a1511ee2dd",
                 "fastqc_overrepresented_sequences_plot.txt:md5,f595fa4961c25812eaa6261571bbe82d",
                 "fastqc_per_base_n_content_plot.txt:md5,6b8bc1f7d8fe7c29a3e73265485a8749",
@@ -837,7 +837,7 @@
                 "fastqc_sequence_duplication_levels_plot.txt:md5,fe1e13d8df20bac75f2f8fc7d5084b6e",
                 "fastqc_sequence_length_distribution_plot.txt:md5,4edfd953a4cd2b32259a66efa3315c07",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-                "multiqc_fastqc.txt:md5,24876db1d855327d76cb36bb6dfb055d",
+                "multiqc_fastqc.txt:md5,90b7768897bc9864007e7933918b969d",
                 "fastqc-status-check-heatmap.txt:md5,3c1b51a7c544d4f6bc4a600fa9995ae1",
                 "fastqc_overrepresented_sequences_plot.txt:md5,11058cfb68a885924eed5ec32189fe81",
                 "fastqc_per_base_n_content_plot.txt:md5,f7949bc40528475df3d2539b0d5d7c9f",
@@ -849,7 +849,7 @@
                 "fastqc_sequence_duplication_levels_plot.txt:md5,fd528343aca7a0769ea59f6495feca9c",
                 "fastqc_sequence_length_distribution_plot.txt:md5,589aff813279aa132e80fbf452cb7166",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-                "multiqc_fastqc.txt:md5,84bda05129ec44bcc8a4d09936e4bf92",
+                "multiqc_fastqc.txt:md5,6288914bad4d9936e4575d3b96fce966",
                 "fastqc-status-check-heatmap.txt:md5,61857d2c45cf0c080348047aa34e7525",
                 "fastqc_overrepresented_sequences_plot.txt:md5,7949c64cc6cef77f29349a188fc09656",
                 "fastqc_per_base_n_content_plot.txt:md5,0f2fd628631d42ed5e6a1db22578daaa",
@@ -861,7 +861,7 @@
                 "fastqc_sequence_duplication_levels_plot.txt:md5,8fc995cb2192a2926eee242681bc3af6",
                 "fastqc_sequence_length_distribution_plot.txt:md5,4513e22583677a4d6167b9094242eb0b",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-                "multiqc_fastqc.txt:md5,98111f17d1899cad6379e4e56ed11c53",
+                "multiqc_fastqc.txt:md5,b1233994fb36f079a7fad8939181de00",
                 "fastqc-status-check-heatmap.txt:md5,3c1b51a7c544d4f6bc4a600fa9995ae1",
                 "fastqc_overrepresented_sequences_plot.txt:md5,11058cfb68a885924eed5ec32189fe81",
                 "fastqc_per_base_n_content_plot.txt:md5,f7949bc40528475df3d2539b0d5d7c9f",
@@ -873,7 +873,7 @@
                 "fastqc_sequence_duplication_levels_plot.txt:md5,fd528343aca7a0769ea59f6495feca9c",
                 "fastqc_sequence_length_distribution_plot.txt:md5,589aff813279aa132e80fbf452cb7166",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-                "multiqc_fastqc.txt:md5,84bda05129ec44bcc8a4d09936e4bf92",
+                "multiqc_fastqc.txt:md5,6288914bad4d9936e4575d3b96fce966",
                 "fastqc-status-check-heatmap.txt:md5,61857d2c45cf0c080348047aa34e7525",
                 "fastqc_overrepresented_sequences_plot.txt:md5,7949c64cc6cef77f29349a188fc09656",
                 "fastqc_per_base_n_content_plot.txt:md5,0f2fd628631d42ed5e6a1db22578daaa",
@@ -885,7 +885,7 @@
                 "fastqc_sequence_duplication_levels_plot.txt:md5,8fc995cb2192a2926eee242681bc3af6",
                 "fastqc_sequence_length_distribution_plot.txt:md5,4513e22583677a4d6167b9094242eb0b",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-                "multiqc_fastqc.txt:md5,98111f17d1899cad6379e4e56ed11c53"
+                "multiqc_fastqc.txt:md5,b1233994fb36f079a7fad8939181de00"
             ],
             "No BAM files",
             [
@@ -895,10 +895,10 @@
                 "WARN: Tag name collision: [test, Test, TEST]"
             ]
         ],
-        "timestamp": "2026-03-30T16:34:10.501468881",
+        "timestamp": "2026-10-06T10:51:43.306707469",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "25.10.2"
+            "nextflow": "26.09.1"
         }
     }
 }

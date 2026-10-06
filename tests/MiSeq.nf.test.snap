@@ -11,7 +11,7 @@
                     "samtools": "1.22.1"
                 },
                 "FASTQC": {
-                    "fastqc": "0.12.1"
+                    "fastqc": "0.13.0"
                 },
                 "FASTQSCREEN_FASTQSCREEN": {
                     "fastqscreen": "0.16.0"
@@ -550,7 +550,7 @@
                 "fastqc_sequence_duplication_levels_plot.txt:md5,ae9c9102460b28ef9537cc5d6103737d",
                 "multiqc_citations.txt:md5,fe17a641bafc0b112bf30f596f1b122e",
                 "multiqc_fastq_screen.txt:md5,e07e581204b73061e9f3418e59dfc74f",
-                "multiqc_fastqc.txt:md5,76799a64cbef084c20e7f12d3de6c133",
+                "multiqc_fastqc.txt:md5,dea0d7cdffe1180d44442959e5ef7019",
                 "multiqc_picard_AlignmentSummaryMetrics.txt:md5,df2b2356ee2f904d19588872205343b1",
                 "multiqc_picard_baseContent.txt:md5,dca55fb91ced396fd64d9143330a7d60",
                 "multiqc_picard_quality_by_cycle.txt:md5,f71fc6a7c9cd3a25626513d503979d89",
@@ -592,7 +592,7 @@
                 "fastqc_sequence_duplication_levels_plot.txt:md5,62e93bfc80b0bf201a605802edbe0177",
                 "multiqc_citations.txt:md5,fe17a641bafc0b112bf30f596f1b122e",
                 "multiqc_fastq_screen.txt:md5,6f9cfa81bda7482142c640b9f0c82b90",
-                "multiqc_fastqc.txt:md5,85fe5c24576dc105adb8ca90ce6449b7",
+                "multiqc_fastqc.txt:md5,7477fe51f035ad9232bedd2920d7a9ee",
                 "multiqc_picard_AlignmentSummaryMetrics.txt:md5,32c0a27891fabd36de3c7fa97d82c11f",
                 "multiqc_picard_baseContent.txt:md5,a2043541e3ce74b710ae2b69ef7bc593",
                 "multiqc_picard_quality_by_cycle.txt:md5,0eab2183e8852b165b09a9ea8a5f67c9",
@@ -627,7 +627,7 @@
                 "fastqc_sequence_duplication_levels_plot.txt:md5,65f6b13aaa64d9ed17a4339596ecdfe3",
                 "multiqc_citations.txt:md5,fe17a641bafc0b112bf30f596f1b122e",
                 "multiqc_fastq_screen.txt:md5,6184979a78adcd5c04935ada1ba69b7f",
-                "multiqc_fastqc.txt:md5,284edc03545d4d17947155fe54bfb5d2",
+                "multiqc_fastqc.txt:md5,e59d734aa3118787819617f42eaa2c33",
                 "multiqc_picard_AlignmentSummaryMetrics.txt:md5,590ae211454839b1ed0ff2b63945d39c",
                 "multiqc_picard_baseContent.txt:md5,b845396eeeb8510f2b0af6a93123fc5b",
                 "multiqc_picard_quality_by_cycle.txt:md5,9045bd4f1810034954be55d62aec1908",
@@ -679,10 +679,10 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-09-16T10:49:38.382107031",
+        "timestamp": "2026-10-06T10:41:48.514237066",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.08.0"
+            "nextflow": "26.09.1"
         }
     }
 }

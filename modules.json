@@ -13,12 +13,12 @@
                     },
                     "bwamem2/index": {
                         "branch": "master",
-                        "git_sha": "62ce917fd775aaef732eb82019de069c765adfd3",
+                        "git_sha": "8327445b5266b0df32212e5c27407546d100429f",
                         "installed_by": ["modules"]
                     },
                     "bwamem2/mem": {
                         "branch": "master",
-                        "git_sha": "62ce917fd775aaef732eb82019de069c765adfd3",
+                        "git_sha": "8327445b5266b0df32212e5c27407546d100429f",
                         "installed_by": ["modules"]
                     },
                     "checkqc": {
@@ -41,7 +41,7 @@
                     },
                     "fastqc": {
                         "branch": "master",
-                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "git_sha": "b013fb6d627f036b0b61a4b361f0debb50865127",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/fastqc/fastqc.diff"
                     },

@@ -4,7 +4,7 @@
             6,
             {
                 "FASTQC": {
-                    "fastqc": "0.12.1"
+                    "fastqc": "0.13.0"
                 }
             },
             [
@@ -47,10 +47,10 @@
                 "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
             ]
         ],
-        "timestamp": "2026-04-09T14:02:55.413630663",
+        "timestamp": "2026-10-06T10:47:35.134869603",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "25.10.4"
+            "nextflow": "26.09.1"
         }
     },
     "MiSeq data test - fastqc,multiqcsav - multiple rundir": {
@@ -58,7 +58,7 @@
             6,
             {
                 "FASTQC": {
-                    "fastqc": "0.12.1"
+                    "fastqc": "0.13.0"
                 }
             },
             [
@@ -271,7 +271,7 @@
                 "fastqc_sequence_counts_plot.txt:md5,98d35ef8e2fbd373b5afa62458283fca",
                 "fastqc_sequence_duplication_levels_plot.txt:md5,ae9c9102460b28ef9537cc5d6103737d",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-                "multiqc_fastqc.txt:md5,76799a64cbef084c20e7f12d3de6c133",
+                "multiqc_fastqc.txt:md5,dea0d7cdffe1180d44442959e5ef7019",
                 "fastqc-status-check-heatmap.txt:md5,c1e87942bda9a4ccf519bf561ce18ed3",
                 "fastqc_adapter_content_plot.txt:md5,4b7007431bd26127365b0f25120d48f2",
                 "fastqc_per_base_n_content_plot.txt:md5,6bbf19be2aef3ef67dfe548bf9323011",
@@ -282,7 +282,7 @@
                 "fastqc_sequence_counts_plot.txt:md5,57f96ad90232887fec1480ef4071f8b6",
                 "fastqc_sequence_duplication_levels_plot.txt:md5,62e93bfc80b0bf201a605802edbe0177",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-                "multiqc_fastqc.txt:md5,85fe5c24576dc105adb8ca90ce6449b7",
+                "multiqc_fastqc.txt:md5,7477fe51f035ad9232bedd2920d7a9ee",
                 "fastqc-status-check-heatmap.txt:md5,ade9007c9f935892dcfb5614f5e07252",
                 "fastqc_overrepresented_sequences_plot.txt:md5,f921113656f3d6f923abfb608d05cc11",
                 "fastqc_per_base_n_content_plot.txt:md5,48603ea4a36c0e58a965eb68efd819b4",
@@ -293,17 +293,17 @@
                 "fastqc_sequence_counts_plot.txt:md5,22e172214ca1ad9eb449b725ecb2143b",
                 "fastqc_sequence_duplication_levels_plot.txt:md5,65f6b13aaa64d9ed17a4339596ecdfe3",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-                "multiqc_fastqc.txt:md5,284edc03545d4d17947155fe54bfb5d2"
+                "multiqc_fastqc.txt:md5,e59d734aa3118787819617f42eaa2c33"
             ],
             "No BAM files",
             [
                 "WARN: More than one rundir, or sample(s) missing rundir, skipping MULTIQC_SAV"
             ]
         ],
-        "timestamp": "2026-03-30T17:28:20.46786379",
+        "timestamp": "2026-10-06T10:47:09.675301116",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "25.10.2"
+            "nextflow": "26.09.1"
         }
     }
 }
