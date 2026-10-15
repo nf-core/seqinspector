@@ -121,15 +121,12 @@
                 "SAMPLE_SINGLE_END_03_screen.txt:md5,588b1b1f2d307fae7272ab0819e4bac5"
             ],
             "No BAM files",
-            [
-                "WARN: BWAMEM2, SAMTOOLS, PICARD and RIKER processes will be skipped",
-                "WARN: No fasta was provided, but picard or riker was requested"
-            ]
+            "No warnings"
         ],
-        "timestamp": "2026-06-29T17:32:37.723184769",
+        "timestamp": "2026-10-15T14:22:23.549724191",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.10.0"
         }
     },
     "MiSeq data test - no genome - stub": {
@@ -178,16 +175,12 @@
                 "reports/fastqscreen/SAMPLE_SINGLE_END_03/SAMPLE_SINGLE_END_03_screen.png",
                 "reports/fastqscreen/SAMPLE_SINGLE_END_03/SAMPLE_SINGLE_END_03_screen.txt"
             ],
-            [
-                "WARN: BWAMEM2, SAMTOOLS, PICARD and RIKER processes will be skipped",
-                "WARN: No fasta was provided, but picard or riker was requested",
-                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
-            ]
+            "No warnings"
         ],
-        "timestamp": "2026-06-29T17:33:11.342407966",
+        "timestamp": "2026-10-15T14:22:56.515504828",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.10.0"
         }
     }
 }

@@ -25,7 +25,7 @@
                 "RUNDIRPARSER": {
                     "python": "3.13.2",
                     "pyyaml": "6.0.2",
-                    "rundirparser": "1.0.1"
+                    "rundirparser": "1.1.0"
                 },
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.24"
@@ -1498,10 +1498,10 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-10-06T10:43:16.303455315",
+        "timestamp": "2026-10-15T14:12:00.50261463",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.09.1"
+            "nextflow": "26.10.0"
         }
     }
 }

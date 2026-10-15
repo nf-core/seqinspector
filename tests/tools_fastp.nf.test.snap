@@ -316,14 +316,12 @@
                 "reports/fastp/SAMPLE_SINGLE_END_03/SAMPLE_SINGLE_END_03.fastp.json",
                 "reports/fastp/SAMPLE_SINGLE_END_03/SAMPLE_SINGLE_END_03.fastp.log"
             ],
-            [
-                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
-            ]
+            "No warnings"
         ],
-        "timestamp": "2026-08-12T13:40:26.616182709",
+        "timestamp": "2026-10-15T14:37:20.608983164",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.10.0"
         }
     }
 }

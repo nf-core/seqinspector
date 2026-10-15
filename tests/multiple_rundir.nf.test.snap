@@ -42,15 +42,12 @@
                 "reports/fastqc/SAMPLE_SINGLE_END_03/SAMPLE_SINGLE_END_03.html",
                 "reports/fastqc/SAMPLE_SINGLE_END_03/SAMPLE_SINGLE_END_03.zip"
             ],
-            [
-                "WARN: More than one rundir, or sample(s) missing rundir, skipping MULTIQC_SAV",
-                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
-            ]
+            "No warnings"
         ],
-        "timestamp": "2026-10-06T10:47:35.134869603",
+        "timestamp": "2026-10-15T14:21:35.687807514",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.09.1"
+            "nextflow": "26.10.0"
         }
     },
     "MiSeq data test - fastqc,multiqcsav - multiple rundir": {
@@ -296,14 +293,12 @@
                 "multiqc_fastqc.txt:md5,e59d734aa3118787819617f42eaa2c33"
             ],
             "No BAM files",
-            [
-                "WARN: More than one rundir, or sample(s) missing rundir, skipping MULTIQC_SAV"
-            ]
+            "No warnings"
         ],
-        "timestamp": "2026-10-06T10:47:09.675301116",
+        "timestamp": "2026-10-15T14:21:05.38834337",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.09.1"
+            "nextflow": "26.10.0"
         }
     }
 }

@@ -47,14 +47,12 @@
                 "reports/checkqc/200624_A00834_0183_BHMTFYDRXX",
                 "reports/checkqc/200624_A00834_0183_BHMTFYDRXX/checkqc_report.json"
             ],
-            [
-                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
-            ]
+            "No warnings"
         ],
-        "timestamp": "2026-04-09T14:05:47.720193914",
+        "timestamp": "2026-10-15T14:34:05.257255191",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "25.10.4"
+            "nextflow": "26.10.0"
         }
     },
     "NovaSeq6000 data test - checkqc with config - stub": {
@@ -105,14 +103,12 @@
                 "reports/checkqc/200624_A00834_0183_BHMTFYDRXX",
                 "reports/checkqc/200624_A00834_0183_BHMTFYDRXX/checkqc_report.json"
             ],
-            [
-                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
-            ]
+            "No warnings"
         ],
-        "timestamp": "2026-04-09T14:06:25.988266748",
+        "timestamp": "2026-10-15T14:34:39.918666561",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "25.10.4"
+            "nextflow": "26.10.0"
         }
     },
     "NovaSeq6000 data test - checkqc": {
