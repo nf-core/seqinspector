@@ -78,12 +78,10 @@ workflow SEQINSPECTOR {
             bam: [meta, files.findAll { file -> file.name.endsWith('.bam') } ]
             fastq: [meta, files.findAll { file -> !file.name.endsWith('.bam') } ]
         }
-        .set { ch_samplesheet}
+        .set { ch_samplesheet }
 
     ch_samplesheet_bam = ch_samplesheet.bam.filter { _meta, bam -> bam }
     ch_samplesheet_fastq = ch_samplesheet.fastq. filter { _meta, fastq -> fastq }
-
-    ch_samplesheet_fastq.view()
 
     // STEP 00: SUBSAMPLE
 

@@ -59,7 +59,7 @@
             }
         },
         "required": ["sample"],
-        "anyOf": [
+        "oneOf": [
             { "required": ["fastq_1"] },
             { "required": ["bam"] }
         ],
