@@ -59,10 +59,7 @@
             }
         },
         "required": ["sample"],
-        "oneOf": [
-            { "required": ["fastq_1"] },
-            { "required": ["bam"] }
-        ],
+        "oneOf": [{ "required": ["fastq_1"] }, { "required": ["bam"] }],
         "errorMessage": "Each row must provide at least one BAM or FASTQ file for reads 1",
         "dependentRequired": {
             "fastq_2": ["fastq_1"]
