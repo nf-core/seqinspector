@@ -41,4 +41,74 @@ nextflow_process {
             assert snapshot(topics).match()
         }
     }
+
+    test("PromethION - MinKNOW 5") {
+
+        when {
+            process {
+                """
+                input[0] = [[id:'20230505_1857_1B_PAO99309_94e07fab', platform:'ont'],
+                    file(params.pipelines_testdata_base_path + 'seqinspector/data/rundir/20230505_1857_1B_PAO99309_94e07fab.tar.gz', checkIfExists: true)
+                ]
+                """
+            }
+        }
+        then {
+            assert process.success
+            assert snapshot(topics).match()
+        }
+    }
+
+    test("PromethION - MinKNOW 6") {
+
+        when {
+            process {
+                """
+                input[0] = [[id:'20261009_1457_1A_PBO51508_cb5816a7', platform:'ont'],
+                    file(params.pipelines_testdata_base_path + 'seqinspector/data/rundir/20261009_1457_1A_PBO51508_cb5816a7.tar.gz', checkIfExists: true)
+                ]
+                """
+            }
+        }
+        then {
+            assert process.success
+            assert snapshot(topics).match()
+        }
+    }
+
+    test("PromethION - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [[id:'20230505_1857_1B_PAO99309_94e07fab', platform:'ont'],
+                    file(params.pipelines_testdata_base_path + 'seqinspector/data/rundir/20230505_1857_1B_PAO99309_94e07fab.tar.gz', checkIfExists: true)
+                ]
+                """
+            }
+        }
+        then {
+            assert process.success
+            assert snapshot(topics).match()
+        }
+    }
+
+    test("NovaSeq6000 - wrong platform") {
+
+        when {
+            process {
+                """
+                input[0] = [[id:'200624_A00834_0183_BHMTFYDRXX', platform:'ont'],
+                    file(params.pipelines_testdata_base_path + 'seqinspector/data/rundir/200624_A00834_0183_BHMTFYDRXX.tar.gz', checkIfExists: true)
+                ]
+                """
+            }
+        }
+        then {
+            assert process.failed
+            assert (process.stdout + process.stderr).any { line -> line.contains("has platform 'ont' in the samplesheet, but no report_*.json was found") }
+        }
+    }
 }
