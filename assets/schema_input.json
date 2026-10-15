@@ -47,7 +47,6 @@
             "platform": {
                 "type": "string",
                 "enum": ["illumina", "ont"],
-                "default": "illumina",
                 "errorMessage": "Platform must be one of: 'illumina', 'ont'",
                 "meta": ["platform"]
             },

@@ -115,9 +115,13 @@ workflow SEQINSPECTOR {
         .groupTuple()
         .combine(rundir_number)
         .map { rundir, meta, _rundir_number ->
-            def platforms = meta.collect { meta_ -> meta_.platform }.unique()
+            // Empty samplesheet fields are parsed as [], normalise them to null
+            def platforms = meta.collect { meta_ -> meta_.platform ?: null }.unique()
             if (rundir && platforms.size() > 1) {
-                error("[nf-core/seqinspector] Samples sharing rundir ${rundir.simpleName} have different platforms in the samplesheet: ${platforms.join(', ')}")
+                error("[nf-core/seqinspector] Samples sharing rundir ${rundir.simpleName} have different platforms in the samplesheet: ${platforms.collect { platform -> platform ?: 'blank' }.join(', ')}")
+            }
+            if (rundir && !platforms[0] && 'rundirparser' in tools) {
+                error("[nf-core/seqinspector] Rundir ${rundir.simpleName} has no platform in the samplesheet. Please set 'platform' to 'illumina' or 'ont' for these samples, or remove rundirparser from the selected tools.")
             }
             // Return for all the rundir specific processes and to mix with ch_multiqc_files
             //   - meta: (map)
