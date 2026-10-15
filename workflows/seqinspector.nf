@@ -73,6 +73,18 @@ workflow SEQINSPECTOR {
     def ch_multiqc_files = channel.empty()
     def ch_multiqc_extra_files = channel.empty()
 
+    ch_samplesheet
+        .multiMap { meta, files ->
+            bam: [meta, files.findAll { file -> file.name.endsWith('.bam') } ]
+            fastq: [meta, files.findAll { file -> !file.name.endsWith('.bam') } ]
+        }
+        .set { ch_samplesheet}
+
+    ch_samplesheet_bam = ch_samplesheet.bam.filter { _meta, bam -> bam }
+    ch_samplesheet_fastq = ch_samplesheet.fastq. filter { _meta, fastq -> fastq }
+
+    ch_samplesheet_fastq.view()
+
     // STEP 00: SUBSAMPLE
 
     //
@@ -80,8 +92,8 @@ workflow SEQINSPECTOR {
     // Any downstream tool will be run on subsampled reads if seqtk is run
     //
 
-    SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] }.filter { 'seqtk' in tools })
-    ch_sample = 'seqtk' in tools ? SEQTK_SAMPLE.out.reads : ch_samplesheet
+    SEQTK_SAMPLE(ch_samplesheet_fastq.map { meta, reads -> [meta, reads, sample_size] }.filter { 'seqtk' in tools })
+    ch_sample = 'seqtk' in tools ? SEQTK_SAMPLE.out.reads : ch_samplesheet_fastq
 
     // STEP 01: EARLY SKIP FAILING MALFORMED FASTQ FILES
 
@@ -89,28 +101,28 @@ workflow SEQINSPECTOR {
     // MODULE: Run FQ_LINT to catch early errors
     //
 
-    FQ_LINT(('fq_lint' in subsample_tools ? ch_sample : ch_samplesheet).filter { 'fq_lint' in tools })
+    FQ_LINT(('fq_lint' in subsample_tools ? ch_sample : ch_samplesheet_fastq).filter { 'fq_lint' in tools })
 
     // This catches all FASTQs that pass linting
     // If you use an error strategy that allows FQ_LINT to fail,
     // only valid FASTQ files will be passed to the next module
-    ch_samplesheet = 'fq_lint' in tools
-        ? FQ_LINT.out.lint.join(ch_samplesheet).map { meta, _process, _tool, _fq_lint, reads -> [meta, reads] }
-        : ch_samplesheet
+    ch_samplesheet_fastq = 'fq_lint' in tools
+        ? FQ_LINT.out.lint.join(ch_samplesheet_fastq).map { meta, _process, _tool, _fq_lint, reads -> [meta, reads] }
+        : ch_samplesheet_fastq
 
     // STEP 01: ILLUMINA RUNDIR INFORMATION
 
     // Parse RUNDIR INFO
 
     // Calculate the global rundir_number for the entire samplesheet
-    rundir_number = ch_samplesheet
+    rundir_number = ch_samplesheet_fastq
         .map { meta, _reads -> [meta.rundir ? meta.rundir.simpleName : 'no_rundir'] }
         .flatten()
         .unique()
         .collect()
         .map { rundir -> [rundir.size()] }
 
-    ch_rundir = ch_samplesheet
+    ch_rundir = ch_samplesheet_fastq
         .map { meta, _reads -> [meta.rundir ?: null, meta] }
         .groupTuple()
         .combine(rundir_number)
@@ -188,7 +200,7 @@ workflow SEQINSPECTOR {
     // MODULE: TOULLIGQC
     // This provides useful stats of long reads
 
-    TOULLIGQC(('toulligqc' in subsample_tools ? ch_sample : ch_samplesheet).filter { 'toulligqc' in tools })
+    TOULLIGQC(('toulligqc' in subsample_tools ? ch_sample : ch_samplesheet_fastq.mix(ch_samplesheet_bam)).filter { 'toulligqc' in tools })
 
     // STEP 02: BASIC QC ON FASTQ FILES
 
@@ -196,14 +208,14 @@ workflow SEQINSPECTOR {
     // MODULE: Run BBMAP_CLUMPIFY
     //
 
-    BBMAP_CLUMPIFY(('bbmap_clumpify' in subsample_tools ? ch_sample : ch_samplesheet).filter { 'bbmap_clumpify' in tools })
+    BBMAP_CLUMPIFY(('bbmap_clumpify' in subsample_tools ? ch_sample : ch_samplesheet_fastq).filter { 'bbmap_clumpify' in tools })
     bbmap_clumpify_reads = save_bbmap_clumpify_reads ? BBMAP_CLUMPIFY.out.reads : channel.empty()
 
     //
     // MODULE: SEQFU_STATS
     //
 
-    SEQFU_STATS(('seqfu_stats' in subsample_tools ? ch_sample : ch_samplesheet).filter { 'seqfu_stats' in tools })
+    SEQFU_STATS(('seqfu_stats' in subsample_tools ? ch_sample : ch_samplesheet_fastq).filter { 'seqfu_stats' in tools })
 
     // Parse the stats TSV file
     SEQFU_STATS.out.stats
@@ -218,11 +230,11 @@ workflow SEQINSPECTOR {
 
     // STEP 04: MORE QC ON FASTQ FILES (CAN BE SUBSAMPLED)
 
-    FASTQC(('fastqc' in subsample_tools ? ch_sample : ch_samplesheet).filter { 'fastqc' in tools })
+    FASTQC(('fastqc' in subsample_tools ? ch_sample : ch_samplesheet_fastq.mix(ch_samplesheet_bam)).filter { 'fastqc' in tools })
 
-    FASTQE(('fastqe' in subsample_tools ? ch_sample : ch_samplesheet).filter { 'fastqe' in tools })
+    FASTQE(('fastqe' in subsample_tools ? ch_sample : ch_samplesheet_fastq).filter { 'fastqe' in tools })
 
-    SEQKIT_STATS(('seqkit_stats' in subsample_tools ? ch_sample : ch_samplesheet).filter { 'seqkit_stats' in tools })
+    SEQKIT_STATS(('seqkit_stats' in subsample_tools ? ch_sample : ch_samplesheet_fastq).filter { 'seqkit_stats' in tools })
 
     //
     // MODULE: FASTP for adapter trimming and quality filtering
@@ -233,7 +245,7 @@ workflow SEQINSPECTOR {
     def save_merged = false
 
     FASTP(
-        ('fastp' in subsample_tools ? ch_sample : ch_samplesheet).map { meta, reads -> [meta, reads, []] }.filter { 'fastp' in tools },
+        ('fastp' in subsample_tools ? ch_sample : ch_samplesheet_fastq).map { meta, reads -> [meta, reads, []] }.filter { 'fastp' in tools },
         discard_trimmed_pass,
         save_trimmed_fail,
         save_merged,
@@ -244,7 +256,7 @@ workflow SEQINSPECTOR {
     //
 
     CHELAE_TRIM(
-        ('chelae' in subsample_tools ? ch_sample : ch_samplesheet).map { meta, reads -> [meta, reads] }.filter { 'chelae' in tools },
+        ('chelae' in subsample_tools ? ch_sample : ch_samplesheet_fastq).map { meta, reads -> [meta, reads] }.filter { 'chelae' in tools },
         [],
     )
 
@@ -252,7 +264,7 @@ workflow SEQINSPECTOR {
     // MODULE: SEQUALI
     //
 
-    SEQUALI(('sequali' in subsample_tools ? ch_sample : ch_samplesheet).filter { 'sequali' in tools })
+    SEQUALI(('sequali' in subsample_tools ? ch_sample : ch_samplesheet_fastq.mix(ch_samplesheet_bam)).filter { 'sequali' in tools })
 
     // STEP 05: FASTQSCREEN
 
@@ -262,7 +274,7 @@ workflow SEQINSPECTOR {
     //   and transpose it into a tuple containing lists for each property
 
     FASTQSCREEN_FASTQSCREEN(
-        ('fastqscreen' in subsample_tools ? ch_sample : ch_samplesheet).filter { 'fastqscreen' in tools },
+        ('fastqscreen' in subsample_tools ? ch_sample : ch_samplesheet_fastq).filter { 'fastqscreen' in tools },
         channel.fromList(
             samplesheetToList(
                 fastq_screen_references,
@@ -279,7 +291,7 @@ workflow SEQINSPECTOR {
 
     if ('kraken2' in tools) {
         FASTQ_QC_PHYLOGENETIC(
-            'kraken2' in subsample_tools ? ch_sample : ch_samplesheet,
+            'kraken2' in subsample_tools ? ch_sample : ch_samplesheet_fastq,
             kraken2_db,
             kraken2_save_reads,
             kraken2_save_readclassifications,
@@ -298,7 +310,7 @@ workflow SEQINSPECTOR {
     def bam_subsampled = ('picard_collecthsmetrics' in subsample_tools) || ('picard_collectmultiplemetrics' in subsample_tools) || ('riker' in subsample_tools)
 
     BWAMEM2_MEM(
-        (bam_subsampled ? ch_sample : ch_samplesheet).filter { needs_bam },
+        (bam_subsampled ? ch_sample : ch_samplesheet_fastq).filter { needs_bam },
         bwamem2,
         fasta,
         sort_bam,
