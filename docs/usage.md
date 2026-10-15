@@ -49,13 +49,14 @@ sample3 path/to/run_dir/sample3_lane2_group2_r1.fq.gz         path/to/run_dir pr
 sample4 path/to/run_dir/sample4_lane2_group3_r1.fq.gz         path/to/run_dir control
 ```
 
-| Column    | Description                                                                                                                                                                            |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sample`  | Custom sample name. This entry will be identical for multiple sequencing libraries/runs from the same sample. Spaces in sample names are automatically converted to underscores (`_`). |
-| `fastq_1` | Full path to FastQ file for Illumina short reads 1. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                             |
-| `fastq_2` | Full path to FastQ file for Illumina short reads 2. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz" (optional).                                                  |
-| `rundir`  | Path to the runfolder containing extra information about the sequencing run (optional\*).                                                                                              |
-| `tags`    | Colon-separated list of tags to group samples in special reports.                                                                                                                      |
+| Column     | Description                                                                                                                                                                            |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sample`   | Custom sample name. This entry will be identical for multiple sequencing libraries/runs from the same sample. Spaces in sample names are automatically converted to underscores (`_`). |
+| `fastq_1`  | Full path to FastQ file for Illumina short reads 1. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                             |
+| `fastq_2`  | Full path to FastQ file for Illumina short reads 2. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz" (optional).                                                  |
+| `rundir`   | Path to the runfolder containing extra information about the sequencing run (optional\*).                                                                                              |
+| `tags`     | Colon-separated list of tags to group samples in special reports.                                                                                                                      |
+| `platform` | Sequencing platform of the `rundir`: `illumina` (default) or `ont`. Selects how the run folder is parsed by RUNDIRPARSER.                                                              |
 
 \*If rundir is not provided, the RUNDIRPARSER module is skipped and the sequencing run metadata is not collected.
 
