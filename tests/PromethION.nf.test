@@ -14,6 +14,15 @@ nextflow_pipeline {
                 tools_bundle: 'ont',
             ],
         ],
+        [
+            // Reads and rundir are from different runs, only used to test parsing of a MinKNOW 6 run report
+            name: "PromethION data test - rundirparser - MinKNOW 6 rundir, unmatched reads",
+            params: [
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.1/promethion_minknow6_unmatched.csv',
+                tools: 'rundirparser',
+                tools_bundle: null,
+            ],
+        ],
     ]
 
     // Generate tests for each scenario
