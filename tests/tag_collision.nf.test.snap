@@ -90,12 +90,18 @@
                 "reports/fastqc/sampletest_04/sampletest_04.html",
                 "reports/fastqc/sampletest_04/sampletest_04.zip"
             ],
-            "No warnings"
+            [
+                "WARN: On a MacOS system these tags will be considered as one",
+                "WARN: Tag name collision: [group1, Group1]",
+                "WARN: Tag name collision: [lane1, Lane1, LANE1]",
+                "WARN: Tag name collision: [test, Test, TEST]",
+                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
+            ]
         ],
-        "timestamp": "2026-10-15T14:29:13.083580332",
+        "timestamp": "2026-10-16T07:41:02.43828145",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.0"
+            "nextflow": "25.10.4"
         }
     },
     "NovaSeq6000 data test - tag collision": {
@@ -882,12 +888,17 @@
                 "multiqc_fastqc.txt:md5,b1233994fb36f079a7fad8939181de00"
             ],
             "No BAM files",
-            "No warnings"
+            [
+                "WARN: On a MacOS system these tags will be considered as one",
+                "WARN: Tag name collision: [group1, Group1]",
+                "WARN: Tag name collision: [lane1, Lane1, LANE1]",
+                "WARN: Tag name collision: [test, Test, TEST]"
+            ]
         ],
-        "timestamp": "2026-10-15T14:28:06.069701385",
+        "timestamp": "2026-10-16T07:39:55.457187961",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.0"
+            "nextflow": "25.10.4"
         }
     }
 }

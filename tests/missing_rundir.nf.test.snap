@@ -74,12 +74,16 @@
                 "reports/rundirparser/200624_A00834_0183_BHMTFYDRXX",
                 "reports/rundirparser/200624_A00834_0183_BHMTFYDRXX/200624_A00834_0183_BHMTFYDRXX_illumina_mqc.yml"
             ],
-            "No warnings"
+            [
+                "WARN: More than one rundir, or sample(s) missing rundir, skipping MULTIQC_SAV",
+                "WARN: No rundir for sample(s): SampleA_02, sampletest_04",
+                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
+            ]
         ],
-        "timestamp": "2026-10-15T14:19:22.408170826",
+        "timestamp": "2026-10-16T07:31:15.568827585",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.0"
+            "nextflow": "25.10.4"
         }
     },
     "NovaSeq6000 data test - checkqc,fastqc,multiqcsav,rundirparser - no rundir - stub": {
@@ -143,12 +147,18 @@
                 "reports/fastqc/sampletest_04/sampletest_04.html",
                 "reports/fastqc/sampletest_04/sampletest_04.zip"
             ],
-            "No warnings"
+            [
+                "WARN: No rundir for sample(s): Sample1_01, Sample23_03, SampleA_02, Undetermined_05, sampletest_04",
+                "WARN: No samples with rundir found, skipping CHECKQC",
+                "WARN: No samples with rundir found, skipping MULTIQC_SAV",
+                "WARN: No samples with rundir found, skipping RUNDIRPARSER",
+                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
+            ]
         ],
-        "timestamp": "2026-10-15T14:19:58.772855523",
+        "timestamp": "2026-10-16T07:31:54.135800092",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.0"
+            "nextflow": "25.10.4"
         }
     },
     "NovaSeq6000 data test - checkqc,fastqc,multiqcsav,rundirparser - missing rundir": {
@@ -611,12 +621,15 @@
                 "200624_A00834_0183_BHMTFYDRXX_illumina_mqc.yml:md5,29e05fed18bca0e9a857c992b6d59a40"
             ],
             "No BAM files",
-            "No warnings"
+            [
+                "WARN: More than one rundir, or sample(s) missing rundir, skipping MULTIQC_SAV",
+                "WARN: No rundir for sample(s): SampleA_02, sampletest_04"
+            ]
         ],
-        "timestamp": "2026-10-15T14:16:52.932946546",
+        "timestamp": "2026-10-16T07:29:13.846542175",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.0"
+            "nextflow": "25.10.4"
         }
     },
     "NovaSeq6000 data test - checkqc,fastqc,multiqcsav,rundirparser - no rundir": {
@@ -1028,12 +1041,17 @@
                 "multiqc_fastqc.txt:md5,6f91452cb05797d96d26f2ce9dce337d"
             ],
             "No BAM files",
-            "No warnings"
+            [
+                "WARN: No rundir for sample(s): Sample1_01, Sample23_03, SampleA_02, Undetermined_05, sampletest_04",
+                "WARN: No samples with rundir found, skipping CHECKQC",
+                "WARN: No samples with rundir found, skipping MULTIQC_SAV",
+                "WARN: No samples with rundir found, skipping RUNDIRPARSER"
+            ]
         ],
-        "timestamp": "2026-10-15T14:18:07.419192072",
+        "timestamp": "2026-10-16T07:30:32.538967666",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.0"
+            "nextflow": "25.10.4"
         }
     }
 }

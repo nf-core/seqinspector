@@ -176,12 +176,14 @@
                 "reports/chelae/SAMPLE_SINGLE_END_03/SAMPLE_SINGLE_END_03.chelae.json",
                 "reports/chelae/SAMPLE_SINGLE_END_03/SAMPLE_SINGLE_END_03.chelae.tsv"
             ],
-            "No warnings"
+            [
+                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
+            ]
         ],
-        "timestamp": "2026-10-15T14:35:58.824928357",
+        "timestamp": "2026-10-16T07:47:10.179973463",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.0"
+            "nextflow": "25.10.4"
         }
     }
 }

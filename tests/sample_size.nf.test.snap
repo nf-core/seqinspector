@@ -1224,12 +1224,18 @@
                 "sampletest_04_sampletest_S4_L001_R1_001.fastq.gz:md5,e81c2337941970a3bafa2c0adf8bebb1"
             ],
             "No BAM files",
-            "No warnings"
+            [
+                "WARN: Sample1_01: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
+                "WARN: Sample23_03: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
+                "WARN: SampleA_02: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
+                "WARN: Undetermined_05: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads.",
+                "WARN: sampletest_04: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads."
+            ]
         ],
-        "timestamp": "2026-10-15T14:26:19.598620519",
+        "timestamp": "2026-10-16T07:38:05.286807855",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.0"
+            "nextflow": "25.10.4"
         }
     }
 }
