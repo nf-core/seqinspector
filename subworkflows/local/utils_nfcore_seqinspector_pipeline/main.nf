@@ -144,7 +144,7 @@ ${subsampled_info}-\033[2m----------------------------------------------------\0
             def new_meta = [id: "${meta.sample}_${zero_padded_idx}"]
             return [
                 new_meta.id,
-                meta + meta + [id: new_meta.id, tags: tags] + (fastq_1 ? [single_end: !fastq_2] : [:]),
+                meta + [id: new_meta.id, tags: tags] + (fastq_1 ? [single_end: !fastq_2] : [:]),
                 // Filter tuple to keep only the files provided for this row (empty columns are [])
                 [fastq_1, fastq_2, bam].findAll { file -> file },
             ]
