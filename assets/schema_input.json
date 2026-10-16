@@ -63,7 +63,7 @@
             { "required": ["fastq_1"] },
             { "required": ["bam"] }
         ],
-        "errorMessage": "Each row must provide at least a BAM or a FASTQ file",
+        "errorMessage": "Each row must provide either a BAM file or FASTQ file(s), but not both",
         "dependentRequired": {
             "fastq_2": ["fastq_1"]
         }
