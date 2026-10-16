@@ -416,7 +416,7 @@ def defineToolsList(input_bundle, input_tools, input_skip, sample_size) {
     if ('illumina' in bundle_list) {
         tools_list << 'checkqc'
         tools_list << 'multiqcsav'
-        tools_list << 'rundirparser' 
+        tools_list << 'rundirparser'
         tools_list << 'fq_lint'
         tools_list << 'fastqc'
         tools_list << 'fastqscreen'
@@ -443,7 +443,7 @@ def defineToolsList(input_bundle, input_tools, input_skip, sample_size) {
         tools_list << 'fastqc'
         tools_list << 'sequali'
     }
-    
+
     // other
     if ('default' in bundle_list) {
         tools_list << 'fq_lint'
