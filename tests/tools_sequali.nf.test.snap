@@ -60,12 +60,14 @@
                 "reports/sequali/sampletest_04/sampletest_04.html",
                 "reports/sequali/sampletest_04/sampletest_04.json"
             ],
-            "No warnings"
+            [
+                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
+            ]
         ],
-        "timestamp": "2026-10-15T15:05:42.024288806",
+        "timestamp": "2026-10-16T09:28:01.616101016",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.0"
+            "nextflow": "25.10.4"
         }
     },
     "NovaSeq6000 data test - sequali": {
