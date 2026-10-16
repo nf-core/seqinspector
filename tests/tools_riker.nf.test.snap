@@ -696,12 +696,14 @@
                 "reports/riker/sampletest_04/sampletest_04.wgs-coverage.txt",
                 "reports/riker/sampletest_04/sampletest_04.wgs-metrics.txt"
             ],
-            "No warnings"
+            [
+                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
+            ]
         ],
-        "timestamp": "2026-10-15T14:58:38.406983836",
+        "timestamp": "2026-10-16T09:04:06.231359842",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.0"
+            "nextflow": "25.10.4"
         }
     },
     "NovaSeq6000 data test - riker": {
@@ -1214,13 +1216,14 @@
             "No BAM files",
             "No warnings",
             [
+                "  riker_args                : --tools alignment basic hybcap isize",
                 "riker_args contains 'hybcap' but --bait_intervals and --target_intervals were not provided. Both are required for hybcap metrics."
             ]
         ],
-        "timestamp": "2026-10-15T15:02:12.994570583",
+        "timestamp": "2026-10-16T09:04:23.268209474",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.0"
+            "nextflow": "25.10.4"
         }
     },
     "NovaSeq6000 data test - riker with bait and target - stub": {

@@ -959,12 +959,14 @@
                 "subsampled/sampletest_04",
                 "subsampled/sampletest_04/sampletest_04.fastq.gz"
             ],
-            "No warnings"
+            [
+                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
+            ]
         ],
-        "timestamp": "2026-10-15T14:48:22.044896937",
+        "timestamp": "2026-10-16T08:59:54.866016917",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.0"
+            "nextflow": "25.10.4"
         }
     },
     "NovaSeq6000 data test - kraken2,fastqc subsample_tools kraken2,fastqc": {
