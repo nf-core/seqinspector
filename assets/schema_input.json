@@ -18,7 +18,7 @@
                 "format": "file-path",
                 "exists": true,
                 "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                "errorMessage": "If no BAM file is provided, FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
             },
             "fastq_2": {
                 "type": "string",
@@ -26,6 +26,13 @@
                 "exists": true,
                 "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
                 "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+            },
+            "bam": {
+                "type": "string",
+                "format": "file-path",
+                "exists": true,
+                "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.bam$",
+                "errorMessage": "If no FastQ1 file was provided, BAM file must be provided, cannot contain spaces and must have extension '.bam'"
             },
             "rundir": {
                 "oneOf": [
@@ -51,7 +58,9 @@
                 "meta": ["tags"]
             }
         },
-        "required": ["sample", "fastq_1"],
+        "required": ["sample"],
+        "oneOf": [{ "required": ["fastq_1"] }, { "required": ["bam"] }],
+        "errorMessage": "Each row must provide either a BAM file or FASTQ file(s), but not both",
         "dependentRequired": {
             "fastq_2": ["fastq_1"]
         }

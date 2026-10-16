@@ -21,7 +21,7 @@
 
 ## Introduction
 
-**nf-core/seqinspector** is a bioinformatics pipeline that processes raw sequence data (FASTQ) to provide comprehensive quality control.
+**nf-core/seqinspector** is a bioinformatics pipeline that processes raw sequence data (FASTQ or BAM) to provide comprehensive quality control.
 It can perform subsampling, quality assessment, duplication level analysis, and complexity evaluation on a per-sample basis, while also detecting adapter content, technical artifacts, and common biological contaminants.
 The pipeline generates detailed MultiQC reports with flexible output options, ranging from individual sample reports to project-wide summaries, making it particularly useful for sequencing core facilities and research groups with access to sequencing instruments.
 If provided, nf-core/seqinspector can also parse statistics from an Illumina run folder directory into the final MultiQC reports.
@@ -114,6 +114,13 @@ CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz,2
 Each row represents a fastq file (single-end with only `fastq_1`) or a pair of fastq files (paired end with `fastq_1` and `fastq_2`).
 `rundir` is the path to the runfolder.
 `tags` is a colon-separated list of tags that will be added to the MultiQC report for this `sample`.
+
+Alternatively, you can use a bam file to run the pipeline instead of fastq files:
+
+```csv
+sample,bam,rundir,tags
+CONTROL_REP1,AEG588A1_S1_L002_R1_001.bam,200624_A00834_0183_BHMTFYDRXX,lane1:project5:group2
+```
 
 Now, you can run the pipeline using:
 
