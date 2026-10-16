@@ -1567,12 +1567,14 @@
                 "reports/riker/sampletest_04/sampletest_04.wgs-coverage.txt",
                 "reports/riker/sampletest_04/sampletest_04.wgs-metrics.txt"
             ],
-            "No warnings"
+            [
+                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
+            ]
         ],
-        "timestamp": "2026-10-15T15:01:57.192020334",
+        "timestamp": "2026-10-16T08:43:10.952635739",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.0"
+            "nextflow": "25.10.4"
         }
     },
     "NovaSeq6000 data test - riker with rna metrics": {
