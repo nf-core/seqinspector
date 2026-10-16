@@ -403,69 +403,62 @@ def defineToolsList(input_bundle, input_tools, input_skip, sample_size) {
         tools_list << 'seqtk'
     }
 
-    // Current list actually used are default, minimal and promethion, we should probably always have a list `all`
-    // The others are here as a showcase for what could be done
+    // The bundles are separated by platform, input data type or other. Platform bundles will include
+    // a platform specific rundir parser, whereas the input type bundles are platform independent.
+    // "Other" bundles may only work with specific data types or platforms.
+    // If there are tools that are interchangable in their function, only one tool is included
+    // in the bundle.
+    // Future bundle types might focus on QC tools that are relevant for specific applications like RNAseq, ATACseq, etc.
 
     // please update the docs/usage.md section about tools selection when adding new tools here!
 
-    if ('all' in bundle_list) {
-        tools_list << 'bbmap_clumpify'
-        tools_list << 'checkqc'
-        tools_list << 'chelae'
-        tools_list << 'fastqc'
-        tools_list << 'fastp'
-        tools_list << 'fastqe'
-        tools_list << 'fastqscreen'
-        tools_list << 'fq_lint'
-        tools_list << 'kraken2'
-        tools_list << 'multiqcsav'
-        tools_list << 'picard_collecthsmetrics'
-        tools_list << 'picard_collectmultiplemetrics'
-        tools_list << 'riker'
-        tools_list << 'rundirparser'
-        tools_list << 'seqkit_stats'
-        tools_list << 'seqfu_stats'
-        tools_list << 'sequali'
-        tools_list << 'toulligqc'
-    }
-    if ('bam' in bundle_list) {
-        tools_list << 'picard_collecthsmetrics'
-        tools_list << 'picard_collectmultiplemetrics'
-        tools_list << 'riker'
-    }
-    if ('fastq' in bundle_list) {
-        tools_list << 'fastqc'
-        tools_list << 'fastqscreen'
-        tools_list << 'fq_lint'
-        tools_list << 'seqkit_stats'
-    }
-    if ('default' in bundle_list) {
-        tools_list << 'fastqc'
-        tools_list << 'fastqscreen'
-        tools_list << 'fq_lint'
-        tools_list << 'picard_collectmultiplemetrics'
-        tools_list << 'rundirparser'
-        tools_list << 'seqfu_stats'
-        tools_list << 'sequali'
-    }
+    // bundles by platform, will require platform to be specified in the sample sheet in order to parse the run folder information
     if ('illumina' in bundle_list) {
         tools_list << 'checkqc'
         tools_list << 'multiqcsav'
         tools_list << 'rundirparser'
-        tools_list << 'seqfu_stats'
-    }
-    if ('minimal' in bundle_list) {
+        tools_list << 'fq_lint'
         tools_list << 'fastqc'
         tools_list << 'fastqscreen'
-        tools_list << 'picard_collectmultiplemetrics'
-        tools_list << 'seqfu_stats'
     }
+
     if ('ont' in bundle_list) {
         tools_list << 'fastqc'
-        tools_list << 'fastqscreen'
-        tools_list << 'seqkit_stats'
         tools_list << 'sequali'
         tools_list << 'toulligqc'
+        // tools_list << 'rundirparser' // Not yet, we still need to code that
+    }
+
+    // future extension: PacBio, Element
+
+    // bundles by data type (fastq, bam, etc.)
+    if ('fastq' in bundle_list) {
+        tools_list << 'fq_lint'
+        tools_list << 'fastqc'
+        tools_list << 'fastqscreen'
+        tools_list << 'seqfu_stats'
+    }
+
+    if ('bam' in bundle_list) {
+        tools_list << 'fastqc'
+        tools_list << 'sequali'
+    }
+
+    // other
+    if ('default' in bundle_list) {
+        tools_list << 'fq_lint'
+        tools_list << 'fastqc'
+        tools_list << 'fastqscreen'
+        tools_list << 'rundirparser'
+        tools_list << 'seqfu_stats'
+        tools_list << 'sequali'
+    }
+
+    if ('minimal' in bundle_list) {
+        // fastqscreen is not compatible with bam file input
+        // TODO: chain fastqscreen with a tool that translates bam to fastq in such cases
+        tools_list << 'fastqc'
+        tools_list << 'fastqscreen'
     }
 
     tools_list = tools_list.sort().unique() - skip_list
