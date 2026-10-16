@@ -426,7 +426,7 @@ def defineToolsList(input_bundle, input_tools, input_skip, sample_size) {
         tools_list << 'fastqc'
         tools_list << 'sequali'
         tools_list << 'toulligqc'
-        tools_list << 'rundirparser'
+        // tools_list << 'rundirparser' // Not yet, we still need to code that
     }
 
     // future extension: PacBio, Element
