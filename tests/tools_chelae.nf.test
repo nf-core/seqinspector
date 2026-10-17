@@ -9,7 +9,7 @@ nextflow_pipeline {
         [
             name: "MiSeq data test - chelae",
             params: [
-                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/miseq.csv',
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.1/miseq.csv',
                 tools: 'chelae',
                 tools_bundle: null,
             ],
@@ -17,7 +17,7 @@ nextflow_pipeline {
         [
             name: "MiSeq data test - chelae - stub",
             params: [
-                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/miseq.csv',
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.1/miseq.csv',
                 tools: 'chelae',
                 tools_bundle: null,
             ],

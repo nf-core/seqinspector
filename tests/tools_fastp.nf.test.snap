@@ -320,10 +320,10 @@
                 "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
             ]
         ],
-        "timestamp": "2026-08-12T13:40:26.616182709",
+        "timestamp": "2026-10-16T07:48:31.072640181",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "25.10.4"
         }
     }
 }

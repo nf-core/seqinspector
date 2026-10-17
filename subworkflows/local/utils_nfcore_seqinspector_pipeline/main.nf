@@ -315,7 +315,7 @@ def toolReferencesMap() {
         'python': ['name': 'Python', 'authors': '', 'authors_short': '', 'description': 'Programming language.', 'url': 'https://www.python.org/'],
         'pyyaml': ['name': 'PyYAML', 'authors': '', 'authors_short': '', 'description': 'YAML parser and emitter for Python.', 'url': 'https://pyyaml.org/'],
         'riker': ['name': 'Riker', 'authors': '', 'authors_short': '', 'description': 'Fast Rust CLI toolkit for sequencing QC metrics. Ports key QC metrics tools from Picard with cleaner output and better performance.', 'url': 'https://github.com/fulcrumgenomics/riker'],
-        'rundirparser': ['name': 'Rundirparser', 'authors': '', 'authors_short': '', 'description': 'Parse Illumina run directory metadata for MultiQC.', 'url': 'https://github.com/nf-core/seqinspector'],
+        'rundirparser': ['name': 'Rundirparser', 'authors': '', 'authors_short': '', 'description': 'Parse Illumina or ONT run directory metadata for MultiQC.', 'url': 'https://github.com/nf-core/seqinspector'],
         'samtools': ['name': 'SAMTOOLS', 'authors': 'Danecek P., Bonfield JK., Liddle J., & al. (2021).', 'authors_short': 'Danecek et al. 2021', 'description': 'Twelve years of SAMtools and BCFtools.', 'doi': '10.1093/gigascience/giab008'],
         'seqfu': ['name': 'SeqFu', 'authors': 'Telatin A., Fariselli P., & Birolo G. (2021).', 'authors_short': 'Telatin et al. 2021', 'description': 'SeqFu: A Suite of Utilities for the Robust and Reproducible Manipulation of Sequence Files. Bioengineering, 8, 59.', 'doi': '10.3390/bioengineering8050059'],
         'seqkit': ['name': 'SeqKit', 'authors': 'Shen W., Sipos B., & Zhao L. (2024).', 'authors_short': 'Shen et al. 2024', 'description': 'SeqKit2: A Swiss Army Knife for Sequence and Alignment Processing. iMeta, e191.', 'doi': '10.1002/imt2.191'],
@@ -426,7 +426,7 @@ def defineToolsList(input_bundle, input_tools, input_skip, sample_size) {
         tools_list << 'fastqc'
         tools_list << 'sequali'
         tools_list << 'toulligqc'
-        // tools_list << 'rundirparser' // Not yet, we still need to code that
+        tools_list << 'rundirparser'
     }
 
     // future extension: PacBio, Element
