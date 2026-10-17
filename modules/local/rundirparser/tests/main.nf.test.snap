@@ -10,7 +10,7 @@
                         },
                         "RUNDIRPARSER",
                         "rundirparser",
-                        "ont_mqc.yml:md5,228005d9c01f2dfe56a926c1f0900eee"
+                        "ont_mqc.yml:md5,9822f83de2a7e0e622082079c36804d7"
                     ]
                 ],
                 "versions": [
@@ -32,10 +32,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-10-15T14:03:26.03092072",
+        "timestamp": "2026-10-17T08:23:34.637596358",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.0"
+            "nextflow": "25.10.4"
         }
     },
     "PromethION - stub": {
@@ -127,7 +127,7 @@
                         },
                         "RUNDIRPARSER",
                         "rundirparser",
-                        "ont_mqc.yml:md5,9360ffae335f3f804c3bd5b6a04946ca"
+                        "ont_mqc.yml:md5,7b1d22199c6d704f3ce8f1d9034bb41a"
                     ]
                 ],
                 "versions": [
@@ -149,10 +149,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-10-15T14:03:34.477015374",
+        "timestamp": "2026-10-17T08:23:43.146736494",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.0"
+            "nextflow": "25.10.4"
         }
     },
     "NovaSeq6000 - stub": {
