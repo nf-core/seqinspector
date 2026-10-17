@@ -96,8 +96,25 @@ def construct_data(report):
         info["Basecalled reads"] = f"{pass_reads + fail_reads:,}"
         info["Pass reads"] = f"{pass_reads:,} ({100 * pass_reads / (pass_reads + fail_reads):.1f}%)"
         info["Pass bases"] = f"{pass_bases / 1e9:.2f} Gb"
+    if pass_reads:
+        info["Mean read length (pass)"] = f"{pass_bases / pass_reads:,.0f} bp"
+
+    n50 = read_n50(acquisition)
+    if n50:
+        info["Read N50"] = f"{n50:,} bp"
 
     return {key: {"Value": str(value)} for key, value in info.items() if value is not None}
+
+
+def read_n50(acquisition):
+    # The read length histograms carry an N50 per read length type, use the basecalled one
+    for histogram in acquisition.get("read_length_histogram", []):
+        plot = histogram.get("plot", histogram)
+        if plot.get("read_length_type", histogram.get("read_length_type")) == "BasecalledBases":
+            for data in plot.get("histogram_data", []):
+                if data.get("n50"):
+                    return int(data["n50"])
+    return None
 
 
 def construct_multiqc_yaml(directory):

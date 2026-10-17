@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
-- [#291](https://github.com/nf-core/seqinspector/pull/291) Support ONT run folders in RUNDIRPARSER: parse the MinKNOW `report_*.json` into the run metadata table, and add `rundirparser` to the `ont` bundle ([#289](https://github.com/nf-core/seqinspector/issues/289)) (@chriswyatt1)
+- [#291](https://github.com/nf-core/seqinspector/pull/291) Support ONT run folders in RUNDIRPARSER: parse the MinKNOW `report_*.json` into the run metadata table (including read N50 and mean read length), and add `rundirparser` to the `ont` bundle ([#289](https://github.com/nf-core/seqinspector/issues/289)) (@chriswyatt1)
 
 ### `Fixed`
 
