@@ -166,9 +166,14 @@ ${subsampled_info}-\033[2m----------------------------------------------------\0
             }
         }
 
+    // Picard and riker require a reference FASTA for alignment and metrics
     if (!(fasta) && (("picard_collecthsmetrics" in tools) || ("picard_collectmultiplemetrics" in tools) || ("riker" in tools))) {
-        log.warn("No fasta was provided, but picard or riker was requested")
-        log.warn("BWAMEM2, SAMTOOLS, PICARD and RIKER processes will be skipped")
+        error("No fasta was provided, but picard or riker was requested. A reference FASTA is required for these tools.")
+    }
+
+    // CollectHsMetrics requires bait and target interval lists
+    if ('picard_collecthsmetrics' in tools && (!params.bait_intervals || !params.target_intervals)) {
+        error("picard_collecthsmetrics was requested but --bait_intervals and --target_intervals were not provided. Both are required for CollectHsMetrics.")
     }
 
     if ('toulligqc' in tools && 'emulate_amd64' in workflow.profile.tokenize(",")) {
@@ -238,7 +243,7 @@ workflow PIPELINE_COMPLETION {
 def validateInputParameters(tools, riker_args) {
     genomeExistsError()
     rikerHybcapError(tools, riker_args)
-    rikerRnaCheck(tools, riker_args)
+    rikerUnsupportedCollectorsError(tools, riker_args)
 }
 
 //
@@ -276,18 +281,19 @@ def rikerHybcapError(tools, riker_args) {
 }
 
 //
-// Validate riker RNA metrics configuration: the gene model and the `rna` tool must be requested together
+// Exit pipeline if riker collectors requiring interval files are requested
+// but the pipeline does not yet support providing those files
 //
-def rikerRnaCheck(tools, riker_args) {
-    if (!('riker' in tools)) {
-        return
-    }
-    def rna_requested = riker_args?.contains('rna')
-    if (rna_requested && !params.rna_gene_model) {
-        error("riker_args contains 'rna' but --rna_gene_model was not provided. A gene model is required for RNA metrics.")
-    }
-    if (params.rna_gene_model && !rna_requested) {
-        log.warn("--rna_gene_model was provided but riker_args does not request 'rna'; no RNA metrics will be produced. Add 'rna' to --riker_args to enable them.")
+def rikerUnsupportedCollectorsError(tools, riker_args) {
+    if ('riker' in tools && riker_args) {
+        def unsupported = []
+        if (riker_args.contains('wgs'))       unsupported << 'wgs (requires --wgs_intervals)'
+        if (riker_args.contains('gcbias'))    unsupported << 'gcbias (requires --gcbias_exclude_intervals)'
+        if (riker_args.contains('error'))     unsupported << 'error (requires --error_vcf and/or --error_intervals)'
+        if (riker_args.contains('rna'))       unsupported << 'rna (requires --rna_gene_model and/or --rna_ribosomal_intervals)'
+        if (unsupported) {
+            error("riker_args contains collectors that require interval files not yet supported as pipeline parameters: ${unsupported.join(', ')}.")
+        }
     }
 }
 

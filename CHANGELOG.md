@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#280](https://github.com/nf-core/seqinspector/pull/280) Add validation for missing `--bait_intervals` and `--target_intervals` when `picard_collecthsmetrics` is requested (@maxulysse)
+- [#280](https://github.com/nf-core/seqinspector/pull/280) Add validation for missing fasta when picard or riker is requested (@maxulysse)
+- [#280](https://github.com/nf-core/seqinspector/pull/280) Add validation for unsupported riker collectors (wgs, gcbias, error, rna) that require interval files not yet supported as pipeline parameters (@maxulysse)
+
 ### `Fixed`
 
 ### `Changed`
