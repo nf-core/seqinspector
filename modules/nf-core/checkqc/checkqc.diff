@@ -1,0 +1,20 @@
+Changes in component 'nf-core/checkqc'
+'modules/nf-core/checkqc/meta.yml' is unchanged
+'modules/nf-core/checkqc/environment.yml' is unchanged
+Changes in 'checkqc/main.nf':
+--- modules/nf-core/checkqc/main.nf
++++ modules/nf-core/checkqc/main.nf
+@@ -11,7 +11,7 @@
+     path(checkqc_config)
+ 
+     output:
+-    tuple val(meta), path("*checkqc_report.json"), emit: report
++    tuple val(meta), val("${task.process}"), val('checkqc'), path("*checkqc_report.json"), emit: report, topic: multiqc_files
+     tuple val("${task.process}"), val('checkqc'), eval('checkqc --version | sed -e "s/checkqc, version //g"'), emit: versions_checkqc, topic: versions
+ 
+     when:
+
+'modules/nf-core/checkqc/tests/main.nf.test' is unchanged
+'modules/nf-core/checkqc/tests/nextflow.config' is unchanged
+'modules/nf-core/checkqc/tests/main.nf.test.snap' is unchanged
+************************************************************

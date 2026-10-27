@@ -1,0 +1,239 @@
+{
+    "NovaSeq6000 data test - args for fq/lint - stub": {
+        "content": [
+            10,
+            {
+                "FQ_LINT": {
+                    "fq": "0.12.0"
+                }
+            },
+            [
+                "multiqc",
+                "multiqc/global_report",
+                "multiqc/global_report/multiqc_data",
+                "multiqc/global_report/multiqc_data/.stub",
+                "multiqc/global_report/multiqc_plots",
+                "multiqc/global_report/multiqc_plots/.stub",
+                "multiqc/global_report/multiqc_report.html",
+                "multiqc/group_reports",
+                "multiqc/group_reports/group1",
+                "multiqc/group_reports/group1/multiqc_data",
+                "multiqc/group_reports/group1/multiqc_data/.stub",
+                "multiqc/group_reports/group1/multiqc_plots",
+                "multiqc/group_reports/group1/multiqc_plots/.stub",
+                "multiqc/group_reports/group1/multiqc_report.html",
+                "multiqc/group_reports/group2",
+                "multiqc/group_reports/group2/multiqc_data",
+                "multiqc/group_reports/group2/multiqc_data/.stub",
+                "multiqc/group_reports/group2/multiqc_plots",
+                "multiqc/group_reports/group2/multiqc_plots/.stub",
+                "multiqc/group_reports/group2/multiqc_report.html",
+                "multiqc/group_reports/lane1",
+                "multiqc/group_reports/lane1/multiqc_data",
+                "multiqc/group_reports/lane1/multiqc_data/.stub",
+                "multiqc/group_reports/lane1/multiqc_plots",
+                "multiqc/group_reports/lane1/multiqc_plots/.stub",
+                "multiqc/group_reports/lane1/multiqc_report.html",
+                "multiqc/group_reports/test",
+                "multiqc/group_reports/test/multiqc_data",
+                "multiqc/group_reports/test/multiqc_data/.stub",
+                "multiqc/group_reports/test/multiqc_plots",
+                "multiqc/group_reports/test/multiqc_plots/.stub",
+                "multiqc/group_reports/test/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
+                "reports",
+                "reports/fq",
+                "reports/fq/Sample1_01",
+                "reports/fq/Sample1_01/Sample1_01.fq_lint.txt",
+                "reports/fq/Sample23_03",
+                "reports/fq/Sample23_03/Sample23_03.fq_lint.txt",
+                "reports/fq/SampleA_02",
+                "reports/fq/SampleA_02/SampleA_02.fq_lint.txt",
+                "reports/fq/Undetermined_05",
+                "reports/fq/Undetermined_05/Undetermined_05.fq_lint.txt",
+                "reports/fq/sampletest_04",
+                "reports/fq/sampletest_04/sampletest_04.fq_lint.txt"
+            ],
+            [
+                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
+            ]
+        ],
+        "timestamp": "2026-04-09T14:08:19.966257144",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
+        }
+    },
+    "NovaSeq6000 data test - args for fq/lint": {
+        "content": [
+            10,
+            {
+                "FQ_LINT": {
+                    "fq": "0.12.0"
+                }
+            },
+            [
+                "multiqc",
+                "multiqc/global_report",
+                "multiqc/global_report/multiqc_data",
+                "multiqc/global_report/multiqc_data/llms-full.txt",
+                "multiqc/global_report/multiqc_data/multiqc.log",
+                "multiqc/global_report/multiqc_data/multiqc.parquet",
+                "multiqc/global_report/multiqc_data/multiqc_citations.txt",
+                "multiqc/global_report/multiqc_data/multiqc_data.json",
+                "multiqc/global_report/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/global_report/multiqc_data/multiqc_sources.txt",
+                "multiqc/global_report/multiqc_report.html",
+                "multiqc/group_reports",
+                "multiqc/group_reports/group1",
+                "multiqc/group_reports/group1/multiqc_data",
+                "multiqc/group_reports/group1/multiqc_data/llms-full.txt",
+                "multiqc/group_reports/group1/multiqc_data/multiqc.log",
+                "multiqc/group_reports/group1/multiqc_data/multiqc.parquet",
+                "multiqc/group_reports/group1/multiqc_data/multiqc_citations.txt",
+                "multiqc/group_reports/group1/multiqc_data/multiqc_data.json",
+                "multiqc/group_reports/group1/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/group_reports/group1/multiqc_data/multiqc_sources.txt",
+                "multiqc/group_reports/group1/multiqc_report.html",
+                "multiqc/group_reports/group2",
+                "multiqc/group_reports/group2/multiqc_data",
+                "multiqc/group_reports/group2/multiqc_data/llms-full.txt",
+                "multiqc/group_reports/group2/multiqc_data/multiqc.log",
+                "multiqc/group_reports/group2/multiqc_data/multiqc.parquet",
+                "multiqc/group_reports/group2/multiqc_data/multiqc_citations.txt",
+                "multiqc/group_reports/group2/multiqc_data/multiqc_data.json",
+                "multiqc/group_reports/group2/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/group_reports/group2/multiqc_data/multiqc_sources.txt",
+                "multiqc/group_reports/group2/multiqc_report.html",
+                "multiqc/group_reports/lane1",
+                "multiqc/group_reports/lane1/multiqc_data",
+                "multiqc/group_reports/lane1/multiqc_data/llms-full.txt",
+                "multiqc/group_reports/lane1/multiqc_data/multiqc.log",
+                "multiqc/group_reports/lane1/multiqc_data/multiqc.parquet",
+                "multiqc/group_reports/lane1/multiqc_data/multiqc_citations.txt",
+                "multiqc/group_reports/lane1/multiqc_data/multiqc_data.json",
+                "multiqc/group_reports/lane1/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/group_reports/lane1/multiqc_data/multiqc_sources.txt",
+                "multiqc/group_reports/lane1/multiqc_report.html",
+                "multiqc/group_reports/test",
+                "multiqc/group_reports/test/multiqc_data",
+                "multiqc/group_reports/test/multiqc_data/llms-full.txt",
+                "multiqc/group_reports/test/multiqc_data/multiqc.log",
+                "multiqc/group_reports/test/multiqc_data/multiqc.parquet",
+                "multiqc/group_reports/test/multiqc_data/multiqc_citations.txt",
+                "multiqc/group_reports/test/multiqc_data/multiqc_data.json",
+                "multiqc/group_reports/test/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/group_reports/test/multiqc_data/multiqc_sources.txt",
+                "multiqc/group_reports/test/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
+                "reports",
+                "reports/fq",
+                "reports/fq/Sample1_01",
+                "reports/fq/Sample1_01/Sample1_01.fq_lint.txt",
+                "reports/fq/Sample23_03",
+                "reports/fq/Sample23_03/Sample23_03.fq_lint.txt",
+                "reports/fq/SampleA_02",
+                "reports/fq/SampleA_02/SampleA_02.fq_lint.txt",
+                "reports/fq/Undetermined_05",
+                "reports/fq/Undetermined_05/Undetermined_05.fq_lint.txt",
+                "reports/fq/sampletest_04",
+                "reports/fq/sampletest_04/sampletest_04.fq_lint.txt"
+            ],
+            [
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
+            ],
+            "No BAM files",
+            "No warnings"
+        ],
+        "timestamp": "2026-03-31T12:38:15.607635886",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
+        }
+    },
+    "NovaSeq6000 data test - Fail fq_lint": {
+        "content": [
+            [
+                "pipeline_info"
+            ],
+            "No stable content",
+            "No BAM files",
+            "No warnings"
+        ],
+        "timestamp": "2026-03-16T09:40:03.529857594",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
+    },
+    "NovaSeq6000 data test - fq_lint force success - stub": {
+        "content": [
+            4,
+            {
+                "FQ_LINT": {
+                    "fq": "0.12.0"
+                }
+            },
+            [
+                "multiqc",
+                "multiqc/global_report",
+                "multiqc/global_report/multiqc_data",
+                "multiqc/global_report/multiqc_data/.stub",
+                "multiqc/global_report/multiqc_plots",
+                "multiqc/global_report/multiqc_plots/.stub",
+                "multiqc/global_report/multiqc_report.html",
+                "multiqc/group_reports",
+                "multiqc/group_reports/group1",
+                "multiqc/group_reports/group1/multiqc_data",
+                "multiqc/group_reports/group1/multiqc_data/.stub",
+                "multiqc/group_reports/group1/multiqc_plots",
+                "multiqc/group_reports/group1/multiqc_plots/.stub",
+                "multiqc/group_reports/group1/multiqc_report.html",
+                "multiqc/group_reports/lane1",
+                "multiqc/group_reports/lane1/multiqc_data",
+                "multiqc/group_reports/lane1/multiqc_data/.stub",
+                "multiqc/group_reports/lane1/multiqc_plots",
+                "multiqc/group_reports/lane1/multiqc_plots/.stub",
+                "multiqc/group_reports/lane1/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
+                "reports",
+                "reports/fq",
+                "reports/fq/Sample1_01",
+                "reports/fq/Sample1_01/Sample1_01.fq_lint.txt"
+            ],
+            [
+                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
+            ]
+        ],
+        "timestamp": "2026-04-09T14:07:33.929613017",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
+        }
+    },
+    "NovaSeq6000 data test - fq_lint force success": {
+        "content": [
+            0,
+            "No versions",
+            [
+                "pipeline_info",
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"
+            ],
+            "No stable content",
+            "No BAM files",
+            "No warnings"
+        ],
+        "timestamp": "2026-03-20T13:37:11.478990591",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
+    }
+}

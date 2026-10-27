@@ -1,0 +1,103 @@
+name: rundirparser
+description: Parse Illumina run directory metadata from runParameters.xml for MultiQC reporting
+keywords:
+  - illumina
+  - rundir
+  - metadata
+  - multiqc
+  - sequencing
+tools:
+  - rundirparser:
+      description: Parse Illumina run directory metadata for MultiQC
+      homepage: https://github.com/nf-core/seqinspector
+      documentation: https://github.com/nf-core/seqinspector
+      licence:
+        - "MIT"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - rundir:
+        type: file
+        description: |
+          Path to Illumina run directory or tar.gz archive containing runParameters.xml
+        pattern: "*.{tar.gz,directory}"
+output:
+  multiqc:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "${task.process}":
+          type: string
+          description: The name of the process
+      - rundirparser:
+          type: string
+          description: The name of the tool
+      - "*_mqc.yml":
+          type: file
+          description: MultiQC-compatible YAML file containing run directory metadata
+          pattern: "*_mqc.yml"
+  versions_python:
+    - - "${task.process}":
+          type: string
+          description: The name of the process
+      - Python:
+          type: string
+          description: The name of the tool
+      - python --version |& sed '1!d ; s/Python //':
+          type: eval
+          description: The expression to obtain the version of the tool
+  versions_pyyaml:
+    - - "${task.process}":
+          type: string
+          description: The name of the process
+      - PyYAML:
+          type: string
+          description: The name of the tool
+      - python -c 'import yaml; print(yaml.__version__)':
+          type: eval
+          description: The expression to obtain the version of the tool
+topics:
+  multiqc_files:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "${task.process}":
+          type: string
+          description: The name of the process
+      - rundirparser:
+          type: string
+          description: The name of the tool
+      - "*_mqc.yml":
+          type: file
+          description: MultiQC-compatible YAML file containing run directory metadata
+          pattern: "*_mqc.yml"
+  versions:
+    - - "${task.process}":
+          type: string
+          description: The name of the process
+      - Python:
+          type: string
+          description: The name of the tool
+      - python --version |& sed '1!d ; s/Python //':
+          type: eval
+          description: The expression to obtain the version of the tool
+    - - "${task.process}":
+          type: string
+          description: The name of the process
+      - PyYAML:
+          type: string
+          description: The name of the tool
+      - python -c 'import yaml; print(yaml.__version__)':
+          type: eval
+          description: The expression to obtain the version of the tool
+authors:
+  - "@matrulda"
+maintainers:
+  - "@matrulda"
