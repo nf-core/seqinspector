@@ -9,5 +9,7 @@ testing*
 null/
 .lineage/
 .nf-test*
+.nf-test/
+.nf-test.log
 modules/nf-core/**/tests/
 subworkflows/nf-core/**/tests/
