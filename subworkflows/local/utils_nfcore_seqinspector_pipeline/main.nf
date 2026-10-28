@@ -94,7 +94,7 @@ workflow PIPELINE_INITIALISATION {
         before_text,
         after_text,
         command,
-        false,
+        null,
     )
 
     def subsampled_info = ""
@@ -215,7 +215,7 @@ workflow PIPELINE_COMPLETION {
                 plaintext_email,
                 outdir,
                 monochrome_logs,
-                multiqc_reports.getVal(),
+                multiqc_reports.isBound() ? multiqc_reports.getVal() : [],
             )
         }
 
@@ -315,7 +315,7 @@ def toolReferencesMap() {
         'python': ['name': 'Python', 'authors': '', 'authors_short': '', 'description': 'Programming language.', 'url': 'https://www.python.org/'],
         'pyyaml': ['name': 'PyYAML', 'authors': '', 'authors_short': '', 'description': 'YAML parser and emitter for Python.', 'url': 'https://pyyaml.org/'],
         'riker': ['name': 'Riker', 'authors': '', 'authors_short': '', 'description': 'Fast Rust CLI toolkit for sequencing QC metrics. Ports key QC metrics tools from Picard with cleaner output and better performance.', 'url': 'https://github.com/fulcrumgenomics/riker'],
-        'rundirparser': ['name': 'Rundirparser', 'authors': '', 'authors_short': '', 'description': 'Parse Illumina run directory metadata for MultiQC.', 'url': 'https://github.com/nf-core/seqinspector'],
+        'rundirparser': ['name': 'Rundirparser', 'authors': '', 'authors_short': '', 'description': 'Parse Illumina or ONT run directory metadata for MultiQC.', 'url': 'https://github.com/nf-core/seqinspector'],
         'samtools': ['name': 'SAMTOOLS', 'authors': 'Danecek P., Bonfield JK., Liddle J., & al. (2021).', 'authors_short': 'Danecek et al. 2021', 'description': 'Twelve years of SAMtools and BCFtools.', 'doi': '10.1093/gigascience/giab008'],
         'seqfu': ['name': 'SeqFu', 'authors': 'Telatin A., Fariselli P., & Birolo G. (2021).', 'authors_short': 'Telatin et al. 2021', 'description': 'SeqFu: A Suite of Utilities for the Robust and Reproducible Manipulation of Sequence Files. Bioengineering, 8, 59.', 'doi': '10.3390/bioengineering8050059'],
         'seqkit': ['name': 'SeqKit', 'authors': 'Shen W., Sipos B., & Zhao L. (2024).', 'authors_short': 'Shen et al. 2024', 'description': 'SeqKit2: A Swiss Army Knife for Sequence and Alignment Processing. iMeta, e191.', 'doi': '10.1002/imt2.191'],
@@ -403,69 +403,62 @@ def defineToolsList(input_bundle, input_tools, input_skip, sample_size) {
         tools_list << 'seqtk'
     }
 
-    // Current list actually used are default, minimal and promethion, we should probably always have a list `all`
-    // The others are here as a showcase for what could be done
+    // The bundles are separated by platform, input data type or other. Platform bundles will include
+    // a platform specific rundir parser, whereas the input type bundles are platform independent.
+    // "Other" bundles may only work with specific data types or platforms.
+    // If there are tools that are interchangable in their function, only one tool is included
+    // in the bundle.
+    // Future bundle types might focus on QC tools that are relevant for specific applications like RNAseq, ATACseq, etc.
 
     // please update the docs/usage.md section about tools selection when adding new tools here!
 
-    if ('all' in bundle_list) {
-        tools_list << 'bbmap_clumpify'
-        tools_list << 'checkqc'
-        tools_list << 'chelae'
-        tools_list << 'fastqc'
-        tools_list << 'fastp'
-        tools_list << 'fastqe'
-        tools_list << 'fastqscreen'
-        tools_list << 'fq_lint'
-        tools_list << 'kraken2'
-        tools_list << 'multiqcsav'
-        tools_list << 'picard_collecthsmetrics'
-        tools_list << 'picard_collectmultiplemetrics'
-        tools_list << 'riker'
-        tools_list << 'rundirparser'
-        tools_list << 'seqkit_stats'
-        tools_list << 'seqfu_stats'
-        tools_list << 'sequali'
-        tools_list << 'toulligqc'
-    }
-    if ('bam' in bundle_list) {
-        tools_list << 'picard_collecthsmetrics'
-        tools_list << 'picard_collectmultiplemetrics'
-        tools_list << 'riker'
-    }
-    if ('fastq' in bundle_list) {
-        tools_list << 'fastqc'
-        tools_list << 'fastqscreen'
-        tools_list << 'fq_lint'
-        tools_list << 'seqkit_stats'
-    }
-    if ('default' in bundle_list) {
-        tools_list << 'fastqc'
-        tools_list << 'fastqscreen'
-        tools_list << 'fq_lint'
-        tools_list << 'picard_collectmultiplemetrics'
-        tools_list << 'rundirparser'
-        tools_list << 'seqfu_stats'
-        tools_list << 'sequali'
-    }
+    // bundles by platform, will require platform to be specified in the sample sheet in order to parse the run folder information
     if ('illumina' in bundle_list) {
         tools_list << 'checkqc'
         tools_list << 'multiqcsav'
         tools_list << 'rundirparser'
-        tools_list << 'seqfu_stats'
-    }
-    if ('minimal' in bundle_list) {
+        tools_list << 'fq_lint'
         tools_list << 'fastqc'
         tools_list << 'fastqscreen'
-        tools_list << 'picard_collectmultiplemetrics'
-        tools_list << 'seqfu_stats'
     }
+
     if ('ont' in bundle_list) {
         tools_list << 'fastqc'
-        tools_list << 'fastqscreen'
-        tools_list << 'seqkit_stats'
         tools_list << 'sequali'
         tools_list << 'toulligqc'
+        tools_list << 'rundirparser'
+    }
+
+    // future extension: PacBio, Element
+
+    // bundles by data type (fastq, bam, etc.)
+    if ('fastq' in bundle_list) {
+        tools_list << 'fq_lint'
+        tools_list << 'fastqc'
+        tools_list << 'fastqscreen'
+        tools_list << 'seqfu_stats'
+    }
+
+    if ('bam' in bundle_list) {
+        tools_list << 'fastqc'
+        tools_list << 'sequali'
+    }
+
+    // other
+    if ('default' in bundle_list) {
+        tools_list << 'fq_lint'
+        tools_list << 'fastqc'
+        tools_list << 'fastqscreen'
+        tools_list << 'rundirparser'
+        tools_list << 'seqfu_stats'
+        tools_list << 'sequali'
+    }
+
+    if ('minimal' in bundle_list) {
+        // fastqscreen is not compatible with bam file input
+        // TODO: chain fastqscreen with a tool that translates bam to fastq in such cases
+        tools_list << 'fastqc'
+        tools_list << 'fastqscreen'
     }
 
     tools_list = tools_list.sort().unique() - skip_list
