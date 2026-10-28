@@ -15,7 +15,7 @@
                 "RUNDIRPARSER": {
                     "python": "3.13.2",
                     "pyyaml": "6.0.2",
-                    "rundirparser": "1.0.1"
+                    "rundirparser": "1.1.0"
                 },
                 "SEQFU_STATS": {
                     "seqfu": "1.22.3"
@@ -1100,10 +1100,10 @@
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-10-16T14:31:02.666452372",
+        "timestamp": "2026-10-17T08:43:45.367381373",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.0"
+            "nextflow": "25.10.4"
         }
     }
 }

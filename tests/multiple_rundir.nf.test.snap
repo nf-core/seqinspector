@@ -47,10 +47,10 @@
                 "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
             ]
         ],
-        "timestamp": "2026-10-06T10:47:35.134869603",
+        "timestamp": "2026-10-16T07:33:27.343884255",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.09.1"
+            "nextflow": "25.10.4"
         }
     },
     "MiSeq data test - fastqc,multiqcsav - multiple rundir": {
@@ -300,10 +300,10 @@
                 "WARN: More than one rundir, or sample(s) missing rundir, skipping MULTIQC_SAV"
             ]
         ],
-        "timestamp": "2026-10-06T10:47:09.675301116",
+        "timestamp": "2026-10-16T07:32:54.870171595",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.09.1"
+            "nextflow": "25.10.4"
         }
     }
 }

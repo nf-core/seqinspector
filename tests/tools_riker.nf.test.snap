@@ -510,6 +510,24 @@
             "nextflow": "26.04.4"
         }
     },
+    "NovaSeq6000 data test - riker rna without gene model - should fail": {
+        "content": [
+            [
+                "pipeline_info"
+            ],
+            "No stable content",
+            "No BAM files",
+            "No warnings",
+            [
+                "riker_args contains 'rna' but --rna_gene_model was not provided. A gene model is required for RNA metrics."
+            ]
+        ],
+        "timestamp": "2026-08-31T16:06:09.677298",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
+        }
+    },
     "NovaSeq6000 data test - riker - stub": {
         "content": [
             22,
@@ -682,10 +700,10 @@
                 "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
             ]
         ],
-        "timestamp": "2026-07-13T16:56:33.077465714",
+        "timestamp": "2026-10-16T09:04:06.231359842",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "25.10.4"
         }
     },
     "NovaSeq6000 data test - riker": {
@@ -1202,10 +1220,10 @@
                 "riker_args contains 'hybcap' but --bait_intervals and --target_intervals were not provided. Both are required for hybcap metrics."
             ]
         ],
-        "timestamp": "2026-08-18T17:15:06.896364673",
+        "timestamp": "2026-10-16T09:04:23.268209474",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "25.10.4"
         }
     },
     "NovaSeq6000 data test - riker with bait and target - stub": {
@@ -1380,10 +1398,188 @@
                 "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
             ]
         ],
-        "timestamp": "2026-07-13T16:57:09.567680795",
+        "timestamp": "2026-10-16T09:27:04.780207612",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "25.10.4"
+        }
+    },
+    "NovaSeq6000 data test - riker with rna metrics - stub": {
+        "content": [
+            22,
+            {
+                "BWAMEM2_INDEX": {
+                    "bwamem2": "2.2.1"
+                },
+                "BWAMEM2_MEM": {
+                    "bwamem2": "2.2.1",
+                    "samtools": "1.22.1"
+                },
+                "RIKER_MULTI": {
+                    "riker": "0.4.0"
+                },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": "1.24"
+                },
+                "SAMTOOLS_INDEX": {
+                    "samtools": "1.24"
+                }
+            },
+            [
+                "mapped",
+                "mapped/Sample1_01",
+                "mapped/Sample1_01/Sample1_01.bam",
+                "mapped/Sample1_01/Sample1_01.bam.bai",
+                "mapped/Sample23_03",
+                "mapped/Sample23_03/Sample23_03.bam",
+                "mapped/Sample23_03/Sample23_03.bam.bai",
+                "mapped/SampleA_02",
+                "mapped/SampleA_02/SampleA_02.bam",
+                "mapped/SampleA_02/SampleA_02.bam.bai",
+                "mapped/Undetermined_05",
+                "mapped/Undetermined_05/Undetermined_05.bam",
+                "mapped/Undetermined_05/Undetermined_05.bam.bai",
+                "mapped/sampletest_04",
+                "mapped/sampletest_04/sampletest_04.bam",
+                "mapped/sampletest_04/sampletest_04.bam.bai",
+                "multiqc",
+                "multiqc/global_report",
+                "multiqc/global_report/multiqc_data",
+                "multiqc/global_report/multiqc_data/.stub",
+                "multiqc/global_report/multiqc_plots",
+                "multiqc/global_report/multiqc_plots/.stub",
+                "multiqc/global_report/multiqc_report.html",
+                "multiqc/group_reports",
+                "multiqc/group_reports/group1",
+                "multiqc/group_reports/group1/multiqc_data",
+                "multiqc/group_reports/group1/multiqc_data/.stub",
+                "multiqc/group_reports/group1/multiqc_plots",
+                "multiqc/group_reports/group1/multiqc_plots/.stub",
+                "multiqc/group_reports/group1/multiqc_report.html",
+                "multiqc/group_reports/group2",
+                "multiqc/group_reports/group2/multiqc_data",
+                "multiqc/group_reports/group2/multiqc_data/.stub",
+                "multiqc/group_reports/group2/multiqc_plots",
+                "multiqc/group_reports/group2/multiqc_plots/.stub",
+                "multiqc/group_reports/group2/multiqc_report.html",
+                "multiqc/group_reports/lane1",
+                "multiqc/group_reports/lane1/multiqc_data",
+                "multiqc/group_reports/lane1/multiqc_data/.stub",
+                "multiqc/group_reports/lane1/multiqc_plots",
+                "multiqc/group_reports/lane1/multiqc_plots/.stub",
+                "multiqc/group_reports/lane1/multiqc_report.html",
+                "multiqc/group_reports/test",
+                "multiqc/group_reports/test/multiqc_data",
+                "multiqc/group_reports/test/multiqc_data/.stub",
+                "multiqc/group_reports/test/multiqc_plots",
+                "multiqc/group_reports/test/multiqc_plots/.stub",
+                "multiqc/group_reports/test/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
+                "references",
+                "references/bwamem2",
+                "references/bwamem2/genome.fa.0123",
+                "references/bwamem2/genome.fa.amb",
+                "references/bwamem2/genome.fa.ann",
+                "references/bwamem2/genome.fa.bwt.2bit.64",
+                "references/bwamem2/genome.fa.pac",
+                "references/genome.fa.fai",
+                "reports",
+                "reports/riker",
+                "reports/riker/Sample1_01",
+                "reports/riker/Sample1_01/Sample1_01.alignment-metrics.txt",
+                "reports/riker/Sample1_01/Sample1_01.base-distribution-by-cycle.txt",
+                "reports/riker/Sample1_01/Sample1_01.error-indel.txt",
+                "reports/riker/Sample1_01/Sample1_01.error-mismatch.txt",
+                "reports/riker/Sample1_01/Sample1_01.error-overlap.txt",
+                "reports/riker/Sample1_01/Sample1_01.gcbias-detail.txt",
+                "reports/riker/Sample1_01/Sample1_01.gcbias-summary.txt",
+                "reports/riker/Sample1_01/Sample1_01.hybcap-metrics.txt",
+                "reports/riker/Sample1_01/Sample1_01.hybcap-per-base.txt",
+                "reports/riker/Sample1_01/Sample1_01.hybcap-per-target.txt",
+                "reports/riker/Sample1_01/Sample1_01.isize-histogram.txt",
+                "reports/riker/Sample1_01/Sample1_01.isize-metrics.txt",
+                "reports/riker/Sample1_01/Sample1_01.mean-quality-by-cycle.txt",
+                "reports/riker/Sample1_01/Sample1_01.quality-score-distribution.txt",
+                "reports/riker/Sample1_01/Sample1_01.wgs-coverage.txt",
+                "reports/riker/Sample1_01/Sample1_01.wgs-metrics.txt",
+                "reports/riker/Sample23_03",
+                "reports/riker/Sample23_03/Sample23_03.alignment-metrics.txt",
+                "reports/riker/Sample23_03/Sample23_03.base-distribution-by-cycle.txt",
+                "reports/riker/Sample23_03/Sample23_03.error-indel.txt",
+                "reports/riker/Sample23_03/Sample23_03.error-mismatch.txt",
+                "reports/riker/Sample23_03/Sample23_03.error-overlap.txt",
+                "reports/riker/Sample23_03/Sample23_03.gcbias-detail.txt",
+                "reports/riker/Sample23_03/Sample23_03.gcbias-summary.txt",
+                "reports/riker/Sample23_03/Sample23_03.hybcap-metrics.txt",
+                "reports/riker/Sample23_03/Sample23_03.hybcap-per-base.txt",
+                "reports/riker/Sample23_03/Sample23_03.hybcap-per-target.txt",
+                "reports/riker/Sample23_03/Sample23_03.isize-histogram.txt",
+                "reports/riker/Sample23_03/Sample23_03.isize-metrics.txt",
+                "reports/riker/Sample23_03/Sample23_03.mean-quality-by-cycle.txt",
+                "reports/riker/Sample23_03/Sample23_03.quality-score-distribution.txt",
+                "reports/riker/Sample23_03/Sample23_03.wgs-coverage.txt",
+                "reports/riker/Sample23_03/Sample23_03.wgs-metrics.txt",
+                "reports/riker/SampleA_02",
+                "reports/riker/SampleA_02/SampleA_02.alignment-metrics.txt",
+                "reports/riker/SampleA_02/SampleA_02.base-distribution-by-cycle.txt",
+                "reports/riker/SampleA_02/SampleA_02.error-indel.txt",
+                "reports/riker/SampleA_02/SampleA_02.error-mismatch.txt",
+                "reports/riker/SampleA_02/SampleA_02.error-overlap.txt",
+                "reports/riker/SampleA_02/SampleA_02.gcbias-detail.txt",
+                "reports/riker/SampleA_02/SampleA_02.gcbias-summary.txt",
+                "reports/riker/SampleA_02/SampleA_02.hybcap-metrics.txt",
+                "reports/riker/SampleA_02/SampleA_02.hybcap-per-base.txt",
+                "reports/riker/SampleA_02/SampleA_02.hybcap-per-target.txt",
+                "reports/riker/SampleA_02/SampleA_02.isize-histogram.txt",
+                "reports/riker/SampleA_02/SampleA_02.isize-metrics.txt",
+                "reports/riker/SampleA_02/SampleA_02.mean-quality-by-cycle.txt",
+                "reports/riker/SampleA_02/SampleA_02.quality-score-distribution.txt",
+                "reports/riker/SampleA_02/SampleA_02.wgs-coverage.txt",
+                "reports/riker/SampleA_02/SampleA_02.wgs-metrics.txt",
+                "reports/riker/Undetermined_05",
+                "reports/riker/Undetermined_05/Undetermined_05.alignment-metrics.txt",
+                "reports/riker/Undetermined_05/Undetermined_05.base-distribution-by-cycle.txt",
+                "reports/riker/Undetermined_05/Undetermined_05.error-indel.txt",
+                "reports/riker/Undetermined_05/Undetermined_05.error-mismatch.txt",
+                "reports/riker/Undetermined_05/Undetermined_05.error-overlap.txt",
+                "reports/riker/Undetermined_05/Undetermined_05.gcbias-detail.txt",
+                "reports/riker/Undetermined_05/Undetermined_05.gcbias-summary.txt",
+                "reports/riker/Undetermined_05/Undetermined_05.hybcap-metrics.txt",
+                "reports/riker/Undetermined_05/Undetermined_05.hybcap-per-base.txt",
+                "reports/riker/Undetermined_05/Undetermined_05.hybcap-per-target.txt",
+                "reports/riker/Undetermined_05/Undetermined_05.isize-histogram.txt",
+                "reports/riker/Undetermined_05/Undetermined_05.isize-metrics.txt",
+                "reports/riker/Undetermined_05/Undetermined_05.mean-quality-by-cycle.txt",
+                "reports/riker/Undetermined_05/Undetermined_05.quality-score-distribution.txt",
+                "reports/riker/Undetermined_05/Undetermined_05.wgs-coverage.txt",
+                "reports/riker/Undetermined_05/Undetermined_05.wgs-metrics.txt",
+                "reports/riker/sampletest_04",
+                "reports/riker/sampletest_04/sampletest_04.alignment-metrics.txt",
+                "reports/riker/sampletest_04/sampletest_04.base-distribution-by-cycle.txt",
+                "reports/riker/sampletest_04/sampletest_04.error-indel.txt",
+                "reports/riker/sampletest_04/sampletest_04.error-mismatch.txt",
+                "reports/riker/sampletest_04/sampletest_04.error-overlap.txt",
+                "reports/riker/sampletest_04/sampletest_04.gcbias-detail.txt",
+                "reports/riker/sampletest_04/sampletest_04.gcbias-summary.txt",
+                "reports/riker/sampletest_04/sampletest_04.hybcap-metrics.txt",
+                "reports/riker/sampletest_04/sampletest_04.hybcap-per-base.txt",
+                "reports/riker/sampletest_04/sampletest_04.hybcap-per-target.txt",
+                "reports/riker/sampletest_04/sampletest_04.isize-histogram.txt",
+                "reports/riker/sampletest_04/sampletest_04.isize-metrics.txt",
+                "reports/riker/sampletest_04/sampletest_04.mean-quality-by-cycle.txt",
+                "reports/riker/sampletest_04/sampletest_04.quality-score-distribution.txt",
+                "reports/riker/sampletest_04/sampletest_04.wgs-coverage.txt",
+                "reports/riker/sampletest_04/sampletest_04.wgs-metrics.txt"
+            ],
+            [
+                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
+            ]
+        ],
+        "timestamp": "2026-10-16T08:43:10.952635739",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
         }
     },
     "NovaSeq6000 data test - riker with rna metrics": {
@@ -1922,202 +2118,6 @@
             "No warnings"
         ],
         "timestamp": "2026-08-28T18:46:14.059563",
-        "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "25.10.4"
-        }
-    },
-    "NovaSeq6000 data test - riker with rna metrics - stub": {
-        "content": [
-            22,
-            {
-                "BWAMEM2_INDEX": {
-                    "bwamem2": "2.2.1"
-                },
-                "BWAMEM2_MEM": {
-                    "bwamem2": "2.2.1",
-                    "samtools": "1.22.1"
-                },
-                "RIKER_MULTI": {
-                    "riker": "0.4.0"
-                },
-                "SAMTOOLS_FAIDX": {
-                    "samtools": "1.24"
-                },
-                "SAMTOOLS_INDEX": {
-                    "samtools": "1.24"
-                }
-            },
-            [
-                "mapped",
-                "mapped/Sample1_01",
-                "mapped/Sample1_01/Sample1_01.bam",
-                "mapped/Sample1_01/Sample1_01.bam.bai",
-                "mapped/Sample23_03",
-                "mapped/Sample23_03/Sample23_03.bam",
-                "mapped/Sample23_03/Sample23_03.bam.bai",
-                "mapped/SampleA_02",
-                "mapped/SampleA_02/SampleA_02.bam",
-                "mapped/SampleA_02/SampleA_02.bam.bai",
-                "mapped/Undetermined_05",
-                "mapped/Undetermined_05/Undetermined_05.bam",
-                "mapped/Undetermined_05/Undetermined_05.bam.bai",
-                "mapped/sampletest_04",
-                "mapped/sampletest_04/sampletest_04.bam",
-                "mapped/sampletest_04/sampletest_04.bam.bai",
-                "multiqc",
-                "multiqc/global_report",
-                "multiqc/global_report/multiqc_data",
-                "multiqc/global_report/multiqc_data/.stub",
-                "multiqc/global_report/multiqc_plots",
-                "multiqc/global_report/multiqc_plots/.stub",
-                "multiqc/global_report/multiqc_report.html",
-                "multiqc/group_reports",
-                "multiqc/group_reports/group1",
-                "multiqc/group_reports/group1/multiqc_data",
-                "multiqc/group_reports/group1/multiqc_data/.stub",
-                "multiqc/group_reports/group1/multiqc_plots",
-                "multiqc/group_reports/group1/multiqc_plots/.stub",
-                "multiqc/group_reports/group1/multiqc_report.html",
-                "multiqc/group_reports/group2",
-                "multiqc/group_reports/group2/multiqc_data",
-                "multiqc/group_reports/group2/multiqc_data/.stub",
-                "multiqc/group_reports/group2/multiqc_plots",
-                "multiqc/group_reports/group2/multiqc_plots/.stub",
-                "multiqc/group_reports/group2/multiqc_report.html",
-                "multiqc/group_reports/lane1",
-                "multiqc/group_reports/lane1/multiqc_data",
-                "multiqc/group_reports/lane1/multiqc_data/.stub",
-                "multiqc/group_reports/lane1/multiqc_plots",
-                "multiqc/group_reports/lane1/multiqc_plots/.stub",
-                "multiqc/group_reports/lane1/multiqc_report.html",
-                "multiqc/group_reports/test",
-                "multiqc/group_reports/test/multiqc_data",
-                "multiqc/group_reports/test/multiqc_data/.stub",
-                "multiqc/group_reports/test/multiqc_plots",
-                "multiqc/group_reports/test/multiqc_plots/.stub",
-                "multiqc/group_reports/test/multiqc_report.html",
-                "pipeline_info",
-                "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml",
-                "references",
-                "references/bwamem2",
-                "references/bwamem2/genome.fa.0123",
-                "references/bwamem2/genome.fa.amb",
-                "references/bwamem2/genome.fa.ann",
-                "references/bwamem2/genome.fa.bwt.2bit.64",
-                "references/bwamem2/genome.fa.pac",
-                "references/genome.fa.fai",
-                "reports",
-                "reports/riker",
-                "reports/riker/Sample1_01",
-                "reports/riker/Sample1_01/Sample1_01.alignment-metrics.txt",
-                "reports/riker/Sample1_01/Sample1_01.base-distribution-by-cycle.txt",
-                "reports/riker/Sample1_01/Sample1_01.error-indel.txt",
-                "reports/riker/Sample1_01/Sample1_01.error-mismatch.txt",
-                "reports/riker/Sample1_01/Sample1_01.error-overlap.txt",
-                "reports/riker/Sample1_01/Sample1_01.gcbias-detail.txt",
-                "reports/riker/Sample1_01/Sample1_01.gcbias-summary.txt",
-                "reports/riker/Sample1_01/Sample1_01.hybcap-metrics.txt",
-                "reports/riker/Sample1_01/Sample1_01.hybcap-per-base.txt",
-                "reports/riker/Sample1_01/Sample1_01.hybcap-per-target.txt",
-                "reports/riker/Sample1_01/Sample1_01.isize-histogram.txt",
-                "reports/riker/Sample1_01/Sample1_01.isize-metrics.txt",
-                "reports/riker/Sample1_01/Sample1_01.mean-quality-by-cycle.txt",
-                "reports/riker/Sample1_01/Sample1_01.quality-score-distribution.txt",
-                "reports/riker/Sample1_01/Sample1_01.wgs-coverage.txt",
-                "reports/riker/Sample1_01/Sample1_01.wgs-metrics.txt",
-                "reports/riker/Sample23_03",
-                "reports/riker/Sample23_03/Sample23_03.alignment-metrics.txt",
-                "reports/riker/Sample23_03/Sample23_03.base-distribution-by-cycle.txt",
-                "reports/riker/Sample23_03/Sample23_03.error-indel.txt",
-                "reports/riker/Sample23_03/Sample23_03.error-mismatch.txt",
-                "reports/riker/Sample23_03/Sample23_03.error-overlap.txt",
-                "reports/riker/Sample23_03/Sample23_03.gcbias-detail.txt",
-                "reports/riker/Sample23_03/Sample23_03.gcbias-summary.txt",
-                "reports/riker/Sample23_03/Sample23_03.hybcap-metrics.txt",
-                "reports/riker/Sample23_03/Sample23_03.hybcap-per-base.txt",
-                "reports/riker/Sample23_03/Sample23_03.hybcap-per-target.txt",
-                "reports/riker/Sample23_03/Sample23_03.isize-histogram.txt",
-                "reports/riker/Sample23_03/Sample23_03.isize-metrics.txt",
-                "reports/riker/Sample23_03/Sample23_03.mean-quality-by-cycle.txt",
-                "reports/riker/Sample23_03/Sample23_03.quality-score-distribution.txt",
-                "reports/riker/Sample23_03/Sample23_03.wgs-coverage.txt",
-                "reports/riker/Sample23_03/Sample23_03.wgs-metrics.txt",
-                "reports/riker/SampleA_02",
-                "reports/riker/SampleA_02/SampleA_02.alignment-metrics.txt",
-                "reports/riker/SampleA_02/SampleA_02.base-distribution-by-cycle.txt",
-                "reports/riker/SampleA_02/SampleA_02.error-indel.txt",
-                "reports/riker/SampleA_02/SampleA_02.error-mismatch.txt",
-                "reports/riker/SampleA_02/SampleA_02.error-overlap.txt",
-                "reports/riker/SampleA_02/SampleA_02.gcbias-detail.txt",
-                "reports/riker/SampleA_02/SampleA_02.gcbias-summary.txt",
-                "reports/riker/SampleA_02/SampleA_02.hybcap-metrics.txt",
-                "reports/riker/SampleA_02/SampleA_02.hybcap-per-base.txt",
-                "reports/riker/SampleA_02/SampleA_02.hybcap-per-target.txt",
-                "reports/riker/SampleA_02/SampleA_02.isize-histogram.txt",
-                "reports/riker/SampleA_02/SampleA_02.isize-metrics.txt",
-                "reports/riker/SampleA_02/SampleA_02.mean-quality-by-cycle.txt",
-                "reports/riker/SampleA_02/SampleA_02.quality-score-distribution.txt",
-                "reports/riker/SampleA_02/SampleA_02.wgs-coverage.txt",
-                "reports/riker/SampleA_02/SampleA_02.wgs-metrics.txt",
-                "reports/riker/Undetermined_05",
-                "reports/riker/Undetermined_05/Undetermined_05.alignment-metrics.txt",
-                "reports/riker/Undetermined_05/Undetermined_05.base-distribution-by-cycle.txt",
-                "reports/riker/Undetermined_05/Undetermined_05.error-indel.txt",
-                "reports/riker/Undetermined_05/Undetermined_05.error-mismatch.txt",
-                "reports/riker/Undetermined_05/Undetermined_05.error-overlap.txt",
-                "reports/riker/Undetermined_05/Undetermined_05.gcbias-detail.txt",
-                "reports/riker/Undetermined_05/Undetermined_05.gcbias-summary.txt",
-                "reports/riker/Undetermined_05/Undetermined_05.hybcap-metrics.txt",
-                "reports/riker/Undetermined_05/Undetermined_05.hybcap-per-base.txt",
-                "reports/riker/Undetermined_05/Undetermined_05.hybcap-per-target.txt",
-                "reports/riker/Undetermined_05/Undetermined_05.isize-histogram.txt",
-                "reports/riker/Undetermined_05/Undetermined_05.isize-metrics.txt",
-                "reports/riker/Undetermined_05/Undetermined_05.mean-quality-by-cycle.txt",
-                "reports/riker/Undetermined_05/Undetermined_05.quality-score-distribution.txt",
-                "reports/riker/Undetermined_05/Undetermined_05.wgs-coverage.txt",
-                "reports/riker/Undetermined_05/Undetermined_05.wgs-metrics.txt",
-                "reports/riker/sampletest_04",
-                "reports/riker/sampletest_04/sampletest_04.alignment-metrics.txt",
-                "reports/riker/sampletest_04/sampletest_04.base-distribution-by-cycle.txt",
-                "reports/riker/sampletest_04/sampletest_04.error-indel.txt",
-                "reports/riker/sampletest_04/sampletest_04.error-mismatch.txt",
-                "reports/riker/sampletest_04/sampletest_04.error-overlap.txt",
-                "reports/riker/sampletest_04/sampletest_04.gcbias-detail.txt",
-                "reports/riker/sampletest_04/sampletest_04.gcbias-summary.txt",
-                "reports/riker/sampletest_04/sampletest_04.hybcap-metrics.txt",
-                "reports/riker/sampletest_04/sampletest_04.hybcap-per-base.txt",
-                "reports/riker/sampletest_04/sampletest_04.hybcap-per-target.txt",
-                "reports/riker/sampletest_04/sampletest_04.isize-histogram.txt",
-                "reports/riker/sampletest_04/sampletest_04.isize-metrics.txt",
-                "reports/riker/sampletest_04/sampletest_04.mean-quality-by-cycle.txt",
-                "reports/riker/sampletest_04/sampletest_04.quality-score-distribution.txt",
-                "reports/riker/sampletest_04/sampletest_04.wgs-coverage.txt",
-                "reports/riker/sampletest_04/sampletest_04.wgs-metrics.txt"
-            ],
-            [
-                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
-            ]
-        ],
-        "timestamp": "2026-08-28T18:47:45.484265",
-        "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "25.10.4"
-        }
-    },
-    "NovaSeq6000 data test - riker rna without gene model - should fail": {
-        "content": [
-            [
-                "pipeline_info"
-            ],
-            "No stable content",
-            "No BAM files",
-            "No warnings",
-            [
-                "riker_args contains 'rna' but --rna_gene_model was not provided. A gene model is required for RNA metrics."
-            ]
-        ],
-        "timestamp": "2026-08-31T16:06:09.677298",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"

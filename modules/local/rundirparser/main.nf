@@ -12,7 +12,7 @@ process RUNDIRPARSER {
 
     output:
     tuple val(meta), val("${task.process}"), val('rundirparser'), path("*_mqc.yml"), emit: multiqc, topic: multiqc_files
-    tuple val("${task.process}"), val('rundirparser'), val("1.0.1"), emit: versions_rundirparser, topic: versions
+    tuple val("${task.process}"), val('rundirparser'), val("1.1.0"), emit: versions_rundirparser, topic: versions
     tuple val("${task.process}"), val('python'), eval("python --version |& sed '1!d ; s/Python //'"), emit: versions_python, topic: versions
     tuple val("${task.process}"), val('pyyaml'), eval("python -c 'import yaml; print(yaml.__version__)'"), emit: versions_pyyaml, topic: versions
 
@@ -22,6 +22,15 @@ process RUNDIRPARSER {
     script:
     def input_tar = rundir.toString().endsWith(".tar.gz") ? true : false
     def input_dir = input_tar ? rundir.toString() - '.tar.gz' : rundir
+    // Parser script and the file it expects in the rundir, per platform
+    def parsers = [
+        illumina: [script: 'parse_illumina.py', marker: '[Rr]unParameters.xml'],
+        ont: [script: 'parse_ont.py', marker: 'report_*.json'],
+    ]
+    def parser = parsers[meta.platform]
+    if (!parser) {
+        error("[nf-core/seqinspector] RUNDIRPARSER: unsupported platform '${meta.platform}' for rundir ${meta.id}, expected one of: ${parsers.keySet().join(', ')}")
+    }
     """
     if [ ! -d ${input_dir} ]; then
         mkdir -p ${input_dir}
@@ -44,13 +53,17 @@ process RUNDIRPARSER {
         fi
     fi
 
-    # TODO: check what kind of seq platfrom to decide which script to use
-    # or replace with a smarter solution, like the MultiQC_SAV plugin
-    parse_illumina.py ${input_dir}
+    # Check the rundir contents match the platform given in the samplesheet
+    if [ -z "\$(find -L ${input_dir} -maxdepth 1 -name '${parser.marker}' -print -quit)" ]; then
+        echo "[nf-core/seqinspector] ERROR: rundir ${meta.id} has platform '${meta.platform}' in the samplesheet, but no ${parser.marker} was found in it" >&2
+        exit 1
+    fi
+
+    ${parser.script} ${input_dir}
     """
 
     stub:
     """
-    touch illumina_mqc.yml
+    touch ${meta.platform}_mqc.yml
     """
 }

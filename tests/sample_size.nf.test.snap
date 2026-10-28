@@ -1232,10 +1232,10 @@
                 "WARN: sampletest_04: Requested sample_size (120) is larger than available reads (100). Pipeline will continue with 100 reads."
             ]
         ],
-        "timestamp": "2026-04-01T15:52:26.65842346",
+        "timestamp": "2026-10-16T07:38:05.286807855",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.4"
         }
     }
 }

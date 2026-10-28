@@ -44,6 +44,12 @@
                 "errorMessage": "Run directory must be a path or tar directory",
                 "meta": ["rundir"]
             },
+            "platform": {
+                "type": "string",
+                "enum": ["illumina", "ont"],
+                "errorMessage": "Platform must be one of: 'illumina', 'ont'",
+                "meta": ["platform"]
+            },
             "tags": {
                 "type": "string",
                 "pattern": "^([A-Za-z0-9_-]+:)*([A-Za-z0-9_-]+)$",
