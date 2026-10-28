@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#279](https://github.com/nf-core/seqinspector/pull/279) Exclude CheckQC from individual MultiQC reports to prevent runfolder information from bleeding into other samples' reports (@maxulysse)
 - [#282](https://github.com/nf-core/seqinspector/pull/282) Template update for nf-core/tools v4.1.0 (@maxulysse)
 - [#285](https://github.com/nf-core/seqinspector/pull/285) Update nf-core modules FastQC to 0.13.0 and bwamem2 index/mem (@maxulysse)
+- [#296](https://github.com/nf-core/seqinspector/pull/296) Template update for nf-core/tools v4.2.1 (@maxulysse)
 
 ### `Dependencies`
 
