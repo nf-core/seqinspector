@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#282](https://github.com/nf-core/seqinspector/pull/282) Template update for nf-core/tools v4.1.0 (@maxulysse)
 - [#285](https://github.com/nf-core/seqinspector/pull/285) Update nf-core modules FastQC to 0.13.0 and bwamem2 index/mem (@maxulysse)
 - [#291](https://github.com/nf-core/seqinspector/pull/291) New samplesheet column `platform` (`illumina` or `ont`). **Breaking:** rows with a `rundir` now need `platform` set when `rundirparser` runs, which is part of the `default` bundle (@chriswyatt1)
-- [#294](https://github.com/nf-core/seqinspector/pull/294) Add ToulligQC and Rundirparser to the README tool table and correct the default tool column for BWA-MEM2, SAMtools and Picard CollectMultipleMetrics (@FranBonath)
+- [#294](https://github.com/nf-core/seqinspector/pull/294) Update README tool table (@FranBonath)
 - [#296](https://github.com/nf-core/seqinspector/pull/296) Template update for nf-core/tools v4.2.1 (@maxulysse)
 
 ### `Dependencies`
