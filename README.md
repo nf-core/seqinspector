@@ -24,7 +24,7 @@
 **nf-core/seqinspector** is a bioinformatics pipeline that processes raw sequence data (FASTQ) to provide comprehensive quality control.
 It can perform subsampling, quality assessment, duplication level analysis, and complexity evaluation on a per-sample basis, while also detecting adapter content, technical artifacts, and common biological contaminants.
 The pipeline generates detailed MultiQC reports with flexible output options, ranging from individual sample reports to project-wide summaries, making it particularly useful for sequencing core facilities and research groups with access to sequencing instruments.
-If provided, nf-core/seqinspector can also parse statistics from an Illumina run folder directory into the final MultiQC reports.
+If provided, nf-core/seqinspector can also parse statistics from an Illumina or ONT run folder directory into the final MultiQC reports.
 
 ### Compatibility between tools and data type
 
