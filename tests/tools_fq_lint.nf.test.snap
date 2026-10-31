@@ -55,14 +55,12 @@
                 "reports/fq/sampletest_04",
                 "reports/fq/sampletest_04/sampletest_04.fq_lint.txt"
             ],
-            [
-                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
-            ]
+            "No warnings"
         ],
-        "timestamp": "2026-04-09T14:08:19.966257144",
+        "timestamp": "2026-06-17T11:00:55.334756735",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "25.10.4"
+            "nextflow": "26.04.3"
         }
     },
     "NovaSeq6000 data test - args for fq/lint": {
@@ -208,14 +206,12 @@
                 "reports/fq/Sample1_01",
                 "reports/fq/Sample1_01/Sample1_01.fq_lint.txt"
             ],
-            [
-                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
-            ]
+            "No warnings"
         ],
-        "timestamp": "2026-04-09T14:07:33.929613017",
+        "timestamp": "2026-06-17T11:00:24.556712525",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "25.10.4"
+            "nextflow": "26.04.3"
         }
     },
     "NovaSeq6000 data test - fq_lint force success": {

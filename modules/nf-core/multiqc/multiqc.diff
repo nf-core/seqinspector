@@ -1,0 +1,31 @@
+Changes in component 'nf-core/multiqc'
+Changes in 'multiqc/meta.yml':
+--- modules/nf-core/multiqc/meta.yml
++++ modules/nf-core/multiqc/meta.yml
+@@ -10,8 +10,14 @@
+       description: |
+         MultiQC searches a given directory for analysis logs and compiles a HTML report.
+         It's a general use tool, perfect for summarising the output from numerous bioinformatics tools.
+-      homepage: https://multiqc.info/
+-      documentation: https://multiqc.info/docs/
++      homepage: https://seqera.io/multiqc/
++      documentation: https://docs.seqera.io/multiqc/
++      doi: "10.1093/bioinformatics/btw354"
++      publication:
++        author: "Ewels P., Magnusson M., Lundin S. & Käller M."
++        year: 2016
++        source: "Bioinformatics"
++        title: "MultiQC: summarize analysis results for multiple tools and samples in a single report"
+       licence:
+         - "GPL-3.0-or-later"
+       identifier: biotools:multiqc
+
+'modules/nf-core/multiqc/environment.yml' is unchanged
+'modules/nf-core/multiqc/main.nf' is unchanged
+'modules/nf-core/multiqc/.conda-lock/linux_arm64-bd-5c84a5000a226ab5_1.txt' is unchanged
+'modules/nf-core/multiqc/.conda-lock/linux_amd64-bd-c17fb751507e9dfc_1.txt' is unchanged
+'modules/nf-core/multiqc/tests/main.nf.test' was removed
+'modules/nf-core/multiqc/tests/custom_prefix.config' was removed
+'modules/nf-core/multiqc/tests/nextflow.config' was removed
+'modules/nf-core/multiqc/tests/main.nf.test.snap' was removed
+************************************************************

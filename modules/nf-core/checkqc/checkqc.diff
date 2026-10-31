@@ -1,5 +1,20 @@
 Changes in component 'nf-core/checkqc'
-'modules/nf-core/checkqc/meta.yml' is unchanged
+Changes in 'checkqc/meta.yml':
+--- modules/nf-core/checkqc/meta.yml
++++ modules/nf-core/checkqc/meta.yml
+@@ -12,6 +12,11 @@
+       homepage: "https://github.com/Molmed/checkQC"
+       documentation: "http://checkqc.readthedocs.io/en/latest/"
+       doi: "10.21105/joss.00556"
++      publication:
++        author: "Åslin M., Brandt M. & Dahlberg J."
++        title: "CheckQC: Quick quality control of Illumina sequencing runs"
++        year: 2018
++        source: "Journal of Open Source Software"
+       licence:
+         - "GPL v3"
+       identifier: ""
+
 'modules/nf-core/checkqc/environment.yml' is unchanged
 Changes in 'checkqc/main.nf':
 --- modules/nf-core/checkqc/main.nf
