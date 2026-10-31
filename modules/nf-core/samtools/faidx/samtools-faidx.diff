@@ -1,0 +1,23 @@
+Changes in component 'nf-core/samtools/faidx'
+Changes in 'samtools/faidx/meta.yml':
+--- modules/nf-core/samtools/faidx/meta.yml
++++ modules/nf-core/samtools/faidx/meta.yml
+@@ -15,6 +15,11 @@
+       homepage: http://www.htslib.org/
+       documentation: http://www.htslib.org/doc/samtools.html
+       doi: 10.1093/bioinformatics/btp352
++      publication:
++        author: "Li Heng, Handsaker Bob, Wysoker Alec, Fennell Tim, Ruan Jue, Homer Nils, Marth Gabor, Abecasis Goncalo, Durbin Richard, 1000 Genome Project Data Processing Subgroup"
++        year: 2009
++        source: "Bioinformatics"
++        title: "The Sequence Alignment/Map format and SAMtools"
+       licence:
+         - "MIT"
+       identifier: biotools:samtools
+
+'modules/nf-core/samtools/faidx/environment.yml' is unchanged
+'modules/nf-core/samtools/faidx/main.nf' is unchanged
+'modules/nf-core/samtools/faidx/tests/main.nf.test' is unchanged
+'modules/nf-core/samtools/faidx/tests/nextflow.config' is unchanged
+'modules/nf-core/samtools/faidx/tests/main.nf.test.snap' is unchanged
+************************************************************

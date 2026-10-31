@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Changed`
 
-- [#241](https://github.com/nf-core/seqinspector/pull/241) Remove vendored nf-core utils subworkflows, use plugin imports from nf-core-utils and nf-schema (@maxulysse)
+- [#241](https://github.com/nf-core/seqinspector/pull/241) Remove vendored nf-core utils subworkflows, use plugin imports from nf-core-utils and nf-schema, build tool citations from module `meta.yml` with `citationsOnTheFly()` (@maxulysse)
 - [#278](https://github.com/nf-core/seqinspector/pull/278) Back to dev (@maxulysse)
 - [#279](https://github.com/nf-core/seqinspector/pull/279) Exclude CheckQC from individual MultiQC reports to prevent runfolder information from bleeding into other samples' reports (@maxulysse)
 - [#282](https://github.com/nf-core/seqinspector/pull/282) Template update for nf-core/tools v4.1.0 (@maxulysse)

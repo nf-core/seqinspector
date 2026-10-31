@@ -1,5 +1,22 @@
 Changes in component 'nf-core/fastqe'
-'modules/nf-core/fastqe/meta.yml' is unchanged
+Changes in 'fastqe/meta.yml':
+--- modules/nf-core/fastqe/meta.yml
++++ modules/nf-core/fastqe/meta.yml
+@@ -12,7 +12,12 @@
+       homepage: "https://github.com/fastqe/fastqe"
+       documentation: "https://github.com/fastqe/fastqe#readme"
+       tool_dev_url: "https://github.com/fastqe/fastqe"
+-      doi: "10.21105/joss.02400"
++      doi: "10.25334/Q4D172"
++      publication:
++        author: "StJacques R., Maza M., Robertson S., Lu G., Lonsdale A. & Enke R.A."
++        year: 2019
++        source: "Journal of Open Source Education"
++        title: "A Fun Introductory Command Line Exercise: Next Generation Sequencing Quality Analysis with Emoji!"
+       licence:
+         - "MIT"
+       identifier: "biotools:fastqe"
+
 'modules/nf-core/fastqe/environment.yml' is unchanged
 Changes in 'fastqe/main.nf':
 --- modules/nf-core/fastqe/main.nf

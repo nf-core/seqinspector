@@ -83,12 +83,14 @@
                     "multiqc": {
                         "branch": "master",
                         "git_sha": "98403d15b0e50edae1f3fec5eae5e24982f1fade",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/multiqc/multiqc.diff"
                     },
                     "multiqcsav": {
                         "branch": "master",
                         "git_sha": "6ef220fd9252b42fb3c50348bbdbcb6246730686",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/multiqcsav/multiqcsav.diff"
                     },
                     "picard/collecthsmetrics": {
                         "branch": "master",
@@ -116,12 +118,14 @@
                     "samtools/faidx": {
                         "branch": "master",
                         "git_sha": "9339809fcb90af8a8b7051e6cd914894d5c52002",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/samtools/faidx/samtools-faidx.diff"
                     },
                     "samtools/index": {
                         "branch": "master",
                         "git_sha": "9339809fcb90af8a8b7051e6cd914894d5c52002",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/samtools/index/samtools-index.diff"
                     },
                     "seqfu/stats": {
                         "branch": "master",
