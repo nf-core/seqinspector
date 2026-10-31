@@ -1,14 +1,15 @@
 name: rundirparser
-description: Parse Illumina run directory metadata from runParameters.xml for MultiQC reporting
+description: Parse Illumina (runParameters.xml) or ONT (MinKNOW report_*.json) run directory metadata for MultiQC reporting
 keywords:
   - illumina
+  - ont
   - rundir
   - metadata
   - multiqc
   - sequencing
 tools:
   - rundirparser:
-      description: Parse Illumina run directory metadata for MultiQC
+      description: Parse Illumina or ONT run directory metadata for MultiQC
       homepage: https://github.com/nf-core/seqinspector
       documentation: https://github.com/nf-core/seqinspector
       licence:
@@ -17,12 +18,12 @@ input:
   - - meta:
         type: map
         description: |
-          Groovy Map containing sample information
-          e.g. [ id:'test', single_end:false ]
+          Groovy Map containing rundir information, including the sequencing platform ('illumina' or 'ont')
+          e.g. [ id:'test', platform:'illumina' ]
     - rundir:
         type: file
         description: |
-          Path to Illumina run directory or tar.gz archive containing runParameters.xml
+          Path to Illumina or ONT run directory or tar.gz archive containing runParameters.xml or report_*.json
         pattern: "*.{tar.gz,directory}"
 output:
   multiqc:

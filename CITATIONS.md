@@ -22,6 +22,10 @@
 
   > Åslin et al., (2018). CheckQC: Quick quality control of Illumina sequencing runs. Journal of Open Source Software, 3(22), 556, https://doi.org/10.21105/joss.00556
 
+- [Chelae](https://github.com/fulcrumgenomics/chelae)
+
+  > Fulcrum Genomics. Chelae: A fast toolkit for trimming and filtering short-read FASTQ data.
+
 - [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
 
   > Andrews, S. (2010). FastQC: A Quality Control Tool for High Throughput Sequence Data [Online].
@@ -57,6 +61,10 @@
 - [MultiQC SAV](https://github.com/MultiQC/MultiQC_SAV/)
 
   > MultiQC SAV: MultiQC plugin for Illumina Sequencing Analysis Viewer.
+
+- [Riker](https://github.com/fulcrumgenomics/riker)
+
+  > Fulcrum Genomics. Fast Rust CLI toolkit for sequencing QC metrics. Ports key QC metrics tools from Picard with cleaner output and better performance.
 
 - [Picard Tools](https://broadinstitute.github.io/picard/)
 

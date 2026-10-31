@@ -8,6 +8,7 @@
 include { BBMAP_CLUMPIFY               } from '../modules/nf-core/bbmap/clumpify'
 include { BWAMEM2_MEM                  } from '../modules/nf-core/bwamem2/mem'
 include { CHECKQC                      } from '../modules/nf-core/checkqc'
+include { CHELAE_TRIM                  } from '../modules/nf-core/chelae/trim'
 include { FASTP                        } from '../modules/nf-core/fastp'
 include { FASTQC                       } from '../modules/nf-core/fastqc'
 include { FASTQE                       } from '../modules/nf-core/fastqe'
@@ -15,6 +16,7 @@ include { FASTQSCREEN_FASTQSCREEN      } from '../modules/nf-core/fastqscreen/fa
 include { FQ_LINT                      } from '../modules/nf-core/fq/lint'
 include { MULTIQC as MULTIQC_PER_TAG   } from '../modules/nf-core/multiqc'
 include { MULTIQCSAV as MULTIQC_GLOBAL } from '../modules/nf-core/multiqcsav'
+include { RIKER_MULTI                  } from '../modules/nf-core/riker/multi'
 include { RUNDIRPARSER                 } from '../modules/local/rundirparser'
 include { SAMTOOLS_INDEX               } from '../modules/nf-core/samtools/index'
 include { SEQFU_STATS                  } from '../modules/nf-core/seqfu/stats'
@@ -28,12 +30,12 @@ include { BAM_QC                       } from '../subworkflows/local/bam_qc'
 include { FASTQ_QC_PHYLOGENETIC        } from '../subworkflows/local/fastq_qc_phylogenetic'
 
 // functions
-include { citationsOnTheFly            } from 'plugin/nf-core-utils'
-include { methodsDescriptionText       } from 'plugin/nf-core-utils'
+include { methodsDescriptionText       } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
 include { paramsSummaryMap             } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc         } from 'plugin/nf-core-utils'
 include { samplesheetToList            } from 'plugin/nf-schema'
 include { softwareVersionsToYAML       } from 'plugin/nf-core-utils'
+include { subsamplingNoticeYaml        } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
 
 // custom functions
 include { reportIndexMultiqc           } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
@@ -60,7 +62,10 @@ workflow SEQINSPECTOR {
     fai
     sample_size
     tools
+    subsample_tools
     target_intervals
+    rna_gene_model
+    rna_ribosomal_intervals
     kraken2_db
     kraken2_save_reads
     kraken2_save_readclassifications
@@ -70,13 +75,23 @@ workflow SEQINSPECTOR {
     def ch_multiqc_files = channel.empty()
     def ch_multiqc_extra_files = channel.empty()
 
-    // STEP 00: EARLY SKIP FAILING MALFORMED FASTQ FILES
+    // STEP 00: SUBSAMPLE
+
+    //
+    // MODULE: SEQTK_SAMPLE
+    // Any downstream tool will be run on subsampled reads if seqtk is run
+    //
+
+    SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] }.filter { 'seqtk' in tools })
+    ch_sample = 'seqtk' in tools ? SEQTK_SAMPLE.out.reads : ch_samplesheet
+
+    // STEP 01: EARLY SKIP FAILING MALFORMED FASTQ FILES
 
     //
     // MODULE: Run FQ_LINT to catch early errors
     //
 
-    FQ_LINT(ch_samplesheet.filter { ('fq_lint' in tools) })
+    FQ_LINT(('fq_lint' in subsample_tools ? ch_sample : ch_samplesheet).filter { 'fq_lint' in tools })
 
     // This catches all FASTQs that pass linting
     // If you use an error strategy that allows FQ_LINT to fail,
@@ -102,12 +117,21 @@ workflow SEQINSPECTOR {
         .groupTuple()
         .combine(rundir_number)
         .map { rundir, meta, _rundir_number ->
+            // Empty samplesheet fields are parsed as [], normalise them to null
+            def platforms = meta.collect { meta_ -> meta_.platform ?: null }.unique()
+            if (rundir && platforms.size() > 1) {
+                error("[nf-core/seqinspector] Samples sharing rundir ${rundir.simpleName} have different platforms in the samplesheet: ${platforms.collect { platform -> platform ?: 'blank' }.join(', ')}")
+            }
+            if (rundir && !platforms[0] && 'rundirparser' in tools) {
+                error("[nf-core/seqinspector] Rundir ${rundir.simpleName} has no platform in the samplesheet. Please set 'platform' to 'illumina' or 'ont' for these samples, or remove rundirparser from the selected tools.")
+            }
             // Return for all the rundir specific processes and to mix with ch_multiqc_files
             //   - meta: (map)
             //     - id: Simple name of the rundir, used for setting unique output names in publishDir
             //     - samples: List all sample of the rundir
             //     - rundir_number: number of total rundir, no rundir counts as one
             //     - tags: List of merged tags, used for grouping MultiQC reports
+            //     - platform: Sequencing platform of the rundir (illumina or ont), null when no rundir
             //   - rundir: path to rundir or null when no rundir
             [
                 [
@@ -115,6 +139,7 @@ workflow SEQINSPECTOR {
                     samples: rundir ? false : meta.collect { meta_ -> meta_.id }.flatten().unique().sort(),
                     rundir_number: _rundir_number,
                     tags: meta.collect { meta_ -> meta_.tags }.flatten().unique(),
+                    platform: rundir ? platforms[0] : null,
                 ],
                 rundir ? file(rundir, checkIfExists: true) : null,
             ]
@@ -175,7 +200,7 @@ workflow SEQINSPECTOR {
     // MODULE: TOULLIGQC
     // This provides useful stats of long reads
 
-    TOULLIGQC(ch_samplesheet.filter { 'toulligqc' in tools })
+    TOULLIGQC(('toulligqc' in subsample_tools ? ch_sample : ch_samplesheet).filter { 'toulligqc' in tools })
 
     // STEP 02: BASIC QC ON FASTQ FILES
 
@@ -183,14 +208,14 @@ workflow SEQINSPECTOR {
     // MODULE: Run BBMAP_CLUMPIFY
     //
 
-    BBMAP_CLUMPIFY(ch_samplesheet.filter { 'bbmap_clumpify' in tools })
+    BBMAP_CLUMPIFY(('bbmap_clumpify' in subsample_tools ? ch_sample : ch_samplesheet).filter { 'bbmap_clumpify' in tools })
     bbmap_clumpify_reads = save_bbmap_clumpify_reads ? BBMAP_CLUMPIFY.out.reads : channel.empty()
 
     //
     // MODULE: SEQFU_STATS
     //
 
-    SEQFU_STATS(ch_samplesheet.filter { 'seqfu_stats' in tools })
+    SEQFU_STATS(('seqfu_stats' in subsample_tools ? ch_sample : ch_samplesheet).filter { 'seqfu_stats' in tools })
 
     // Parse the stats TSV file
     SEQFU_STATS.out.stats
@@ -203,23 +228,13 @@ workflow SEQINSPECTOR {
             }
         }
 
-    // STEP 03: SUBSAMPLE
-
-    //
-    // MODULE: SEQTK_SAMPLE
-    // Any downstream tool will be run on subsampled reads if seqtk is run
-    //
-
-    SEQTK_SAMPLE(ch_samplesheet.map { meta, reads -> [meta, reads, sample_size] }.filter { 'seqtk_sample' in tools })
-    ch_sample = 'seqtk_sample' in tools ? SEQTK_SAMPLE.out.reads : ch_samplesheet
-
     // STEP 04: MORE QC ON FASTQ FILES (CAN BE SUBSAMPLED)
 
-    FASTQC(ch_sample.filter { 'fastqc' in tools })
+    FASTQC(('fastqc' in subsample_tools ? ch_sample : ch_samplesheet).filter { 'fastqc' in tools })
 
-    FASTQE(ch_sample.filter { 'fastqe' in tools })
+    FASTQE(('fastqe' in subsample_tools ? ch_sample : ch_samplesheet).filter { 'fastqe' in tools })
 
-    SEQKIT_STATS(ch_sample.filter { 'seqkit_stats' in tools })
+    SEQKIT_STATS(('seqkit_stats' in subsample_tools ? ch_sample : ch_samplesheet).filter { 'seqkit_stats' in tools })
 
     //
     // MODULE: FASTP for adapter trimming and quality filtering
@@ -230,17 +245,26 @@ workflow SEQINSPECTOR {
     def save_merged = false
 
     FASTP(
-        ch_sample.map { meta, reads -> [meta, reads, []] }.filter { 'fastp' in tools },
+        ('fastp' in subsample_tools ? ch_sample : ch_samplesheet).map { meta, reads -> [meta, reads, []] }.filter { 'fastp' in tools },
         discard_trimmed_pass,
         save_trimmed_fail,
         save_merged,
     )
 
     //
+    // MODULE: CHELAE_TRIM for adapter trimming and quality filtering
+    //
+
+    CHELAE_TRIM(
+        ('chelae' in subsample_tools ? ch_sample : ch_samplesheet).map { meta, reads -> [meta, reads] }.filter { 'chelae' in tools },
+        [],
+    )
+
+    //
     // MODULE: SEQUALI
     //
 
-    SEQUALI(ch_sample.filter { 'sequali' in tools })
+    SEQUALI(('sequali' in subsample_tools ? ch_sample : ch_samplesheet).filter { 'sequali' in tools })
 
     // STEP 05: FASTQSCREEN
 
@@ -250,7 +274,7 @@ workflow SEQINSPECTOR {
     //   and transpose it into a tuple containing lists for each property
 
     FASTQSCREEN_FASTQSCREEN(
-        ch_sample.filter { 'fastqscreen' in tools },
+        ('fastqscreen' in subsample_tools ? ch_sample : ch_samplesheet).filter { 'fastqscreen' in tools },
         channel.fromList(
             samplesheetToList(
                 fastq_screen_references,
@@ -267,7 +291,7 @@ workflow SEQINSPECTOR {
 
     if ('kraken2' in tools) {
         FASTQ_QC_PHYLOGENETIC(
-            ch_sample,
+            'kraken2' in subsample_tools ? ch_sample : ch_samplesheet,
             kraken2_db,
             kraken2_save_reads,
             kraken2_save_readclassifications,
@@ -282,8 +306,11 @@ workflow SEQINSPECTOR {
 
     def sort_bam = true
 
+    def needs_bam = ('picard_collecthsmetrics' in tools) || ('picard_collectmultiplemetrics' in tools) || ('riker' in tools)
+    def bam_subsampled = ('picard_collecthsmetrics' in subsample_tools) || ('picard_collectmultiplemetrics' in subsample_tools) || ('riker' in subsample_tools)
+
     BWAMEM2_MEM(
-        ch_sample.filter { ('picard_collecthsmetrics' in tools) || ('picard_collectmultiplemetrics' in tools) },
+        (bam_subsampled ? ch_sample : ch_samplesheet).filter { needs_bam },
         bwamem2,
         fasta,
         sort_bam,
@@ -311,6 +338,32 @@ workflow SEQINSPECTOR {
         tools,
     )
 
+    //
+    // MODULE: RIKER_MULTI
+    //   Run riker multi QC metrics on BAM files
+
+    // Optional single files staged directly; channel.combine would drop all records when the param is null
+    def rna_gene_model_file = rna_gene_model ? file(rna_gene_model) : []
+    def rna_ribosomal_intervals_file = rna_ribosomal_intervals ? file(rna_ribosomal_intervals) : []
+
+    if (bait_intervals && target_intervals) {
+        bam_bai_for_riker = bam_bai
+            .map { meta, bam, bai -> [meta, bam, bai, [], [], [], []] }
+            .combine(channel.fromPath(bait_intervals).collect())
+            .combine(channel.fromPath(target_intervals).collect())
+            .map { meta, bam, bai, error_vcf, error_vcf_idx, error_intervals, gcbias_exclude_intervals, hybcap_baits, hybcap_targets ->
+                [meta, bam, bai, error_vcf, error_vcf_idx, error_intervals, gcbias_exclude_intervals, hybcap_baits, hybcap_targets, rna_gene_model_file, rna_ribosomal_intervals_file, []]
+            }
+    }
+    else {
+        bam_bai_for_riker = bam_bai.map { meta, bam, bai -> [meta, bam, bai, [], [], [], [], [], [], rna_gene_model_file, rna_ribosomal_intervals_file, []] }
+    }
+
+    RIKER_MULTI(
+        bam_bai_for_riker.filter { 'riker' in tools },
+        fasta.join(fai).collect(),
+    )
+
     // Collate and save software versions
     def collated_versions = softwareVersionsToYAML(
         softwareVersions: channel.topic("versions"),
@@ -322,8 +375,10 @@ workflow SEQINSPECTOR {
         newLine: true,
     )
 
+    // Tag CheckQC reports so they can be excluded from per-tag MultiQC reports.
+    // CheckQC results contain runfolder-level information that bleeds into other samples' reports.
     def collated_reports = channel.topic("multiqc_files")
-        .map { meta, _process, _tool, reports -> [meta, reports] }
+        .map { meta, _process, tool, reports -> [meta + [is_checkqc: tool == 'checkqc'], reports] }
 
     // STEP 08: MULTIQC (GLOBAL USING SAV AND PER TAG)
 
@@ -344,13 +399,25 @@ workflow SEQINSPECTOR {
         ? file(multiqc_methods_description, checkIfExists: true)
         : file("${projectDir}/assets/methods_description_template.yml", checkIfExists: true)
 
-    // Build citations on the fly from versions topic + meta.yml files
-    ch_methods_description = channel.topic('versions')
-        .collect(flat: false)
-        .map { versions -> citationsOnTheFly(versions, files("${projectDir}/modules/**/meta.yml").collect { path -> path.toString() }, ['multiqcsav']) }
-        .map { versions -> methodsDescriptionText(ch_multiqc_custom_methods_description.toString(), versions) }
+    ch_methods_description = channel.topic("versions")
+        .map { _process, tool, _version -> tool }
+        .unique()
+        .collect()
+        .map { tool_list -> ('multiqcsav' in tools ? tool_list + ['multiqcsav'] : tool_list).unique() }
+        .map { tool_list -> methodsDescriptionText(ch_multiqc_custom_methods_description, tool_list, subsample_tools) }
 
     ch_multiqc_extra_files = ch_multiqc_extra_files.mix(ch_methods_description.collectFile(name: 'methods_description_mqc.yaml', sort: true))
+
+    // Optional subsampling notice section for MultiQC
+    if ('seqtk' in tools) {
+        ch_subsampling_notice = channel.topic("versions")
+            .map { _process, tool, _version -> tool }
+            .unique()
+            .collect()
+            .map { ran_tools -> subsamplingNoticeYaml(subsample_tools, ran_tools) }
+
+        ch_multiqc_extra_files = ch_multiqc_extra_files.mix(ch_subsampling_notice.collectFile(name: 'subsampling_notice_mqc.yaml', sort: true))
+    }
 
     // Add index to other MultiQC reports
     ch_tags = ch_multiqc_files.map { meta, _files -> meta.tags }.flatten().unique()
@@ -414,9 +481,10 @@ workflow SEQINSPECTOR {
         )
     )
 
+    // Exclude CheckQC reports from per-tag MultiQC
     ch_multiqc_per_tag_files = ch_tags
         .combine(ch_multiqc_files)
-        .filter { sample_tag, meta, _sample -> sample_tag in meta.tags }
+        .filter { sample_tag, meta, _sample -> sample_tag in meta.tags && !meta.is_checkqc }
         .map { sample_tag, _meta, sample -> [sample_tag, sample] }
         .mix(multiqc_extra_files_per_tag)
         .groupTuple()
@@ -458,6 +526,7 @@ workflow SEQINSPECTOR {
 
     emit:
     bam_bai        = bam_bai
+    chelae_reads   = CHELAE_TRIM.out.reads
     clumpify_reads = bbmap_clumpify_reads
     data_global    = MULTIQC_GLOBAL.out.data // channel: [ /path/to/multiqc_data/ ]
     data_groups    = MULTIQC_PER_TAG.out.data // channel: [ /path/to/multiqc_data/ ]

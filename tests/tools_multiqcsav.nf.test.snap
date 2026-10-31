@@ -168,12 +168,14 @@
                 "pipeline_info",
                 "pipeline_info/nf_core_seqinspector_software_mqc_versions.yml"
             ],
-            "No warnings"
+            [
+                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
+            ]
         ],
-        "timestamp": "2026-06-17T11:02:08.136373674",
+        "timestamp": "2026-10-16T08:40:47.655850764",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.3"
+            "nextflow": "25.10.4"
         }
     }
 }

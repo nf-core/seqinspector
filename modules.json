@@ -13,12 +13,12 @@
                     },
                     "bwamem2/index": {
                         "branch": "master",
-                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "git_sha": "8327445b5266b0df32212e5c27407546d100429f",
                         "installed_by": ["modules"]
                     },
                     "bwamem2/mem": {
                         "branch": "master",
-                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "git_sha": "8327445b5266b0df32212e5c27407546d100429f",
                         "installed_by": ["modules"]
                     },
                     "checkqc": {
@@ -27,15 +27,21 @@
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/checkqc/checkqc.diff"
                     },
+                    "chelae/trim": {
+                        "branch": "master",
+                        "git_sha": "0819fb5b80a4b86b31f35bf96e53a9d65e160520",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/chelae/trim/chelae-trim.diff"
+                    },
                     "fastp": {
                         "branch": "master",
-                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "git_sha": "826a9b28d6da61097d60e1923bb8a2e51de3c5b4",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/fastp/fastp.diff"
                     },
                     "fastqc": {
                         "branch": "master",
-                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "git_sha": "2c2d159951605a1e815f1236616201353138c073",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/fastqc/fastqc.diff"
                     },
@@ -59,19 +65,19 @@
                     },
                     "kraken2/kraken2": {
                         "branch": "master",
-                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "git_sha": "d67d33d5925fcec4691b499670fa2bd926fd2be5",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/kraken2/kraken2/kraken2-kraken2.diff"
                     },
                     "krona/ktimporttaxonomy": {
                         "branch": "master",
-                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "git_sha": "c565f1b27c06a1e8b726e2a646d4c822ae3b514a",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/krona/ktimporttaxonomy/krona-ktimporttaxonomy.diff"
                     },
                     "krona/ktupdatetaxonomy": {
                         "branch": "master",
-                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "git_sha": "10d22ca9b72ecea28167f289df13a81ceb12d085",
                         "installed_by": ["modules"]
                     },
                     "multiqc": {
@@ -81,39 +87,45 @@
                     },
                     "multiqcsav": {
                         "branch": "master",
-                        "git_sha": "98403d15b0e50edae1f3fec5eae5e24982f1fade",
+                        "git_sha": "6ef220fd9252b42fb3c50348bbdbcb6246730686",
                         "installed_by": ["modules"]
                     },
                     "picard/collecthsmetrics": {
                         "branch": "master",
-                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "git_sha": "fe08122c3dc2f2d7890daba06f6c90e570ef01de",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/picard/collecthsmetrics/picard-collecthsmetrics.diff"
                     },
                     "picard/collectmultiplemetrics": {
                         "branch": "master",
-                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "git_sha": "fe08122c3dc2f2d7890daba06f6c90e570ef01de",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/picard/collectmultiplemetrics/picard-collectmultiplemetrics.diff"
                     },
                     "picard/createsequencedictionary": {
                         "branch": "master",
-                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "git_sha": "fe08122c3dc2f2d7890daba06f6c90e570ef01de",
                         "installed_by": ["modules"]
+                    },
+                    "riker/multi": {
+                        "branch": "master",
+                        "git_sha": "6ef220fd9252b42fb3c50348bbdbcb6246730686",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/riker/multi/riker-multi.diff"
                     },
                     "samtools/faidx": {
                         "branch": "master",
-                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "git_sha": "9339809fcb90af8a8b7051e6cd914894d5c52002",
                         "installed_by": ["modules"]
                     },
                     "samtools/index": {
                         "branch": "master",
-                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "git_sha": "9339809fcb90af8a8b7051e6cd914894d5c52002",
                         "installed_by": ["modules"]
                     },
                     "seqfu/stats": {
                         "branch": "master",
-                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "git_sha": "e0c07e2169e7569da58d8d8c3ca71023fc6a217e",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/seqfu/stats/seqfu-stats.diff"
                     },
@@ -125,7 +137,7 @@
                     },
                     "seqtk/sample": {
                         "branch": "master",
-                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "git_sha": "d672aca9cdef89ee649b340c08877ae40a19d5c0",
                         "installed_by": ["modules"]
                     },
                     "sequali": {

@@ -25,6 +25,7 @@
                 },
                 "sample_size": {
                     "type": "number",
+                    "minimum": 0,
                     "description": "Take a subset of reads for analysis.",
                     "help_text": "Subset can be used as a fraction of reads (ex/ 0.20) or an absolute number of reads per sample (integer). Pipeline will still run if a sample has less reads than selected subset value.",
                     "default": 0,
@@ -45,27 +46,36 @@
                 },
                 "multiqc_title": {
                     "type": "string",
-                    "description": "MultiQC report title. Printed as page header, used for filename if not otherwise specified.",
+                    "description": "MultiQC report title. Printed as page header.",
                     "fa_icon": "fas fa-file-signature"
                 },
                 "tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to run",
-                    "pattern": "^((bbmap_clumpify|checkqc|fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|multiqcsav|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqkit_stats|seqfu_stats|sequali|toulligqc)?,?)*(?<!,)$",
+                    "pattern": "^((bbmap_clumpify|checkqc|chelae|fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|multiqcsav|picard_collecthsmetrics|picard_collectmultiplemetrics|riker|rundirparser|seqkit_stats|seqfu_stats|sequali|toulligqc)?,?)*(?<!,)$",
                     "fa_icon": "fas fa-sort-amount-asc"
                 },
                 "tools_bundle": {
                     "type": "string",
                     "description": "Select some default setup for the tools to be run, tools can still be used to add tools",
-                    "pattern": "^((all|bam|fastq|default|illumina|minimal|ont|null)?,?)*(?<!,)$",
+                    "help_text": "Pre-defined bundles of tools. Available bundles:\n- `illumina`: checkqc, multiqcsav, rundirparser, fq_lint, fastqc, fastqscreen (requires Illumina runfolder with `platform` set to `illumina`)\n- `ont`: fastqc, rundirparser, sequali, toulligqc (requires `platform` set to `ont` for samples with a runfolder)\n- `fastq`: fq_lint, fastqc, fastqscreen, seqfu_stats\n- `bam`: fastqc, sequali\n- `minimal`: fastqc, fastqscreen\n- `default`: fq_lint, fastqc, fastqscreen, rundirparser, seqfu_stats, sequali (requires `platform` in the samplesheet for samples with a runfolder)\n- `null`: disables all bundles, use with `--tools` to select individual tools",
+                    "pattern": "^((illumina|ont|fastq|bam|minimal|default|null)?,?)*(?<!,)$",
                     "fa_icon": "fas fa-window-restore",
                     "default": "default"
                 },
                 "skip_tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to skip - overrides any other means of tools selection",
-                    "pattern": "^((bbmap_clumpify|checkqc|fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|multiqcsav|picard_collecthsmetrics|picard_collectmultiplemetrics|rundirparser|seqkit_stats|seqfu_stats|sequali|toulligqc)?,?)*(?<!,)$",
+                    "pattern": "^((bbmap_clumpify|checkqc|chelae|fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|multiqcsav|picard_collecthsmetrics|picard_collectmultiplemetrics|riker|rundirparser|seqkit_stats|seqfu_stats|sequali|toulligqc)?,?)*(?<!,)$",
                     "fa_icon": "fas fa-window-close "
+                },
+                "subsample_tools": {
+                    "type": "string",
+                    "description": "Comma-separated string of tools to run on subsampled data. Tools not in this list run on original data.",
+                    "help_text": "Controls which tools receive subsampled reads (via Seqtk) versus original data. Only effective when sample_size > 0. Use 'all' to subsample all active tools, or 'null' to disable subsampling for all tools. Note: picard_collecthsmetrics and picard_collectmultiplemetrics share the same alignment step; selecting one automatically subsamples the other.",
+                    "pattern": "^((all|null|bbmap_clumpify|chelae|fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|picard_collecthsmetrics|picard_collectmultiplemetrics|riker|seqkit_stats|seqfu_stats|sequali|toulligqc)?,?)*(?<!,)$",
+                    "default": "fastqscreen,kraken2,picard_collecthsmetrics,picard_collectmultiplemetrics",
+                    "fa_icon": "fas fa-random"
                 }
             }
         },
@@ -112,7 +122,22 @@
                     "default": "markduplicates=true",
                     "fa_icon": "fas fa-cog",
                     "description": "Arguments to pass to BBMap Clumpify",
-                    "help_text": "Arguments to pass to BBMap Clumpify. Defaults to `markduplicates=true`."
+                    "help_text": "Arguments to pass to BBMap Clumpify. Defaults to `markduplicates=true` to mark duplicates. Use `dedupe=true` to remove duplicates entirely instead of just marking them."
+                }
+            }
+        },
+        "riker_options": {
+            "title": "Riker options",
+            "type": "object",
+            "description": "Options for Riker",
+            "default": "",
+            "properties": {
+                "riker_args": {
+                    "type": "string",
+                    "default": "--tools alignment basic isize",
+                    "fa_icon": "fas fa-cog",
+                    "description": "Arguments to pass to riker multi",
+                    "help_text": "Arguments to pass to riker multi. Defaults to `--tools alignment basic isize`. Use `--tools` to select which collectors to run (e.g. alignment, basic, error, isize, wgs, gcbias, hybcap)."
                 }
             }
         },
@@ -228,6 +253,22 @@
                     "type": "string",
                     "description": "Path to bait intervals file.",
                     "pattern": "^\\S+.(bed|bed.gz|interval_list)$",
+                    "format": "file-path",
+                    "exists": true,
+                    "fa_icon": "fas fa-file"
+                },
+                "rna_gene_model": {
+                    "type": "string",
+                    "description": "Path to a GTF/GFF gene model for riker RNA metrics. RNA metrics are only produced when `riker_args` includes `--tools rna`.",
+                    "pattern": "^\\S+\\.(gtf|gff|gff3)(\\.gz)?$",
+                    "format": "file-path",
+                    "exists": true,
+                    "fa_icon": "fas fa-file"
+                },
+                "rna_ribosomal_intervals": {
+                    "type": "string",
+                    "description": "Path to explicit ribosomal (rRNA) intervals (BED or Picard IntervalList) for riker RNA metrics, unioned with rRNA genes derived from the gene model by biotype.",
+                    "pattern": "^\\S+\\.(bed|bed\\.gz|interval_list)$",
                     "format": "file-path",
                     "exists": true,
                     "fa_icon": "fas fa-file"
@@ -407,6 +448,9 @@
         },
         {
             "$ref": "#/$defs/kraken2_options"
+        },
+        {
+            "$ref": "#/$defs/riker_options"
         },
         {
             "$ref": "#/$defs/reference_genome_options"

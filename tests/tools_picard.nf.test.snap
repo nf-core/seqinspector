@@ -11,19 +11,19 @@
                     "samtools": "1.22.1"
                 },
                 "PICARD_COLLECTHSMETRICS": {
-                    "picard": "3.4.0"
+                    "picard": "3.5.0"
                 },
                 "PICARD_COLLECTMULTIPLEMETRICS": {
-                    "picard": "3.4.0"
+                    "picard": "3.5.0"
                 },
                 "PICARD_CREATESEQUENCEDICTIONARY": {
-                    "picard": "3.4.0"
+                    "picard": "3.5.0"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.23.1"
+                    "samtools": "1.24"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.23.1"
+                    "samtools": "1.24"
                 }
             },
             [
@@ -547,10 +547,10 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-06-08T15:00:56.303201013",
+        "timestamp": "2026-09-16T10:53:09.258528808",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.3"
+            "nextflow": "26.08.0"
         }
     },
     "NovaSeq6000 data test - picard_collecthsmetrics and picard_collectmultiplemetrics - stub": {
@@ -565,19 +565,19 @@
                     "samtools": "1.22.1"
                 },
                 "PICARD_COLLECTHSMETRICS": {
-                    "picard": "3.4.0"
+                    "picard": "3.5.0"
                 },
                 "PICARD_COLLECTMULTIPLEMETRICS": {
-                    "picard": "3.4.0"
+                    "picard": "3.5.0"
                 },
                 "PICARD_CREATESEQUENCEDICTIONARY": {
-                    "picard": "3.4.0"
+                    "picard": "3.5.0"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.23.1"
+                    "samtools": "1.24"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.23.1"
+                    "samtools": "1.24"
                 }
             },
             [
@@ -684,12 +684,14 @@
                 "reports/picard_collectmultiplemetrics/sampletest_04/sampletest_04.CollectMultipleMetrics.quality_by_cycle_metrics",
                 "reports/picard_collectmultiplemetrics/sampletest_04/sampletest_04.CollectMultipleMetrics.quality_distribution_metrics"
             ],
-            "No warnings"
+            [
+                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
+            ]
         ],
-        "timestamp": "2026-06-17T11:02:51.951677937",
+        "timestamp": "2026-10-16T09:26:09.030958644",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.3"
+            "nextflow": "25.10.4"
         }
     }
 }

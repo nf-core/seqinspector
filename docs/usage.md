@@ -42,22 +42,25 @@ run_dir
 ...would be represented in the following samplesheet (shown as .tsv for readability)
 
 ```csv title="samplesheet.csv"
-sample  fastq_1                                       fastq_2 rundir          tags
-sample1 path/to/run_dir/sample1_lane1_group1_r1.fq.gz         path/to/run_dir project1:group1
-sample2 path/to/run_dir/sample2_lane1_group1_r1.fq.gz         path/to/run_dir project1:group1
-sample3 path/to/run_dir/sample3_lane2_group2_r1.fq.gz         path/to/run_dir project1:group2
-sample4 path/to/run_dir/sample4_lane2_group3_r1.fq.gz         path/to/run_dir control
+sample  fastq_1                                       fastq_2 rundir          tags            platform
+sample1 path/to/run_dir/sample1_lane1_group1_r1.fq.gz         path/to/run_dir project1:group1 illumina
+sample2 path/to/run_dir/sample2_lane1_group1_r1.fq.gz         path/to/run_dir project1:group1 illumina
+sample3 path/to/run_dir/sample3_lane2_group2_r1.fq.gz         path/to/run_dir project1:group2 illumina
+sample4 path/to/run_dir/sample4_lane2_group3_r1.fq.gz         path/to/run_dir control         illumina
 ```
 
-| Column    | Description                                                                                                                                                                            |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sample`  | Custom sample name. This entry will be identical for multiple sequencing libraries/runs from the same sample. Spaces in sample names are automatically converted to underscores (`_`). |
-| `fastq_1` | Full path to FastQ file for Illumina short reads 1. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                             |
-| `fastq_2` | Full path to FastQ file for Illumina short reads 2. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz" (optional).                                                  |
-| `rundir`  | Path to the runfolder containing extra information about the sequencing run (optional\*).                                                                                              |
-| `tags`    | Colon-separated list of tags to group samples in special reports.                                                                                                                      |
+| Column     | Description                                                                                                                                                                            |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sample`   | Custom sample name. This entry will be identical for multiple sequencing libraries/runs from the same sample. Spaces in sample names are automatically converted to underscores (`_`). |
+| `fastq_1`  | Full path to FastQ file for Illumina short reads 1. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                             |
+| `fastq_2`  | Full path to FastQ file for Illumina short reads 2. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz" (optional).                                                  |
+| `rundir`   | Path to the runfolder containing extra information about the sequencing run (optional\*).                                                                                              |
+| `tags`     | Colon-separated list of tags to group samples in special reports.                                                                                                                      |
+| `platform` | Sequencing platform of the `rundir`: `illumina` or `ont`. Required when a `rundir` is given and `rundirparser` is run (optional\*\*).                                                  |
 
 \*If rundir is not provided, the RUNDIRPARSER module is skipped and the sequencing run metadata is not collected.
+
+\*\*The platform selects how RUNDIRPARSER parses the run folder. It can be left blank for samples without a `rundir`, or when `rundirparser` is not run.
 
 Another [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
 
@@ -132,17 +135,54 @@ withName: SEQTK_SAMPLE {
 ```
 
 ```bash
-nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 -profile docker
+nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000
 ```
+
+#### Subsampling control
+
+By default, only a subset of tools run on the subsampled data. The `--subsample_tools` parameter controls which tools receive subsampled reads (via Seqtk) versus original data. Tools not in this list run on the original (non-subsampled) data.
+
+The default value is:
+
+```bash
+--subsample_tools fastqscreen,kraken2,picard_collecthsmetrics,picard_collectmultiplemetrics
+```
+
+For example, to also run FastQC on subsampled data:
+
+```bash
+nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 --subsample_tools fastqscreen,kraken2,picard_collecthsmetrics,picard_collectmultiplemetrics,fastqc
+```
+
+Or to run all active tools on subsampled data:
+
+```bash
+nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 --subsample_tools all
+```
+
+Note: `all` excludes tools that cannot use subsampled data (`checkqc`, `multiqcsav`, `rundirparser`).
+
+Or to disable subsampling for all tools (run everything on original data):
+
+```bash
+nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --sample_size 1000000 --subsample_tools null
+```
+
+:::note
+`picard_collecthsmetrics` and `picard_collectmultiplemetrics` share the same alignment step. Selecting one for subsampling will automatically subsample the other as well.
+:::
+
+Note: The `--subsample_tools` parameter only takes effect when `sample_size > 0`.
 
 ### Tools selection
 
 Tools selection is an integral part of sequinspector and, as the pipeline grows, it will become more and more important to select tools of interest.
 By **default**, the pipeline does run a subsection of tools as defined in the `utils_nfcore_seqinspector_pipeline` subworkflow.
-Currently, the following tools are run as default:
+Currently, the following tools are run by default:
 
 - fastqc
 - fastqscreen
+- fq_lint
 - picard_collectmultiplemetrics
 - rundirparser
 - seqfu_stats
@@ -152,163 +192,42 @@ Currently, the following tools are run as default:
 
 It is possible to choose individual tools to run using the `--tools` parameter and add all desired tools in a comma separated string. For example:
 
-```showLineNumbers
+```bash
 --tools fastqscreen,rundirparser
 ```
 
 Be aware that the default tools will still be run. In order to ONLY run the selection, one has to specify `--tools_bundle null` as well:
 
-```showLineNumbers
+```bash
 --tools fastqscreen,rundirparser --tools_bundle null
 ```
 
-Currently the `tools` param can have the following values: bbmap_clumpify, checkqc, fastp, fastqc, fastqe, fastqscreen, fq_lint, kraken2, multiqcsav, picard_collecthsmetrics, picard_collectmultiplemetrics, rundirparser, seqkit_stats, seqfu_stats, sequali and toulligqc.
+See the [parameters page](https://nf-co.re/seqinspector/parameters/#tools) for the list of available tools and their values.
 
 #### Skip specific tools
 
-Some tools might not be compatible with your data or you do not require all tools that are going to be run. In this case you can skip them by providing a comma-separated list of tools to be skipped with the `--skip_tools` parameter.
+Some tools might not be compatible with your data or you do not require all tools that are going to be run. In this case you can skip them by providing a comma-separated list of tools to be skipped with the `--skip_tools` parameter, e.g.:
+
+```bash
+--skip_tools fastqe,kraken2,riker
+```
 
 The nextflow configuration file can also be use to customise tool arguments.
 See official [nexflow](https://www.nextflow.io/docs/latest/config.html) and [nf-core](https://nf-co.re/docs/usage/configuration#customising-tool-arguments) documentation for further details.
 
-#### Custom tool arguments
-
-Some tools accept additional arguments that can be customised via command-line parameters. The following tool arguments are available:
-
-| Parameter               | Default                 | Description                                                                                              |
-| ----------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------- |
-| `--bbmap_clumpify_args` | `"markduplicates=true"` | Arguments passed to BBMap Clumpify. Use `dedupe=true` to remove duplicates instead of just marking them. |
-| `--fq_lint_args`        | `""`                    | Arguments passed to fq-lint.                                                                             |
-
 #### Choose pre-defined bundles of tools
 
-It is possible to also chose bundles of pre-specified tools using the `tools_bundle` parameter. It is still possible to remove tools using the `skip_tools` parameters or add additional tools with the `tools` parameter when chosing a predefined setup with `tools_bundle`.
+It is possible to also choose bundles of pre-specified tools using the `--tools_bundle` parameter. It is still possible to remove tools using the `--skip_tools` parameters or add additional tools with the `--tools` parameter when choosing a predefined setup with `--tools_bundle`.
 
-Currently, the following bundles are available:
-
-<details>
-<summary>default</summary>
-
-Requirements:
-
-- specification of the `genome` parameter
-- specification of the Illumina runfolder
-
-Tools:
-
-- fastqc
-- fastqscreen
-- fq_lint
-- picard_collectmultiplemetrics
-- rundirparser
-- seqfu_stats
-- sequali
-
-</details>
-
-<details>
-<summary>all</summary>
-
-Requirements:
-
-- specification of the `genome` parameter
-- specification of the Illumina runfolder
-
-Tools:
-
-- bbmap_clumpify
-- checkqc
-- fastqc
-- fastqe
-- fastqscreen
-- fq_lint
-- multiqcsav
-- picard_collecthsmetrics
-- picard_collectmultiplemetrics
-- rundirparser
-- seqkit_stats
-- seqfu_stats
-- sequali
-- toulligqc
-
-</details>
-
-<details>
-<summary>minimal</summary>
-
-Requirements:
-
-- specification of the `genome` parameter
-
-Tools:
-
-- fastqc
-- fastqscreen
-- picard_collectmultiplemetrics
-- seqfu_stats
-</details>
-
-<details>
-<summary>bam</summary>
-
-Requirements:
-
-- specification of the `genome` parameter
-
-Tools:
-
-- picard_collecthsmetrics
-- picard_collectmultiplemetrics
-
-</details>
-
-<details>
-<summary>fastq</summary>
-
-Tools:
-
-- fastqc
-- fastqscreen
-- fq_lint
-- seqkit_stats
-
-</details>
-
-<details>
-<summary>illumina</summary>
-
-Requirements:
-
-- Specification of the Illumina runfolder
-
-Tools:
-
-- checkqc
-- multiqcsav
-- rundirparser
-- seqfu_stats
-</details>
-
-<details>
-<summary>ont</summary>
-
-Tools:
-
-- fastqc
-- fastqscreen
-- seqkit_stats
-- sequali
-- toulligqc
-
-</details>
+See the [parameters page](https://nf-co.re/seqinspector/parameters/#tools_bundle) for the list of available bundles and their contents.
 
 ### Available functionality and tools
 
 #### BWAMEM2 and alignment-based QC tools
 
 If no genome or fasta file is provided, either with `--genome` or `--fasta`,
-the pipeline will not be able to run the alignment step with BWAMEM2,
-and will skip all tools that depend on the alignment file (eg. `picard CollectHsMetrics` and `picard CollectHsMetrics`).
+the pipeline will not be able to run the alignment step with `BWAMEM2`,
+and will skip all tools that depend on the alignment file (e.g. `picard CollectHsMetrics` and `picard CollectMultipleMetrics`).
 
 #### Hybrid-selection QC metrics
 

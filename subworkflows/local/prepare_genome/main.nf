@@ -26,7 +26,7 @@ workflow PREPARE_GENOME {
         ch_bwamem2 = channel.fromPath(bwamem2, checkIfExists: true).map { bwamem2_ -> [[id: genome], bwamem2_] }.collect()
     }
     else {
-        BWAMEM2_INDEX(ch_fasta.filter { 'picard_collecthsmetrics' in tools || 'picard_collectmultiplemetrics' in tools })
+        BWAMEM2_INDEX(ch_fasta.filter { 'picard_collecthsmetrics' in tools || 'picard_collectmultiplemetrics' in tools || 'riker' in tools })
         ch_bwamem2 = BWAMEM2_INDEX.out.index
     }
 
@@ -45,7 +45,7 @@ workflow PREPARE_GENOME {
     }
     else {
         SAMTOOLS_FAIDX(
-            ch_fasta.map { meta, fasta_ -> [meta, fasta_, []] }.filter { 'picard_collecthsmetrics' in tools || 'picard_collectmultiplemetrics' in tools },
+            ch_fasta.map { meta, fasta_ -> [meta, fasta_, []] }.filter { 'picard_collecthsmetrics' in tools || 'picard_collectmultiplemetrics' in tools || 'riker' in tools },
             false,
         )
         ch_fai = SAMTOOLS_FAIDX.out.fai

@@ -11,7 +11,7 @@
 [![nf-test](https://img.shields.io/badge/unit_tests-nf--test-337ab7.svg)](https://www.nf-test.com)
 
 [![Nextflow](https://img.shields.io/badge/version-%E2%89%A525.10.4-green?style=flat&logo=nextflow&logoColor=white&color=%230DC09D&link=https%3A%2F%2Fnextflow.io)](https://www.nextflow.io/)
-[![nf-core template version](https://img.shields.io/badge/nf--core_template-4.0.2-green?style=flat&logo=nfcore&logoColor=white&color=%2324B064&link=https%3A%2F%2Fnf-co.re)](https://github.com/nf-core/tools/releases/tag/4.0.2)
+[![nf-core template version](https://img.shields.io/badge/nf--core_template-4.2.1-green?style=flat&logo=nfcore&logoColor=white&color=%2324B064&link=https%3A%2F%2Fnf-co.re)](https://github.com/nf-core/tools/releases/tag/4.2.1)
 [![run with conda](http://img.shields.io/badge/run%20with-conda-3EB049?labelColor=000000&logo=anaconda)](https://docs.conda.io/en/latest/)
 [![run with docker](https://img.shields.io/badge/run%20with-docker-0db7ed?labelColor=000000&logo=docker)](https://www.docker.com/)
 [![run with singularity](https://img.shields.io/badge/run%20with-singularity-1d355c.svg?labelColor=000000)](https://sylabs.io/docs/)
@@ -24,39 +24,53 @@
 **nf-core/seqinspector** is a bioinformatics pipeline that processes raw sequence data (FASTQ) to provide comprehensive quality control.
 It can perform subsampling, quality assessment, duplication level analysis, and complexity evaluation on a per-sample basis, while also detecting adapter content, technical artifacts, and common biological contaminants.
 The pipeline generates detailed MultiQC reports with flexible output options, ranging from individual sample reports to project-wide summaries, making it particularly useful for sequencing core facilities and research groups with access to sequencing instruments.
-If provided, nf-core/seqinspector can also parse statistics from an Illumina run folder directory into the final MultiQC reports.
+If provided, nf-core/seqinspector can also parse statistics from an Illumina or ONT run folder directory into the final MultiQC reports.
 
 ### Compatibility between tools and data type
 
 <!-- TODO: add a search tool that accepts a tree for `Compatibility with Data`. -->
 
-| Tool Type                  | Tool Name                                                                                                           | Tool Description                                                                              | Compatibility with Data | Dependencies                                                                            | Default tool |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | ----------------------- | --------------------------------------------------------------------------------------- | ------------ |
-| `Subsampling`              | [`Seqtk`](https://github.com/lh3/seqtk)                                                                             | Global subsampling of reads. Only performs subsampling if `--sample_size` parameter is given. | [RNA, DNA]              | [N/A]                                                                                   | no           |
-| `Lint FASTQs`              | [`fq`](https://github.com/stjude-rust-labs/fq)                                                                      | fq filters, generates, subsamples, and validates FASTQ files. [RNA, DNA, synthetic]           | [N/A]                   | yes                                                                                     |
-| `Trimming`                 | [`Fastp`](https://github.com/OpenGene/fastp)                                                                        | Trimming of reads. Only performs trimming if `--tools` parameter is given.                    | [RNA, DNA, synthetic]   | [N/A]                                                                                   | no           |
-| `Deduplication assessment` | [`BBMap Clumpify`](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/clumpify-guide/)   | Deduplicate and compress FASTQ files. Only performs clumpify if `--tools` parameter is given. | [RNA, DNA]              | [N/A]                                                                                   | no           |
-| `Indexing, Mapping`        | [`Bwamem2`](https://github.com/bwa-mem2/bwa-mem2)                                                                   | Align reads to reference                                                                      | [RNA, DNA]              | [N/A]                                                                                   | yes          |
-| `Indexing`                 | [`SAMtools`](http://github.com/samtools)                                                                            | Index aligned BAM files, create FASTA index                                                   | [DNA]                   | [N/A]                                                                                   | yes          |
-| `QC`                       | [`checkQC`](https://github.com/Molmed/checkQC)                                                                      | Read QC                                                                                       | [RNA, DNA]              | Illumina rundir                                                                         | no           |
-| `QC`                       | [`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)                                              | Read QC                                                                                       | [RNA, DNA]              | [N/A]                                                                                   | yes          |
-| `QC`                       | [`FASTQE`](https://fastqe.com/)                                                                                     | Read QC                                                                                       | [RNA, DNA]              | [N/A]                                                                                   | no           |
-| `QC`                       | [`FastqScreen`](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/)                                   | Basic contamination detection                                                                 | [RNA, DNA]              | [N/A]                                                                                   | yes          |
-| `QC`                       | [`SeqFu Stats`](https://github.com/telatin/seqfu2)                                                                  | Sequence statistics                                                                           | [RNA, DNA]              | [N/A]                                                                                   | yes          |
-| `QC`                       | [`Seqkit Stats`](https://bioinf.shenwei.me/seqkit/usage/#stats)                                                     | Simple statistics of FASTA/Q files                                                            | [RNA, DNA]              | [N/A]                                                                                   | no           |
-| `QC`                       | [`Sequali`](https://sequali.readthedocs.io/en/latest/)                                                              | Read QC for long and short reads.                                                             | [RNA, DNA]              | [N/A]                                                                                   | yes          |
-| `Taxonomic Classification` | [`Kraken2`](https://ccb.jhu.edu/software/kraken2/)                                                                  | Performs taxonomic classification and/or profiling                                            | [RNA, DNA]              | [N/A]                                                                                   | no           |
-| `QC`                       | [`Picard collect multiple metrics`](https://broadinstitute.github.io/picard/picard-metric-definitions.html)         | Collect multiple QC metrics                                                                   | [RNA, DNA]              | [Bwamem2, SAMtools, `--genome`]                                                         | yes          |
-| `QC`                       | [`Picard_collecthsmetrics`](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard) | Collect alignment QC metrics of hybrid-selection data.                                        | [RNA, DNA]              | [Bwamem2, SAMtools, `--fasta`, `--bait_intervals`, `--target_intervals` (`--ref_dict`)] | no           |
-| `Reporting`                | [`MultiQC`](http://multiqc.info/)                                                                                   | Present QC for raw reads                                                                      | [RNA, DNA, synthetic]   | [N/A]                                                                                   | yes          |
-| `Reporting`                | [`Krona`](https://hpc.nih.gov/apps/kronatools.html)                                                                 | Plotting Kraken2 results                                                                      | [RNA, DNA, synthetic]   | [kraken2]                                                                               | no           |
+| Tool Type                  | Tool Name                                                                                                           | Tool Description                                                                                            | Compatibility with Data | Dependencies                                                                             | Default tool |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------- | ---------------------------------------------------------------------------------------- | ------------ |
+| `Subsampling`              | [`Seqtk`](https://github.com/lh3/seqtk)                                                                             | Global subsampling of reads. Only performs subsampling if `--sample_size` parameter is given.               | [RNA, DNA]              | [N/A]                                                                                    | no           |
+| `Lint FASTQs`              | [`fq`](https://github.com/stjude-rust-labs/fq)                                                                      | fq filters, generates, subsamples, and validates FASTQ files.                                               | [RNA, DNA, synthetic]   | [N/A]                                                                                    | yes          |
+| `Trimming`                 | [`Chelae`](https://github.com/fulcrumgenomics/chelae)                                                               | Adapter and quality trimming of short-read FASTQ data.                                                      | [RNA, DNA, synthetic]   | [N/A]                                                                                    | no           |
+| `Trimming`                 | [`Fastp`](https://github.com/OpenGene/fastp)                                                                        | Trimming of reads. Only performs trimming if `--tools` parameter is given.                                  | [RNA, DNA, synthetic]   | [N/A]                                                                                    | no           |
+| `Deduplication assessment` | [`BBMap Clumpify`](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/clumpify-guide/)   | Deduplicate and compress FASTQ files. Only performs clumpify if `--tools` parameter is given.               | [RNA, DNA]              | [N/A]                                                                                    | no           |
+| `Indexing, Mapping`        | [`BWA-MEM2`](https://github.com/bwa-mem2/bwa-mem2)                                                                  | Align reads to reference                                                                                    | [RNA, DNA]              | [N/A]                                                                                    | no           |
+| `Indexing`                 | [`SAMtools`](http://github.com/samtools)                                                                            | Index aligned BAM files, create FASTA index                                                                 | [DNA]                   | [N/A]                                                                                    | no           |
+| `QC`                       | [`checkQC`](https://github.com/Molmed/checkQC)                                                                      | Read QC                                                                                                     | [RNA, DNA]              | Illumina rundir                                                                          | no           |
+| `QC`                       | [`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)                                              | Read QC                                                                                                     | [RNA, DNA]              | [N/A]                                                                                    | yes          |
+| `QC`                       | [`FASTQE`](https://fastqe.com/)                                                                                     | Read QC                                                                                                     | [RNA, DNA]              | [N/A]                                                                                    | no           |
+| `QC`                       | [`FastqScreen`](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/)                                   | Basic contamination detection                                                                               | [RNA, DNA]              | [N/A]                                                                                    | yes          |
+| `QC`                       | [`SeqFu Stats`](https://github.com/telatin/seqfu2)                                                                  | Sequence statistics                                                                                         | [RNA, DNA]              | [N/A]                                                                                    | yes          |
+| `QC`                       | [`Seqkit Stats`](https://bioinf.shenwei.me/seqkit/usage/#stats)                                                     | Simple statistics of FASTA/Q files                                                                          | [RNA, DNA]              | [N/A]                                                                                    | no           |
+| `QC`                       | [`Sequali`](https://sequali.readthedocs.io/en/latest/)                                                              | Read QC for long and short reads.                                                                           | [RNA, DNA]              | [N/A]                                                                                    | yes          |
+| `QC`                       | [`Rundirparser`](https://github.com/nf-core/seqinspector/tree/dev/modules/local/rundirparser)                       | Parse sequencing run metadata into MultiQC (Illumina `RunParameters.xml`, ONT MinKNOW `report_*.json`).     | [RNA, DNA]              | Illumina or ONT rundir, `platform` samplesheet column                                    | yes          |
+| `Taxonomic Classification` | [`Kraken2`](https://ccb.jhu.edu/software/kraken2/)                                                                  | Performs taxonomic classification and/or profiling                                                          | [RNA, DNA]              | [N/A]                                                                                    | no           |
+| `QC`                       | [`Picard CollectMultipleMetrics`](https://broadinstitute.github.io/picard/picard-metric-definitions.html)           | Collect multiple QC metrics                                                                                 | [RNA, DNA]              | [BWA-MEM2, SAMtools, `--genome`]                                                         | no           |
+| `QC`                       | [`Picard CollectHsMetrics`](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard) | Collect alignment QC metrics of hybrid-selection data.                                                      | [RNA, DNA]              | [BWA-MEM2, SAMtools, `--fasta`, `--bait_intervals`, `--target_intervals` (`--ref_dict`)] | no           |
+| `QC`                       | [`Riker`](https://github.com/fulcrumgenomics/riker)                                                                 | Collect BAM-level QC metrics (alignment, base distribution, insert size, GC bias, WGS, RNA, error metrics). | [RNA, DNA]              | [BWA-MEM2, SAMtools, `--fasta`, `--rna_gene_model` (RNA)]                                | no           |
+| `QC`                       | [`ToulligQC`](https://github.com/GenomiqueENS/toulligqc)                                                            | QC analyses of Oxford Nanopore                                                                              | [RNA, DNA]              | ONT reads                                                                                | no           |
+| `Reporting`                | [`MultiQC`](http://multiqc.info/)                                                                                   | Present QC for raw reads                                                                                    | [RNA, DNA, synthetic]   | [N/A]                                                                                    | yes          |
+| `Reporting`                | [`Krona`](https://hpc.nih.gov/apps/kronatools.html)                                                                 | Plotting Kraken2 results                                                                                    | [RNA, DNA, synthetic]   | [kraken2]                                                                                | no           |
 
 ### Workflow diagram
+
+The subway map below is a graphical representation of the pipeline workflow, generated with [nf-metro](https://seqeralabs.github.io/nf-metro/).
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/images/seqinspector_tubemap_dark.png">
   <source media="(prefers-color-scheme: light)" srcset="docs/images/seqinspector_tubemap_light.png">
   <img alt="Fallback image description" src="docs/images/seqinspector_tubemap_light.png">
+</picture>
+
+The diagram below illustrates the MultiQC reporting logic for per-sample tags and global aggregation.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/seqinspector_multiqc_dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="docs/images/seqinspector_multiqc_light.png">
+  <img alt="Fallback image description" src="docs/images/seqinspector_multiqc_light.png">
 </picture>
 
 ### Summary of tools and version used in the pipeline
@@ -66,9 +80,10 @@ If provided, nf-core/seqinspector can also parse statistics from an Illumina run
 | bwamem2     | 2.3     |
 | bbmap       | 39.18   |
 | checkQC     | 4.1.0   |
+| chelae      | 0.1.0   |
 | fq/lint     | 0.12.0  |
-| fastp       | 1.1.0   |
-| fastqc      | 0.12.1  |
+| fastp       | 1.3.6   |
+| fastqc      | 0.13.0  |
 | fastqe      | 0.5.2   |
 | fastqscreen | 0.16.0  |
 | kraken2     | 2.1.6   |
@@ -76,11 +91,13 @@ If provided, nf-core/seqinspector can also parse statistics from an Illumina run
 | multiqc     | 1.35    |
 | multiqcsav  | 0.2.0   |
 | picard      | 3.4.0   |
-| samtools    | 1.23    |
+| riker       | 0.4.0   |
+| samtools    | 1.24    |
 | seqfu       | 1.22.3  |
 | seqkit      | 2.9.0   |
 | seqtk       | 1.4     |
 | sequali     | 1.0.2   |
+| toulligqc   | 2.8.4   |
 
 ## Usage
 
@@ -92,13 +109,14 @@ First, prepare a samplesheet with your input data that looks as follows:
 `samplesheet.csv`:
 
 ```csv
-sample,fastq_1,fastq_2,rundir,tags
-CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz,200624_A00834_0183_BHMTFYDRXX,lane1:project5:group2
+sample,fastq_1,fastq_2,rundir,tags,platform
+CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz,200624_A00834_0183_BHMTFYDRXX,lane1:project5:group2,illumina
 ```
 
 Each row represents a fastq file (single-end with only `fastq_1`) or a pair of fastq files (paired end with `fastq_1` and `fastq_2`).
 `rundir` is the path to the runfolder.
 `tags` is a colon-separated list of tags that will be added to the MultiQC report for this `sample`.
+`platform` is the sequencing platform of the `rundir` (`illumina` or `ont`). It is required when a `rundir` is given and run folder parsing (`rundirparser`) is run, and can be left blank otherwise.
 
 Now, you can run the pipeline using:
 

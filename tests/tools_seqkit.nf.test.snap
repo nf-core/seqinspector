@@ -39,12 +39,14 @@
                 "reports/seqkit/SAMPLE_SINGLE_END_03",
                 "reports/seqkit/SAMPLE_SINGLE_END_03/SAMPLE_SINGLE_END_03.tsv"
             ],
-            "No warnings"
+            [
+                "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
+            ]
         ],
-        "timestamp": "2026-06-17T11:03:21.022749912",
+        "timestamp": "2026-10-16T08:43:45.255337605",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.3"
+            "nextflow": "25.10.4"
         }
     },
     "MiSeq data test - seqkit_stats": {

@@ -107,10 +107,10 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-06-12T13:32:08.528487804",
+        "timestamp": "2026-10-16T07:42:54.166914642",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.3"
+            "nextflow": "25.10.4"
         }
     },
     "MiSeq data test - bbmap_clumpify - save reads": {

@@ -7,9 +7,77 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
-- [#59](https://github.com/nf-core/seqinspector/pull/59) Seqkit Stats TSV output.
+- [#291](https://github.com/nf-core/seqinspector/pull/291) Support ONT run folders in RUNDIRPARSER: parse the MinKNOW `report_*.json` into the run metadata table (including read N50 and mean read length), and add `rundirparser` to the `ont` bundle ([#289](https://github.com/nf-core/seqinspector/issues/289)) (@chriswyatt1)
+
+### `Fixed`
+
+### `Changed`
+
+- [#241](https://github.com/nf-core/seqinspector/pull/241) Remove vendored nf-core utils subworkflows, use plugin imports from nf-core-utils and nf-schema (@maxulysse)
+- [#278](https://github.com/nf-core/seqinspector/pull/278) Back to dev (@maxulysse)
+- [#279](https://github.com/nf-core/seqinspector/pull/279) Exclude CheckQC from individual MultiQC reports to prevent runfolder information from bleeding into other samples' reports (@maxulysse)
+- [#282](https://github.com/nf-core/seqinspector/pull/282) Template update for nf-core/tools v4.1.0 (@maxulysse)
+- [#285](https://github.com/nf-core/seqinspector/pull/285) Update nf-core modules FastQC to 0.13.0 and bwamem2 index/mem (@maxulysse)
+- [#291](https://github.com/nf-core/seqinspector/pull/291) New samplesheet column `platform` (`illumina` or `ont`). **Breaking:** rows with a `rundir` now need `platform` set when `rundirparser` runs, which is part of the `default` bundle (@chriswyatt1)
+- [#294](https://github.com/nf-core/seqinspector/pull/294) Update README tool table (@FranBonath)
+- [#296](https://github.com/nf-core/seqinspector/pull/296) Template update for nf-core/tools v4.2.1 (@maxulysse)
+
+### `Dependencies`
+
+| Dependency | Old version | New version |
+| ---------- | ----------- | ----------- |
+| picard     | 3.4.0       | 3.5.0       |
+| fastqc     | 0.12.1      | 0.13.0      |
+
+## [1.1.2](https://github.com/nf-core/seqinspector/releases/tag/1.1.2) - Carrie Bishop
+
+### `Added`
+
+- [#281](https://github.com/nf-core/seqinspector/pull/281) Add riker RNA metrics support via `--rna_gene_model` and `--rna_ribosomal_intervals` (@emmcauley)
+
+### `Fixed`
+
+### `Changed`
+
+- [#270](https://github.com/nf-core/seqinspector/pull/270) Back to dev (@FranBonath)
+- [#271](https://github.com/nf-core/seqinspector/pull/271) Template update for nf-core/tools v4.1.0 (@agrima2010, @mashehu, @maxulysse)
+- [#272](https://github.com/nf-core/seqinspector/pull/272) prepare pipeline update v1.1.2 (@agrima2010, @maxulysse)
+- [#276](https://github.com/nf-core/seqinspector/pull/276) Address review comments for release v1.1.2 (@maxulysse)
+
+## [1.1.1](https://github.com/nf-core/seqinspector/releases/tag/1.1.1) - Cindy Mackenzie
+
+### `Added`
+
+- [#260](https://github.com/nf-core/seqinspector/pull/260) Add chelae/trim as an alternate trimming tool to fastp
+- [#266](https://github.com/nf-core/seqinspector/pull/266) Add documentation on custom MultiQC sections
+
+### `Fixed`
+
+- [#264](https://github.com/nf-core/seqinspector/pull/264) Fix `--multiqc_title` modifying the output directory structure, breaking the report index section ([#261](https://github.com/nf-core/seqinspector/issues/261))
+- [#269](https://github.com/nf-core/seqinspector/pull/269) Revert to old setup-apptainer version for GHA
+
+### `Changed`
+
+- [#259](https://github.com/nf-core/seqinspector/pull/259) Back to dev
+- [#268](https://github.com/nf-core/seqinspector/pull/268) prepare pipeline update v1.1.1
+- [#262](https://github.com/nf-core/seqinspector/pull/262) Template update for nf-core/tools v4.0.3
+
+### `Dependencies`
+
+| Dependency | Old version | New version |
+| ---------- | ----------- | ----------- |
+| chelae     |             | 0.1.0       |
+| fastp      | 1.1.0       | 1.3.6       |
+
+### `Removed`
+
+## [1.1.0](https://github.com/nf-core/seqinspector/releases/tag/1.1.0) - Veronica Mars
+
+### `Added`
+
+- [#59](https://github.com/nf-core/seqinspector/pull/59) Seqkit Stats TSV output
 - [#109](https://github.com/nf-core/seqinspector/pull/109) Adds ToulligQC module for long read QC
-- [#134](https://github.com/nf-core/seqinspector/pull/134) Added sequali module.
+- [#134](https://github.com/nf-core/seqinspector/pull/134) Added sequali module
 - [#202](https://github.com/nf-core/seqinspector/pull/202) Added support for fasta fai file as input (via params or igenomes) for the pipeline
 - [#204](https://github.com/nf-core/seqinspector/pull/204) Added Fastp module
 - [#206](https://github.com/nf-core/seqinspector/pull/206) Added FASTQE for more comprehensive QC of FASTQ files
@@ -23,6 +91,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#234](https://github.com/nf-core/seqinspector/pull/234) Add pipeline level PICARD tests
 - [#236](https://github.com/nf-core/seqinspector/pull/236) Added bbmap/clumpify module for FASTQ deduplication and compression
 - [#237](https://github.com/nf-core/seqinspector/pull/237) Add meta.yml for rundirparser module
+- [#243](https://github.com/nf-core/seqinspector/pull/243) Add `--subsample_tools` parameter to control which tools run on subsampled data
+- [#246](https://github.com/nf-core/seqinspector/pull/246) Added riker module for BAM-level QC metrics collection
+- [#247](https://github.com/nf-core/seqinspector/pull/247) Add `AGENTS.md` file with nf-core agent instructions
+- [#256](https://github.com/nf-core/seqinspector/pull/256) Improve docs
+- [#258](https://github.com/nf-core/seqinspector/pull/258) Standardize output docs: descriptions above output files
 
 ### `Fixed`
 
@@ -32,24 +105,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#238](https://github.com/nf-core/seqinspector/pull/238) Fix Python/PyYAML tool name case mismatch in rundirparser module
 - [#239](https://github.com/nf-core/seqinspector/pull/239) Fix tool bundles documentation to match code
 - [#240](https://github.com/nf-core/seqinspector/pull/240) Fix FASTQE default tool marking in README
+- [#243](https://github.com/nf-core/seqinspector/pull/243) Fix typos, broken link, missing `</details>` tag, and stray content in output documentation
+- [#245](https://github.com/nf-core/seqinspector/pull/245) Fix repeated listing of CollectHsMetrics
+- [#253](https://github.com/nf-core/seqinspector/pull/253) Fix CHANGELOG, missing Update in README and CITATIONS
+- [#255](https://github.com/nf-core/seqinspector/pull/255) Fix rundirparser test snapshots to use full topic object instead of individual channels
 
 ### `Changed`
 
 - [#191](https://github.com/nf-core/seqinspector/pull/191) Back to dev
 - [#192](https://github.com/nf-core/seqinspector/pull/192) Refactor the tools selection logic
-- [#192](https://github.com/nf-core/seqinspector/pull/192) Removed `bwamem2_index`, `bwamem2_mem`, `samtools_faidx` and `samtools_index` from the list of tools as they can be inferred from downstream tools
-- [#192](https://github.com/nf-core/seqinspector/pull/192) Removed params `run_picard_collecthsmetrics` and add `picard_collecthsmetrics` to the list of tools
-- [#192](https://github.com/nf-core/seqinspector/pull/192) Removed `seqtk_sample` from the list of tools as it can be inferred from `params.sample_size`
-- [#205](https://github.com/nf-core/seqinspector/pull/205) document how to add a tool to tool selection and how to use tool selection
+- [#205](https://github.com/nf-core/seqinspector/pull/205) Document how to add a tool to tool selection and how to use tool selection
 - [#215](https://github.com/nf-core/seqinspector/pull/215) Update all modules
 - [#216](https://github.com/nf-core/seqinspector/pull/216) Split out and simplify tests
 - [#220](https://github.com/nf-core/seqinspector/pull/220) Workflow output for MultiQC
-- [#221](https://github.com/nf-core/seqinspector/pull/221) Workflow output for checkQC, Fastp, fastp, fastqe, fastqscreen, picard_collecthsmetrics, picard_collectmultiplemetrics, rundirparser, seqfu
+- [#221](https://github.com/nf-core/seqinspector/pull/221) Workflow output for checkQC, Fastp, fastqe, fastqscreen, picard_collecthsmetrics, picard_collectmultiplemetrics, rundirparser, seqfu
 - [#222](https://github.com/nf-core/seqinspector/pull/222) Workflow output for fq/lint, kraken2, krona, toulligqc
 - [#223](https://github.com/nf-core/seqinspector/pull/223) Workflow output for the rest of the pipeline
+- [#225](https://github.com/nf-core/seqinspector/pull/225) Update subway map with nf-metro v1.0.0: add banner labels for file icons, folder icon for run directory, center ports, compact offsets, and reorder lines
 - [#235](https://github.com/nf-core/seqinspector/pull/235) Update MultiQC and other dependencies
 - [#237](https://github.com/nf-core/seqinspector/pull/237) Improved citation system to dynamically build tool citations based on selected tools
-- [#241](https://github.com/nf-core/seqinspector/pull/241) Remove vendored nf-core utils subworkflows, use plugin imports from nf-core-utils and nf-schema
+- [#244](https://github.com/nf-core/seqinspector/pull/244) Corrected the pipeline introduction tool list for fq lint
+- [#249](https://github.com/nf-core/seqinspector/pull/249) Create meta.yml files for local subworkflows
+- [#249](https://github.com/nf-core/seqinspector/pull/249) Update modules
+- [#250](https://github.com/nf-core/seqinspector/pull/250) Prepare release 1.1.0
+- [#252](https://github.com/nf-core/seqinspector/pull/252) Skip conda tests for CheckQC
+- [#252](https://github.com/nf-core/seqinspector/pull/252) Skip latest-everything Nextflow version on main/master
+- [#253](https://github.com/nf-core/seqinspector/pull/253) Update modules
 
 ### `Dependencies`
 
@@ -60,18 +141,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | fastp      |             | 1.1.0       |
 | fastqe     |             | 0.5.2       |
 | fq/lint    |             | 0.12.0      |
-| htslib     | 1.22.1      | 1.23.1      |
+| htslib     | 1.22.1      | 1.24        |
 | kraken2    |             | 2.1.6       |
 | krona      |             | 2.8.1       |
 | multiqc    | 1.34        | 1.35        |
 | multiqcsav |             | 0.2.0       |
-| samtools   | 1.22.1      | 1.23.1      |
+| riker      |             | 0.4.0       |
+| samtools   | 1.22.1      | 1.24        |
 | seqkit     |             | 2.9.0       |
 | toulligqc  |             | 2.8.4       |
 | tar        |             | 1.34        |
 
-### `Deprecated`
+### `Removed`
 
+- [#192](https://github.com/nf-core/seqinspector/pull/192) Removed `bwamem2_index`, `bwamem2_mem`, `samtools_faidx` and `samtools_index` from the list of tools as they can be inferred from downstream tools
+- [#192](https://github.com/nf-core/seqinspector/pull/192) Removed `run_picard_collecthsmetrics` param as `picard_collecthsmetrics` is now part of the list of tools
+- [#192](https://github.com/nf-core/seqinspector/pull/192) Removed `seqtk_sample` from the list of tools as it can be inferred from `params.sample_size`
 - [#213](https://github.com/nf-core/seqinspector/pull/213) Removed `sort_bam` params as we always need sorted BAM files for the QC_BAM subworkflow
 
 ## [1.0.1](https://github.com/nf-core/seqinspector/releases/tag/1.0.1) - Penelope Ruth "Penny" Gadget
