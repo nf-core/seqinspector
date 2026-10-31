@@ -8,18 +8,18 @@ IMPORT FUNCTIONS / MODULES / SUBWORKFLOWS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
-include { checkCondaChannels } from 'plugin/nf-core-utils'
-include { checkConfigProvided } from 'plugin/nf-core-utils'
+include { checkCondaChannels   } from 'plugin/nf-core-utils'
+include { checkConfigProvided  } from 'plugin/nf-core-utils'
 include { checkProfileProvided } from 'plugin/nf-core-utils'
-include { completionEmail } from 'plugin/nf-core-utils'
-include { completionSummary } from 'plugin/nf-core-utils'
+include { completionEmail      } from 'plugin/nf-core-utils'
+include { completionSummary    } from 'plugin/nf-core-utils'
 include { dumpParametersToJSON } from 'plugin/nf-core-utils'
-include { getWorkflowVersion } from 'plugin/nf-core-utils'
-include { paramsHelp } from 'plugin/nf-schema'
-include { paramsSummaryLog } from 'plugin/nf-schema'
-include { paramsSummaryMap } from 'plugin/nf-schema'
-include { samplesheetToList } from 'plugin/nf-schema'
-include { validateParameters } from 'plugin/nf-schema'
+include { getWorkflowVersion   } from 'plugin/nf-core-utils'
+include { paramsHelp           } from 'plugin/nf-schema'
+include { paramsSummaryLog     } from 'plugin/nf-schema'
+include { paramsSummaryMap     } from 'plugin/nf-schema'
+include { samplesheetToList    } from 'plugin/nf-schema'
+include { validateParameters   } from 'plugin/nf-schema'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -201,7 +201,7 @@ ${subsampled_info}-\033[2m----------------------------------------------------\0
 
     emit:
     samplesheet = ch_samplesheet
-    versions = ch_versions
+    versions    = ch_versions
 }
 
 /*
