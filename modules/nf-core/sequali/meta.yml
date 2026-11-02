@@ -10,7 +10,12 @@ tools:
       homepage: "https://github.com/rhpvorderman/sequali"
       documentation: "https://sequali.readthedocs.io/en/latest/"
       tool_dev_url: "https://github.com/rhpvorderman/sequali"
-      doi: "10.5281/zenodo.10854010"
+      doi: "10.1093/bioadv/vbaf010"
+      publication:
+        author: "Vorderman Ruben HP"
+        year: 2025
+        source: "Bioinformatics Advances"
+        title: "Sequali: efficient and comprehensive quality control of short- and long-read sequencing data"
       licence:
         - "AGPL v3-or-later"
       identifier: biotools:sequali
