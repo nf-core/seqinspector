@@ -9,7 +9,7 @@ nextflow_pipeline {
         [
             name: "MiSeq data test - no genome",
             params: [
-                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/miseq.csv',
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.1/miseq.csv',
                 genome: null,
                 tools: 'fastqscreen,picard_collecthsmetrics',
                 tools_bundle: null,
@@ -18,7 +18,7 @@ nextflow_pipeline {
         [
             name: "MiSeq data test - no genome - stub",
             params: [
-                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.0/miseq.csv',
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.1/miseq.csv',
                 genome: null,
                 tools: 'fastqscreen,picard_collecthsmetrics',
                 tools_bundle: null,

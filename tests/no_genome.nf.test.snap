@@ -126,10 +126,10 @@
                 "WARN: No fasta was provided, but picard or riker was requested"
             ]
         ],
-        "timestamp": "2026-06-29T17:32:37.723184769",
+        "timestamp": "2026-10-16T07:34:16.781332061",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "25.10.4"
         }
     },
     "MiSeq data test - no genome - stub": {
@@ -184,10 +184,10 @@
                 "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
             ]
         ],
-        "timestamp": "2026-06-29T17:33:11.342407966",
+        "timestamp": "2026-10-16T07:34:51.35756841",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "25.10.4"
         }
     }
 }

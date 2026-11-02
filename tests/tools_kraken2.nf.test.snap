@@ -963,7 +963,7 @@
                 "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
             ]
         ],
-        "timestamp": "2026-04-09T14:09:00.853191657",
+        "timestamp": "2026-10-16T08:59:54.866016917",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"
@@ -1830,7 +1830,7 @@
                 "No kraken2_db was provided, but Kraken2 was requested"
             ]
         ],
-        "timestamp": "2026-04-09T14:09:27.312230993",
+        "timestamp": "2026-10-16T09:24:54.047628124",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"

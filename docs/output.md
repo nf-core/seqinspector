@@ -15,7 +15,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 - [References](#references) - Create missing indexes for a given fasta file
 - [FQ](#fq) - Linting of FASTQ files to check for formatting issues
 - [CheckQC](#checkqc) - QC of an Illumina run
-- [Rundirparser](#rundirparser) - Parse rundir metadata from Illumina runs
+- [Rundirparser](#rundirparser) - Parse rundir metadata from Illumina and Oxford Nanopore runs
 - [ToulligQC](#toulligqc) - Raw read QC for Oxford Nanopore runs
 - [SeqFu](#seqfu) - Statistics for FASTA or FASTQ files
 - [BBMap Clumpify](#bbmap-clumpify) - FASTQ deduplication, compression and quality assessment
@@ -93,13 +93,14 @@ Required by `picard_collecthsmetrics`, `picard_collectmultiplemetrics`, and `rik
 
 ### Rundirparser
 
-[Rundirparser](https://github.com/nf-core/seqinspector) extracts run metadata from Illumina run directories by parsing the `runParameters.xml` file and generates a MultiQC-compatible YAML report.
+[Rundirparser](https://github.com/nf-core/seqinspector) extracts run metadata from run directories and generates a MultiQC-compatible YAML report. The `platform` column in the samplesheet decides how the run directory is parsed: `illumina` reads the `runParameters.xml` file, `ont` reads the MinKNOW `report_*.json` file.
 
 <details markdown="1">
 <summary>Output files</summary>
 
 - `reports/rundirparser/[rundir]/`
   - `[rundir]_illumina_mqc.yml`: Reports sequencing metrics. This is done via a custom script that can be found in `bin/parse_illumina.py` that parses the `runParameters.xml` file. The resulting YAML file is formatted to be read by MultiQC. Results can be found in the output directory.
+  - `[rundir]_ont_mqc.yml`: Reports run metadata and yield for Oxford Nanopore runs (instrument, flow cell, kit, MinKNOW and basecaller versions, basecalling model, run time, basecalled and passed reads, passed bases, mean read length of passed reads and read N50). This is done via a custom script that can be found in `bin/parse_ont.py` that parses the MinKNOW `report_*.json` file. The resulting YAML file is formatted to be read by MultiQC.
 
 </details>
 

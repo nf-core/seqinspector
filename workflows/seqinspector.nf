@@ -1,8 +1,8 @@
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
+IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
+ */
 
 // modules
 include { BBMAP_CLUMPIFY               } from '../modules/nf-core/bbmap/clumpify'
@@ -30,19 +30,23 @@ include { BAM_QC                       } from '../subworkflows/local/bam_qc'
 include { FASTQ_QC_PHYLOGENETIC        } from '../subworkflows/local/fastq_qc_phylogenetic'
 
 // functions
-include { methodsDescriptionText       } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { citationsOnTheFly            } from 'plugin/nf-core-utils'
+include { methodsDescriptionText       } from 'plugin/nf-core-utils'
 include { paramsSummaryMap             } from 'plugin/nf-schema'
-include { paramsSummaryMultiqc         } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { reportIndexMultiqc           } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
+include { paramsSummaryMultiqc         } from 'plugin/nf-core-utils'
 include { samplesheetToList            } from 'plugin/nf-schema'
 include { softwareVersionsToYAML       } from 'plugin/nf-core-utils'
+include { subsampledMethodsText        } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
 include { subsamplingNoticeYaml        } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
+
+// custom functions
+include { reportIndexMultiqc           } from '../subworkflows/local/utils_nfcore_seqinspector_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    RUN MAIN WORKFLOW
+RUN MAIN WORKFLOW
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
+ */
 
 workflow SEQINSPECTOR {
     take:
@@ -125,12 +129,21 @@ workflow SEQINSPECTOR {
         .groupTuple()
         .combine(rundir_number)
         .map { rundir, meta, _rundir_number ->
+            // Empty samplesheet fields are parsed as [], normalise them to null
+            def platforms = meta.collect { meta_ -> meta_.platform ?: null }.unique()
+            if (rundir && platforms.size() > 1) {
+                error("[nf-core/seqinspector] Samples sharing rundir ${rundir.simpleName} have different platforms in the samplesheet: ${platforms.collect { platform -> platform ?: 'blank' }.join(', ')}")
+            }
+            if (rundir && !platforms[0] && 'rundirparser' in tools) {
+                error("[nf-core/seqinspector] Rundir ${rundir.simpleName} has no platform in the samplesheet. Please set 'platform' to 'illumina' or 'ont' for these samples, or remove rundirparser from the selected tools.")
+            }
             // Return for all the rundir specific processes and to mix with ch_multiqc_files
             //   - meta: (map)
             //     - id: Simple name of the rundir, used for setting unique output names in publishDir
             //     - samples: List all sample of the rundir
             //     - rundir_number: number of total rundir, no rundir counts as one
             //     - tags: List of merged tags, used for grouping MultiQC reports
+            //     - platform: Sequencing platform of the rundir (illumina or ont), null when no rundir
             //   - rundir: path to rundir or null when no rundir
             [
                 [
@@ -138,6 +151,7 @@ workflow SEQINSPECTOR {
                     samples: rundir ? false : meta.collect { meta_ -> meta_.id }.flatten().unique().sort(),
                     rundir_number: _rundir_number,
                     tags: meta.collect { meta_ -> meta_.tags }.flatten().unique(),
+                    platform: rundir ? platforms[0] : null,
                 ],
                 rundir ? file(rundir, checkIfExists: true) : null,
             ]
@@ -397,12 +411,22 @@ workflow SEQINSPECTOR {
         ? file(multiqc_methods_description, checkIfExists: true)
         : file("${projectDir}/assets/methods_description_template.yml", checkIfExists: true)
 
+    // MultiQC and MultiQC_SAV run after this collect, so their versions never reach the topic
     ch_methods_description = channel.topic("versions")
-        .map { _process, tool, _version -> tool }
-        .unique()
-        .collect()
-        .map { tool_list -> ('multiqcsav' in tools ? tool_list + ['multiqcsav'] : tool_list).unique() }
-        .map { tool_list -> methodsDescriptionText(ch_multiqc_custom_methods_description, tool_list, subsample_tools) }
+        .collect(flat: false)
+        .map { versions ->
+            def citations = citationsOnTheFly(
+                versions,
+                files("${projectDir}/modules/**/meta.yml").collect { path -> path.toString() },
+                ['multiqc'] + ('multiqcsav' in tools ? ['multiqcsav'] : []),
+            )
+            def tool_list = versions.collect { _process, tool, _version -> tool }.unique()
+            methodsDescriptionText(
+                ch_multiqc_custom_methods_description.toString(),
+                citations,
+                [subsampled_text: subsampledMethodsText(subsample_tools, tool_list)],
+            )
+        }
 
     ch_multiqc_extra_files = ch_multiqc_extra_files.mix(ch_methods_description.collectFile(name: 'methods_description_mqc.yaml', sort: true))
 

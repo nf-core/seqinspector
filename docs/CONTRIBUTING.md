@@ -191,7 +191,6 @@ Tool entries, includes, and references throughout the pipeline must follow alpha
 - `include` statements in workflow files
 - Module invocations within workflows
 - Tool entries in `defineToolsList()` bundles
-- Entries in `toolReferencesMap()`
 - Regex patterns in `nextflow_schema.json`
 - Lists in `docs/usage.md`, `docs/output.md`, `README.md`, and `CITATIONS.md`
 
@@ -209,10 +208,38 @@ The nf-core/seqinspector pipeline has a strong emphasis on a broad spectrum of t
      - If the tool should be part of any pre-defined bundle, update the `help_text` of the `tools_bundle` property to include it in the relevant bundle(s).
 4. Add your tool to the table `Compatibility between tools and data type` in `README.md`.
 5. Add your tool to the tools version table in `README.md` (alphabetical order).
-6. Add your tool to the `toolReferencesMap()` in `subworkflows/local/utils_nfcore_seqinspector_pipeline/main.nf` with name, authors, description, and DOI or URL.
+6. Check that the tool entry in the module `meta.yml` has a `publication` block, see [Tool citations](#tool-citations).
 7. Add a citation entry in `CITATIONS.md` (alphabetical order).
 8. Update the metromap (can be found in `assets`) to include your new step.
 9. Update the `CHANGELOG.md` file in the base directory of the pipeline.
+
+### Tool citations
+
+The MultiQC methods description cites tools on the fly with `citationsOnTheFly()` from the nf-core-utils plugin.
+It reads the tools that ran from the `versions` topic and takes their citation from the `tools` entries of every `modules/**/meta.yml`.
+The tool name in the `versions` topic must match the tool key in `meta.yml`.
+
+Each cited tool entry in `meta.yml` should carry a `doi` and a nested `publication` block in Harvard style:
+
+```yaml
+tools:
+  - fastp:
+      doi: "10.1093/bioinformatics/bty560"
+      publication:
+        author: "Chen S., Zhou Y., Chen Y. & Gu J."
+        year: 2018
+        title: "fastp: an ultra-fast all-in-one FASTQ preprocessor"
+        source: "Bioinformatics"
+```
+
+A tool without a `publication` block falls back to its `doi`, then its `homepage`.
+
+The `publication` block is not yet in every upstream nf-core module.
+When an installed module lacks it, add it to the module `meta.yml`, then run `nf-core modules patch <tool>` so the change survives module updates and passes `nf-core pipelines lint`.
+If the module already has a patch, delete the `.diff` file and its `patch` entry in `modules.json`, then run `nf-core modules patch <tool>` again so the new patch covers both changes.
+Open a PR to nf-core/modules to upstream the `publication` block.
+
+MultiQC and MultiQC_SAV run after the `versions` topic is collected, so `workflows/seqinspector.nf` passes them to `citationsOnTheFly()` as extra tools.
 
 ### Things to consider regarding displaying results for a new tool
 

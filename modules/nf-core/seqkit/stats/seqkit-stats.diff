@@ -1,5 +1,20 @@
 Changes in component 'nf-core/seqkit/stats'
-'modules/nf-core/seqkit/stats/meta.yml' is unchanged
+Changes in 'seqkit/stats/meta.yml':
+--- modules/nf-core/seqkit/stats/meta.yml
++++ modules/nf-core/seqkit/stats/meta.yml
+@@ -12,6 +12,11 @@
+       documentation: https://bioinf.shenwei.me/seqkit/usage/
+       tool_dev_url: https://github.com/shenwei356/seqkit/
+       doi: "10.1371/journal.pone.0163962"
++      publication:
++        author: "Shen W., Le S., Li Y. & Hu F."
++        year: 2016
++        source: "PLOS ONE"
++        title: "SeqKit: A Cross-Platform and Ultrafast Toolkit for FASTA/Q File Manipulation"
+       licence: ["MIT"]
+       identifier: biotools:seqkit
+ input:
+
 'modules/nf-core/seqkit/stats/environment.yml' is unchanged
 Changes in 'seqkit/stats/main.nf':
 --- modules/nf-core/seqkit/stats/main.nf

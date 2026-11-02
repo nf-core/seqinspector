@@ -1,28 +1,51 @@
 name: rundirparser
-description: Parse Illumina run directory metadata from runParameters.xml for MultiQC reporting
+description: Parse Illumina (runParameters.xml) or ONT (MinKNOW report_*.json) run directory metadata for MultiQC reporting
 keywords:
   - illumina
+  - ont
   - rundir
   - metadata
   - multiqc
   - sequencing
 tools:
   - rundirparser:
-      description: Parse Illumina run directory metadata for MultiQC
+      description: Parse Illumina or ONT run directory metadata for MultiQC
       homepage: https://github.com/nf-core/seqinspector
       documentation: https://github.com/nf-core/seqinspector
+      licence:
+        - "MIT"
+  - python:
+      description: Python programming language
+      homepage: https://www.python.org/
+      documentation: https://docs.python.org/3/
+      publication:
+        author: "Van Rossum G. & Drake F.L."
+        year: 2009
+        title: "Python 3 Reference Manual"
+        source: "CreateSpace, Scotts Valley, CA"
+      licence:
+        - "PSF-2.0"
+  - pyyaml:
+      description: YAML parser and emitter for Python
+      homepage: https://pyyaml.org/
+      documentation: https://pyyaml.org/wiki/PyYAMLDocumentation
+      publication:
+        author: "Simonov K."
+        year: 2006
+        title: "PyYAML: YAML parser and emitter for Python"
+        source: "https://pyyaml.org/"
       licence:
         - "MIT"
 input:
   - - meta:
         type: map
         description: |
-          Groovy Map containing sample information
-          e.g. [ id:'test', single_end:false ]
+          Groovy Map containing rundir information, including the sequencing platform ('illumina' or 'ont')
+          e.g. [ id:'test', platform:'illumina' ]
     - rundir:
         type: file
         description: |
-          Path to Illumina run directory or tar.gz archive containing runParameters.xml
+          Path to Illumina or ONT run directory or tar.gz archive containing runParameters.xml or report_*.json
         pattern: "*.{tar.gz,directory}"
 output:
   multiqc:

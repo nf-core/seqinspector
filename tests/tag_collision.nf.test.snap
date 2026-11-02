@@ -98,10 +98,10 @@
                 "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
             ]
         ],
-        "timestamp": "2026-10-06T10:52:11.947987262",
+        "timestamp": "2026-10-16T07:41:02.43828145",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.09.1"
+            "nextflow": "25.10.4"
         }
     },
     "NovaSeq6000 data test - tag collision": {
@@ -895,10 +895,10 @@
                 "WARN: Tag name collision: [test, Test, TEST]"
             ]
         ],
-        "timestamp": "2026-10-06T10:51:43.306707469",
+        "timestamp": "2026-10-16T07:39:55.457187961",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.09.1"
+            "nextflow": "25.10.4"
         }
     }
 }

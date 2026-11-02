@@ -11,7 +11,7 @@
                 "ToulligQC is not compatible with the 'emulate_amd64' profile. Please remove ToulligQC from the list of tools if you wish to run seqinspector on this architecture."
             ]
         ],
-        "timestamp": "2026-04-09T14:10:13.561661222",
+        "timestamp": "2026-10-16T08:44:00.549759199",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"

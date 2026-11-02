@@ -1,11 +1,90 @@
 {
+    "PromethION - MinKNOW 5": {
+        "content": [
+            {
+                "multiqc_files": [
+                    [
+                        {
+                            "id": "20230505_1857_1B_PAO99309_94e07fab",
+                            "platform": "ont"
+                        },
+                        "RUNDIRPARSER",
+                        "rundirparser",
+                        "ont_mqc.yml:md5,9822f83de2a7e0e622082079c36804d7"
+                    ]
+                ],
+                "versions": [
+                    [
+                        "RUNDIRPARSER",
+                        "python",
+                        "3.13.2"
+                    ],
+                    [
+                        "RUNDIRPARSER",
+                        "pyyaml",
+                        "6.0.2"
+                    ],
+                    [
+                        "RUNDIRPARSER",
+                        "rundirparser",
+                        "1.1.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-10-17T08:23:34.637596358",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
+        }
+    },
+    "PromethION - stub": {
+        "content": [
+            {
+                "multiqc_files": [
+                    [
+                        {
+                            "id": "20230505_1857_1B_PAO99309_94e07fab",
+                            "platform": "ont"
+                        },
+                        "RUNDIRPARSER",
+                        "rundirparser",
+                        "ont_mqc.yml:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    [
+                        "RUNDIRPARSER",
+                        "python",
+                        "3.13.2"
+                    ],
+                    [
+                        "RUNDIRPARSER",
+                        "pyyaml",
+                        "6.0.2"
+                    ],
+                    [
+                        "RUNDIRPARSER",
+                        "rundirparser",
+                        "1.1.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-10-15T14:03:43.059401955",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.0"
+        }
+    },
     "NovaSeq6000": {
         "content": [
             {
                 "multiqc_files": [
                     [
                         {
-                            "id": "200624_A00834_0183_BHMTFYDRXX"
+                            "id": "200624_A00834_0183_BHMTFYDRXX",
+                            "platform": "illumina"
                         },
                         "RUNDIRPARSER",
                         "rundirparser",
@@ -26,15 +105,54 @@
                     [
                         "RUNDIRPARSER",
                         "rundirparser",
-                        "1.0.1"
+                        "1.1.0"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-07-14T13:59:22.481197877",
+        "timestamp": "2026-10-15T14:03:08.470931227",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.10.0"
+        }
+    },
+    "PromethION - MinKNOW 6": {
+        "content": [
+            {
+                "multiqc_files": [
+                    [
+                        {
+                            "id": "20261009_1457_1A_PBO51508_cb5816a7",
+                            "platform": "ont"
+                        },
+                        "RUNDIRPARSER",
+                        "rundirparser",
+                        "ont_mqc.yml:md5,7b1d22199c6d704f3ce8f1d9034bb41a"
+                    ]
+                ],
+                "versions": [
+                    [
+                        "RUNDIRPARSER",
+                        "python",
+                        "3.13.2"
+                    ],
+                    [
+                        "RUNDIRPARSER",
+                        "pyyaml",
+                        "6.0.2"
+                    ],
+                    [
+                        "RUNDIRPARSER",
+                        "rundirparser",
+                        "1.1.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-10-17T08:23:43.146736494",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
         }
     },
     "NovaSeq6000 - stub": {
@@ -43,7 +161,8 @@
                 "multiqc_files": [
                     [
                         {
-                            "id": "200624_A00834_0183_BHMTFYDRXX"
+                            "id": "200624_A00834_0183_BHMTFYDRXX",
+                            "platform": "illumina"
                         },
                         "RUNDIRPARSER",
                         "rundirparser",
@@ -64,15 +183,15 @@
                     [
                         "RUNDIRPARSER",
                         "rundirparser",
-                        "1.0.1"
+                        "1.1.0"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-07-14T13:59:33.97253431",
+        "timestamp": "2026-10-15T14:03:17.544013366",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.10.0"
         }
     }
 }
