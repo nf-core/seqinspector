@@ -4,7 +4,7 @@ Changes in component 'nf-core/fq/lint'
 Changes in 'fq/lint/main.nf':
 --- modules/nf-core/fq/lint/main.nf
 +++ modules/nf-core/fq/lint/main.nf
-@@ -11,7 +11,7 @@
+@@ -14,7 +14,7 @@
      tuple val(meta), path(fastq, arity: '1..2')
  
      output:

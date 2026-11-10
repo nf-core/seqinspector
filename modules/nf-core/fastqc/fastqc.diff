@@ -4,7 +4,7 @@ Changes in component 'nf-core/fastqc'
 Changes in 'fastqc/main.nf':
 --- modules/nf-core/fastqc/main.nf
 +++ modules/nf-core/fastqc/main.nf
-@@ -11,8 +11,8 @@
+@@ -14,8 +14,8 @@
      tuple val(meta), path(reads, stageAs: '?/*')
  
      output:

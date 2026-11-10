@@ -4,7 +4,7 @@ Changes in component 'nf-core/chelae/trim'
 Changes in 'chelae/trim/main.nf':
 --- modules/nf-core/chelae/trim/main.nf
 +++ modules/nf-core/chelae/trim/main.nf
-@@ -13,8 +13,8 @@
+@@ -16,8 +16,8 @@
  
      output:
      tuple val(meta), path('*.chelae.fastq.gz'), emit: reads

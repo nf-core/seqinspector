@@ -1,27 +1,10 @@
 Changes in component 'nf-core/fastqscreen/fastqscreen'
-Changes in 'fastqscreen/fastqscreen/meta.yml':
---- modules/nf-core/fastqscreen/fastqscreen/meta.yml
-+++ modules/nf-core/fastqscreen/fastqscreen/meta.yml
-@@ -15,7 +15,12 @@
-       homepage: "https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/"
-       documentation: "https://stevenwingett.github.io/FastQ-Screen/"
-       tool_dev_url: "https://github.com/StevenWingett/FastQ-Screen/archive/refs/tags/v0.15.3.zip"
--      doi: "10.5281/zenodo.5838377"
-+      doi: "10.12688/f1000research.15931.2"
-+      publication:
-+        author: "Wingett S.W. & Andrews S."
-+        year: 2018
-+        title: "FastQ Screen: A tool for multi-genome mapping and quality control"
-+        source: "F1000Research"
-       licence: ["GPL-3.0-or-later"]
-       identifier: ""
- input:
-
+'modules/nf-core/fastqscreen/fastqscreen/meta.yml' is unchanged
 'modules/nf-core/fastqscreen/fastqscreen/environment.yml' is unchanged
 Changes in 'fastqscreen/fastqscreen/main.nf':
 --- modules/nf-core/fastqscreen/fastqscreen/main.nf
 +++ modules/nf-core/fastqscreen/fastqscreen/main.nf
-@@ -8,13 +8,13 @@
+@@ -11,13 +11,13 @@
          : 'community.wave.seqera.io/library/fastq-screen_perl-gdgraph:5c1786a5d5bc1309'}"
  
      input:
@@ -40,7 +23,7 @@ Changes in 'fastqscreen/fastqscreen/main.nf':
      tuple val(meta), path("*.fastq.gz"), emit: fastq, optional: true
      tuple val("${task.process}"), val('fastqscreen'), eval('fastq_screen --version 2>&1 | sed "s/^.*FastQ Screen v//;"'), emit: versions_fastqscreen, topic: versions
  
-@@ -22,13 +22,33 @@
+@@ -25,13 +25,33 @@
      task.ext.when == null || task.ext.when
  
      script:
