@@ -15,7 +15,7 @@
                     "sequali": "1.0.2"
                 },
                 "TOULLIGQC": {
-                    "toulligqc": "2.8.4"
+                    "toulligqc": "2.9.1"
                 }
             },
             [
@@ -192,7 +192,7 @@
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-10-17T08:44:32.489385963",
+        "timestamp": "2026-11-10T10:57:27.886469667",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"
