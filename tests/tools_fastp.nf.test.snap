@@ -4,7 +4,7 @@
             6,
             {
                 "FASTP": {
-                    "fastp": "1.3.6"
+                    "fastp": "1.4.0"
                 }
             },
             [
@@ -225,7 +225,7 @@
                 "reports/fastp/SAMPLE_SINGLE_END_03/SAMPLE_SINGLE_END_03.fastp.log"
             ],
             [
-                "fastp-insert-size-plot.txt:md5,dfe6136a17a4a1a2d01d75bf4461717b",
+                "fastp-insert-size-plot.txt:md5,a86aac667bcb810d4f86f32e20becebb",
                 "fastp-seq-content-gc-plot_Read_1_After_filtering.txt:md5,9b6ffacb3879a51961b894b88b0be177",
                 "fastp-seq-content-gc-plot_Read_1_Before_filtering.txt:md5,0457b602a8c7a7cb4a452e7166743160",
                 "fastp-seq-content-gc-plot_Read_2_After_filtering.txt:md5,d6a55b88a1580d87012a2ac9f98b388d",
@@ -239,7 +239,7 @@
                 "fastp-seq-quality-plot_Read_2_After_filtering.txt:md5,ef75e9e33f6ef64d42fdf3743e29c0ec",
                 "fastp-seq-quality-plot_Read_2_Before_filtering.txt:md5,85a7ba96d6f106e67f1857f5f98bb2ec",
                 "multiqc_citations.txt:md5,d35df50e9903a96a2b3bce3c1fbc8ad2",
-                "fastp-insert-size-plot.txt:md5,dfe6136a17a4a1a2d01d75bf4461717b",
+                "fastp-insert-size-plot.txt:md5,a86aac667bcb810d4f86f32e20becebb",
                 "fastp-seq-content-gc-plot_Read_1_After_filtering.txt:md5,209986817601624d24c85babed7bf3a7",
                 "fastp-seq-content-gc-plot_Read_1_Before_filtering.txt:md5,f30c5ced8379d95131c8505ad1abfdc0",
                 "fastp-seq-content-gc-plot_Read_2_After_filtering.txt:md5,d6a55b88a1580d87012a2ac9f98b388d",
@@ -264,10 +264,10 @@
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-08-12T13:39:57.630386716",
+        "timestamp": "2026-11-10T10:58:31.405076775",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "25.10.4"
         }
     },
     "MiSeq data test - fastp - stub": {
@@ -275,7 +275,7 @@
             6,
             {
                 "FASTP": {
-                    "fastp": "1.3.6"
+                    "fastp": "1.4.0"
                 }
             },
             [
@@ -320,7 +320,7 @@
                 "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
             ]
         ],
-        "timestamp": "2026-10-16T07:48:31.072640181",
+        "timestamp": "2026-11-10T10:58:50.69945699",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"

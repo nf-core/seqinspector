@@ -15,17 +15,18 @@ tools:
         It's a general use tool, perfect for summarising the output from numerous bioinformatics tools.
       homepage: https://seqera.io/multiqc/
       documentation: https://docs.seqera.io/multiqc/
-      doi: "10.1093/bioinformatics/btw354"
+      doi: 10.1093/bioinformatics/btw354
       publication:
-        author: "Ewels P., Magnusson M., Lundin S. & Käller M."
+        author: "Ewels, P., Magnusson, M., Lundin, S. & Käller, M."
         year: 2016
-        source: "Bioinformatics"
         title: "MultiQC: summarize analysis results for multiple tools and samples in a single report"
+        source: "Bioinformatics"
       licence:
         - "GPL-3.0-or-later"
       identifier: biotools:multiqc
   - multiqcsav:
-      description: MultiQC plugin for Illumina Sequencing Analysis Viewer.
+      description: MultiQC plugin replicating the most used plots and tables
+        from Illumina's Sequencing Analysis Viewer (SAV)
       homepage: https://github.com/MultiQC/MultiQC_SAV
       documentation: https://github.com/MultiQC/MultiQC_SAV
       licence:

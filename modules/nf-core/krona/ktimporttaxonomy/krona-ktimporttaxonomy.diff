@@ -4,7 +4,7 @@ Changes in component 'nf-core/krona/ktimporttaxonomy'
 Changes in 'krona/ktimporttaxonomy/main.nf':
 --- modules/nf-core/krona/ktimporttaxonomy/main.nf
 +++ modules/nf-core/krona/ktimporttaxonomy/main.nf
-@@ -13,7 +13,7 @@
+@@ -16,7 +16,7 @@
      path taxonomy, stageAs: 'taxonomy.tab'
  
      output:

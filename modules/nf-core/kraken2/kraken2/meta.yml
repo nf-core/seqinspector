@@ -13,21 +13,16 @@ tools:
       documentation: https://github.com/DerrickWood/kraken2/wiki/Manual
       doi: 10.1186/s13059-019-1891-0
       publication:
-        author: "Wood D.E., Lu J. & Langmead B."
+        author: "Wood, D. E., Lu, J. & Langmead, B."
         year: 2019
         title: "Improved metagenomic analysis with Kraken 2"
         source: "Genome Biology"
       licence: ["MIT"]
       identifier: biotools:kraken2
   - pigz:
-      description: Parallel implementation of the gzip algorithm.
-      homepage: https://zlib.net/pigz/
-      documentation: https://zlib.net/pigz/pigz.pdf
-      publication:
-        author: "Adler M."
-        year: 2007
-        title: "pigz: A parallel implementation of gzip for modern multi-processor, multi-core machines"
-        source: "https://zlib.net/pigz/"
+      description: "Parallel implementation of the gzip algorithm."
+      homepage: "https://zlib.net/pigz/"
+      documentation: "https://zlib.net/pigz/pigz.pdf"
       licence: ["Zlib"]
       identifier: ""
 input:

@@ -1,31 +1,10 @@
 Changes in component 'nf-core/kraken2/kraken2'
-Changes in 'kraken2/kraken2/meta.yml':
---- modules/nf-core/kraken2/kraken2/meta.yml
-+++ modules/nf-core/kraken2/kraken2/meta.yml
-@@ -19,6 +19,17 @@
-         source: "Genome Biology"
-       licence: ["MIT"]
-       identifier: biotools:kraken2
-+  - pigz:
-+      description: Parallel implementation of the gzip algorithm.
-+      homepage: https://zlib.net/pigz/
-+      documentation: https://zlib.net/pigz/pigz.pdf
-+      publication:
-+        author: "Adler M."
-+        year: 2007
-+        title: "pigz: A parallel implementation of gzip for modern multi-processor, multi-core machines"
-+        source: "https://zlib.net/pigz/"
-+      licence: ["Zlib"]
-+      identifier: ""
- input:
-   - - meta:
-         type: map
-
+'modules/nf-core/kraken2/kraken2/meta.yml' is unchanged
 'modules/nf-core/kraken2/kraken2/environment.yml' is unchanged
 Changes in 'kraken2/kraken2/main.nf':
 --- modules/nf-core/kraken2/kraken2/main.nf
 +++ modules/nf-core/kraken2/kraken2/main.nf
-@@ -17,7 +17,7 @@
+@@ -20,7 +20,7 @@
      tuple val(meta), path('*.classified{.,_}*')     , optional:true, emit: classified_reads_fastq
      tuple val(meta), path('*.unclassified{.,_}*')   , optional:true, emit: unclassified_reads_fastq
      tuple val(meta), path('*classifiedreads.txt')   , optional:true, emit: classified_reads_assignment

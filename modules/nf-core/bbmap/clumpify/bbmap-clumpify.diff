@@ -4,7 +4,7 @@ Changes in component 'nf-core/bbmap/clumpify'
 Changes in 'bbmap/clumpify/main.nf':
 --- modules/nf-core/bbmap/clumpify/main.nf
 +++ modules/nf-core/bbmap/clumpify/main.nf
-@@ -13,7 +13,7 @@
+@@ -16,7 +16,7 @@
  
      output:
      tuple val(meta), path('*.fastq.gz'), emit: reads

@@ -4,7 +4,7 @@ Changes in component 'nf-core/riker/multi'
 Changes in 'riker/multi/main.nf':
 --- modules/nf-core/riker/multi/main.nf
 +++ modules/nf-core/riker/multi/main.nf
-@@ -12,27 +12,27 @@
+@@ -15,27 +15,27 @@
      tuple val(meta2), path(fasta), path(fai)
  
      output:
@@ -49,10 +49,12 @@ Changes in 'riker/multi/main.nf':
 +    tuple val(meta), val("${task.process}"), val('riker'), path("*.rna-metrics.txt"),                emit: rna_metrics,               optional: true, topic: multiqc_files
 +    tuple val(meta), val("${task.process}"), val('riker'), path("*.wgs-coverage.txt"),               emit: wgs_coverage,              optional: true, topic: multiqc_files
 +    tuple val(meta), val("${task.process}"), val('riker'), path("*.wgs-metrics.txt"),                emit: wgs_metrics,               optional: true, topic: multiqc_files
+     tuple val(meta), path("*.wgs-per-base.bw"),                emit: wgs_per_base_bw,           optional: true
      tuple val("${task.process}"), val('riker'), eval("riker --version 2>&1 | sed 's/riker //'") , topic: versions, emit: versions_riker
  
-     when:
 
+'modules/nf-core/riker/multi/.conda-lock/linux_arm64-bd-b407026cbdb7f300_1.txt' is unchanged
+'modules/nf-core/riker/multi/.conda-lock/linux_amd64-bd-fc5310a356298f75_1.txt' is unchanged
 'modules/nf-core/riker/multi/tests/main.nf.test' is unchanged
 'modules/nf-core/riker/multi/tests/nextflow.config' is unchanged
 'modules/nf-core/riker/multi/tests/main.nf.test.snap' is unchanged

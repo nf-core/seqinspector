@@ -11,13 +11,13 @@
                     "samtools": "1.22.1"
                 },
                 "RIKER_MULTI": {
-                    "riker": "0.4.0"
+                    "riker": "0.5.0"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.24"
+                    "samtools": "1.25"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.24"
+                    "samtools": "1.25"
                 }
             },
             [
@@ -504,10 +504,10 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-07-13T16:53:39.835150351",
+        "timestamp": "2026-11-10T11:02:53.811794969",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "25.10.4"
         }
     },
     "NovaSeq6000 data test - riker rna without gene model - should fail": {
@@ -540,13 +540,13 @@
                     "samtools": "1.22.1"
                 },
                 "RIKER_MULTI": {
-                    "riker": "0.4.0"
+                    "riker": "0.5.0"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.24"
+                    "samtools": "1.25"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.24"
+                    "samtools": "1.25"
                 }
             },
             [
@@ -700,7 +700,7 @@
                 "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
             ]
         ],
-        "timestamp": "2026-10-16T09:04:06.231359842",
+        "timestamp": "2026-11-10T11:03:24.733589454",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"
@@ -718,13 +718,13 @@
                     "samtools": "1.22.1"
                 },
                 "RIKER_MULTI": {
-                    "riker": "0.4.0"
+                    "riker": "0.5.0"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.24"
+                    "samtools": "1.25"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.24"
+                    "samtools": "1.25"
                 }
             },
             [
@@ -1201,10 +1201,10 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-07-13T16:52:39.781102538",
+        "timestamp": "2026-11-10T11:02:07.551570135",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "25.10.4"
         }
     },
     "NovaSeq6000 data test - riker hybcap with only bait - should fail": {
@@ -1238,13 +1238,13 @@
                     "samtools": "1.22.1"
                 },
                 "RIKER_MULTI": {
-                    "riker": "0.4.0"
+                    "riker": "0.5.0"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.24"
+                    "samtools": "1.25"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.24"
+                    "samtools": "1.25"
                 }
             },
             [
@@ -1398,7 +1398,7 @@
                 "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
             ]
         ],
-        "timestamp": "2026-10-16T09:27:04.780207612",
+        "timestamp": "2026-11-10T11:03:55.618214533",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"
@@ -1416,13 +1416,13 @@
                     "samtools": "1.22.1"
                 },
                 "RIKER_MULTI": {
-                    "riker": "0.4.0"
+                    "riker": "0.5.0"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.24"
+                    "samtools": "1.25"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.24"
+                    "samtools": "1.25"
                 }
             },
             [
@@ -1576,7 +1576,7 @@
                 "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
             ]
         ],
-        "timestamp": "2026-10-16T08:43:10.952635739",
+        "timestamp": "2026-11-10T11:05:13.90218892",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"
@@ -1594,13 +1594,13 @@
                     "samtools": "1.22.1"
                 },
                 "RIKER_MULTI": {
-                    "riker": "0.4.0"
+                    "riker": "0.5.0"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.24"
+                    "samtools": "1.25"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.24"
+                    "samtools": "1.25"
                 }
             },
             [
@@ -2117,7 +2117,7 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-08-28T18:46:14.059563",
+        "timestamp": "2026-11-10T11:04:43.052371328",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"

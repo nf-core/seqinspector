@@ -21,13 +21,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#291](https://github.com/nf-core/seqinspector/pull/291) New samplesheet column `platform` (`illumina` or `ont`). **Breaking:** rows with a `rundir` now need `platform` set when `rundirparser` runs, which is part of the `default` bundle (@chriswyatt1)
 - [#294](https://github.com/nf-core/seqinspector/pull/294) Update README tool table (@FranBonath)
 - [#296](https://github.com/nf-core/seqinspector/pull/296) Template update for nf-core/tools v4.2.1 (@maxulysse)
+- [#297](https://github.com/nf-core/seqinspector/pull/297) Update nf-core modules, drop citation-only module patches (@maxulysse)
 
 ### `Dependencies`
 
 | Dependency | Old version | New version |
 | ---------- | ----------- | ----------- |
-| picard     | 3.4.0       | 3.5.0       |
+| fastp      | 1.3.6       | 1.4.0       |
 | fastqc     | 0.12.1      | 0.13.0      |
+| picard     | 3.4.0       | 3.5.0       |
+| riker      | 0.4.0       | 0.5.0       |
+| samtools   | 1.24        | 1.25        |
+| toulligqc  | 2.8.4       | 2.9.1       |
 
 ## [1.1.2](https://github.com/nf-core/seqinspector/releases/tag/1.1.2) - Carrie Bishop
 

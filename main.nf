@@ -182,7 +182,9 @@ output {
                     ? "reports/${process.tokenize(':').last().toLowerCase()}/${meta.id}/"
                     : tool == 'rundirparser' || tool == 'seqfu'
                         ? "reports/${tool}/${meta.id}/${meta.id}_${file.name}"
-                        : "reports/${tool}/${meta.id}/")
+                        : tool == 'toulligqc'
+                            ? "reports/${tool}/"
+                            : "reports/${tool}/${meta.id}/")
         }
     }
     subsampled {

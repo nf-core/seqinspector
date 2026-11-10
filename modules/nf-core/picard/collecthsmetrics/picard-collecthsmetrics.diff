@@ -4,7 +4,7 @@ Changes in component 'nf-core/picard/collecthsmetrics'
 Changes in 'picard/collecthsmetrics/main.nf':
 --- modules/nf-core/picard/collecthsmetrics/main.nf
 +++ modules/nf-core/picard/collecthsmetrics/main.nf
-@@ -15,7 +15,7 @@
+@@ -18,7 +18,7 @@
      tuple val(meta5), path(ref_gzi)
  
      output:
@@ -14,6 +14,8 @@ Changes in 'picard/collecthsmetrics/main.nf':
  
      when:
 
+'modules/nf-core/picard/collecthsmetrics/.conda-lock/linux_arm64-bd-5516268008db5ab4_1.txt' is unchanged
+'modules/nf-core/picard/collecthsmetrics/.conda-lock/linux_amd64-bd-be20f299a1924f0d_1.txt' is unchanged
 'modules/nf-core/picard/collecthsmetrics/tests/main.nf.test' is unchanged
 'modules/nf-core/picard/collecthsmetrics/tests/main.nf.test.snap' is unchanged
 ************************************************************

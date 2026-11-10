@@ -4,7 +4,7 @@ Changes in component 'nf-core/fastp'
 Changes in 'fastp/main.nf':
 --- modules/nf-core/fastp/main.nf
 +++ modules/nf-core/fastp/main.nf
-@@ -15,9 +15,9 @@
+@@ -18,9 +18,9 @@
  
      output:
      tuple val(meta), path('*.fastp.fastq.gz') , optional:true, emit: reads
@@ -18,7 +18,10 @@ Changes in 'fastp/main.nf':
      tuple val(meta), path('*.merged.fastq.gz'), optional:true, emit: reads_merged
      tuple val("${task.process}"), val('fastp'), eval('fastp --version 2>&1 | sed -e "s/fastp //g"'), emit: versions_fastp, topic: versions
 
+'modules/nf-core/fastp/.conda-lock/linux_amd64-bd-df415eab5e33cb11_1.txt' is unchanged
+'modules/nf-core/fastp/.conda-lock/linux_arm64-bd-39bad1c703aea2ba_1.txt' is unchanged
 'modules/nf-core/fastp/tests/main.nf.test' is unchanged
+'modules/nf-core/fastp/tests/nextflow.cpus.config' is unchanged
 'modules/nf-core/fastp/tests/nextflow.save_failed.config' is unchanged
 'modules/nf-core/fastp/tests/nextflow.interleaved.config' is unchanged
 'modules/nf-core/fastp/tests/main.nf.test.snap' is unchanged

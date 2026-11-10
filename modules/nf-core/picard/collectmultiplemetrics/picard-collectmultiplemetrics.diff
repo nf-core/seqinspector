@@ -4,7 +4,7 @@ Changes in component 'nf-core/picard/collectmultiplemetrics'
 Changes in 'picard/collectmultiplemetrics/main.nf':
 --- modules/nf-core/picard/collectmultiplemetrics/main.nf
 +++ modules/nf-core/picard/collectmultiplemetrics/main.nf
-@@ -13,7 +13,7 @@
+@@ -16,7 +16,7 @@
      tuple val(meta3), path(fai)
  
      output:
@@ -14,6 +14,8 @@ Changes in 'picard/collectmultiplemetrics/main.nf':
      tuple val("${task.process}"), val('picard'), eval("picard CollectMultipleMetrics --version 2>&1 | sed -n 's/.*Version://p'"), topic: versions, emit: versions_picard
  
 
+'modules/nf-core/picard/collectmultiplemetrics/.conda-lock/linux_arm64-bd-5516268008db5ab4_1.txt' is unchanged
+'modules/nf-core/picard/collectmultiplemetrics/.conda-lock/linux_amd64-bd-be20f299a1924f0d_1.txt' is unchanged
 'modules/nf-core/picard/collectmultiplemetrics/tests/main.nf.test' is unchanged
 'modules/nf-core/picard/collectmultiplemetrics/tests/main.nf.test.snap' is unchanged
 ************************************************************

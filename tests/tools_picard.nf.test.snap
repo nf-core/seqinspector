@@ -20,10 +20,10 @@
                     "picard": "3.5.0"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.24"
+                    "samtools": "1.25"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.24"
+                    "samtools": "1.25"
                 }
             },
             [
@@ -547,10 +547,10 @@
             ],
             "No warnings"
         ],
-        "timestamp": "2026-09-16T10:53:09.258528808",
+        "timestamp": "2026-11-10T11:00:48.369399266",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.08.0"
+            "nextflow": "25.10.4"
         }
     },
     "NovaSeq6000 data test - picard_collecthsmetrics and picard_collectmultiplemetrics - stub": {
@@ -574,10 +574,10 @@
                     "picard": "3.5.0"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.24"
+                    "samtools": "1.25"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.24"
+                    "samtools": "1.25"
                 }
             },
             [
@@ -688,7 +688,7 @@
                 "WARN: nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected."
             ]
         ],
-        "timestamp": "2026-10-16T09:26:09.030958644",
+        "timestamp": "2026-11-10T11:01:21.720639194",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"
