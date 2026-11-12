@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | ---------- | ----------- | ----------- |
 | fastp      | 1.3.6       | 1.4.0       |
 | fastqc     | 0.12.1      | 0.13.0      |
+| nf-schema  | 2.7.2       | 3.0.0       |
 | picard     | 3.4.0       | 3.5.0       |
 | riker      | 0.4.0       | 0.5.0       |
 | samtools   | 1.24        | 1.25        |

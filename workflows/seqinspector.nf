@@ -391,7 +391,7 @@ workflow SEQINSPECTOR {
     ch_multiqc_files = ch_multiqc_files.mix(collated_reports)
     ch_multiqc_extra_files = ch_multiqc_extra_files.mix(collated_versions)
 
-    summary_params = paramsSummaryMap(workflow, parameters_schema: "nextflow_schema.json")
+    summary_params = paramsSummaryMap(parameters_schema: "nextflow_schema.json")
 
     ch_multiqc_extra_files = ch_multiqc_extra_files.mix(
         channel.value(paramsSummaryMultiqc(summary_params)).collectFile(name: 'workflow_summary_mqc.yaml')
