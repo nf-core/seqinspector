@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#296](https://github.com/nf-core/seqinspector/pull/296) Template update for nf-core/tools v4.2.1 (@maxulysse)
 - [#297](https://github.com/nf-core/seqinspector/pull/297) Update nf-core modules, drop citation-only module patches (@maxulysse)
 - [#298](https://github.com/nf-core/seqinspector/pull/298) Template update for nf-core/tools v4.2.2 (@maxulysse)
+- [#299](https://github.com/nf-core/seqinspector/pull/299) Bump nf-schema to 3.0.0, raise minimal Nextflow version to 26.04.0 (@maxulysse)
 
 ### `Dependencies`
 
