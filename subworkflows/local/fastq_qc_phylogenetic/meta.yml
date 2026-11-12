@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "FASTQ_QC_PHYLOGENETIC"
+description: Phylogenetic classification of reads to check for contamination and adjacent issues
+keywords:
+  - fastq
+  - qc
+  - kraken2
+  - krona
+  - phylogenetic
+  - classification
+components:
+  - kraken2/kraken2
+  - krona/ktimporttaxonomy
+  - krona/ktupdatetaxonomy
+input:
+  - reads:
+      type: list
+      description: |
+        List containing: [ val(meta), path(reads) ]
+        e.g. [ [ id:'test' ], ['/path/to/reads_1.fastq.gz', '/path/to/reads_2.fastq.gz'] ]
+  - kraken2_db:
+      type: list
+      description: |
+        Path to Kraken2 database
+  - kraken2_save_reads:
+      type: boolean
+      description: |
+        Save reads classified by Kraken2
+  - kraken2_save_readclassifications:
+      type: boolean
+      description: |
+        Save read classifications from Kraken2
+output:
+  - report:
+      type: list
+      description: |
+        Kraken2 classification reports
+authors:
+  - "@maxulysse"
+maintainers:
+  - "@maxulysse"

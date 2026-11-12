@@ -10,13 +10,109 @@
 
 ## Pipeline tools
 
+- [BBMap](https://bbmap.org/)
+
+  > Bushnell, B. (2014) BBMap: A Fast, Accurate, Splice-Aware Aligner. 9th Annual Genomics of Energy & Environment Meeting, Walnut Creek, CA. https://github.com/bbushnell/BBTools
+
+- [BWAMEM2](https://github.com/bwa-mem2/bwa-mem2)
+
+  > Vasimuddin Md, Misra S, Li H, Aluru S. Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems. In: 2019 IEEE International Parallel and Distributed Processing Symposium (IPDPS). IEEE; 2019:314-324. doi:10.1109/IPDPS.2019.00041
+
+- [checkQC](https://github.com/Molmed/checkQC)
+
+  > Åslin et al., (2018). CheckQC: Quick quality control of Illumina sequencing runs. Journal of Open Source Software, 3(22), 556, https://doi.org/10.21105/joss.00556
+
+- [Chelae](https://github.com/fulcrumgenomics/chelae)
+
+  > Fulcrum Genomics. Chelae: A fast toolkit for trimming and filtering short-read FASTQ data.
+
 - [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
 
-> Andrews, S. (2010). FastQC: A Quality Control Tool for High Throughput Sequence Data [Online].
+  > Andrews, S. (2010). FastQC: A Quality Control Tool for High Throughput Sequence Data [Online].
+
+- [Kraken2](https://doi.org/10.1186/s13059-019-1891-0)
+
+  > Wood, D. E., Lu, J., & Langmead, B. (2019). Improved metagenomic analysis with Kraken 2. Genome Biology, 20(1), 257. https://doi.org/10.1186/s13059-019-1891-0
+
+- [Krona](https://doi.org/10.1186/1471-2105-12-385)
+
+  > Ondov, B. D., Bergman, N. H., & Phillippy, A. M. (2011). Interactive metagenomic visualization in a Web browser. BMC Bioinformatics, 12. https://doi.org/10.1186/1471-2105-12-385
+
+- [Fastp](https://doi.org/10.1093/bioinformatics/bty560)
+
+  > Shifu Chen, Yanqing Zhou, Yaru Chen, Jia Gu, fastp: an ultra-fast all-in-one FASTQ preprocessor, Bioinformatics, Volume 34, Issue 17, September 2018, Pages i884–i890.
+
+- [FastQ Screen](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/)
+
+  > Wingett SW and Andrews S. FastQ Screen: A tool for multi-genome mapping and quality control [version 2; referees: 4 approved]. F1000Research 2018, 7:1338 (https://doi.org/10.12688/f1000research.15931.2)
+
+- [FASTQE](https://github.com/fastqe/fastqe)
+
+  > FastQE: A tool for quality control of Illumina sequencing data using emoji.
+
+- [FQ](https://github.com/stjude-rust-labs/fq)
+
+  > FQ: A library to generate and validate FASTQ file pairs.
 
 - [MultiQC](https://pubmed.ncbi.nlm.nih.gov/27312411/)
 
-> Ewels P, Magnusson M, Lundin S, Käller M. MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics. 2016 Oct 1;32(19):3047-8. doi: 10.1093/bioinformatics/btw354. Epub 2016 Jun 16. PubMed PMID: 27312411; PubMed Central PMCID: PMC5039924.
+  > Ewels P, Magnusson M, Lundin S, Käller M. MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics. 2016 Oct 1;32(19):3047-8. doi: 10.1093/bioinformatics/btw354. Epub 2016 Jun 16. PubMed PMID: 27312411; PubMed Central PMCID: PMC5039924.
+
+- [MultiQC SAV](https://github.com/MultiQC/MultiQC_SAV/)
+
+  > MultiQC SAV: MultiQC plugin for Illumina Sequencing Analysis Viewer.
+
+- [Riker](https://github.com/fulcrumgenomics/riker)
+
+  > Fulcrum Genomics. Fast Rust CLI toolkit for sequencing QC metrics. Ports key QC metrics tools from Picard with cleaner output and better performance.
+
+- [Picard Tools](https://broadinstitute.github.io/picard/)
+
+  > Broad Institute, “Picard Toolkit.” 2019. GitHub Repository. https://broadinstitute.github.io/picard/
+
+- [Rundirparser](https://github.com/nf-core/seqinspector)
+
+  > Rundirparser: Parse Illumina run directory metadata for MultiQC.
+
+- [SAMTOOLS](https://doi.org/10.1093/gigascience/giab008)
+
+  > Danecek P, Bonfield JK, Liddle J, et al. Twelve years of SAMtools and BCFtools. GigaScience. 2021;10(2):giab008. doi:10.1093/gigascience/giab008
+
+- [SeqFu](https://telatin.github.io/seqfu2/)
+
+  > Telatin A, Fariselli P, Birolo G. SeqFu: A Suite of Utilities for the Robust and Reproducible Manipulation of Sequence Files. Bioengineering 2021, 8, 59. doi.org/10.3390/bioengineering8050059
+
+- [Seqkit](https://doi.org/10.1002/imt2.191)
+
+> Wei Shen, Botond Sipos, and Liuyang Zhao. 2024. SeqKit2: A Swiss Army Knife for Sequence and Alignment Processing. iMeta e191. [doi:10.1002/imt2.191](https://doi.org/10.1002/imt2.191).
+
+- [Seqtk](https://github.com/lh3/seqtk)
+
+  > Li, H. SeqTk: A toolkit for processing sequences in FASTA/Q formats.
+
+- [Sequali](https://sequali.readthedocs.io/en/latest/)
+
+  > Vorderman R. Sequali: efficient and comprehensive quality control of short- and long-read sequencing data. Bioinformatics Advances, 2025. doi: 10.1093/bioadv/vbaf010
+
+- [ToulligQC](https://github.com/GenomiqueENS/toulligQC)
+
+  > ToulligQC: A post sequencing QC tool for Oxford Nanopore sequencers.
+
+- [pigz](https://zlib.net/pigz/)
+
+  > Adler, M. pigz: A parallel implementation of gzip.
+
+- [Python](https://www.python.org/)
+
+  > Python Software Foundation. Python programming language.
+
+- [PyYAML](https://pyyaml.org/)
+
+  > PyYAML: YAML parser and emitter for Python.
+
+- [GNU tar](https://www.gnu.org/software/tar/)
+
+  > GNU tar: Archive utility.
 
 ## Software packaging/containerisation tools
 

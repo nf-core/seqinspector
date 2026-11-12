@@ -1,0 +1,76 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "UTILS_NFSEQINSPECTOR_PIPELINE"
+description: Subworkflow with functionality specific to the nf-core/seqinspector pipeline
+keywords:
+  - utility
+  - pipeline
+  - initialise
+  - validation
+  - completion
+components: []
+input:
+  - version:
+      type: boolean
+      description: |
+        Display version and exit
+  - validate_params:
+      type: boolean
+      description: |
+        Boolean whether to validate parameters against the schema at runtime
+  - monochrome_logs:
+      type: boolean
+      description: |
+        Do not use coloured log outputs
+  - nextflow_cli_args:
+      type: list
+      description: |
+        List of positional nextflow CLI args
+  - outdir:
+      type: string
+      description: |
+        The output directory where the results will be saved
+  - input:
+      type: string
+      description: |
+        Path to input samplesheet
+  - help:
+      type: boolean
+      description: |
+        Display help message and exit
+  - help_full:
+      type: boolean
+      description: |
+        Show the full help message
+  - show_hidden:
+      type: boolean
+      description: |
+        Show hidden parameters in the help message
+  - tools:
+      type: string
+      description: |
+        Tools to run
+  - subsample_tools:
+      type: string
+      description: |
+        Tools to run on subsampled data
+  - fasta:
+      type: string
+      description: |
+        Path to reference genome FASTA file
+  - kraken2_db:
+      type: string
+      description: |
+        Path to Kraken2 database
+  - riker_args:
+      type: string
+      description: |
+        Arguments to pass to riker
+output:
+  - success:
+      type: boolean
+      description: |
+        Dummy output to indicate success
+authors:
+  - ""
+maintainers:
+  - "@maxulysse"
