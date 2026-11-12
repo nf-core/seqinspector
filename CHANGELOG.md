@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#294](https://github.com/nf-core/seqinspector/pull/294) Update README tool table (@FranBonath)
 - [#296](https://github.com/nf-core/seqinspector/pull/296) Template update for nf-core/tools v4.2.1 (@maxulysse)
 - [#297](https://github.com/nf-core/seqinspector/pull/297) Update nf-core modules, drop citation-only module patches (@maxulysse)
+- [#298](https://github.com/nf-core/seqinspector/pull/298) Template update for nf-core/tools v4.2.2 (@maxulysse)
 
 ### `Dependencies`
 
