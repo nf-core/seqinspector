@@ -95,21 +95,19 @@ workflow PIPELINE_INITIALISATION {
     if (help || help_full) {
         log.info(
             paramsHelp(
-                [
-                    beforeText: before_text,
-                    afterText: after_text,
-                    command: command,
-                    showHidden: show_hidden,
-                    fullHelp: help_full,
-                ],
-                (help instanceof String && help != "true") ? help : "",
+                parameter: (help instanceof String && help != "true") ? help : "",
+                beforeText: before_text,
+                afterText: after_text,
+                command: command,
+                showHidden: show_hidden,
+                fullHelp: help_full,
             )
         )
         System.exit(0)
     }
 
     log.info(before_text)
-    log.info(paramsSummaryLog(workflow, parameters_schema: "nextflow_schema.json"))
+    log.info(paramsSummaryLog(parameters_schema: "nextflow_schema.json"))
     log.info(after_text)
 
     if (validate_params) {
@@ -220,7 +218,7 @@ workflow PIPELINE_COMPLETION {
     multiqc_report // string: Path to MultiQC report
 
     main:
-    summary_params = paramsSummaryMap(workflow, parameters_schema: "nextflow_schema.json")
+    summary_params = paramsSummaryMap(parameters_schema: "nextflow_schema.json")
     def multiqc_reports = multiqc_report.toList()
 
     //
