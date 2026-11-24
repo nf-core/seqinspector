@@ -40,7 +40,7 @@ nextflow_pipeline {
             ],
             snapshot_ignore: ignore_unknown_columns,
             failure: true,
-            snapshot_include: 'somalier',
+            snapshot_include: 'somalier was requested',
             snapshot: 'stdout,stderr',
         ],
         [
