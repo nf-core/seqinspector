@@ -34,7 +34,7 @@ nextflow_pipeline {
                 somalier_sites: null,
             ],
             failure: true,
-            snapshot_include: 'somalier',
+            snapshot_include: 'somalier was requested',
             snapshot: 'stdout,stderr',
         ],
         [
