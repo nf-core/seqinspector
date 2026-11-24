@@ -78,6 +78,7 @@ BAM input is only processed by the tools that support it:
 | `platform`   | Sequencing platform of the `rundir`: `illumina` or `ont`. Required when a `rundir` is given and `rundirparser` is run (optional\*\*).                                                  |
 | `individual` | Individual (patient or donor) the sample comes from. The `somalier` tool expects samples of one individual to be identical (optional).                                                 |
 | `batch`      | Group of samples that `somalier` compares with each other, for example a sequencing run. All samples form one group if it is empty (optional).                                         |
+| `sex`        | Annotated sex of the sample: `male` or `female` (`M` and `F` are accepted). The `sexcheck` tool compares it with the inferred sex (optional).                                          |
 
 \*If rundir is not provided, the RUNDIRPARSER module is skipped and the sequencing run metadata is not collected.
 
@@ -279,6 +280,17 @@ nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results -
 - Samples with the same genotypes are treated as one individual. If one of them is clean, `somalier contamination` adds a second estimate for the others.
 
 The thresholds of the underlying model can be changed with `ext.args` of the `SOMALIERCONTAM_IDENTITY`, `SOMALIERCONTAM_ATTRIBUTE` and `SOMALIERCONTAM_REPORT` processes.
+
+#### Sex check
+
+The `sexcheck` tool compares the `sex` column of the samplesheet with the sex inferred from the data.
+It runs the `somalier_contamination` tool as well and adds its result to the same report.
+
+- `samtools coverage` counts the reads per chromosome with a mapping quality of at least `--sexcheck_min_mapq`.
+- A sample is called male from `--sexcheck_male_min_y_rpm` chrY reads per million autosomal reads and female up to `--sexcheck_female_max_y_rpm`.
+- Between the two thresholds, heterozygous X sites from somalier call a sample female.
+
+The default thresholds are not calibrated for every assay. Check them on samples of known sex before relying on the result, in particular for panels without chrY targets.
 
 #### Hybrid-selection QC metrics
 

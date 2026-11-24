@@ -402,6 +402,11 @@ def defineToolsList(input_bundle, input_tools, input_skip, sample_size) {
         tools_list << 'fastqscreen'
     }
 
+    // The sex check is part of the contamination report
+    if ('sexcheck' in tools_list) {
+        tools_list << 'somalier_contamination'
+    }
+
     // The contamination checks work on the somalier digests
     if ('somalier_contamination' in tools_list) {
         tools_list << 'somalier'

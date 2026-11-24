@@ -76,6 +76,12 @@
                 "errorMessage": "Batch can only consist of letters, numbers, dots, underscores and hyphens",
                 "meta": ["batch"]
             },
+            "sex": {
+                "type": "string",
+                "pattern": "^([Mm]ale|[Ff]emale|MALE|FEMALE|[MmFf]|[Uu]nknown|UNKNOWN|NA)$",
+                "errorMessage": "Sex must be 'male' or 'female' ('M' and 'F' are accepted), or empty, 'unknown' or 'NA' if it is not known",
+                "meta": ["sex"]
+            },
             "tags": {
                 "type": "string",
                 "pattern": "^([A-Za-z0-9_-]+:)*([A-Za-z0-9_-]+)$",
