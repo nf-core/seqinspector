@@ -177,12 +177,10 @@
                 "multiqc_citations.txt:md5,a5d272d8bd6c2fbd2271e792474eb5a5",
                 "multiqc_somalier.txt:md5,08241bbbc6d6a442c630fbcdf32822ba",
                 "somalier_het_check_plot.txt:md5,3ea9c7ba2ffebc383a7f767009806913",
-                "somalier_sex_check_plot.txt:md5,d575e4698b3b7f9b3ba99d3862d8c0e6",
                 "somalier_stats.txt:md5,455e0e43ead0aebe734798e1a35adb2e",
                 "multiqc_citations.txt:md5,a5d272d8bd6c2fbd2271e792474eb5a5",
                 "multiqc_somalier.txt:md5,08241bbbc6d6a442c630fbcdf32822ba",
                 "somalier_het_check_plot.txt:md5,3ea9c7ba2ffebc383a7f767009806913",
-                "somalier_sex_check_plot.txt:md5,fa2d50f2048649a97aec4293f2bcd489",
                 "somalier_stats.txt:md5,455e0e43ead0aebe734798e1a35adb2e",
                 "genome.fasta.fai:md5,6ba15c83fe6615bc7c7534a91db37efb",
                 "cohort.pairs.tsv:md5,864a94e66e8b6a9c9e8969b471db05c8",
@@ -197,7 +195,7 @@
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-11-24T21:54:52.222958",
+        "timestamp": "2026-11-24T22:00:10.17899",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.6"
@@ -333,17 +331,14 @@
                 "multiqc_citations.txt:md5,a5d272d8bd6c2fbd2271e792474eb5a5",
                 "multiqc_somalier.txt:md5,08241bbbc6d6a442c630fbcdf32822ba",
                 "somalier_het_check_plot.txt:md5,18af409cd5a6513854bc126cc9109e38",
-                "somalier_sex_check_plot.txt:md5,799c490e7386f7762ee08e6b152c3893",
                 "somalier_stats.txt:md5,455e0e43ead0aebe734798e1a35adb2e",
                 "multiqc_citations.txt:md5,a5d272d8bd6c2fbd2271e792474eb5a5",
                 "multiqc_somalier.txt:md5,a63200ca31155fd51e3dd797fece7cbf",
                 "somalier_het_check_plot.txt:md5,1cd6f6013ad14433c58504c65a61dec4",
-                "somalier_sex_check_plot.txt:md5,96ce6e2ec0b001236d3bbafa826b3f94",
                 "somalier_stats.txt:md5,fa286d8d96f4111eb238f8bb935fde51",
                 "multiqc_citations.txt:md5,a5d272d8bd6c2fbd2271e792474eb5a5",
                 "multiqc_somalier.txt:md5,b512e20713b7c32ce3d06ef2725be11f",
                 "somalier_het_check_plot.txt:md5,d75360ac9aaa2f791f0e07c517a5821c",
-                "somalier_sex_check_plot.txt:md5,bdca22ffec7554ceae0f96636a514aef",
                 "somalier_stats.txt:md5,ebb894446a9415bad1bed3249fcbc160",
                 "genome.fasta.fai:md5,6ba15c83fe6615bc7c7534a91db37efb",
                 "RUN_A.pairs.tsv:md5,a6de4841e3b0a6f8c9ef5a3cc884c3cf",
@@ -360,7 +355,7 @@
             "No BAM files",
             "No warnings"
         ],
-        "timestamp": "2026-11-24T21:55:06.207792",
+        "timestamp": "2026-11-24T22:00:23.868014",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.6"
