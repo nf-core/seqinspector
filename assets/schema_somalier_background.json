@@ -1,0 +1,33 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://raw.githubusercontent.com/nf-core/seqinspector/master/assets/schema_somalier_background.json",
+    "title": "nf-core/seqinspector pipeline - params.somalier_background schema",
+    "description": "Schema for the file provided with params.somalier_background",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "sample": {
+                "type": "string",
+                "pattern": "^\\S+$",
+                "errorMessage": "Sample name must be provided and cannot contain spaces",
+                "meta": ["sample"]
+            },
+            "somalier": {
+                "type": "string",
+                "format": "file-path",
+                "exists": true,
+                "pattern": "^\\S+\\.somalier$",
+                "errorMessage": "somalier digest must be provided, cannot contain spaces and must have extension '.somalier'"
+            },
+            "individual": {
+                "type": "string",
+                "pattern": "^\\S+$",
+                "errorMessage": "Individual cannot contain spaces",
+                "meta": ["individual"]
+            }
+        },
+        "required": ["sample", "somalier"]
+    },
+    "uniqueEntries": ["sample"]
+}
