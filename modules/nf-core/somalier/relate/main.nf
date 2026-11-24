@@ -16,9 +16,9 @@ process SOMALIER_RELATE {
     tuple val(meta2), path(sites)
 
     output:
-    tuple val(meta), path("*.html"),          emit: html
-    tuple val(meta), path("*.pairs.tsv"),     emit: pairs_tsv
-    tuple val(meta), path("*.samples.tsv"),   emit: samples_tsv
+    tuple val(meta), val("${task.process}"), val('somalier'), path("*.html"),        emit: html,        topic: multiqc_files
+    tuple val(meta), val("${task.process}"), val('somalier'), path("*.pairs.tsv"),   emit: pairs_tsv,   topic: multiqc_files
+    tuple val(meta), val("${task.process}"), val('somalier'), path("*.samples.tsv"), emit: samples_tsv, topic: multiqc_files
     tuple val("${task.process}"), val('somalier'), eval('somalier 2>&1 | sed -n \'s/.*version: \\([0-9.]*\\).*/\\1/p\''), emit: versions_somalier, topic: versions
 
     when:
