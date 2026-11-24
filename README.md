@@ -121,8 +121,8 @@ Each row represents a fastq file (single-end with only `fastq_1`) or a pair of f
 Alternatively, you can use a bam file to run the pipeline instead of fastq files:
 
 ```csv
-sample,bam,rundir,tags
-CONTROL_REP1,AEG588A1_S1_L002_R1_001.bam,200624_A00834_0183_BHMTFYDRXX,lane1:project5:group2
+sample,bam,bai,rundir,tags
+CONTROL_REP1,AEG588A1_S1_L002_R1_001.bam,AEG588A1_S1_L002_R1_001.bam.bai,200624_A00834_0183_BHMTFYDRXX,lane1:project5:group2
 ```
 
 Now, you can run the pipeline using:

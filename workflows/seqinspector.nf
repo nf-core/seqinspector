@@ -77,15 +77,16 @@ workflow SEQINSPECTOR {
     def ch_multiqc_files = channel.empty()
     def ch_multiqc_extra_files = channel.empty()
 
-    ch_samplesheet
-        .multiMap { meta, files ->
-            bam: [meta, files.findAll { file -> file.name.endsWith('.bam') } ]
-            fastq: [meta, files.findAll { file -> !file.name.endsWith('.bam') } ]
-        }
-        .set { ch_samplesheet }
+    def ch_input = ch_samplesheet.branch { _meta, files ->
+        bam: files[0].name.endsWith('.bam')
+        fastq: true
+    }
 
-    ch_samplesheet_bam = ch_samplesheet.bam.filter { _meta, bam -> bam }
-    ch_samplesheet_fastq = ch_samplesheet.fastq. filter { _meta, fastq -> fastq }
+    def ch_samplesheet_fastq = ch_input.fastq
+    def ch_samplesheet_bam = ch_input.bam.map { meta, files -> [meta, [files[0]]] }
+    def ch_samplesheet_bam_bai = ch_input.bam
+        .filter { _meta, files -> files.size() == 2 }
+        .map { meta, files -> [meta, files[0], files[1]] }
 
     // STEP 00: SUBSAMPLE
 
@@ -117,14 +118,16 @@ workflow SEQINSPECTOR {
     // Parse RUNDIR INFO
 
     // Calculate the global rundir_number for the entire samplesheet
-    rundir_number = ch_samplesheet_fastq
+    def ch_samplesheet_all = ch_samplesheet_fastq.mix(ch_samplesheet_bam)
+
+    rundir_number = ch_samplesheet_all
         .map { meta, _reads -> [meta.rundir ? meta.rundir.simpleName : 'no_rundir'] }
         .flatten()
         .unique()
         .collect()
         .map { rundir -> [rundir.size()] }
 
-    ch_rundir = ch_samplesheet_fastq
+    ch_rundir = ch_samplesheet_all
         .map { meta, _reads -> [meta.rundir ?: null, meta] }
         .groupTuple()
         .combine(rundir_number)
@@ -212,7 +215,7 @@ workflow SEQINSPECTOR {
     // MODULE: TOULLIGQC
     // This provides useful stats of long reads
 
-    TOULLIGQC(('toulligqc' in subsample_tools ? ch_sample : ch_samplesheet_fastq.mix(ch_samplesheet_bam)).filter { 'toulligqc' in tools })
+    TOULLIGQC(('toulligqc' in subsample_tools ? ch_sample : ch_samplesheet_fastq).mix(ch_samplesheet_bam).filter { 'toulligqc' in tools })
 
     // STEP 02: BASIC QC ON FASTQ FILES
 
@@ -242,7 +245,7 @@ workflow SEQINSPECTOR {
 
     // STEP 04: MORE QC ON FASTQ FILES (CAN BE SUBSAMPLED)
 
-    FASTQC(('fastqc' in subsample_tools ? ch_sample : ch_samplesheet_fastq.mix(ch_samplesheet_bam)).filter { 'fastqc' in tools })
+    FASTQC(('fastqc' in subsample_tools ? ch_sample : ch_samplesheet_fastq).mix(ch_samplesheet_bam).filter { 'fastqc' in tools })
 
     FASTQE(('fastqe' in subsample_tools ? ch_sample : ch_samplesheet_fastq).filter { 'fastqe' in tools })
 
@@ -276,7 +279,7 @@ workflow SEQINSPECTOR {
     // MODULE: SEQUALI
     //
 
-    SEQUALI(('sequali' in subsample_tools ? ch_sample : ch_samplesheet_fastq.mix(ch_samplesheet_bam)).filter { 'sequali' in tools })
+    SEQUALI(('sequali' in subsample_tools ? ch_sample : ch_samplesheet_fastq).mix(ch_samplesheet_bam).filter { 'sequali' in tools })
 
     // STEP 05: FASTQSCREEN
 
@@ -336,12 +339,14 @@ workflow SEQINSPECTOR {
 
     bam_bai = BWAMEM2_MEM.out.bam.join(SAMTOOLS_INDEX.out.index, failOnDuplicate: true, failOnMismatch: true)
 
+    def ch_bam_bai = bam_bai.mix(ch_samplesheet_bam_bai)
+
     //
     // SUBWORKFLOW: BAM_QC
     //   Run picard_collecthsmetrics and/or picard_collectmultiplemetrics
 
     BAM_QC(
-        bam_bai,
+        ch_bam_bai,
         fasta,
         fai,
         bait_intervals ? channel.fromPath(bait_intervals).collect() : channel.empty(),
@@ -359,7 +364,7 @@ workflow SEQINSPECTOR {
     def rna_ribosomal_intervals_file = rna_ribosomal_intervals ? file(rna_ribosomal_intervals) : []
 
     if (bait_intervals && target_intervals) {
-        bam_bai_for_riker = bam_bai
+        bam_bai_for_riker = ch_bam_bai
             .map { meta, bam, bai -> [meta, bam, bai, [], [], [], []] }
             .combine(channel.fromPath(bait_intervals).collect())
             .combine(channel.fromPath(target_intervals).collect())
@@ -368,7 +373,7 @@ workflow SEQINSPECTOR {
             }
     }
     else {
-        bam_bai_for_riker = bam_bai.map { meta, bam, bai -> [meta, bam, bai, [], [], [], [], [], [], rna_gene_model_file, rna_ribosomal_intervals_file, []] }
+        bam_bai_for_riker = ch_bam_bai.map { meta, bam, bai -> [meta, bam, bai, [], [], [], [], [], [], rna_gene_model_file, rna_ribosomal_intervals_file, []] }
     }
 
     RIKER_MULTI(

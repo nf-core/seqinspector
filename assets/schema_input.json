@@ -34,6 +34,13 @@
                 "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.bam$",
                 "errorMessage": "If no FastQ1 file was provided, BAM file must be provided, cannot contain spaces and must have extension '.bam'"
             },
+            "bai": {
+                "type": "string",
+                "format": "file-path",
+                "exists": true,
+                "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.(bai|csi)$",
+                "errorMessage": "BAM index file cannot contain spaces and must have extension '.bai' or '.csi'"
+            },
             "rundir": {
                 "oneOf": [
                     {
@@ -68,7 +75,8 @@
         "oneOf": [{ "required": ["fastq_1"] }, { "required": ["bam"] }],
         "errorMessage": "Each row must provide either a BAM file or FASTQ file(s), but not both",
         "dependentRequired": {
-            "fastq_2": ["fastq_1"]
+            "fastq_2": ["fastq_1"],
+            "bai": ["bam"]
         }
     }
 }

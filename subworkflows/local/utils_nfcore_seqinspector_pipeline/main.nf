@@ -155,7 +155,7 @@ ${subsampled_info}-\033[2m----------------------------------------------------\0
     ch_samplesheet = channel.fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
         .toList()
         .flatMap { item -> item.withIndex().collect { entry, idx -> entry + "${idx + 1}" } }
-        .map { meta, fastq_1, fastq_2, bam, idx ->
+        .map { meta, fastq_1, fastq_2, bam, bai, idx ->
             def tags = meta.tags ? meta.tags.tokenize(":") : []
             def pad_positions = [nr_samples.length(), 2].max()
             def zero_padded_idx = idx.padLeft(pad_positions, "0")
@@ -164,7 +164,7 @@ ${subsampled_info}-\033[2m----------------------------------------------------\0
                 new_meta.id,
                 meta + [id: new_meta.id, tags: tags] + (fastq_1 ? [single_end: !fastq_2] : [:]),
                 // Filter tuple to keep only the files provided for this row (empty columns are [])
-                [fastq_1, fastq_2, bam].findAll { file -> file },
+                [fastq_1, fastq_2, bam, bai].findAll { file -> file },
             ]
         }
         .groupTuple()
@@ -185,7 +185,6 @@ ${subsampled_info}-\033[2m----------------------------------------------------\0
                 log.warn("On a MacOS system these tags will be considered as one")
             }
         }
-        .view()
 
     if (!(fasta) && (("picard_collecthsmetrics" in tools) || ("picard_collectmultiplemetrics" in tools) || ("riker" in tools))) {
         log.warn("No fasta was provided, but picard or riker was requested")
