@@ -1,0 +1,78 @@
+nextflow_workflow {
+
+    name "Test Workflow BAM_SAMPLE_IDENTITY_SOMALIER"
+    script "subworkflows/local/bam_sample_identity_somalier/main.nf"
+    workflow "BAM_SAMPLE_IDENTITY_SOMALIER"
+    tag 'subworkflows'
+    tag 'bam_sample_identity_somalier'
+    topics "multiqc_files"
+    config "./nextflow.config"
+
+    test("Two batches, one individual with two samples") {
+        when {
+            workflow {
+                """
+                def bam = params.pipelines_testdata_base_path + 'seqinspector/data/sample_identity/bam/'
+                def references = params.pipelines_testdata_base_path + 'seqinspector/data/sample_identity/references/'
+                input[0] = channel.of(
+                    [id: 'P1_N', tags: ['a'], individual: 'P1', batch: 'RUN_A'],
+                    [id: 'P1_T', tags: ['a'], individual: 'P1', batch: 'RUN_A'],
+                    [id: 'P2_A', tags: ['b'], individual: 'P2', batch: 'RUN_A'],
+                    [id: 'P3_A', tags: ['b'], individual: 'P3', batch: 'RUN_B'],
+                    [id: 'P4_A', tags: ['b'], individual: [], batch: 'RUN_B'],
+                ).map { meta -> [meta, file(bam + meta.id + '.bam', checkIfExists: true), file(bam + meta.id + '.bam.bai', checkIfExists: true)] }
+                input[1] = channel.of([id: 'genome'], file(references + 'genome.fasta', checkIfExists: true)).collect()
+                input[2] = channel.of([id: 'genome'], file(references + 'genome.fasta.fai', checkIfExists: true)).collect()
+                input[3] = channel.of([id: 'sites'], file(references + 'sites.vcf.gz', checkIfExists: true)).collect()
+                """
+            }
+        }
+
+        then {
+            def relate = topics.multiqc_files.collect { meta, _process, _tool, file_ -> [meta, file(file_.toString())] }
+            def pairs = relate.find { meta, file_ -> meta.id == 'RUN_A' && file_.name.endsWith('.pairs.tsv') }[1].readLines()
+            def header = pairs[0].tokenize('\t')
+            def p1 = pairs.find { line -> line.contains('P1_N') && line.contains('P1_T') }.tokenize('\t')
+            assertAll(
+                { assert workflow.success },
+                { assert p1[header.indexOf('relatedness')].toFloat() > 0.9 },
+                { assert p1[header.indexOf('expected_relatedness')].toFloat() == 1.0 },
+                { assert snapshot(
+                    workflow.out.extract,
+                    relate.collect { meta, file_ -> [meta, file_.name.endsWith('.html') ? file_.name : file_] }.sort { row -> row[1].toString().tokenize('/').last() },
+                ).match() },
+            )
+        }
+    }
+
+    test("Two batches, one individual with two samples - stub") {
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                def bam = params.pipelines_testdata_base_path + 'seqinspector/data/sample_identity/bam/'
+                def references = params.pipelines_testdata_base_path + 'seqinspector/data/sample_identity/references/'
+                input[0] = channel.of(
+                    [id: 'P1_N', tags: ['a'], individual: 'P1', batch: 'RUN_A'],
+                    [id: 'P1_T', tags: ['a'], individual: 'P1', batch: 'RUN_A'],
+                    [id: 'P3_A', tags: ['b'], individual: 'P3', batch: 'RUN_B'],
+                ).map { meta -> [meta, file(bam + meta.id + '.bam', checkIfExists: true), file(bam + meta.id + '.bam.bai', checkIfExists: true)] }
+                input[1] = channel.of([id: 'genome'], file(references + 'genome.fasta', checkIfExists: true)).collect()
+                input[2] = channel.of([id: 'genome'], file(references + 'genome.fasta.fai', checkIfExists: true)).collect()
+                input[3] = channel.of([id: 'sites'], file(references + 'sites.vcf.gz', checkIfExists: true)).collect()
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out.extract.collect { meta, file_ -> [meta, file(file_.toString()).name] },
+                    topics.multiqc_files.collect { meta, _process, _tool, file_ -> [meta, file(file_.toString()).name] }.sort { row -> row[1] },
+                ).match() },
+            )
+        }
+    }
+}

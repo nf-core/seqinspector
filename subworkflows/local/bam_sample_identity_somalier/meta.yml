@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "bam_sample_identity_somalier"
+description: Sample identity and relatedness of aligned BAM files with somalier
+keywords:
+  - bam
+  - identity
+  - relatedness
+  - sample swap
+  - somalier
+components:
+  - somalier/extract
+  - somalier/relate
+input:
+  - ch_bam_bai:
+      type: file
+      description: |
+        Aligned BAM files with index. The meta map holds `id`, `tags`, `individual` and `batch`.
+        Structure: [ val(meta), path(bam), path(bai) ]
+  - ch_fasta:
+      type: file
+      description: |
+        Reference genome FASTA
+        Structure: [ val(meta), path(fasta) ]
+  - ch_fai:
+      type: file
+      description: |
+        Index of the reference genome FASTA
+        Structure: [ val(meta), path(fai) ]
+  - ch_sites:
+      type: file
+      description: |
+        VCF file with the polymorphic sites somalier extracts
+        Structure: [ val(meta), path(vcf) ]
+output:
+  - extract:
+      type: file
+      description: |
+        somalier digest of each sample
+        Structure: [ val(meta), path(somalier) ]
+authors:
+  - "@apeltzer"
+maintainers:
+  - "@apeltzer"
