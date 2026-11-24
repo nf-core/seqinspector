@@ -34,6 +34,7 @@ workflow PREPARE_GENOME {
                 .combine(fastq_count)
                 .filter { _meta, _fasta, count -> count > 0 }
                 .map { meta, fasta_, _count -> [meta, fasta_] }
+                .first()
         )
         ch_bwamem2 = BWAMEM2_INDEX.out.index
     }
