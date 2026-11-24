@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#302](https://github.com/nf-core/seqinspector/pull/302) New tool `somalier` for sample identity and relatedness checks on aligned BAM files, with the samplesheet columns `individual` and `batch` ([#300](https://github.com/nf-core/seqinspector/issues/300)) (@apeltzer)
 
+- [#303](https://github.com/nf-core/seqinspector/pull/303) New tool `somalier_contamination` for contamination estimates and source attribution from somalier digests ([#300](https://github.com/nf-core/seqinspector/issues/300)) (@apeltzer)
+
 ### `Fixed`
 
 ### `Changed`

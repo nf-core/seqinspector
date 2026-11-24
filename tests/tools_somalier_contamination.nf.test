@@ -1,0 +1,51 @@
+def pipelines_testdata_base_path = 'https://raw.githubusercontent.com/nf-core/test-datasets/'
+
+nextflow_pipeline {
+
+    name "Test pipeline"
+    script "../main.nf"
+
+    def somalier_params = [
+        genome: null,
+        fasta: pipelines_testdata_base_path + 'seqinspector/data/sample_identity/references/genome.fasta',
+        somalier_sites: pipelines_testdata_base_path + 'seqinspector/data/sample_identity/references/sites.vcf.gz',
+        somalier_min_depth: 20,
+        tools: 'somalier_contamination',
+        tools_bundle: null,
+    ]
+
+    // The samplesheets hold the sex column of a tool that is not part of the pipeline yet
+    def ignore_unknown_columns = ['unidentified headers']
+
+    def test_scenario = [
+        [
+            name: "Sample identity data test - somalier_contamination",
+            params: somalier_params + [
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.2/sample_identity.csv',
+            ],
+            snapshot_ignore: ignore_unknown_columns,
+        ],
+        [
+            name: "Sample identity data test - somalier_contamination - batches and background",
+            params: somalier_params + [
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.2/sample_identity_batches.csv',
+                somalier_background: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.2/sample_identity_background.csv',
+                somalier_attribution_chunk_size: 2,
+            ],
+            snapshot_ignore: ignore_unknown_columns,
+        ],
+        [
+            name: "Sample identity data test - somalier_contamination - stub",
+            params: somalier_params + [
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.2/sample_identity.csv',
+            ],
+            snapshot_ignore: ignore_unknown_columns,
+            stub: true,
+        ],
+    ]
+
+    // Generate tests for each scenario
+    test_scenario.each { scenario ->
+        test(scenario.name, UTILS.getTest(scenario))
+    }
+}

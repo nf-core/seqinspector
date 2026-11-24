@@ -31,6 +31,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 - [Picard CollectMultipleMetrics](#picard-collectmultiplemetrics) - Combine BAM and BAI outputs for Picard
 - [Riker](#riker) - BAM-level QC metrics collection
 - [somalier](#somalier) - Sample identity and relatedness
+- [somalier contamination](#somalier-contamination) - Contamination estimate and source attribution
 - [Kraken2](#kraken2) - Phylogenetic assignment of reads using k-mers
 - [Krona](#krona) - Interactive visualization of Kraken2 results
 - [MultiQC](#multiqc) - Aggregate report describing results and QC from the whole pipeline
@@ -363,6 +364,33 @@ The MultiQC report shows the relatedness of all sample pairs, which reveals samp
   - `*.samples.tsv`: Per sample statistics such as depth, heterozygosity and X/Y coverage.
 
 </details>
+
+### somalier contamination
+
+The contamination checks use the allele counts in the somalier digests.
+A mixture model estimates the contamination fraction of each sample and tests every other sample of the batch, and every background sample, as its source.
+The MultiQC report shows the result of each sample in the section "Contamination and source attribution".
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `somalier_contamination/`
+  - `*.summary.samples.tsv`: Call, contamination estimates and best source of each sample.
+  - `*.attribution.pairs.tsv.gz`: Likelihood ratios of all tested pairs of receiver and source.
+  - `*.longitudinal.pairs.tsv`: Sample pairs of the same individual or with the same genotypes.
+  - `*.relatedness_flags.tsv`: Pairs of different individuals with high relatedness.
+  - `*.attribution_llr.png`: Heatmap of the likelihood ratios.
+
+</details>
+
+The `call` column of the summary has one of these values:
+
+- `clean`: No source found and no contamination above the threshold.
+- `source_identified`: One candidate sample explains the contamination, `best_source` names it.
+- `source_ambiguous`: More than one candidate sample explains the contamination similarly well.
+- `contaminated_source_not_in_cohort`: Contamination above the threshold that none of the candidate samples explains.
+
+The suffix `;low_sites` marks calls that rest on few informative sites.
 
 ### Kraken2
 

@@ -264,6 +264,22 @@ nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results -
 Samples that share a value in the `individual` column are expected to be identical.
 Raise `--somalier_min_depth` for deeply sequenced panels.
 
+#### Contamination and source attribution
+
+The `somalier_contamination` tool estimates cross-sample contamination from the somalier digests and searches for the sample it came from.
+It runs the `somalier` tool as well and uses the same parameters.
+
+```bash
+nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --genome GRCh38 --tools somalier_contamination --somalier_sites sites.hg38.vcf.gz
+```
+
+- Candidate sources are the other samples of the same `batch`.
+- `--somalier_background` adds digests of samples that are not part of the run as candidate sources, for example samples of earlier runs. The CSV file has the columns `sample`, `somalier` and the optional column `individual`.
+- A sample without an identified source is called contaminated from an estimated fraction of `--somalier_contamination_threshold`.
+- Samples with the same genotypes are treated as one individual. If one of them is clean, `somalier contamination` adds a second estimate for the others.
+
+The thresholds of the underlying model can be changed with `ext.args` of the `SOMALIERCONTAM_IDENTITY`, `SOMALIERCONTAM_ATTRIBUTE` and `SOMALIERCONTAM_REPORT` processes.
+
 #### Hybrid-selection QC metrics
 
 The pipeline supports hybrid-selection (HS) QC metrics collection via [picard CollectHSmetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard).

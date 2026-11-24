@@ -74,6 +74,8 @@ workflow SEQINSPECTOR {
     kraken2_save_readclassifications
     save_bbmap_clumpify_reads
     somalier_sites
+    somalier_background
+    somalier_attribution_chunk_size
 
     main:
     def ch_multiqc_files = channel.empty()
@@ -359,7 +361,7 @@ workflow SEQINSPECTOR {
 
     //
     // SUBWORKFLOW: BAM_SAMPLE_IDENTITY_SOMALIER
-    //   Run somalier extract per sample and somalier relate per batch
+    //   Run somalier extract per sample, somalier relate per batch and the optional contamination checks
 
     BAM_SAMPLE_IDENTITY_SOMALIER(
         ch_bam_bai.filter { 'somalier' in tools },
@@ -368,6 +370,11 @@ workflow SEQINSPECTOR {
         somalier_sites
             ? channel.fromPath(somalier_sites, checkIfExists: true).map { sites -> [[id: sites.simpleName], sites] }.collect()
             : channel.empty(),
+        somalier_background
+            ? channel.fromList(samplesheetToList(somalier_background, "${projectDir}/assets/schema_somalier_background.json")).map { meta, somalier -> [[id: meta.sample, individual: meta.individual], somalier] }
+            : channel.empty(),
+        'somalier_contamination' in tools,
+        somalier_attribution_chunk_size,
     )
 
     //
@@ -577,5 +584,6 @@ workflow SEQINSPECTOR {
     report_global  = MULTIQC_GLOBAL.out.report // channel: [ /path/to/multiqc_report.html ]
     report_groups  = MULTIQC_PER_TAG.out.report // channel: [ /path/to/multiqc_report.html ]
     somalier       = BAM_SAMPLE_IDENTITY_SOMALIER.out.extract
+    somalier_contamination = BAM_SAMPLE_IDENTITY_SOMALIER.out.contamination
     subsampled     = SEQTK_SAMPLE.out.reads
 }

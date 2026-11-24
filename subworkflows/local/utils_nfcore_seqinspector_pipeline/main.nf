@@ -402,6 +402,11 @@ def defineToolsList(input_bundle, input_tools, input_skip, sample_size) {
         tools_list << 'fastqscreen'
     }
 
+    // The contamination checks work on the somalier digests
+    if ('somalier_contamination' in tools_list) {
+        tools_list << 'somalier'
+    }
+
     tools_list = tools_list.sort().unique() - skip_list
 
     return tools_list

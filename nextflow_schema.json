@@ -52,7 +52,7 @@
                 "tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to run",
-                    "pattern": "^((bbmap_clumpify|checkqc|chelae|fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|multiqcsav|picard_collecthsmetrics|picard_collectmultiplemetrics|riker|rundirparser|seqkit_stats|seqfu_stats|sequali|somalier|toulligqc)?,?)*(?<!,)$",
+                    "pattern": "^((bbmap_clumpify|checkqc|chelae|fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|multiqcsav|picard_collecthsmetrics|picard_collectmultiplemetrics|riker|rundirparser|seqkit_stats|seqfu_stats|sequali|somalier|somalier_contamination|toulligqc)?,?)*(?<!,)$",
                     "fa_icon": "fas fa-sort-amount-asc"
                 },
                 "tools_bundle": {
@@ -66,7 +66,7 @@
                 "skip_tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to skip - overrides any other means of tools selection",
-                    "pattern": "^((bbmap_clumpify|checkqc|chelae|fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|multiqcsav|picard_collecthsmetrics|picard_collectmultiplemetrics|riker|rundirparser|seqkit_stats|seqfu_stats|sequali|somalier|toulligqc)?,?)*(?<!,)$",
+                    "pattern": "^((bbmap_clumpify|checkqc|chelae|fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|multiqcsav|picard_collecthsmetrics|picard_collectmultiplemetrics|riker|rundirparser|seqkit_stats|seqfu_stats|sequali|somalier|somalier_contamination|toulligqc)?,?)*(?<!,)$",
                     "fa_icon": "fas fa-window-close "
                 },
                 "subsample_tools": {
@@ -163,6 +163,33 @@
                     "fa_icon": "fas fa-ruler-vertical",
                     "description": "Minimum read depth of a site to genotype it",
                     "help_text": "The default suits whole genome data. Deeply sequenced panels allow a higher value such as 20."
+                },
+                "somalier_background": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "schema": "assets/schema_somalier_background.json",
+                    "mimetype": "text/csv",
+                    "pattern": "^\\S+\\.csv$",
+                    "fa_icon": "fas fa-layer-group",
+                    "description": "CSV file with somalier digests of samples that are only candidate contamination sources",
+                    "help_text": "Used by the `somalier_contamination` tool. The file has the columns `sample`, `somalier` and the optional column `individual`. Typical background samples come from earlier runs, the pipeline publishes their digests in `somalier/`."
+                },
+                "somalier_contamination_threshold": {
+                    "type": "number",
+                    "default": 0.01,
+                    "minimum": 0,
+                    "maximum": 1,
+                    "fa_icon": "fas fa-percentage",
+                    "description": "Estimated contamination fraction from which a sample is called contaminated"
+                },
+                "somalier_attribution_chunk_size": {
+                    "type": "integer",
+                    "default": 250,
+                    "minimum": 1,
+                    "fa_icon": "fas fa-th-large",
+                    "description": "Number of samples per source attribution task",
+                    "help_text": "Large batches are split into chunks of this size, which run in parallel."
                 }
             }
         },

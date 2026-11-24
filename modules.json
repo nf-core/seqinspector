@@ -146,6 +146,11 @@
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/sequali/sequali.diff"
                     },
+                    "somalier/contamination": {
+                        "branch": "master",
+                        "git_sha": "de5802b13d4d754909792797bcfdd8bd965d371d",
+                        "installed_by": ["modules"]
+                    },
                     "somalier/extract": {
                         "branch": "master",
                         "git_sha": "cb523f66bc092e7e0a64f8b29734f6d1b6a94c0b",

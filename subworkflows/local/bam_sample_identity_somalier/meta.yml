@@ -1,15 +1,20 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
 name: "bam_sample_identity_somalier"
-description: Sample identity and relatedness of aligned BAM files with somalier
+description: Sample identity, relatedness and contamination of aligned BAM files with somalier
 keywords:
   - bam
+  - contamination
   - identity
   - relatedness
   - sample swap
   - somalier
 components:
+  - somalier/contamination
   - somalier/extract
   - somalier/relate
+  - somaliercontam/attribute
+  - somaliercontam/identity
+  - somaliercontam/report
 input:
   - ch_bam_bai:
       type: file
@@ -31,12 +36,28 @@ input:
       description: |
         VCF file with the polymorphic sites somalier extracts
         Structure: [ val(meta), path(vcf) ]
+  - ch_background:
+      type: file
+      description: |
+        somalier digests of samples that are only candidate contamination sources. The meta map holds `id` and `individual`.
+        Structure: [ val(meta), path(somalier) ]
+  - run_contamination:
+      type: boolean
+      description: Estimate contamination and attribute it to a source sample
+  - attribution_chunk_size:
+      type: integer
+      description: Number of samples per source attribution task
 output:
   - extract:
       type: file
       description: |
         somalier digest of each sample
         Structure: [ val(meta), path(somalier) ]
+  - contamination:
+      type: file
+      description: |
+        Per sample contamination calls, pair tables and heatmap of all batches
+        Structure: [ val(meta), path(file) ]
 authors:
   - "@apeltzer"
 maintainers:

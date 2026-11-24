@@ -1,0 +1,144 @@
+{
+    "synthetic - somalier x6, sample table, sites - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.genotype_groups.tsv:md5,a24d935f0b2650dcf4b3cc2c94130289"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.identity_pairs.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    [
+                        "SOMALIERCONTAM_IDENTITY",
+                        "somalier_contam",
+                        "1.1.0"
+                    ]
+                ],
+                "3": [
+                    [
+                        "SOMALIERCONTAM_IDENTITY",
+                        "python",
+                        "3.12.8"
+                    ]
+                ],
+                "groups": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.genotype_groups.tsv:md5,a24d935f0b2650dcf4b3cc2c94130289"
+                    ]
+                ],
+                "pairs": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.identity_pairs.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_python": [
+                    [
+                        "SOMALIERCONTAM_IDENTITY",
+                        "python",
+                        "3.12.8"
+                    ]
+                ],
+                "versions_somalier_contam": [
+                    [
+                        "SOMALIERCONTAM_IDENTITY",
+                        "somalier_contam",
+                        "1.1.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-11-24T21:34:35.584243",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.6"
+        }
+    },
+    "synthetic - somalier x6, sample table, sites": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.genotype_groups.tsv:md5,e900439bcd7a39c64dde747964a13a16"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.identity_pairs.tsv:md5,a46461ebc12cc369b4415a38d58f3f7c"
+                    ]
+                ],
+                "2": [
+                    [
+                        "SOMALIERCONTAM_IDENTITY",
+                        "somalier_contam",
+                        "1.1.0"
+                    ]
+                ],
+                "3": [
+                    [
+                        "SOMALIERCONTAM_IDENTITY",
+                        "python",
+                        "3.12.8"
+                    ]
+                ],
+                "groups": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.genotype_groups.tsv:md5,e900439bcd7a39c64dde747964a13a16"
+                    ]
+                ],
+                "pairs": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.identity_pairs.tsv:md5,a46461ebc12cc369b4415a38d58f3f7c"
+                    ]
+                ],
+                "versions_python": [
+                    [
+                        "SOMALIERCONTAM_IDENTITY",
+                        "python",
+                        "3.12.8"
+                    ]
+                ],
+                "versions_somalier_contam": [
+                    [
+                        "SOMALIERCONTAM_IDENTITY",
+                        "somalier_contam",
+                        "1.1.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-11-24T21:02:41.362985",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.6"
+        }
+    }
+}
