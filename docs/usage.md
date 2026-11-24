@@ -66,16 +66,18 @@ BAM input is only processed by the tools that support it:
 - FastQC, Sequali and ToulligQC run on every BAM file.
 - Picard CollectHsMetrics, Picard CollectMultipleMetrics and Riker run on aligned, coordinate-sorted BAM files that have an index in the `bai` column. The pipeline does not realign these files, `--fasta` has to be the reference they were aligned to.
 
-| Column     | Description                                                                                                                                                                            |
-| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sample`   | Custom sample name. This entry will be identical for multiple sequencing libraries/runs from the same sample. Spaces in sample names are automatically converted to underscores (`_`). |
-| `fastq_1`  | Full path to FastQ file for Illumina short reads 1. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz" (required if `bam` is not provided).                         |
-| `fastq_2`  | Full path to FastQ file for Illumina short reads 2. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz" (optional).                                                  |
-| `bam`      | Full path to BAM file, aligned or unaligned. File has to have the extension ".bam" (required if `fastq_1` is not provided).                                                            |
-| `bai`      | Full path to the index of an aligned BAM file with the extension ".bai" or ".csi". Required for the tools that need aligned reads (optional).                                          |
-| `rundir`   | Path to the runfolder containing extra information about the sequencing run (optional\*).                                                                                              |
-| `tags`     | Colon-separated list of tags to group samples in special reports.                                                                                                                      |
-| `platform` | Sequencing platform of the `rundir`: `illumina` or `ont`. Required when a `rundir` is given and `rundirparser` is run (optional\*\*).                                                  |
+| Column       | Description                                                                                                                                                                            |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sample`     | Custom sample name. This entry will be identical for multiple sequencing libraries/runs from the same sample. Spaces in sample names are automatically converted to underscores (`_`). |
+| `fastq_1`    | Full path to FastQ file for Illumina short reads 1. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz" (required if `bam` is not provided).                         |
+| `fastq_2`    | Full path to FastQ file for Illumina short reads 2. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz" (optional).                                                  |
+| `bam`        | Full path to BAM file, aligned or unaligned. File has to have the extension ".bam" (required if `fastq_1` is not provided).                                                            |
+| `bai`        | Full path to the index of an aligned BAM file with the extension ".bai" or ".csi". Required for the tools that need aligned reads (optional).                                          |
+| `rundir`     | Path to the runfolder containing extra information about the sequencing run (optional\*).                                                                                              |
+| `tags`       | Colon-separated list of tags to group samples in special reports.                                                                                                                      |
+| `platform`   | Sequencing platform of the `rundir`: `illumina` or `ont`. Required when a `rundir` is given and `rundirparser` is run (optional\*\*).                                                  |
+| `individual` | Individual (patient or donor) the sample comes from. The `somalier` tool expects samples of one individual to be identical (optional).                                                 |
+| `batch`      | Group of samples that `somalier` compares with each other, for example a sequencing run. All samples form one group if it is empty (optional).                                         |
 
 \*If rundir is not provided, the RUNDIRPARSER module is skipped and the sequencing run metadata is not collected.
 
@@ -247,6 +249,20 @@ See the [parameters page](https://nf-co.re/seqinspector/parameters/#tools_bundle
 If no genome or fasta file is provided, either with `--genome` or `--fasta`,
 the pipeline will not be able to run the alignment step with `BWAMEM2`,
 and will skip all tools that depend on the alignment file (e.g. `picard CollectHsMetrics` and `picard CollectMultipleMetrics`).
+
+#### Sample identity with somalier
+
+The `somalier` tool detects sample swaps and unexpected relatedness in human data.
+It runs [somalier](https://github.com/brentp/somalier) `extract` on each aligned BAM file and `relate` on each `batch` of the samplesheet.
+It needs a reference genome (`--genome` or `--fasta`) and a VCF file of polymorphic sites (`--somalier_sites`) for the same genome build.
+FASTQ input is aligned with `BWAMEM2` first.
+
+```bash
+nextflow run nf-core/seqinspector --input ./samplesheet.csv --outdir ./results --genome GRCh38 --tools somalier --somalier_sites sites.hg38.vcf.gz
+```
+
+Samples that share a value in the `individual` column are expected to be identical.
+Raise `--somalier_min_depth` for deeply sequenced panels.
 
 #### Hybrid-selection QC metrics
 

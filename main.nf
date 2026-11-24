@@ -66,6 +66,7 @@ workflow {
         params.fasta,
         params.kraken2_db,
         params.riker_args,
+        params.somalier_sites,
     )
 
     PREPARE_GENOME(
@@ -102,6 +103,7 @@ workflow {
         params.kraken2_save_reads,
         params.kraken2_save_readclassifications,
         params.save_bbmap_clumpify_reads,
+        params.somalier_sites,
     )
 
     //
@@ -131,6 +133,7 @@ workflow {
         PREPARE_GENOME.out.fai,
     )
     reports                = channel.topic("multiqc_files")
+    somalier               = NFCORE_SEQINSPECTOR.out.somalier
     subsampled             = NFCORE_SEQINSPECTOR.out.subsampled
 }
 
@@ -188,6 +191,11 @@ output {
                             : "reports/${tool}/${meta.id}/")
         }
     }
+    somalier {
+        path { meta, _somalier ->
+            "somalier/${meta.id}/"
+        }
+    }
     subsampled {
         path { meta, _fastq ->
             "subsampled/${meta.id}/"
@@ -217,6 +225,7 @@ workflow NFCORE_SEQINSPECTOR {
     kraken2_save_reads
     kraken2_save_readclassifications
     save_bbmap_clumpify_reads
+    somalier_sites
 
     main:
     //
@@ -245,6 +254,7 @@ workflow NFCORE_SEQINSPECTOR {
         kraken2_save_reads,
         kraken2_save_readclassifications,
         save_bbmap_clumpify_reads,
+        somalier_sites,
     )
 
     emit:
@@ -257,5 +267,6 @@ workflow NFCORE_SEQINSPECTOR {
     plots_groups   = SEQINSPECTOR.out.plots_groups // channel: /path/to/multiqc_report.html
     report_global  = SEQINSPECTOR.out.report_global // channel: /path/to/multiqc_report.html
     report_groups  = SEQINSPECTOR.out.report_groups // channel: /path/to/multiqc_report.html
+    somalier       = SEQINSPECTOR.out.somalier
     subsampled     = SEQINSPECTOR.out.subsampled
 }

@@ -30,6 +30,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and can generat
 - [Picard CollectHsMetrics](#picard-collecthsmetrics) - Collect alignment QC metrics of hybrid-selection data
 - [Picard CollectMultipleMetrics](#picard-collectmultiplemetrics) - Combine BAM and BAI outputs for Picard
 - [Riker](#riker) - BAM-level QC metrics collection
+- [somalier](#somalier) - Sample identity and relatedness
 - [Kraken2](#kraken2) - Phylogenetic assignment of reads using k-mers
 - [Krona](#krona) - Interactive visualization of Kraken2 results
 - [MultiQC](#multiqc) - Aggregate report describing results and QC from the whole pipeline
@@ -343,6 +344,23 @@ Optionally supply `--rna_ribosomal_intervals` to union explicit rRNA intervals w
   - `*.isize-histogram.txt`: Insert size histogram.
   - `*.wgs-metrics.txt`: Whole-genome coverage summary metrics.
   - `*.wgs-coverage.txt`: Per-depth coverage histogram.
+
+</details>
+
+### somalier
+
+[somalier](https://github.com/brentp/somalier) genotypes a set of polymorphic sites in each sample and compares the samples of a batch with each other.
+The MultiQC report shows the relatedness of all sample pairs, which reveals sample swaps and unexpected duplicates.
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `somalier/[sample_id]/`
+  - `*.somalier`: Genotype digest of the sample.
+- `reports/somalier/[batch]/`
+  - `*.html`: Interactive somalier report.
+  - `*.pairs.tsv`: Relatedness, IBS0 and IBS2 of each sample pair.
+  - `*.samples.tsv`: Per sample statistics such as depth, heterozygosity and X/Y coverage.
 
 </details>
 

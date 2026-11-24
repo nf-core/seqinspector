@@ -32,6 +32,8 @@ fn_clean_trim:
 #    and: "SampleName_01_2" -> "SampleName #01_2"
 sample_names_replace_regex: true
 sample_names_replace:
+  # somalier: "SampleName_01__SMtag" -> "SampleName_01"
+  "^(.+_\\d{2,})__.+$": "\\1"
   "(.+)_(\\d{2,}|\\d{2,}_[12])$": "\\1 #\\2"
 
 table_sample_merge:

@@ -32,4 +32,5 @@ reports/picard_collectmultiplemetrics/*/base_distribution_by_cycle_metrics
 reports/picard_collectmultiplemetrics/*/quality_by_cycle_metrics
 reports/picard_collectmultiplemetrics/*/quality_distribution_metrics
 reports/sequali/**
+reports/somalier/*/*.html
 reports/toulligqc/**
