@@ -1,0 +1,234 @@
+{
+    "synthetic - identity, attribution, relate, contamination - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.summary.samples.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.attribution.pairs.tsv.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.longitudinal.pairs.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.relatedness_flags.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "4": [
+                    
+                ],
+                "5": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "SOMALIERCONTAM_REPORT",
+                        "somalier_contam",
+                        "test_summary_mqc.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "6": [
+                    [
+                        "SOMALIERCONTAM_REPORT",
+                        "somalier_contam",
+                        "1.1.0"
+                    ]
+                ],
+                "7": [
+                    [
+                        "SOMALIERCONTAM_REPORT",
+                        "python",
+                        "3.12.8"
+                    ]
+                ],
+                "attribution_pairs": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.attribution.pairs.tsv.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "flags": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.relatedness_flags.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "heatmap": [
+                    
+                ],
+                "longitudinal": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.longitudinal.pairs.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "multiqc": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "SOMALIERCONTAM_REPORT",
+                        "somalier_contam",
+                        "test_summary_mqc.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "summary": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.summary.samples.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_python": [
+                    [
+                        "SOMALIERCONTAM_REPORT",
+                        "python",
+                        "3.12.8"
+                    ]
+                ],
+                "versions_somalier_contam": [
+                    [
+                        "SOMALIERCONTAM_REPORT",
+                        "somalier_contam",
+                        "1.1.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-11-24T21:03:57.000857",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.6"
+        }
+    },
+    "synthetic - identity, attribution, relate, contamination": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.summary.samples.tsv:md5,50b1da1ad6e19bc388b1bbcf42b98303"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.longitudinal.pairs.tsv:md5,49eb4cf3298df1c8d8fe701f5b286d65"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.relatedness_flags.tsv:md5,8ffb6de2b30ea3ba0465c59f6995f814"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "SOMALIERCONTAM_REPORT",
+                    "somalier_contam",
+                    [
+                        "test_generalstats_mqc.tsv:md5,59c9ba7fda5e01ba6c9100384003b7cc",
+                        "test_summary_mqc.tsv:md5,793ab2d6bebc2ce8ecbf625b51b5c70e"
+                    ]
+                ]
+            ],
+            [
+                "receiver\tcandidate\tn_sites\tn_informative\talpha_source\talpha_unknown_same_sites\tllr_vs_unknown\tllr_vs_clean\thom_discordance\tn_both_hom\tsame_genotype_group\tcandidate_individual\tcandidate_role\tsomalier_relatedness\tsomalier_concordance\tsomalier_ibs0\tsomalier_n\tsomalier_anchored_mle",
+                "P1_N\tP1_T\t164\t0\t0\t0\t0\t0\t0\t164\tTrue\tP1\tcohort\t1\t1\t0\t315\t0",
+                "P1_N\tP2_A\t164\t88\t0\t0\t0\t0\t0.2897\t107\tFalse\tP2\tcohort\t0.036\t0\t31\t315\t",
+                "P1_N\tP3_A\t164\t89\t0\t0\t0\t0\t0.2347\t98\tFalse\tP3\tcohort\t0.476\t0\t7\t229\t",
+                "P1_N\tP4_A\t164\t88\t0\t0\t0\t0\t0.2083\t96\tFalse\tP4\tcohort\t0.456\t0\t7\t232\t",
+                "P1_N\tP6_A\t164\t83\t0\t0\t0\t0\t0.2136\t103\tFalse\tP6\tcohort\t0.214\t0\t22\t318\t",
+                "P1_T\tP1_N\t164\t0\t0\t0\t0\t0\t0\t164\tTrue\tP1\tcohort\t1\t1\t0\t315\t0",
+                "P1_T\tP2_A\t164\t88\t0\t0\t0\t0\t0.2897\t107\tFalse\tP2\tcohort\t0.065\t0\t29\t310\t",
+                "P1_T\tP3_A\t164\t89\t0\t0\t0\t0\t0.2347\t98\tFalse\tP3\tcohort\t0.498\t0\t6\t225\t",
+                "P1_T\tP4_A\t164\t88\t0\t0\t0\t0\t0.2083\t96\tFalse\tP4\tcohort\t0.456\t0\t7\t230\t",
+                "P1_T\tP6_A\t164\t83\t0\t0\t0\t0\t0.2136\t103\tFalse\tP6\tcohort\t0.215\t0\t22\t313\t",
+                "P2_A\tP1_N\t196\t120\t0\t0\t0\t0\t0.2897\t107\tFalse\tP1\tcohort\t0.036\t0\t31\t315\t",
+                "P2_A\tP1_T\t196\t120\t0\t0\t0\t0\t0.2897\t107\tFalse\tP1\tcohort\t0.065\t0\t29\t310\t",
+                "P2_A\tP3_A\t196\t113\t0\t0\t0\t0\t0.2655\t113\tFalse\tP3\tcohort\t0.545\t0.944\t1\t224\t",
+                "P2_A\tP4_A\t196\t106\t0\t0\t0\t0\t0.2373\t118\tFalse\tP4\tcohort\t0.284\t0\t14\t228\t",
+                "P2_A\tP6_A\t196\t124\t0\t0\t0\t0\t0.3571\t112\tFalse\tP6\tcohort\t-0.217\t0\t40\t313\t",
+                "P3_A\tP2_A\t180\t97\t0.0485\t0.047\t103.2\t625.6\t0.2655\t113\tFalse\tP2\tcohort\t0.545\t0.944\t1\t224\t",
+                "P3_A\tP1_N\t180\t105\t0.0305\t0.047\t-211.5\t310.8\t0.2347\t98\tFalse\tP1\tcohort\t0.476\t0\t7\t229\t",
+                "P3_A\tP1_T\t180\t105\t0.0305\t0.047\t-211.5\t310.8\t0.2347\t98\tFalse\tP1\tcohort\t0.498\t0\t6\t225\t",
+                "P3_A\tP6_A\t180\t109\t0.0275\t0.047\t-232.2\t290.1\t0.297\t101\tFalse\tP6\tcohort\t0.251\t0\t14\t228\t",
+                "P3_A\tP4_A\t180\t107\t0.0275\t0.047\t-233.4\t288.9\t0.2772\t101\tFalse\tP4\tcohort\t0.451\t0\t8\t165\t",
+                "P4_A\tP1_N\t181\t105\t0.0255\t0.0365\t-140.7\t227.6\t0.2083\t96\tFalse\tP1\tcohort\t0.456\t0\t7\t232\t",
+                "P4_A\tP1_T\t181\t105\t0.0255\t0.0365\t-140.7\t227.6\t0.2083\t96\tFalse\tP1\tcohort\t0.456\t0\t7\t230\t",
+                "P4_A\tP3_A\t181\t108\t0.0235\t0.0365\t-150\t218.4\t0.2772\t101\tFalse\tP3\tcohort\t0.451\t0\t8\t165\t",
+                "P4_A\tP6_A\t181\t106\t0.02\t0.0365\t-189.3\t179\t0.2991\t107\tFalse\tP6\tcohort\t0.28\t0\t14\t231\t",
+                "P4_A\tP2_A\t181\t91\t0.018\t0.0365\t-233.4\t135\t0.2373\t118\tFalse\tP2\tcohort\t0.284\t0\t14\t228\t",
+                "P6_A\tP1_N\t184\t103\t0\t0\t0\t0\t0.2136\t103\tFalse\tP1\tcohort\t0.214\t0\t22\t318\t",
+                "P6_A\tP1_T\t184\t103\t0\t0\t0\t0\t0.2136\t103\tFalse\tP1\tcohort\t0.215\t0\t22\t313\t",
+                "P6_A\tP2_A\t184\t112\t0\t0\t0\t0\t0.3571\t112\tFalse\tP2\tcohort\t-0.217\t0\t40\t313\t",
+                "P6_A\tP3_A\t184\t113\t0\t0\t0\t0\t0.297\t101\tFalse\tP3\tcohort\t0.251\t0\t14\t228\t",
+                "P6_A\tP4_A\t184\t109\t0\t0\t0\t0\t0.2991\t107\tFalse\tP4\tcohort\t0.28\t0\t14\t231\t"
+            ],
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.cohort.attribution_llr.png"
+                ]
+            ],
+            {
+                "versions_python": [
+                    [
+                        "SOMALIERCONTAM_REPORT",
+                        "python",
+                        "3.12.8"
+                    ]
+                ],
+                "versions_somalier_contam": [
+                    [
+                        "SOMALIERCONTAM_REPORT",
+                        "somalier_contam",
+                        "1.1.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-11-24T21:34:50.476654",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.6"
+        }
+    }
+}

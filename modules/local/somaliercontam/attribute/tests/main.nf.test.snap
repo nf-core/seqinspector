@@ -1,0 +1,160 @@
+{
+    "synthetic - somalier x6, sample table, sites - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test.shard0",
+                            "shard_index": 0,
+                            "n_shards": 1
+                        },
+                        "test.shard0.attribution_pairs.tsv.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test.shard0",
+                            "shard_index": 0,
+                            "n_shards": 1
+                        },
+                        "test.shard0.attribution_self.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    [
+                        "SOMALIERCONTAM_ATTRIBUTE",
+                        "somalier_contam",
+                        "1.1.0"
+                    ]
+                ],
+                "3": [
+                    [
+                        "SOMALIERCONTAM_ATTRIBUTE",
+                        "python",
+                        "3.12.8"
+                    ]
+                ],
+                "pairs": [
+                    [
+                        {
+                            "id": "test.shard0",
+                            "shard_index": 0,
+                            "n_shards": 1
+                        },
+                        "test.shard0.attribution_pairs.tsv.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "self": [
+                    [
+                        {
+                            "id": "test.shard0",
+                            "shard_index": 0,
+                            "n_shards": 1
+                        },
+                        "test.shard0.attribution_self.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_python": [
+                    [
+                        "SOMALIERCONTAM_ATTRIBUTE",
+                        "python",
+                        "3.12.8"
+                    ]
+                ],
+                "versions_somalier_contam": [
+                    [
+                        "SOMALIERCONTAM_ATTRIBUTE",
+                        "somalier_contam",
+                        "1.1.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-11-24T21:02:59.989073",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.6"
+        }
+    },
+    "synthetic - somalier x6, sample table, sites": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test.shard0",
+                            "shard_index": 0,
+                            "n_shards": 1
+                        },
+                        "test.shard0.attribution_pairs.tsv.gz:md5,b667e4a639355a97a594f9379e7763b2"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test.shard0",
+                            "shard_index": 0,
+                            "n_shards": 1
+                        },
+                        "test.shard0.attribution_self.tsv:md5,fb2a28b205627808176bc680f6f33497"
+                    ]
+                ],
+                "2": [
+                    [
+                        "SOMALIERCONTAM_ATTRIBUTE",
+                        "somalier_contam",
+                        "1.1.0"
+                    ]
+                ],
+                "3": [
+                    [
+                        "SOMALIERCONTAM_ATTRIBUTE",
+                        "python",
+                        "3.12.8"
+                    ]
+                ],
+                "pairs": [
+                    [
+                        {
+                            "id": "test.shard0",
+                            "shard_index": 0,
+                            "n_shards": 1
+                        },
+                        "test.shard0.attribution_pairs.tsv.gz:md5,b667e4a639355a97a594f9379e7763b2"
+                    ]
+                ],
+                "self": [
+                    [
+                        {
+                            "id": "test.shard0",
+                            "shard_index": 0,
+                            "n_shards": 1
+                        },
+                        "test.shard0.attribution_self.tsv:md5,fb2a28b205627808176bc680f6f33497"
+                    ]
+                ],
+                "versions_python": [
+                    [
+                        "SOMALIERCONTAM_ATTRIBUTE",
+                        "python",
+                        "3.12.8"
+                    ]
+                ],
+                "versions_somalier_contam": [
+                    [
+                        "SOMALIERCONTAM_ATTRIBUTE",
+                        "somalier_contam",
+                        "1.1.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-11-24T21:02:54.582859",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.6"
+        }
+    }
+}
