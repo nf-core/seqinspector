@@ -412,6 +412,8 @@ That database maps -mers to the lowest common ancestor (LCA) of all genomes know
 
 </details>
 
+For BAM input, Kraken2 classifies the read pairs where both mates are unmapped.
+
 The main taxonomic classification file from Kraken2 is the `*report.txt` file.
 It gives you the most information for a single sample.
 You will only receive the `.fastq` and `*classifiedreads.txt` file if you supply `--kraken2_save_reads` and/or `--kraken2_save_readclassifications` parameters to the pipeline.

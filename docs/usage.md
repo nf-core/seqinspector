@@ -64,6 +64,7 @@ Each row must provide either a `bam` file or `fastq_1` (and optionally `fastq_2`
 BAM input is only processed by the tools that support it:
 
 - FastQC, Sequali and ToulligQC run on every BAM file.
+- Kraken2 runs on the read pairs of paired-end BAM files where both mates are unmapped. For aligned BAM files this screens the reads that did not align to the reference genome.
 - Picard CollectHsMetrics, Picard CollectMultipleMetrics and Riker run on aligned, coordinate-sorted BAM files that have an index in the `bai` column. The pipeline does not realign these files, `--fasta` has to be the reference they were aligned to.
 
 | Column       | Description                                                                                                                                                                            |

@@ -18,6 +18,7 @@ include { MULTIQC as MULTIQC_PER_TAG   } from '../modules/nf-core/multiqc'
 include { MULTIQCSAV as MULTIQC_GLOBAL } from '../modules/nf-core/multiqcsav'
 include { RIKER_MULTI                  } from '../modules/nf-core/riker/multi'
 include { RUNDIRPARSER                 } from '../modules/local/rundirparser'
+include { SAMTOOLS_FASTQ               } from '../modules/nf-core/samtools/fastq'
 include { SAMTOOLS_INDEX               } from '../modules/nf-core/samtools/index'
 include { SEQFU_STATS                  } from '../modules/nf-core/seqfu/stats'
 include { SEQKIT_STATS                 } from '../modules/nf-core/seqkit/stats'
@@ -309,8 +310,19 @@ workflow SEQINSPECTOR {
     //   Run KRAKEN2 and produce KRONA plots
 
     if ('kraken2' in tools) {
+        //
+        // MODULE: SAMTOOLS_FASTQ
+        //   BAM input is screened on the read pairs that did not align
+
+        def interleave = false
+
+        SAMTOOLS_FASTQ(
+            ch_samplesheet_bam.map { meta, bam -> [meta + [single_end: false], bam[0]] },
+            interleave,
+        )
+
         FASTQ_QC_PHYLOGENETIC(
-            'kraken2' in subsample_tools ? ch_sample : ch_samplesheet_fastq,
+            ('kraken2' in subsample_tools ? ch_sample : ch_samplesheet_fastq).mix(SAMTOOLS_FASTQ.out.fastq),
             kraken2_db,
             kraken2_save_reads,
             kraken2_save_readclassifications,
