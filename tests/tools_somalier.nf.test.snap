@@ -8,10 +8,10 @@
             "No BAM files",
             "No warnings",
             [
-                "[ERROR] somalier was requested, but it needs a reference genome (--genome or --fasta) and --somalier_sites"
+                "somalier was requested, but it needs a reference genome (--genome or --fasta) and --somalier_sites"
             ]
         ],
-        "timestamp": "2026-11-24T20:56:34.263782",
+        "timestamp": "2026-11-24T22:42:20.403647",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.6"
