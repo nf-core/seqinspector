@@ -383,6 +383,8 @@ The MultiQC report shows the result of each sample in the section "Contamination
 
 </details>
 
+With the `sexcheck` tool, the summary also holds the columns `sex_annotated`, `sex_inferred` and `sex_check`. `sex_check` is `ok`, `not_annotated`, `undetermined` or starts with `SEX_MISMATCH`.
+
 The `call` column of the summary has one of these values:
 
 - `clean`: No source found and no contamination above the threshold.

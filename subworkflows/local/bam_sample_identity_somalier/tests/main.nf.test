@@ -27,6 +27,7 @@ nextflow_workflow {
                 input[4] = channel.empty()
                 input[5] = false
                 input[6] = 250
+                input[7] = false
                 """
             }
         }
@@ -67,6 +68,7 @@ nextflow_workflow {
                 input[4] = channel.of([[id: 'P5_X', individual: 'P5'], file(data + 'background/P5_X.somalier', checkIfExists: true)])
                 input[5] = true
                 input[6] = 4
+                input[7] = false
                 """
             }
         }
@@ -84,6 +86,46 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out.contamination.collect { meta, file_ -> [meta, file_.toString().endsWith('.png') ? file(file_.toString()).name : file_] }.sort { row -> row[1].toString().tokenize('/').last() },
                     topics.multiqc_files.findAll { _meta, _process, tool, _file -> tool == 'somalier_contam' }.collect { meta, _process, _tool, file_ -> [meta, file_] },
+                ).match() },
+            )
+        }
+    }
+
+    test("Contamination and sex check") {
+        when {
+            workflow {
+                """
+                def data = params.pipelines_testdata_base_path + 'seqinspector/data/sample_identity/'
+                input[0] = channel.of(
+                    [id: 'P1_N', tags: ['a'], individual: 'P1', batch: [], sex: 'female'],
+                    [id: 'P1_T', tags: ['a'], individual: 'P1', batch: [], sex: 'female'],
+                    [id: 'P2_A', tags: ['a'], individual: 'P2', batch: [], sex: 'M'],
+                    [id: 'P3_A', tags: ['a'], individual: 'P3', batch: [], sex: 'female'],
+                    [id: 'P4_A', tags: ['b'], individual: 'P4', batch: [], sex: []],
+                    [id: 'P6_A', tags: ['b'], individual: 'P6', batch: [], sex: 'female'],
+                ).map { meta -> [meta, file(data + 'bam/' + meta.id + '.bam', checkIfExists: true), file(data + 'bam/' + meta.id + '.bam.bai', checkIfExists: true)] }
+                input[1] = channel.of([id: 'genome'], file(data + 'references/genome.fasta', checkIfExists: true)).collect()
+                input[2] = channel.of([id: 'genome'], file(data + 'references/genome.fasta.fai', checkIfExists: true)).collect()
+                input[3] = channel.of([id: 'sites'], file(data + 'references/sites.vcf.gz', checkIfExists: true)).collect()
+                input[4] = channel.empty()
+                input[5] = true
+                input[6] = 250
+                input[7] = true
+                """
+            }
+        }
+
+        then {
+            def summary = file(workflow.out.contamination.find { _meta, file_ -> file_.toString().endsWith('.summary.samples.tsv') }[1]).readLines()
+            def header = summary[0].tokenize('\t')
+            def rows = summary.drop(1).collect { line -> [header, line.split('\t', -1) as List].transpose().collectEntries() }
+            assertAll(
+                { assert workflow.success },
+                { assert rows.collect { row -> row.call } == ['clean', 'clean', 'clean', 'source_identified', 'contaminated_source_not_in_cohort', 'clean'] },
+                { assert rows.collect { row -> row.sex_inferred } == ['female', 'female', 'male', 'female', 'male', 'male'] },
+                { assert rows.collect { row -> row.sex_check } == ['ok', 'ok', 'ok', 'ok', 'not_annotated', 'SEX_MISMATCH(Y_present:swap_or_male_contamination?)'] },
+                { assert snapshot(
+                    workflow.out.contamination.findAll { _meta, file_ -> file_.toString().endsWith('.summary.samples.tsv') },
                 ).match() },
             )
         }
@@ -108,6 +150,7 @@ nextflow_workflow {
                 input[4] = channel.empty()
                 input[5] = false
                 input[6] = 250
+                input[7] = false
                 """
             }
         }

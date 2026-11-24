@@ -1,7 +1,8 @@
 //
-// Sample identity, relatedness and contamination of aligned BAM files with somalier
+// Sample identity, relatedness, contamination and sex of aligned BAM files with somalier
 //
 
+include { SAMTOOLS_COVERAGE        } from '../../../modules/nf-core/samtools/coverage'
 include { SOMALIERCONTAM_ATTRIBUTE } from '../../../modules/local/somaliercontam/attribute'
 include { SOMALIERCONTAM_IDENTITY  } from '../../../modules/local/somaliercontam/identity'
 include { SOMALIERCONTAM_REPORT    } from '../../../modules/local/somaliercontam/report'
@@ -21,18 +22,19 @@ def somalierSampleName(somalier) {
 
 // Row of the sample table read by somalier_contam.py, the digests are staged as somalier/<name>
 def sampleTableRow(meta, somalier, role) {
-    return [meta.id, "somalier/${somalier.name}", meta.individual ?: '', role == 'cohort' ? (meta.batch ?: '') : '', role, '', ''].join('\t')
+    return [meta.id, "somalier/${somalier.name}", meta.individual ?: '', role == 'cohort' ? (meta.batch ?: '') : '', role, '', meta.sex ?: ''].join('\t')
 }
 
 workflow BAM_SAMPLE_IDENTITY_SOMALIER {
     take:
-    ch_bam_bai // channel: [mandatory] [ val(meta), path(bam), path(bai) ], meta: id, tags, individual, batch
+    ch_bam_bai // channel: [mandatory] [ val(meta), path(bam), path(bai) ], meta: id, tags, individual, batch, sex
     ch_fasta   // channel: [mandatory] [ val(meta), path(fasta) ]
     ch_fai     // channel: [mandatory] [ val(meta), path(fai) ]
     ch_sites   // channel: [mandatory] [ val(meta), path(vcf) ]
     ch_background // channel: [optional] [ val(meta), path(somalier) ], digests of samples that are only candidate sources, meta: id, individual
     run_contamination // boolean: estimate contamination and attribute it to a source sample
     attribution_chunk_size // integer: number of samples per SOMALIERCONTAM_ATTRIBUTE task
+    run_sexcheck // boolean: compare the annotated sex with the sex inferred from chrY reads and X heterozygosity
 
     main:
     SOMALIER_EXTRACT(ch_bam_bai, ch_fasta, ch_fai, ch_sites)
@@ -75,6 +77,15 @@ workflow BAM_SAMPLE_IDENTITY_SOMALIER {
     def ch_summary = channel.empty()
 
     if (run_contamination) {
+        //
+        // Reads per contig for the sex check
+        //
+        def ch_coverage = channel.empty()
+        if (run_sexcheck) {
+            SAMTOOLS_COVERAGE(ch_bam_bai, ch_fasta.join(ch_fai).collect())
+            ch_coverage = SAMTOOLS_COVERAGE.out.coverage
+        }
+
         def table_header = "sample\tfile\tindividual\tbatch\trole\tinput\tsex"
 
         def ch_all = SOMALIER_EXTRACT.out.extract
@@ -168,7 +179,11 @@ workflow BAM_SAMPLE_IDENTITY_SOMALIER {
                 .collect(sort: true)
                 .ifEmpty([])
                 .map { pairs -> [[id: 'contamination'], pairs] },
-            [[id: 'coverage'], []],
+            ch_coverage
+                .map { _meta, txt -> txt }
+                .collect(sort: { a, b -> a.name <=> b.name })
+                .ifEmpty([])
+                .map { coverage -> [[id: 'coverage'], coverage] },
         )
 
         ch_summary = SOMALIERCONTAM_REPORT.out.summary.mix(

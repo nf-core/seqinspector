@@ -113,6 +113,11 @@
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/riker/multi/riker-multi.diff"
                     },
+                    "samtools/coverage": {
+                        "branch": "master",
+                        "git_sha": "9804fc814f848fd7100b2203e35ff6d5321d031f",
+                        "installed_by": ["modules"]
+                    },
                     "samtools/faidx": {
                         "branch": "master",
                         "git_sha": "80eb474060aa4aa6d7b4b00e0dc785174f156a28",

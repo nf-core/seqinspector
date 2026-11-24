@@ -14,16 +14,12 @@ nextflow_pipeline {
         tools_bundle: null,
     ]
 
-    // The samplesheets hold the sex column of a tool that is not part of the pipeline yet
-    def ignore_unknown_columns = ['unidentified headers']
-
     def test_scenario = [
         [
             name: "Sample identity data test - somalier_contamination",
             params: somalier_params + [
                 input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.2/sample_identity.csv',
             ],
-            snapshot_ignore: ignore_unknown_columns,
         ],
         [
             name: "Sample identity data test - somalier_contamination - batches and background",
@@ -32,14 +28,12 @@ nextflow_pipeline {
                 somalier_background: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.2/sample_identity_background.csv',
                 somalier_attribution_chunk_size: 2,
             ],
-            snapshot_ignore: ignore_unknown_columns,
         ],
         [
             name: "Sample identity data test - somalier_contamination - stub",
             params: somalier_params + [
                 input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.2/sample_identity.csv',
             ],
-            snapshot_ignore: ignore_unknown_columns,
             stub: true,
         ],
     ]

@@ -375,6 +375,7 @@ workflow SEQINSPECTOR {
             : channel.empty(),
         'somalier_contamination' in tools,
         somalier_attribution_chunk_size,
+        'sexcheck' in tools,
     )
 
     //

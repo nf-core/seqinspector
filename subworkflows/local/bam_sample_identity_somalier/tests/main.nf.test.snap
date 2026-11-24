@@ -226,6 +226,27 @@
             "nextflow": "26.10.6"
         }
     },
+    "Contamination and sex check": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "somalier_contamination",
+                        "tags": [
+                            "a",
+                            "b"
+                        ]
+                    },
+                    "somalier_contamination.summary.samples.tsv:md5,57a2fdb0dfa53970cf0be492c277fcef"
+                ]
+            ]
+        ],
+        "timestamp": "2026-11-24T22:07:09.761153",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.6"
+        }
+    },
     "Contamination with a background sample": {
         "content": [
             [

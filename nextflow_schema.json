@@ -52,7 +52,7 @@
                 "tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to run",
-                    "pattern": "^((bbmap_clumpify|checkqc|chelae|fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|multiqcsav|picard_collecthsmetrics|picard_collectmultiplemetrics|riker|rundirparser|seqkit_stats|seqfu_stats|sequali|somalier|somalier_contamination|toulligqc)?,?)*(?<!,)$",
+                    "pattern": "^((bbmap_clumpify|checkqc|chelae|fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|multiqcsav|picard_collecthsmetrics|picard_collectmultiplemetrics|riker|rundirparser|seqkit_stats|seqfu_stats|sequali|sexcheck|somalier|somalier_contamination|toulligqc)?,?)*(?<!,)$",
                     "fa_icon": "fas fa-sort-amount-asc"
                 },
                 "tools_bundle": {
@@ -66,7 +66,7 @@
                 "skip_tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to skip - overrides any other means of tools selection",
-                    "pattern": "^((bbmap_clumpify|checkqc|chelae|fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|multiqcsav|picard_collecthsmetrics|picard_collectmultiplemetrics|riker|rundirparser|seqkit_stats|seqfu_stats|sequali|somalier|somalier_contamination|toulligqc)?,?)*(?<!,)$",
+                    "pattern": "^((bbmap_clumpify|checkqc|chelae|fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|multiqcsav|picard_collecthsmetrics|picard_collectmultiplemetrics|riker|rundirparser|seqkit_stats|seqfu_stats|sequali|sexcheck|somalier|somalier_contamination|toulligqc)?,?)*(?<!,)$",
                     "fa_icon": "fas fa-window-close "
                 },
                 "subsample_tools": {
@@ -190,6 +190,38 @@
                     "fa_icon": "fas fa-th-large",
                     "description": "Number of samples per source attribution task",
                     "help_text": "Large batches are split into chunks of this size, which run in parallel."
+                }
+            }
+        },
+        "sexcheck_options": {
+            "title": "Sex check options",
+            "type": "object",
+            "description": "Options for the comparison of annotated and inferred sex",
+            "default": "",
+            "properties": {
+                "sexcheck_min_mapq": {
+                    "type": "integer",
+                    "default": 30,
+                    "minimum": 0,
+                    "fa_icon": "fas fa-filter",
+                    "description": "Minimum mapping quality of the reads counted per chromosome",
+                    "help_text": "The filter removes reads of the pseudoautosomal and X-transposed regions from the chrY count."
+                },
+                "sexcheck_female_max_y_rpm": {
+                    "type": "number",
+                    "default": 50,
+                    "minimum": 0,
+                    "fa_icon": "fas fa-venus",
+                    "description": "chrY reads per million autosomal reads up to which a sample is called female",
+                    "help_text": "The default is not calibrated for every assay. Panels without chrY targets need lower thresholds than whole genome data."
+                },
+                "sexcheck_male_min_y_rpm": {
+                    "type": "number",
+                    "default": 200,
+                    "minimum": 0,
+                    "fa_icon": "fas fa-mars",
+                    "description": "chrY reads per million autosomal reads from which a sample is called male",
+                    "help_text": "The default is not calibrated for every assay. Panels without chrY targets need lower thresholds than whole genome data."
                 }
             }
         },
@@ -506,6 +538,9 @@
         },
         {
             "$ref": "#/$defs/somalier_options"
+        },
+        {
+            "$ref": "#/$defs/sexcheck_options"
         },
         {
             "$ref": "#/$defs/reference_genome_options"
