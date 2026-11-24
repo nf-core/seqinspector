@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#305](https://github.com/nf-core/seqinspector/pull/305) New tools bundle `identity` with `sexcheck`, `somalier` and `somalier_contamination` ([#300](https://github.com/nf-core/seqinspector/issues/300), [#288](https://github.com/nf-core/seqinspector/issues/288)) (@apeltzer)
 
+- [#306](https://github.com/nf-core/seqinspector/pull/306) Kraken2 screens the unmapped read pairs of BAM input ([#300](https://github.com/nf-core/seqinspector/issues/300)) (@apeltzer)
+
 ### `Fixed`
 
 ### `Changed`
