@@ -243,6 +243,12 @@ It is possible to also choose bundles of pre-specified tools using the `--tools_
 
 See the [parameters page](https://nf-co.re/seqinspector/parameters/#tools_bundle) for the list of available bundles and their contents.
 
+The `identity` bundle runs the sample identity, contamination and sex checks on aligned human data. Combine it with `--skip_tools` to leave out single checks:
+
+```bash
+--tools_bundle identity --skip_tools sexcheck
+```
+
 ### Available functionality and tools
 
 #### BWAMEM2 and alignment-based QC tools

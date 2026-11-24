@@ -385,6 +385,13 @@ def defineToolsList(input_bundle, input_tools, input_skip, sample_size) {
         tools_list << 'sequali'
     }
 
+    // bundles by application
+    if ('identity' in bundle_list) {
+        tools_list << 'sexcheck'
+        tools_list << 'somalier'
+        tools_list << 'somalier_contamination'
+    }
+
     // other
     if ('default' in bundle_list) {
         tools_list << 'fq_lint'
@@ -413,6 +420,14 @@ def defineToolsList(input_bundle, input_tools, input_skip, sample_size) {
     }
 
     tools_list = tools_list.sort().unique() - skip_list
+
+    // Skipping a tool also skips the tools that work on its results
+    if (!('somalier' in tools_list)) {
+        tools_list -= ['somalier_contamination']
+    }
+    if (!('somalier_contamination' in tools_list)) {
+        tools_list -= ['sexcheck']
+    }
 
     return tools_list
 }

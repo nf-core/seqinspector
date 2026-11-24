@@ -17,6 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#304](https://github.com/nf-core/seqinspector/pull/304) New tool `sexcheck` to compare the samplesheet column `sex` with the sex inferred from chrY reads and X heterozygosity ([#300](https://github.com/nf-core/seqinspector/issues/300)) (@apeltzer)
 
+- [#305](https://github.com/nf-core/seqinspector/pull/305) New tools bundle `identity` with `sexcheck`, `somalier` and `somalier_contamination` ([#300](https://github.com/nf-core/seqinspector/issues/300), [#288](https://github.com/nf-core/seqinspector/issues/288)) (@apeltzer)
+
 ### `Fixed`
 
 ### `Changed`

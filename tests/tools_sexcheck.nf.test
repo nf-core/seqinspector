@@ -21,6 +21,14 @@ nextflow_pipeline {
             params: sexcheck_params,
         ],
         [
+            name: "Sample identity data test - identity bundle without sexcheck",
+            params: sexcheck_params + [
+                tools: null,
+                tools_bundle: 'identity',
+                skip_tools: 'sexcheck',
+            ],
+        ],
+        [
             name: "Sample identity data test - sexcheck - stub",
             params: sexcheck_params,
             stub: true,
