@@ -13,6 +13,7 @@ workflow PREPARE_GENOME {
     fai // path(fai)
     genome // val('genome')
     tools // list('tools')
+    fastq_count // channel: val(number of samples with FASTQ input)
 
     main:
     // Initialize all channels that will be used to generate references files
@@ -26,7 +27,14 @@ workflow PREPARE_GENOME {
         ch_bwamem2 = channel.fromPath(bwamem2, checkIfExists: true).map { bwamem2_ -> [[id: genome], bwamem2_] }.collect()
     }
     else {
-        BWAMEM2_INDEX(ch_fasta.filter { 'picard_collecthsmetrics' in tools || 'picard_collectmultiplemetrics' in tools || 'riker' in tools })
+        // BAM input is not realigned, the index is only needed for FASTQ input
+        BWAMEM2_INDEX(
+            ch_fasta
+                .filter { 'picard_collecthsmetrics' in tools || 'picard_collectmultiplemetrics' in tools || 'riker' in tools }
+                .combine(fastq_count)
+                .filter { _meta, _fasta, count -> count > 0 }
+                .map { meta, fasta_, _count -> [meta, fasta_] }
+        )
         ch_bwamem2 = BWAMEM2_INDEX.out.index
     }
 

@@ -16,6 +16,7 @@ nextflow_workflow {
                 input[3] = null
                 input[4] = 'genome'
                 input[5] = ''
+                input[6] = channel.value(1)
                 """
             }
         }
@@ -42,6 +43,7 @@ nextflow_workflow {
                 input[3] = null
                 input[4] = 'genome'
                 input[5] = 'picard_collecthsmetrics'
+                input[6] = channel.value(1)
                 """
             }
         }
@@ -68,6 +70,7 @@ nextflow_workflow {
                 input[3] = null
                 input[4] = 'genome'
                 input[5] = 'picard_collecthsmetrics'
+                input[6] = channel.value(1)
                 """
             }
         }

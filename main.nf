@@ -75,6 +75,7 @@ workflow {
         params.fai,
         params.genome ?: 'custom',
         tools,
+        PIPELINE_INITIALISATION.out.samplesheet.filter { _meta, files -> !files[0].name.endsWith('.bam') }.count(),
     )
 
     // KRAKEN2_DB initialisation

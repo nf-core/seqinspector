@@ -1,0 +1,53 @@
+def pipelines_testdata_base_path = 'https://raw.githubusercontent.com/nf-core/test-datasets/'
+
+nextflow_pipeline {
+
+    name "Test pipeline"
+    script "../main.nf"
+
+    def test_scenario = [
+        [
+            name: "NovaSeq6000 unaligned BAM input - fastqc,sequali",
+            params: [
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.1/novaseq6000_bam.csv',
+                tools: 'fastqc,sequali',
+                tools_bundle: null,
+            ],
+        ],
+        [
+            name: "NovaSeq6000 unaligned BAM input - fastqc,sequali - stub",
+            params: [
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.1/novaseq6000_bam.csv',
+                tools: 'fastqc,sequali',
+                tools_bundle: null,
+            ],
+            stub: true,
+        ],
+        [
+            name: "Aligned BAM input with index - picard_collectmultiplemetrics",
+            params: [
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.2/sample_identity.csv',
+                genome: null,
+                fasta: pipelines_testdata_base_path + 'seqinspector/data/sample_identity/references/genome.fasta',
+                tools: 'picard_collectmultiplemetrics',
+                tools_bundle: null,
+            ],
+        ],
+        [
+            name: "Aligned BAM input with index - picard_collectmultiplemetrics - stub",
+            params: [
+                input: pipelines_testdata_base_path + 'seqinspector/samplesheet/1.2/sample_identity.csv',
+                genome: null,
+                fasta: pipelines_testdata_base_path + 'seqinspector/data/sample_identity/references/genome.fasta',
+                tools: 'picard_collectmultiplemetrics',
+                tools_bundle: null,
+            ],
+            stub: true,
+        ],
+    ]
+
+    // Generate tests for each scenario
+    test_scenario.each { scenario ->
+        test(scenario.name, UTILS.getTest(scenario))
+    }
+}

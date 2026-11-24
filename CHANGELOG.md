@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#291](https://github.com/nf-core/seqinspector/pull/291) Support ONT run folders in RUNDIRPARSER: parse the MinKNOW `report_*.json` into the run metadata table (including read N50 and mean read length), and add `rundirparser` to the `ont` bundle ([#289](https://github.com/nf-core/seqinspector/issues/289)) (@chriswyatt1)
 
-- [#PRNUM](https://github.com/nf-core/seqinspector/pull/PRNUM) BAM input through the samplesheet columns `bam` and `bai`. FastQC, Sequali and ToulligQC run on every BAM file, Picard and Riker run on indexed, aligned BAM files without realignment ([#290](https://github.com/nf-core/seqinspector/issues/290)) (@FernandoDuarteF, @apeltzer)
+- [#301](https://github.com/nf-core/seqinspector/pull/301) BAM input through the samplesheet columns `bam` and `bai`. FastQC, Sequali and ToulligQC run on every BAM file, Picard and Riker run on indexed, aligned BAM files without realignment ([#290](https://github.com/nf-core/seqinspector/issues/290)) (@FernandoDuarteF, @apeltzer)
 
 ### `Fixed`
 
