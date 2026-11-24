@@ -52,7 +52,7 @@
                 "tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to run",
-                    "pattern": "^((bbmap_clumpify|checkqc|chelae|fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|multiqcsav|picard_collecthsmetrics|picard_collectmultiplemetrics|riker|rundirparser|seqkit_stats|seqfu_stats|sequali|toulligqc)?,?)*(?<!,)$",
+                    "pattern": "^((bbmap_clumpify|checkqc|chelae|fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|multiqcsav|picard_collecthsmetrics|picard_collectmultiplemetrics|riker|rundirparser|seqkit_stats|seqfu_stats|sequali|somalier|toulligqc)?,?)*(?<!,)$",
                     "fa_icon": "fas fa-sort-amount-asc"
                 },
                 "tools_bundle": {
@@ -66,7 +66,7 @@
                 "skip_tools": {
                     "type": "string",
                     "description": "Comma-separated string of tools to skip - overrides any other means of tools selection",
-                    "pattern": "^((bbmap_clumpify|checkqc|chelae|fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|multiqcsav|picard_collecthsmetrics|picard_collectmultiplemetrics|riker|rundirparser|seqkit_stats|seqfu_stats|sequali|toulligqc)?,?)*(?<!,)$",
+                    "pattern": "^((bbmap_clumpify|checkqc|chelae|fastp|fastqc|fastqe|fastqscreen|fq_lint|kraken2|multiqcsav|picard_collecthsmetrics|picard_collectmultiplemetrics|riker|rundirparser|seqkit_stats|seqfu_stats|sequali|somalier|toulligqc)?,?)*(?<!,)$",
                     "fa_icon": "fas fa-window-close "
                 },
                 "subsample_tools": {
@@ -138,6 +138,31 @@
                     "fa_icon": "fas fa-cog",
                     "description": "Arguments to pass to riker multi",
                     "help_text": "Arguments to pass to riker multi. Defaults to `--tools alignment basic isize`. Use `--tools` to select which collectors to run (e.g. alignment, basic, error, isize, wgs, gcbias, hybcap)."
+                }
+            }
+        },
+        "somalier_options": {
+            "title": "somalier options",
+            "type": "object",
+            "description": "Options for the sample identity checks with somalier",
+            "default": "",
+            "properties": {
+                "somalier_sites": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "pattern": "^\\S+\\.vcf(\\.gz)?$",
+                    "fa_icon": "fas fa-map-marker-alt",
+                    "description": "VCF file with the polymorphic sites that somalier extracts",
+                    "help_text": "Required for the `somalier` tool. The sites have to match the build and the contig names of the reference genome. Sites files for GRCh37 and GRCh38 are available from the [somalier releases](https://github.com/brentp/somalier/releases)."
+                },
+                "somalier_min_depth": {
+                    "type": "integer",
+                    "default": 7,
+                    "minimum": 1,
+                    "fa_icon": "fas fa-ruler-vertical",
+                    "description": "Minimum read depth of a site to genotype it",
+                    "help_text": "The default suits whole genome data. Deeply sequenced panels allow a higher value such as 20."
                 }
             }
         },
@@ -451,6 +476,9 @@
         },
         {
             "$ref": "#/$defs/riker_options"
+        },
+        {
+            "$ref": "#/$defs/somalier_options"
         },
         {
             "$ref": "#/$defs/reference_genome_options"

@@ -1,0 +1,229 @@
+{
+    "Two batches, one individual with two samples - stub": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "P1_N",
+                        "tags": [
+                            "a"
+                        ],
+                        "individual": "P1",
+                        "batch": "RUN_A"
+                    },
+                    "P1_N.somalier"
+                ],
+                [
+                    {
+                        "id": "P1_T",
+                        "tags": [
+                            "a"
+                        ],
+                        "individual": "P1",
+                        "batch": "RUN_A"
+                    },
+                    "P1_T.somalier"
+                ],
+                [
+                    {
+                        "id": "P3_A",
+                        "tags": [
+                            "b"
+                        ],
+                        "individual": "P3",
+                        "batch": "RUN_B"
+                    },
+                    "P3_A.somalier"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "RUN_A",
+                        "tags": [
+                            "a"
+                        ]
+                    },
+                    "RUN_A.html"
+                ],
+                [
+                    {
+                        "id": "RUN_A",
+                        "tags": [
+                            "a"
+                        ]
+                    },
+                    "RUN_A.pairs.tsv"
+                ],
+                [
+                    {
+                        "id": "RUN_A",
+                        "tags": [
+                            "a"
+                        ]
+                    },
+                    "RUN_A.samples.tsv"
+                ],
+                [
+                    {
+                        "id": "RUN_B",
+                        "tags": [
+                            "b"
+                        ]
+                    },
+                    "RUN_B.html"
+                ],
+                [
+                    {
+                        "id": "RUN_B",
+                        "tags": [
+                            "b"
+                        ]
+                    },
+                    "RUN_B.pairs.tsv"
+                ],
+                [
+                    {
+                        "id": "RUN_B",
+                        "tags": [
+                            "b"
+                        ]
+                    },
+                    "RUN_B.samples.tsv"
+                ]
+            ]
+        ],
+        "timestamp": "2026-11-24T20:57:13.469504",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.6"
+        }
+    },
+    "Two batches, one individual with two samples": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "P1_N",
+                        "tags": [
+                            "a"
+                        ],
+                        "individual": "P1",
+                        "batch": "RUN_A"
+                    },
+                    "P1_N.somalier:md5,5045d6d12b9ce29ebc214dd7ca22b376"
+                ],
+                [
+                    {
+                        "id": "P1_T",
+                        "tags": [
+                            "a"
+                        ],
+                        "individual": "P1",
+                        "batch": "RUN_A"
+                    },
+                    "P1_T.somalier:md5,3e29595cbf5e3cce97bcdb15df255a22"
+                ],
+                [
+                    {
+                        "id": "P2_A",
+                        "tags": [
+                            "b"
+                        ],
+                        "individual": "P2",
+                        "batch": "RUN_A"
+                    },
+                    "P2_A.somalier:md5,1b567e47af0b4c1f11fba1d320d0c5b9"
+                ],
+                [
+                    {
+                        "id": "P3_A",
+                        "tags": [
+                            "b"
+                        ],
+                        "individual": "P3",
+                        "batch": "RUN_B"
+                    },
+                    "P3_A.somalier:md5,a2a69164807a01564aeb8fc43650b375"
+                ],
+                [
+                    {
+                        "id": "P4_A",
+                        "tags": [
+                            "b"
+                        ],
+                        "individual": [
+                            
+                        ],
+                        "batch": "RUN_B"
+                    },
+                    "P4_A.somalier:md5,c43bd8bd26b243c67fcf1116f9d37642"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "RUN_A",
+                        "tags": [
+                            "a",
+                            "b"
+                        ]
+                    },
+                    "RUN_A.html"
+                ],
+                [
+                    {
+                        "id": "RUN_A",
+                        "tags": [
+                            "a",
+                            "b"
+                        ]
+                    },
+                    "RUN_A.pairs.tsv:md5,6fabf32d769ffa791dab5ac6bd8d44d6"
+                ],
+                [
+                    {
+                        "id": "RUN_A",
+                        "tags": [
+                            "a",
+                            "b"
+                        ]
+                    },
+                    "RUN_A.samples.tsv:md5,ca09af04db64f1b2a22c7729b0dd0380"
+                ],
+                [
+                    {
+                        "id": "RUN_B",
+                        "tags": [
+                            "b"
+                        ]
+                    },
+                    "RUN_B.html"
+                ],
+                [
+                    {
+                        "id": "RUN_B",
+                        "tags": [
+                            "b"
+                        ]
+                    },
+                    "RUN_B.pairs.tsv:md5,63a231c2f000705c588dc2c05341db72"
+                ],
+                [
+                    {
+                        "id": "RUN_B",
+                        "tags": [
+                            "b"
+                        ]
+                    },
+                    "RUN_B.samples.tsv:md5,8250970f995d20752e3ad220cec20d66"
+                ]
+            ]
+        ],
+        "timestamp": "2026-11-24T20:55:27.209563",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.6"
+        }
+    }
+}

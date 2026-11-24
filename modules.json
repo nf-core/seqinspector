@@ -146,6 +146,17 @@
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/sequali/sequali.diff"
                     },
+                    "somalier/extract": {
+                        "branch": "master",
+                        "git_sha": "cb523f66bc092e7e0a64f8b29734f6d1b6a94c0b",
+                        "installed_by": ["modules"]
+                    },
+                    "somalier/relate": {
+                        "branch": "master",
+                        "git_sha": "cb523f66bc092e7e0a64f8b29734f6d1b6a94c0b",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/somalier/relate/somalier-relate.diff"
+                    },
                     "toulligqc": {
                         "branch": "master",
                         "git_sha": "7b3452a23773f687ededb4befd037920e5a51341",

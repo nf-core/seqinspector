@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#301](https://github.com/nf-core/seqinspector/pull/301) BAM input through the samplesheet columns `bam` and `bai`. FastQC, Sequali and ToulligQC run on every BAM file, Picard and Riker run on indexed, aligned BAM files without realignment ([#290](https://github.com/nf-core/seqinspector/issues/290)) (@FernandoDuarteF, @apeltzer)
 
+- [#302](https://github.com/nf-core/seqinspector/pull/302) New tool `somalier` for sample identity and relatedness checks on aligned BAM files, with the samplesheet columns `individual` and `batch` ([#300](https://github.com/nf-core/seqinspector/issues/300)) (@apeltzer)
+
 ### `Fixed`
 
 ### `Changed`

@@ -27,6 +27,7 @@ include { TOULLIGQC                    } from '../modules/nf-core/toulligqc'
 
 // subworkflow
 include { BAM_QC                       } from '../subworkflows/local/bam_qc'
+include { BAM_SAMPLE_IDENTITY_SOMALIER } from '../subworkflows/local/bam_sample_identity_somalier'
 include { FASTQ_QC_PHYLOGENETIC        } from '../subworkflows/local/fastq_qc_phylogenetic'
 
 // functions
@@ -72,6 +73,7 @@ workflow SEQINSPECTOR {
     kraken2_save_reads
     kraken2_save_readclassifications
     save_bbmap_clumpify_reads
+    somalier_sites
 
     main:
     def ch_multiqc_files = channel.empty()
@@ -321,7 +323,7 @@ workflow SEQINSPECTOR {
 
     def sort_bam = true
 
-    def needs_bam = ('picard_collecthsmetrics' in tools) || ('picard_collectmultiplemetrics' in tools) || ('riker' in tools)
+    def needs_bam = ('picard_collecthsmetrics' in tools) || ('picard_collectmultiplemetrics' in tools) || ('riker' in tools) || ('somalier' in tools)
     def bam_subsampled = ('picard_collecthsmetrics' in subsample_tools) || ('picard_collectmultiplemetrics' in subsample_tools) || ('riker' in subsample_tools)
 
     BWAMEM2_MEM(
@@ -353,6 +355,19 @@ workflow SEQINSPECTOR {
         target_intervals ? channel.fromPath(target_intervals).collect() : channel.empty(),
         dict,
         tools,
+    )
+
+    //
+    // SUBWORKFLOW: BAM_SAMPLE_IDENTITY_SOMALIER
+    //   Run somalier extract per sample and somalier relate per batch
+
+    BAM_SAMPLE_IDENTITY_SOMALIER(
+        ch_bam_bai.filter { 'somalier' in tools },
+        fasta,
+        fai,
+        somalier_sites
+            ? channel.fromPath(somalier_sites, checkIfExists: true).map { sites -> [[id: sites.simpleName], sites] }.collect()
+            : channel.empty(),
     )
 
     //
@@ -561,5 +576,6 @@ workflow SEQINSPECTOR {
     plots_groups   = MULTIQC_PER_TAG.out.plots // channel: [ /path/to/multiqc_plots/ ]
     report_global  = MULTIQC_GLOBAL.out.report // channel: [ /path/to/multiqc_report.html ]
     report_groups  = MULTIQC_PER_TAG.out.report // channel: [ /path/to/multiqc_report.html ]
+    somalier       = BAM_SAMPLE_IDENTITY_SOMALIER.out.extract
     subsampled     = SEQTK_SAMPLE.out.reads
 }

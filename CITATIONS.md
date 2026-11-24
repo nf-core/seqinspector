@@ -94,6 +94,10 @@
 
   > Vorderman R. Sequali: efficient and comprehensive quality control of short- and long-read sequencing data. Bioinformatics Advances, 2025. doi: 10.1093/bioadv/vbaf010
 
+- [somalier](https://doi.org/10.1186/s13073-020-00761-2)
+
+  > Pedersen, B. S., Bhetariya, P. J., Brown, J., Kravitz, S. N., Marth, G., Jensen, R. L., Bronner, M. P., Underhill, H. R., & Quinlan, A. R. (2020). Somalier: rapid relatedness estimation for cancer and germline studies using efficient genome sketches. Genome Medicine, 12(1), 62. https://doi.org/10.1186/s13073-020-00761-2
+
 - [ToulligQC](https://github.com/GenomiqueENS/toulligQC)
 
   > ToulligQC: A post sequencing QC tool for Oxford Nanopore sequencers.

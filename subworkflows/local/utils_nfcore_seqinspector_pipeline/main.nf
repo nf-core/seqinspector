@@ -43,6 +43,7 @@ workflow PIPELINE_INITIALISATION {
     fasta
     kraken2_db
     riker_args
+    somalier_sites
 
     main:
 
@@ -197,6 +198,10 @@ ${subsampled_info}-\033[2m----------------------------------------------------\0
 
     if (!(kraken2_db) && ("kraken2" in tools)) {
         error("No kraken2_db was provided, but Kraken2 was requested")
+    }
+
+    if ('somalier' in tools && !(fasta && somalier_sites)) {
+        error("somalier was requested, but it needs a reference genome (--genome or --fasta) and --somalier_sites")
     }
 
     emit:

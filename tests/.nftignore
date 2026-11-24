@@ -11,6 +11,7 @@ multiqc/{global_report,group_reports/*}/multiqc_data/multiqc_fastp.txt
 multiqc/{global_report,group_reports/*}/multiqc_data/multiqc_general_stats.txt
 multiqc/{global_report,group_reports/*}/multiqc_data/multiqc_software_versions.txt
 multiqc/{global_report,group_reports/*}/multiqc_data/multiqc_sources.txt
+multiqc/{global_report,group_reports/*}/multiqc_data/somalier_sex_check_plot.txt
 multiqc/{global_report,group_reports/*}/multiqc_plots/{svg,pdf,png}/*.{svg,pdf,png}
 multiqc/{global_report,group_reports/*}/multiqc_report.html
 pipeline_info/*.{html,json,txt,yml}
@@ -32,4 +33,5 @@ reports/picard_collectmultiplemetrics/*/base_distribution_by_cycle_metrics
 reports/picard_collectmultiplemetrics/*/quality_by_cycle_metrics
 reports/picard_collectmultiplemetrics/*/quality_distribution_metrics
 reports/sequali/**
+reports/somalier/*/*.html
 reports/toulligqc/**

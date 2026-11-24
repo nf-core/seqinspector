@@ -64,6 +64,18 @@
                 "errorMessage": "Platform must be one of: 'illumina', 'ont'",
                 "meta": ["platform"]
             },
+            "individual": {
+                "type": "string",
+                "pattern": "^\\S+$",
+                "errorMessage": "Individual cannot contain spaces",
+                "meta": ["individual"]
+            },
+            "batch": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9._-]+$",
+                "errorMessage": "Batch can only consist of letters, numbers, dots, underscores and hyphens",
+                "meta": ["batch"]
+            },
             "tags": {
                 "type": "string",
                 "pattern": "^([A-Za-z0-9_-]+:)*([A-Za-z0-9_-]+)$",

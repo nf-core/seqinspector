@@ -30,7 +30,7 @@ workflow PREPARE_GENOME {
         // BAM input is not realigned, the index is only needed for FASTQ input
         BWAMEM2_INDEX(
             ch_fasta
-                .filter { 'picard_collecthsmetrics' in tools || 'picard_collectmultiplemetrics' in tools || 'riker' in tools }
+                .filter { 'picard_collecthsmetrics' in tools || 'picard_collectmultiplemetrics' in tools || 'riker' in tools || 'somalier' in tools }
                 .combine(fastq_count)
                 .filter { _meta, _fasta, count -> count > 0 }
                 .map { meta, fasta_, _count -> [meta, fasta_] }
@@ -54,7 +54,7 @@ workflow PREPARE_GENOME {
     }
     else {
         SAMTOOLS_FAIDX(
-            ch_fasta.map { meta, fasta_ -> [meta, fasta_, []] }.filter { 'picard_collecthsmetrics' in tools || 'picard_collectmultiplemetrics' in tools || 'riker' in tools },
+            ch_fasta.map { meta, fasta_ -> [meta, fasta_, []] }.filter { 'picard_collecthsmetrics' in tools || 'picard_collectmultiplemetrics' in tools || 'riker' in tools || 'somalier' in tools },
             false,
         )
         ch_fai = SAMTOOLS_FAIDX.out.fai
