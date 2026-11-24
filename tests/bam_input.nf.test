@@ -32,6 +32,8 @@ nextflow_pipeline {
                 tools: 'picard_collectmultiplemetrics',
                 tools_bundle: null,
             ],
+            // The samplesheet holds columns of tools that are not part of the pipeline yet
+            snapshot_ignore: ['unidentified headers'],
         ],
         [
             name: "Aligned BAM input with index - picard_collectmultiplemetrics - stub",
@@ -42,6 +44,8 @@ nextflow_pipeline {
                 tools: 'picard_collectmultiplemetrics',
                 tools_bundle: null,
             ],
+            // The samplesheet holds columns of tools that are not part of the pipeline yet
+            snapshot_ignore: ['unidentified headers'],
             stub: true,
         ],
     ]
