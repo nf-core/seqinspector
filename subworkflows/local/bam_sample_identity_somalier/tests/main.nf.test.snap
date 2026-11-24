@@ -225,5 +225,81 @@
             "nf-test": "0.9.5",
             "nextflow": "26.10.6"
         }
+    },
+    "Contamination with a background sample": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "somalier_contamination",
+                        "tags": [
+                            "a",
+                            "b"
+                        ]
+                    },
+                    "somalier_contamination.attribution.pairs.tsv.gz:md5,3ef9ff99f32af4822c6f7923d119a0a2"
+                ],
+                [
+                    {
+                        "id": "somalier_contamination",
+                        "tags": [
+                            "a",
+                            "b"
+                        ]
+                    },
+                    "somalier_contamination.cohort.attribution_llr.png"
+                ],
+                [
+                    {
+                        "id": "somalier_contamination",
+                        "tags": [
+                            "a",
+                            "b"
+                        ]
+                    },
+                    "somalier_contamination.longitudinal.pairs.tsv:md5,f69bb808cfe9d7b8c046d2cd7711dbd1"
+                ],
+                [
+                    {
+                        "id": "somalier_contamination",
+                        "tags": [
+                            "a",
+                            "b"
+                        ]
+                    },
+                    "somalier_contamination.relatedness_flags.tsv:md5,6ca30f51a0e675ab9128c0806f0b39c2"
+                ],
+                [
+                    {
+                        "id": "somalier_contamination",
+                        "tags": [
+                            "a",
+                            "b"
+                        ]
+                    },
+                    "somalier_contamination.summary.samples.tsv:md5,a759d7d69ea36c0df0f5f166e04a95c7"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "somalier_contamination",
+                        "tags": [
+                            "a",
+                            "b"
+                        ]
+                    },
+                    [
+                        "somalier_contamination_generalstats_mqc.tsv:md5,5925815d68ff2c1bd01efbec1dafb8d9",
+                        "somalier_contamination_summary_mqc.tsv:md5,3dfb842ff33515b83799589718a9c9b5"
+                    ]
+                ]
+            ]
+        ],
+        "timestamp": "2026-11-24T21:03:31.872064",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.6"
+        }
     }
 }
