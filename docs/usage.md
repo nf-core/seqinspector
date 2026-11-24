@@ -7,7 +7,7 @@
 ### General points
 
 The nf-core/seqinspector pipeline is a general QC pipeline for sequencing data.
-The current version only supports data in fastq format.
+The current version supports data in both bam and fastq format.
 The pipeline is meant to include a large amount of possible QC tools to chose from, but not all of them may be relevant to your data.
 As such we highly recommend to familiarize yourself with the different QC tools available and to remove any QC tool you would like to exclude with the `--skip-tools` command line parameter.
 For repeated use we suggest to create a params file containing the `--skip-tools` parameters (for details see the "Running the pipeline" section).
@@ -21,7 +21,7 @@ Even tools that may be used in other pipelines as a starting point for analysis 
 
 ## Samplesheet input
 
-You will need to create a samplesheet with information about the samples/fastq files you would like to analyse before running the pipeline. Use this parameter to specify its location.
+You will need to create a samplesheet with information about the samples/fastq/bam files you would like to analyse before running the pipeline. Use this parameter to specify its location.
 
 ```bash
 --input '[path to samplesheet file]'
@@ -49,11 +49,30 @@ sample3 path/to/run_dir/sample3_lane2_group2_r1.fq.gz         path/to/run_dir pr
 sample4 path/to/run_dir/sample4_lane2_group3_r1.fq.gz         path/to/run_dir control         illumina
 ```
 
+The pipeline also accepts BAM files, aligned or unaligned:
+
+```csv title="samplesheet_bam.csv"
+sample  bam                                      bai                                          rundir          tags
+sample1 path/to/run_dir/sample1_lane1_group1.bam path/to/run_dir/sample1_lane1_group1.bam.bai path/to/run_dir project1:group1
+sample2 path/to/run_dir/sample2_lane1_group1.bam path/to/run_dir/sample2_lane1_group1.bam.bai path/to/run_dir project1:group1
+sample3 path/to/run_dir/sample3_lane2_group2.bam                                              path/to/run_dir project1:group2
+sample4 path/to/run_dir/sample4_lane2_group3.bam                                              path/to/run_dir control
+```
+
+Each row must provide either a `bam` file or `fastq_1` (and optionally `fastq_2`), but not both.
+
+BAM input is only processed by the tools that support it:
+
+- FastQC, Sequali and ToulligQC run on every BAM file.
+- Picard CollectHsMetrics, Picard CollectMultipleMetrics and Riker run on aligned, coordinate-sorted BAM files that have an index in the `bai` column. The pipeline does not realign these files, `--fasta` has to be the reference they were aligned to.
+
 | Column     | Description                                                                                                                                                                            |
 | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `sample`   | Custom sample name. This entry will be identical for multiple sequencing libraries/runs from the same sample. Spaces in sample names are automatically converted to underscores (`_`). |
-| `fastq_1`  | Full path to FastQ file for Illumina short reads 1. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                             |
+| `fastq_1`  | Full path to FastQ file for Illumina short reads 1. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz" (required if `bam` is not provided).                         |
 | `fastq_2`  | Full path to FastQ file for Illumina short reads 2. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz" (optional).                                                  |
+| `bam`      | Full path to BAM file, aligned or unaligned. File has to have the extension ".bam" (required if `fastq_1` is not provided).                                                            |
+| `bai`      | Full path to the index of an aligned BAM file with the extension ".bai" or ".csi". Required for the tools that need aligned reads (optional).                                          |
 | `rundir`   | Path to the runfolder containing extra information about the sequencing run (optional\*).                                                                                              |
 | `tags`     | Colon-separated list of tags to group samples in special reports.                                                                                                                      |
 | `platform` | Sequencing platform of the `rundir`: `illumina` or `ont`. Required when a `rundir` is given and `rundirparser` is run (optional\*\*).                                                  |

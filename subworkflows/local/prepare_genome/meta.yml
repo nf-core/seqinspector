@@ -37,6 +37,10 @@ input:
       type: list
       description: |
         List of tools to run, used to determine which indices to build
+  - fastq_count:
+      type: integer
+      description: |
+        Number of samples with FASTQ input, the BWA-MEM2 index is only built if it is above zero
 output:
   - bwamem2:
       type: list

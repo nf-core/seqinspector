@@ -151,18 +151,20 @@ ${subsampled_info}-\033[2m----------------------------------------------------\0
         .toList()
         .size()
 
+
     ch_samplesheet = channel.fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
         .toList()
         .flatMap { item -> item.withIndex().collect { entry, idx -> entry + "${idx + 1}" } }
-        .map { meta, fastq_1, fastq_2, idx ->
+        .map { meta, fastq_1, fastq_2, bam, bai, idx ->
             def tags = meta.tags ? meta.tags.tokenize(":") : []
             def pad_positions = [nr_samples.length(), 2].max()
             def zero_padded_idx = idx.padLeft(pad_positions, "0")
             def new_meta = [id: "${meta.sample}_${zero_padded_idx}"]
             return [
                 new_meta.id,
-                meta + [id: new_meta.id, tags: tags, single_end: fastq_2 ? false : true],
-                fastq_2 ? [fastq_1, fastq_2] : [fastq_1],
+                meta + [id: new_meta.id, tags: tags] + (fastq_1 ? [single_end: !fastq_2] : [:]),
+                // Filter tuple to keep only the files provided for this row (empty columns are [])
+                [fastq_1, fastq_2, bam, bai].findAll { file -> file },
             ]
         }
         .groupTuple()
