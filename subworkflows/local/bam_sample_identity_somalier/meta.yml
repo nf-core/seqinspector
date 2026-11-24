@@ -1,14 +1,16 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
 name: "bam_sample_identity_somalier"
-description: Sample identity, relatedness and contamination of aligned BAM files with somalier
+description: Sample identity, relatedness, contamination and sex of aligned BAM files with somalier
 keywords:
   - bam
   - contamination
   - identity
   - relatedness
   - sample swap
+  - sex
   - somalier
 components:
+  - samtools/coverage
   - somalier/contamination
   - somalier/extract
   - somalier/relate
@@ -19,7 +21,7 @@ input:
   - ch_bam_bai:
       type: file
       description: |
-        Aligned BAM files with index. The meta map holds `id`, `tags`, `individual` and `batch`.
+        Aligned BAM files with index. The meta map holds `id`, `tags`, `individual`, `batch` and `sex`.
         Structure: [ val(meta), path(bam), path(bai) ]
   - ch_fasta:
       type: file
@@ -47,6 +49,9 @@ input:
   - attribution_chunk_size:
       type: integer
       description: Number of samples per source attribution task
+  - run_sexcheck:
+      type: boolean
+      description: Compare the annotated sex with the sex inferred from chrY reads and X heterozygosity
 output:
   - extract:
       type: file
